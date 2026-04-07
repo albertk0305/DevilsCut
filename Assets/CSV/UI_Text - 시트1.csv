@@ -2,6 +2,21 @@ Key,Korean,English
 btn_start,시작하기,Start
 btn_continue,이어하기,Continue
 btn_settings,설정,Settings
-btn_help,도움말,Help
+btn_help,매뉴얼,Manual
 btn_credits,개발진,Credits
-btn_exit,게임 종료,Exit
+btn_exit,게임 종료,Quit Game
+btn_sound,소리,Sound
+btn_language,언어,Language
+btn_main_menu,메인화면,Main Menu
+btn_return,돌아가기,Return
+btn_yes,예,Yes
+btn_no,아니요,No
+confirmation_text,정말 종료하시겠습니까?,Are you sure you want to quit?
+,,
+bar,스트레이 스네이크,Stray Snake
+blackmarket,파시오네,Passione
+live_house,스트레이,Stray
+fightclub,언체인,Unchain
+maidcafe,카페 메이러스트,Cafe Mailust
+restaurant,견반점,Kyeonhanten
+casino,벨벳 소서,Velvet Saucer

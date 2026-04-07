@@ -35,11 +35,6 @@ public class MainMenuManager : MonoBehaviour
         if (settingsPanel != null) settingsPanel.SetActive(true);
     }
 
-    public void OnClickCloseSettings()
-    {
-        if (settingsPanel != null) settingsPanel.SetActive(false);
-    }
-
     // '도움말' 버튼을 눌렀을 때 실행될 함수
     public void OnClickHelp()
     {

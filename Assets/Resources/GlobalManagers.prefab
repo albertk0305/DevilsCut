@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feffe4d33648bcb4fa448678c635f3c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizationManager
-  localizationCSV: {fileID: 4900000, guid: 177a5541e1285804b8c9928374be31cb, type: 3}
-  currentLanguage: 1
+  localizationCSV: {fileID: 4900000, guid: 7cdd186739eb41845ab1e8a69aeb9710, type: 3}
+  currentLanguage: 0
 --- !u!114 &2952436123089374904
 MonoBehaviour:
   m_ObjectHideFlags: 0

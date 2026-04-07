@@ -7,7 +7,7 @@ public static class GameManagerSpawner
     public static void SpawnManagers()
     {
         // 1. 이미 씬에 매니저가 존재하는지 확인 (중복 소환 방지)
-        if (Object.FindObjectOfType<LocalizationManager>() != null) return;
+        if (Object.FindAnyObjectByType<LocalizationManager>() != null) return;
 
         // 2. Resources 폴더에 넣어둔 프리팹을 자동으로 찾아서 허공에 소환!
         GameObject prefab = Resources.Load<GameObject>("GlobalManagers");
