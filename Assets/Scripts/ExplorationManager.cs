@@ -13,8 +13,6 @@ public class ExplorationManager : MonoBehaviour
     [Header("동적 데이터 (저장될 내용들)")]
     // 키(ID), 값(Rank)으로 시설별 랭크를 기억해 (예: "shop" -> 2레벨)
     public Dictionary<string, int> facilityRanks = new Dictionary<string, int>();
-    // 키(ID), 값(해금여부)으로 조력자 등장 여부를 기억해
-    public Dictionary<string, bool> operatorUnlocked = new Dictionary<string, bool>();
 
     [Header("현재 상태")]
     public FacilityData lastVisitedFacility; // 마지막으로 방문한 시설! (여기에 변수로 쏙 담아두면 끝)

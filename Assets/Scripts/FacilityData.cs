@@ -11,4 +11,5 @@ public class FacilityData : ScriptableObject
 
     [Header("조력자 정보")]
     public Sprite operatorImage;   // 이 시설의 고정 조력자 이미지 (없을 때 띄울 실루엣 이미지 등)
+    public Sprite operatorSmileImage;   // 웃는 표정 (클릭 시)
 }

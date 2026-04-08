@@ -15,4 +15,5 @@ MonoBehaviour:
   facilityID: maidcafe
   facilityNameKey: maidcafe
   facilityImage: {fileID: 0}
-  operatorImage: {fileID: 0}
+  operatorImage: {fileID: -5769735938010624694, guid: e3a75b95a17f46a49961b4a16dad6447, type: 3}
+  operatorSmileImage: {fileID: -9160313936180807146, guid: 2b1082bf75f173240a5cf53e1ed62a08, type: 3}
