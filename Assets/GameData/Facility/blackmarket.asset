@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b46f4aef743b177459676bc434def94c, type: 3}
+  m_Name: blackmarket
+  m_EditorClassIdentifier: Assembly-CSharp::FacilityData
+  nodeID: blackmarket
+  nodeImage: {fileID: 21300000, guid: c3997dabb8a20604880ff51cfa8f3cbd, type: 3}
+  operatorImage: {fileID: 21300000, guid: 4735bde3fd2d5d3488dfb7aeac1b1621, type: 3}
+  operatorSmileImage: {fileID: 21300000, guid: e0f33487468066741b2a2c2e15a01965, type: 3}

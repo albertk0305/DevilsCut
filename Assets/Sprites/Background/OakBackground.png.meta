@@ -3,8 +3,8 @@ guid: 6588b388ae3d22646926ed0345bbf494
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7062765619323584268
-    second: OakBackground 1_0
+      213: 6739978211615850800
+    second: OakBackground_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -43,7 +43,7 @@ TextureImporter:
     wrapU: 1
     wrapV: 1
     wrapW: 1
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
@@ -75,9 +75,9 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 100
-    crunchedCompression: 1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
     ignorePlatformSupport: 0
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OakBackground 1_0
+      name: OakBackground_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c0fbf9f19ebf30260800000000000000
-      internalID: 7062765619323584268
+      spriteID: 0314c393976398d50800000000000000
+      internalID: 6739978211615850800
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      OakBackground 1_0: 7062765619323584268
+      OakBackground_0: 6739978211615850800
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
