@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: event
   m_EditorClassIdentifier: Assembly-CSharp::EventNodeData
   nodeID: event
-  nodeImage: {fileID: -2273958870705210090, guid: c02747eed30fc464bbb0b3781b0fbd07, type: 3}
-  nodeNameKey: event
+  nodeImage: {fileID: 21300000, guid: a290edb1d6fb15046af8721e77ae9ba0, type: 3}
   eventDescription: 

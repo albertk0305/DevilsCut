@@ -38,6 +38,22 @@ public class KarinEquipmentUI : MonoBehaviour
         ShowPreview(PlayerManager.Instance.equippedKarinItem, isEquippedState: true);
         currentRow = 0; // 스크롤 맨 위로 초기화
         RefreshInventory();
+
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged += RefreshLanguage;
+    }
+
+    private void OnDisable()
+    {
+        // [추가됨] 창이 꺼질 때 방송 구독 취소
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged -= RefreshLanguage;
+    }
+
+    private void RefreshLanguage()
+    {
+        bool isEquipped = (currentPreview != null && currentPreview == PlayerManager.Instance.equippedKarinItem);
+        ShowPreview(currentPreview, isEquipped);
     }
 
     private void ShowPreview(KarinItemData data, bool isEquippedState)
@@ -49,8 +65,8 @@ public class KarinEquipmentUI : MonoBehaviour
             mainItemImage.gameObject.SetActive(false);
 
             itemNameText.text = "";
-            itemDescText.text = "장착된 장비가 없습니다.";
-            karinDialogueText.text = "어떤 장비를 써볼까요?";
+            itemDescText.text = LocalizationManager.Instance.GetText("msg_no_equipment");
+            karinDialogueText.text = LocalizationManager.Instance.GetText("msg_karin_idle");
 
             equipButton.interactable = false;
             removeButton.interactable = false;
@@ -61,9 +77,10 @@ public class KarinEquipmentUI : MonoBehaviour
             mainItemImage.gameObject.SetActive(true);
 
             mainItemImage.sprite = data.itemIcon;
-            itemNameText.text = data.itemName;
-            itemDescText.text = data.itemDescription;
-            karinDialogueText.text = isEquippedState ? data.equipDialogue : data.previewDialogue;
+            itemNameText.text = LocalizationManager.Instance.GetText(data.itemName);
+            itemDescText.text = LocalizationManager.Instance.GetText(data.itemDescription);
+            string dialogueKey = isEquippedState ? data.equipDialogue : data.previewDialogue;
+            karinDialogueText.text = LocalizationManager.Instance.GetText(dialogueKey);
 
             equipButton.interactable = !isEquippedState;
             removeButton.interactable = isEquippedState;

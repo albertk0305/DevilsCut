@@ -35,7 +35,25 @@ public class SupporterUI : MonoBehaviour
     {
         ShowPreview(PlayerManager.Instance.activeSupporter, isJoinedState: true);
         RefreshRosterList();
+
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged += RefreshLanguage;
     }
+
+    private void OnDisable()
+    {
+        // [추가] 창이 꺼질 때는 에러 방지를 위해 구독 취소
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged -= RefreshLanguage;
+    }
+
+    private void RefreshLanguage()
+    {
+        // 현재 띄워진 조력자 상태 그대로 텍스트만 다시 불러옵니다.
+        bool isJoined = (currentPreview != null && currentPreview == PlayerManager.Instance.activeSupporter);
+        ShowPreview(currentPreview, isJoined);
+    }
+
 
     // 메인 화면 업데이트
     private void ShowPreview(SupporterData data, bool isJoinedState)
@@ -50,7 +68,7 @@ public class SupporterUI : MonoBehaviour
             passiveText.text = "";
             startText.text = "";
             battleText.text = "";
-            dialogueText.text = "현재 조력자가 선택되어 있지 않습니다.";
+            dialogueText.text = LocalizationManager.Instance.GetText("msg_no_supporter");
 
             joinButton.interactable = false;
             leaveButton.interactable = false;
@@ -60,13 +78,14 @@ public class SupporterUI : MonoBehaviour
         {
             mainImage.gameObject.SetActive(true);
 
-            supporterNameText.text = data.supporterName;
+            supporterNameText.text = LocalizationManager.Instance.GetText(data.supporterName);
             mainImage.sprite = data.mainImage;
-            passiveText.text = data.passiveSkillDesc;
-            startText.text = data.startSkillDesc;
-            battleText.text = data.battleSkillDesc;
+            passiveText.text = LocalizationManager.Instance.GetText(data.passiveSkillDesc);
+            startText.text = LocalizationManager.Instance.GetText(data.startSkillDesc);
+            battleText.text = LocalizationManager.Instance.GetText(data.battleSkillDesc);
 
-            dialogueText.text = isJoinedState ? data.joinMessage : data.selectMessage;
+            string dialogueKey = isJoinedState ? data.joinMessage : data.selectMessage;
+            dialogueText.text = LocalizationManager.Instance.GetText(dialogueKey);
 
             joinButton.interactable = !isJoinedState;
             leaveButton.interactable = isJoinedState;
@@ -90,24 +109,24 @@ public class SupporterUI : MonoBehaviour
         for (int i = 0; i < rosterButtons.Length; i++)
         {
             int dataIndex = startIndex + i;
-            if (dataIndex < displayList.Count)
+
+            // 1. 현재 슬롯에 들어갈 데이터가 존재하는지 여부를 bool로 판별
+            bool hasData = dataIndex < displayList.Count;
+
+            // 2. 데이터 유무에 따라 버튼 켜기/끄기, 클릭 활성화/비활성화를 한 번에 처리!
+            rosterButtons[i].gameObject.SetActive(hasData);
+            rosterButtons[i].interactable = hasData;
+
+            // 3. 데이터가 있을 때만 이미지 교체
+            if (hasData)
             {
-                // [수정됨] 버튼 자체를 켜고, 버튼의 image에 접근해서 스프라이트를 바꿉니다!
-                rosterButtons[i].gameObject.SetActive(true);
                 rosterButtons[i].image.sprite = displayList[dataIndex].iconImage;
-                rosterButtons[i].interactable = true;
-
-                if (rosterBackgrounds.Length > i && rosterBackgrounds[i] != null)
-                    rosterBackgrounds[i].SetActive(true);
             }
-            else
-            {
-                // 빈 칸이면 버튼과 배경 숨기기
-                rosterButtons[i].gameObject.SetActive(false);
-                rosterButtons[i].interactable = false;
 
-                if (rosterBackgrounds.Length > i && rosterBackgrounds[i] != null)
-                    rosterBackgrounds[i].SetActive(false);
+            // 4. 배경 이미지 켜기/끄기도 if/else 없이 한 줄로 압축!
+            if (rosterBackgrounds.Length > i && rosterBackgrounds[i] != null)
+            {
+                rosterBackgrounds[i].SetActive(hasData);
             }
         }
 
@@ -147,12 +166,10 @@ public class SupporterUI : MonoBehaviour
         if (currentPreview == null) return;
 
         PlayerManager.Instance.activeSupporter = currentPreview;
-        dialogueText.text = currentPreview.joinMessage;
+
+        ShowPreview(currentPreview, isJoinedState: true);
 
         RefreshRosterList();
-
-        joinButton.interactable = false;
-        leaveButton.interactable = true;
     }
 
     public void OnClickLeave()

@@ -16,8 +16,8 @@ MonoBehaviour:
   supporterName: leviathan
   mainImage: {fileID: 21300000, guid: 1d4014b65dffe4441977e05b8a43e50b, type: 3}
   iconImage: {fileID: 21300000, guid: 1c9240fd690bcde4b86817c73c9502b7, type: 3}
-  passiveSkillDesc: .
-  startSkillDesc: .
-  battleSkillDesc: .
-  selectMessage: .
-  joinMessage: .
+  passiveSkillDesc: dummy_Passive
+  startSkillDesc: dummy_StartSkill
+  battleSkillDesc: dummy_BattleSkill
+  selectMessage: dummy_SelectMessage
+  joinMessage: dummy_JoinMessage

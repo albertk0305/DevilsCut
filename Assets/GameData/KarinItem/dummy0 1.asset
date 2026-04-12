@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e02acdb935644458559277d3c42d95, type: 3}
   m_Name: dummy0 1
   m_EditorClassIdentifier: Assembly-CSharp::KarinItemData
-  itemName: 1
+  itemName: dummy_item
   itemIcon: {fileID: 21300000, guid: c3997dabb8a20604880ff51cfa8f3cbd, type: 3}
-  itemDescription: 1
-  previewDialogue: 1
-  equipDialogue: 1
+  itemDescription: dummy_desc
+  previewDialogue: dummy_preview
+  equipDialogue: dummy_equip

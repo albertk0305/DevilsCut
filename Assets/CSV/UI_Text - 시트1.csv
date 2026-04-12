@@ -1,5 +1,5 @@
 Key,Korean,English
-btn_start,시작하기,Start
+btn_start,새 게임,New Game
 btn_continue,이어하기,Continue
 btn_settings,설정,Settings
 btn_help,매뉴얼,Manual
@@ -12,6 +12,28 @@ btn_return,돌아가기,Return
 btn_yes,예,Yes
 btn_no,아니요,No
 confirmation_text,정말 종료하시겠습니까?,Are you sure you want to quit?
+btn_party,파티,Party
+btn_skill,스킬,Skill
+btn_showtime,쇼타임!,Showtime!
+btn_wait,잠깐만,Hold On
+btn_status,스테이터스,Status
+btn_helper,조력자,Helper
+btn_equipment,장비,Equipment
+hp_text,체력,HP
+resist_text,저항,Resist
+stamina_text,스태미나,Stamina
+power_text,힘,Power
+defense_text,방어,Defense
+speed_text,속도,Speed
+luck_text,운,Luck
+btn_join,합류,Join
+btn_leave,이탈,Leave
+btn_cancel,취소,Cancel
+passive_text,패시브 스킬,Passive Skill
+initiation_text,개전 스킬,Initiation Skill
+battleSkill_text,배틀 스킬,Battle Skill
+btn_equip,장비,Equip
+btn_remove,제거,Remove
 ,,
 bar,스트레이 스네이크,Stray Snake
 blackmarket,파시오네,Passione
@@ -20,3 +42,36 @@ fightclub,언체인,Unchain
 maidcafe,카페 메이러스트,Cafe Mailust
 restaurant,견반점,Kyeonhanten
 casino,벨벳 소서,Velvet Saucer
+danger,위험,Danger
+event,이벤트,Event
+asmodeus,아스모데우스,Asmodeus
+baalzebub,바알제붑,Baalzebub
+belphegor,벨페고르,Belphegor
+leviathan,레비아탄,Leviathan
+lucifer,루시퍼,Lucifer
+mammon,마몬,Mammon
+satan,사탄,Satan
+baito,바이토,Baito
+sherry,셰리,Sherry
+karin,카린,Karin
+gabriel,가브리엘,Gabriel
+mio,미오,Mio
+raguel,라구엘,Raguel
+raphael,라파엘,Raphael
+remiel,레미엘,Remiel
+sariel,사리엘,Sariel
+uriel,우리엘,Uriel
+michael,미카엘,Michael
+,,
+msg_no_supporter,선택된 조력자가 없습니다,No Helper Selected
+dummy_Passive,패시브 스킬 설명,Paasive Description
+dummy_StartSkill,개전 스킬 설명,Initiation
+dummy_BattleSkill,배틀 스킬 설명,Battle Skill Description
+dummy_SelectMessage,날 선택해줘서 고마워!,Thank you for choosing me!
+dummy_JoinMessage,나만 믿으라구!,Leave it to me!
+msg_no_equipment,장착된 장비가 없습니다.,No equipment equipped.
+msg_karin_idle,어떤 장비를 써볼까요?,What should we try on?
+dummy_item,피 묻은 전기톱,Bloody Chainsaw
+dummy_desc,공격력을 20 증가시킵니다.,Increases Attack by 20.
+dummy_preview,꽤 무거워 보이네요...,Looks quite heavy...
+dummy_equip,위이이잉! 다 썰어버릴까요?,Vrrrr! Shall I slice them all?
