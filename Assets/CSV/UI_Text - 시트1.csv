@@ -75,3 +75,6 @@ dummy_item,피 묻은 전기톱,Bloody Chainsaw
 dummy_desc,공격력을 20 증가시킵니다.,Increases Attack by 20.
 dummy_preview,꽤 무거워 보이네요...,Looks quite heavy...
 dummy_equip,위이이잉! 다 썰어버릴까요?,Vrrrr! Shall I slice them all?
+dummy_itemname,아이템이에요~,Item~
+dummy_itemDesc,아이템 설명 옵니다~,Item Description Comes Here
+dummy_itemBonus,템 수치 설명 와요,Item Buffs Description

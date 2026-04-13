@@ -37,6 +37,9 @@ public class PlayerManager : MonoBehaviour
     public List<KarinItemData> ownedKarinItems = new List<KarinItemData>(); // 소지한 아이템 목록
     public KarinItemData equippedKarinItem = null; // 현재 착용 중인 아이템
 
+    [Header("일반 장비 인벤토리")]
+    public List<EquipmentItemData> ownedEquipments = new List<EquipmentItemData>();
+
     private void Awake()
     {
         // 싱글톤 & 씬이 넘어가도 파괴되지 않도록 설정 (매우 중요!)

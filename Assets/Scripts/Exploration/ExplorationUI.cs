@@ -6,6 +6,12 @@ using TMPro;
 //탐색 씬 UI 제어 코드
 public class ExplorationUI : MonoBehaviour
 {
+    [Header("캐릭터 & 상태 UI")]
+    public Sprite playerNormal;       // 기본 표정
+    public Sprite playerReady;        // 선택 시 준비 표정
+    public Sprite playerWorried;      // 체력 저하 시 걱정 표정
+    public Slider hpSlider;           // 캐릭터 머리 위 체력바
+
     [Header("좌측 & 하단 (고정 및 단일 슬롯)")]
     public Image playerImage;         // 주인공
     public Image companionImage;      // 동행 조력자
@@ -24,7 +30,6 @@ public class ExplorationUI : MonoBehaviour
     [Header("선택 팝업 UI")]
     public GameObject confirmPopup; // 화면 중앙의 예/아니오 팝업창 묶음
 
-    [Header("전체 메뉴 UI")]
     public GameObject statusCanvas;
     public GameObject settingsCanvas;
 
@@ -38,13 +43,6 @@ public class ExplorationUI : MonoBehaviour
 
     public void InitializeSceneUI()
     {
-        // 1. 주인공 & 내비 가이드 세팅
-        // (보통 유니티 인스펙터 창에서 Image 컴포넌트에 기본 스프라이트를 넣어두면 코드로 안 건드려도 알아서 잘 떠 있어!)
-
-        // 2. 동행 조력자 세팅 (임시 로직)
-        // 나중에 PartyManager 같은 게 생기면 거기서 현재 파티원 이미지를 가져오면 돼.
-        // companionImage.sprite = PartyManager.Instance.GetCurrentCompanionSprite();
-
         // [추가됨] 씬이 시작될 때 메뉴창(StatusCanvas)을 확실하게 꺼둡니다.
         if (statusCanvas != null) statusCanvas.SetActive(false);
         if (settingsCanvas != null) settingsCanvas.SetActive(false);
@@ -53,7 +51,16 @@ public class ExplorationUI : MonoBehaviour
         if (confirmPopup != null) confirmPopup.SetActive(false);
         selectedIndex = -1; // 선택 상태도 초기화
 
-        // 이전 사용 시설 이미지 띄우기
+        // 2. 체력바 설정 및 캐릭터 이미지 업데이트
+        UpdateHPBar();
+        UpdateCharacterStates();
+
+        // 3. 이전 시설 및 랜덤 노드 설정 로직 (기존과 동일)
+        SetupNodes();
+    }
+
+    private void SetupNodes()
+    {
         FacilityData lastFacility = ExplorationManager.Instance.lastVisitedFacility;
         if (lastFacility != null && lastFacility.nodeImage != null)
         {
@@ -128,6 +135,7 @@ public class ExplorationUI : MonoBehaviour
         }
 
         confirmPopup.SetActive(true);
+        UpdateCharacterStates();
     }
 
     // 클릭했던 시설의 운영자의 표정을 기본 상태로 되돌리는 함수
@@ -155,6 +163,7 @@ public class ExplorationUI : MonoBehaviour
         confirmPopup.SetActive(false); // 팝업 닫기
         ResetSelectedOperatorFace();       // 웃는 표정 원상복구
         selectedIndex = -1;
+        UpdateCharacterStates();
     }
 
     // 팝업에서 'Confirm(확인)' 버튼을 눌렀을 때
@@ -183,5 +192,54 @@ public class ExplorationUI : MonoBehaviour
         }
 
         confirmPopup.SetActive(false);
+    }
+
+    // 체력바 업데이트 함수
+    private void UpdateHPBar()
+    {
+        if (hpSlider != null && PlayerManager.Instance != null)
+        {
+            float currentHp = PlayerManager.Instance.stats.currentHp;
+            float maxHp = PlayerManager.Instance.stats.maxHp;
+
+            // 슬라이더의 가치를 0~1 사이로 맞춤
+            hpSlider.value = currentHp / maxHp;
+        }
+    }
+
+    private void UpdateCharacterStates()
+    {
+        if (PlayerManager.Instance == null) return;
+
+        // 1. 상태 체크 (우선순위: 걱정 > 준비 > 일반)
+        float hpPercent = (float)PlayerManager.Instance.stats.currentHp / PlayerManager.Instance.stats.maxHp;
+        bool isLowHP = hpPercent <= 0.3f;
+        bool isConfirming = selectedIndex != -1;
+
+        // 2. 메인 캐릭터 이미지 교체
+        if (isLowHP) playerImage.sprite = playerWorried;
+        else if (isConfirming) playerImage.sprite = playerReady;
+        else playerImage.sprite = playerNormal;
+
+        // 3. 조력자 이미지 교체
+        SupporterData activeSupporter = PlayerManager.Instance.activeSupporter;
+        if (activeSupporter != null)
+        {
+            companionImage.gameObject.SetActive(true);
+
+            if (isLowHP) companionImage.sprite = activeSupporter.worriedImage; // SupporterData에 worriedImage가 있다고 가정
+            else if (isConfirming) companionImage.sprite = activeSupporter.readyImage; // SupporterData에 readyImage가 있다고 가정
+            else companionImage.sprite = activeSupporter.sdImage;
+        }
+        else
+        {
+            companionImage.gameObject.SetActive(false);
+        }
+    }
+
+    public void RefreshUI()
+    {
+        UpdateHPBar();           // 장비 교체로 체력이 변경되었을 수 있으니 갱신!
+        UpdateCharacterStates(); // 서포터 교체가 있었을 수 있으니 이미지 갱신!
     }
 }

@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SupporterData
   supporterID: asmodeus
   supporterName: asmodeus
-  mainImage: {fileID: 21300000, guid: 1b77c03cdae53ab41bf54ffa8748f742, type: 3}
+  mainImage: {fileID: 21300000, guid: 9310ea1addd46bf4686f793a13674af4, type: 3}
   iconImage: {fileID: 21300000, guid: e591bdb9608cb634481a4bb2e950e547, type: 3}
+  worriedImage: {fileID: 21300000, guid: 802e1665804a3d444a041e548372e8f1, type: 3}
+  readyImage: {fileID: 21300000, guid: 1b77c03cdae53ab41bf54ffa8748f742, type: 3}
+  sdImage: {fileID: 21300000, guid: e591bdb9608cb634481a4bb2e950e547, type: 3}
   passiveSkillDesc: dummy_Passive
   startSkillDesc: dummy_StartSkill
   battleSkillDesc: dummy_BattleSkill

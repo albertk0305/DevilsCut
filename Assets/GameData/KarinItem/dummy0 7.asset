@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: dummy0 7
   m_EditorClassIdentifier: Assembly-CSharp::KarinItemData
   itemName: dummy_item
-  itemIcon: {fileID: 21300000, guid: d2e08b0dc53c02644941d4bf4a757f05, type: 3}
+  itemIcon: {fileID: 21300000, guid: b92b5d6caa4281344ab75925abde49dc, type: 3}
   itemDescription: dummy_desc
   previewDialogue: dummy_preview
   equipDialogue: dummy_equip

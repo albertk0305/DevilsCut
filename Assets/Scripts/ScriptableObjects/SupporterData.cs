@@ -9,6 +9,9 @@ public class SupporterData : ScriptableObject
     [Header("이미지")]
     public Sprite mainImage; // 메인 화면에 뜰 큰 이미지
     public Sprite iconImage; // 하단 목록에 뜰 작은 아이콘
+    public Sprite worriedImage;
+    public Sprite readyImage;
+    public Sprite sdImage;
 
     [Header("스킬 설명")]
     [TextArea] public string passiveSkillDesc;
