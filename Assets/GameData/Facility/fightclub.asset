@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FacilityData
   nodeID: fightclub
   nodeImage: {fileID: 21300000, guid: e16f0d1f7745b744a914bac4220979d0, type: 3}
+  operatorName: satan
   operatorImage: {fileID: 21300000, guid: 8631ec2f121d2c84f9d553ca7f7aaa21, type: 3}
   operatorSmileImage: {fileID: 21300000, guid: 7369eac1b0acc9a4da3ee0c98a2e690d, type: 3}

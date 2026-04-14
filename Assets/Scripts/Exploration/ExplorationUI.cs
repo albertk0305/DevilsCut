@@ -11,6 +11,11 @@ public class ExplorationUI : MonoBehaviour
     public Sprite playerReady;        // 선택 시 준비 표정
     public Sprite playerWorried;      // 체력 저하 시 걱정 표정
     public Slider hpSlider;           // 캐릭터 머리 위 체력바
+    public TextMeshProUGUI karinDialogueText;
+    public Sprite karinNormal;       // 카린 기본 표정
+    public Sprite karinReady;        // 카린 준비 표정
+    public Sprite karinWorried;
+    public Image karinImage;
 
     [Header("좌측 & 하단 (고정 및 단일 슬롯)")]
     public Image playerImage;         // 주인공
@@ -41,8 +46,22 @@ public class ExplorationUI : MonoBehaviour
         InitializeSceneUI();
     }
 
+    private void OnDestroy()
+    {
+        if (LocalizationManager.Instance != null)
+        {
+            LocalizationManager.Instance.OnLanguageChanged -= UpdateKarinDialogue;
+        }
+    }
+
     public void InitializeSceneUI()
     {
+        // [추가됨] 언어 변경 이벤트(방송) 구독 시작!
+        if (LocalizationManager.Instance != null)
+        {
+            LocalizationManager.Instance.OnLanguageChanged += UpdateKarinDialogue;
+        }
+
         // [추가됨] 씬이 시작될 때 메뉴창(StatusCanvas)을 확실하게 꺼둡니다.
         if (statusCanvas != null) statusCanvas.SetActive(false);
         if (settingsCanvas != null) settingsCanvas.SetActive(false);
@@ -166,6 +185,86 @@ public class ExplorationUI : MonoBehaviour
         UpdateCharacterStates();
     }
 
+    private void UpdateCharacterStates()
+    {
+        if (PlayerManager.Instance == null) return;
+
+        float hpPercent = (float)PlayerManager.Instance.stats.currentHp / PlayerManager.Instance.stats.maxHp;
+        bool isLowHP = hpPercent <= 0.3f;
+        bool isConfirming = selectedIndex != -1;
+
+        // 1. 이미지 교체 (우선순위: 걱정 > 준비 > 일반)
+        if (isLowHP)
+        {
+            playerImage.sprite = playerWorried;
+            // 카린 걱정 이미지가 있다면 띄우고, 안 넣었으면 기본 표정으로 방어!
+            karinImage.sprite = karinWorried;
+        }
+        else if (isConfirming)
+        {
+            playerImage.sprite = playerReady;
+            karinImage.sprite = karinReady;
+        }
+        else
+        {
+            playerImage.sprite = playerNormal;
+            karinImage.sprite = karinNormal;
+        }
+        SupporterData activeSupporter = PlayerManager.Instance.activeSupporter;
+        if (activeSupporter != null)
+        {
+            companionImage.gameObject.SetActive(true);
+            if (isLowHP) companionImage.sprite = activeSupporter.worriedImage;
+            else if (isConfirming) companionImage.sprite = activeSupporter.readyImage;
+            else companionImage.sprite = activeSupporter.sdImage;
+        }
+        else companionImage.gameObject.SetActive(false);
+
+        // 2. [핵심] 카린 대사 업데이트
+        UpdateKarinDialogue();
+    }
+
+    private void UpdateKarinDialogue()
+    {
+        if (selectedIndex == -1)
+        {
+            // 아무것도 선택하지 않았을 때 대사
+            karinDialogueText.text = LocalizationManager.Instance.GetText("msg_karin_exploration_idle");
+        }
+        else
+        {
+            ExplorationNodeData data = currentOptions[selectedIndex];
+
+            if (data is FacilityData facility)
+            {
+                int rank = ExplorationManager.Instance.GetFacilityRank(facility.nodeID);
+
+                if (rank > 0)
+                {
+                    // 운영자가 해금된 경우: "그 시설은 {0}가 운영 중이고 시설 랭크는 {1}네요."
+                    string fmt = LocalizationManager.Instance.GetText("msg_facility_info_format");
+                    string opName = LocalizationManager.Instance.GetText(facility.operatorName); // 운영자 이름 Key 번역
+                    karinDialogueText.text = string.Format(fmt, opName, rank);
+                }
+                else
+                {
+                    // 운영자가 해금되지 않은 경우
+                    karinDialogueText.text = LocalizationManager.Instance.GetText("msg_operator_not_unlocked");
+                }
+            }
+            else if (data is DangerNodeData)
+            {
+                // 전투 노드를 눌렀을 때
+                karinDialogueText.text = LocalizationManager.Instance.GetText("msg_danger_selected");
+            }
+            else if (data is EventNodeData)
+            {
+                // 이벤트 노드를 눌렀을 때
+                karinDialogueText.text = LocalizationManager.Instance.GetText("msg_event_selected");
+            }
+        }
+    }
+
     // 팝업에서 'Confirm(확인)' 버튼을 눌렀을 때
     public void OnClickConfirm()
     {
@@ -204,36 +303,6 @@ public class ExplorationUI : MonoBehaviour
 
             // 슬라이더의 가치를 0~1 사이로 맞춤
             hpSlider.value = currentHp / maxHp;
-        }
-    }
-
-    private void UpdateCharacterStates()
-    {
-        if (PlayerManager.Instance == null) return;
-
-        // 1. 상태 체크 (우선순위: 걱정 > 준비 > 일반)
-        float hpPercent = (float)PlayerManager.Instance.stats.currentHp / PlayerManager.Instance.stats.maxHp;
-        bool isLowHP = hpPercent <= 0.3f;
-        bool isConfirming = selectedIndex != -1;
-
-        // 2. 메인 캐릭터 이미지 교체
-        if (isLowHP) playerImage.sprite = playerWorried;
-        else if (isConfirming) playerImage.sprite = playerReady;
-        else playerImage.sprite = playerNormal;
-
-        // 3. 조력자 이미지 교체
-        SupporterData activeSupporter = PlayerManager.Instance.activeSupporter;
-        if (activeSupporter != null)
-        {
-            companionImage.gameObject.SetActive(true);
-
-            if (isLowHP) companionImage.sprite = activeSupporter.worriedImage; // SupporterData에 worriedImage가 있다고 가정
-            else if (isConfirming) companionImage.sprite = activeSupporter.readyImage; // SupporterData에 readyImage가 있다고 가정
-            else companionImage.sprite = activeSupporter.sdImage;
-        }
-        else
-        {
-            companionImage.gameObject.SetActive(false);
         }
     }
 

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FacilityData
   nodeID: maidcafe
   nodeImage: {fileID: 21300000, guid: 5ec598df792bf2b408ea26f82a8ae5f7, type: 3}
+  operatorName: asmodeus
   operatorImage: {fileID: 21300000, guid: e591bdb9608cb634481a4bb2e950e547, type: 3}
   operatorSmileImage: {fileID: 21300000, guid: 1b77c03cdae53ab41bf54ffa8748f742, type: 3}

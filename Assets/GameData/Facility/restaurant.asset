@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FacilityData
   nodeID: restaurant
   nodeImage: {fileID: 21300000, guid: b2302ab2b87785b4d8fc38575a6b4f19, type: 3}
+  operatorName: baalzebub
   operatorImage: {fileID: 21300000, guid: 5897a3a303f4a194f95e2c1cd4601d52, type: 3}
   operatorSmileImage: {fileID: 21300000, guid: fb1758b1fe8961849b40fd3f7040cbc4, type: 3}

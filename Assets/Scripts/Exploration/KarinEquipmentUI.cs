@@ -26,6 +26,9 @@ public class KarinEquipmentUI : MonoBehaviour
     public Button removeButton;
     public Button cancelButton;
 
+    public Sprite karinNormal;       // 카린 장비 없을 시 표정
+    public Sprite karinReady;        // 카린 장비 시 표정
+
     // 내부 상태 관리
     private KarinItemData currentPreview;
     private int currentRow = 0; // 현재 스크롤 맨 윗줄 번호 (0부터 시작)
@@ -68,6 +71,8 @@ public class KarinEquipmentUI : MonoBehaviour
             itemDescText.text = LocalizationManager.Instance.GetText("msg_no_equipment");
             karinDialogueText.text = LocalizationManager.Instance.GetText("msg_karin_idle");
 
+            if (karinFaceImage != null) karinFaceImage.sprite = karinNormal;
+
             equipButton.interactable = false;
             removeButton.interactable = false;
             cancelButton.gameObject.SetActive(false); // 아무것도 선택 안 했으니 취소 불가
@@ -81,6 +86,9 @@ public class KarinEquipmentUI : MonoBehaviour
             itemDescText.text = LocalizationManager.Instance.GetText(data.itemDescription);
             string dialogueKey = isEquippedState ? data.equipDialogue : data.previewDialogue;
             karinDialogueText.text = LocalizationManager.Instance.GetText(dialogueKey);
+
+            if (karinFaceImage != null)
+                karinFaceImage.sprite = isEquippedState ? karinReady : karinNormal;
 
             equipButton.interactable = !isEquippedState;
             removeButton.interactable = isEquippedState;
@@ -98,29 +106,14 @@ public class KarinEquipmentUI : MonoBehaviour
         for (int i = 0; i < inventoryButtons.Length; i++)
         {
             int dataIndex = startIndex + i;
+            bool hasData = dataIndex < ownedList.Count;
 
-            if (dataIndex < ownedList.Count)
+            inventoryButtons[i].image.enabled = hasData; // 이미지 렌더러 끄기
+            inventoryButtons[i].interactable = hasData;  // 클릭 기능 끄기
+
+            if (hasData)
             {
-                KarinItemData itemData = ownedList[dataIndex];
-
-                inventoryButtons[i].gameObject.SetActive(true);
                 inventoryButtons[i].image.sprite = ownedList[dataIndex].itemIcon;
-                inventoryButtons[i].interactable = true;
-
-                // [핵심 추가] 현재 그려주는 버튼의 데이터가 '착용 중'인 아이템과 똑같다면?
-                if (itemData == PlayerManager.Instance.equippedKarinItem)
-                {
-                    inventoryButtons[i].image.color = equippedColor; // 어둡게 처리
-                }
-                else
-                {
-                    inventoryButtons[i].image.color = normalColor; // 기본 색상으로 원상복구
-                }
-            }
-            else
-            {
-                inventoryButtons[i].gameObject.SetActive(false);
-                inventoryButtons[i].interactable = false;
             }
         }
 

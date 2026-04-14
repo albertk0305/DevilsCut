@@ -78,3 +78,8 @@ dummy_equip,위이이잉! 다 썰어버릴까요?,Vrrrr! Shall I slice them all?
 dummy_itemname,아이템이에요~,Item~
 dummy_itemDesc,아이템 설명 옵니다~,Item Description Comes Here
 dummy_itemBonus,템 수치 설명 와요,Item Buffs Description
+msg_karin_exploration_idle,어디로 갈까요?,Where shall we go?
+msg_operator_not_unlocked,해당 시설은 아직 운영자가 해금되지 않았네요.,The operator for this facility has not been unlocked yet.
+msg_facility_info_format,그 시설은 {0}가 운영 중이고 시설 랭크는 {1}네요.,That facility is operated by {0} and its rank is {1}.
+msg_danger_selected,위험이 예지됩니다! 조심하세요.,Danger detected! Please be careful.
+msg_event_selected,뭔가 묘한 일이 일어날 것만 같네요.,I feel like something strange is about to happen.
