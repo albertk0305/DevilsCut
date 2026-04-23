@@ -19,6 +19,7 @@ btn_wait,잠깐만,Hold On
 btn_status,스테이터스,Status
 btn_helper,조력자,Helper
 btn_equipment,장비,Equipment
+lv_text,레벨,Level
 hp_text,체력,HP
 resist_text,저항,Resist
 stamina_text,스태미나,Stamina
@@ -55,7 +56,7 @@ baito,바이토,Baito
 sherry,셰리,Sherry
 karin,카린,Karin
 gabriel,가브리엘,Gabriel
-mio,미오,Mio
+hibiki,히비키,Hibiki
 raguel,라구엘,Raguel
 raphael,라파엘,Raphael
 remiel,레미엘,Remiel

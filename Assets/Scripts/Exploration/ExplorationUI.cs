@@ -287,7 +287,12 @@ public class ExplorationUI : MonoBehaviour
         else if (targetData is DangerNodeData dangerNode)
         {
             DevLog.Log($"[전투] LV.{dangerNode.enemyLevel} 적 출현! (전투 씬 로드)");
-            // SceneManager.LoadScene("CombatScene"); 
+
+            // 1. PlayerManager 우체통에 적 데이터를 쏙 넣어줍니다!
+            PlayerManager.Instance.currentEnemyToFight = dangerNode.enemyToSpawn;
+
+            // 2. 이제 전투 씬으로 넘어갑니다.
+            UnityEngine.SceneManagement.SceneManager.LoadScene("CombatScene");
         }
 
         confirmPopup.SetActive(false);

@@ -5,6 +5,7 @@ using TMPro;
 public class StatusUI : MonoBehaviour
 {
     [Header("텍스트 연결")]
+    public TextMeshProUGUI lvText;
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI apText; // 행동력
     public TextMeshProUGUI breakResText;
@@ -26,8 +27,9 @@ public class StatusUI : MonoBehaviour
         {
             PlayerStats pStats = PlayerManager.Instance.stats;
 
+            lvText.text = $"{pStats.level} ({pStats.currentExp} / {pStats.maxExp})";
             hpText.text = $"{pStats.currentHp} / {pStats.maxHp}";
-            apText.text = pStats.maxActionPoints.ToString();
+            apText.text = pStats.ActionPoints.ToString();
             breakResText.text = pStats.breakResistance.ToString();
             strText.text = pStats.strength.ToString();
             defText.text = pStats.defense.ToString();

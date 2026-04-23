@@ -74,10 +74,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
   stats:
+    level: 1
+    maxExp: 100
+    currentExp: 0
     maxHp: 100
     currentHp: 100
-    maxActionPoints: 5
-    currentActionPoints: 5
+    ActionPoints: 5
     breakResistance: 50
     strength: 10
     defense: 10
@@ -142,3 +144,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
   - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
   - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
+  currentEnemyToFight: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}

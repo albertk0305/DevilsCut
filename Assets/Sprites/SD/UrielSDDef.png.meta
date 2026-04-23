@@ -116,10 +116,10 @@ TextureImporter:
       name: UrielSDDef_0
       rect:
         serializedVersion: 2
-        x: 336
-        y: 10
-        width: 375
-        height: 991
+        x: 306
+        y: 14
+        width: 442
+        height: 980
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -6,11 +6,13 @@ using System.Collections.Generic;
 //플레이어 정보 저장 코드
 public class PlayerStats
 {
+    public int level = 1;
+    public int maxExp = 100;
+    public int currentExp = 0;
     public int maxHp = 100;
     public int currentHp = 100;
 
-    public int maxActionPoints = 5; // 최대 행동력
-    public int currentActionPoints = 5; // 현재 행동력
+    public int ActionPoints = 5; 
 
     public int breakResistance = 50; // 그로기 저항
     public int strength = 10;        // 힘
@@ -39,6 +41,9 @@ public class PlayerManager : MonoBehaviour
 
     [Header("일반 장비 인벤토리")]
     public List<EquipmentItemData> ownedEquipments = new List<EquipmentItemData>();
+
+    [Header("전투 진입 데이터 (임시 저장소)")]
+    public EnemyData currentEnemyToFight; // 탐색 씬에서 넘겨준 적 데이터를 전투 씬까지 배달해 줄 변수
 
     private void Awake()
     {
