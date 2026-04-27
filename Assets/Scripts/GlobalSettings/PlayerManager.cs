@@ -12,7 +12,12 @@ public class PlayerStats
     public int maxHp = 100;
     public int currentHp = 100;
 
-    public int ActionPoints = 5; 
+    public int ActionPoints = 5;
+
+    // 주인공 3번 칠 때 1번 침
+    public int KarinAP => Mathf.Max(1, Mathf.RoundToInt(ActionPoints * 0.20f));
+    // 주인공 5번 칠 때 1번 침
+    public int SupporterAP => Mathf.Max(1, Mathf.RoundToInt(ActionPoints * 0.11f));
 
     public int breakResistance = 50; // 그로기 저항
     public int strength = 10;        // 힘
@@ -44,6 +49,15 @@ public class PlayerManager : MonoBehaviour
 
     [Header("전투 진입 데이터 (임시 저장소)")]
     public EnemyData currentEnemyToFight; // 탐색 씬에서 넘겨준 적 데이터를 전투 씬까지 배달해 줄 변수
+
+    [Header("플레이어 해금 스킬")]
+    public List<SkillData> unlockedSkills = new List<SkillData>();
+
+    // 특정 카테고리의 스킬만 쏙쏙 뽑아주는 헬퍼 함수
+    public List<SkillData> GetSkillsByCategory(SkillCategory category)
+    {
+        return unlockedSkills.FindAll(s => s.category == category);
+    }
 
     private void Awake()
     {

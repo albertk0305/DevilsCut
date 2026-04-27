@@ -6,7 +6,9 @@ using System;
 public class LocalizationManager : MonoBehaviour
 {
     public static LocalizationManager Instance;
-    public TextAsset localizationCSV;
+
+    [Header("다국어 CSV 파일들")]
+    public TextAsset[] localizationCSVs;
 
     public enum Language { Korean, English }
     public Language currentLanguage = Language.Korean;
@@ -33,19 +35,33 @@ public class LocalizationManager : MonoBehaviour
 
     private void LoadCSV()
     {
-        if (localizationCSV == null) return;
-        string[] rows = localizationCSV.text.Split('\n');
-        for (int i = 1; i < rows.Length; i++)
+        dictionary.Clear();
+
+        // 배열에 파일이 하나도 없으면 중단
+        if (localizationCSVs == null || localizationCSVs.Length == 0) return;
+
+        // 배열에 들어있는 모든 CSV 파일을 하나씩 꺼내서 읽습니다.
+        foreach (TextAsset csvFile in localizationCSVs)
         {
-            if (string.IsNullOrWhiteSpace(rows[i])) continue;
-            string row = rows[i].TrimEnd('\r', '\n');
-            string[] columns = row.Split(',');
-            if (columns.Length >= 3)
+            if (csvFile == null) continue; // 빈 칸은 무시
+
+            string[] rows = csvFile.text.Split('\n');
+            for (int i = 1; i < rows.Length; i++)
             {
-                dictionary[columns[0]] = new string[] { columns[1], columns[2] };
+                if (string.IsNullOrWhiteSpace(rows[i])) continue;
+                string row = rows[i].TrimEnd('\r', '\n');
+                string[] columns = row.Split(',');
+
+                // A열(0)이 Key, B열(1)이 한국어, C열(2)이 영어
+                if (columns.Length >= 3)
+                {
+                    // Dictionary는 하나만 쓰기 때문에, 여러 파일에서 읽어와도 
+                    // 하나의 거대한 사전(Dictionary)에 모두 통합되어 들어갑니다!
+                    dictionary[columns[0]] = new string[] { columns[1], columns[2] };
+                }
             }
         }
-        DevLog.Log("다국어 데이터 로드 및 적용 완료!");
+        DevLog.Log($"다국어 데이터 로드 완료! (총 {localizationCSVs.Length}개 파일 통합)");
     }
 
     // --- 저장 및 불러오기 핵심 로직 ---

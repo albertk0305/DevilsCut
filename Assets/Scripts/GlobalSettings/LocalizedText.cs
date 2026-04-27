@@ -32,4 +32,10 @@ public class LocalizedText : MonoBehaviour
             textComponent.text = LocalizationManager.Instance.GetText(textKey);
         }
     }
+
+    public void SetKey(string newKey)
+    {
+        textKey = newKey;
+        UpdateText(); // 키를 바꾸자마자 즉시 텍스트 갱신!
+    }
 }

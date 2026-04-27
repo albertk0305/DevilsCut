@@ -46,7 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feffe4d33648bcb4fa448678c635f3c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizationManager
-  localizationCSV: {fileID: 4900000, guid: 7cdd186739eb41845ab1e8a69aeb9710, type: 3}
+  localizationCSVs:
+  - {fileID: 4900000, guid: 7cdd186739eb41845ab1e8a69aeb9710, type: 3}
+  - {fileID: 4900000, guid: 5fd6bbae1e4c95f4ab246cf77b9b0ef7, type: 3}
   currentLanguage: 0
 --- !u!114 &2952436123089374904
 MonoBehaviour:
@@ -79,7 +81,7 @@ MonoBehaviour:
     currentExp: 0
     maxHp: 100
     currentHp: 100
-    ActionPoints: 5
+    ActionPoints: 10
     breakResistance: 50
     strength: 10
     defense: 10
@@ -145,3 +147,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
   - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
   currentEnemyToFight: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
+  unlockedSkills:
+  - {fileID: 11400000, guid: 6f76bd2b0cc4916469f2ca32aba944e9, type: 2}
+  - {fileID: 11400000, guid: 64802653b7803204a93d67678bd46cd7, type: 2}
+  - {fileID: 11400000, guid: ec743606e6decaa4ca00be15688d59e6, type: 2}
+  - {fileID: 11400000, guid: 2bf3a371eb8b0d743a182c512093e7f7, type: 2}
+  - {fileID: 11400000, guid: 20cf60fc3fd55f24495211e58a5182ed, type: 2}
+  - {fileID: 11400000, guid: f13534802f8187c4e8f0068debe09130, type: 2}
+  - {fileID: 11400000, guid: 0204210682c535f4793afcd1eda8bf63, type: 2}
+  - {fileID: 11400000, guid: 0cb1fc9fcae16b145a295b0107681b37, type: 2}
+  - {fileID: 11400000, guid: 9f38f52eae4f254489cb646c4702d649, type: 2}
+  - {fileID: 11400000, guid: 034b7404251e82b40818f935d702eff0, type: 2}
+  - {fileID: 11400000, guid: a0ce4993cf02fde45ae51366a8311e4d, type: 2}
+  - {fileID: 11400000, guid: 55234477a0ae01a4194b5f8d307a3117, type: 2}
+  - {fileID: 11400000, guid: a66ec80d2d7aa4a4983dc27d792beb8d, type: 2}
+  - {fileID: 11400000, guid: d39f76da4729fa94090c8c82ccf764b5, type: 2}
+  - {fileID: 11400000, guid: 7674950fd1dbaa242a64e295442c4825, type: 2}
+  - {fileID: 11400000, guid: b6d234caab7b10a4d9f0adb6141cba11, type: 2}
+  - {fileID: 11400000, guid: dd89fe5eefd9e7f4ea57c835b8325960, type: 2}
+  - {fileID: 11400000, guid: 29d3bd789538da743944bd773eae5c74, type: 2}
+  - {fileID: 11400000, guid: 28f8f6eeac00dbb479903e4cfe924ead, type: 2}
+  - {fileID: 11400000, guid: 3e32ee87390d2c543bb844e722adb623, type: 2}
