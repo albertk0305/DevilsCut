@@ -12,6 +12,7 @@ public class SupporterData : ScriptableObject
     public Sprite worriedImage;
     public Sprite readyImage;
     public Sprite sdImage;
+    public Sprite CutIn;
 
     [Header("스킬 설명")]
     [TextArea] public string passiveSkillDesc;

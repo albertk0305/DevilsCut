@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -35,6 +36,7 @@ public class CombatManager : MonoBehaviour
     public Sprite playerNormal; // 기본
     public Sprite playerHit;    // 피격
     public Sprite playerEvade;  // 회피
+    public Sprite PlayerCutIn;
 
     // 적의 실시간 체력 및 브레이크 값
     private int currentEnemyHp;
@@ -50,6 +52,10 @@ public class CombatManager : MonoBehaviour
 
     [Header("데이터 연결")]
     public KarinData karinData; // 방금 만든 카린 데이터 연결
+
+    // 전투 내내 돌려쓸 플레이어와 적 데이터를 담아둘 전용 상자!
+    private PlayerStats currentPlayerStats;
+    private EnemyData currentEnemyData;
 
     [Header("턴 관리 시스템")]
     public List<TurnEntity> turnQueue = new List<TurnEntity>(); // 전투에 참여하는 캐릭터들
@@ -88,19 +94,23 @@ public class CombatManager : MonoBehaviour
 
     private void SetupCombatScene()
     {
-        // 1. 아군 데이터 초기화
         if (PlayerManager.Instance != null)
         {
-            PlayerStats pStats = PlayerManager.Instance.stats;
+            currentPlayerStats = PlayerManager.Instance.stats;
+            currentEnemyData = PlayerManager.Instance.currentEnemyToFight;
+        }
 
+        // 1. 아군 데이터 초기화
+        if (currentPlayerStats != null)
+        {
             // 기본 이미지 세팅
             playerImage.sprite = playerNormal;
 
             // HP 바 세팅
-            playerHpSlider.maxValue = pStats.maxHp;
-            playerHpSlider.value = pStats.currentHp;
+            playerHpSlider.maxValue = currentPlayerStats.maxHp;
+            playerHpSlider.value = currentPlayerStats.currentHp;
             if (playerHpText != null)
-                playerHpText.text = $"{pStats.currentHp}/{pStats.maxHp}";
+                playerHpText.text = $"{currentPlayerStats.currentHp}/{currentPlayerStats.maxHp}";
 
             // 브레이크 바: 100 고정
             playerBreakSlider.maxValue = 100;
@@ -127,18 +137,16 @@ public class CombatManager : MonoBehaviour
         }
 
         // 2. 적군 데이터 초기화
-        EnemyData eData = PlayerManager.Instance.currentEnemyToFight;
-
-        if (eData != null)
+        if (currentEnemyData != null)
         {
-            enemyImage.sprite = eData.enemyImage;
+            enemyImage.sprite = currentEnemyData.enemyImage;
 
             // 적 HP 바 세팅
-            enemyHpSlider.maxValue = eData.maxHp;
-            enemyHpSlider.value = eData.maxHp;
-            currentEnemyHp = eData.maxHp;
+            enemyHpSlider.maxValue = currentEnemyData.maxHp;
+            enemyHpSlider.value = currentEnemyData.maxHp;
+            currentEnemyHp = currentEnemyData.maxHp;
             if (enemyHpText != null)
-                enemyHpText.text = $"{currentEnemyHp}/{eData.maxHp}";
+                enemyHpText.text = $"{currentEnemyHp}/{currentEnemyData.maxHp}";
 
             // 적 브레이크 바: 100 고정
             enemyBreakSlider.maxValue = 100;
@@ -154,27 +162,26 @@ public class CombatManager : MonoBehaviour
     private void InitializeTurnQueue()
     {
         turnQueue.Clear();
-        PlayerStats pStats = PlayerManager.Instance.stats;
 
         // 1. 주인공 (배수 1.0 = 100% 속도)
-        turnQueue.Add(new TurnEntity { entityName = "Player", ap = pStats.ActionPoints, actionGauge = 0, isPlayer = true, speedMultiplier = 1.0f, portraitIcon = playerNormal });
+        turnQueue.Add(new TurnEntity { entityName = "Player", ap = currentPlayerStats.ActionPoints, actionGauge = 0, isPlayer = true, speedMultiplier = 1.0f, portraitIcon = PlayerCutIn });
 
         // 2. 카린 (주인공과 똑같은 AP를 넣되, 게이지 차는 속도를 1/3로 깎음 -> 정확히 3번에 1번 행동!)
-        Sprite kIcon = karinData != null ? karinData.normal : null;
-        turnQueue.Add(new TurnEntity { entityName = "Karin", ap = pStats.ActionPoints, actionGauge = 0, isPlayer = false, speedMultiplier = 0.333f, portraitIcon = kIcon });
+        Sprite kIcon = karinData != null ? karinData.CutIn : null;
+        turnQueue.Add(new TurnEntity { entityName = "Karin", ap = currentPlayerStats.ActionPoints, actionGauge = 0, isPlayer = false, speedMultiplier = 0.333f, portraitIcon = kIcon });
 
         // 3. 조력자 (주인공의 1/5 속도 = 0.2f 배수)
         if (PlayerManager.Instance.activeSupporter != null)
         {
-            Sprite sIcon = PlayerManager.Instance.activeSupporter.mainImage; // 혹은 sdImage 등 초상화용 변수
-            turnQueue.Add(new TurnEntity { entityName = "Supporter", ap = pStats.ActionPoints, actionGauge = 0, isPlayer = false, speedMultiplier = 0.2f, portraitIcon = sIcon });
+            Sprite sIcon = PlayerManager.Instance.activeSupporter.CutIn; 
+            turnQueue.Add(new TurnEntity { entityName = "Supporter", ap = currentPlayerStats.ActionPoints, actionGauge = 0, isPlayer = false, speedMultiplier = 0.2f, portraitIcon = sIcon });
         }
 
         // 4. 적 (배수 1.0) - 적은 자신의 고유 AP 스탯을 그대로 사용합니다.
-        if (PlayerManager.Instance.currentEnemyToFight != null)
+        if (currentEnemyData != null)
         {
-            int enemyAP = PlayerManager.Instance.currentEnemyToFight.ActionPoints;
-            Sprite eIcon = PlayerManager.Instance.currentEnemyToFight.enemyImage;
+            int enemyAP = currentEnemyData.ActionPoints;
+            Sprite eIcon = currentEnemyData.CutIn;
             turnQueue.Add(new TurnEntity { entityName = "Enemy", ap = enemyAP, actionGauge = 0, isPlayer = false, speedMultiplier = 1.0f, portraitIcon = eIcon });
         }
 
@@ -394,24 +401,163 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    // [최적화] 실제 스킬 효과를 적용하는 함수 (매개변수가 SkillData로 변경됨!)
     private void ExecuteSkill(SkillData skill)
     {
-        // 1. 데미지 계산 및 적 체력 감소
-        // 예시: int damage = Mathf.RoundToInt(PlayerManager.Instance.stats.strength * skill.damageMultiplier);
-        // PlayerManager.Instance.currentEnemyToFight.TakeDamage(damage); // (적 데미지 처리 함수가 있다면)
-
-        // 2. 브레이크 데미지 적용
-        // float breakDmg = skill.breakPower; ...
-
-        // 3. 스킬 이펙트 연출 재생
-        // ...
-
-        actionUIPanel.SetActive(false); // 행동을 마쳤으니 버튼 패널 닫기
-        waitingPanel.SetActive(true);
+        actionUIPanel.SetActive(false);
+        waitingPanel.SetActive(true); // 버튼은 즉시 끄고 대기 패널을 켭니다.
         currentMenuState = MenuState.Hidden;
 
-        // 연출이 끝난 뒤에 다시 다음 턴 계산 시작 (임시로 바로 호출)
+        // 코루틴을 실행하여 '시간의 흐름'이 있는 연출을 만듭니다.
+        StartCoroutine(PerformSkillRoutine(skill));
+    }
+    private IEnumerator PerformSkillRoutine(SkillData skill)
+    {
+        // 1. 주인공 이미지 교체 (스킬에 할당된 이미지가 있다면)
+        if (skill.skillActionImage != null)
+        {
+            playerImage.sprite = skill.skillActionImage;
+        }
+
+        DevLog.Log($"[스킬 시전] {skill.skillNameKey} 발동 준비!");
+
+        // 2. 스킬 연출 대기 시간 (임시로 1초 대기)
+        // 나중에 이펙트 프리팹을 생성하고 타격음 사운드를 재생하는 코드가 들어갈 자리입니다.
+        yield return new WaitForSeconds(1.0f);
+
+        // ==========================================
+        // 3. 명중 / 회피 판정 (Hit or Miss 주사위 굴리기)
+        // ==========================================
+        float skillBaseAccuracy = skill.baseAccuracy;
+        int enemySpeed = currentEnemyData.speed;
+
+        bool isHit = CheckHitSuccess(skillBaseAccuracy, currentPlayerStats.speed, enemySpeed);
+
+        if (!isHit)
+        {
+            DevLog.Log("빗나감 (Miss)! 데미지와 브레이크 수치가 적용되지 않습니다.");
+            // TODO: 화면에 "빗나감" 텍스트 연출 애니메이션 추가
+        }
+        else
+        {
+            // ==========================================
+            // 4. 실제 데미지 및 브레이크 계산 (명중했을 때만 실행!)
+            // ==========================================
+            int rawDamage = Mathf.RoundToInt(currentPlayerStats.strength * skill.damageMultiplier);
+
+            float specialMultiplier = GetSpecialBreakMultiplier(skill, currentPlayerStats);
+            float finalBreakDamage = skill.breakPower * specialMultiplier;
+
+            int enemyBR = currentEnemyData.breakResistance;
+            float dr = GetBreakDamageReduction(enemyBR);
+            finalBreakDamage *= (1f - dr);
+
+            float snowball = GetBreakSnowballMultiplier(currentEnemyBreak);
+            finalBreakDamage *= snowball;
+
+            currentEnemyBreak += finalBreakDamage;
+            if (currentEnemyBreak >= 100f)
+            {
+                currentEnemyBreak = 100f;
+                DevLog.Log("적 그로기(Break) 발생!");
+            }
+
+            enemyBreakSlider.value = currentEnemyBreak;
+
+            DevLog.Log($"[공격 적중] 데미지: {rawDamage} / 브레이크 누적: {finalBreakDamage:F1} (현재 게이지: {currentEnemyBreak:F1}%)");
+        }
+
+        // 5. 고유 특수 효과 발동 (버프 등은 빗나가도 본인에게 걸려야 하는 경우 함수 안에서 분기 처리)
+        ApplySpecialSkillEffects(skill);
+
+        // 6. 행동 종료 및 원상 복구
+        playerImage.sprite = playerNormal;
         CalculateNextTurn();
+    }
+
+    // 스킬의 고유한 효과를 분기 처리하는 함수
+    private void ApplySpecialSkillEffects(SkillData skill)
+    {
+        switch (skill.specificId)
+        {
+            case SkillID.Sword_Deflect:
+                // TODO: 가드 버프 획득 로직
+                break;
+            case SkillID.Sword_SpaceSlash:
+                // TODO: 적 방어력 감소 디버프 부여 로직
+                break;
+                // ... 기획하신 다른 스킬들의 특수 효과도 이곳에 하나씩 추가해 나갑니다.
+        }
+    }
+
+    // ==========================================
+    // [전투 수학 공식 로직]
+    // ==========================================
+
+    // 명중, 회피 함수(속도)
+    private float GetEffectiveSpeed(int speed)
+    {
+        if (speed <= 100) return speed;
+        if (speed <= 200) return 100f + (speed - 100f) / 2f;
+        return 150f + (speed - 200f) / 10f;
+    }
+
+    private bool CheckHitSuccess(float baseAccuracy, int attackerSpeed, int defenderSpeed)
+    {
+        float attackerES = GetEffectiveSpeed(attackerSpeed);
+        float defenderES = GetEffectiveSpeed(defenderSpeed);
+
+        float deltaES = attackerES - defenderES;
+        float M = 120f;
+        float C = 30f;
+
+        // 명중률 보정 공식 (점감형 곡선)
+        float hitModifier = M * (deltaES / (Mathf.Abs(deltaES) + C));
+        float finalHitRate = baseAccuracy + hitModifier;
+
+        // 최소 5%, 최대 95% 클램프 처리
+        finalHitRate = Mathf.Clamp(finalHitRate, 5f, 95f);
+
+        // 0.0 ~ 100.0 사이의 랜덤 주사위 굴리기!
+        float randomRoll = Random.Range(0f, 100f);
+
+        DevLog.Log($"[명중 연산] 유효속도 차이: {deltaES:F1} / 보정치: {hitModifier:F1}% / 최종 명중률: {finalHitRate:F1}% / 주사위 결과: {randomRoll:F1}");
+
+        return randomRoll <= finalHitRate; // 주사위가 명중률보다 낮거나 같으면 타격 성공!
+    }
+
+    // 브레이크 함수(그로기)
+    private float GetBreakDamageReduction(int br)
+    {
+        if (br <= 100) return br / 200f;
+        else if (br <= 200) return 0.5f + ((br - 100f) / 400f);
+        else return 0.75f + ((br - 200f) / 2000f);
+    }
+
+    private float GetBreakSnowballMultiplier(float currentGauge)
+    {
+        // 최대치 100을 기준으로 현재 비율의 제곱을 더함
+        float ratio = currentGauge / 100f;
+        return 1.0f + (ratio * ratio);
+    }
+
+    // ==========================================
+    // [스킬 특수 처리 로직 분리]
+    // ==========================================
+    private float GetSpecialBreakMultiplier(SkillData skill, PlayerStats pStats)
+    {
+        float multiplier = 1.0f; // 기본 배율은 1.0 (변화 없음)
+
+        switch (skill.specificId)
+        {
+            case SkillID.Oni_WitchHunt:
+                // 마녀사냥: 잃은 체력에 비례해 브레이크 수치 최대 2배(1.0 + 1.0) 증가
+                float missingHpRatio = (float)(pStats.maxHp - pStats.currentHp) / pStats.maxHp;
+                multiplier += (missingHpRatio * 1.0f);
+                break;
+
+                // 나중에 브레이크 수치를 뻥튀기하는 다른 스킬이 생기면 여기에 case만 추가하면 됩니다!
+        }
+
+        return multiplier;
     }
 }

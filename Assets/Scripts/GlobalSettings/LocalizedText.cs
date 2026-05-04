@@ -27,10 +27,22 @@ public class LocalizedText : MonoBehaviour
 
     void UpdateText()
     {
-        if (LocalizationManager.Instance != null && !string.IsNullOrEmpty(textKey))
+        // 1. 방어 코드: 텍스트 컴포넌트를 아직 못 찾았다면, 지금 당장 찾아서 연결합니다!
+        if (textComponent == null)
         {
-            textComponent.text = LocalizationManager.Instance.GetText(textKey);
+            textComponent = GetComponent<TextMeshProUGUI>();
         }
+
+        // 그래도 컴포넌트가 없다면 에러를 막기 위해 함수를 종료합니다.
+        if (textComponent == null) return;
+
+        // 2. 방어 코드: 다국어 매니저가 아직 안 만들어졌다면 에러를 내지 않고 종료합니다.
+        // (조금 뒤에 매니저가 켜지면서 알아서 다시 글자를 바꿔줄 것입니다.)
+        if (LocalizationManager.Instance == null) return;
+
+        // 3. 모든 준비가 끝났을 때만 안전하게 글자를 바꿉니다.
+        // (기존에 작성하셨던 다국어 매니저 호출 함수 이름을 사용하시면 됩니다. GetText 또는 GetValue 등)
+        textComponent.text = LocalizationManager.Instance.GetText(textKey);
     }
 
     public void SetKey(string newKey)

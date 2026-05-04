@@ -19,6 +19,7 @@ MonoBehaviour:
   worriedImage: {fileID: 21300000, guid: b10d5eb177c7de24082a3d4fe6768056, type: 3}
   readyImage: {fileID: 21300000, guid: 3a4430af34aed9a45a9c79fbda862599, type: 3}
   sdImage: {fileID: 21300000, guid: 4ac70460cb4323644873696fb76ee96c, type: 3}
+  CutIn: {fileID: 21300000, guid: 9c5c85916a080c341869400abd108b04, type: 3}
   passiveSkillDesc: dummy_Passive
   startSkillDesc: dummy_StartSkill
   battleSkillDesc: dummy_BattleSkill

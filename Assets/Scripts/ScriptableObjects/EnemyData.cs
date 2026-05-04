@@ -6,6 +6,7 @@ public class EnemyData : ScriptableObject
     [Header("기본 정보")]
     public string enemyNameKey; // 다국어 번역을 위한 Key
     public Sprite enemyImage;   // 전투 씬에 띄울 이미지
+    public Sprite CutIn;
 
     [Header("전투 스탯")]
     public int level;
