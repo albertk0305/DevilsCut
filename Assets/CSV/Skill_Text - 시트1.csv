@@ -1,24 +1,24 @@
 Key,Korean,English
-skill_name_sword1,튕겨내기,Deflect
-skill_name_sword2,공간살법,Spatial Slaying Method
-skill_name_sword3,원무,Circle Dance
-skill_name_sword4,엑스칼리버,Excalibur
-skill_name_gun1,엔젤암,Angel Arm
-skill_name_gun2,무한의 마탄,Infinite Magic Bullet
-skill_name_gun3,저격,Snipe
-skill_name_gun4,게이트 오브 바빌론,Gate of Babylon
-skill_name_hit1,파괴살나침,Compass Needle
-skill_name_hit2,허도류 제4 오의,Kyotoryu 4th Secret Technique
-skill_name_hit3,에네르기파,Kamehameha
-skill_name_hit4,펀치러쉬,Punch Rush
-skill_name_magic1,가불,Advance
-skill_name_magic2,산데비스탄,Sandevistan
-skill_name_magic3,구속제어술식,Restraint Level Release
-skill_name_magic4,영역전개,Domain Expansion
-skill_name_oni1,도발,Taunt
-skill_name_oni2,코코로와타리,Kokorowatari
-skill_name_oni3,마녀사냥,Witch Hunt
-skill_name_oni4,영역전개,Domain Expansion
+skill_name_sword1,담력,Guts
+skill_name_sword2,타나토스,Thanatos
+skill_name_sword3,악귀멸살,Exterminate
+skill_name_sword4,약속된 승리의 검,The Sword of Promised Victory
+skill_name_gun1,데몬 암,Demon Arm
+skill_name_gun2,무한의 마탄,Infinita
+skill_name_gun3,판타스틱 드리머,Fantastic Dreamer
+skill_name_gun4,오니의 재보,Oni's Treasure
+skill_name_hit1,새벽별,Daystar
+skill_name_hit2,유록화홍,Yurokwahong
+skill_name_hit3,기,Ki
+skill_name_hit4,크루세이더,Crusader
+skill_name_magic1,아수라,Asura
+skill_name_magic2,메이저 크라임,Major Crimes
+skill_name_magic3,이성이 없는 세계,The World without Logos
+skill_name_magic4,회옥,Hidden Inventory
+skill_name_oni1,빈 상자,Void
+skill_name_oni2,페이퍼문,Papermoon
+skill_name_oni3,etoile et toi,etoile et toi
+skill_name_oni4,역몽,Sakayume
 skill_desc_sword1,더미 sword1,dummy sword1
 skill_desc_sword2,더미 sword2,dummy sword2
 skill_desc_sword3,더미 sword3,dummy sword3
@@ -39,3 +39,63 @@ skill_desc_oni1,더미 oni1,dummy oni1
 skill_desc_oni2,더미 oni2,dummy oni2
 skill_desc_oni3,더미 oni3,dummy oni3
 skill_desc_oni4,더미 oni4,dummy oni4
+sword1_enhance1,인과율,Casusality
+sword1_enhance2,고드 핸드,God Hand
+sword1_enhance3,제물의 낙인,Brand of Sacrifice
+sword2_enhance1,Color Your Night,Color Your Night
+sword2_enhance2,Burn My Dread,Burn My Dread
+sword2_enhance3,Full Moon Full Life,Full Moon Full Life
+sword3_enhance1,내비치는 세계,Transparent World
+sword3_enhance2,오니가 되어라,Become a Demon
+sword3_enhance3,빈틈의 실,Opning Tread
+sword4_enhance1,인비저블 에어,Invisible Air
+sword4_enhance2,아발론,Avalon
+sword4_enhance3,모르간,Morgan
+gun1_enhance1,성자의 행진,Come the Light
+gun1_enhance2,별 부스러기,Stars
+gun1_enhance3,러시안 룰렛,Russian Roulette
+gun2_enhance1,티로 듀엣,Tiro Duet
+gun2_enhance2,마기아,Magia
+gun2_enhance3,티로 피날레,Tiro Finale
+gun3_enhance1,최강급 행운,Superlative Luck
+gun3_enhance2,익스플로전,Explosion
+gun3_enhance3,스틸,Steal
+gun4_enhance1,컬렉터 EX,Collector EX
+gun4_enhance2,엘키두,Enkidu
+gun4_enhance3,에누마 엘리시,Enuma Elish
+hit1_enhance1,멸식,Annihilation Type
+hit1_enhance2,난식,Disorder
+hit1_enhance3,종식,Final Form
+hit2_enhance1,박수갈채가합,Hakushu Kassai Utaawase
+hit2_enhance2,비화낙엽,Bihwanakyeop
+hit2_enhance3,칠화팔열,Chilhwapalryeol
+hit3_enhance1,마관광살포,Special Beam Cannon
+hit3_enhance2,기공포,Tri Beam
+hit3_enhance3,원기옥,Spirit Bomb
+hit4_enhance1,Bloody Stream,Bloody Stream
+hit4_enhance2,Stand Proud,Stand Proud
+hit4_enhance3,Last Train Home,Last Train Home
+magic1_enhance1,초인,Superhuman
+magic1_enhance2,마인,Majin
+magic1_enhance3,마창,Eldritch Pike
+magic2_enhance1,This Fffire,This Fffire
+magic2_enhance2,Let You Down,Let You Down
+magic2_enhance3,사이버 사이코,Cyber Psycho
+magic3_enhance1,Shine,Shine
+magic3_enhance2,초재생,Super Regeneration
+magic3_enhance3,구속제어술식,Control Art Restriction System
+magic4_enhance1,반전술식,Reversed Cursed Technique
+magic4_enhance2,무하한,Limitless
+magic4_enhance3,무량공처,Unlimited Void
+oni1_enhance1,누구도 될 수 없는 나니까,I'm Nobody
+oni1_enhance2,공백과 카타르시스,Emptiness and Catharsis
+oni1_enhance3,운명의 꽃,I'm here
+oni2_enhance1,공명,Resonance
+oni2_enhance2,아이 워너 비,I Wanna be
+oni2_enhance3,스타일,Style
+oni3_enhance1,네가 모르는 이야기,Kimi no Shiranai Monogatari
+oni3_enhance2,mein schatz,mein schatz
+oni3_enhance3,언데드,Undead
+oni4_enhance1,give it back,give it back
+oni4_enhance2,Vivid Vice,Vivid Vice
+oni4_enhance3,more than words,more than words

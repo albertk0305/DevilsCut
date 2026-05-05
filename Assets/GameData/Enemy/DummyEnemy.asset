@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyNameKey: michael
   enemyImage: {fileID: 21300000, guid: 5cfe54c1fe09e8f4a80dd1bfb058cd84, type: 3}
   CutIn: {fileID: 21300000, guid: 4920c5ca85027c248b42296d2ab806ae, type: 3}
+  aiBrain: {fileID: 11400000, guid: da718e34bc8b3c14c9275e3ea61a6cab, type: 2}
   level: 1
   maxHp: 100
   ActionPoints: 10

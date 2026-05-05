@@ -3399,6 +3399,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1018720924}
   - component: {fileID: 1018720923}
+  - component: {fileID: 1018720926}
+  - component: {fileID: 1018720925}
+  - component: {fileID: 1018720927}
   m_Layer: 0
   m_Name: CombatManager
   m_TagString: Untagged
@@ -3418,41 +3421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b26ee1f8823d724db0d38fa28b6b238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatManager
-  playerImage: {fileID: 2134813121}
-  playerHpSlider: {fileID: 527452232}
-  playerBreakSlider: {fileID: 1596793029}
-  playerHpText: {fileID: 240479073}
-  enemyImage: {fileID: 568858269}
-  enemyHpSlider: {fileID: 1333156416}
-  enemyBreakSlider: {fileID: 631447325}
-  enemyHpText: {fileID: 293266001}
-  playerNormal: {fileID: 21300000, guid: b397b6e04837b3d4ab452dc7c304de6a, type: 3}
-  playerHit: {fileID: 21300000, guid: 346c760c1631278478fa765648dcdcd6, type: 3}
-  playerEvade: {fileID: 21300000, guid: 716f4d1f2a3b1a848a2b965d38a92cbf, type: 3}
-  PlayerCutIn: {fileID: 21300000, guid: 46cff6a0058accd4994e85b1484cde8d, type: 3}
-  karinProfileImage: {fileID: 1468104749}
-  supporterProfileImage: {fileID: 1596340157}
-  turnOrderIcons:
-  - {fileID: 472147955}
-  - {fileID: 539572307}
-  - {fileID: 78058193}
-  - {fileID: 999563966}
+  playerData: {fileID: 11400000, guid: 942b59532c7d2484c8102038283ffa5d, type: 2}
   karinData: {fileID: 11400000, guid: e0e6014fd0ee1ba42ba376a8247cef9b, type: 2}
-  turnQueue: []
-  actionUIPanel: {fileID: 777518473}
-  waitingPanel: {fileID: 112903217}
-  actionButtons:
-  - {fileID: 1676486643}
-  - {fileID: 1308822419}
-  - {fileID: 1657024024}
-  - {fileID: 1618145039}
-  - {fileID: 2117832988}
-  actionButtonTexts:
-  - {fileID: 546965870}
-  - {fileID: 964596024}
-  - {fileID: 1087755355}
-  - {fileID: 1609597500}
-  - {fileID: 67403896}
 --- !u!4 &1018720924
 Transform:
   m_ObjectHideFlags: 0
@@ -3468,6 +3438,84 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1018720925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018720922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c8cbd21a0585c344ae5996b84907296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TurnManager
+  turnQueue: []
+--- !u!114 &1018720926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018720922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d21367d2f84a914f87bf92762d37e12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatUIManager
+  playerImage: {fileID: 2134813121}
+  playerHpSlider: {fileID: 527452232}
+  playerBreakSlider: {fileID: 1596793029}
+  playerHpText: {fileID: 240479073}
+  enemyImage: {fileID: 568858269}
+  enemyHpSlider: {fileID: 1333156416}
+  enemyBreakSlider: {fileID: 631447325}
+  enemyHpText: {fileID: 293266001}
+  karinProfileImage: {fileID: 1468104749}
+  supporterProfileImage: {fileID: 1596340157}
+  turnOrderIcons:
+  - {fileID: 472147955}
+  - {fileID: 539572307}
+  - {fileID: 78058193}
+  - {fileID: 999563966}
+  actionUIPanel: {fileID: 777518473}
+  waitingPanel: {fileID: 112903217}
+  actionButtons:
+  - {fileID: 1676486643}
+  - {fileID: 1308822419}
+  - {fileID: 1657024024}
+  - {fileID: 1618145039}
+  - {fileID: 2117832988}
+  actionButtonTexts:
+  - {fileID: 546965870}
+  - {fileID: 964596024}
+  - {fileID: 1087755355}
+  - {fileID: 1609597500}
+  - {fileID: 67403896}
+  styleRankImage: {fileID: 1533690708}
+  styleRankSprites:
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 95e344d200021fe44a7058c45be04350, type: 3}
+  - {fileID: 21300000, guid: df6db9c41f23e2640a4fe12a282b9fd8, type: 3}
+  - {fileID: 21300000, guid: 0eb43abc5b0ad9548a12a2edeed0faca, type: 3}
+  - {fileID: 21300000, guid: c2baba2336c93b14b9c0f0b01db4b32e, type: 3}
+  - {fileID: 21300000, guid: 5a0644567aa923049a51dc3d5743b931, type: 3}
+  - {fileID: 21300000, guid: 1c528f9eb9989384e91b8b55c3457308, type: 3}
+  - {fileID: 21300000, guid: 9b326cf5cfaed6e479301f7bfdccbb04, type: 3}
+  commentaryText: {fileID: 2027828307}
+--- !u!114 &1018720927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018720922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6137353994651104d944721eea3d9bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StyleRankManager
+  currentRank: 0
 --- !u!1 &1087755351
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,9 @@ public class EnemyData : ScriptableObject
     public Sprite enemyImage;   // 전투 씬에 띄울 이미지
     public Sprite CutIn;
 
+    [Header("적 AI 설정")]
+    public EnemyAIBase aiBrain;
+
     [Header("전투 스탯")]
     public int level;
     public int maxHp;

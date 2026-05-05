@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c0cf3389c5bded42a986a7d5db9ef87, type: 3}
+  m_Name: SherryData
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerData
+  playerNamekey: sherry
+  normal: {fileID: 21300000, guid: b397b6e04837b3d4ab452dc7c304de6a, type: 3}
+  cutIn: {fileID: 21300000, guid: 46cff6a0058accd4994e85b1484cde8d, type: 3}
+  hit: {fileID: 21300000, guid: 346c760c1631278478fa765648dcdcd6, type: 3}
+  evade: {fileID: 21300000, guid: 716f4d1f2a3b1a848a2b965d38a92cbf, type: 3}
