@@ -76,6 +76,14 @@ public class StyleRankManager : MonoBehaviour
         DecreaseRank();
     }
 
+    public void OnSupportActionUsed()
+    {
+        IncreaseRank();
+
+        // 참고: 카린과 조력자는 셰리의 스킬 카테고리(검, 총 등)와 무관하므로
+        // previousCategory 변수를 덮어쓰지 않고 랭크만 깔끔하게 올립니다!
+    }
+
     // --- 내부 랭크 조절 로직 ---
     private void IncreaseRank()
     {
@@ -111,5 +119,22 @@ public class StyleRankManager : MonoBehaviour
 
         UpdateUI();
         DevLog.Log("[스타일 랭크] 궁극기 사용! 랭크가 None으로 초기화되었습니다.");
+    }
+
+    public float GetRankDamageMultiplier()
+    {
+        // 선형 증가: None(1.0배)부터 SSS(1.7배)까지 0.1배씩 증가합니다.
+        switch (currentRank)
+        {
+            case StyleRank.None: return 1.0f;
+            case StyleRank.D: return 1.1f;
+            case StyleRank.C: return 1.2f;
+            case StyleRank.B: return 1.3f;
+            case StyleRank.A: return 1.4f;
+            case StyleRank.S: return 1.5f;
+            case StyleRank.SS: return 1.6f;
+            case StyleRank.SSS: return 1.7f;
+            default: return 1.0f;
+        }
     }
 }

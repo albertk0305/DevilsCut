@@ -19,9 +19,14 @@ MonoBehaviour:
   worriedImage: {fileID: 21300000, guid: b10d5eb177c7de24082a3d4fe6768056, type: 3}
   readyImage: {fileID: 21300000, guid: 3a4430af34aed9a45a9c79fbda862599, type: 3}
   sdImage: {fileID: 21300000, guid: 4ac70460cb4323644873696fb76ee96c, type: 3}
-  CutIn: {fileID: 21300000, guid: 9c5c85916a080c341869400abd108b04, type: 3}
+  CutIn: {fileID: 21300000, guid: 48cb4501239be0048aee7c5c4688b74a, type: 3}
+  startSkillCutIn: {fileID: 21300000, guid: 9c5c85916a080c341869400abd108b04, type: 3}
+  startSkillImage: {fileID: 21300000, guid: b3cac51737118344eac2da899cdeca3d, type: 3}
+  battleSkillImage: {fileID: 21300000, guid: be150377faf34494bbd2527accc78884, type: 3}
   passiveSkillDesc: dummy_Passive
   startSkillDesc: dummy_StartSkill
   battleSkillDesc: dummy_BattleSkill
   selectMessage: dummy_SelectMessage
   joinMessage: dummy_JoinMessage
+  startSkillLogic: {fileID: 11400000, guid: 59886f409f1345547902faf228e6ea74, type: 2}
+  battleSkillLogic: {fileID: 11400000, guid: 7a5cc691eb040b947ac9c7322d806722, type: 2}

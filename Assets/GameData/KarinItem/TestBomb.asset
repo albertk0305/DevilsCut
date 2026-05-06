@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1e02acdb935644458559277d3c42d95, type: 3}
-  m_Name: dummy0
+  m_Name: TestBomb
   m_EditorClassIdentifier: Assembly-CSharp::KarinItemData
-  itemName: dummy_item
+  itemName: TestBomb
   itemIcon: {fileID: 21300000, guid: 247b24374b4d3bb4596850e095961bf3, type: 3}
-  itemDescription: dummy_desc
+  itemDescription: "\uC170\uB9AC\uC758 \uD798 \uB9CC\uD07C \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4"
   previewDialogue: dummy_preview
   equipDialogue: dummy_equip
+  itemLogic: {fileID: 11400000, guid: a7e541482fa4d1e4dbfd55a30f61af08, type: 2}

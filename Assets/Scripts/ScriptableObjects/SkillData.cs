@@ -24,4 +24,8 @@ public class SkillData : ScriptableObject
     public float breakPower = 20f;        // 브레이크 깎는 수치
     public float baseAccuracy = 80f; // [추가] 기본 명중률
     public float bonusCritRate = 0f; // [추가] 스킬 고유 크리티컬 추가 확률 (예: 15f)
+
+    [Header("스킬 유형")]
+    public bool isUltimate = false;
+    public int hitCount = 1;
 }

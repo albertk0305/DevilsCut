@@ -11,4 +11,5 @@ public class PlayerData : ScriptableObject
     public Sprite cutIn;  // 턴 대기열용 작은 얼굴
     public Sprite hit;    // 피격 시 얼굴
     public Sprite evade;  // 회피 시 얼굴
+    public Sprite breakImage;
 }

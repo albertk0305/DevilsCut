@@ -24,6 +24,12 @@ public class PlayerStats
     public int defense = 10;         // 방어
     public int speed = 10;           // 속도
     public int luck = 5;             // 운
+
+    // 전투용 임시 복사본을 만들어주는 함수!
+    public PlayerStats Clone()
+    {
+        return (PlayerStats)this.MemberwiseClone();
+    }
 }
 
 public class PlayerManager : MonoBehaviour

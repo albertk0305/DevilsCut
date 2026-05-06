@@ -127,4 +127,17 @@ public class TurnManager : MonoBehaviour
 
         return futureTurnIcons; // 예측된 초상화 리스트만 CombatManager에게 전달합니다!
     }
+
+    public void ResetGauge(string targetName)
+    {
+        foreach (var entity in turnQueue)
+        {
+            if (entity.entityName == targetName)
+            {
+                entity.actionGauge = 0f;
+                DevLog.Log($"[{targetName}]의 행동 게이지가 0으로 강제 초기화되었습니다!");
+                break;
+            }
+        }
+    }
 }

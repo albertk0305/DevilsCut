@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2506315741611087086}
   - component: {fileID: 2952436123089374904}
   - component: {fileID: 6879955947631341113}
+  - component: {fileID: 4950642224689884447}
   m_Layer: 0
   m_Name: GlobalManagers
   m_TagString: Untagged
@@ -79,14 +80,14 @@ MonoBehaviour:
     level: 1
     maxExp: 100
     currentExp: 0
-    maxHp: 100
-    currentHp: 100
+    maxHp: 1000
+    currentHp: 1000
     ActionPoints: 10
     breakResistance: 50
     strength: 10
     defense: 10
     speed: 10
-    luck: 5
+    luck: 10
   unlockedSupporters:
   - {fileID: 11400000, guid: 8f7a108444158544399cf83ab876c34c, type: 2}
   - {fileID: 11400000, guid: 324e8b7827f679846a1984c00523c40e, type: 2}
@@ -104,7 +105,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 44ea8ddbf190c1b4aa60370fa23be87d, type: 2}
   - {fileID: 11400000, guid: acd1785fe78e23e4cb3b5b30efb571bd, type: 2}
   - {fileID: 11400000, guid: 56c51a8b624cf964a95c6d31b09b7ffe, type: 2}
-  equippedKarinItem: {fileID: 0}
+  equippedKarinItem: {fileID: 11400000, guid: 3af5d2d3d0ac65e4e81a7df77f56e141, type: 2}
   ownedEquipments:
   - {fileID: 11400000, guid: 6e99cd199e7b6fb4a9b923829b1c6a27, type: 2}
   - {fileID: 11400000, guid: b9e74b766e913524096968b2d622663f, type: 2}
@@ -168,3 +169,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 29d3bd789538da743944bd773eae5c74, type: 2}
   - {fileID: 11400000, guid: 28f8f6eeac00dbb479903e4cfe924ead, type: 2}
   - {fileID: 11400000, guid: 3e32ee87390d2c543bb844e722adb623, type: 2}
+--- !u!114 &4950642224689884447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7079399663421639093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d63663735aa9cb643bd3e14a83c22ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TypewriterUtility

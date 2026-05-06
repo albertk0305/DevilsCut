@@ -17,8 +17,10 @@ MonoBehaviour:
   skillDescKey: dummy skill
   category: 5
   skillLevel: 1
-  skillActionImage: {fileID: 21300000, guid: 9e9919a3d285c914da83f7d3b7cffca1, type: 3}
+  skillActionImage: {fileID: 21300000, guid: 5cfe54c1fe09e8f4a80dd1bfb058cd84, type: 3}
   damageMultiplier: 1
   breakPower: 20
   baseAccuracy: 80
   bonusCritRate: 0
+  isUltimate: 0
+  hitCount: 1

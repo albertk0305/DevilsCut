@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class CombatUIManager : MonoBehaviour
 {
@@ -38,6 +40,15 @@ public class CombatUIManager : MonoBehaviour
 
     [Header("전투 해설 텍스트 UI")]
     public TextMeshProUGUI commentaryText;
+
+    [Header("컷인(Cut-in) 연출 UI")]
+    public Image cutInImage;      // 실제 캐릭터 컷인이 들어갈 이미지 컴포넌트
+
+    [Header("데미지 및 크리티컬 연출 UI")]
+    public GameObject damageTextPrefab; // 아까 만든 데미지 텍스트 프리팹
+    public Transform playerDamagePos;   // 아군 데미지가 뜰 기준점
+    public Transform enemyDamagePos;    // 적 데미지가 뜰 기준점
+    public GameObject critAlertImage;
 
     // 원래 얼굴로 복구하기 위해 기억해둘 변수
     private Sprite defaultPlayerSprite;
@@ -174,7 +185,21 @@ public class CombatUIManager : MonoBehaviour
         else enemyImage.sprite = skillSprite;
     }
 
+    public void SetDefenderImage(bool isPlayer, Sprite reactionSprite)
+    {
+        if (reactionSprite == null) return;
+
+        if (isPlayer) playerImage.sprite = reactionSprite;
+        else enemyImage.sprite = reactionSprite;
+    }
+
     public void ResetCasterImage(bool isPlayer)
+    {
+        if (isPlayer) playerImage.sprite = defaultPlayerSprite;
+        else enemyImage.sprite = defaultEnemySprite;
+    }
+
+    public void ResetDefenderImage(bool isPlayer)
     {
         if (isPlayer) playerImage.sprite = defaultPlayerSprite;
         else enemyImage.sprite = defaultEnemySprite;
@@ -218,11 +243,73 @@ public class CombatUIManager : MonoBehaviour
         }
     }
 
-    public void UpdateCommentary(string message)
+    public IEnumerator TypeCommentary(string message, bool autoProceed = true, float delayAfter = 1.5f)
     {
-        if (commentaryText != null)
+        // TypewriterUtility가 텍스트를 다 칠 때까지 여기서 기다립니다(yield return).
+        yield return StartCoroutine(TypewriterUtility.Instance.TypeText(commentaryText, message, autoProceed, delayAfter));
+    }
+
+    public IEnumerator ShowCutIn(Sprite cutInSprite)
+    {
+        if (cutInImage != null && cutInSprite != null)
         {
-            commentaryText.text = message;
+            cutInImage.gameObject.SetActive(true);
+            cutInImage.sprite = cutInSprite;
+
+            // 1초 동안 컷인을 보여줍니다.
+            yield return new WaitForSeconds(1.5f);
+
+            cutInImage.gameObject.SetActive(false);
+        }
+    }
+
+    public void SpawnDamageText(string text, bool isCrit, bool isPlayerTarget)
+    {
+        if (damageTextPrefab == null) return;
+
+        Transform targetPos = isPlayerTarget ? playerDamagePos : enemyDamagePos;
+
+        // X, Y축으로 랜덤하게 흩뿌릴 오프셋(Offset) 생성
+        float randomX = Random.Range(-50f, 50f);
+        float randomY = Random.Range(-50f, 50f);
+        Vector3 spawnPos = targetPos.position + new Vector3(randomX, randomY, 0);
+
+        // 텍스트 생성
+        GameObject dmgObj = Instantiate(damageTextPrefab, spawnPos, Quaternion.identity, targetPos.parent);
+        DamageText dmgScript = dmgObj.GetComponent<DamageText>();
+        if (dmgScript != null)
+        {
+            dmgScript.Setup(text, isCrit);
+        }
+    }
+
+    public IEnumerator ShowCritAlert()
+    {
+        if (critAlertImage != null)
+        {
+            critAlertImage.SetActive(true);
+            yield return new WaitForSeconds(1.0f); // 1초간 띄움
+            critAlertImage.SetActive(false);
+        }
+    }
+
+    // 턴 종료 시 화면에 남은 전투 연출 UI를 강제로 끄고 지웁니다.
+    public void ClearCombatEffects()
+    {
+        // 1. 크리티컬 알림 이미지 강제 끄기
+        if (critAlertImage != null)
+        {
+            critAlertImage.SetActive(false);
+        }
+
+        // 2. 씬에 남아있는 모든 데미지 텍스트 강제 파괴 (최신 유니티 문법 사용)
+        DamageText[] activeTexts = FindObjectsByType<DamageText>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (DamageText txt in activeTexts)
+        {
+            if (txt != null && txt.gameObject != null)
+            {
+                Destroy(txt.gameObject);
+            }
         }
     }
 }

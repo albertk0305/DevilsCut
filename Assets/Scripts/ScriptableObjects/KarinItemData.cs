@@ -11,4 +11,7 @@ public class KarinItemData : ScriptableObject
     [Header("카린 대사")]
     public string previewDialogue; // 목록에서 눌러서 고민 중일 때 나오는 대사
     public string equipDialogue;   // 장비(Equip) 했을 때 나오는 대사
+
+    [Header("아이템 효과 로직")]
+    public KarinItemLogicBase itemLogic;
 }

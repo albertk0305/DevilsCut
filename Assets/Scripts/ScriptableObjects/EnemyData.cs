@@ -8,6 +8,11 @@ public class EnemyData : ScriptableObject
     public Sprite enemyImage;   // 전투 씬에 띄울 이미지
     public Sprite CutIn;
 
+    [Header("리액션 이미지")]
+    public Sprite hit;
+    public Sprite evade;
+    public Sprite breakImage;
+
     [Header("적 AI 설정")]
     public EnemyAIBase aiBrain;
 
