@@ -16,12 +16,19 @@ MonoBehaviour:
   supporterName: mammon
   mainImage: {fileID: 21300000, guid: 105ffe0fb7459bc429a450498db10517, type: 3}
   iconImage: {fileID: 21300000, guid: 4735bde3fd2d5d3488dfb7aeac1b1621, type: 3}
-  worriedImage: {fileID: 21300000, guid: 24055132972b0ed49ae4a5370e333f79, type: 3}
-  readyImage: {fileID: 21300000, guid: e0f33487468066741b2a2c2e15a01965, type: 3}
+  worriedSDImage: {fileID: 21300000, guid: 24055132972b0ed49ae4a5370e333f79, type: 3}
+  readySDImage: {fileID: 21300000, guid: e0f33487468066741b2a2c2e15a01965, type: 3}
   sdImage: {fileID: 21300000, guid: 4735bde3fd2d5d3488dfb7aeac1b1621, type: 3}
   CutIn: {fileID: 21300000, guid: 498fada1bc200f0459ea4a10fb33af6a, type: 3}
+  startSkillCutIn: {fileID: 0}
+  startSkillImage: {fileID: 0}
+  battleSkillImage: {fileID: 0}
+  worried: {fileID: 21300000, guid: a2429909a4971e244a17cd6447ebc5e9, type: 3}
+  happy: {fileID: 21300000, guid: d4b55a8c7cf6d7541916c3d504a6d109, type: 3}
   passiveSkillDesc: dummy_Passive
   startSkillDesc: dummy_StartSkill
   battleSkillDesc: dummy_BattleSkill
   selectMessage: dummy_SelectMessage
   joinMessage: dummy_JoinMessage
+  startSkillLogic: {fileID: 0}
+  battleSkillLogic: {fileID: 0}

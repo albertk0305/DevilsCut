@@ -12,4 +12,5 @@ public class PlayerData : ScriptableObject
     public Sprite hit;    // ÇÇ°Ý ½Ã ¾ó±¼
     public Sprite evade;  // È¸ÇÇ ½Ã ¾ó±¼
     public Sprite breakImage;
+    public Sprite guardImage;
 }

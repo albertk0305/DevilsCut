@@ -86,7 +86,7 @@ MonoBehaviour:
     breakResistance: 50
     strength: 10
     defense: 10
-    speed: 10
+    speed: 20
     luck: 10
   unlockedSupporters:
   - {fileID: 11400000, guid: 8f7a108444158544399cf83ab876c34c, type: 2}

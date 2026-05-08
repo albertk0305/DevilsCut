@@ -80,4 +80,20 @@ public static class CombatMath
         float ratio = currentGauge / 100f;
         return 1.0f + (ratio * ratio);
     }
+
+    // 8. 브레이크 자연 회복량 산출 (게이지가 낮을수록 많이 회복)
+    public static float GetBreakRecoveryAmount(float currentGauge, float baseRecovery = 10f)
+    {
+        // 게이지 비율 (0.0 ~ 1.0)
+        float ratio = currentGauge / 100f;
+
+        // 스노우볼 공식(1 + x^2)의 정반대인 (1 - x^2)를 사용하여 긴장감을 맞춥니다!
+        // 게이지가 0일 땐 100% 회복, 게이지가 90일 땐 19%만 회복됩니다.
+        float multiplier = 1.0f - (ratio * ratio);
+
+        // 최소한의 회복량은 보장 (예: 10% 이하는 떨어지지 않음)
+        multiplier = Mathf.Max(0.1f, multiplier);
+
+        return baseRecovery * multiplier;
+    }
 }

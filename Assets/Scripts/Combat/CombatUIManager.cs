@@ -50,6 +50,10 @@ public class CombatUIManager : MonoBehaviour
     public Transform enemyDamagePos;    // 적 데미지가 뜰 기준점
     public GameObject critAlertImage;
 
+    [Header("버프/디버프 UI 연결 (미리 깔아둔 24개 슬롯)")]
+    public BuffSlotUI[] playerBuffSlots; // 에디터에서 플레이어 측 24개 슬롯을 모두 넣습니다.
+    public BuffSlotUI[] enemyBuffSlots;  // 에디터에서 적 측 24개 슬롯을 모두 넣습니다.
+
     // 원래 얼굴로 복구하기 위해 기억해둘 변수
     private Sprite defaultPlayerSprite;
     private Sprite defaultEnemySprite;
@@ -100,6 +104,19 @@ public class CombatUIManager : MonoBehaviour
             {
                 supporterProfileImage.gameObject.SetActive(false);
             }
+        }
+    }
+
+    public void UpdateProfileImages(Sprite karinSprite, Sprite supporterSprite)
+    {
+        if (karinProfileImage != null && karinSprite != null)
+        {
+            karinProfileImage.sprite = karinSprite;
+        }
+
+        if (supporterProfileImage != null && supporterSprite != null)
+        {
+            supporterProfileImage.sprite = supporterSprite;
         }
     }
 
@@ -243,10 +260,66 @@ public class CombatUIManager : MonoBehaviour
         }
     }
 
+    private Coroutine currentCommentaryCoroutine; // 겉포장지 (TypeCommentary)
+    private Coroutine innerTypingCoroutine; // 알맹이 (실제 타자기 역할)
+
     public IEnumerator TypeCommentary(string message, bool autoProceed = true, float delayAfter = 1.5f)
     {
-        // TypewriterUtility가 텍스트를 다 칠 때까지 여기서 기다립니다(yield return).
-        yield return StartCoroutine(TypewriterUtility.Instance.TypeText(commentaryText, message, autoProceed, delayAfter));
+        // ==========================================
+        // 스킬 연출이든 버프 클릭이든, 이 함수가 호출되는 즉시 
+        // 기존에 돌고 있던 모든 타자기(좀비 코루틴)의 목을 베어버리고 창을 비웁니다!
+        // ==========================================
+        if (innerTypingCoroutine != null)
+        {
+            StopCoroutine(innerTypingCoroutine);
+            innerTypingCoroutine = null;
+        }
+
+        if (TypewriterUtility.Instance != null)
+        {
+            TypewriterUtility.Instance.StopAllCoroutines();
+        }
+
+        if (commentaryText != null)
+        {
+            commentaryText.text = "";
+        }
+
+        // 깨끗해진 상태에서 안전하게 새로운 텍스트 타이핑을 시작합니다.
+        innerTypingCoroutine = StartCoroutine(TypewriterUtility.Instance.TypeText(commentaryText, message, autoProceed, delayAfter));
+        yield return innerTypingCoroutine;
+    }
+
+    public void InterruptAndTypeCommentary(string message)
+    {
+        // 1. 겉포장지 코루틴 정지
+        if (currentCommentaryCoroutine != null)
+        {
+            StopCoroutine(currentCommentaryCoroutine);
+            currentCommentaryCoroutine = null;
+        }
+
+        // 2. [핵심] 실제로 글자를 치고 있는 내부 좀비 코루틴을 정확히 타겟팅해서 죽입니다!
+        if (innerTypingCoroutine != null)
+        {
+            StopCoroutine(innerTypingCoroutine);
+            innerTypingCoroutine = null;
+        }
+
+        // 3. Typewriter 쪽에서 돌아가던 코루틴도 확실히 죽입니다.
+        if (TypewriterUtility.Instance != null)
+        {
+            TypewriterUtility.Instance.StopAllCoroutines();
+        }
+
+        // 4. 텍스트 창을 하얗게 비웁니다.
+        if (commentaryText != null)
+        {
+            commentaryText.text = "";
+        }
+
+        // 5. 새로운 코루틴을 시작하고 이름표를 저장합니다.
+        currentCommentaryCoroutine = StartCoroutine(TypeCommentary(message, false, 0f));
     }
 
     public IEnumerator ShowCutIn(Sprite cutInSprite)
@@ -310,6 +383,46 @@ public class CombatUIManager : MonoBehaviour
             {
                 Destroy(txt.gameObject);
             }
+        }
+    }
+
+    public void RefreshBuffUI()
+    {
+        UpdateBuffGrid(playerBuffSlots, CombatManager.Instance.GetGroupedEffects(true), true);
+        UpdateBuffGrid(enemyBuffSlots, CombatManager.Instance.GetGroupedEffects(false), false);
+    }
+
+    private void UpdateBuffGrid(BuffSlotUI[] slots, Dictionary<StatusEffectData, float> groupedEffects, bool isPlayer)
+    {
+        int maxSlots = slots.Length;
+        int activeCount = groupedEffects.Count;
+
+        foreach (var slot in slots)
+        {
+            slot.gameObject.SetActive(false);
+        }
+
+        int index = 0;
+        foreach (var kvp in groupedEffects)
+        {
+            if (index < maxSlots - 1)
+            {
+                // Setup에 isPlayer 여부를 전달합니다!
+                slots[index].Setup(kvp.Key, kvp.Value, isPlayer);
+            }
+            else if (index == maxSlots - 1)
+            {
+                if (activeCount > maxSlots)
+                {
+                    slots[index].Setup(null, 0, isPlayer, true);
+                    break;
+                }
+                else
+                {
+                    slots[index].Setup(kvp.Key, kvp.Value, isPlayer);
+                }
+            }
+            index++;
         }
     }
 }

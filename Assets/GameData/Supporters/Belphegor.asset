@@ -16,12 +16,19 @@ MonoBehaviour:
   supporterName: belphegor
   mainImage: {fileID: 21300000, guid: 5c44bdc8c73ff704780bbcb2a9fbabe6, type: 3}
   iconImage: {fileID: 21300000, guid: 154f4c0b671e36d46abac7c981cc928e, type: 3}
-  worriedImage: {fileID: 21300000, guid: efcd1862d6539ec48b30d146e70d5e0a, type: 3}
-  readyImage: {fileID: 21300000, guid: d3750f8a2c810054497210cee59981f1, type: 3}
+  worriedSDImage: {fileID: 21300000, guid: efcd1862d6539ec48b30d146e70d5e0a, type: 3}
+  readySDImage: {fileID: 21300000, guid: d3750f8a2c810054497210cee59981f1, type: 3}
   sdImage: {fileID: 21300000, guid: 154f4c0b671e36d46abac7c981cc928e, type: 3}
   CutIn: {fileID: 21300000, guid: b6dcaf61f556a534ea3bf0abe211eaa4, type: 3}
+  startSkillCutIn: {fileID: 0}
+  startSkillImage: {fileID: 0}
+  battleSkillImage: {fileID: 0}
+  worried: {fileID: 21300000, guid: c7d19723fb57d164982f8e79efba8011, type: 3}
+  happy: {fileID: 21300000, guid: 4088168e32151394b8766079952945fc, type: 3}
   passiveSkillDesc: dummy_Passive
   startSkillDesc: dummy_StartSkill
   battleSkillDesc: dummy_BattleSkill
   selectMessage: dummy_SelectMessage
   joinMessage: dummy_JoinMessage
+  startSkillLogic: {fileID: 0}
+  battleSkillLogic: {fileID: 0}

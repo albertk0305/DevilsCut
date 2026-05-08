@@ -214,8 +214,8 @@ public class ExplorationUI : MonoBehaviour
         if (activeSupporter != null)
         {
             companionImage.gameObject.SetActive(true);
-            if (isLowHP) companionImage.sprite = activeSupporter.worriedImage;
-            else if (isConfirming) companionImage.sprite = activeSupporter.readyImage;
+            if (isLowHP) companionImage.sprite = activeSupporter.worriedSDImage;
+            else if (isConfirming) companionImage.sprite = activeSupporter.readySDImage;
             else companionImage.sprite = activeSupporter.sdImage;
         }
         else companionImage.gameObject.SetActive(false);

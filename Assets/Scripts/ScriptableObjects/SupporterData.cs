@@ -9,13 +9,15 @@ public class SupporterData : ScriptableObject
     [Header("이미지")]
     public Sprite mainImage; // 메인 화면에 뜰 큰 이미지
     public Sprite iconImage; // 하단 목록에 뜰 작은 아이콘
-    public Sprite worriedImage;
-    public Sprite readyImage;
+    public Sprite worriedSDImage;
+    public Sprite readySDImage;
     public Sprite sdImage;
     public Sprite CutIn;
     public Sprite startSkillCutIn; // 개전 스킬 전용 컷인 (비어있으면 기본 CutIn을 사용합니다)
     public Sprite startSkillImage;
     public Sprite battleSkillImage;
+    public Sprite worried;
+    public Sprite happy;
 
     [Header("스킬 설명")]
     [TextArea] public string passiveSkillDesc;

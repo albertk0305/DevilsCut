@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa14b50fd4ca0d4eaa462662a5819ec, type: 3}
+  m_Name: DummyBuff_AtkUp
+  m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
+  effectID: buff_atk_up
+  effectName: "\uACF5\uACA9\uB825 \uC99D\uAC00"
+  category: 0
+  icon: {fileID: 21300000, guid: b06a08c67f032ad459626a9e86772e4e, type: 3}
+  targetStat: 1
+  modifierType: 1
+  specialType: 0
+  baseDescription: "\uACF5\uACA9\uB825\uC774 \uC99D\uAC00 \uC911\uC785\uB2C8\uB2E4!"
+  valueFormat: "(\uCD1D +{0:P0})"

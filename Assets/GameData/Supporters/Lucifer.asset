@@ -16,13 +16,15 @@ MonoBehaviour:
   supporterName: lucifer
   mainImage: {fileID: 21300000, guid: e4d738ca0763f61458cf244a6a741ab2, type: 3}
   iconImage: {fileID: 21300000, guid: 4ac70460cb4323644873696fb76ee96c, type: 3}
-  worriedImage: {fileID: 21300000, guid: b10d5eb177c7de24082a3d4fe6768056, type: 3}
-  readyImage: {fileID: 21300000, guid: 3a4430af34aed9a45a9c79fbda862599, type: 3}
+  worriedSDImage: {fileID: 21300000, guid: b10d5eb177c7de24082a3d4fe6768056, type: 3}
+  readySDImage: {fileID: 21300000, guid: 3a4430af34aed9a45a9c79fbda862599, type: 3}
   sdImage: {fileID: 21300000, guid: 4ac70460cb4323644873696fb76ee96c, type: 3}
   CutIn: {fileID: 21300000, guid: 48cb4501239be0048aee7c5c4688b74a, type: 3}
   startSkillCutIn: {fileID: 21300000, guid: 9c5c85916a080c341869400abd108b04, type: 3}
   startSkillImage: {fileID: 21300000, guid: b3cac51737118344eac2da899cdeca3d, type: 3}
   battleSkillImage: {fileID: 21300000, guid: be150377faf34494bbd2527accc78884, type: 3}
+  worried: {fileID: 21300000, guid: 5b3211894fb79b64ebc037e35d5f070c, type: 3}
+  happy: {fileID: 21300000, guid: be150377faf34494bbd2527accc78884, type: 3}
   passiveSkillDesc: dummy_Passive
   startSkillDesc: dummy_StartSkill
   battleSkillDesc: dummy_BattleSkill
