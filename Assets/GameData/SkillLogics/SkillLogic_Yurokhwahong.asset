@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bae82ffebaa225c43a16974956cd9c2e, type: 3}
-  m_Name: SkillLogic_Courage
-  m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Courage
-  guardBuffData: {fileID: 11400000, guid: fab6c6f67ca90f749bcf1f3b6974ac4f, type: 2}
+  m_Script: {fileID: 11500000, guid: 316623533a004e040b4ab9c08220e4c7, type: 3}
+  m_Name: SkillLogic_Yurokhwahong
+  m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Yurokhwahong

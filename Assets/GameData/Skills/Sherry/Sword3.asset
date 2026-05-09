@@ -12,11 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
   m_Name: Sword3
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillLogic: {fileID: 11400000, guid: 5978ac0494441bb4aa6fb3f179e371ac, type: 2}
   skillNameKey: skill_name_sword3
   skillDescKey: skill_desc_sword3
   category: 0
-  specificId: 3
   skillLevel: 1
   skillActionImage: {fileID: 21300000, guid: 31b830bfa39494b4c94b5ad46e459658, type: 3}
-  damageMultiplier: 1
-  breakPower: 20
+  damageMultipliers:
+  - 12
+  - 15
+  - 18
+  breakPowers:
+  - 10
+  - 11
+  - 12
+  baseAccuracy: 90
+  bonusCritRate: 0
+  isUltimate: 0
+  hitCount: 1
+  currentEvolution: 0
+  evolutionA_Multipliers:
+  - 0.5
+  - 0.75
+  - 1
+  evolutionB_Multipliers:
+  - 0.4
+  - 0.5
+  - 0.6
+  evolutionC_DamageMultipliers:
+  - 15
+  - 20
+  - 25
+  evolutionC_BreakPowers:
+  - 25
+  - 30
+  - 35

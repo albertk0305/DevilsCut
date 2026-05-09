@@ -4,7 +4,7 @@ using UnityEngine;
 public enum EffectCategory { Buff, Debuff, Special }
 public enum TargetStat { None, Strength, Defense, Speed, Luck }
 public enum ModifierType { Flat, Percentage }
-public enum SpecialEffectType { None, Guard, Reflect, Poison }
+public enum SpecialEffectType { None, Guard, Reflect, AbsoluteGuard, EvasionUp }
 
 [CreateAssetMenu(fileName = "NewStatusEffect", menuName = "GameData/StatusEffect")]
 public class StatusEffectData : ScriptableObject

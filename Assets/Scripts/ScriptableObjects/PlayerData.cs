@@ -13,4 +13,5 @@ public class PlayerData : ScriptableObject
     public Sprite evade;  // È¸ÇÇ ½Ã ¾ó±¼
     public Sprite breakImage;
     public Sprite guardImage;
+    public Sprite reflectImage;
 }

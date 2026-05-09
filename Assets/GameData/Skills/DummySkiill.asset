@@ -18,9 +18,28 @@ MonoBehaviour:
   category: 5
   skillLevel: 1
   skillActionImage: {fileID: 21300000, guid: 5cfe54c1fe09e8f4a80dd1bfb058cd84, type: 3}
-  damageMultiplier: 1
-  breakPower: 20
-  baseAccuracy: 80
+  damageMultipliers:
+  - 10
+  breakPowers:
+  - 20
+  baseAccuracy: 90
   bonusCritRate: 0
   isUltimate: 0
   hitCount: 1
+  currentEvolution: 0
+  evolutionA_Multipliers:
+  - 0.5
+  - 0.75
+  - 1
+  evolutionB_Multipliers:
+  - 0.4
+  - 0.5
+  - 0.6
+  evolutionC_DamageMultipliers:
+  - 15
+  - 20
+  - 25
+  evolutionC_BreakPowers:
+  - 25
+  - 30
+  - 35

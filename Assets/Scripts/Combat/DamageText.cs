@@ -4,23 +4,41 @@ using TMPro;
 public class DamageText : MonoBehaviour
 {
     public TextMeshProUGUI textMesh;
-    public float moveSpeed = 10f; // 위로 올라가는 속도
-    public float lifetime = 1.0f; // 사라지기까지 걸리는 시간
+    public float moveSpeed = 2f;
+    public float lifetime = 3.0f;
+
+    private float defaultFontSize; // 재사용을 위한 기본 폰트 크기 기억
 
     private void Awake()
     {
-        if (textMesh == null)
-        {
-            textMesh = GetComponentInChildren<TextMeshProUGUI>();
-        }
+        if (textMesh == null) textMesh = GetComponentInChildren<TextMeshProUGUI>();
+        if (textMesh != null) defaultFontSize = textMesh.fontSize;
+    }
+
+    private void OnEnable()
+    {
+        // [최적화 2] 켜질 때마다 lifetime 초 뒤에 자신을 끄도록 예약 (Destroy 완전 대체)
+        Invoke("Deactivate", lifetime);
+    }
+
+    private void OnDisable()
+    {
+        // 도중에 강제로 꺼지면 예약 취소 (메모리 꼬임 방지)
+        CancelInvoke();
+    }
+
+    private void Deactivate()
+    {
+        gameObject.SetActive(false); // 수명이 다하면 스스로 꺼집니다.
     }
 
     public void Setup(string text, bool isCrit)
     {
         if (textMesh == null) return;
-        textMesh.text = text;
 
-        // [신규 추가] 텍스트가 "Miss"라면 무조건 파란색으로 띄웁니다!
+        textMesh.text = text;
+        textMesh.fontSize = defaultFontSize; // 재사용 시 폰트 크기 초기화
+
         if (text == "Miss")
         {
             textMesh.color = Color.blue;
@@ -28,20 +46,17 @@ public class DamageText : MonoBehaviour
         else if (isCrit)
         {
             textMesh.text += "!";
-            textMesh.color = Color.yellow; // 크리티컬은 노란색
-            textMesh.fontSize += 20;       // 크리티컬은 글자도 더 크게!
+            textMesh.color = Color.yellow;
+            textMesh.fontSize += 20; // 크리티컬일 때만 폰트 키움
         }
         else
         {
-            textMesh.color = Color.red;    // 일반 적중은 붉은색
+            textMesh.color = Color.red;
         }
-
-        Destroy(gameObject, lifetime);
     }
 
     void Update()
     {
-        // 매 프레임마다 위쪽으로 조금씩 이동시킵니다.
         transform.position += Vector3.up * moveSpeed * Time.deltaTime;
     }
 }

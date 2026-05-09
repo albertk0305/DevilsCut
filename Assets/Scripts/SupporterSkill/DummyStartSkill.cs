@@ -11,7 +11,7 @@ public class DummyStartSkill : SupporterLogicBase
         // 아군(true)에게 공격력 20%(0.2f) 증가 버프를 3턴 동안 부여합니다.
         if (attackBuffData != null)
         {
-            CombatManager.Instance.AddEffect(true, attackBuffData, 0.2f, 3);
+            BuffManager.Instance.AddEffect(true, attackBuffData, 0.2f, 3);
             DevLog.Log("[조력자 개전 스킬] 셰리의 공격력이 3턴 동안 20% 증가합니다!");
         }
     }

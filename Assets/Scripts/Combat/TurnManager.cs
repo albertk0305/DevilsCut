@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+public enum EntityType { Player, Enemy, Karin, Supporter }
 // [분리] CombatManager에 있던 클래스를 이쪽으로 이사했습니다.
 [System.Serializable]
 public class TurnEntity
 {
-    public string entityName;
+    public EntityType type;
     public int ap;
     public float actionGauge;
     public bool isPlayer;
@@ -33,11 +34,11 @@ public class TurnManager : MonoBehaviour
     }
 
     // 2. 대기열에 캐릭터 추가
-    public void AddEntity(string name, int ap, bool isPlayer, float speedMult, Sprite icon)
+    public void AddEntity(EntityType type, int ap, bool isPlayer, float speedMult, Sprite icon)
     {
         turnQueue.Add(new TurnEntity
         {
-            entityName = name,
+            type = type,
             ap = ap,
             actionGauge = 0,
             isPlayer = isPlayer,
@@ -94,7 +95,7 @@ public class TurnManager : MonoBehaviour
 
         for (int i = 0; i < turnQueue.Count; i++)
         {
-            simQueue[i].entityName = turnQueue[i].entityName;
+            simQueue[i].type = turnQueue[i].type;
             simQueue[i].ap = turnQueue[i].ap;
             simQueue[i].actionGauge = turnQueue[i].actionGauge;
             simQueue[i].isPlayer = turnQueue[i].isPlayer;
@@ -128,14 +129,14 @@ public class TurnManager : MonoBehaviour
         return futureTurnIcons; // 예측된 초상화 리스트만 CombatManager에게 전달합니다!
     }
 
-    public void ResetGauge(string targetName)
+    public void ResetGauge(EntityType targetType)
     {
         foreach (var entity in turnQueue)
         {
-            if (entity.entityName == targetName)
+            if (entity.type == targetType) // 문자열 대신 Enum으로 비교!
             {
                 entity.actionGauge = 0f;
-                DevLog.Log($"[{targetName}]의 행동 게이지가 0으로 강제 초기화되었습니다!");
+                DevLog.Log($"[{targetType}]의 행동 게이지가 0으로 강제 초기화되었습니다!");
                 break;
             }
         }

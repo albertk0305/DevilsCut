@@ -20,10 +20,10 @@ MonoBehaviour:
   breakImage: {fileID: 21300000, guid: 2ae8ef447da692d489f41df53f9c4916, type: 3}
   aiBrain: {fileID: 11400000, guid: da718e34bc8b3c14c9275e3ea61a6cab, type: 2}
   level: 1
-  maxHp: 1000
+  maxHp: 10000
   ActionPoints: 10
   breakResistance: 10
-  strength: 5
-  defense: 5
-  speed: 5
-  luck: 5
+  strength: 20
+  defense: 20
+  speed: 20
+  luck: 20

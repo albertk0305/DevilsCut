@@ -1,62 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.InputSystem;
 
 public class CombatUIManager : MonoBehaviour
 {
     public static CombatUIManager Instance;
 
-    [Header("아군(Player) UI 연결")]
-    public Image playerImage;
-    public Slider playerHpSlider;
-    public Slider playerBreakSlider;
-    public TextMeshProUGUI playerHpText;
+    [Header("UI 모듈 연결 (신설 부서)")]
+    public EntityStatusUI playerStatusUI;
+    public EntityStatusUI enemyStatusUI;
+    public ActionMenuUI actionMenuUI;
+    public CombatVisualUI visualUI;
 
-    [Header("적(Enemy) UI 연결")]
-    public Image enemyImage;
-    public Slider enemyHpSlider;
-    public Slider enemyBreakSlider;
-    public TextMeshProUGUI enemyHpText;
-
-    [Header("UI 프로필 이미지 (왼쪽 구역)")]
+    [Header("기타 UI (매니저 직속)")]
+    public Image[] turnOrderIcons;
     public Image karinProfileImage;
     public Image supporterProfileImage;
-
-    [Header("턴 대기열 UI (위에서부터 1~4등)")]
-    public Image[] turnOrderIcons;
-
-    [Header("전투 액션 메뉴 UI")]
-    public GameObject actionUIPanel;
-    public GameObject waitingPanel;
-    public Button[] actionButtons;
-    public LocalizedText[] actionButtonTexts;
-
-    [Header("스타일 랭크 UI")]
-    public Image styleRankImage;
-    public Sprite[] styleRankSprites;
-
-    [Header("전투 해설 텍스트 UI")]
-    public TextMeshProUGUI commentaryText;
-
-    [Header("컷인(Cut-in) 연출 UI")]
-    public Image cutInImage;      // 실제 캐릭터 컷인이 들어갈 이미지 컴포넌트
-
-    [Header("데미지 및 크리티컬 연출 UI")]
-    public GameObject damageTextPrefab; // 아까 만든 데미지 텍스트 프리팹
-    public Transform playerDamagePos;   // 아군 데미지가 뜰 기준점
-    public Transform enemyDamagePos;    // 적 데미지가 뜰 기준점
-    public GameObject critAlertImage;
-
-    [Header("버프/디버프 UI 연결 (미리 깔아둔 24개 슬롯)")]
-    public BuffSlotUI[] playerBuffSlots; // 에디터에서 플레이어 측 24개 슬롯을 모두 넣습니다.
-    public BuffSlotUI[] enemyBuffSlots;  // 에디터에서 적 측 24개 슬롯을 모두 넣습니다.
-
-    // 원래 얼굴로 복구하기 위해 기억해둘 변수
-    private Sprite defaultPlayerSprite;
-    private Sprite defaultEnemySprite;
 
     private void Awake()
     {
@@ -64,64 +24,69 @@ public class CombatUIManager : MonoBehaviour
     }
 
     // ==========================================
-    // 1. 초기 셋업
+    // 0. 이벤트 방송 구독 (수신 후 각 부서로 전달)
     // ==========================================
-    public void InitPlayerUI(int maxHp, int currentHp, Sprite normalSprite)
+    private void OnEnable()
     {
-        defaultPlayerSprite = normalSprite;
-        playerImage.sprite = normalSprite;
-        playerHpSlider.maxValue = maxHp;
-        playerHpSlider.value = currentHp;
-        if (playerHpText != null) playerHpText.text = $"{currentHp}/{maxHp}";
-        playerBreakSlider.maxValue = 100;
-        playerBreakSlider.value = 0;
+        BattleEventSystem.OnHpChanged += HandleHpChanged;
+        BattleEventSystem.OnDamageTaken += HandleDamageTaken;
+        BattleEventSystem.OnEvaded += HandleEvaded;
     }
 
-    public void InitEnemyUI(int maxHp, int currentHp, Sprite enemySprite)
+    private void OnDisable()
     {
-        defaultEnemySprite = enemySprite;
-        enemyImage.sprite = enemySprite;
-        enemyHpSlider.maxValue = maxHp;
-        enemyHpSlider.value = currentHp;
-        if (enemyHpText != null) enemyHpText.text = $"{currentHp}/{maxHp}";
-        enemyBreakSlider.maxValue = 100;
-        enemyBreakSlider.value = 0;
+        BattleEventSystem.OnHpChanged -= HandleHpChanged;
+        BattleEventSystem.OnDamageTaken -= HandleDamageTaken;
+        BattleEventSystem.OnEvaded -= HandleEvaded;
     }
+
+    private void HandleHpChanged(bool isPlayer, int currentHp, int maxHp)
+    {
+        if (isPlayer) playerStatusUI.UpdateHP(currentHp, maxHp);
+        else enemyStatusUI.UpdateHP(currentHp, maxHp);
+    }
+
+    private void HandleDamageTaken(bool isPlayerTarget, int damage, bool isCrit) => visualUI.SpawnDamageText(damage.ToString(), isCrit, isPlayerTarget);
+    private void HandleEvaded(bool isPlayerTarget) => visualUI.SpawnDamageText("Miss", false, isPlayerTarget);
+
+    // ==========================================
+    // 1. 초기 셋업 위임
+    // ==========================================
+    public void InitPlayerUI(int maxHp, int currentHp, Sprite normalSprite) => playerStatusUI.InitUI(maxHp, currentHp, normalSprite);
+    public void InitEnemyUI(int maxHp, int currentHp, Sprite enemySprite) => enemyStatusUI.InitUI(maxHp, currentHp, enemySprite);
 
     public void InitProfiles(Sprite karinSprite, Sprite supporterSprite)
     {
-        if (karinProfileImage != null && karinSprite != null)
-            karinProfileImage.sprite = karinSprite;
-
+        if (karinProfileImage != null && karinSprite != null) karinProfileImage.sprite = karinSprite;
         if (supporterProfileImage != null)
         {
-            if (supporterSprite != null)
-            {
-                supporterProfileImage.gameObject.SetActive(true);
-                supporterProfileImage.sprite = supporterSprite;
-            }
-            else
-            {
-                supporterProfileImage.gameObject.SetActive(false);
-            }
+            supporterProfileImage.gameObject.SetActive(supporterSprite != null);
+            if (supporterSprite != null) supporterProfileImage.sprite = supporterSprite;
+        }
+    }
+
+    public void ShowFantasticDreamerDice(int count, bool isPlayerCaster)
+    {
+        visualUI.ShowDiceVisual(count, isPlayerCaster);
+    }
+
+    public void ClearCombatEffects()
+    {
+        if (visualUI != null)
+        {
+            visualUI.ClearCombatEffects();
+            visualUI.ClearDiceVisual(); // [추가됨]
         }
     }
 
     public void UpdateProfileImages(Sprite karinSprite, Sprite supporterSprite)
     {
-        if (karinProfileImage != null && karinSprite != null)
-        {
-            karinProfileImage.sprite = karinSprite;
-        }
-
-        if (supporterProfileImage != null && supporterSprite != null)
-        {
-            supporterProfileImage.sprite = supporterSprite;
-        }
+        if (karinProfileImage != null && karinSprite != null) karinProfileImage.sprite = karinSprite;
+        if (supporterProfileImage != null && supporterSprite != null) supporterProfileImage.sprite = supporterSprite;
     }
 
     // ==========================================
-    // 2. 턴 대기열 및 패널 조작
+    // 2. 기타 직속 기능 (턴 대기열)
     // ==========================================
     public void UpdateTurnOrderUI(List<Sprite> icons)
     {
@@ -132,297 +97,58 @@ public class CombatUIManager : MonoBehaviour
                 turnOrderIcons[i].gameObject.SetActive(true);
                 turnOrderIcons[i].sprite = icons[i];
             }
-            else
-            {
-                turnOrderIcons[i].gameObject.SetActive(false);
-            }
+            else turnOrderIcons[i].gameObject.SetActive(false);
         }
     }
 
-    public void SetActionPanelActive(bool isActive)
-    {
-        actionUIPanel.SetActive(isActive);
-    }
-
-    public void SetWaitingPanelActive(bool isActive)
-    {
-        waitingPanel.SetActive(isActive);
-    }
+    // ==========================================
+    // 3. 하단 메뉴 버튼 위임
+    // ==========================================
+    public void SetActionPanelActive(bool isActive) => actionMenuUI.SetActionPanelActive(isActive);
+    public void SetWaitingPanelActive(bool isActive) => actionMenuUI.SetWaitingPanelActive(isActive);
+    public void UpdateActionButtonsForCategory(string[] categoryKeys) => actionMenuUI.UpdateCategoryButtons(categoryKeys);
+    public void UpdateActionButtonsForSkills(List<SkillData> skills, StyleRank currentRank) => actionMenuUI.UpdateSkillButtons(skills, currentRank);
+    public void UpdateStyleRankUI(StyleRank rank) => actionMenuUI.UpdateStyleRank(rank);
 
     // ==========================================
-    // 3. 하단 메뉴 버튼 조작
-    // ==========================================
-    public void UpdateActionButtonsForCategory(string[] categoryKeys)
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            actionButtons[i].gameObject.SetActive(true);
-            actionButtons[i].interactable = true;
-            actionButtonTexts[i].SetKey(categoryKeys[i]);
-        }
-    }
-
-    public void UpdateActionButtonsForSkills(List<SkillData> skills, StyleRank currentRank)
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            if (i < skills.Count)
-            {
-                actionButtons[i].gameObject.SetActive(true);
-                actionButtonTexts[i].SetKey(skills[i].skillNameKey);
-
-                // 4번째 스킬(인덱스 3)은 궁극기이므로 SSS 랭크일 때만 클릭 가능!
-                if (i == 3)
-                {
-                    actionButtons[i].interactable = (currentRank == StyleRank.SSS);
-                }
-                else
-                {
-                    actionButtons[i].interactable = true; // 일반 스킬은 항상 클릭 가능
-                }
-            }
-            else
-            {
-                actionButtons[i].gameObject.SetActive(false);
-            }
-        }
-        actionButtons[4].gameObject.SetActive(true);
-        actionButtons[4].interactable = true; // 취소 버튼은 항상 클릭 가능
-        actionButtonTexts[4].SetKey("btn_cancel");
-    }
-
-    // ==========================================
-    // 4. 전투 실시간 데이터 갱신
+    // 4. 전투 데이터 및 연출 위임
     // ==========================================
     public void SetCasterImage(bool isPlayer, Sprite skillSprite)
     {
-        if (skillSprite == null) return;
-
-        if (isPlayer) playerImage.sprite = skillSprite;
-        else enemyImage.sprite = skillSprite;
+        if (isPlayer) playerStatusUI.SetProfileImage(skillSprite);
+        else enemyStatusUI.SetProfileImage(skillSprite);
     }
 
     public void SetDefenderImage(bool isPlayer, Sprite reactionSprite)
     {
-        if (reactionSprite == null) return;
-
-        if (isPlayer) playerImage.sprite = reactionSprite;
-        else enemyImage.sprite = reactionSprite;
+        if (isPlayer) playerStatusUI.SetProfileImage(reactionSprite);
+        else enemyStatusUI.SetProfileImage(reactionSprite);
     }
 
     public void ResetCasterImage(bool isPlayer)
     {
-        if (isPlayer) playerImage.sprite = defaultPlayerSprite;
-        else enemyImage.sprite = defaultEnemySprite;
+        if (isPlayer) playerStatusUI.ResetProfileImage();
+        else enemyStatusUI.ResetProfileImage();
     }
 
     public void ResetDefenderImage(bool isPlayer)
     {
-        if (isPlayer) playerImage.sprite = defaultPlayerSprite;
-        else enemyImage.sprite = defaultEnemySprite;
+        if (isPlayer) playerStatusUI.ResetProfileImage();
+        else enemyStatusUI.ResetProfileImage();
     }
 
-    public void UpdatePlayerHP(int currentHp, int maxHp)
-    {
-        playerHpSlider.value = currentHp;
-        if (playerHpText != null) playerHpText.text = $"{currentHp}/{maxHp}";
-    }
+    public void UpdatePlayerBreak(float breakValue) => playerStatusUI.UpdateBreak(breakValue);
+    public void UpdateEnemyBreak(float breakValue) => enemyStatusUI.UpdateBreak(breakValue);
 
-    public void UpdateEnemyHP(int currentHp, int maxHp)
-    {
-        enemyHpSlider.value = currentHp;
-        if (enemyHpText != null) enemyHpText.text = $"{currentHp}/{maxHp}";
-    }
-
-    public void UpdatePlayerBreak(float breakValue)
-    {
-        playerBreakSlider.value = breakValue;
-    }
-
-    public void UpdateEnemyBreak(float breakValue)
-    {
-        enemyBreakSlider.value = breakValue;
-    }
-
-    public void UpdateStyleRankUI(StyleRank rank)
-    {
-        int rankIndex = (int)rank;
-
-        // None 상태이거나 이미지가 안 채워져 있으면 이미지를 끕니다.
-        if (rank == StyleRank.None || styleRankSprites.Length <= rankIndex || styleRankSprites[rankIndex] == null)
-        {
-            styleRankImage.gameObject.SetActive(false);
-        }
-        else
-        {
-            styleRankImage.gameObject.SetActive(true);
-            styleRankImage.sprite = styleRankSprites[rankIndex];
-        }
-    }
-
-    private Coroutine currentCommentaryCoroutine; // 겉포장지 (TypeCommentary)
-    private Coroutine innerTypingCoroutine; // 알맹이 (실제 타자기 역할)
-
-    public IEnumerator TypeCommentary(string message, bool autoProceed = true, float delayAfter = 1.5f)
-    {
-        // ==========================================
-        // 스킬 연출이든 버프 클릭이든, 이 함수가 호출되는 즉시 
-        // 기존에 돌고 있던 모든 타자기(좀비 코루틴)의 목을 베어버리고 창을 비웁니다!
-        // ==========================================
-        if (innerTypingCoroutine != null)
-        {
-            StopCoroutine(innerTypingCoroutine);
-            innerTypingCoroutine = null;
-        }
-
-        if (TypewriterUtility.Instance != null)
-        {
-            TypewriterUtility.Instance.StopAllCoroutines();
-        }
-
-        if (commentaryText != null)
-        {
-            commentaryText.text = "";
-        }
-
-        // 깨끗해진 상태에서 안전하게 새로운 텍스트 타이핑을 시작합니다.
-        innerTypingCoroutine = StartCoroutine(TypewriterUtility.Instance.TypeText(commentaryText, message, autoProceed, delayAfter));
-        yield return innerTypingCoroutine;
-    }
-
-    public void InterruptAndTypeCommentary(string message)
-    {
-        // 1. 겉포장지 코루틴 정지
-        if (currentCommentaryCoroutine != null)
-        {
-            StopCoroutine(currentCommentaryCoroutine);
-            currentCommentaryCoroutine = null;
-        }
-
-        // 2. [핵심] 실제로 글자를 치고 있는 내부 좀비 코루틴을 정확히 타겟팅해서 죽입니다!
-        if (innerTypingCoroutine != null)
-        {
-            StopCoroutine(innerTypingCoroutine);
-            innerTypingCoroutine = null;
-        }
-
-        // 3. Typewriter 쪽에서 돌아가던 코루틴도 확실히 죽입니다.
-        if (TypewriterUtility.Instance != null)
-        {
-            TypewriterUtility.Instance.StopAllCoroutines();
-        }
-
-        // 4. 텍스트 창을 하얗게 비웁니다.
-        if (commentaryText != null)
-        {
-            commentaryText.text = "";
-        }
-
-        // 5. 새로운 코루틴을 시작하고 이름표를 저장합니다.
-        currentCommentaryCoroutine = StartCoroutine(TypeCommentary(message, false, 0f));
-    }
-
-    public IEnumerator ShowCutIn(Sprite cutInSprite)
-    {
-        if (cutInImage != null && cutInSprite != null)
-        {
-            cutInImage.gameObject.SetActive(true);
-            cutInImage.sprite = cutInSprite;
-
-            // 1초 동안 컷인을 보여줍니다.
-            yield return new WaitForSeconds(1.5f);
-
-            cutInImage.gameObject.SetActive(false);
-        }
-    }
-
-    public void SpawnDamageText(string text, bool isCrit, bool isPlayerTarget)
-    {
-        if (damageTextPrefab == null) return;
-
-        Transform targetPos = isPlayerTarget ? playerDamagePos : enemyDamagePos;
-
-        // X, Y축으로 랜덤하게 흩뿌릴 오프셋(Offset) 생성
-        float randomX = Random.Range(-50f, 50f);
-        float randomY = Random.Range(-50f, 50f);
-        Vector3 spawnPos = targetPos.position + new Vector3(randomX, randomY, 0);
-
-        // 텍스트 생성
-        GameObject dmgObj = Instantiate(damageTextPrefab, spawnPos, Quaternion.identity, targetPos.parent);
-        DamageText dmgScript = dmgObj.GetComponent<DamageText>();
-        if (dmgScript != null)
-        {
-            dmgScript.Setup(text, isCrit);
-        }
-    }
-
-    public IEnumerator ShowCritAlert()
-    {
-        if (critAlertImage != null)
-        {
-            critAlertImage.SetActive(true);
-            yield return new WaitForSeconds(1.0f); // 1초간 띄움
-            critAlertImage.SetActive(false);
-        }
-    }
-
-    // 턴 종료 시 화면에 남은 전투 연출 UI를 강제로 끄고 지웁니다.
-    public void ClearCombatEffects()
-    {
-        // 1. 크리티컬 알림 이미지 강제 끄기
-        if (critAlertImage != null)
-        {
-            critAlertImage.SetActive(false);
-        }
-
-        // 2. 씬에 남아있는 모든 데미지 텍스트 강제 파괴 (최신 유니티 문법 사용)
-        DamageText[] activeTexts = FindObjectsByType<DamageText>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-        foreach (DamageText txt in activeTexts)
-        {
-            if (txt != null && txt.gameObject != null)
-            {
-                Destroy(txt.gameObject);
-            }
-        }
-    }
+    public IEnumerator TypeCommentary(string message, bool autoProceed = true, float delayAfter = 1.5f) => visualUI.TypeCommentary(message, autoProceed, delayAfter);
+    public void InterruptAndTypeCommentary(string message) => visualUI.InterruptAndTypeCommentary(message);
+    public IEnumerator ShowCutIn(Sprite cutInSprite) => visualUI.ShowCutIn(cutInSprite);
+    public void SpawnDamageText(string text, bool isCrit, bool isPlayerTarget) => visualUI.SpawnDamageText(text, isCrit, isPlayerTarget);
+    public IEnumerator ShowCritAlert() => visualUI.ShowCritAlert();
 
     public void RefreshBuffUI()
     {
-        UpdateBuffGrid(playerBuffSlots, CombatManager.Instance.GetGroupedEffects(true), true);
-        UpdateBuffGrid(enemyBuffSlots, CombatManager.Instance.GetGroupedEffects(false), false);
-    }
-
-    private void UpdateBuffGrid(BuffSlotUI[] slots, Dictionary<StatusEffectData, float> groupedEffects, bool isPlayer)
-    {
-        int maxSlots = slots.Length;
-        int activeCount = groupedEffects.Count;
-
-        foreach (var slot in slots)
-        {
-            slot.gameObject.SetActive(false);
-        }
-
-        int index = 0;
-        foreach (var kvp in groupedEffects)
-        {
-            if (index < maxSlots - 1)
-            {
-                // Setup에 isPlayer 여부를 전달합니다!
-                slots[index].Setup(kvp.Key, kvp.Value, isPlayer);
-            }
-            else if (index == maxSlots - 1)
-            {
-                if (activeCount > maxSlots)
-                {
-                    slots[index].Setup(null, 0, isPlayer, true);
-                    break;
-                }
-                else
-                {
-                    slots[index].Setup(kvp.Key, kvp.Value, isPlayer);
-                }
-            }
-            index++;
-        }
+        playerStatusUI.UpdateBuffs(BuffManager.Instance.GetGroupedEffects(true), true);
+        enemyStatusUI.UpdateBuffs(BuffManager.Instance.GetGroupedEffects(false), false);
     }
 }

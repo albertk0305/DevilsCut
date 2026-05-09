@@ -80,14 +80,14 @@ MonoBehaviour:
     level: 1
     maxExp: 100
     currentExp: 0
-    maxHp: 1000
-    currentHp: 1000
+    maxHp: 10000
+    currentHp: 10000
     ActionPoints: 10
     breakResistance: 50
-    strength: 10
-    defense: 10
+    strength: 20
+    defense: 20
     speed: 20
-    luck: 10
+    luck: 20
   unlockedSupporters:
   - {fileID: 11400000, guid: 8f7a108444158544399cf83ab876c34c, type: 2}
   - {fileID: 11400000, guid: 324e8b7827f679846a1984c00523c40e, type: 2}

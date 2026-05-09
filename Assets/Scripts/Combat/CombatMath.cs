@@ -12,7 +12,7 @@ public static class CombatMath
     }
 
     // 2. 명중/회피 판정 (Hit or Miss)
-    public static bool CheckHitSuccess(float baseAccuracy, int attackerSpeed, int defenderSpeed)
+    public static bool CheckHitSuccess(float baseAccuracy, int attackerSpeed, int defenderSpeed, float extraEvasion = 0f)
     {
         float attackerES = GetEffectiveSpeed(attackerSpeed);
         float defenderES = GetEffectiveSpeed(defenderSpeed);
@@ -22,7 +22,7 @@ public static class CombatMath
         float C = 30f;
 
         float hitModifier = M * (deltaES / (Mathf.Abs(deltaES) + C));
-        float finalHitRate = baseAccuracy + hitModifier;
+        float finalHitRate = baseAccuracy + hitModifier - extraEvasion;
 
         finalHitRate = Mathf.Clamp(finalHitRate, 5f, 95f);
         float randomRoll = Random.Range(0f, 100f);

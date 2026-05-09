@@ -12,11 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
   m_Name: Hit2
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillLogic: {fileID: 11400000, guid: 93ebd04e7135847489323a002fd23ccd, type: 2}
   skillNameKey: skill_name_hit2
   skillDescKey: skill_desc_hit2
   category: 2
-  specificId: 10
   skillLevel: 1
   skillActionImage: {fileID: 21300000, guid: cd1051cc7ce45794e967d4280965c803, type: 3}
-  damageMultiplier: 1
-  breakPower: 20
+  damageMultipliers:
+  - 6
+  - 7.5
+  - 9
+  breakPowers:
+  - 30
+  - 33
+  - 36
+  bonusCritRates:
+  - 0
+  bonusAccuracyRates:
+  - 30
+  - 45
+  - 60
+  baseAccuracy: 90
+  isUltimate: 0
+  hitCounts: 01000000
+  currentEvolution: 0
+  evolutionA_Multipliers:
+  - 0.5
+  - 0.75
+  - 1
+  evolutionB_Multipliers:
+  - 0.4
+  - 0.5
+  - 0.6
+  evolutionC_DamageMultipliers:
+  - 15
+  - 20
+  - 25
+  evolutionC_BreakPowers:
+  - 25
+  - 30
+  - 35

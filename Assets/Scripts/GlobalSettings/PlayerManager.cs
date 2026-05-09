@@ -87,4 +87,12 @@ public class PlayerManager : MonoBehaviour
 
         DevLog.Log($"플레이어가 {damage}의 피해를 입었습니다. 남은 체력: {stats.currentHp}");
     }
+
+    public float GetReflectRatio()
+    {
+        var courageSkill = unlockedSkills.Find(s => s.skillNameKey == "skill_name_sword1"); // 하드코딩은 데이터의 주인인 여기서만 관리!
+        if (courageSkill != null && courageSkill.currentEvolution == SkillEvolution.PathA)
+            return courageSkill.evolutionA_Multipliers[Mathf.Clamp(courageSkill.skillLevel - 1, 0, 2)];
+        return 0f;
+    }
 }

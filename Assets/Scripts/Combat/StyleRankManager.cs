@@ -123,18 +123,8 @@ public class StyleRankManager : MonoBehaviour
 
     public float GetRankDamageMultiplier()
     {
-        // 선형 증가: None(1.0배)부터 SSS(1.7배)까지 0.1배씩 증가합니다.
-        switch (currentRank)
-        {
-            case StyleRank.None: return 1.0f;
-            case StyleRank.D: return 1.1f;
-            case StyleRank.C: return 1.2f;
-            case StyleRank.B: return 1.3f;
-            case StyleRank.A: return 1.4f;
-            case StyleRank.S: return 1.5f;
-            case StyleRank.SS: return 1.6f;
-            case StyleRank.SSS: return 1.7f;
-            default: return 1.0f;
-        }
+        // [최적화] Enum의 정수값(None=0, D=1 ~ SSS=7)을 이용해 스위치문을 수학 공식 한 줄로 압축!
+        // 0일 땐 1.0f, 1일 땐 1.1f, 7일 땐 1.7f가 반환됩니다.
+        return 1.0f + ((int)currentRank * 0.1f);
     }
 }

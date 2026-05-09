@@ -1,2 +1,12 @@
 fileFormatVersion: 2
 guid: bae82ffebaa225c43a16974956cd9c2e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - guardBuffData: {fileID: 11400000, guid: fab6c6f67ca90f749bcf1f3b6974ac4f, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
