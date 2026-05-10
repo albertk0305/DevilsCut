@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e582a511314d7842809e86fcedb543b, type: 3}
+  m_Name: SkillLogic_EmptyBox
+  m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_EmptyBox
+  enemyStrBuff: {fileID: 11400000, guid: 07544c373cdb648419253e5405e9c4cf, type: 2}
+  enemyDefDebuff: {fileID: 11400000, guid: 7b4fb3d4ae74bfc46b9803307518b04e, type: 2}
+  strBuffRates:
+  - 0
+  - 0.2
+  - 0.4
+  defDebuffRates:
+  - 0
+  - -0.1
+  - -0.2

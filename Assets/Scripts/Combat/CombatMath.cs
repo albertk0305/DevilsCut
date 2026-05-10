@@ -44,7 +44,7 @@ public static class CombatMath
     public static bool CheckCriticalSuccess(float skillBonusCrit, int attackerLuck)
     {
         float statCritRate = GetCriticalRate(attackerLuck);
-        float finalCritRate = statCritRate + skillBonusCrit;
+        float finalCritRate = GetFinalCritRate(skillBonusCrit, attackerLuck);
 
         finalCritRate = Mathf.Clamp(finalCritRate, 0f, 100f);
         float randomRoll = Random.Range(0f, 100f);
@@ -95,5 +95,25 @@ public static class CombatMath
         multiplier = Mathf.Max(0.1f, multiplier);
 
         return baseRecovery * multiplier;
+    }
+
+    // 잃은 체력 비례 증폭 배율 계산 (통일 공식)
+    // Multiplier = 1.0 + (잃은 체력 비율) * 최대 증폭치
+    public static float GetMissingHPMultiplier(int maxHp, int currentHp, float maxBonus)
+    {
+        if (maxHp <= 0) return 1.0f;
+
+        // 1. 잃은 체력 비중 계산 (0.0 ~ 1.0)
+        float missingRatio = (float)(maxHp - currentHp) / maxHp;
+
+        // 2. 최종 배율 반환
+        return 1.0f + (missingRatio * maxBonus);
+    }
+
+    // 스탯과 보정치를 합산한 '최종 크리티컬 확률'을 미리 계산해서 반환하는 함수
+    public static float GetFinalCritRate(float bonusCritRate, int luck)
+    {
+        float statCritRate = GetCriticalRate(luck);
+        return statCritRate + bonusCritRate;
     }
 }

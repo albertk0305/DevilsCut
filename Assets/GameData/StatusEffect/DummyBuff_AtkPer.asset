@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0aa14b50fd4ca0d4eaa462662a5819ec, type: 3}
-  m_Name: DummyBuff_AtkUp
+  m_Name: DummyBuff_AtkPer
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
   effectID: buff_atk_up
   effectName: "\uACF5\uACA9\uB825 \uC99D\uAC00"

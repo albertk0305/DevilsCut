@@ -58,21 +58,30 @@ public class BuffManager : MonoBehaviour
     public void AddEffect(bool isPlayerTarget, StatusEffectData data, float value, int turns)
     {
         var list = isPlayerTarget ? playerEffects : enemyEffects;
-
-        // CombatManager에게 물어봐서 '셀프 버프(자신의 턴에 자신에게 검)'인지 확인합니다.
         bool isSelfBuff = CombatManager.Instance != null && CombatManager.Instance.IsCurrentTurnOwner(isPlayerTarget);
 
-        list.Add(new ActiveEffect
-        {
-            effectData = data,
-            value = value,
-            turnsLeft = turns,
-            isNewlyApplied = isSelfBuff
-        });
+        ActiveEffect existingEffect = list.Find(e => e.effectData == data);
 
-        DevLog.Log($"[효과 부여] {(isPlayerTarget ? "아군" : "적")}에게 {data.effectName} 적용! (수치: {value}, {turns}턴)");
+        if (existingEffect != null)
+        {
+            existingEffect.turnsLeft = Mathf.Max(existingEffect.turnsLeft, turns);
+            existingEffect.value = Mathf.Max(existingEffect.value, value);
+            existingEffect.isNewlyApplied = isSelfBuff;
+        }
+        else
+        {
+            list.Add(new ActiveEffect
+            {
+                effectData = data,
+                value = value,
+                turnsLeft = turns,
+                isNewlyApplied = isSelfBuff
+            });
+        }
+
         if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
     }
+
 
     // 턴 종료 시 남은 턴수 차감 및 만료된 버프 삭제
     public void UpdateEffectsOnTurnEnd(bool isPlayerTarget)

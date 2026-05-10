@@ -16,3 +16,10 @@ MonoBehaviour:
   - 0.3
   - 0.4
   - 0.5
+  avalonBuff: {fileID: 11400000, guid: 7fba5554084b67649af84c0ca0a666db, type: 2}
+  avalonHealRate: 0.3
+  morganDebuff: {fileID: 11400000, guid: 43a882ce67030a34c919e7668ca3991d, type: 2}
+  morganAmpRates:
+  - 0.5
+  - 0.6
+  - 0.7

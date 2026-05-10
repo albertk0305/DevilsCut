@@ -46,11 +46,29 @@ public static class BattleCalculator
             }
         }
 
+        int consecutiveHits = 0; // 연속 적중 카운터 초기화
+
         for (int i = 0; i < totalHits; i++)
         {
             HitResult hit = new HitResult();
-            float finalAccuracy = skill.baseAccuracy + skill.GetCurrentBonusAccuracy();
-            hit.isHit = CombatMath.CheckHitSuccess(finalAccuracy, attackerSpeed, defenderSpeed, defenderExtraEvasion);
+            bool isAlwaysHit = skill.skillLogic != null && skill.skillLogic.AlwaysHits(skill);
+            bool isForcedMiss = skill.skillLogic != null && skill.skillLogic.AlwaysMisses(skill, i);
+
+            if (isForcedMiss)
+            {
+                hit.isHit = false; 
+            }
+            else if (isAlwaysHit)
+            {
+                hit.isHit = true;
+            }
+            else
+            {
+                float currentBaseAccuracy = skill.skillLogic != null ? skill.skillLogic.GetBaseAccuracy(skill) : skill.baseAccuracy;
+
+                float finalAccuracy = currentBaseAccuracy + skill.GetCurrentBonusAccuracy();
+                hit.isHit = CombatMath.CheckHitSuccess(finalAccuracy, attackerSpeed, defenderSpeed, defenderExtraEvasion);
+            }
 
             if (hit.isHit)
             {
@@ -61,7 +79,7 @@ public static class BattleCalculator
                 float currentBreakPower = skill.GetCurrentBreakPower();
 
                 // Path C (제물의 낙인) 특수 공식 적용
-                if (skill.currentEvolution == SkillEvolution.PathC)
+                if (skill.currentEvolution == SkillEvolution.PathC && skill.skillLogic is SkillLogic_Courage)
                 {
                     int combinedStat = attackerStrength + attackerDefense;
                     int cIndex = Mathf.Clamp(skill.skillLevel - 1, 0, skill.evolutionC_DamageMultipliers.Length - 1);
@@ -71,7 +89,10 @@ public static class BattleCalculator
 
                 // 2. 외부 보정 (스킬 고유 로직, 스타일 랭크, 그로기 증폭)
                 if (skill.skillLogic != null)
+                {
                     calculatedDamage *= skill.skillLogic.GetDamageMultiplier(skill, pStats, eData, isPlayerAttacking);
+                    calculatedDamage *= skill.skillLogic.GetDynamicDamageMultiplier(skill, consecutiveHits);
+                }
 
                 if (isPlayerAttacking)
                     calculatedDamage *= StyleRankManager.Instance.GetRankDamageMultiplier();
@@ -80,8 +101,21 @@ public static class BattleCalculator
                 else if (isPlayerAttacking && BreakManager.Instance.IsBroken(false)) calculatedDamage *= 2.0f;
 
                 // 3. 크리티컬 판정
-                hit.isCrit = CombatMath.CheckCriticalSuccess(skill.GetCurrentBonusCritRate(), attackerLuck);
-                if (hit.isCrit) { calculatedDamage *= 1.5f; result.anyCrit = true; }
+                if (skill.GetCurrentDamageMultiplier() > 0f)
+                {
+                    float dynamicCrit = skill.skillLogic != null ? skill.skillLogic.GetDynamicCritRateBonus(skill, consecutiveHits) : 0f;
+                    hit.isCrit = CombatMath.CheckCriticalSuccess(skill.GetCurrentBonusCritRate(), attackerLuck);
+                    if (hit.isCrit)
+                    {
+                        float critMult = skill.skillLogic != null ? skill.skillLogic.GetCritDamageMultiplier(skill) : 1.5f;
+                        calculatedDamage *= critMult;
+                        result.anyCrit = true;
+                    }
+                }
+                else
+                {
+                    hit.isCrit = false;
+                }
 
                 // 4. 고정 피해 분할 및 기본 방어력 적용
                 float armorPenRatio = skill.skillLogic != null ? skill.skillLogic.GetArmorPenetrationRatio(skill, skill.skillLevel) : 0f;
@@ -108,8 +142,25 @@ public static class BattleCalculator
 
                 // 7. 최종 데미지 합산
                 calculatedDamage = fixedDamage + normalDamage;
+                float damageAmp = 0f;
+                foreach (var eff in defenderEffects)
+                {
+                    if (eff.effectData.specialType == SpecialEffectType.DamageAmp)
+                        damageAmp += eff.value;
+                }
+                if (damageAmp > 0f)
+                {
+                    calculatedDamage *= (1f + damageAmp); // 예: 0.5면 데미지 1.5배 증폭
+                }
                 hit.damage = Mathf.RoundToInt(calculatedDamage);
-                if (hit.damage <= 0) hit.damage = 1;
+                if (skill.GetCurrentDamageMultiplier() > 0f)
+                {
+                    if (hit.damage <= 0) hit.damage = 1;
+                }
+                else
+                {
+                    hit.damage = 0; // 버프/디버프는 0 데미지 고정
+                }
 
                 if (result.isGuardTriggered) result.totalMitigatedDamage += (originalDamage - hit.damage);
 
@@ -127,6 +178,11 @@ public static class BattleCalculator
                 else hit.breakDamage = 0f;
 
                 if (result.isGuardTriggered) hit.breakDamage = 0f;
+                consecutiveHits++;
+            }
+            else
+            {
+                consecutiveHits = 0;
             }
             result.hits.Add(hit);
         }

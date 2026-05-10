@@ -12,6 +12,7 @@ public class EnemyData : ScriptableObject
     public Sprite hit;
     public Sprite evade;
     public Sprite breakImage;
+    public Sprite guardImage;
 
     [Header("Àû AI ¼³Á¤")]
     public EnemyAIBase aiBrain;

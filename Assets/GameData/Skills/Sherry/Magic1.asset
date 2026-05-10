@@ -12,11 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
   m_Name: Magic1
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillLogic: {fileID: 11400000, guid: 81a2d6808ef2f7e4b8d78488b08fd154, type: 2}
   skillNameKey: skill_name_magic1
   skillDescKey: skill_desc_magic1
   category: 3
-  specificId: 13
   skillLevel: 1
   skillActionImage: {fileID: 21300000, guid: f9b13ec8b54ba9847977ce1f998c40c6, type: 3}
-  damageMultiplier: 1
-  breakPower: 20
+  damageMultipliers:
+  - 0
+  breakPowers:
+  - 0
+  bonusCritRates:
+  - 0
+  bonusAccuracyRates:
+  - 0
+  baseAccuracy: 100
+  isUltimate: 0
+  forceHitReaction: 0
+  hitCounts: 
+  currentEvolution: 0
+  evolutionA_Multipliers:
+  - 0.5
+  - 0.75
+  - 1
+  evolutionB_Multipliers:
+  - 0.4
+  - 0.5
+  - 0.6
+  evolutionC_DamageMultipliers:
+  - 15
+  - 20
+  - 25
+  evolutionC_BreakPowers:
+  - 25
+  - 30
+  - 35

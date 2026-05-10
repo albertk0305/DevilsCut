@@ -26,10 +26,14 @@ MonoBehaviour:
   - 10
   - 11
   - 12
+  bonusCritRates:
+  - 0
+  bonusAccuracyRates:
+  - 0
   baseAccuracy: 90
-  bonusCritRate: 0
   isUltimate: 0
-  hitCount: 1
+  forceHitReaction: 0
+  hitCounts: 01000000
   currentEvolution: 0
   evolutionA_Multipliers:
   - 0.5

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
   m_Name: Gun1
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
-  skillLogic: {fileID: 0}
+  skillLogic: {fileID: 11400000, guid: f8c3436004151c44e963c8140386a681, type: 2}
   skillNameKey: skill_name_gun1
   skillDescKey: skill_desc_gun1
   category: 1
@@ -30,8 +30,11 @@ MonoBehaviour:
   - 15
   - 25
   - 35
+  bonusAccuracyRates:
+  - 0
   baseAccuracy: 90
   isUltimate: 0
+  forceHitReaction: 0
   hitCounts: 01000000
   currentEvolution: 0
   evolutionA_Multipliers:

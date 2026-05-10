@@ -33,6 +33,7 @@ public class BreakManager : MonoBehaviour
     }
 
     public bool IsBroken(bool isPlayer) => isPlayer ? isPlayerBroken : isEnemyBroken;
+    public float GetBreakGauge(bool isPlayer) => isPlayer ? playerBreak : enemyBreak;
 
     // 브레이크 데미지 누적 및 발동 확인 (방금 브레이크가 터졌다면 true 반환)
     public bool AddBreakDamage(bool isPlayerTarget, float damage)
@@ -123,6 +124,23 @@ public class BreakManager : MonoBehaviour
             isEnemyBroken = false;
             enemyBreak = 0f;
             CombatUIManager.Instance.UpdateEnemyBreak(0f);
+        }
+    }
+
+    public void RecoverBreakInstantly(bool isPlayerTarget, float amount)
+    {
+        if (IsBroken(isPlayerTarget)) return; // 이미 그로기가 터진 상태면 게이지를 깎을 수 없습니다.
+
+        if (isPlayerTarget && playerBreak > 0f)
+        {
+            playerBreak = Mathf.Max(0f, playerBreak - amount);
+            CombatUIManager.Instance.UpdatePlayerBreak(playerBreak);
+            DevLog.Log($"[그로기 즉시 회복] 셰리의 버스트 게이지가 {amount} 감소했습니다. (현재: {playerBreak:F1})");
+        }
+        else if (!isPlayerTarget && enemyBreak > 0f)
+        {
+            enemyBreak = Mathf.Max(0f, enemyBreak - amount);
+            CombatUIManager.Instance.UpdateEnemyBreak(enemyBreak);
         }
     }
 }

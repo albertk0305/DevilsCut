@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804882787cee19b4db2fdb7197c6e2c2, type: 3}
+  m_Name: SkillLogic_Hweok
+  m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Hweok
+  strengthBuff: {fileID: 11400000, guid: 2791be59c75ea3d4da9823c438d4a0d2, type: 2}
+  defenseBuff: {fileID: 11400000, guid: 93c02ad03e835b44d9730fb345f39225, type: 2}
+  speedBuff: {fileID: 11400000, guid: 6e7e4d03b2d981c47b8b25624c9dac4f, type: 2}
+  luckBuff: {fileID: 11400000, guid: 3630a8554cffc754abfdd6c248c84c2b, type: 2}
+  statBuffRates:
+  - 0.4
+  - 0.6
+  - 0.8
+  healRates:
+  - 0.5
+  - 0.75
+  - 1
+  breakRecoveryAmounts:
+  - 50
+  - 80
+  - 100

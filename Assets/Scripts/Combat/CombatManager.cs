@@ -290,6 +290,7 @@ public class CombatManager : MonoBehaviour
         // ==========================================
         string commentary = !skillResult.anyHit ? $"{attackerName}의 {skillName}이(가) 빗나갔습니다!" :
                             (skillResult.anyCrit ? $"{attackerName}의 {skillName} 치명적으로 적중!" : $"{attackerName}의 {skillName} 적중!");
+        bool isPureUtility = skill.GetCurrentDamageMultiplier() <= 0f && !skill.forceHitReaction;
 
         BattleVisualizer.Instance.EnqueueAction(() =>
         {
@@ -300,21 +301,31 @@ public class CombatManager : MonoBehaviour
 
             // 1. 내 이미지 변경
             CombatUIManager.Instance.SetCasterImage(isPlayerAttacking, skill.skillActionImage);
+            skill.skillLogic?.PaySkillCost(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking);
             CompanionManager.Instance.UpdateEmotion(skillResult.anyHit ?
                 (isPlayerAttacking ? CompanionManager.Emotion.Happy : CompanionManager.Emotion.Worried) :
                 (isPlayerAttacking ? CompanionManager.Emotion.Worried : CompanionManager.Emotion.Happy));
 
-            // 2. 적 피격 이미지 '즉시' 변경
+            // 2. 방어자 이미지 변경
+            Sprite reactionSprite = null;
             if (skillResult.anyHit)
             {
-                Sprite hitSpr = (skillResult.isGuardTriggered && playerData.guardImage != null) ? playerData.guardImage : defenderHitSprite;
-                CombatUIManager.Instance.SetDefenderImage(isPlayerDefending, hitSpr);
+                if (!isPureUtility) // 공격기일 때만 피격/가드 이미지를 설정!
+                {
+                    reactionSprite = skillResult.isGuardTriggered
+                        ? (isPlayerAttacking ? currentEnemyData?.guardImage : playerData?.guardImage)
+                        : (isPlayerAttacking ? currentEnemyData?.hit : playerData?.hit);
+                }
             }
             else
             {
-                CombatUIManager.Instance.SetDefenderImage(isPlayerDefending, defenderEvadeSprite);
-                if (!isPlayerAttacking) StyleRankManager.Instance.OnEvade();
+                if (!isPureUtility) // 공격기가 빗나갔을 때만 회피 이미지 설정!
+                {
+                    reactionSprite = isPlayerAttacking ? currentEnemyData?.evade : playerData?.evade;
+                }
             }
+            // reactionSprite가 null이면 UIManager는 원래(기본) 이미지를 그대로 유지합니다!
+            CombatUIManager.Instance.SetDefenderImage(!isPlayerAttacking, reactionSprite);
 
             // 3. 텍스트가 대본을 멈추게 하지 않고, 백그라운드에서 타라락 쳐지게 합니다!
             CombatUIManager.Instance.InterruptAndTypeCommentary(commentary);
@@ -324,12 +335,47 @@ public class CombatManager : MonoBehaviour
                 CombatUIManager.Instance.StartCoroutine(CombatUIManager.Instance.ShowCritAlert());
         });
 
+        bool isMorningStarApRecovered = false;
         bool hasRewardedCrit = false;
         foreach (var hit in skillResult.hits)
         {
+            // 1. 명중/회피 기본 연출 대본
             BattleVisualizer.Instance.EnqueueAction(() =>
             {
-                if (!hit.isHit) BattleEventSystem.CallEvaded(isPlayerDefending);
+                if (!hit.isHit)
+                {
+                    if (!isPureUtility)
+                    {
+                        // 1. 방송국에 회피를 알려 "Miss" 텍스트를 팝업시킵니다.
+                        BattleEventSystem.CallEvaded(isPlayerDefending);
+
+                        // 2. 즉시 방어자의 이미지를 '회피(Evade)' 이미지로 바꿉니다.
+                        Sprite evadeSprite = isPlayerDefending ? playerData?.evade : currentEnemyData?.evade;
+                        CombatUIManager.Instance.SetDefenderImage(!isPlayerAttacking, evadeSprite);
+
+                        if (isPlayerDefending)
+                        {
+                            StyleRankManager.Instance.OnEvade();
+
+                            // [진화 B] 난식 턴 당기기 (시각적 딜레이가 불필요하므로 즉시 처리)
+                            var martialSkill = PlayerManager.Instance.unlockedSkills.Find(s => s.category == SkillCategory.Martial);
+                            if (martialSkill != null && martialSkill.skillLogic is SkillLogic_MorningStar msLogic)
+                            {
+                                bool hasEvasionBuff = BuffManager.Instance.GetEffects(true).Exists(e => e.effectData == msLogic.evasionBuffData);
+                                if (hasEvasionBuff && martialSkill.currentEvolution == SkillEvolution.PathB && !isMorningStarApRecovered)
+                                {
+                                    var playerEntity = TurnManager.Instance.turnQueue.Find(e => e.isPlayer);
+                                    if (playerEntity != null)
+                                    {
+                                        playerEntity.actionGauge += msLogic.pathB_ApRecovery;
+                                        isMorningStarApRecovered = true;
+                                        DevLog.Log($"[새벽별:난식] 회피 성공! 행동 게이지 {msLogic.pathB_ApRecovery} 회복.");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 else
                 {
                     if (hit.isCrit && isPlayerAttacking && !hasRewardedCrit) { StyleRankManager.Instance.OnCriticalHit(); hasRewardedCrit = true; }
@@ -352,16 +398,59 @@ public class CombatManager : MonoBehaviour
                     if (!isPlayerAttacking && !BreakManager.Instance.IsBroken(true))
                         if (BreakManager.Instance.AddBreakDamage(true, hit.breakDamage)) UpdateTurnOrderUI();
 
-                    BattleEventSystem.CallDamageTaken(isPlayerDefending, hit.damage, hit.isCrit);
+                    if (!isPureUtility) BattleEventSystem.CallDamageTaken(isPlayerDefending, hit.damage, hit.isCrit);
                 }
             });
-            BattleVisualizer.Instance.EnqueueDelay(0.15f); // 다단히트 간격을 약간 좁힘
+
+            // 다단히트 간 기본 대기 시간
+            BattleVisualizer.Instance.EnqueueDelay(0.15f);
         }
 
-        // ==========================================
-        // [템포 개선] 데미지 텍스트가 뜬 상태에서 1.2초간 길게 대기하여 타격감을 줍니다!
-        // ==========================================
-        BattleVisualizer.Instance.EnqueueDelay(2.0f);
+        // 2. [신규] 루프 종료 후 카운터 반격 판정 및 연출
+        bool isCounterTriggered = false;
+
+        // 전부 회피(anyHit == false)했을 때 카운터 조건 체크
+        if (!skillResult.anyHit && !isPureUtility && isPlayerDefending)
+        {
+            var martialSkill = PlayerManager.Instance.unlockedSkills.Find(s => s.category == SkillCategory.Martial);
+            if (martialSkill != null && martialSkill.skillLogic is SkillLogic_MorningStar msLogic)
+            {
+                bool hasEvasionBuff = BuffManager.Instance.GetEffects(true).Exists(e => e.effectData == msLogic.evasionBuffData);
+                if (hasEvasionBuff && martialSkill.currentEvolution == SkillEvolution.PathA)
+                {
+                    isCounterTriggered = true;
+                    int levelIdx = Mathf.Clamp(martialSkill.skillLevel - 1, 0, msLogic.pathA_CounterRates.Length - 1);
+                    int counterDmg = Mathf.RoundToInt(currentPlayerStats.strength * msLogic.pathA_CounterRates[levelIdx]);
+                    Sprite counterImage = msLogic.GetCounterActionImage(martialSkill);
+
+                    // 1단계: 회피 성공 이미지를 충분히 감상 (평소 턴 넘어가기 전 대기 시간 2.0f 적용)
+                    BattleVisualizer.Instance.EnqueueDelay(2.0f);
+
+                    // 2단계: 카운터 일격 작렬! (이미지 교체 및 적 피격 연출)
+                    BattleVisualizer.Instance.EnqueueAction(() =>
+                    {
+                        currentEnemyHp = Mathf.Max(0, currentEnemyHp - counterDmg);
+
+                        CombatUIManager.Instance.SetDefenderImage(true, counterImage); // 내 이미지 카운터로
+                        CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData?.hit); // 적 이미지 피격으로
+
+                        CombatUIManager.Instance.enemyStatusUI.UpdateHP(currentEnemyHp, currentEnemyData.maxHp);
+                        CombatUIManager.Instance.SpawnDamageText(counterDmg.ToString(), false, false);
+                        DevLog.Log($"[새벽별:멸식] 카운터 발동! {counterDmg} 피해");
+                    });
+
+                    // 3단계: 카운터 타격감을 느낄 수 있게 대기 (스킬 적중 후 대기 시간과 동일하게 2.0f 적용)
+                    BattleVisualizer.Instance.EnqueueDelay(2.0f);
+                }
+            }
+        }
+
+        // 카운터가 발동하지 않은 일반적인 상황(명중했거나 카운터가 없는 회피)에서의 대기
+        if (!isCounterTriggered)
+        {
+            // 데미지 텍스트나 Miss를 감상할 수 있도록 표준 2.0초 대기
+            BattleVisualizer.Instance.EnqueueDelay(2.0f);
+        }
 
         // 가드 및 인과율(반사) 후처리
         if (skillResult.isGuardTriggered)
@@ -402,7 +491,7 @@ public class CombatManager : MonoBehaviour
         // 스킬 로직 효과 적용 및 화면 리셋
         BattleVisualizer.Instance.EnqueueAction(() =>
         {
-            skill.skillLogic?.ApplyEffect(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking);
+            skill.skillLogic?.ApplyEffectOnHit(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking, skillResult.anyHit);
 
             if (isPlayerAttacking)
             {
@@ -455,6 +544,32 @@ public class CombatManager : MonoBehaviour
 
         if (currentActiveEntity != null)
         {
+            bool isPlayerTurn = currentActiveEntity.isPlayer;
+            var effects = BuffManager.Instance.GetEffects(isPlayerTurn);
+            float hpRegenRate = 0f;
+
+            foreach (var eff in effects)
+                if (eff.effectData.specialType == SpecialEffectType.HpRegen) hpRegenRate += eff.value;
+
+            if (hpRegenRate > 0f)
+            {
+                if (isPlayerTurn)
+                {
+                    int healAmount = Mathf.RoundToInt(currentPlayerStats.maxHp * hpRegenRate);
+                    currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + healAmount, 0, currentPlayerStats.maxHp);
+                    CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
+                    CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
+                    DevLog.Log($"[아발론] 턴 종료! 셰리의 체력이 {healAmount} 회복되었습니다.");
+                }
+                else
+                {
+                    int healAmount = Mathf.RoundToInt(currentEnemyData.maxHp * hpRegenRate);
+                    currentEnemyHp = Mathf.Clamp(currentEnemyHp + healAmount, 0, currentEnemyData.maxHp);
+                    CombatUIManager.Instance.enemyStatusUI.UpdateHP(currentEnemyHp, currentEnemyData.maxHp);
+                    CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, false);
+                }
+            }
+
             if (currentActiveEntity.isPlayer) BuffManager.Instance.UpdateEffectsOnTurnEnd(true);
             else if (currentActiveEntity.type == EntityType.Enemy) BuffManager.Instance.UpdateEffectsOnTurnEnd(false);
         }

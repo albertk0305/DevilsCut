@@ -12,8 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9c1d61e33904b44866bf72526f240a, type: 3}
   m_Name: SkillLogic_MorningStar
   m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_MorningStar
-  evasionBuffData: {fileID: 11400000, guid: 8c5891569afd60c489745678b7f0624e, type: 2}
+  evasionBuffData: {fileID: 11400000, guid: 1231e810e38ec52489c2dbbb926ed9f9, type: 2}
   evasionBonusRates:
   - 20
   - 30
   - 40
+  pathA_CounterRates:
+  - 0.5
+  - 0.8
+  - 1.2
+  counterActionImage: {fileID: 21300000, guid: d4873c2ac9818254aab166453d3c87cc, type: 3}
+  pathB_ApRecovery: 15
+  pathC_ConversionRate: 0.03

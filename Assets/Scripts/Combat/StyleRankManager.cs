@@ -127,4 +127,17 @@ public class StyleRankManager : MonoBehaviour
         // 0ÀÏ ¶© 1.0f, 1ÀÏ ¶© 1.1f, 7ÀÏ ¶© 1.7f°¡ ¹ÝÈ¯µË´Ï´Ù.
         return 1.0f + ((int)currentRank * 0.1f);
     }
+
+    public void IncreaseRank(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            if (currentRank < StyleRank.SSS)
+            {
+                currentRank++;
+            }
+        }
+        DevLog.Log($"[½ºÅ¸ÀÏ ·©Å©] ±Þ»ó½Â! ÇöÀç ·©Å©: {currentRank}");
+        UpdateUI();
+    }
 }

@@ -122,8 +122,18 @@ public class CombatVisualUI : MonoBehaviour
 
         rt.anchoredPosition = new Vector2(targetX, targetY);
 
-        // 4. 주사위 개수 셋업
-        currentDiceInstance.Setup(count);
+        bool isJackpot = (count == 6);
+        int displayCount = isJackpot ? 5 : count; // 6단계여도 주사위는 5개만 소환
+
+        currentDiceInstance.Setup(displayCount);
+
+        if (isJackpot)
+        {
+            Color goldenDiceColor = new Color(1f, 0.85f, 0f); // 영롱한 황금색
+            currentDiceInstance.SetDiceColor(goldenDiceColor);
+
+            DevLog.Log("[연출] 익스플로전 발동! 황금 주사위가 소환되었습니다!");
+        }
 
         DevLog.Log($"[연출] 주사위 {count}개 머리 위에 표출");
     }

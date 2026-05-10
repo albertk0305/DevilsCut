@@ -12,3 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9f409c7088ce554eab9fde9c4317f8b, type: 3}
   m_Name: SkillLogic_FantasticDreamer
   m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_FantasticDreamer
+  stage6Multipliers:
+  - 30
+  - 40
+  - 50
+  stage6BreakPowers:
+  - 25
+  - 30
+  - 35
+  stage6ArmorPenetration: 0.5
+  luckUpBuff: {fileID: 11400000, guid: eb533507b80124f468360e23eafc1106, type: 2}
+  luckDownDebuff: {fileID: 11400000, guid: 3fcb1c83a8c6ba449af9a85c3b21ca5a, type: 2}
+  luckStealAmount: 15

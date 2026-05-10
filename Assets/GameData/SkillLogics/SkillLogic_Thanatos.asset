@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b93392ceabd6924fb186aa6c3a4d5ef, type: 3}
   m_Name: SkillLogic_Thanatos
   m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Thanatos
-  defDownDebuff: {fileID: 11400000, guid: 52044c4e0e21786459330a00686e23f8, type: 2}
+  defDownDebuff: {fileID: 11400000, guid: bf5a20e1529a97c4d90def4b53964185, type: 2}
+  defUpBuff: {fileID: 11400000, guid: 573b875a54992b44bb19ff47968f8534, type: 2}
   defDownRates:
   - -0.1
   - -0.15
   - -0.2
+  pathB_BaseMult: 0.5
+  pathB_MaxBonus: 1.5

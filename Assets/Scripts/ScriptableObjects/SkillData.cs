@@ -39,6 +39,10 @@ public class SkillData : ScriptableObject
 
     [Header("스킬 유형")]
     public bool isUltimate = false;
+
+    [Tooltip("체크 시 데미지가 0이어도 적중하면 적이 피격(Hit) 모션을 취합니다. (예: 출혈 부여)")]
+    public bool forceHitReaction = false;
+
     [Tooltip("순서대로 Lv1, Lv2, Lv3... 의 타격 횟수입니다.")]
     public int[] hitCounts = { 1 };
 

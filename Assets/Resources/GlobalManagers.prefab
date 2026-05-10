@@ -93,7 +93,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 324e8b7827f679846a1984c00523c40e, type: 2}
   - {fileID: 11400000, guid: 393f560ec2c52ed45bbb5f5324003c40, type: 2}
   - {fileID: 11400000, guid: 2953981cd2e43c94c915f020e05321a7, type: 2}
-  activeSupporter: {fileID: 11400000, guid: 2953981cd2e43c94c915f020e05321a7, type: 2}
+  activeSupporter: {fileID: 0}
   ownedKarinItems:
   - {fileID: 11400000, guid: 3af5d2d3d0ac65e4e81a7df77f56e141, type: 2}
   - {fileID: 11400000, guid: d405f17abc2742149b80600dc920f8c5, type: 2}
@@ -105,7 +105,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 44ea8ddbf190c1b4aa60370fa23be87d, type: 2}
   - {fileID: 11400000, guid: acd1785fe78e23e4cb3b5b30efb571bd, type: 2}
   - {fileID: 11400000, guid: 56c51a8b624cf964a95c6d31b09b7ffe, type: 2}
-  equippedKarinItem: {fileID: 11400000, guid: 3af5d2d3d0ac65e4e81a7df77f56e141, type: 2}
+  equippedKarinItem: {fileID: 0}
   ownedEquipments:
   - {fileID: 11400000, guid: 6e99cd199e7b6fb4a9b923829b1c6a27, type: 2}
   - {fileID: 11400000, guid: b9e74b766e913524096968b2d622663f, type: 2}

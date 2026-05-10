@@ -12,14 +12,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
   m_Name: Oni4
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
-  skillLogic: {fileID: 0}
+  skillLogic: {fileID: 11400000, guid: 363344c68080c4f479858ce279f56d29, type: 2}
   skillNameKey: skill_name_oni4
   skillDescKey: skill_desc_oni4
   category: 4
   skillLevel: 1
   skillActionImage: {fileID: 21300000, guid: ecc6c4fc9bc2bdc48ba4bb5efb924035, type: 3}
-  damageMultiplier: 1
-  breakPower: 20
-  baseAccuracy: 80
-  bonusCritRate: 0
+  damageMultipliers:
+  - 14
+  - 17
+  - 20
+  breakPowers:
+  - 20
+  - 22
+  - 24
+  bonusCritRates:
+  - 0
+  bonusAccuracyRates:
+  - 0
+  baseAccuracy: 90
   isUltimate: 1
+  forceHitReaction: 0
+  hitCounts: 01000000
+  currentEvolution: 0
+  evolutionA_Multipliers:
+  - 0.5
+  - 0.75
+  - 1
+  evolutionB_Multipliers:
+  - 0.4
+  - 0.5
+  - 0.6
+  evolutionC_DamageMultipliers:
+  - 15
+  - 20
+  - 25
+  evolutionC_BreakPowers:
+  - 25
+  - 30
+  - 35

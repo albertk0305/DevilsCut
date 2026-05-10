@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15896ab2725c2243aa0210313c2c00f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FantasticDreamerDiceUI
-  diceImages:
+  diceObjects:
   - {fileID: 7777511715462608596}
   - {fileID: 8019275386023485434}
   - {fileID: 6508692570227909987}

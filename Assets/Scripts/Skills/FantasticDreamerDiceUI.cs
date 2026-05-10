@@ -1,24 +1,46 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI; // Image 컴포넌트 접근을 위해 추가
 
 public class FantasticDreamerDiceUI : MonoBehaviour
 {
-    // 자식으로 만들어둔 주사위 이미지 5개를 인스펙터에서 연결합니다.
-    public GameObject[] diceImages;
+    [SerializeField] private GameObject[] diceObjects; // 주사위 오브젝트 배열 (인스펙터에서 할당됨)
 
     public void Setup(int count)
     {
-        // 0부터 5 사이로 제한
-        count = Mathf.Clamp(count, 1, diceImages.Length);
-
-        // 전체 주사위를 순회하며, 뽑힌 개수(count)만큼만 활성화합니다.
-        for (int i = 0; i < diceImages.Length; i++)
+        // 모든 주사위 비활성화
+        foreach (var dice in diceObjects)
         {
-            // 예: count가 3이면 index 0,1,2는 켜지고 3,4는 꺼집니다.
-            // Horizontal Layout Group이 알아서 켜진 3개만 가운데 정렬합니다.
-            if (diceImages[i].activeSelf != (i < count))
+            if (dice != null)
+                dice.SetActive(false);
+        }
+
+        // 개수에 맞게 주사위 활성화
+        int diceToActivate = Mathf.Min(count, diceObjects.Length);
+        for (int i = 0; i < diceToActivate; i++)
+        {
+            if (diceObjects[i] != null)
+                diceObjects[i].SetActive(true);
+        }
+    }
+
+    // ==========================================
+    // [신규 추가] 활성화된 주사위(버튼)들의 색상만 변경하는 함수
+    // ==========================================
+    public void SetDiceColor(Color color)
+    {
+        if (diceObjects == null) return;
+
+        foreach (var dice in diceObjects)
+        {
+            // 활성화된 주사위 오브젝트만 대상으로 합니다.
+            if (dice != null && dice.activeSelf)
             {
-                diceImages[i].SetActive(i < count);
+                // 주사위 오브젝트 자체에 붙어있는 Image 컴포넌트를 가져옵니다.
+                Image diceImage = dice.GetComponent<Image>();
+                if (diceImage != null)
+                {
+                    diceImage.color = color;
+                }
             }
         }
     }

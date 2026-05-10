@@ -12,3 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2816c60d43cc7c47ab28da4a23facd1, type: 3}
   m_Name: SkillLogic_MagicBullet
   m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_MagicBullet
+  pathA_DamageBonusPerHit: 0.15
+  pathA_CritBonusPerHit: 15
+  speedDownDebuff: {fileID: 11400000, guid: 09a7d2034b4b0454db00d8de3149a8f4, type: 2}
+  pathB_SpeedDownRates:
+  - -0.2
+  - -0.25
+  - -0.3
+  pathC_ArmorPenetration: 0.3

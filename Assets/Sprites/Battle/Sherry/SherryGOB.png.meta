@@ -5,6 +5,12 @@ TextureImporter:
   - first:
       213: 6100023574206009502
     second: SherryGOB_0
+  - first:
+      213: 2510371950118336484
+    second: SherryGOB_1
+  - first:
+      213: -7024458374293467212
+    second: SherryGOB_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,10 +122,10 @@ TextureImporter:
       name: SherryGOB_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 12
         y: 0
-        width: 1024
-        height: 1016
+        width: 980
+        height: 998
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,6 +136,50 @@ TextureImporter:
       bones: []
       spriteID: e90de061f13a7a450800000000000000
       internalID: 6100023574206009502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SherryGOB_1
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 580
+        width: 258
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e778e4fcf1a6d220800000000000000
+      internalID: 2510371950118336484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SherryGOB_2
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 440
+        width: 136
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bf48b4635c148e90800000000000000
+      internalID: -7024458374293467212
       vertices: []
       indices: 
       edges: []
@@ -149,6 +199,8 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       SherryGOB_0: 6100023574206009502
+      SherryGOB_1: 2510371950118336484
+      SherryGOB_2: -7024458374293467212
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

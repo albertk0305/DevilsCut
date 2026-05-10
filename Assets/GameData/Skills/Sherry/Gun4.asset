@@ -30,8 +30,11 @@ MonoBehaviour:
   - 0.2
   - 0.3
   - 0.4
+  bonusAccuracyRates:
+  - 0
   baseAccuracy: 80
   isUltimate: 1
+  forceHitReaction: 0
   hitCounts: 0a0000000c0000000f000000
   currentEvolution: 0
   evolutionA_Multipliers:
