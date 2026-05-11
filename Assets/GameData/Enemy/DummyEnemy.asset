@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: DummyEnemy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyNameKey: michael
-  enemyImage: {fileID: 21300000, guid: 4ff3a681121248449ad3787dd84320c5, type: 3}
+  enemyImage: {fileID: 21300000, guid: 349510c06ffcef44abd96cf6a2feec5d, type: 3}
   CutIn: {fileID: 21300000, guid: 657214891ca487e4f9f7e7f05163c7c7, type: 3}
-  hit: {fileID: 21300000, guid: 10795b22d4a0fb3409441e288918a5f1, type: 3}
+  hit: {fileID: 21300000, guid: 4ff3a681121248449ad3787dd84320c5, type: 3}
   evade: {fileID: 21300000, guid: 4aaf28389dbfe754996b0bd89586de5c, type: 3}
-  breakImage: {fileID: 21300000, guid: 2ae8ef447da692d489f41df53f9c4916, type: 3}
+  breakImage: {fileID: 21300000, guid: d6f03d8f683eed44d96619d02eca8701, type: 3}
+  guardImage: {fileID: 21300000, guid: d6f03d8f683eed44d96619d02eca8701, type: 3}
   aiBrain: {fileID: 11400000, guid: da718e34bc8b3c14c9275e3ea61a6cab, type: 2}
   level: 1
   maxHp: 10000

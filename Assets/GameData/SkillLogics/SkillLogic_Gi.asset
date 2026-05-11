@@ -16,3 +16,13 @@ MonoBehaviour:
   - 0.3
   - 0.45
   - 0.6
+  pathA_ActionGaugeBonus: 100
+  pathB_HpCostRatio: 0.2
+  pathB_DamageBonus:
+  - 0.4
+  - 0.6
+  - 0.8
+  pathC_ChargeDamageMult:
+  - 2.5
+  - 3
+  - 3.5

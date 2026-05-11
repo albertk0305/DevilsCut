@@ -13,6 +13,11 @@ public class EntityStatusUI : MonoBehaviour
 
     private Sprite defaultSprite;
 
+    [Header("그로기 게이지 연출")]
+    public Image breakGaugeFill; // 인스펙터에서 브레이크 슬라이더의 Fill 이미지 할당
+    public Sprite normalBreakSprite; // 평소 게이지 이미지 (ex: 노란색/하얀색 바)
+    public Sprite brokenGroggySprite; // 그로기 터졌을 때 전용 이미지 (공용)
+
     public void InitUI(int maxHp, int currentHp, Sprite sprite)
     {
         defaultSprite = sprite;
@@ -64,6 +69,14 @@ public class EntityStatusUI : MonoBehaviour
         for (int i = index; i < maxSlots; i++)
         {
             if (buffSlots[i].gameObject.activeSelf) buffSlots[i].gameObject.SetActive(false);
+        }
+    }
+
+    public void SetBreakGaugeState(bool isBroken)
+    {
+        if (breakGaugeFill != null && brokenGroggySprite != null && normalBreakSprite != null)
+        {
+            breakGaugeFill.sprite = isBroken ? brokenGroggySprite : normalBreakSprite;
         }
     }
 }

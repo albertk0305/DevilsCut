@@ -135,8 +135,8 @@ public class TurnManager : MonoBehaviour
         {
             if (entity.type == targetType) // 문자열 대신 Enum으로 비교!
             {
-                entity.actionGauge = 0f;
-                DevLog.Log($"[{targetType}]의 행동 게이지가 0으로 강제 초기화되었습니다!");
+                entity.actionGauge = -100f;
+                DevLog.Log($"[{targetType}]의 행동 게이지가 -100으로 강제 초기화되었습니다!");
                 break;
             }
         }

@@ -3034,15 +3034,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: eaf53d76990a46e468c438b5322986ec, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3308,6 +3308,9 @@ MonoBehaviour:
   - {fileID: 1709328773}
   - {fileID: 476334658}
   - {fileID: 997819886}
+  breakGaugeFill: {fileID: 1738773916}
+  normalBreakSprite: {fileID: 21300000, guid: da42cb99cc02c164aa96539428355c6c, type: 3}
+  brokenGroggySprite: {fileID: 21300000, guid: 3ca1999a25bfb3b40980a68445942fd6, type: 3}
 --- !u!1 &472147953
 GameObject:
   m_ObjectHideFlags: 0
@@ -6095,6 +6098,9 @@ MonoBehaviour:
   - {fileID: 1789282435}
   - {fileID: 438992500}
   - {fileID: 784929786}
+  breakGaugeFill: {fileID: 2076759579}
+  normalBreakSprite: {fileID: 21300000, guid: da42cb99cc02c164aa96539428355c6c, type: 3}
+  brokenGroggySprite: {fileID: 21300000, guid: 3ca1999a25bfb3b40980a68445942fd6, type: 3}
 --- !u!1 &936240150
 GameObject:
   m_ObjectHideFlags: 0
@@ -7027,6 +7033,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatManager
   playerData: {fileID: 11400000, guid: 942b59532c7d2484c8102038283ffa5d, type: 2}
+  isPlayerCharging: 0
+  isUnleashingCharge: 0
+  chargingSkill: {fileID: 0}
+  hasUsedKiExtraTurn: 0
+  wasEnemyBrokenAtSkillStart: 0
 --- !u!4 &1018720924
 Transform:
   m_ObjectHideFlags: 0
@@ -10681,15 +10692,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: eaf53d76990a46e468c438b5322986ec, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -12218,15 +12229,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: da42cb99cc02c164aa96539428355c6c, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -13397,15 +13408,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: da42cb99cc02c164aa96539428355c6c, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

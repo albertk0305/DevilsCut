@@ -27,6 +27,18 @@ public class CombatManager : MonoBehaviour
     private SkillCategory selectedCategory;
     private List<SkillData> currentDisplaySkills;
 
+    [Header("기(Ki) 스킬 전용 상태")]
+    public bool isPlayerCharging = false;
+    public bool isUnleashingCharge = false;
+    public SkillData chargingSkill = null;
+    public bool hasUsedKiExtraTurn = false;
+    public bool wasEnemyBrokenAtSkillStart = false;
+
+    [Header("크루세이더 (Last Train Home) 상태")]
+    public bool isBombActive = false;
+    public int savedBombDamage = 0;
+    public int lastSuccessfulHits = 0; // 진화 A 디버프 계산용
+
     // [최적화] 코루틴 대기 객체 캐싱
     private readonly WaitForSeconds oneSecondWait = new WaitForSeconds(1.0f);
 
@@ -144,6 +156,36 @@ public class CombatManager : MonoBehaviour
             CombatUIManager.Instance.SetWaitingPanelActive(true);
             currentMenuState = MenuState.Hidden;
 
+            if (isBombActive)
+            {
+                isBombActive = false;
+
+                var effects = BuffManager.Instance.GetEffects(false);
+                effects.RemoveAll(e => e.effectData != null && e.effectData.specialType == SpecialEffectType.TimeBomb);
+                CombatUIManager.Instance.RefreshBuffUI();
+
+                // 적 이미지를 피격 이미지로 변경 (주인공은 그대로 유지)
+                CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit);
+
+                // 코멘터리 및 폭발 데미지 적용
+                yield return StartCoroutine(CombatUIManager.Instance.TypeCommentary("라스트 트레인 홈 발동!!", true, 0.5f));
+
+                currentEnemyHp = Mathf.Max(0, currentEnemyHp - savedBombDamage);
+                BattleEventSystem.CallHpChanged(false, currentEnemyHp, currentEnemyData.maxHp);
+                CombatUIManager.Instance.SpawnDamageText(savedBombDamage.ToString(), true, false);
+                DevLog.Log($"[라스트 트레인 홈] 적에게 {savedBombDamage}의 확정 피해를 입힙니다!");
+
+                yield return new WaitForSeconds(1.0f);
+                CombatUIManager.Instance.ResetDefenderImage(false);
+
+                // 폭탄 맞고 죽었으면 턴 종료
+                if (currentEnemyHp <= 0)
+                {
+                    EndCombat(false);
+                    yield break;
+                }
+            }
+
             if (BreakManager.Instance.IsBroken(false))
             {
                 yield return StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{eName}이(가) 그로기 상태에서 정신을 차렸습니다."));
@@ -161,13 +203,33 @@ public class CombatManager : MonoBehaviour
             {
                 yield return StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{pName}이(가) 그로기 상태에서 정신을 차렸습니다."));
                 BreakManager.Instance.WakeUpFromBreak(true);
-                CombatUIManager.Instance.ResetDefenderImage(false);
+                CombatUIManager.Instance.ResetDefenderImage(true);
+                CombatUIManager.Instance.ResetCasterImage(true);
                 ResolveTurnEnd();
                 yield break;
             }
-            CombatUIManager.Instance.SetWaitingPanelActive(false);
-            ShowCategoryMenu();
-            StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{pName}, 무슨 공격을 할까요?", false));
+            if (isPlayerCharging && chargingSkill != null)
+            {
+                // 1. 유저가 조작할 수 없도록 버튼을 숨기고 Waiting 패널을 띄웁니다.
+                CombatUIManager.Instance.SetActionPanelActive(false);
+                CombatUIManager.Instance.SetWaitingPanelActive(true);
+
+                // 2. 차지 상태를 해제하고 해방 모드로 전환합니다.
+                isPlayerCharging = false;
+                isUnleashingCharge = true;
+
+                // 3. 발사 코멘터리를 띄운 뒤 즉시 스킬 연산으로 넘깁니다.
+                yield return StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{pName}이(가) 모아둔 기를 방출합니다!", true, 1.0f));
+                DevLog.Log("[원기옥] 모은 기를 발사합니다!");
+
+                PerformSkillRoutine(chargingSkill, true); // 이후 알아서 데미지 연산 후 턴 종료(ResolveTurnEnd)로 이어짐
+            }
+            else
+            {
+                CombatUIManager.Instance.SetWaitingPanelActive(false);
+                ShowCategoryMenu();
+                StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{pName}, 무슨 공격을 할까요?", false));
+            }
         }
         else if (currentTurnOwner.type == EntityType.Karin)
         {
@@ -247,6 +309,31 @@ public class CombatManager : MonoBehaviour
     // 스킬 처리 프로세스 (연산 -> 큐 적재 -> 실행)
     private void PerformSkillRoutine(SkillData skill, bool isPlayerAttacking, bool isUltimate = false)
     {
+        currentMenuState = MenuState.Hidden;
+        CombatUIManager.Instance.SetActionPanelActive(false);
+        wasEnemyBrokenAtSkillStart = BreakManager.Instance.IsBroken(false);
+
+        // [추가] 2. [진화 C] 차지 시작 처리
+        // 만약 플레이어가 기 스킬을 썼는데, 아직 해방(Unleash) 중이 아니라면 '차지 모드'로 들어갑니다.
+        if (isPlayerAttacking && skill.skillLogic is SkillLogic_Gi && skill.currentEvolution == SkillEvolution.PathC && !isUnleashingCharge)
+        {
+            BattleVisualizer.Instance.EnqueueAction(() =>
+            {
+                isPlayerCharging = true;
+                chargingSkill = skill;
+                CombatUIManager.Instance.SetCasterImage(true, skill.skillActionImage); // 이미지 변경
+                CombatUIManager.Instance.SpawnDamageText("Charge!", false, true);
+                DevLog.Log("[원기옥] 기를 모으기 시작합니다!");
+            });
+            BattleVisualizer.Instance.EnqueueDelay(2.0f);
+
+            BattleVisualizer.Instance.StartSequence(() => {
+                if (isPlayerAttacking) BuffManager.Instance.UpdateEffectsOnTurnEnd(true);
+                CalculateNextTurn(); // 행동 없이 바로 턴 종료
+            });
+            return; // 여기서 함수 종료 (공격 연출로 안 넘어감)
+        }
+
         // 1. 순수 데미지 연산 (BattleCalculator)
         int attackerStrength = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Strength);
         int attackerDefense = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Defense);
@@ -255,7 +342,7 @@ public class CombatManager : MonoBehaviour
 
         int defenderDefense = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.Defense);
         int defenderSpeed = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.Speed);
-        int defenderBR = isPlayerAttacking ? currentEnemyData.breakResistance : currentPlayerStats.breakResistance;
+        int defenderBR = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.BreakResistance);
 
         SkillResult skillResult = BattleCalculator.CalculateSkill(
             skill, isPlayerAttacking, currentPlayerStats, currentEnemyData,
@@ -390,6 +477,14 @@ public class CombatManager : MonoBehaviour
                         currentPlayerStats.currentHp = Mathf.Max(0, currentPlayerStats.currentHp - hit.damage);
                         BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
                         if (!skillResult.isGuardTriggered) StyleRankManager.Instance.OnPlayerHit();
+
+                        if (isPlayerCharging && hit.damage > 0)
+                        {
+                            isPlayerCharging = false;
+                            chargingSkill = null;
+                            CombatUIManager.Instance.SpawnDamageText("Broken!", false, true);
+                            DevLog.Log("[원기옥] 피격당하여 기 모으기가 취소되었습니다!");
+                        }
                     }
 
                     if (isPlayerAttacking && !BreakManager.Instance.IsBroken(false))
@@ -405,6 +500,15 @@ public class CombatManager : MonoBehaviour
             // 다단히트 간 기본 대기 시간
             BattleVisualizer.Instance.EnqueueDelay(0.15f);
         }
+
+        int successCount = 0;
+        foreach (var hit in skillResult.hits) { if (hit.isHit) successCount++; }
+        lastSuccessfulHits = successCount;
+
+        BattleVisualizer.Instance.EnqueueAction(() =>
+        {
+            skill.skillLogic?.ApplyEffectOnHit(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking, skillResult.anyHit);
+        });
 
         // 2. [신규] 루프 종료 후 카운터 반격 판정 및 연출
         bool isCounterTriggered = false;
@@ -488,10 +592,10 @@ public class CombatManager : MonoBehaviour
             }
         }
 
-        // 스킬 로직 효과 적용 및 화면 리셋
+        // 화면 리셋
         BattleVisualizer.Instance.EnqueueAction(() =>
         {
-            skill.skillLogic?.ApplyEffectOnHit(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking, skillResult.anyHit);
+            CombatUIManager.Instance.ClearCombatEffects(); // 여기서 텍스트가 지워짐
 
             if (isPlayerAttacking)
             {
@@ -500,16 +604,48 @@ public class CombatManager : MonoBehaviour
                 if (isUltimate) StyleRankManager.Instance.ResetRankForUltimate();
             }
 
-            CombatUIManager.Instance.ClearCombatEffects(); // 여기서 텍스트가 지워짐
-            CombatUIManager.Instance.ResetCasterImage(isPlayerAttacking);
+            if (!(isPlayerAttacking && isPlayerCharging))
+            {
+                CombatUIManager.Instance.ResetCasterImage(isPlayerAttacking);
+            }
 
-            if (!(!isPlayerAttacking && BreakManager.Instance.IsBroken(true)) && !(isPlayerAttacking && BreakManager.Instance.IsBroken(false)))
-                CombatUIManager.Instance.ResetDefenderImage(isPlayerDefending);
+            bool isDefenderBroken = (!isPlayerAttacking && BreakManager.Instance.IsBroken(true)) || (isPlayerAttacking && BreakManager.Instance.IsBroken(false));
+
+            if (!isDefenderBroken)
+            {
+                // 방어자(플레이어)가 기를 모으는 중이었다면, 기본 이미지가 아닌 [기 모으기 이미지]로 복구!
+                if (isPlayerDefending && isPlayerCharging && chargingSkill != null)
+                {
+                    CombatUIManager.Instance.SetDefenderImage(true, chargingSkill.skillActionImage);
+                }
+                else
+                {
+                    // 일반적인 상황에선 기본 이미지로 리셋
+                    CombatUIManager.Instance.ResetDefenderImage(isPlayerDefending);
+                }
+            }
+            else
+            {
+                // [수정됨] 방어자가 아직 그로기 상태라면, ScriptableObject에 할당해둔 'breakImage'로 되돌려놓습니다!
+                Sprite groggySprite = isPlayerDefending ? playerData?.breakImage : currentEnemyData?.breakImage;
+
+                if (groggySprite != null)
+                {
+                    CombatUIManager.Instance.SetDefenderImage(isPlayerDefending, groggySprite);
+                }
+
+                DevLog.Log($"[{(isPlayerDefending ? "주인공" : "적")}]가 아직 그로기 상태이므로 전용 Break 이미지로 복구합니다.");
+            }
         });
 
         // 3. 지휘관 권한 위임 및 턴 종료 대기
         BattleVisualizer.Instance.StartSequence(() =>
         {
+            if (isPlayerAttacking && isUnleashingCharge)
+            {
+                isUnleashingCharge = false;
+            }
+
             if (currentEnemyHp <= 0 || currentPlayerStats.currentHp <= 0) EndCombat(currentEnemyHp <= 0);
             else ResolveTurnEnd();
         });
@@ -558,7 +694,7 @@ public class CombatManager : MonoBehaviour
                     int healAmount = Mathf.RoundToInt(currentPlayerStats.maxHp * hpRegenRate);
                     currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + healAmount, 0, currentPlayerStats.maxHp);
                     CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-                    CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
+                    CombatUIManager.Instance.SpawnDamageText($"+{healAmount}", false, true);
                     DevLog.Log($"[아발론] 턴 종료! 셰리의 체력이 {healAmount} 회복되었습니다.");
                 }
                 else
@@ -566,7 +702,7 @@ public class CombatManager : MonoBehaviour
                     int healAmount = Mathf.RoundToInt(currentEnemyData.maxHp * hpRegenRate);
                     currentEnemyHp = Mathf.Clamp(currentEnemyHp + healAmount, 0, currentEnemyData.maxHp);
                     CombatUIManager.Instance.enemyStatusUI.UpdateHP(currentEnemyHp, currentEnemyData.maxHp);
-                    CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, false);
+                    CombatUIManager.Instance.SpawnDamageText($"+{healAmount}", false, false);
                 }
             }
 

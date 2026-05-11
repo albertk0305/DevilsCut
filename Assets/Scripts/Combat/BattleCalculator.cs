@@ -48,6 +48,8 @@ public static class BattleCalculator
 
         int consecutiveHits = 0; // 연속 적중 카운터 초기화
 
+        bool isDefenderBroken = BreakManager.Instance.IsBroken(!isPlayerAttacking);
+
         for (int i = 0; i < totalHits; i++)
         {
             HitResult hit = new HitResult();
@@ -58,7 +60,7 @@ public static class BattleCalculator
             {
                 hit.isHit = false; 
             }
-            else if (isAlwaysHit)
+            else if (isAlwaysHit || isDefenderBroken)
             {
                 hit.isHit = true;
             }

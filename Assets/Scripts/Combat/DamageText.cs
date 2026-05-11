@@ -36,23 +36,39 @@ public class DamageText : MonoBehaviour
     {
         if (textMesh == null) return;
 
-        textMesh.text = text;
         textMesh.fontSize = defaultFontSize; // 재사용 시 폰트 크기 초기화
+
+        // 1. 글자 몸통 색상은 무조건 깔끔한 흰색 고정!
+        textMesh.color = Color.white;
+
+        // 2. 텍스트 종류에 따라 테두리(Outline) 색상 결정
+        Color outlineCol = Color.red; // 기본 테두리: 붉은색 (일반 타격)
 
         if (text == "Miss")
         {
-            textMesh.color = Color.blue;
+            outlineCol = Color.blue;
+        }
+        else if (text.StartsWith("+"))
+        {
+            outlineCol = Color.green; // 체력 회복
+        }
+        else if (text.StartsWith("-"))
+        {
+            outlineCol = Color.red; // 코스트 지불
         }
         else if (isCrit)
         {
-            textMesh.text += "!";
-            textMesh.color = Color.yellow;
+            text += "!"; // 느낌표 추가
+            outlineCol = Color.yellow; // 크리티컬
             textMesh.fontSize += 20; // 크리티컬일 때만 폰트 키움
         }
-        else
-        {
-            textMesh.color = Color.red;
-        }
+
+        textMesh.text = text;
+
+        // 3. TextMeshPro 테두리 적용
+        // 두께가 너무 두껍거나 얇으면 0.2f 숫자를 입맛에 맞게 조절하세요! (보통 0.1f ~ 0.3f 사이)
+        textMesh.outlineWidth = 0.2f;
+        textMesh.outlineColor = outlineCol;
     }
 
     void Update()

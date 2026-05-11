@@ -16,3 +16,7 @@ MonoBehaviour:
   - 0.5
   - 0.75
   - 1
+  defDownEffect: {fileID: 11400000, guid: 8eaac86f8b6c5d14cb658519b6261257, type: 2}
+  brDownEffect: {fileID: 11400000, guid: f6eae639aae359e49bb496f5731ba4ef, type: 2}
+  pathA_DebuffPerHit: 0.03
+  timeBombEffect: {fileID: 11400000, guid: c32c78a7071d1664b8814c76f8e1cf41, type: 2}

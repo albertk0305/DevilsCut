@@ -69,6 +69,9 @@ public class BreakManager : MonoBehaviour
             CombatUIManager.Instance.UpdatePlayerBreak(playerBreak);
             TurnManager.Instance.ResetGauge(EntityType.Player);
 
+            // 그로기 전용 게이지 이미지로 교체!
+            CombatUIManager.Instance.playerStatusUI.SetBreakGaugeState(true);
+
             if (CombatManager.Instance.playerData != null && CombatManager.Instance.playerData.breakImage != null)
                 CombatUIManager.Instance.SetDefenderImage(true, CombatManager.Instance.playerData.breakImage);
         }
@@ -78,6 +81,9 @@ public class BreakManager : MonoBehaviour
             isEnemyBroken = true;
             CombatUIManager.Instance.UpdateEnemyBreak(enemyBreak);
             TurnManager.Instance.ResetGauge(EntityType.Enemy);
+
+            // 그로기 전용 게이지 이미지로 교체!
+            CombatUIManager.Instance.enemyStatusUI.SetBreakGaugeState(true);
 
             if (StyleRankManager.Instance != null) StyleRankManager.Instance.OnEnemyBreak();
 
@@ -118,12 +124,23 @@ public class BreakManager : MonoBehaviour
             isPlayerBroken = false;
             playerBreak = 0f;
             CombatUIManager.Instance.UpdatePlayerBreak(0f);
+
+            // [추가] 기상 시 평소 게이지 이미지로 원상 복구!
+            CombatUIManager.Instance.playerStatusUI.SetBreakGaugeState(false);
         }
         else
         {
             isEnemyBroken = false;
             enemyBreak = 0f;
             CombatUIManager.Instance.UpdateEnemyBreak(0f);
+
+            // [추가] 기상 시 평소 게이지 이미지로 원상 복구!
+            CombatUIManager.Instance.enemyStatusUI.SetBreakGaugeState(false);
+
+            if (CombatManager.Instance != null)
+            {
+                CombatManager.Instance.hasUsedKiExtraTurn = false;
+            }
         }
     }
 
