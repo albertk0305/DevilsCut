@@ -55,7 +55,9 @@ public class TurnManager : MonoBehaviour
 
     private float GetTicksToNextTurn(TurnEntity entity)
     {
-        float fillPerTick = GetGaugeFillAmount(entity.ap) * entity.speedMultiplier;
+        int currentAP = GetDynamicAP(entity);
+        float fillPerTick = GetGaugeFillAmount(currentAP) * entity.speedMultiplier;
+
         if (fillPerTick <= 0) return 9999f;
         return (100f - entity.actionGauge) / fillPerTick;
     }
@@ -79,7 +81,8 @@ public class TurnManager : MonoBehaviour
         {
             foreach (var entity in turnQueue)
             {
-                entity.actionGauge += GetGaugeFillAmount(entity.ap) * entity.speedMultiplier * ticksToAdvance;
+                int currentAP = GetDynamicAP(entity);
+                entity.actionGauge += GetGaugeFillAmount(currentAP) * entity.speedMultiplier * ticksToAdvance;
             }
         }
 
@@ -119,7 +122,8 @@ public class TurnManager : MonoBehaviour
 
             foreach (var e in simQueue)
             {
-                e.actionGauge += GetGaugeFillAmount(e.ap) * e.speedMultiplier * ticksToAdvance;
+                int currentAP = GetDynamicAP(e);
+                e.actionGauge += GetGaugeFillAmount(currentAP) * e.speedMultiplier * ticksToAdvance;
             }
 
             futureTurnIcons.Add(nextSimEntity.portraitIcon);
@@ -140,5 +144,17 @@ public class TurnManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private int GetDynamicAP(TurnEntity entity)
+    {
+        if (StatManager.Instance != null)
+        {
+            // 주인공과 적은 버프/디버프가 적용된 실시간 AP를 가져옴
+            if (entity.type == EntityType.Player) return StatManager.Instance.GetEffectiveStat(true, TargetStat.AP);
+            if (entity.type == EntityType.Enemy) return StatManager.Instance.GetEffectiveStat(false, TargetStat.AP);
+        }
+        // 카린이나 서포터는 버프를 받지 않으므로 원래 AP 유지
+        return entity.ap;
     }
 }

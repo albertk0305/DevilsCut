@@ -116,10 +116,10 @@ TextureImporter:
       name: LuciferDDrink_0
       rect:
         serializedVersion: 2
-        x: 199
+        x: 106
         y: 0
-        width: 759
-        height: 1014
+        width: 850
+        height: 1008
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

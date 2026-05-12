@@ -28,3 +28,14 @@ MonoBehaviour:
   - 50
   - 80
   - 100
+  pathA_StrengthFlatBuff: {fileID: 11400000, guid: fa824b09daf19cd4fa200f98ab79a088, type: 2}
+  pathA_HpToStrengthRates:
+  - 0.05
+  - 0.1
+  - 0.15
+  pathA_BreakToStrengthRates:
+  - 0.3
+  - 0.5
+  - 0.8
+  pathB_InvincibleBuff: {fileID: 11400000, guid: 4a3b114d42056344a8e3d2f1cfb09a72, type: 2}
+  pathC_StunDebuff: {fileID: 11400000, guid: e7e2eee35de44384a9ec1b64e53ea1d9, type: 2}

@@ -69,6 +69,7 @@ public class StatManager : MonoBehaviour
                 case TargetStat.Speed: return playerStats.speed;
                 case TargetStat.Luck: return playerStats.luck;
                 case TargetStat.BreakResistance: return playerStats.breakResistance;
+                case TargetStat.AP: return playerStats.ActionPoints;
             }
         }
         else
@@ -80,6 +81,7 @@ public class StatManager : MonoBehaviour
                 case TargetStat.Speed: return enemyData.speed;
                 case TargetStat.Luck: return enemyData.luck;
                 case TargetStat.BreakResistance: return enemyData.breakResistance;
+                case TargetStat.AP: return enemyData.ActionPoints;
             }
         }
         return 0;

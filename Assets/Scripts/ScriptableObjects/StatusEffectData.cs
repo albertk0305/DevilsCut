@@ -2,9 +2,9 @@ using UnityEngine;
 
 //  효과가 어떤 작용을 하는지 정의하는 열거형들
 public enum EffectCategory { Buff, Debuff, Special }
-public enum TargetStat { None, Strength, Defense, Speed, Luck, BreakResistance }
+public enum TargetStat { None, Strength, Defense, Speed, Luck, BreakResistance, AP }
 public enum ModifierType { Flat, Percentage }
-public enum SpecialEffectType { None, Guard, Reflect, AbsoluteGuard, EvasionUp, HpRegen, DamageAmp, TimeBomb }
+public enum SpecialEffectType { None, Guard, Reflect, AbsoluteGuard, EvasionUp, HpRegen, DamageAmp, TimeBomb, Overheat, DamageAccumulator, CyberRoulette, BreakRegen, Invincible, Stun }
 
 [CreateAssetMenu(fileName = "NewStatusEffect", menuName = "GameData/StatusEffect")]
 public class StatusEffectData : ScriptableObject

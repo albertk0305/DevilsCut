@@ -18,3 +18,22 @@ MonoBehaviour:
   - 0.25
   - 0.4
   - 0.6
+  speedBuff: {fileID: 11400000, guid: bfd34ad13609aa243bc3221869961b8d, type: 2}
+  pathA_SpeedRates:
+  - 0.15
+  - 0.2
+  - 0.25
+  defenseDebuff: {fileID: 11400000, guid: 6b116193d0b03be4eb6ee05da7c4ef84, type: 2}
+  flatStrengthBuff: {fileID: 11400000, guid: 6e03d4d18bf7f844e814676c08eb53b6, type: 2}
+  pathB_DefDebuffRates:
+  - 0.3
+  - 0.4
+  - 0.5
+  pathB_StrMultipliers:
+  - 2
+  - 2.5
+  - 3
+  pathC_DamageMults:
+  - 30
+  - 40
+  - 50

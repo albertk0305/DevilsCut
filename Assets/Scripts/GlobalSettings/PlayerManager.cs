@@ -20,6 +20,7 @@ public class PlayerStats
     public int SupporterAP => Mathf.Max(1, Mathf.RoundToInt(ActionPoints * 0.11f));
 
     public int breakResistance = 50; // 그로기 저항
+    public float maxBreakGauge = 100f; // 최대 브레이크 수치
     public int strength = 10;        // 힘
     public int defense = 10;         // 방어
     public int speed = 10;           // 속도

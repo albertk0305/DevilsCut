@@ -24,6 +24,7 @@ MonoBehaviour:
   maxHp: 10000
   ActionPoints: 10
   breakResistance: 10
+  maxBreakGauge: 100
   strength: 20
   defense: 20
   speed: 20

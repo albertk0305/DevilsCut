@@ -20,3 +20,9 @@ MonoBehaviour:
   - 30
   - 50
   - 100
+  hpRegenBuff: {fileID: 11400000, guid: e7336ac7ecf34584db956dace6314df0, type: 2}
+  breakRegenBuff: {fileID: 11400000, guid: 0a4b98bdd44902d49bc0fda54e222edd, type: 2}
+  pathC_DamageRates:
+  - 0.5
+  - 0.75
+  - 1

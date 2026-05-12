@@ -12,9 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8b9061d8e0ec64ebe146bba6a53e04, type: 3}
   m_Name: SkillLogic_MajorCrime
   m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_MajorCrime
-  speedBuff: {fileID: 11400000, guid: ddb9ab76f63af9f42a6adc803d5823c3, type: 2}
-  luckBuff: {fileID: 11400000, guid: 375b07ae117e2d4488f0ea235ea9d490, type: 2}
-  buffRates:
+  baseSpeedBuff: {fileID: 11400000, guid: ddb9ab76f63af9f42a6adc803d5823c3, type: 2}
+  baseLuckBuff: {fileID: 11400000, guid: 375b07ae117e2d4488f0ea235ea9d490, type: 2}
+  baseBuffRates:
   - 0.3
   - 0.45
   - 0.6
+  overheatDebuff: {fileID: 11400000, guid: 10755108e360dc24fa118ac9366a23c0, type: 2}
+  damageAccBuff: {fileID: 11400000, guid: 86f4e8f29d07f164498771295a3a6e36, type: 2}
+  pathA_Speed: {fileID: 11400000, guid: 4ae4b22bb8c49064f8ff38d0e73dc826, type: 2}
+  pathA_Luck: {fileID: 11400000, guid: 0bf162d7a262f3c47ac0318e61b84aea, type: 2}
+  pathA_Rates:
+  - 0.6
+  - 0.8
+  - 1
+  strengthMod: {fileID: 11400000, guid: 294dffc8c2d9a3c4dafc328b095717c8, type: 2}
+  defenseMod: {fileID: 11400000, guid: bc1a5d400a1ab42499de36320e11c080, type: 2}
+  speedMod: {fileID: 11400000, guid: f8afb200cbd085e40813846c2d64d727, type: 2}
+  luckMod: {fileID: 11400000, guid: 895895abd41b8af48a47eec9592881c1, type: 2}

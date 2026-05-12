@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 393129d409deeb649ab742db822149a4
+guid: c61647ae0a584b7458f518df6368f409
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6152199617045435972
-    second: LuciferDDrink2_0
+      213: -1761343631697575125
+    second: LuciferDHappy_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LuciferDDrink2_0
+      name: LuciferDHappy_0
       rect:
         serializedVersion: 2
-        x: 199
+        x: 80
         y: 0
-        width: 759
-        height: 1014
+        width: 878
+        height: 1012
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb966b64b0ffe9aa0800000000000000
-      internalID: -6152199617045435972
+      spriteID: b2305498c437e87e0800000000000000
+      internalID: -1761343631697575125
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LuciferDDrink2_0: -6152199617045435972
+      LuciferDHappy_0: -1761343631697575125
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

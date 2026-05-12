@@ -77,7 +77,16 @@ public static class BattleCalculator
                 result.anyHit = true;
 
                 // 1. 기본 데미지 및 브레이크 수치 산출
-                float calculatedDamage = attackerStrength * skill.GetCurrentDamageMultiplier();
+                float baseMult = skill.GetCurrentDamageMultiplier();
+                float logicMult = skill.skillLogic != null ? skill.skillLogic.GetDamageMultiplier(skill, pStats, eData, isPlayerAttacking) : 1f;
+
+                // 원본이 버프(baseMult가 0)라도, 로직에서 계수를 줬다면 이 스킬은 이제 공격기(isAttackSkill)입니다!
+                bool isAttackSkill = baseMult > 0f || (baseMult <= 0f && logicMult > 0f && logicMult != 1.0f);
+
+                if (baseMult <= 0f && isAttackSkill) baseMult = 1.0f; // 공격기로 확인된 놈만 배율을 살려줍니다.
+
+                // 1. 기본 데미지 및 브레이크 수치 산출
+                float calculatedDamage = attackerStrength * baseMult;
                 float currentBreakPower = skill.GetCurrentBreakPower();
 
                 // Path C (제물의 낙인) 특수 공식 적용
@@ -92,7 +101,7 @@ public static class BattleCalculator
                 // 2. 외부 보정 (스킬 고유 로직, 스타일 랭크, 그로기 증폭)
                 if (skill.skillLogic != null)
                 {
-                    calculatedDamage *= skill.skillLogic.GetDamageMultiplier(skill, pStats, eData, isPlayerAttacking);
+                    calculatedDamage *= logicMult; // 여기서 위에서 계산해둔 logicMult를 곱해 최종 데미지를 뻥튀기합니다!
                     calculatedDamage *= skill.skillLogic.GetDynamicDamageMultiplier(skill, consecutiveHits);
                 }
 
@@ -102,8 +111,8 @@ public static class BattleCalculator
                 if (!isPlayerAttacking && BreakManager.Instance.IsBroken(true)) calculatedDamage *= 2.0f;
                 else if (isPlayerAttacking && BreakManager.Instance.IsBroken(false)) calculatedDamage *= 2.0f;
 
-                // 3. 크리티컬 판정
-                if (skill.GetCurrentDamageMultiplier() > 0f)
+                // 3. 크리티컬 판정 (여기서도 isAttackSkill 사용)
+                if (isAttackSkill)
                 {
                     float dynamicCrit = skill.skillLogic != null ? skill.skillLogic.GetDynamicCritRateBonus(skill, consecutiveHits) : 0f;
                     hit.isCrit = CombatMath.CheckCriticalSuccess(skill.GetCurrentBonusCritRate(), attackerLuck);
@@ -155,13 +164,20 @@ public static class BattleCalculator
                     calculatedDamage *= (1f + damageAmp); // 예: 0.5면 데미지 1.5배 증폭
                 }
                 hit.damage = Mathf.RoundToInt(calculatedDamage);
-                if (skill.GetCurrentDamageMultiplier() > 0f)
+
+                var invincibleEffect = defenderEffects.Find(e => e.effectData.specialType == SpecialEffectType.Invincible);
+
+                if (invincibleEffect != null)
                 {
-                    if (hit.damage <= 0) hit.damage = 1;
+                    hit.damage = 0; // 무적이면 최소 데미지 무시하고 무조건 0!
+                }
+                else if (isAttackSkill)
+                {
+                    if (hit.damage <= 0) hit.damage = 1; // 공격기면 최소 데미지 1 보장
                 }
                 else
                 {
-                    hit.damage = 0; // 버프/디버프는 0 데미지 고정
+                    hit.damage = 0; // 순수 버프/디버프일 때만 데미지 0 고정
                 }
 
                 if (result.isGuardTriggered) result.totalMitigatedDamage += (originalDamage - hit.damage);
@@ -179,7 +195,8 @@ public static class BattleCalculator
                 }
                 else hit.breakDamage = 0f;
 
-                if (result.isGuardTriggered) hit.breakDamage = 0f;
+                if (invincibleEffect != null) hit.breakDamage = 0f;
+                else if (result.isGuardTriggered) hit.breakDamage = 0f;
                 consecutiveHits++;
             }
             else

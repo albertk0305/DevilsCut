@@ -39,6 +39,9 @@ public class CombatManager : MonoBehaviour
     public int savedBombDamage = 0;
     public int lastSuccessfulHits = 0; // 진화 A 디버프 계산용
 
+    [Header("메이저 크라임 상태")]
+    public int accumulatedDamage = 0; // 진화 B: 3턴간 기록한 데미지 합계
+
     // [최적화] 코루틴 대기 객체 캐싱
     private readonly WaitForSeconds oneSecondWait = new WaitForSeconds(1.0f);
 
@@ -155,6 +158,20 @@ public class CombatManager : MonoBehaviour
             CombatUIManager.Instance.SetActionPanelActive(false);
             CombatUIManager.Instance.SetWaitingPanelActive(true);
             currentMenuState = MenuState.Hidden;
+
+            var enemyEffects = BuffManager.Instance.GetEffects(false);
+            var stunEffect = enemyEffects.Find(e => e.effectData.specialType == SpecialEffectType.Stun);
+
+            if (stunEffect != null)
+            {
+                enemyEffects.Remove(stunEffect);
+                CombatUIManager.Instance.RefreshBuffUI();
+
+                // 1초간 스턴 텍스트 띄워주고 곧바로 턴 강제 종료 (EnemyTurnRoutine 실행 안 함!)
+                yield return StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{eName}은(는) 무량공처의 효과로 행동할 수 없습니다!", true, 1.0f));
+                ResolveTurnEnd();
+                yield break;
+            }
 
             if (isBombActive)
             {
@@ -377,7 +394,11 @@ public class CombatManager : MonoBehaviour
         // ==========================================
         string commentary = !skillResult.anyHit ? $"{attackerName}의 {skillName}이(가) 빗나갔습니다!" :
                             (skillResult.anyCrit ? $"{attackerName}의 {skillName} 치명적으로 적중!" : $"{attackerName}의 {skillName} 적중!");
-        bool isPureUtility = skill.GetCurrentDamageMultiplier() <= 0f && !skill.forceHitReaction;
+        float baseMultForUI = skill.GetCurrentDamageMultiplier();
+        float logicMultForUI = skill.skillLogic != null ? skill.skillLogic.GetDamageMultiplier(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking) : 1f;
+
+        bool isAttackForUI = baseMultForUI > 0f || (baseMultForUI <= 0f && logicMultForUI > 0f && logicMultForUI != 1.0f);
+        bool isPureUtility = !isAttackForUI && !skill.forceHitReaction;
 
         BattleVisualizer.Instance.EnqueueAction(() =>
         {
@@ -395,11 +416,15 @@ public class CombatManager : MonoBehaviour
 
             // 2. 방어자 이미지 변경
             Sprite reactionSprite = null;
+
+            bool isDefenderInvincible = BuffManager.Instance.GetEffects(!isPlayerAttacking).Exists(e => e.effectData.specialType == SpecialEffectType.Invincible);
+
             if (skillResult.anyHit)
             {
                 if (!isPureUtility) // 공격기일 때만 피격/가드 이미지를 설정!
                 {
-                    reactionSprite = skillResult.isGuardTriggered
+                    if (isDefenderInvincible) reactionSprite = null;
+                    else reactionSprite = skillResult.isGuardTriggered
                         ? (isPlayerAttacking ? currentEnemyData?.guardImage : playerData?.guardImage)
                         : (isPlayerAttacking ? currentEnemyData?.hit : playerData?.hit);
                 }
@@ -471,12 +496,25 @@ public class CombatManager : MonoBehaviour
                     {
                         currentEnemyHp = Mathf.Max(0, currentEnemyHp - hit.damage);
                         BattleEventSystem.CallHpChanged(false, currentEnemyHp, currentEnemyData.maxHp);
+                        if (isBombActive == false)
+                        {
+                            accumulatedDamage += hit.damage;
+                        }
                     }
                     else
                     {
                         currentPlayerStats.currentHp = Mathf.Max(0, currentPlayerStats.currentHp - hit.damage);
                         BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-                        if (!skillResult.isGuardTriggered) StyleRankManager.Instance.OnPlayerHit();
+                        bool isInvincible = BuffManager.Instance.GetEffects(true).Exists(e => e.effectData.specialType == SpecialEffectType.Invincible);
+
+                        if (!skillResult.isGuardTriggered && !isInvincible)
+                        {
+                            StyleRankManager.Instance.OnPlayerHit();
+                        }
+                        else if (isInvincible)
+                        {
+                            DevLog.Log("[무하한] 무적 상태이므로 스타일 랭크가 감소하지 않습니다.");
+                        }
 
                         if (isPlayerCharging && hit.damage > 0)
                         {
@@ -670,6 +708,24 @@ public class CombatManager : MonoBehaviour
 
     public void ResolveTurnEnd()
     {
+        StartCoroutine(ResolveTurnEndRoutine());
+    }
+
+    private IEnumerator ResolveTurnEndRoutine()
+    {
+        yield return StartCoroutine(HandleSpecialExpirations());
+
+        if (currentActiveEntity != null && currentActiveEntity.type == EntityType.Enemy)
+        {
+            var pEffects = BuffManager.Instance.GetEffects(true);
+            int removed = pEffects.RemoveAll(e => e.effectData.specialType == SpecialEffectType.Invincible);
+            if (removed > 0)
+            {
+                CombatUIManager.Instance.RefreshBuffUI();
+                DevLog.Log("[무하한] 적의 턴이 종료되어 무적 효과가 해제되었습니다.");
+            }
+        }
+
         CompanionManager.Instance.UpdateEmotion(CompanionManager.Emotion.Normal);
 
         bool playerTookDamage = currentPlayerStats.currentHp < playerHpAtTurnStart;
@@ -683,27 +739,49 @@ public class CombatManager : MonoBehaviour
             bool isPlayerTurn = currentActiveEntity.isPlayer;
             var effects = BuffManager.Instance.GetEffects(isPlayerTurn);
             float hpRegenRate = 0f;
+            float breakRegenRate = 0f;
 
             foreach (var eff in effects)
                 if (eff.effectData.specialType == SpecialEffectType.HpRegen) hpRegenRate += eff.value;
 
-            if (hpRegenRate > 0f)
+            foreach (var eff in effects)
+                if (eff.effectData.specialType == SpecialEffectType.BreakRegen) breakRegenRate += eff.value;
+
+            if (hpRegenRate > 0f || breakRegenRate > 0f)
             {
-                if (isPlayerTurn)
+                string targetName = isPlayerTurn ? (playerData != null ? GetTranslatedText(playerData.playerNamekey) : "셰리") : "적";
+
+                // 1. 회복 알림 텍스트 출력 (0.5초간 타자 치듯 출력)
+                yield return StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{targetName}의 지속 회복 효과 발동!", true, 0.5f));
+
+                // 2. 실제 회복 수치 연산 및 데미지 텍스트 팝업
+                if (hpRegenRate > 0f)
                 {
-                    int healAmount = Mathf.RoundToInt(currentPlayerStats.maxHp * hpRegenRate);
-                    currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + healAmount, 0, currentPlayerStats.maxHp);
-                    CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-                    CombatUIManager.Instance.SpawnDamageText($"+{healAmount}", false, true);
-                    DevLog.Log($"[아발론] 턴 종료! 셰리의 체력이 {healAmount} 회복되었습니다.");
+                    if (isPlayerTurn)
+                    {
+                        int healAmount = Mathf.RoundToInt(currentPlayerStats.maxHp * hpRegenRate);
+                        currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + healAmount, 0, currentPlayerStats.maxHp);
+                        CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
+                        CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
+                        DevLog.Log($"[재생] 턴 종료! 셰리의 체력이 {healAmount} 회복되었습니다.");
+                    }
+                    else
+                    {
+                        int healAmount = Mathf.RoundToInt(currentEnemyData.maxHp * hpRegenRate);
+                        currentEnemyHp = Mathf.Clamp(currentEnemyHp + healAmount, 0, currentEnemyData.maxHp);
+                        CombatUIManager.Instance.enemyStatusUI.UpdateHP(currentEnemyHp, currentEnemyData.maxHp);
+                        CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, false);
+                    }
                 }
-                else
+
+                if (breakRegenRate > 0f)
                 {
-                    int healAmount = Mathf.RoundToInt(currentEnemyData.maxHp * hpRegenRate);
-                    currentEnemyHp = Mathf.Clamp(currentEnemyHp + healAmount, 0, currentEnemyData.maxHp);
-                    CombatUIManager.Instance.enemyStatusUI.UpdateHP(currentEnemyHp, currentEnemyData.maxHp);
-                    CombatUIManager.Instance.SpawnDamageText($"+{healAmount}", false, false);
+                    // 턴 종료 시 그로기 게이지 즉시 회복
+                    BreakManager.Instance.RecoverBreakInstantly(isPlayerTurn, breakRegenRate);
                 }
+
+                // 3. 유저가 초록색 회복 데미지 텍스트와 UI 바가 차오르는 것을 감상할 수 있도록 1초 대기!
+                yield return new WaitForSeconds(1.0f);
             }
 
             if (currentActiveEntity.isPlayer) BuffManager.Instance.UpdateEffectsOnTurnEnd(true);
@@ -711,6 +789,54 @@ public class CombatManager : MonoBehaviour
         }
 
         CalculateNextTurn();
+    }
+
+    private IEnumerator HandleSpecialExpirations()
+    {
+        bool isPlayerTurn = currentActiveEntity.isPlayer;
+        var effects = BuffManager.Instance.GetEffects(isPlayerTurn);
+
+        // 만료될 효과들 찾기 (turnsLeft가 1이고 isNewlyApplied가 false인 것)
+        for (int i = effects.Count - 1; i >= 0; i--)
+        {
+            var e = effects[i];
+            if (e.turnsLeft == 1 && !e.isNewlyApplied)
+            {
+                // 1. [진화 A] 과열 폭발 (주인공 피격)
+                if (e.effectData.specialType == SpecialEffectType.Overheat)
+                {
+                    yield return StartCoroutine(CombatUIManager.Instance.TypeCommentary("과열(Overheat) 디버프 발동!!", true, 0.5f));
+
+                    int selfDamage = Mathf.RoundToInt(currentPlayerStats.currentHp * 0.4f);
+                    currentPlayerStats.currentHp = Mathf.Max(0, currentPlayerStats.currentHp - selfDamage);
+
+                    CombatUIManager.Instance.SetDefenderImage(true, playerData.hit); // 주인공 피격 이미지
+                    CombatUIManager.Instance.SpawnDamageText(selfDamage.ToString(), false, true);
+                    BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
+
+                    yield return new WaitForSeconds(1.0f);
+                    CombatUIManager.Instance.ResetDefenderImage(true);
+                }
+
+                // 2. [진화 B] 피해 누적 폭발 (적 피격)
+                if (e.effectData.specialType == SpecialEffectType.DamageAccumulator)
+                {
+                    yield return StartCoroutine(CombatUIManager.Instance.TypeCommentary("렛 유 다운(Let You Down) 추가 피해 발동!", true, 0.5f));
+
+                    // 기록된 피해의 50%를 추가로 입힘
+                    int extraDmg = Mathf.RoundToInt(accumulatedDamage * 0.5f);
+                    currentEnemyHp = Mathf.Max(0, currentEnemyHp - extraDmg);
+
+                    CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit); // 적 피격 이미지
+                    CombatUIManager.Instance.SpawnDamageText(extraDmg.ToString(), true, false);
+                    BattleEventSystem.CallHpChanged(false, currentEnemyHp, currentEnemyData.maxHp);
+
+                    accumulatedDamage = 0; // 초기화
+                    yield return new WaitForSeconds(1.0f);
+                    CombatUIManager.Instance.ResetDefenderImage(false);
+                }
+            }
+        }
     }
 
     public bool IsCurrentTurnOwner(bool isPlayerTarget)

@@ -5,6 +5,12 @@ TextureImporter:
   - first:
       213: 5220181170713414983
     second: LuciferDHappy2_0
+  - first:
+      213: 6095860259085308912
+    second: LuciferDHappy2_1
+  - first:
+      213: -4554102991678070213
+    second: LuciferDHappy2_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,10 +122,10 @@ TextureImporter:
       name: LuciferDHappy2_0
       rect:
         serializedVersion: 2
-        x: 78
+        x: 200
         y: 0
-        width: 880
-        height: 1013
+        width: 758
+        height: 1011
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,6 +136,50 @@ TextureImporter:
       bones: []
       spriteID: 74d4e87fd1fc17840800000000000000
       internalID: 5220181170713414983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LuciferDHappy2_1
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 65
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f3533fbb98d89450800000000000000
+      internalID: 6095860259085308912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LuciferDHappy2_2
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 52
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b322c7e25739cc0c0800000000000000
+      internalID: -4554102991678070213
       vertices: []
       indices: 
       edges: []
@@ -149,6 +199,8 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       LuciferDHappy2_0: 5220181170713414983
+      LuciferDHappy2_1: 6095860259085308912
+      LuciferDHappy2_2: -4554102991678070213
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

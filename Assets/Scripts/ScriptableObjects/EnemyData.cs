@@ -24,6 +24,7 @@ public class EnemyData : ScriptableObject
     public int ActionPoints; 
 
     public int breakResistance; // 그로기 저항
+    public float maxBreakGauge = 100f; // 최대 브레이크 수치
     public int strength;        // 힘
     public int defense;         // 방어
     public int speed;           // 속도
