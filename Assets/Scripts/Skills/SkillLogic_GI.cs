@@ -52,7 +52,7 @@ public class SkillLogic_Gi : SkillLogicBase
             multiplier += pathB_DamageBonus[levelIdx];
         }
         // [진화 C] 차지 해방 시 폭발적 데미지 (기본 1.0 무시하고 전용 계수 사용)
-        else if (skill.currentEvolution == SkillEvolution.PathC && CombatManager.Instance.isUnleashingCharge)
+        else if (skill.currentEvolution == SkillEvolution.PathC && CombatManager.Instance.currentState.isUnleashingCharge)
         {
             return pathC_ChargeDamageMult[levelIdx];
         }
@@ -68,9 +68,9 @@ public class SkillLogic_Gi : SkillLogicBase
         // [진화 A] 보너스 턴 획득
         if (skill.currentEvolution == SkillEvolution.PathA)
         {
-            if (CombatManager.Instance.wasEnemyBrokenAtSkillStart && BreakManager.Instance.IsBroken(false) && !CombatManager.Instance.hasUsedKiExtraTurn)
+            if (CombatManager.Instance.currentState.wasEnemyBrokenAtSkillStart && BreakManager.Instance.IsBroken(false) && !CombatManager.Instance.currentState.hasUsedKiExtraTurn)
             {
-                CombatManager.Instance.hasUsedKiExtraTurn = true;
+                CombatManager.Instance.currentState.hasUsedKiExtraTurn = true;
                 var playerEntity = TurnManager.Instance.turnQueue.Find(e => e.isPlayer);
                 if (playerEntity != null)
                 {
@@ -80,7 +80,7 @@ public class SkillLogic_Gi : SkillLogicBase
             }
         }
         // [진화 C] 스타일 랭크업 보너스
-        else if (skill.currentEvolution == SkillEvolution.PathC && CombatManager.Instance.isUnleashingCharge)
+        else if (skill.currentEvolution == SkillEvolution.PathC && CombatManager.Instance.currentState.isUnleashingCharge)
         {
             StyleRankManager.Instance.OnCriticalHit(); // 보너스로 랭크 한 단계 더 상승
         }

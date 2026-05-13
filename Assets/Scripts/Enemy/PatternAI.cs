@@ -7,15 +7,21 @@ public class PatternAI : EnemyAIBase
     [Header("스킬 사용 순서 (위에서부터 차례대로)")]
     public List<SkillData> skillPattern;
 
-    public override SkillData DecideNextSkill(int currentTurnCount, PlayerStats pStats, EnemyData enemy)
+    public override EnemyActionIntent DecideNextAction(int currentTurnCount, PlayerStats pStats, EnemyData enemy)
     {
-        // 스킬 패턴이 비어있으면 에러 방지를 위해 null 반환
-        if (skillPattern == null || skillPattern.Count == 0)
-            return null;
+        // 1. 제출할 빈 계획서 생성
+        EnemyActionIntent intent = new EnemyActionIntent();
 
-        // 핵심 수학 로직: 턴 수에 따라 리스트를 순환합니다. (예: 3개짜리 리스트면 0, 1, 2, 0, 1, 2...)
+        // 스킬 패턴이 비어있으면 빈 계획서(아무 행동 안 함) 반환
+        if (skillPattern == null || skillPattern.Count == 0)
+            return intent;
+
+        // 2. 턴 수에 따라 스킬 선택
         int index = currentTurnCount % skillPattern.Count;
 
-        return skillPattern[index];
+        // 3. 계획서에 스킬 기입 후 제출
+        intent.skillToUse = skillPattern[index];
+
+        return intent;
     }
 }

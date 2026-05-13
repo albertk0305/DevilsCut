@@ -65,8 +65,16 @@ public class BuffManager : MonoBehaviour
         if (existingEffect != null)
         {
             existingEffect.turnsLeft = Mathf.Max(existingEffect.turnsLeft, turns);
-            if (value < 0) existingEffect.value = Mathf.Min(existingEffect.value, value);
-            else existingEffect.value = Mathf.Max(existingEffect.value, value);
+
+            if (data.specialType == SpecialEffectType.Bleed)
+            {
+                existingEffect.value += value;
+            }
+            else
+            {
+                if (value < 0) existingEffect.value = Mathf.Min(existingEffect.value, value);
+                else existingEffect.value = Mathf.Max(existingEffect.value, value);
+            }
 
             existingEffect.isNewlyApplied = isSelfBuff;
         }

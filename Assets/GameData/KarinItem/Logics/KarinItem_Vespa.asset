@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 633a037df305c7e409b047759f38c087, type: 3}
+  m_Name: KarinItem_Vespa
+  m_EditorClassIdentifier: Assembly-CSharp::KarinItemLogic_Vespa
+  apBuffData: {fileID: 11400000, guid: f6aa3da37224a6f4182277edd273fe8d, type: 2}
+  apBoostValue: 0.3
+  duration: 3

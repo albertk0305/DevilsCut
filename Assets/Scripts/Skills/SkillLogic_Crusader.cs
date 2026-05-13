@@ -76,8 +76,8 @@ public class SkillLogic_Crusader : SkillLogicBase
             float rawDmg = (pStats.strength * skillMult) * (1f - dr);
             int totalDmg = Mathf.RoundToInt(rawDmg * hits * snapshotMult); // <- ¹èÀ² °ö»ê
 
-            CombatManager.Instance.savedBombDamage = totalDmg;
-            CombatManager.Instance.isBombActive = true;
+            CombatManager.Instance.currentState.savedBombDamage = totalDmg;
+            CombatManager.Instance.currentState.isBombActive = true;
 
             if (timeBombEffect != null)
             {
@@ -106,7 +106,7 @@ public class SkillLogic_Crusader : SkillLogicBase
             int index = Mathf.Clamp(skill.skillLevel - 1, 0, pathA_DebuffPerHitRates.Length - 1);
             float debuffPerHit = pathA_DebuffPerHitRates[index];
 
-            int hitCount = CombatManager.Instance.lastSuccessfulHits;
+            int hitCount = CombatManager.Instance.currentState.lastSuccessfulHits;
             float totalDebuff = -(debuffPerHit * hitCount);
 
             if (defDownEffect != null) BuffManager.Instance.AddEffect(false, defDownEffect, totalDebuff, 3);

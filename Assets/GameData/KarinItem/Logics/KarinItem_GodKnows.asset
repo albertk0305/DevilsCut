@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 575c2f80792ef4d499762c24bb5968a5, type: 3}
+  m_Name: KarinItem_GodKnows
+  m_EditorClassIdentifier: Assembly-CSharp::KarinItemLogic_GodKnows
+  strBuffData: {fileID: 11400000, guid: ca39fee337b4474479bad48c8c89c4a0, type: 2}
+  luckBuffData: {fileID: 11400000, guid: cae95eb42c766e64082ff77345ea6154, type: 2}
+  buffValue: 0.15
+  duration: 3

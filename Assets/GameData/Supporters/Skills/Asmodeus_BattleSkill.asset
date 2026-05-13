@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 566ef65d2662cf24c821fa22868f9581, type: 3}
+  m_Name: Asmodeus_BattleSkill
+  m_EditorClassIdentifier: Assembly-CSharp::SupporterLogic_Asmodeus_Battle
+  strBuff: {fileID: 11400000, guid: 89cbf6987d1468e42978f8df49484a4d, type: 2}
+  defBuff: {fileID: 11400000, guid: 47106dc01edbead4891fbfd3ecbaab99, type: 2}
+  spdBuff: {fileID: 11400000, guid: 186b3304b4e94804ca9a7aaf16cf57d5, type: 2}
+  lukBuff: {fileID: 11400000, guid: 2a7289558314072418ac861e04c47800, type: 2}
+  buffValue: 0.2
+  duration: 3

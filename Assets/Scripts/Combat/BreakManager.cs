@@ -151,7 +151,7 @@ public class BreakManager : MonoBehaviour
 
             if (CombatManager.Instance != null)
             {
-                CombatManager.Instance.hasUsedKiExtraTurn = false;
+                CombatManager.Instance.currentState.hasUsedKiExtraTurn = false;
             }
         }
     }

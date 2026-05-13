@@ -12,8 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bd95814cbe329f408da139557c53a30, type: 3}
   m_Name: SkillLogic_ReverseDream
   m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_ReverseDream
-  lifestealRates:
+  maxDamageBonus: 2
+  pathA_LifestealRates:
+  - 0.5
+  - 0.75
+  - 1
+  pathA_DamageReductionBuff: {fileID: 11400000, guid: 7ee282c4e60d70f45bc42706ea2843c9, type: 2}
+  baseLifestealRates:
   - 0.2
   - 0.3
   - 0.4
-  maxDamageBonus: 2
+  pathC_HitCounts: 080000000a0000000c000000
+  pathC_BleedDebuff: {fileID: 11400000, guid: 1bdffa09e8b1c29418220923d7b7a71f, type: 2}
+  pathC_BleedRatePerStack: 1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
   effectID: WorldLogosBreakRegen
   effectName: WorldLogosBreakRegen
-  category: 2
+  category: 0
   icon: {fileID: 21300000, guid: 0785da9cfae58174c92e5ea8e68ca76e, type: 3}
   targetStat: 0
   modifierType: 0

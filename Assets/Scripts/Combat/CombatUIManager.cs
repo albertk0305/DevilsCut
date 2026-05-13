@@ -18,9 +18,35 @@ public class CombatUIManager : MonoBehaviour
     public Image karinProfileImage;
     public Image supporterProfileImage;
 
+    [Header("2배속 UI")]
+    public GameObject fastCombatIcon;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
+    }
+
+    private void Start()
+    {
+        // 전투 씬이 시작될 때, 현재 2배속 상태를 확인하고 즉시 적용합니다.
+        bool isFast = PlayerPrefs.GetInt("FastCombat", 0) == 1;
+        Time.timeScale = isFast ? 2.0f : 1.0f;
+
+        UpdateFastCombatIcon(isFast);
+    }
+
+    private void OnDestroy()
+    {
+        Time.timeScale = 1.0f;
+        DevLog.Log("전투 종료: 타임스케일을 1.0으로 복구합니다.");
+    }
+
+    public void UpdateFastCombatIcon(bool isFast)
+    {
+        if (fastCombatIcon != null)
+        {
+            fastCombatIcon.SetActive(isFast);
+        }
     }
 
     // ==========================================

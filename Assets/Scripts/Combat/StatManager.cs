@@ -42,18 +42,11 @@ public class StatManager : MonoBehaviour
             }
         }
 
-        // 스탯 캡(제한) 적용
-        if (stat == TargetStat.Defense)
-        {
-            multiplier = Mathf.Clamp(multiplier, -0.8f, 2.0f);
-        }
-        else
-        {
-            multiplier = Mathf.Max(-0.8f, multiplier);
-        }
+        // 스탯 캡(제한) 적용 디버프는 최대 -90퍼까지 적용(스탯 음수 방지)
+        multiplier = Mathf.Max(-0.9f, multiplier);
 
-        // 공식: 기본 스탯 * (1 + 퍼센트 합) + 고정치 합
-        int finalStat = Mathf.RoundToInt(baseStat * (1f + multiplier) + flatBonus);
+        // 공식: (기본 스탯 + 고정치 합) * (1 + 퍼센트 합)
+        int finalStat = Mathf.RoundToInt((baseStat + flatBonus) * (1f + multiplier));
         return Mathf.Max(1, finalStat); // 스탯이 1 미만으로 떨어지지 않게 보호
     }
 

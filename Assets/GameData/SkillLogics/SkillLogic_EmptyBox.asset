@@ -14,6 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_EmptyBox
   enemyStrBuff: {fileID: 11400000, guid: 07544c373cdb648419253e5405e9c4cf, type: 2}
   enemyDefDebuff: {fileID: 11400000, guid: 7b4fb3d4ae74bfc46b9803307518b04e, type: 2}
+  evasionBuff: {fileID: 11400000, guid: 7d08ccc398737a746b0db0a469449662, type: 2}
+  pathA_EvasionRates:
+  - 0.5
+  - 0.6
+  - 0.75
+  damageGivenAmpBuff: {fileID: 11400000, guid: 2bd9dc0cc8302e14f8e651512b02981e, type: 2}
+  pathB_AmpRates:
+  - 0.5
+  - 0.75
+  - 1
+  guardBuff: {fileID: 11400000, guid: 4246c359fdb561e40adff37e4f502902, type: 2}
+  pathC_GuardRates:
+  - 0.3
+  - 0.45
+  - 0.6
   strBuffRates:
   - 0
   - 0.2

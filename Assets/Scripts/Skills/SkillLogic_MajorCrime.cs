@@ -99,7 +99,7 @@ public class SkillLogic_MajorCrime : SkillLogicBase
             if (!isAlreadyActive)
             {
                 // 버프가 없을 때(처음 쓸 때)만 데미지를 초기화합니다!
-                CombatManager.Instance.accumulatedDamage = 0;
+                CombatManager.Instance.currentState.accumulatedDamage = 0;
             }
             else
             {

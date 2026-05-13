@@ -56,6 +56,11 @@ public class DamageText : MonoBehaviour
         {
             outlineCol = Color.red; // 코스트 지불
         }
+        else if (text.StartsWith("★"))
+        {
+            text = text.Replace("★", ""); // 화면에 별 기호는 안 보이게 지워줍니다.
+            outlineCol = new Color(0.6f, 0.1f, 0.9f); // 예쁜 보라색
+        }
         else if (isCrit)
         {
             text += "!"; // 느낌표 추가

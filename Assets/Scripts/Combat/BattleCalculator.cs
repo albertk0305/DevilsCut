@@ -154,15 +154,29 @@ public static class BattleCalculator
                 // 7. 최종 데미지 합산
                 calculatedDamage = fixedDamage + normalDamage;
                 float damageAmp = 0f;
+                float damageGivenAmp = 0f;
+                float damageReduction = 0f;
+                var attackerEffects = BuffManager.Instance.GetEffects(isPlayerAttacking);
+                foreach (var eff in attackerEffects)
+                {
+                    // 공격자에게 '주는 피해 증폭' 버프가 있다면 합산
+                    if (eff.effectData.specialType == SpecialEffectType.DamageGivenAmp)
+                        damageGivenAmp += eff.value;
+                }
                 foreach (var eff in defenderEffects)
                 {
                     if (eff.effectData.specialType == SpecialEffectType.DamageAmp)
                         damageAmp += eff.value;
+
+                    if (eff.effectData.specialType == SpecialEffectType.DamageReduction)
+                        damageReduction += eff.value;
                 }
+                float totalAmp = damageAmp + damageGivenAmp;
                 if (damageAmp > 0f)
                 {
                     calculatedDamage *= (1f + damageAmp); // 예: 0.5면 데미지 1.5배 증폭
                 }
+                if (damageReduction > 0f) calculatedDamage *= (1f - Mathf.Clamp01(damageReduction));
                 hit.damage = Mathf.RoundToInt(calculatedDamage);
 
                 var invincibleEffect = defenderEffects.Find(e => e.effectData.specialType == SpecialEffectType.Invincible);
