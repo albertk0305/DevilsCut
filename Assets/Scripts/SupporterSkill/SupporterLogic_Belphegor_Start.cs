@@ -2,8 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 
 // [패시브 스킬 공간]
-// TODO: 탐색 씬 구현 시, 벨페고르 패시브 '타짜의 밑장빼기' 로직 추가 예정
-// (보상 선택 시 리롤하면 20% 확률로 등급 상승)
+// TODO: 탐색 씬 구현 시, 벨페고르 패시브 'There is a Reason' 로직 추가 예정
+// (보상 선택 시 리롤하면 10% / 20% / 35% 확률로 등급 상승)
 
 [CreateAssetMenu(fileName = "Belphegor_StartSkill", menuName = "SupporterLogic/Belphegor/Start Skill")]
 public class SupporterLogic_Belphegor_Start : SupporterLogicBase
@@ -13,16 +13,20 @@ public class SupporterLogic_Belphegor_Start : SupporterLogicBase
     public StatusEffectData defBuff;
     public StatusEffectData spdBuff;
     public StatusEffectData lukBuff;
-
     public int duration = 3;
 
-    public override void ApplyEffect(PlayerStats pStats, EnemyData enemy)
-    {
-        // 1. 후보 리스트 생성
-        List<StatusEffectData> candidates = new List<StatusEffectData> { strBuff, defBuff, spdBuff, lukBuff };
-        candidates.RemoveAll(x => x == null); // 비어있는 슬롯 안전장치
+    [Header("레벨별 무작위 버프 범위")]
+    public float[] minBuffValues = { 0.05f, 0.10f, 0.20f }; // 최소 5% / 10% / 20%
+    public float[] maxBuffValues = { 0.30f, 0.50f, 0.80f }; // 최대 30% / 50% / 80%
 
-        // 2. 리스트 셔플 (Fisher-Yates)
+    public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
+    {
+        int levelIndex = Mathf.Clamp(skillLevel - 1, 0, minBuffValues.Length - 1);
+
+        List<StatusEffectData> candidates = new List<StatusEffectData> { strBuff, defBuff, spdBuff, lukBuff };
+        candidates.RemoveAll(x => x == null);
+
+        // 리스트 셔플
         for (int i = 0; i < candidates.Count; i++)
         {
             StatusEffectData temp = candidates[i];
@@ -31,14 +35,14 @@ public class SupporterLogic_Belphegor_Start : SupporterLogicBase
             candidates[randomIndex] = temp;
         }
 
-        // 3. 상위 2개 스탯 뽑아서 무작위 수치(10~50%)로 부여!
         int buffCount = Mathf.Min(2, candidates.Count);
         for (int i = 0; i < buffCount; i++)
         {
-            float randomValue = Random.Range(0.10f, 0.50f); // 10% ~ 50%
-            BuffManager.Instance.AddEffect(true, candidates[i], randomValue, duration);
+            // 레벨에 맞는 최소~최대치 사이에서 룰렛을 돌립니다!
+            float randomValue = Random.Range(minBuffValues[levelIndex], maxBuffValues[levelIndex]);
 
-            DevLog.Log($"[벨페고르 개전] 셰리에게 {candidates[i].targetStat} {randomValue * 100:F1}% 증가 버프를 걸었습니다!");
+            BuffManager.Instance.AddEffect(true, candidates[i], randomValue, duration);
+            DevLog.Log($"[벨페고르 개전: This Game] Lv.{skillLevel} 발동! 셰리에게 {candidates[i].targetStat} {randomValue * 100:F1}% 증가 버프 부여!");
         }
 
         if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();

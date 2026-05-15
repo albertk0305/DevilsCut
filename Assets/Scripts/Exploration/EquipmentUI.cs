@@ -70,7 +70,8 @@ public class EquipmentUI : MonoBehaviour
     // 하단 인벤토리 리스트 갱신 함수
     private void RefreshInventory()
     {
-        List<EquipmentItemData> ownedList = PlayerManager.Instance.ownedEquipments;
+        // [수정] 타입과 리스트 이름을 OwnedItem과 inventory로 변경
+        List<OwnedItem> ownedList = PlayerManager.Instance.inventory;
         int startIndex = currentRow * columns;
 
         for (int i = 0; i < inventoryButtons.Length; i++)
@@ -78,18 +79,17 @@ public class EquipmentUI : MonoBehaviour
             int dataIndex = startIndex + i;
             bool hasData = dataIndex < ownedList.Count;
 
-            // 아이템이 없으면 버튼 자체를 완전히 꺼버림 (비어있는 버튼 숨기기 완벽 충족!)
             inventoryButtons[i].gameObject.SetActive(hasData);
 
             if (hasData)
             {
-                inventoryButtons[i].image.sprite = ownedList[dataIndex].itemIcon;
+                // [수정] ownedList[dataIndex]는 OwnedItem이므로 .data를 붙여서 원본에 접근
+                inventoryButtons[i].image.sprite = ownedList[dataIndex].data.itemIcon;
             }
         }
 
-        // 스크롤 버튼 활성화/비활성화 로직
         int totalRows = Mathf.Max(1, Mathf.CeilToInt((float)ownedList.Count / columns));
-        int visibleRows = inventoryButtons.Length / columns; // 보통 30/10 = 3줄
+        int visibleRows = inventoryButtons.Length / columns;
 
         upScrollButton.interactable = (currentRow > 0);
         downScrollButton.interactable = (currentRow + visibleRows < totalRows);
@@ -99,9 +99,12 @@ public class EquipmentUI : MonoBehaviour
     public void OnClickInventorySlot(int slotIndex)
     {
         int dataIndex = (currentRow * columns) + slotIndex;
-        if (dataIndex < PlayerManager.Instance.ownedEquipments.Count)
+
+        // [수정] inventory로 변경
+        if (dataIndex < PlayerManager.Instance.inventory.Count)
         {
-            ShowPreview(PlayerManager.Instance.ownedEquipments[dataIndex]);
+            // [수정] ShowPreview는 원본 데이터를 요구하므로 .data를 넘겨줌
+            ShowPreview(PlayerManager.Instance.inventory[dataIndex].data);
         }
     }
 
@@ -116,7 +119,8 @@ public class EquipmentUI : MonoBehaviour
 
     public void OnClickDownScroll()
     {
-        List<EquipmentItemData> ownedList = PlayerManager.Instance.ownedEquipments;
+        // [수정] 타입과 리스트 이름 변경
+        List<OwnedItem> ownedList = PlayerManager.Instance.inventory;
         int totalRows = Mathf.Max(1, Mathf.CeilToInt((float)ownedList.Count / columns));
         int visibleRows = inventoryButtons.Length / columns;
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GodKnows
   m_EditorClassIdentifier: Assembly-CSharp::KarinItemData
   itemName: GodKnows
-  itemIcon: {fileID: 21300000, guid: e9753dfa23f93a3419d4bb2e106b1fa0, type: 3}
+  itemIcon: {fileID: 21300000, guid: c6a70af5b90a5334db8f5472f21fa4f0, type: 3}
   itemDescription: 
   previewDialogue: 
   equipDialogue: 

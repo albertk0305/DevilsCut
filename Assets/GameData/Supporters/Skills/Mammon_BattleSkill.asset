@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36d126e352f67446bf4053224c30465, type: 3}
+  m_Name: Mammon_BattleSkill
+  m_EditorClassIdentifier: Assembly-CSharp::SupporterLogic_Mammon_Battle
+  dmgIncendiary:
+  - 4
+  - 5
+  - 7
+  dmgKnife:
+  - 4
+  - 5
+  - 7
+  dmgAtm:
+  - 8
+  - 10
+  - 14
+  dmgHolyWater:
+  - 6
+  - 8
+  - 11
+  burnDebuff: {fileID: 11400000, guid: dbc70ebd969ae7147a4cc5924f03cee6, type: 2}
+  burnRates:
+  - 0.02
+  - 0.03
+  - 0.05
+  bleedDebuff: {fileID: 11400000, guid: fc285f503f50a1341a5c37a1f8e9bc64, type: 2}
+  bleedRates:
+  - 0.3
+  - 0.5
+  - 0.8
+  item3ApDebuff: {fileID: 11400000, guid: a958eb4551d113749b31c3a5400fecaa, type: 2}
+  apDrops:
+  - 20
+  - 30
+  - 45
+  item3ApDebuffRates:
+  - 0.2
+  - 0.3
+  - 0.4
+  item4SpeedDebuff: {fileID: 11400000, guid: 080d59649d297e14aab00b90b0532902, type: 2}
+  item4SpeedDrops:
+  - 0.2
+  - 0.3
+  - 0.4
+  dmgAmpDebuff: {fileID: 11400000, guid: 558ce07a3b948344d9f23bf82275ce67, type: 2}
+  dmgAmpRates:
+  - 0.15
+  - 0.2
+  - 0.3
+  strDebuff: {fileID: 11400000, guid: 5ca74256d8414ac4c87324eaf263fca1, type: 2}
+  luckDebuff: {fileID: 11400000, guid: 7ead884c519f7d2419dc9f0854ab29c6, type: 2}
+  strLuckDrops:
+  - 0.1
+  - 0.15
+  - 0.25
+  playerDmgGivenAmpBuff: {fileID: 11400000, guid: 237bf0a8d14567c409c39c057c3baed3, type: 2}
+  playerAmpRates:
+  - 0.15
+  - 0.2
+  - 0.3

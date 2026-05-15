@@ -27,7 +27,7 @@ public static class BattleCalculator
         SkillData skill, bool isPlayerAttacking,
         PlayerStats pStats, EnemyData eData,
         int attackerStrength, int attackerDefense, int attackerLuck, int attackerSpeed,
-        int defenderDefense, int defenderSpeed, int defenderBR)
+        int defenderDefense, int defenderSpeed, int defenderBR, int defenderCurrentHp, int defenderMaxHp)
     {
         SkillResult result = new SkillResult();
         int totalHits = skill.skillLogic != null ? skill.skillLogic.GetHitCount(skill) : skill.GetCurrentHitCount();
@@ -111,15 +111,23 @@ public static class BattleCalculator
                 if (!isPlayerAttacking && BreakManager.Instance.IsBroken(true)) calculatedDamage *= 2.0f;
                 else if (isPlayerAttacking && BreakManager.Instance.IsBroken(false)) calculatedDamage *= 2.0f;
 
-                // 3. 크리티컬 판정 (여기서도 isAttackSkill 사용)
+                // 3. 크리티컬 판정
                 if (isAttackSkill)
                 {
                     float dynamicCrit = skill.skillLogic != null ? skill.skillLogic.GetDynamicCritRateBonus(skill, consecutiveHits) : 0f;
-                    hit.isCrit = CombatMath.CheckCriticalSuccess(skill.GetCurrentBonusCritRate(), attackerLuck);
+
+                    float totalCritRateBonus = skill.GetCurrentBonusCritRate() + dynamicCrit;
+                    if (isPlayerAttacking) totalCritRateBonus += (pStats.critRate * 100f);
+
+                    hit.isCrit = CombatMath.CheckCriticalSuccess(totalCritRateBonus, attackerLuck);
                     if (hit.isCrit)
                     {
-                        float critMult = skill.skillLogic != null ? skill.skillLogic.GetCritDamageMultiplier(skill) : 1.5f;
-                        calculatedDamage *= critMult;
+                        float baseCritMult = skill.skillLogic != null ? skill.skillLogic.GetCritDamageMultiplier(skill) : 1.5f;
+
+                        float finalCritMult = baseCritMult;
+                        if (isPlayerAttacking) finalCritMult += (pStats.critDamage - 1.5f);
+
+                        calculatedDamage *= finalCritMult;
                         result.anyCrit = true;
                     }
                 }
@@ -128,55 +136,95 @@ public static class BattleCalculator
                     hit.isCrit = false;
                 }
 
-                // 4. 고정 피해 분할 및 기본 방어력 적용
+                // ==========================================================
+                // 4. 피해 증폭(Amp) 수치 합산 및 선적용
+                // ==========================================================
+                float damageAmp = 0f;
+                float damageGivenAmp = 0f;
+                float damageReduction = 0f;
+
+                var attackerEffects = BuffManager.Instance.GetEffects(isPlayerAttacking);
+                foreach (var eff in attackerEffects)
+                {
+                    if (eff.effectData.specialType == SpecialEffectType.DamageGivenAmp) damageGivenAmp += eff.value;
+                }
+
+                if (isPlayerAttacking && PlayerManager.Instance != null)
+                {
+                    var syn = PlayerManager.Instance.GetCurrentSynergies();
+                    var inventory = PlayerManager.Instance.inventory;
+
+                    // [세이버 에픽 아이템 - 포식자의 이빨] 적 체력이 70% 이상일 때 최종 피해 증폭
+                    if (defenderMaxHp > 0 && ((float)defenderCurrentHp / defenderMaxHp) >= 0.7f)
+                    {
+                        var saberEpic = inventory.Find(x => x.data.itemClass == ItemClass.Saber && x.data.grade == ItemGrade.Epic);
+                        if (saberEpic != null)
+                        {
+                            if (saberEpic.starLevel == 1) damageGivenAmp += 0.04f;
+                            else if (saberEpic.starLevel == 2) damageGivenAmp += 0.20f;
+                            else if (saberEpic.starLevel >= 3) damageGivenAmp += 1.00f;
+                        }
+                    }
+                }
+                if (isPlayerAttacking) damageGivenAmp += pStats.finalDamageAmp;
+
+                // (defenderEffects는 상단에 이미 var로 선언된 변수를 그대로 재사용합니다)
+                foreach (var eff in defenderEffects)
+                {
+                    if (eff.effectData.specialType == SpecialEffectType.DamageAmp) damageAmp += eff.value;
+                    if (eff.effectData.specialType == SpecialEffectType.DamageReduction) damageReduction += eff.value;
+                }
+                if (!isPlayerAttacking) damageReduction += pStats.finalDamageReduction;
+
+                //  [버그 픽스] 주는 피해 증폭과 받는 피해 증폭을 합산(totalAmp)하여 전체 파이를 먼저 키웁니다!
+                float totalAmp = damageAmp + damageGivenAmp;
+                if (totalAmp > 0f) calculatedDamage *= (1f + totalAmp);
+
+
+                // ==========================================================
+                // 5. 고정 피해 분할 및 방어력 / 피해 감소(Reduction) 분리 적용
+                // ==========================================================
                 float armorPenRatio = skill.skillLogic != null ? skill.skillLogic.GetArmorPenetrationRatio(skill, skill.skillLevel) : 0f;
+                if (isPlayerAttacking) armorPenRatio += pStats.trueDamageConversion;
+
+                armorPenRatio = Mathf.Clamp01(armorPenRatio); // 최대 100%까지만 제한
+
                 float fixedDamage = calculatedDamage * armorPenRatio;
                 float normalDamage = calculatedDamage * (1f - armorPenRatio);
 
+                // 일반 피해에만 스탯 방어력(Defense DR) 감쇄 적용
                 normalDamage *= (1f - CombatMath.GetDamageReduction(defenderDefense));
 
-                // 5. 인과율을 위한 '가드 직전 데미지' 저장
+                //  [핵심 수정] 일반 피해에만 데미지 감소(Damage Reduction) 버프/스탯 적용 (고정 피해는 절대 깎이지 않음!)
+                if (damageReduction > 0f) normalDamage *= (1f - Mathf.Clamp01(damageReduction));
+
+
+                // ==========================================================
+                // 6. 인과율(반사)을 위한 '가드 직전 데미지' 스냅샷 저장
+                // ==========================================================
                 int originalDamage = Mathf.RoundToInt(fixedDamage + normalDamage);
                 if (originalDamage <= 0) originalDamage = 1;
 
-                // 6. 가드(Guard) 및 고드 핸드(AbsoluteGuard) 피해 감소 적용
+
+                // ==========================================================
+                // 7. 가드(Guard) 및 갓 핸드(AbsoluteGuard) 방어 적용
+                // ==========================================================
                 if (guardEffect != null && (normalDamage + fixedDamage) > 0)
                 {
                     float reductionRate = guardEffect.value > 0f ? guardEffect.value : 0.5f;
+
+                    // 가드 역시 기본적으로 일반 피해만 줄입니다.
                     normalDamage *= (1f - reductionRate);
 
+                    // 절대 가드(AbsoluteGuard) 효과일 때만 예외적으로 고정 피해도 막아냅니다.
                     if (guardEffect.effectData.specialType == SpecialEffectType.AbsoluteGuard)
                         fixedDamage *= (1f - reductionRate);
 
                     result.isGuardTriggered = true;
                 }
 
-                // 7. 최종 데미지 합산
+                // 최종 데미지 합산
                 calculatedDamage = fixedDamage + normalDamage;
-                float damageAmp = 0f;
-                float damageGivenAmp = 0f;
-                float damageReduction = 0f;
-                var attackerEffects = BuffManager.Instance.GetEffects(isPlayerAttacking);
-                foreach (var eff in attackerEffects)
-                {
-                    // 공격자에게 '주는 피해 증폭' 버프가 있다면 합산
-                    if (eff.effectData.specialType == SpecialEffectType.DamageGivenAmp)
-                        damageGivenAmp += eff.value;
-                }
-                foreach (var eff in defenderEffects)
-                {
-                    if (eff.effectData.specialType == SpecialEffectType.DamageAmp)
-                        damageAmp += eff.value;
-
-                    if (eff.effectData.specialType == SpecialEffectType.DamageReduction)
-                        damageReduction += eff.value;
-                }
-                float totalAmp = damageAmp + damageGivenAmp;
-                if (damageAmp > 0f)
-                {
-                    calculatedDamage *= (1f + damageAmp); // 예: 0.5면 데미지 1.5배 증폭
-                }
-                if (damageReduction > 0f) calculatedDamage *= (1f - Mathf.Clamp01(damageReduction));
                 hit.damage = Mathf.RoundToInt(calculatedDamage);
 
                 var invincibleEffect = defenderEffects.Find(e => e.effectData.specialType == SpecialEffectType.Invincible);

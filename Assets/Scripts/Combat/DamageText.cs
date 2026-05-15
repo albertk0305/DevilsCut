@@ -58,8 +58,20 @@ public class DamageText : MonoBehaviour
         }
         else if (text.StartsWith("★"))
         {
-            text = text.Replace("★", ""); // 화면에 별 기호는 안 보이게 지워줍니다.
-            outlineCol = new Color(0.6f, 0.1f, 0.9f); // 예쁜 보라색
+            // 벨페고르 전용 보라색 테두리 연출
+            text = text.Replace("★", "");
+            outlineCol = new Color(0.6f, 0.1f, 0.9f);
+
+            // [신규] 잭팟 특수 연출: 문구가 최강의 패라면 폰트 크기를 대폭 키웁니다.
+            if (text == "THE DEVIL'S HAND")
+            {
+                textMesh.fontSize += 40; // 크리티컬(+20)보다 두 배 더 큰 압박감!
+            }
+        }
+        else if (text.StartsWith("♣"))
+        {
+            text = text.Replace("♣", "");
+            outlineCol = new Color(0.2f, 0.8f, 0.2f); // 진한 초록색 (숙취 등 상태이상 연출용)
         }
         else if (isCrit)
         {

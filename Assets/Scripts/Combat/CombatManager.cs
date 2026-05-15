@@ -107,10 +107,11 @@ public class CombatManager : MonoBehaviour
     {
         if (PlayerManager.Instance != null)
         {
-            currentPlayerStats = PlayerManager.Instance.stats.Clone();
+            // 1. 순수 스탯 대신 '아이템이 적용된 스냅샷'을 전투 시작 데이터로 가져옵니다!
+            currentPlayerStats = PlayerManager.Instance.GetItemModifiedStats();
             currentEnemyData = PlayerManager.Instance.currentEnemyToFight;
 
-            // 1. [주의] StatManager가 원본 스탯을 먼저 세팅해야 합니다.
+            // StatManager는 이제 이 '아이템 적용 스탯'을 베이스로 삼고 전투 버프를 계산합니다.
             if (StatManager.Instance != null)
                 StatManager.Instance.InitStats(currentPlayerStats, currentEnemyData);
         }
@@ -225,7 +226,7 @@ public class CombatManager : MonoBehaviour
                 ApplyDamageToEntity(false, bleedDmg);
 
                 CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit);
-                CombatUIManager.Instance.SpawnDamageText(bleedDmg.ToString(), true, false);
+                CombatUIManager.Instance.SpawnDamageText("★" + bleedDmg.ToString(), false, false);
 
                 yield return CombatUIManager.Instance.TypeCommentary($"심연의 출혈! {eName}이(가) {bleedDmg}의 지속 피해를 입습니다.", true, 0.5f);
 
@@ -242,7 +243,7 @@ public class CombatManager : MonoBehaviour
                 ApplyDamageToEntity(false, burnDmg);
 
                 CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit);
-                CombatUIManager.Instance.SpawnDamageText(burnDmg.ToString(), true, false);
+                CombatUIManager.Instance.SpawnDamageText("★" + burnDmg.ToString(), false, false);
 
                 yield return CombatUIManager.Instance.TypeCommentary($"지옥의 플람베! {eName}이(가) {burnDmg}의 화상 피해를 입습니다.", true, 0.5f);
 
@@ -263,7 +264,7 @@ public class CombatManager : MonoBehaviour
                 yield return CombatUIManager.Instance.TypeCommentary("라스트 트레인 홈 발동!!", true, 0.5f);
 
                 ApplyDamageToEntity(false, currentState.savedBombDamage);
-                CombatUIManager.Instance.SpawnDamageText(currentState.savedBombDamage.ToString(), true, false);
+                CombatUIManager.Instance.SpawnDamageText("★" + currentState.savedBombDamage.ToString(), false, false);
                 DevLog.Log($"[라스트 트레인 홈] 적에게 {currentState.savedBombDamage}의 확정 피해를 입힙니다!");
 
                 yield return new WaitForSeconds(1.0f);
@@ -495,13 +496,15 @@ public class CombatManager : MonoBehaviour
         int defDef = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.Defense);
         int defSpd = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.Speed);
         int defBR = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.BreakResistance);
+        int defCurrentHp = isPlayerAttacking ? currentEnemyHp : currentPlayerStats.currentHp;
+        int defMaxHp = isPlayerAttacking ? currentEnemyData.maxHp : currentPlayerStats.maxHp;
 
         // 연산 결과를 skillResult 변수에 담습니다!
         SkillResult skillResult = BattleCalculator.CalculateSkill(
             skill, isPlayerAttacking,
             currentPlayerStats, currentEnemyData,
             atkStr, atkDef, atkLck, atkSpd,
-            defDef, defSpd, defBR
+            defDef, defSpd, defBR, defCurrentHp, defMaxHp
         );
 
         // ==========================================================
@@ -698,6 +701,25 @@ public class CombatManager : MonoBehaviour
         {
             ApplyDamageToEntity(false, hit.damage);
             if (!currentState.isBombActive) currentState.accumulatedDamage += hit.damage;
+
+            // [신규] 데몬 시너지 / 흡혈 아이템 '글로벌 흡혈' 로직 적용
+            if (hit.damage > 0 && currentPlayerStats.lifeSteal > 0f && currentActiveEntity != null && currentActiveEntity.type == EntityType.Player)
+            {
+                int healAmount = Mathf.RoundToInt(hit.damage * currentPlayerStats.lifeSteal);
+                if (healAmount > 0)
+                {
+                    // 초과 회복량 기록 (추후 데몬 6시너지 피의 폭주 연동용)
+                    int excessHeal = (currentPlayerStats.currentHp + healAmount) - currentPlayerStats.maxHp;
+
+                    currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + healAmount, 0, currentPlayerStats.maxHp);
+
+                    // UI 업데이트 및 초록색 데미지 텍스트 팝업!
+                    CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
+                    CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
+
+                    // TODO: excessHeal > 0 이면 데몬 6시너지의 "초과 회복 비례 데미지 증폭" 버프 발동 로직 추가 가능
+                }
+            }
         }
         else
         {
@@ -918,7 +940,7 @@ public class CombatManager : MonoBehaviour
                     ApplyDamageToEntity(true, selfDamage);
 
                     CombatUIManager.Instance.SetDefenderImage(true, playerData.hit); // 주인공 피격 이미지
-                    CombatUIManager.Instance.SpawnDamageText(selfDamage.ToString(), false, true);
+                    CombatUIManager.Instance.SpawnDamageText("★" + selfDamage.ToString(), false, true);
                     BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
 
                     yield return new WaitForSeconds(1.0f);
@@ -935,7 +957,7 @@ public class CombatManager : MonoBehaviour
                     ApplyDamageToEntity(false, extraDmg);
 
                     CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit); // 적 피격 이미지
-                    CombatUIManager.Instance.SpawnDamageText(extraDmg.ToString(), true, false);
+                    CombatUIManager.Instance.SpawnDamageText("★" + extraDmg.ToString(), false, false);
                     BattleEventSystem.CallHpChanged(false, currentEnemyHp, currentEnemyData.maxHp);
 
                     currentState.accumulatedDamage = 0; // 초기화

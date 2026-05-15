@@ -13,10 +13,25 @@ MonoBehaviour:
   m_Name: Beelzebub_BattleSkill
   m_EditorClassIdentifier: Assembly-CSharp::SupporterLogic_Beelzebub_Battle
   hitCount: 6
-  baseDamagePerHit: 0.3
-  breakPerHit: 2
+  baseDamageValues:
+  - 1
+  - 1.5
+  - 2
+  breakDamageValues:
+  - 1.5
+  - 2
+  - 3
   bleedDebuff: {fileID: 11400000, guid: aee221f5968470540bfb5dcd797b45f6, type: 2}
-  bleedChance: 0.3
-  bleedRatePerStack: 0.5
+  bleedChances:
+  - 0.2
+  - 0.3
+  - 0.4
+  bleedRates:
+  - 0.8
+  - 1
+  - 1.2
   bleedDuration: 3
-  damageBoostPerDebuff: 0.2
+  debuffBoostRates:
+  - 0.15
+  - 0.2
+  - 0.25

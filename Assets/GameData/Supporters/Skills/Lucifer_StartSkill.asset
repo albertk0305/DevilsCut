@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 440b91289e586df4b967142dfffd19f6, type: 3}
+  m_Name: Lucifer_StartSkill
+  m_EditorClassIdentifier: Assembly-CSharp::SupporterLogic_Lucifer_Start
+  luckBuff: {fileID: 11400000, guid: efb0bf82232d20d44b4e727d4bf3dbdc, type: 2}
+  duration: 3
+  luckBuffRates:
+  - 0.15
+  - 0.2
+  - 0.3
+  apRecoveries:
+  - 100
+  - 150
+  - 200

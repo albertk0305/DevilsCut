@@ -5,23 +5,29 @@ using System.Linq;
 public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
 {
     [Header("효과 전용 버프/디버프")]
-    public StatusEffectData damageGivenAmpBuff; // 주는 피해 증가 (SpecialType = DamageAmp)
-    public StatusEffectData damageAmpDebuff; // 받는 피해 증가용 (SpecialType = DamageReduction)
+    public StatusEffectData damageGivenAmpBuff;
+    public StatusEffectData damageAmpDebuff;
 
-    public override void ApplyEffect(PlayerStats pStats, EnemyData enemy)
+    [Header("레벨별 주사위 보상 계수")]
+    public float[] lowBetMultipliers = { 5.0f, 10.0f, 15.0f };       // 눈금 2 (힘 계수)
+    public float[] raiseStakesAmps = { 0.30f, 0.50f, 0.80f };        // 눈금 3 (주는 피해 증가량)
+    public float[] doubleDownAmps = { 0.70f, 1.00f, 1.50f };         // 눈금 4 (다음 타격 증폭량)
+    public float[] fullHouseHeals = { 0.20f, 0.30f, 0.50f };         // 눈금 5 (체력 회복량)
+    public int[] jackpotMultipliers = { 30, 50, 100 };               // 눈금 6 (운 계수)
+
+    public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
         int playerLuck = StatManager.Instance.GetEffectiveStat(true, TargetStat.Luck);
 
-        // 1. 운 스탯 기반 가중치(확률) 계산
+        // 1. 가중치 계산 (운 스탯 기반 확률 변동은 그대로 유지) [cite: 47]
         float[] weights = new float[6];
-        weights[0] = Mathf.Max(10f, 100f - (playerLuck * 1.5f)); // 1: 운이 높을수록 급격히 감소
-        weights[1] = Mathf.Max(20f, 100f - (playerLuck * 1.0f)); // 2: 운이 높을수록 감소
-        weights[2] = 100f;                                       // 3: 고정
-        weights[3] = 100f + (playerLuck * 0.5f);                 // 4: 운이 높을수록 증가
-        weights[4] = 100f + (playerLuck * 1.0f);                 // 5: 운이 높을수록 증가
-        weights[5] = 100f + (playerLuck * 2.0f);                 // 6: 운이 높을수록 극대화
+        weights[0] = Mathf.Max(10f, 100f - (playerLuck * 1.5f));
+        weights[1] = Mathf.Max(20f, 100f - (playerLuck * 1.0f));
+        weights[2] = 100f;
+        weights[3] = 100f + (playerLuck * 0.5f);
+        weights[4] = 100f + (playerLuck * 1.0f);
+        weights[5] = 100f + (playerLuck * 2.0f);
 
-        // 2. 가중치 기반 무작위 룰렛 돌리기
         float totalWeight = weights.Sum();
         float randomVal = Random.Range(0, totalWeight);
         int rolledDice = 1;
@@ -37,69 +43,63 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
             }
         }
 
-        // 3. 주사위 눈금별 효과 처리
-        ExecuteDiceEffect(rolledDice, pStats, enemy);
+        ExecuteDiceEffect(rolledDice, pStats, enemy, skillLevel);
     }
 
-    private void ExecuteDiceEffect(int dice, PlayerStats pStats, EnemyData enemy)
+    private void ExecuteDiceEffect(int dice, PlayerStats pStats, EnemyData enemy, int skillLevel)
     {
+        int index = Mathf.Clamp(skillLevel - 1, 0, 2);
         string textToDisplay = "";
 
         switch (dice)
         {
             case 1: // Snake Eyes
-                textToDisplay = "Snake Eyes...";
-                CombatManager.Instance.ApplyDamageToEntity(false, 1); // 굴욕적인 데미지 1
-
-                // 벨페고르(조력자) 턴 밀림 처리 (-100 AP)
+                textToDisplay = "MUCK";
+                CombatManager.Instance.ApplyDamageToEntity(false, 1);
                 var supEntity = TurnManager.Instance.turnQueue.Find(e => e.type == EntityType.Supporter);
                 if (supEntity != null) supEntity.actionGauge -= 100f;
                 break;
 
             case 2: // Low Bet
-                textToDisplay = "Low Bet";
-                int lowDmg = Mathf.Max(1, Mathf.RoundToInt(pStats.strength * 10.0f));
+                textToDisplay = "SMALL BLIND"; ;
+                int lowDmg = Mathf.Max(1, Mathf.RoundToInt(pStats.strength * lowBetMultipliers[index]));
                 CombatManager.Instance.ApplyDamageToEntity(false, lowDmg);
                 CombatUIManager.Instance.SpawnDamageText(lowDmg.ToString(), false, false);
                 break;
 
             case 3: // Raise the Stakes
-                textToDisplay = "Raise the Stakes";
+                textToDisplay = "HIGH STAKES";
                 if (damageGivenAmpBuff != null)
-                    BuffManager.Instance.AddEffect(true, damageGivenAmpBuff, 0.50f, 3); // 주는 피해 +50%
+                    BuffManager.Instance.AddEffect(true, damageGivenAmpBuff, raiseStakesAmps[index], 3);
                 if (damageAmpDebuff != null)
-                    BuffManager.Instance.AddEffect(true, damageAmpDebuff, 0.30f, 3);
+                    BuffManager.Instance.AddEffect(true, damageAmpDebuff, 0.30f, 3); // 받는 피해 페널티는 30% 고정 [cite: 50]
                 break;
 
             case 4: // Double Down
                 textToDisplay = "Double Down";
                 if (damageGivenAmpBuff != null)
-                    BuffManager.Instance.AddEffect(true, damageGivenAmpBuff, 1.00f, 1);
+                    BuffManager.Instance.AddEffect(true, damageGivenAmpBuff, doubleDownAmps[index], 1);
                 break;
 
             case 5: // Full House
-                textToDisplay = "Full House!";
-                int healAmount = Mathf.RoundToInt(pStats.maxHp * 0.30f);
+                textToDisplay = "REBUY";
+                int healAmount = Mathf.RoundToInt(pStats.maxHp * fullHouseHeals[index]);
                 pStats.currentHp = Mathf.Clamp(pStats.currentHp + healAmount, 0, pStats.maxHp);
                 CombatUIManager.Instance.playerStatusUI.UpdateHP(pStats.currentHp, pStats.maxHp);
-
                 BuffManager.Instance.GetEffects(true).RemoveAll(e => e.effectData.category == EffectCategory.Debuff);
                 break;
 
             case 6: // Jackpot!
-                textToDisplay = "Jackpot!!";
+                textToDisplay = "THE DEVIL'S HAND";
                 int luckStat = StatManager.Instance.GetEffectiveStat(true, TargetStat.Luck);
-                int jackpotDmg = Mathf.Max(1, luckStat * 50);
+                int jackpotDmg = Mathf.Max(1, luckStat * jackpotMultipliers[index]);
                 CombatManager.Instance.ApplyDamageToEntity(false, jackpotDmg);
                 CombatUIManager.Instance.SpawnDamageText(jackpotDmg.ToString(), true, false);
-
-                StyleRankManager.Instance.IncreaseRank(7); // 즉시 SSS 랭크로 도달! 
+                StyleRankManager.Instance.IncreaseRank(7); // 즉시 SSS 랭크 [cite: 53]
                 break;
         }
 
-        DevLog.Log($"[벨페고르 배틀] 데스 로울 결과: 주사위 {dice} ({textToDisplay})");
-
-        // [핵심] '★'를 붙여서 보내면 DamageText 스크립트가 보라색 테두리로 바꿔서 띄워줍니다!
+        DevLog.Log($"[벨페고르 배틀] Lv.{skillLevel} 데스 로울: 주사위 {dice} ({textToDisplay})");
         CombatUIManager.Instance.SpawnDamageText($"★{textToDisplay}", false, true);
         CombatUIManager.Instance.RefreshBuffUI();
         CombatUIManager.Instance.UpdateTurnOrderUI(TurnManager.Instance.GetFutureTurnIcons(5));

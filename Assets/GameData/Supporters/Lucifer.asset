@@ -21,8 +21,8 @@ MonoBehaviour:
   sdImage: {fileID: 21300000, guid: 4ac70460cb4323644873696fb76ee96c, type: 3}
   CutIn: {fileID: 21300000, guid: 48cb4501239be0048aee7c5c4688b74a, type: 3}
   startSkillCutIn: {fileID: 21300000, guid: 9c5c85916a080c341869400abd108b04, type: 3}
-  startSkillImage: {fileID: 21300000, guid: b3cac51737118344eac2da899cdeca3d, type: 3}
-  battleSkillImage: {fileID: 21300000, guid: be150377faf34494bbd2527accc78884, type: 3}
+  startSkillImage: {fileID: 21300000, guid: 387df89f7a7f6c647bf1fecddedc191e, type: 3}
+  battleSkillImage: {fileID: 21300000, guid: 3103ca45e58457b46878cf92c9dae4a1, type: 3}
   worried: {fileID: 21300000, guid: 5b3211894fb79b64ebc037e35d5f070c, type: 3}
   happy: {fileID: 21300000, guid: be150377faf34494bbd2527accc78884, type: 3}
   passiveSkillDesc: dummy_Passive
@@ -30,5 +30,8 @@ MonoBehaviour:
   battleSkillDesc: dummy_BattleSkill
   selectMessage: dummy_SelectMessage
   joinMessage: dummy_JoinMessage
-  startSkillLogic: {fileID: 11400000, guid: 59886f409f1345547902faf228e6ea74, type: 2}
-  battleSkillLogic: {fileID: 11400000, guid: 7a5cc691eb040b947ac9c7322d806722, type: 2}
+  passiveLevel: 1
+  startSkillLevel: 1
+  battleSkillLevel: 1
+  startSkillLogic: {fileID: 11400000, guid: f59b83eeb46ca4248904117fe325e2b0, type: 2}
+  battleSkillLogic: {fileID: 11400000, guid: 7918fe9a245cfd4488ca34211c68be0b, type: 2}
