@@ -79,4 +79,9 @@ public class SkillLogicBase : ScriptableObject
         // 기본적으로는 스킬의 일반 액션 이미지를 반환하여 하위 호환성을 유지합니다.
         return skill.skillActionImage;
     }
+
+    public virtual float GetSkillBonusLifesteal(SkillData skill)
+    {
+        return 0f;
+    }
 }

@@ -59,49 +59,40 @@ public class SkillLogic_ReverseDream : SkillLogicBase
         return 1.0f;
     }
 
+    public override float GetSkillBonusLifesteal(SkillData skill)
+    {
+        int index = Mathf.Clamp(skill.skillLevel - 1, 0, baseLifestealRates.Length - 1);
+        return (skill.currentEvolution == SkillEvolution.PathA) ? pathA_LifestealRates[index] : baseLifestealRates[index];
+    }
+
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
         if (!isHit || !isPlayerAttacking) return;
 
-        int index = Mathf.Clamp(skill.skillLevel - 1, 0, baseLifestealRates.Length - 1);
-        float currentLifestealRate = (skill.currentEvolution == SkillEvolution.PathA) ? pathA_LifestealRates[index] : baseLifestealRates[index];
-
-        // [수정됨] 진화 C일 경우, 실제 적중한 횟수(lastSuccessfulHits)만큼 효과를 반복 적용합니다.
         int executionCount = (skill.currentEvolution == SkillEvolution.PathC) ? CombatManager.Instance.currentState.lastSuccessfulHits : 1;
 
+        // [진화 C] 타격마다 출혈 디버프 중첩! (타수만큼 반복)
         for (int i = 0; i < executionCount; i++)
         {
-            // 1. 타격당 예상 데미지 및 흡혈량 산출 (진화 C는 계수가 이미 타수만큼 나눠져 있음)
-            float skillMultiplier = skill.GetCurrentDamageMultiplier() * GetDamageMultiplier(skill, pStats, enemy, isPlayerAttacking);
-            int defenderDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
-            float expectedDamage = (pStats.strength * skillMultiplier) * (1f - CombatMath.GetDamageReduction(defenderDef));
-            int healAmount = Mathf.RoundToInt(expectedDamage * currentLifestealRate);
-
-            // 2. 체력 회복 적용
-            int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
-            pStats.currentHp = Mathf.Clamp(pStats.currentHp + healAmount, 0, pStats.maxHp);
-
-            if (CombatUIManager.Instance != null && healAmount > 0)
-            {
-                CombatUIManager.Instance.playerStatusUI.UpdateHP(pStats.currentHp, pStats.maxHp);
-                CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
-            }
-
-            // [진화 A] 비비드 바이스 전용
-            if (skill.currentEvolution == SkillEvolution.PathA && excessHeal > 0 && pathA_DamageReductionBuff != null)
-            {
-                float reductionValue = Mathf.Clamp((float)excessHeal / pStats.maxHp, 0.05f, 0.50f);
-                BuffManager.Instance.AddEffect(true, pathA_DamageReductionBuff, reductionValue, 3);
-            }
-
-            // [진화 C] 타격마다 출혈 디버프 중첩!
             if (skill.currentEvolution == SkillEvolution.PathC && pathC_BleedDebuff != null)
             {
                 BuffManager.Instance.AddEffect(false, pathC_BleedDebuff, pathC_BleedRatePerStack, 3);
             }
         }
 
-        // [진화 B] 버프 강탈 (강탈은 한 번만 수행하도록 루프 밖으로 뺍니다)
+        // [진화 A] 비비드 바이스 전용 - CombatManager가 누적해둔 초과 회복량 사용!
+        if (skill.currentEvolution == SkillEvolution.PathA && pathA_DamageReductionBuff != null)
+        {
+            int totalExcessHeal = CombatManager.Instance.currentState.totalExcessHealThisSkill;
+            if (totalExcessHeal > 0)
+            {
+                float reductionValue = Mathf.Clamp((float)totalExcessHeal / pStats.maxHp, 0.05f, 0.50f);
+                BuffManager.Instance.AddEffect(true, pathA_DamageReductionBuff, reductionValue, 3);
+                DevLog.Log($"[비비드 바이스] 초과 회복량 {totalExcessHeal} 달성 -> 피해 감소 {reductionValue * 100}% 버프 획득!");
+            }
+        }
+
+        // [진화 B] 버프 강탈 (단 1회 수행)
         if (skill.currentEvolution == SkillEvolution.PathB)
         {
             var enemyEffects = BuffManager.Instance.GetEffects(false);

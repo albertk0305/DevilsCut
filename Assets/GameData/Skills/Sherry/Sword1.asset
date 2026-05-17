@@ -15,6 +15,12 @@ MonoBehaviour:
   skillLogic: {fileID: 11400000, guid: 85367be98eb2e004687516471043ae43, type: 2}
   skillNameKey: skill_name_sword1
   skillDescKey: skill_desc_sword1
+  evolutionANameKey: a evol
+  evolutionADescKey: a evol desc
+  evolutionBNameKey: b evol
+  evolutionBDescKey: b evol desc
+  evolutionCNameKey: c evol
+  evolutionCDescKey: c evol desc
   category: 0
   skillLevel: 1
   skillActionImage: {fileID: 21300000, guid: 29774a436b5400940af5cf16381dfe08, type: 3}

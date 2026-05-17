@@ -13,6 +13,8 @@ public class MenuTabManager : MonoBehaviour
     [Header("버튼 색상 설정")]
     public Color normalColor = Color.white; // 기본 색상 (원래 색)
     public Color activeColor = new Color(0.6f, 0.6f, 0.6f); // 눌렸을 때 색상 (회색빛으로 어두워짐)
+    
+    private float timeScaleBeforePause = 1f;
 
     private void OnEnable()
     {
@@ -21,11 +23,20 @@ public class MenuTabManager : MonoBehaviour
 
     public void OpenMenu()
     {
+        timeScaleBeforePause = Time.timeScale;
+        if (timeScaleBeforePause <= 0) timeScaleBeforePause = 1f; // 방어 코드
+
+        Time.timeScale = 0f;
+        DevLog.Log($"[메뉴] 스탯창 열기: 시간 정지 (복구 속도: {timeScaleBeforePause})");
+
         gameObject.SetActive(true);
     }
 
     public void CloseMenu()
     {
+        Time.timeScale = timeScaleBeforePause;
+        DevLog.Log("[메뉴] 스탯창 닫기: 시간 복구");
+
         gameObject.SetActive(false);
     }
 

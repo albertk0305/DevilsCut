@@ -89,53 +89,56 @@ MonoBehaviour:
     defense: 20
     speed: 20
     luck: 20
+    currentGold: 0
+    rejectedSupporterCount: 0
+    finalDamageAmp: 0
+    finalDamageReduction: 0
+    critRate: 0
+    critDamage: 1.5
+    lifeSteal: 0
+    trueDamageConversion: 0
+    bonusAccuracy: 0
+    bonusEvasion: 0
+    healingReceivedAmp: 0
   unlockedSupporters:
-  - {fileID: 11400000, guid: 8f7a108444158544399cf83ab876c34c, type: 2}
-  activeSupporter: {fileID: 11400000, guid: 9725619daf76abb45848508807a510f2, type: 2}
+  - {fileID: 11400000, guid: 324e8b7827f679846a1984c00523c40e, type: 2}
+  activeSupporter: {fileID: 11400000, guid: 324e8b7827f679846a1984c00523c40e, type: 2}
   ownedKarinItems:
-  - {fileID: 11400000, guid: 3af5d2d3d0ac65e4e81a7df77f56e141, type: 2}
+  - {fileID: 11400000, guid: 1f62c13dc91f5f34e8003534a0fe132f, type: 2}
   equippedKarinItem: {fileID: 11400000, guid: 1f62c13dc91f5f34e8003534a0fe132f, type: 2}
-  ownedEquipments:
-  - {fileID: 11400000, guid: 6e99cd199e7b6fb4a9b923829b1c6a27, type: 2}
-  - {fileID: 11400000, guid: b9e74b766e913524096968b2d622663f, type: 2}
-  - {fileID: 11400000, guid: 62acf50e8bcbc4245bed81c4bef93d74, type: 2}
-  - {fileID: 11400000, guid: b0ebccb9b21d8ea4a99cedf7f2b9c01f, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
-  - {fileID: 11400000, guid: 56a963125273f0f459a3d9c7914982dc, type: 2}
+  inventory:
+  - data: {fileID: 11400000, guid: bad34f1eb37c6f74a8deeca7efa03601, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: bad34f1eb37c6f74a8deeca7efa03601, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: 0083bd405a34995429b6b7a82432338f, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: 0fc042644d79d064da320cfa6d25db66, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: aaf562f5ad68e2949897f56cacbc7235, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: c8682bad091f61f4cbb6b63d9ca817bb, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: 5c657b742afbda5438d247e73eb0d26d, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: 32199c5b224529a49afa609a0ec497e0, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: 4494c998f31652646b0bf5ca89bc46f8, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: feb908c5438531b4b905e53087a17f16, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: b691d67261ad18d448e408b1526b73b7, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: 81e21910a1d93b04d9839940403d48bb, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: 134e3e0f6c7e4a34fa439a42a65f7cd9, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: 0fc042644d79d064da320cfa6d25db66, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: 0fc042644d79d064da320cfa6d25db66, type: 2}
+    starLevel: 2
+  - data: {fileID: 11400000, guid: eb29b40cbdb370348bb3bee35c84e192, type: 2}
+    starLevel: 1
   currentEnemyToFight: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
   unlockedSkills:
   - {fileID: 11400000, guid: 6f76bd2b0cc4916469f2ca32aba944e9, type: 2}

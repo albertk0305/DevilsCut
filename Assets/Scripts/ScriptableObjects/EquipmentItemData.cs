@@ -4,7 +4,7 @@ public enum ItemGrade { Common, Rare, Epic, Legendary }
 public enum ItemClass
 {
     Saber, Shielder, Gunner, Assassin, Boxer,
-    Beast, Caster, Trickster, Berserker, Demon
+    Beast, Caster, Trickster, Berserker, Demon, LoneWolf
 }
 
 [CreateAssetMenu(fileName = "NewEquipment", menuName = "GameData/EquipmentItem")]
@@ -45,6 +45,7 @@ public class EquipmentItemData : ScriptableObject
     public int[] flatLuck = new int[3];
     public int[] flatMaxHp = new int[3];
     public int[] flatAP = new int[3];
+    public int[] flatBreakResistance = new int[3];
 
     [Header("2단계 곱 연산 스탯 보너스 (1성/2성/3성)")]
     // 예: 0.15f = 15% 증가
@@ -61,11 +62,6 @@ public class EquipmentItemData : ScriptableObject
     public float[] critRateBonus = new float[3];  // 크리티컬 확률 합산 (%)
     public float[] critDamageBonus = new float[3]; // 크리티컬 피해량 합산 (%)
     public float[] lifeStealRate = new float[3];  // 흡혈률 (%)
-
-    // 특수 기믹 판단용 플래그 (예: 어새신 에픽의 'AP 차이 비례 피해' 등)
-    // 필요에 따라 Enum이나 bool 변수를 추가하여 CombatManager에서 체크하도록 둡니다.
-    public bool hasApDifferenceBonus = false;
-    public bool hasMissingHpBonus = false;
 
     // ==========================================
     // 데이터 겟(Get) 헬퍼 함수들
@@ -86,6 +82,7 @@ public class EquipmentItemData : ScriptableObject
     public int GetFlatLuck(int starLevel) => flatLuck.Length > 0 ? flatLuck[GetIndex(starLevel)] : 0;
     public int GetFlatMaxHp(int starLevel) => flatMaxHp.Length > 0 ? flatMaxHp[GetIndex(starLevel)] : 0;
     public int GetFlatAP(int starLevel) => flatAP.Length > 0 ? flatAP[GetIndex(starLevel)] : 0;
+    public int GetFlatBR(int starLevel) => flatBreakResistance.Length > 0 ? flatBreakResistance[GetIndex(starLevel)] : 0;
 
     public float GetPctStr(int starLevel) => pctStrength.Length > 0 ? pctStrength[GetIndex(starLevel)] : 0f;
     public float GetPctDef(int starLevel) => pctDefense.Length > 0 ? pctDefense[GetIndex(starLevel)] : 0f;

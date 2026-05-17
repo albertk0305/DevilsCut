@@ -13,6 +13,16 @@ public class SkillData : ScriptableObject
     public string skillNameKey;
     public string skillDescKey;
 
+    [Header("스킬 진화 다국어 키")]
+    public string evolutionANameKey;
+    [TextArea] public string evolutionADescKey;
+
+    public string evolutionBNameKey;
+    [TextArea] public string evolutionBDescKey;
+
+    public string evolutionCNameKey;
+    [TextArea] public string evolutionCDescKey;
+
     [Header("스킬 기본 설정")]
     public SkillCategory category;
     public int skillLevel = 1; // 현재 스킬 레벨 (기본값 1)

@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14bd225585018614ab6e4d24d2b69d74, type: 3}
+  m_Name: GottaKnockALittleHarder
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
+  itemID: GottaKnockALittleHarder
+  itemNameKey: GottaKnockALittleHarder
+  itemIcon: {fileID: 21300000, guid: 4dc920805025edb419c535188f697f7d, type: 3}
+  itemDescKey: 
+  itemBonusKey: 
+  grade: 3
+  itemClass: 2
+  currentStarLevel: 1
+  flatStrength: 000000000000000000000000
+  flatDefense: 000000000000000000000000
+  flatSpeed: 000000000000000000000000
+  flatLuck: 000000000000000000000000
+  flatMaxHp: 000000000000000000000000
+  flatAP: 000000000000000000000000
+  flatBreakResistance: 000000000000000000000000
+  pctStrength:
+  - 0
+  - 0
+  - 0
+  pctDefense:
+  - 0
+  - 0
+  - 0
+  pctSpeed:
+  - 0
+  - 0
+  - 0
+  pctLuck:
+  - 0
+  - 0
+  - 0
+  pctMaxHp:
+  - 0
+  - 0
+  - 0
+  pctAP:
+  - 0
+  - 0
+  - 0
+  finalDamageAmp:
+  - 0
+  - 0
+  - 0
+  finalDamageReduction:
+  - 0
+  - 0
+  - 0
+  critRateBonus:
+  - 0
+  - 0
+  - 0
+  critDamageBonus:
+  - 0
+  - 0
+  - 0
+  lifeStealRate:
+  - 0
+  - 0
+  - 0

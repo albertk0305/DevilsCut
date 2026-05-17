@@ -66,7 +66,11 @@ public class SkillLogic_Hweok : SkillLogicBase
         if (luckBuff != null) BuffManager.Instance.AddEffect(true, luckBuff, buffValue, 3);
 
         // 2. 체력 회복 연산 및 UI 업데이트
-        int healAmount = Mathf.RoundToInt(pStats.maxHp * healRates[index]);
+        float baseHeal = pStats.maxHp * healRates[index];
+        // [추가] 데몬 시너지 회복량 증폭
+        int healAmount = Mathf.RoundToInt(baseHeal * (1f + pStats.healingReceivedAmp));
+
+        int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
         pStats.currentHp = Mathf.Clamp(pStats.currentHp + healAmount, 0, pStats.maxHp);
 
         if (CombatUIManager.Instance != null)
@@ -74,6 +78,9 @@ public class SkillLogic_Hweok : SkillLogicBase
             CombatUIManager.Instance.playerStatusUI.UpdateHP(pStats.currentHp, pStats.maxHp);
             CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
         }
+
+        if (excessHeal > 0 && CombatManager.Instance != null)
+            CombatManager.Instance.ApplyOverhealBuff(excessHeal);
 
         // 3. 버스트(그로기) 게이지 감소 연산
         float breakRecover = breakRecoveryAmounts[index];

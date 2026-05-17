@@ -9,21 +9,30 @@ public class EquipmentUI : MonoBehaviour
     public Image mainItemImage;
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemDescText;
-    public TextMeshProUGUI itemStatsText; // [추가] 스탯을 보여줄 텍스트 (우상단)
+    public TextMeshProUGUI itemStatsText;
+
+    [Header("미리보기 별 UI")]
+    public GameObject[] previewStars; // 3개의 별 오브젝트를 순서대로 넣으세요.
 
     [Header("하단 장비 목록")]
-    public Button[] inventoryButtons; // 총 30개의 슬롯 버튼 (좌->우, 상->하 순서)
+    public Button[] inventoryButtons;
     public Button upScrollButton;
     public Button downScrollButton;
 
-    // 내부 상태 관리
-    private EquipmentItemData currentPreview;
-    private int currentRow = 0; // 현재 스크롤 맨 윗줄 번호
-    private const int columns = 10; // 한 줄에 10칸 (10열)
+    // [수정된 부분] 색상 대신 Sprite(이미지 원본)를 받습니다.
+    [Header("인벤토리 슬롯 테두리 (성급별 이미지)")]
+    public Image[] inventoryBorders; // 30개의 테두리(배경) 이미지를 넣으세요.
+    public Sprite border1Star; // 1성 전용 테두리 이미지
+    public Sprite border2Star; // 2성 전용 테두리 이미지
+    public Sprite border3Star; // 3성 전용 테두리 이미지
+
+    private OwnedItem currentPreviewItem;
+    private int currentRow = 0;
+    private const int columns = 10;
 
     private void OnEnable()
     {
-        ShowPreview(null); // 처음 열었을 때는 아무것도 선택 안 된 상태로 비워둠
+        ShowPreview(null);
         currentRow = 0;
         RefreshInventory();
 
@@ -39,38 +48,44 @@ public class EquipmentUI : MonoBehaviour
 
     private void RefreshLanguage()
     {
-        ShowPreview(currentPreview);
+        ShowPreview(currentPreviewItem);
     }
 
-    // 상단 패널 갱신 함수
-    private void ShowPreview(EquipmentItemData data)
+    private void ShowPreview(OwnedItem item)
     {
-        currentPreview = data;
+        currentPreviewItem = item;
 
-        if (data == null)
+        if (item == null || item.data == null)
         {
             mainItemImage.gameObject.SetActive(false);
-
             itemNameText.text = "";
             itemDescText.text = "";
             itemStatsText.text = "";
+
+            foreach (var star in previewStars)
+                if (star != null) star.SetActive(false);
         }
         else
         {
             mainItemImage.gameObject.SetActive(true);
-            mainItemImage.sprite = data.itemIcon;
+            mainItemImage.sprite = item.data.itemIcon;
 
-            // 다국어 매니저를 통해 이름과 설명을 가져옵니다.
-            itemNameText.text = LocalizationManager.Instance.GetText(data.itemNameKey);
-            itemDescText.text = LocalizationManager.Instance.GetText(data.itemDescKey);
-            itemStatsText.text = LocalizationManager.Instance.GetText(data.itemBonusKey);
+            itemNameText.text = LocalizationManager.Instance.GetText(item.data.itemNameKey);
+            itemDescText.text = LocalizationManager.Instance.GetText(item.data.itemDescKey);
+            itemStatsText.text = LocalizationManager.Instance.GetText(item.data.itemBonusKey);
+
+            for (int i = 0; i < previewStars.Length; i++)
+            {
+                if (previewStars[i] != null)
+                {
+                    previewStars[i].SetActive(i < item.starLevel);
+                }
+            }
         }
     }
 
-    // 하단 인벤토리 리스트 갱신 함수
     private void RefreshInventory()
     {
-        // [수정] 타입과 리스트 이름을 OwnedItem과 inventory로 변경
         List<OwnedItem> ownedList = PlayerManager.Instance.inventory;
         int startIndex = currentRow * columns;
 
@@ -81,10 +96,25 @@ public class EquipmentUI : MonoBehaviour
 
             inventoryButtons[i].gameObject.SetActive(hasData);
 
+            if (inventoryBorders.Length > i && inventoryBorders[i] != null)
+                inventoryBorders[i].gameObject.SetActive(hasData);
+
             if (hasData)
             {
-                // [수정] ownedList[dataIndex]는 OwnedItem이므로 .data를 붙여서 원본에 접근
                 inventoryButtons[i].image.sprite = ownedList[dataIndex].data.itemIcon;
+
+                // [핵심 수정] 성급에 따라 스프라이트 원본을 교체합니다.
+                if (inventoryBorders.Length > i && inventoryBorders[i] != null)
+                {
+                    int star = ownedList[dataIndex].starLevel;
+
+                    // 만약 이전에 색상을 건드렸을 경우를 대비해 흰색(원래 색)으로 초기화
+                    inventoryBorders[i].color = Color.white;
+
+                    if (star == 1) inventoryBorders[i].sprite = border1Star;
+                    else if (star == 2) inventoryBorders[i].sprite = border2Star;
+                    else if (star >= 3) inventoryBorders[i].sprite = border3Star;
+                }
             }
         }
 
@@ -95,16 +125,13 @@ public class EquipmentUI : MonoBehaviour
         downScrollButton.interactable = (currentRow + visibleRows < totalRows);
     }
 
-    // 버튼 클릭 시 (인스펙터에서 0~29번까지 매핑)
     public void OnClickInventorySlot(int slotIndex)
     {
         int dataIndex = (currentRow * columns) + slotIndex;
 
-        // [수정] inventory로 변경
         if (dataIndex < PlayerManager.Instance.inventory.Count)
         {
-            // [수정] ShowPreview는 원본 데이터를 요구하므로 .data를 넘겨줌
-            ShowPreview(PlayerManager.Instance.inventory[dataIndex].data);
+            ShowPreview(PlayerManager.Instance.inventory[dataIndex]);
         }
     }
 
@@ -119,7 +146,6 @@ public class EquipmentUI : MonoBehaviour
 
     public void OnClickDownScroll()
     {
-        // [수정] 타입과 리스트 이름 변경
         List<OwnedItem> ownedList = PlayerManager.Instance.inventory;
         int totalRows = Mathf.Max(1, Mathf.CeilToInt((float)ownedList.Count / columns));
         int visibleRows = inventoryButtons.Length / columns;

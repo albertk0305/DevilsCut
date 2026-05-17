@@ -42,6 +42,29 @@ public class StatManager : MonoBehaviour
             }
         }
 
+        // [신규] 버서커 에픽: 잃은 체력 비례 실시간 스탯 증폭!
+        if (isPlayer && PlayerManager.Instance != null)
+        {
+            // 대상 스탯이 4대 핵심 스탯일 경우에만 작동
+            if (stat == TargetStat.Strength || stat == TargetStat.Defense || stat == TargetStat.Speed || stat == TargetStat.Luck)
+            {
+                var inventory = PlayerManager.Instance.inventory;
+                var berserkerEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Berserker && x.data.grade == ItemGrade.Epic);
+
+                float epicMaxBonus = 0f;
+                foreach (var bEpic in berserkerEpics)
+                {
+                    epicMaxBonus += bEpic.starLevel == 1 ? 0.05f : (bEpic.starLevel == 2 ? 0.25f : 0.70f);
+                }
+
+                if (epicMaxBonus > 0f)
+                {
+                    // 실시간으로 변하는 현재 체력을 기반으로 배율을 더해줍니다!
+                    multiplier += (CombatMath.GetMissingHPMultiplier(playerStats.maxHp, playerStats.currentHp, epicMaxBonus) - 1.0f);
+                }
+            }
+        }
+
         // 스탯 캡(제한) 적용 디버프는 최대 -90퍼까지 적용(스탯 음수 방지)
         multiplier = Mathf.Max(-0.9f, multiplier);
 

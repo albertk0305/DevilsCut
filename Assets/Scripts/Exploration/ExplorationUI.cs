@@ -35,6 +35,9 @@ public class ExplorationUI : MonoBehaviour
     [Header("선택 팝업 UI")]
     public GameObject confirmPopup; // 화면 중앙의 예/아니오 팝업창 묶음
 
+    [Header("상단 재화 UI")]
+    public TextMeshProUGUI goldText;
+
     public GameObject statusCanvas;
     public GameObject settingsCanvas;
 
@@ -73,6 +76,7 @@ public class ExplorationUI : MonoBehaviour
         // 2. 체력바 설정 및 캐릭터 이미지 업데이트
         UpdateHPBar();
         UpdateCharacterStates();
+        UpdateGoldUI();
 
         // 3. 이전 시설 및 랜덤 노드 설정 로직 (기존과 동일)
         SetupNodes();
@@ -315,5 +319,16 @@ public class ExplorationUI : MonoBehaviour
     {
         UpdateHPBar();           // 장비 교체로 체력이 변경되었을 수 있으니 갱신!
         UpdateCharacterStates(); // 서포터 교체가 있었을 수 있으니 이미지 갱신!
+        UpdateGoldUI();
     }
+    private void UpdateGoldUI()
+    {
+        // 텍스트 컴포넌트가 연결되어 있고 PlayerManager가 살아있다면
+        if (goldText != null && PlayerManager.Instance != null)
+        {
+            // "N0" 포맷은 1000 -> 1,000 처럼 천 단위 콤마를 찍어줍니다.
+            goldText.text = PlayerManager.Instance.stats.currentGold.ToString("N0");
+        }
+    }
+
 }

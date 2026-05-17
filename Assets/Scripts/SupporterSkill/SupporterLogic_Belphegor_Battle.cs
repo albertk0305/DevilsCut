@@ -83,10 +83,19 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
 
             case 5: // Full House
                 textToDisplay = "REBUY";
-                int healAmount = Mathf.RoundToInt(pStats.maxHp * fullHouseHeals[index]);
+
+                float baseHeal = pStats.maxHp * fullHouseHeals[index];
+                // [추가] 데몬 시너지 회복량 증폭
+                int healAmount = Mathf.RoundToInt(baseHeal * (1f + pStats.healingReceivedAmp));
+                int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
+
                 pStats.currentHp = Mathf.Clamp(pStats.currentHp + healAmount, 0, pStats.maxHp);
                 CombatUIManager.Instance.playerStatusUI.UpdateHP(pStats.currentHp, pStats.maxHp);
                 BuffManager.Instance.GetEffects(true).RemoveAll(e => e.effectData.category == EffectCategory.Debuff);
+
+                // [추가] 데몬 시너지 초과 회복 버프 연동
+                if (excessHeal > 0 && CombatManager.Instance != null)
+                    CombatManager.Instance.ApplyOverhealBuff(excessHeal);
                 break;
 
             case 6: // Jackpot!

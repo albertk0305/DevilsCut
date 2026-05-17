@@ -75,14 +75,23 @@ public class SkillLogic_PaperMoon : SkillLogicBase
             // 스킬 시전 전에는 그로기가 아니었는데, 지금 그로기가 되었다면 (내가 방금 터뜨렸다면)
             if (!wasBroken && isBrokenNow && lastHpCost > 0)
             {
-                pStats.currentHp = Mathf.Clamp(pStats.currentHp + lastHpCost, 0, pStats.maxHp);
+                // [추가] 페이백(회복)에도 데몬 시너지 회복량 증폭 적용!
+                int healAmount = Mathf.RoundToInt(lastHpCost * (1f + pStats.healingReceivedAmp));
+                int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
+
+                pStats.currentHp = Mathf.Clamp(pStats.currentHp + healAmount, 0, pStats.maxHp);
 
                 if (CombatUIManager.Instance != null)
                 {
                     CombatUIManager.Instance.playerStatusUI.UpdateHP(pStats.currentHp, pStats.maxHp);
-                    CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{lastHpCost}</color>", false, true);
+                    CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
                 }
-                DevLog.Log($"[진화 B] 아이 워너 비 발동! 적을 그로기 상태로 만들어 소모한 체력({lastHpCost})을 즉시 회복합니다.");
+
+                // [추가] 데몬 시너지 초과 회복 버프 연동
+                if (excessHeal > 0 && CombatManager.Instance != null)
+                    CombatManager.Instance.ApplyOverhealBuff(excessHeal);
+
+                DevLog.Log($"[진화 B] 아이 워너 비 발동! 적을 그로기 상태로 만들어 소모한 체력을 회복합니다. (최종 회복량: {healAmount})");
 
                 lastHpCost = 0; // 중복 회복 방지
             }

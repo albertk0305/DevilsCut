@@ -20,7 +20,11 @@ public class SupporterLogic_Asmodeus_Battle : SupporterLogicBase
         int index = Mathf.Clamp(skillLevel - 1, 0, healRates.Length - 1);
 
         // 1. 체력 회복
-        int healAmount = Mathf.RoundToInt(pStats.maxHp * healRates[index]);
+        float baseHeal = pStats.maxHp * healRates[index];
+        // [추가] 데몬 시너지 회복량 증폭
+        int healAmount = Mathf.RoundToInt(baseHeal * (1f + pStats.healingReceivedAmp));
+
+        int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
         pStats.currentHp = Mathf.Clamp(pStats.currentHp + healAmount, 0, pStats.maxHp);
 
         BattleEventSystem.CallHpChanged(true, pStats.currentHp, pStats.maxHp);
@@ -29,6 +33,10 @@ public class SupporterLogic_Asmodeus_Battle : SupporterLogicBase
             CombatUIManager.Instance.playerStatusUI.UpdateHP(pStats.currentHp, pStats.maxHp);
             CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
         }
+
+        // [추가] 데몬 시너지 초과 회복 버프 연동
+        if (excessHeal > 0 && CombatManager.Instance != null)
+            CombatManager.Instance.ApplyOverhealBuff(excessHeal);
 
         // 2. 디버프 전체 정화 (레벨 무관 공통 효과)
         if (BuffManager.Instance != null)

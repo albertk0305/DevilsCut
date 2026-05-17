@@ -46,6 +46,8 @@ public static class BattleCalculator
             }
         }
 
+        if (!isPlayerAttacking) defenderExtraEvasion += pStats.bonusEvasion; // 방어자 주인공일 경우 복서 4점 회피율 보정
+
         int consecutiveHits = 0; // 연속 적중 카운터 초기화
 
         bool isDefenderBroken = BreakManager.Instance.IsBroken(!isPlayerAttacking);
@@ -67,8 +69,20 @@ public static class BattleCalculator
             else
             {
                 float currentBaseAccuracy = skill.skillLogic != null ? skill.skillLogic.GetBaseAccuracy(skill) : skill.baseAccuracy;
-
                 float finalAccuracy = currentBaseAccuracy + skill.GetCurrentBonusAccuracy();
+
+                // 복서 4점 보정 (주인공 공격 시에만)
+                if (isPlayerAttacking) finalAccuracy += pStats.bonusAccuracy;
+
+                // [핵심 수정] 공격 주체 상관없이 '명중률 보정' 버프/디버프를 합산!
+                // 트릭스터의 '명중률 감소(-30)' 디버프가 적군 공격 시에 깎여나가도록 연동됩니다.
+                var attackerEffectsForAcc = BuffManager.Instance.GetEffects(isPlayerAttacking);
+                foreach (var eff in attackerEffectsForAcc)
+                {
+                    if (eff.effectData != null && eff.effectData.specialType == SpecialEffectType.AccuracyUp)
+                        finalAccuracy += eff.value;
+                }
+
                 hit.isHit = CombatMath.CheckHitSuccess(finalAccuracy, attackerSpeed, defenderSpeed, defenderExtraEvasion);
             }
 
@@ -117,7 +131,15 @@ public static class BattleCalculator
                     float dynamicCrit = skill.skillLogic != null ? skill.skillLogic.GetDynamicCritRateBonus(skill, consecutiveHits) : 0f;
 
                     float totalCritRateBonus = skill.GetCurrentBonusCritRate() + dynamicCrit;
-                    if (isPlayerAttacking) totalCritRateBonus += (pStats.critRate * 100f);
+                    if (isPlayerAttacking)
+                    {
+                        totalCritRateBonus += (pStats.critRate * 100f);
+
+                        // [캐스터 에픽 연동] 크리티컬 확률 보정 버프 합산
+                        var attackerEffectsForCrit = BuffManager.Instance.GetEffects(true);
+                        foreach (var eff in attackerEffectsForCrit)
+                            if (eff.effectData != null && eff.effectData.specialType == SpecialEffectType.CritRateUp) totalCritRateBonus += eff.value;
+                    }
 
                     hit.isCrit = CombatMath.CheckCriticalSuccess(totalCritRateBonus, attackerLuck);
                     if (hit.isCrit)
@@ -125,7 +147,15 @@ public static class BattleCalculator
                         float baseCritMult = skill.skillLogic != null ? skill.skillLogic.GetCritDamageMultiplier(skill) : 1.5f;
 
                         float finalCritMult = baseCritMult;
-                        if (isPlayerAttacking) finalCritMult += (pStats.critDamage - 1.5f);
+                        if (isPlayerAttacking)
+                        {
+                            finalCritMult += (pStats.critDamage - 1.5f);
+
+                            // [캐스터 에픽 연동] 크리티컬 피해량 증폭 버프 합산
+                            var attackerEffectsForCritDmg = BuffManager.Instance.GetEffects(true);
+                            foreach (var eff in attackerEffectsForCritDmg)
+                                if (eff.effectData != null && eff.effectData.specialType == SpecialEffectType.CritDamageUp) finalCritMult += eff.value;
+                        }
 
                         calculatedDamage *= finalCritMult;
                         result.anyCrit = true;
@@ -157,13 +187,95 @@ public static class BattleCalculator
                     // [세이버 에픽 아이템 - 포식자의 이빨] 적 체력이 70% 이상일 때 최종 피해 증폭
                     if (defenderMaxHp > 0 && ((float)defenderCurrentHp / defenderMaxHp) >= 0.7f)
                     {
-                        var saberEpic = inventory.Find(x => x.data.itemClass == ItemClass.Saber && x.data.grade == ItemGrade.Epic);
-                        if (saberEpic != null)
+                        var saberEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Saber && x.data.grade == ItemGrade.Epic);
+                        foreach (var saberEpic in saberEpics)
                         {
                             if (saberEpic.starLevel == 1) damageGivenAmp += 0.04f;
                             else if (saberEpic.starLevel == 2) damageGivenAmp += 0.20f;
                             else if (saberEpic.starLevel >= 3) damageGivenAmp += 1.00f;
                         }
+                    }
+
+                    int apDiff = pStats.ActionPoints - eData.ActionPoints;
+
+                    if (apDiff > 0)
+                    {
+                        // [어새신 4점] AP 차이 1당 1% (0.01) 피해 증폭
+                        if (syn.GetValueOrDefault(ItemClass.Assassin) >= 4)
+                        {
+                            damageGivenAmp += (apDiff * 0.01f);
+                        }
+
+                        // [어새신 에픽 아이템 - 암살자의 비수] AP 차이에 비례하여 증폭
+                        var assassinEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Assassin && x.data.grade == ItemGrade.Epic);
+                        foreach (var assassinEpic in assassinEpics)
+                        {
+                            if (assassinEpic.starLevel == 1) damageGivenAmp += (apDiff * 0.005f);
+                            else if (assassinEpic.starLevel == 2) damageGivenAmp += (apDiff * 0.01f);
+                            else if (assassinEpic.starLevel >= 3) damageGivenAmp += (apDiff * 0.015f);
+                        }
+                    }
+
+                    // 복서 속도 차이에 비례하여 증폭
+                    int spdDiff = attackerSpeed - defenderSpeed;
+
+                    if (spdDiff > 0)
+                    {
+                        var boxerEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Boxer && x.data.grade == ItemGrade.Epic);
+                        foreach (var boxerEpic in boxerEpics)
+                        {
+                            if (boxerEpic.starLevel == 1) damageGivenAmp += (spdDiff * 0.005f);
+                            else if (boxerEpic.starLevel == 2) damageGivenAmp += (spdDiff * 0.01f);
+                            else if (boxerEpic.starLevel >= 3) damageGivenAmp += (spdDiff * 0.015f);
+                        }
+                    }
+
+                    // 캐스터 6점 및 전설: 현재 걸려있는 "버프"의 개수를 셉니다!
+                    int activeBuffCount = 0;
+                    foreach (var eff in attackerEffects)
+                    {
+                        if (eff.effectData != null && eff.effectData.category == EffectCategory.Buff) activeBuffCount++;
+                    }
+
+                    if (activeBuffCount > 0)
+                    {
+                        if (syn.GetValueOrDefault(ItemClass.Caster) >= 6)
+                            damageGivenAmp += (activeBuffCount * 0.03f); // 1개당 3% 증폭
+
+                        var casterLegendary = inventory.Find(x => x.data.itemClass == ItemClass.Caster && x.data.grade == ItemGrade.Legendary);
+                        if (casterLegendary != null)
+                            damageGivenAmp += (activeBuffCount * 0.02f); // 전설 장착 시 1개당 2% 추가 증폭
+                    }
+
+                    // [트릭스터 6점 및 전설] 적에게 걸려있는 "디버프"의 개수를 셉니다!
+                    int activeDebuffCount = 0;
+                    foreach (var eff in defenderEffects)
+                    {
+                        if (eff.effectData != null && eff.effectData.category == EffectCategory.Debuff) activeDebuffCount++;
+                    }
+
+                    if (activeDebuffCount > 0)
+                    {
+                        if (syn.GetValueOrDefault(ItemClass.Trickster) >= 6)
+                            damageGivenAmp += (activeDebuffCount * 0.03f); // 1개당 3% 증폭
+
+                        var tricksterLegendary = inventory.Find(x => x.data.itemClass == ItemClass.Trickster && x.data.grade == ItemGrade.Legendary);
+                        if (tricksterLegendary != null)
+                            damageGivenAmp += (activeDebuffCount * 0.02f); // 전설 장착 시 1개당 2% 추가 증폭
+                    }
+
+                    // [버서커 4점] 잃은 체력 비중에 따라 최대 50% 피해 증폭
+                    if (syn.GetValueOrDefault(ItemClass.Berserker) >= 4)
+                    {
+                        damageGivenAmp += (CombatMath.GetMissingHPMultiplier(pStats.maxHp, pStats.currentHp, 0.50f) - 1.0f);
+                    }
+
+                    // [버서커 희귀] 광전사의 증표 (잃은 체력 비례 폭딜)
+                    var berserkerRares = inventory.FindAll(x => x.data.itemClass == ItemClass.Berserker && x.data.grade == ItemGrade.Rare);
+                    foreach (var bRare in berserkerRares)
+                    {
+                        float maxBonus = bRare.starLevel == 1 ? 0.10f : (bRare.starLevel == 2 ? 0.40f : 1.20f);
+                        damageGivenAmp += (CombatMath.GetMissingHPMultiplier(pStats.maxHp, pStats.currentHp, maxBonus) - 1.0f);
                     }
                 }
                 if (isPlayerAttacking) damageGivenAmp += pStats.finalDamageAmp;

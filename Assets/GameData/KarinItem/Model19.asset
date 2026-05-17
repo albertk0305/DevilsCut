@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::KarinItemData
   itemName: Model19
   itemIcon: {fileID: 21300000, guid: b9d65dbcb9045464c93c9ca90f180164, type: 3}
-  itemDescription: 
-  previewDialogue: 
-  equipDialogue: 
+  itemDescription: model 19 desc
+  previewDialogue: looks good
+  equipDialogue: let's go
   itemLogic: {fileID: 11400000, guid: d1a89856c2562a44f943623c77af53c9, type: 2}

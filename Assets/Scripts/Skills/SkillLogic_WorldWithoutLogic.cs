@@ -41,7 +41,11 @@ public class SkillLogic_WorldWithoutReason : SkillLogicBase
         int index = Mathf.Clamp(skill.skillLevel - 1, 0, healRates.Length - 1);
 
         // 1. 체력 회복 연산
-        int healAmount = Mathf.RoundToInt(pStats.maxHp * healRates[index]);
+        float baseHeal = pStats.maxHp * healRates[index];
+        // [추가] 데몬 시너지 회복량 증폭
+        int healAmount = Mathf.RoundToInt(baseHeal * (1f + pStats.healingReceivedAmp));
+
+        int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
         pStats.currentHp = Mathf.Clamp(pStats.currentHp + healAmount, 0, pStats.maxHp);
 
         // 2. 체력 UI 업데이트 및 회복 텍스트 띄우기
@@ -50,6 +54,9 @@ public class SkillLogic_WorldWithoutReason : SkillLogicBase
             CombatUIManager.Instance.playerStatusUI.UpdateHP(pStats.currentHp, pStats.maxHp);
             CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
         }
+
+        if (excessHeal > 0 && CombatManager.Instance != null)
+            CombatManager.Instance.ApplyOverhealBuff(excessHeal);
 
         // 3. 버스트(그로기) 게이지 즉시 감소 연산
         float breakRecover = breakRecoveryAmounts[index];

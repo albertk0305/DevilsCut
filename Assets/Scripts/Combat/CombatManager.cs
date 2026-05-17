@@ -21,6 +21,9 @@ public class CombatState
 
     public bool hasRewardedCritThisSkill = false;
     public bool isMorningStarApRecoveredThisSkill = false;
+    public int totalExcessHealThisSkill = 0;
+
+    public bool hasResurrected = false;
 }
 
 public class CombatManager : MonoBehaviour
@@ -139,6 +142,14 @@ public class CombatManager : MonoBehaviour
         CombatUIManager.Instance.SetActionPanelActive(false);
         CombatUIManager.Instance.SetWaitingPanelActive(true);
         currentMenuState = MenuState.Hidden;
+
+        bool isFastCombat = PlayerPrefs.GetInt("FastCombat", 0) == 1;
+        Time.timeScale = isFastCombat ? 2.0f : 1.0f;
+
+        if (CombatUIManager.Instance != null)
+        {
+            CombatUIManager.Instance.UpdateFastCombatIcon(isFastCombat);
+        }
     }
 
     private void InitializeTurnQueue()
@@ -213,6 +224,32 @@ public class CombatManager : MonoBehaviour
     private IEnumerator HandlePreTurnEffects(TurnEntity owner)
     {
         string eName = currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "적";
+
+        if (owner.type == EntityType.Player && PlayerManager.Instance != null)
+        {
+            var syn = PlayerManager.Instance.GetCurrentSynergies();
+            var inventory = PlayerManager.Instance.inventory;
+
+            // [트릭스터 4점]
+            if (syn.GetValueOrDefault(ItemClass.Trickster) >= 4) ApplyRandomTricksterStatDebuff(0.05f);
+
+            // [트릭스터 희귀] 가짜 웃음 수치 합산
+            var trickRares = inventory.FindAll(x => x.data.itemClass == ItemClass.Trickster && x.data.grade == ItemGrade.Rare);
+            float trickRareVal = 0f;
+            foreach (var r in trickRares) trickRareVal += r.starLevel == 1 ? 0.02f : (r.starLevel == 2 ? 0.08f : 0.25f);
+            if (trickRareVal > 0f) ApplyRandomTricksterStatDebuff(trickRareVal);
+
+            // [트릭스터 에픽] 기괴한 가면 수치 합산 (출혈, 화상 계수 분리)
+            var trickEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Trickster && x.data.grade == ItemGrade.Epic);
+            float trickEpicVal = 0f, trickBleedVal = 0f, trickBurnVal = 0f;
+            foreach (var e in trickEpics)
+            {
+                trickEpicVal += e.starLevel == 1 ? 0.02f : (e.starLevel == 2 ? 0.08f : 0.30f);
+                trickBleedVal += e.starLevel == 1 ? 1.0f : (e.starLevel == 2 ? 2.0f : 3.0f); // 100/200/300%
+                trickBurnVal += e.starLevel == 1 ? 0.02f : (e.starLevel == 2 ? 0.03f : 0.04f); // 2/3/4%
+            }
+            if (trickEpics.Count > 0) ApplyRandomTricksterEpicDebuff(trickEpicVal, trickBleedVal, trickBurnVal);
+        }
 
         if (owner.type == EntityType.Enemy)
         {
@@ -471,6 +508,7 @@ public class CombatManager : MonoBehaviour
         currentState.wasEnemyBrokenAtSkillStart = BreakManager.Instance.IsBroken(false);
         currentState.hasRewardedCritThisSkill = false;
         currentState.isMorningStarApRecoveredThisSkill = false;
+        currentState.totalExcessHealThisSkill = 0;
 
         // ==========================================================
         //  [복구됨] 기(Ki) 차지(원기옥) 시작 판정
@@ -542,7 +580,7 @@ public class CombatManager : MonoBehaviour
             BattleVisualizer.Instance.EnqueueAction(() =>
             {
                 if (!hit.isHit) ProcessMissAction(isPlayerAttacking, isPlayerDefending, isPureUtility);
-                else ProcessHitAction(hit, isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult);
+                else ProcessHitAction(hit, isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult, skill);
             });
             BattleVisualizer.Instance.EnqueueDelay(0.15f);
         }
@@ -689,7 +727,7 @@ public class CombatManager : MonoBehaviour
 
     // 단일 타격 성공(명중) 연출
     // ==========================================================
-    private void ProcessHitAction(HitResult hit, bool isPlayerAttacking, bool isPlayerDefending, bool isPureUtility, SkillResult skillResult)
+    private void ProcessHitAction(HitResult hit, bool isPlayerAttacking, bool isPlayerDefending, bool isPureUtility, SkillResult skillResult, SkillData skill)
     {
         if (hit.isCrit && isPlayerAttacking && !currentState.hasRewardedCritThisSkill)
         {
@@ -703,21 +741,43 @@ public class CombatManager : MonoBehaviour
             if (!currentState.isBombActive) currentState.accumulatedDamage += hit.damage;
 
             // [신규] 데몬 시너지 / 흡혈 아이템 '글로벌 흡혈' 로직 적용
-            if (hit.damage > 0 && currentPlayerStats.lifeSteal > 0f && currentActiveEntity != null && currentActiveEntity.type == EntityType.Player)
+            float currentLifeSteal = currentPlayerStats.lifeSteal;
+
+            if (skill != null && skill.skillLogic != null)
             {
-                int healAmount = Mathf.RoundToInt(hit.damage * currentPlayerStats.lifeSteal);
+                currentLifeSteal += skill.skillLogic.GetSkillBonusLifesteal(skill);
+            }
+
+            // [데몬 희귀 아이템 - 귀면의 파편] 잃은 체력 비례 흡혈률 상승!
+            if (currentActiveEntity != null && currentActiveEntity.type == EntityType.Player && PlayerManager.Instance != null)
+            {
+                var demonRares = PlayerManager.Instance.inventory.FindAll(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Rare);
+                float missingRatio = (float)(currentPlayerStats.maxHp - currentPlayerStats.currentHp) / currentPlayerStats.maxHp;
+
+                foreach (var dRare in demonRares)
+                {
+                    float maxBonus = dRare.starLevel == 1 ? 0.02f : (dRare.starLevel == 2 ? 0.10f : 0.30f);
+                    currentLifeSteal += (missingRatio * maxBonus);
+                }
+            }
+
+            if (hit.damage > 0 && currentLifeSteal > 0f && currentActiveEntity != null && currentActiveEntity.type == EntityType.Player)
+            {
+                float baseHeal = hit.damage * currentLifeSteal;
+
+                // [신규] 마성 강화(4점) 및 오니의 검은 피(에픽) - 회복량 증폭 적용!
+                int healAmount = Mathf.RoundToInt(baseHeal * (1f + currentPlayerStats.healingReceivedAmp));
+
                 if (healAmount > 0)
                 {
-                    // 초과 회복량 기록 (추후 데몬 6시너지 피의 폭주 연동용)
                     int excessHeal = (currentPlayerStats.currentHp + healAmount) - currentPlayerStats.maxHp;
-
                     currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + healAmount, 0, currentPlayerStats.maxHp);
 
-                    // UI 업데이트 및 초록색 데미지 텍스트 팝업!
                     CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
                     CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
 
-                    // TODO: excessHeal > 0 이면 데몬 6시너지의 "초과 회복 비례 데미지 증폭" 버프 발동 로직 추가 가능
+                    // [신규] 데몬 6점 및 전설 - 초과 회복 버프 발동
+                    if (excessHeal > 0) ApplyOverhealBuff(excessHeal);
                 }
             }
         }
@@ -811,12 +871,49 @@ public class CombatManager : MonoBehaviour
     {
         if (isPlayerTarget)
         {
-            currentPlayerStats.currentHp = Mathf.Max(0, currentPlayerStats.currentHp - damage);
+            int hpAfterDamage = currentPlayerStats.currentHp - damage;
+
+            // 버서커 6시너지 & 전설 아이템 (사신 거부 / 부활)
+            if (hpAfterDamage <= 0 && PlayerManager.Instance != null && !currentState.hasResurrected)
+            {
+                var syn = PlayerManager.Instance.GetCurrentSynergies();
+                var inventory = PlayerManager.Instance.inventory;
+
+                bool has6Point = syn.GetValueOrDefault(ItemClass.Berserker) >= 6;
+                bool hasLegendary = inventory.Exists(x => x.data.itemClass == ItemClass.Berserker && x.data.grade == ItemGrade.Legendary);
+
+                if (has6Point || hasLegendary) // 6점이거나 전설이거나 둘 중 하나라도 있다면!
+                {
+                    currentState.hasResurrected = true; // 부활 기회 소모
+
+                    if (has6Point && hasLegendary)
+                    {
+                        // 둘 다 있으면 100% 체력으로 완전 부활!
+                        currentPlayerStats.currentHp = currentPlayerStats.maxHp;
+                        CombatUIManager.Instance.SpawnDamageText("<color=#00FF00>Resurrect!</color>", false, true);
+                        DevLog.Log("[불굴의 투지+전설] 치명상을 입었으나, 최대 체력으로 부활합니다!");
+                    }
+                    else
+                    {
+                        // 하나만 있으면 체력 1로 버팀!
+                        currentPlayerStats.currentHp = 1;
+                        CombatUIManager.Instance.SpawnDamageText("<color=#FF0000>Endure!</color>", false, true);
+                        DevLog.Log("[사신 거부] 치명상을 입었으나, 체력 1로 버텨냅니다!");
+                    }
+
+                    BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
+                    return false; // 죽지 않았으므로 false 반환
+                }
+            }
+
+            // 부활 기믹이 안 터졌다면 정상적으로 데미지 적용
+            currentPlayerStats.currentHp = Mathf.Max(0, hpAfterDamage);
             BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
             return currentPlayerStats.currentHp <= 0; // 죽었는지 여부 반환
         }
         else
         {
+            // 적군 데미지 처리 (기존 동일)
             currentEnemyHp = Mathf.Max(0, currentEnemyHp - damage);
             BattleEventSystem.CallHpChanged(false, currentEnemyHp, currentEnemyData.maxHp);
             return currentEnemyHp <= 0;
@@ -888,11 +985,18 @@ public class CombatManager : MonoBehaviour
                 {
                     if (isPlayerTurn)
                     {
-                        int healAmount = Mathf.RoundToInt(currentPlayerStats.maxHp * hpRegenRate);
+                        float baseHeal = currentPlayerStats.maxHp * hpRegenRate;
+                        // [수정] 재생 효과에도 회복 증폭 효율이 똑같이 적용됩니다!
+                        int healAmount = Mathf.RoundToInt(baseHeal * (1f + currentPlayerStats.healingReceivedAmp));
+                        int excessHeal = (currentPlayerStats.currentHp + healAmount) - currentPlayerStats.maxHp;
+
                         currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + healAmount, 0, currentPlayerStats.maxHp);
                         CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
                         CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
                         DevLog.Log($"[재생] 턴 종료! 셰리의 체력이 {healAmount} 회복되었습니다.");
+
+                        // [신규] 재생으로 넘친 체력도 피의 폭주를 발동시킵니다!
+                        if (excessHeal > 0) ApplyOverhealBuff(excessHeal);
                     }
                     else
                     {
@@ -915,9 +1019,120 @@ public class CombatManager : MonoBehaviour
 
             if (currentActiveEntity.isPlayer) BuffManager.Instance.UpdateEffectsOnTurnEnd(true);
             else if (currentActiveEntity.type == EntityType.Enemy) BuffManager.Instance.UpdateEffectsOnTurnEnd(false);
+
+            //  캐스터 시너지: 매 턴 종료 시 무작위 독립 버프 부여
+            if (currentActiveEntity.isPlayer && PlayerManager.Instance != null)
+            {
+                var syn = PlayerManager.Instance.GetCurrentSynergies();
+                var inventory = PlayerManager.Instance.inventory;
+
+                // [캐스터 4점] 매 턴 스탯 5% 버프 1개
+                if (syn.GetValueOrDefault(ItemClass.Caster) >= 4) ApplyRandomCasterStatBuff(0.05f);
+
+                // [캐스터 희귀] 수치를 모두 더한 뒤 1개의 버프만 생성
+                var casterRares = inventory.FindAll(x => x.data.itemClass == ItemClass.Caster && x.data.grade == ItemGrade.Rare);
+                float casterRareVal = 0f;
+                foreach (var casterRare in casterRares)
+                    casterRareVal += casterRare.starLevel == 1 ? 0.02f : (casterRare.starLevel == 2 ? 0.08f : 0.30f);
+
+                if (casterRareVal > 0f) ApplyRandomCasterStatBuff(casterRareVal);
+
+                // [캐스터 에픽] 수치를 모두 더한 뒤 1개의 버프만 생성
+                var casterEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Caster && x.data.grade == ItemGrade.Epic);
+                float casterEpicVal = 0f;
+                foreach (var casterEpic in casterEpics)
+                    casterEpicVal += casterEpic.starLevel == 1 ? 0.02f : (casterEpic.starLevel == 2 ? 0.08f : 0.30f);
+
+                if (casterEpicVal > 0f) ApplyRandomCasterEpicBuff(casterEpicVal);
+            }
         }
 
         CalculateNextTurn();
+    }
+
+    private void ApplyRandomCasterStatBuff(float value)
+    {
+        int rand = Random.Range(0, 4);
+        TargetStat target = TargetStat.Strength;
+        string statName = "힘";
+
+        if (rand == 1) { target = TargetStat.Defense; statName = "방어력"; }
+        else if (rand == 2) { target = TargetStat.Speed; statName = "속도"; }
+        else if (rand == 3) { target = TargetStat.Luck; statName = "운"; }
+
+        // CreateInstance를 사용해 메모리에 완전히 고유한 버프 인스턴스를 찍어냅니다. (서로 덮어쓰지 않음!)
+        StatusEffectData newBuff = ScriptableObject.CreateInstance<StatusEffectData>();
+        newBuff.category = EffectCategory.Buff;
+        newBuff.targetStat = target;
+        newBuff.modifierType = ModifierType.Percentage;
+        newBuff.effectName = $"마력 순환({statName})";
+
+        BuffManager.Instance.AddEffect(true, newBuff, value, 1); // 1턴 유지
+        DevLog.Log($"[캐스터 스탯 버프] 셰리에게 {statName} {value * 100}% 증가 버프가 독립 부여되었습니다.");
+    }
+
+    private void ApplyRandomCasterEpicBuff(float value)
+    {
+        int rand = Random.Range(0, 5);
+        SpecialEffectType specialType = SpecialEffectType.DamageGivenAmp;
+        string buffName = "피해 증폭";
+        float applyValue = value;
+
+        if (rand == 0) { specialType = SpecialEffectType.CritRateUp; buffName = "크리티컬 확률"; applyValue = value * 100f; } // 확률은 합산 연산이라 100을 곱함
+        else if (rand == 1) { specialType = SpecialEffectType.CritDamageUp; buffName = "크리티컬 피해량"; }
+        else if (rand == 2) { specialType = SpecialEffectType.EvasionUp; buffName = "회피율"; applyValue = value * 100f; }
+        else if (rand == 3) { specialType = SpecialEffectType.AccuracyUp; buffName = "명중률"; applyValue = value * 100f; }
+        else if (rand == 4) { specialType = SpecialEffectType.DamageGivenAmp; buffName = "주는 피해 증폭"; }
+
+        StatusEffectData newBuff = ScriptableObject.CreateInstance<StatusEffectData>();
+        newBuff.category = EffectCategory.Buff;
+        newBuff.specialType = specialType;
+        newBuff.effectName = $"마력 공명({buffName})";
+
+        BuffManager.Instance.AddEffect(true, newBuff, applyValue, 1);
+        DevLog.Log($"[캐스터 에픽 버프] 셰리에게 {buffName} +{applyValue} 버프가 독립 부여되었습니다.");
+    }
+
+    private void ApplyRandomTricksterStatDebuff(float value)
+    {
+        int rand = Random.Range(0, 4);
+        TargetStat target = TargetStat.Strength;
+        string statName = "힘";
+
+        if (rand == 1) { target = TargetStat.Defense; statName = "방어력"; }
+        else if (rand == 2) { target = TargetStat.Speed; statName = "속도"; }
+        else if (rand == 3) { target = TargetStat.Luck; statName = "운"; }
+
+        StatusEffectData newDebuff = ScriptableObject.CreateInstance<StatusEffectData>();
+        newDebuff.category = EffectCategory.Debuff;
+        newDebuff.targetStat = target;
+        newDebuff.modifierType = ModifierType.Percentage;
+        newDebuff.effectName = $"악의적 간섭({statName})";
+
+        BuffManager.Instance.AddEffect(false, newDebuff, -value, 1); // 감소이므로 -value를 전달
+        DevLog.Log($"[트릭스터] 적에게 {statName} {value * 100}% 감소 디버프 부여!");
+    }
+
+    private void ApplyRandomTricksterEpicDebuff(float statVal, float bleedVal, float burnVal)
+    {
+        int rand = Random.Range(0, 5);
+        SpecialEffectType specialType = SpecialEffectType.EvasionUp;
+        string debuffName = "회피율 감소";
+        float applyValue = -statVal * 100f; // 명중/회피는 상수로 -20 등의 수치 사용
+
+        if (rand == 0) { specialType = SpecialEffectType.EvasionUp; debuffName = "회피율 감소"; applyValue = -statVal * 100f; }
+        else if (rand == 1) { specialType = SpecialEffectType.DamageAmp; debuffName = "받는 피해 증가"; applyValue = statVal; } // Amp는 양수일 때 데미지 증가
+        else if (rand == 2) { specialType = SpecialEffectType.AccuracyUp; debuffName = "명중률 감소"; applyValue = -statVal * 100f; }
+        else if (rand == 3) { specialType = SpecialEffectType.Bleed; debuffName = "심연의 출혈"; applyValue = bleedVal; } // 출혈은 양수 배율
+        else if (rand == 4) { specialType = SpecialEffectType.Burn; debuffName = "지옥의 화상"; applyValue = burnVal; } // 화상도 양수 배율
+
+        StatusEffectData newDebuff = ScriptableObject.CreateInstance<StatusEffectData>();
+        newDebuff.category = EffectCategory.Debuff;
+        newDebuff.specialType = specialType;
+        newDebuff.effectName = $"기괴한 가면({debuffName})";
+
+        BuffManager.Instance.AddEffect(false, newDebuff, applyValue, 1);
+        DevLog.Log($"[트릭스터 에픽] 적에게 {debuffName} (수치:{applyValue}) 부여!");
     }
 
     private IEnumerator HandleSpecialExpirations()
@@ -965,6 +1180,40 @@ public class CombatManager : MonoBehaviour
                     CombatUIManager.Instance.ResetDefenderImage(false);
                 }
             }
+        }
+    }
+
+    // [신규] 데몬 6점 및 전설 - 초과 회복(Over-heal) 비례 버프 발생기
+    // =======================================================
+    public void ApplyOverhealBuff(int excessHeal)
+    {
+        if (PlayerManager.Instance == null) return;
+        var syn = PlayerManager.Instance.GetCurrentSynergies();
+        var inventory = PlayerManager.Instance.inventory;
+
+        bool has6Point = syn.GetValueOrDefault(ItemClass.Demon) >= 6;
+        bool hasLegendary = inventory.Exists(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Legendary);
+
+        if (!has6Point && !hasLegendary) return;
+
+        // 배율 산출: 기획안에 따라 최대 체력 비례 %당 1% (6점) + 0.5% (전설)
+        float multiplier = 0f;
+        if (has6Point) multiplier += 1.0f;
+        if (hasLegendary) multiplier += 0.5f;
+
+        // 공식: (초과 회복량 / 최대 체력) * 배율
+        // 예: 1000 체력 중 200 초과 회복 시 -> 0.2 * 1.5 = 0.3f (30% 증폭)
+        float ampValue = ((float)excessHeal / currentPlayerStats.maxHp) * multiplier;
+
+        if (ampValue > 0f)
+        {
+            StatusEffectData newBuff = ScriptableObject.CreateInstance<StatusEffectData>();
+            newBuff.category = EffectCategory.Buff;
+            newBuff.specialType = SpecialEffectType.DamageGivenAmp;
+            newBuff.effectName = "피의 폭주";
+
+            BuffManager.Instance.AddEffect(true, newBuff, ampValue, 1);
+            DevLog.Log($"[피의 폭주] 초과 회복 {excessHeal} 달성 -> 피해 증폭 {ampValue * 100:F1}% 버프 1턴 획득!");
         }
     }
 

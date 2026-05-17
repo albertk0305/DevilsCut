@@ -60,6 +60,8 @@ public class SupporterUI : MonoBehaviour
     {
         currentPreview = data;
 
+        bool isExploration = ExplorationManager.Instance != null;
+
         if (data == null)
         {
             mainImage.gameObject.SetActive(false);
@@ -87,8 +89,8 @@ public class SupporterUI : MonoBehaviour
             string dialogueKey = isJoinedState ? data.joinMessage : data.selectMessage;
             dialogueText.text = LocalizationManager.Instance.GetText(dialogueKey);
 
-            joinButton.interactable = !isJoinedState;
-            leaveButton.interactable = isJoinedState;
+            joinButton.interactable = !isJoinedState && isExploration;
+            leaveButton.interactable = isJoinedState && isExploration;
             if (cancelButton != null) cancelButton.gameObject.SetActive(!isJoinedState);
         }
     }

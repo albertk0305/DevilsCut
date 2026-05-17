@@ -27,6 +27,11 @@ public class PlayerStats
     public int speed = 10;           // 속도
     public int luck = 5;             // 운
 
+    public int currentGold = 0;
+
+    // [추가] 조력자 영입을 거절한 횟수 (최대 7)
+    public int rejectedSupporterCount = 0;
+
     [Header("전투 파생 스탯 (아이템/시너지 전용)")]
     public float finalDamageAmp = 0f;        // 최종 피해 증폭 (%)
     public float finalDamageReduction = 0f;  // 받는 피해 감소 (%)
@@ -34,6 +39,9 @@ public class PlayerStats
     public float critDamage = 1.5f;          // 크리티컬 피해량 (기본 150%)
     public float lifeSteal = 0f;             // 흡혈률 (%)
     public float trueDamageConversion = 0f;  // 방어 무시 고정피해 전환율 (%)
+    public float bonusAccuracy = 0f;
+    public float bonusEvasion = 0f;
+    public float healingReceivedAmp = 0f;
 
     // 전투용 임시 복사본을 만들어주는 함수!
     public PlayerStats Clone()
@@ -201,7 +209,7 @@ public class PlayerManager : MonoBehaviour
     {
         PlayerStats modified = stats.Clone();
 
-        int flatStr = 0, flatDef = 0, flatSpd = 0, flatLuck = 0, flatMaxHp = 0, flatAP = 0;
+        int flatStr = 0, flatDef = 0, flatSpd = 0, flatLuck = 0, flatMaxHp = 0, flatAP = 0, flatBR = 0;
         float pctStr = 0f, pctDef = 0f, pctSpd = 0f, pctLuck = 0f, pctMaxHp = 0f, pctAP = 0f, pctBR = 0f;
 
         // 1. 인벤토리 순회: 개별 아이템의 합(Flat), 곱(Pct), 전투 스탯 누적
@@ -214,6 +222,7 @@ public class PlayerManager : MonoBehaviour
             flatLuck += item.data.GetFlatLuck(sl);
             flatMaxHp += item.data.GetFlatMaxHp(sl);
             flatAP += item.data.GetFlatAP(sl);
+            flatBR += item.data.GetFlatBR(sl);
 
             pctStr += item.data.GetPctStr(sl);
             pctDef += item.data.GetPctDef(sl);
@@ -251,6 +260,13 @@ public class PlayerManager : MonoBehaviour
         // [복서] 2점: 속도 20%
         if (syn.GetValueOrDefault(ItemClass.Boxer) >= 2) pctSpd += 0.20f;
 
+        // [복서] 4점: 명중률 및 회피율 20% 추가 상승
+        if (syn.GetValueOrDefault(ItemClass.Boxer) >= 4)
+        {
+            modified.bonusAccuracy += 20f;
+            modified.bonusEvasion += 20f;
+        }
+
         // [비스트] 2점: 체력 15% / 4점: BR 20%
         if (syn.GetValueOrDefault(ItemClass.Beast) >= 2) pctMaxHp += 0.15f;
         if (syn.GetValueOrDefault(ItemClass.Beast) >= 4) pctBR += 0.20f;
@@ -260,6 +276,38 @@ public class PlayerManager : MonoBehaviour
         if (syn.GetValueOrDefault(ItemClass.Trickster) >= 2) modified.finalDamageAmp += 0.05f;
         if (syn.GetValueOrDefault(ItemClass.Berserker) >= 2) modified.finalDamageReduction += 0.10f;
         if (syn.GetValueOrDefault(ItemClass.Demon) >= 2) modified.lifeSteal += 0.03f;
+        if (syn.GetValueOrDefault(ItemClass.Demon) >= 4) modified.healingReceivedAmp += 0.20f;
+
+        var demonEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Epic);
+        foreach (var dEpic in demonEpics)
+        {
+            if (dEpic.starLevel == 1) modified.healingReceivedAmp += 0.07f;
+            else if (dEpic.starLevel == 2) modified.healingReceivedAmp += 0.27f;
+            else if (dEpic.starLevel >= 3) modified.healingReceivedAmp += 1.00f; // 100% 증가!
+        }
+
+        // [추가] 11번째 클래스 '인간 강도(솔로 플레이)' 시너지 적용!
+        // 기획된 지수적 보정 수치 배열 (0명 ~ 7명)
+        float[] loneWolfAmps = { 0f, 0.05f, 0.10f, 0.20f, 0.40f, 0.75f, 1.30f, 2.00f };
+        int rejectCount = Mathf.Clamp(stats.rejectedSupporterCount, 0, 7);
+        float loneWolfBuff = loneWolfAmps[rejectCount];
+
+        if (loneWolfBuff > 0f)
+        {
+            // 전 스탯(7종)에 보정치 100% 동일 적용
+            pctStr += loneWolfBuff;
+            pctDef += loneWolfBuff;
+            pctSpd += loneWolfBuff;
+            pctLuck += loneWolfBuff;
+            pctMaxHp += loneWolfBuff;
+            pctAP += loneWolfBuff;
+            pctBR += loneWolfBuff;
+
+            DevLog.Log($"[인간 강도] 영입 거절 {rejectCount}회! 전 스탯이 {loneWolfBuff * 100}% 증폭됩니다.");
+        }
+
+        // 4. (기본 + 합산) * (1 + 곱산) 메인 스탯 연산
+        modified.strength = Mathf.Max(1, Mathf.RoundToInt((stats.strength + flatStr) * (1f + pctStr)));
 
 
         // 4. (기본 + 합산) * (1 + 곱산) 메인 스탯 연산
@@ -269,7 +317,7 @@ public class PlayerManager : MonoBehaviour
         modified.luck = Mathf.Max(1, Mathf.RoundToInt((stats.luck + flatLuck) * (1f + pctLuck)));
         modified.ActionPoints = Mathf.Max(1, Mathf.RoundToInt((stats.ActionPoints + flatAP) * (1f + pctAP)));
         modified.maxHp = Mathf.Max(1, Mathf.RoundToInt((stats.maxHp + flatMaxHp) * (1f + pctMaxHp)));
-        modified.breakResistance = Mathf.Max(1, Mathf.RoundToInt(stats.breakResistance * (1f + pctBR)));
+        modified.breakResistance = Mathf.Max(1, Mathf.RoundToInt((stats.breakResistance + flatBR) * (1f + pctBR)));
 
 
         // 5. 6시너지 및 전설 아이템의 하이엔드 '스탯 전환(Conversion)' 적용
