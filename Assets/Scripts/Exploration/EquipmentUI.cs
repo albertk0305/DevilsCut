@@ -10,6 +10,7 @@ public class EquipmentUI : MonoBehaviour
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemDescText;
     public TextMeshProUGUI itemStatsText;
+    public TextMeshProUGUI itemClassText;
 
     [Header("미리보기 별 UI")]
     public GameObject[] previewStars; // 3개의 별 오브젝트를 순서대로 넣으세요.
@@ -61,6 +62,7 @@ public class EquipmentUI : MonoBehaviour
             itemNameText.text = "";
             itemDescText.text = "";
             itemStatsText.text = "";
+            if (itemClassText != null) itemClassText.text = "";
 
             foreach (var star in previewStars)
                 if (star != null) star.SetActive(false);
@@ -71,6 +73,14 @@ public class EquipmentUI : MonoBehaviour
             mainItemImage.sprite = item.data.itemIcon;
 
             itemNameText.text = LocalizationManager.Instance.GetText(item.data.itemNameKey);
+            if (itemClassText != null)
+            {
+                // 깔끔하게 보이기 위해 양옆에 괄호를 치고 노란색으로 포맷팅했습니다.
+                itemClassText.text = $"<color=#FFD700>[ {item.data.itemClass.ToString()} ]</color>";
+
+                // ※ 만약 다국어 번역이 필요하시다면 아래처럼 사용할 수도 있습니다.
+                // itemClassText.text = LocalizationManager.Instance.GetText("class_" + item.data.itemClass.ToString().ToLower());
+            }
             itemDescText.text = LocalizationManager.Instance.GetText(item.data.itemDescKey);
             itemStatsText.text = LocalizationManager.Instance.GetText(item.data.itemBonusKey);
 

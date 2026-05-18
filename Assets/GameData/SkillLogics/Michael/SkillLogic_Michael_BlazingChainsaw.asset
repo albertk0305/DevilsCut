@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4750a19c50a49c94f97296fd199ff399, type: 3}
+  m_Name: SkillLogic_Michael_BlazingChainsaw
+  m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Michael_BlazingChainsaw
+  phase2MarkerBuff: {fileID: 11400000, guid: 359298c83791b684e9183825b574e717, type: 2}
+  bloodCurseDebuff: {fileID: 11400000, guid: a7f47860ca138bc41a99e0382906b312, type: 2}

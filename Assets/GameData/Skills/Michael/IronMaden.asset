@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
+  m_Name: IronMaden
+  m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillLogic: {fileID: 11400000, guid: a561dd395fdc74f45b60492687f991e4, type: 2}
+  skillNameKey: IronMaden
+  skillDescKey: IronMaden
+  evolutionANameKey: 
+  evolutionADescKey: 
+  evolutionBNameKey: 
+  evolutionBDescKey: 
+  evolutionCNameKey: 
+  evolutionCDescKey: 
+  category: 5
+  skillLevel: 1
+  skillActionImage: {fileID: 0}
+  damageMultipliers:
+  - 30
+  breakPowers:
+  - 30
+  bonusCritRates:
+  - 0
+  bonusAccuracyRates:
+  - 0
+  baseAccuracy: 90
+  isUltimate: 1
+  forceHitReaction: 0
+  hitCounts: 01000000
+  currentEvolution: 0
+  evolutionA_Multipliers:
+  - 0.5
+  - 0.75
+  - 1
+  evolutionB_Multipliers:
+  - 0.4
+  - 0.5
+  - 0.6
+  evolutionC_DamageMultipliers:
+  - 15
+  - 20
+  - 25
+  evolutionC_BreakPowers:
+  - 25
+  - 30
+  - 35

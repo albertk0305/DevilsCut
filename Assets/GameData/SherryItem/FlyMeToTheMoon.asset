@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: FlyMeToTheMoon
   itemNameKey: FlyMeToTheMoon
-  itemIcon: {fileID: 21300000, guid: b973095c003eead46a946174d8f839ef, type: 3}
+  itemIcon: {fileID: 21300000, guid: 455bbb6aafb1aab4db9a2b12f45767bb, type: 3}
   itemDescKey: 
   itemBonusKey: 
   grade: 3

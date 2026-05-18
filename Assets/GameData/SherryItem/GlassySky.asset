@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: GlassySky
   itemNameKey: GlassySky
-  itemIcon: {fileID: 21300000, guid: 04752072efba21f4282452b5e334b58c, type: 3}
+  itemIcon: {fileID: 21300000, guid: 957412cefa48fbf4aa9464f145e34fb3, type: 3}
   itemDescKey: 
   itemBonusKey: 
   grade: 2

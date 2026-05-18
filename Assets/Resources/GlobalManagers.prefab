@@ -139,7 +139,7 @@ MonoBehaviour:
     starLevel: 2
   - data: {fileID: 11400000, guid: eb29b40cbdb370348bb3bee35c84e192, type: 2}
     starLevel: 1
-  currentEnemyToFight: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
+  currentEnemyToFight: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
   unlockedSkills:
   - {fileID: 11400000, guid: 6f76bd2b0cc4916469f2ca32aba944e9, type: 2}
   - {fileID: 11400000, guid: 64802653b7803204a93d67678bd46cd7, type: 2}

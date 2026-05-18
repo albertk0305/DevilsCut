@@ -54,54 +54,72 @@ public class BuffManager : MonoBehaviour
         return cachedGroupedEffects;
     }
 
-    // 버프/디버프 부여 로직
-    public void AddEffect(bool isPlayerTarget, StatusEffectData data, float value, int turns)
+    // [신규 추가] 실시간 특수 스탯 변동을 귀속 패시브 아이콘으로 UI에 반영하는 핵심 함수!
+    // 값이 존재하면 999턴 귀속 버프로 띄우고, 변동되면 수치 갱신, 0(또는 기본값)이 되면 버프창에서 제거합니다.
+    public void UpdatePermanentPassive(bool isPlayer, StatusEffectData data, float currentValue, float defaultValue = 0f)
     {
-        var list = isPlayerTarget ? playerEffects : enemyEffects;
-        bool isSelfBuff = CombatManager.Instance != null && CombatManager.Instance.IsCurrentTurnOwner(isPlayerTarget);
+        if (data == null) return;
+        data.isPermanentPassive = true; // 강제 귀속 플래그 세팅
 
-        ActiveEffect existingEffect = list.Find(e => e.effectData == data);
+        var list = isPlayer ? playerEffects : enemyEffects;
+        var existing = list.Find(e => e.effectData == data);
 
-        if (existingEffect != null)
+        // 기본값과 다르다면 (즉, 효과가 활성화되어 있다면) 버프창에 유지/갱신
+        if (Mathf.Abs(currentValue - defaultValue) > 0.001f)
         {
-            existingEffect.turnsLeft = Mathf.Max(existingEffect.turnsLeft, turns);
-
-            if (data.specialType == SpecialEffectType.Bleed)
+            if (existing != null)
             {
-                existingEffect.value += value;
+                existing.value = currentValue - defaultValue; // 변동된 순수 보너스 수치 반영
             }
             else
             {
-                if (value < 0) existingEffect.value = Mathf.Min(existingEffect.value, value);
-                else existingEffect.value = Mathf.Max(existingEffect.value, value);
+                list.Add(new ActiveEffect
+                {
+                    effectData = data,
+                    value = currentValue - defaultValue,
+                    turnsLeft = 999, // 영구 유지
+                    isNewlyApplied = false
+                });
             }
-
-            existingEffect.isNewlyApplied = isSelfBuff;
         }
         else
         {
-            list.Add(new ActiveEffect
-            {
-                effectData = data,
-                value = value,
-                turnsLeft = turns,
-                isNewlyApplied = isSelfBuff
-            });
+            // 수치가 기본값으로 돌아왔다면 버프 아이콘 제거
+            if (existing != null) list.Remove(existing);
         }
 
         if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
     }
 
-
-    // 턴 종료 시 남은 턴수 차감 및 만료된 버프 삭제
-    public void UpdateEffectsOnTurnEnd(bool isPlayerTarget)
+    // 버프/디버프 부여 로직
+    public void AddEffect(bool isPlayerTarget, StatusEffectData data, float val, int duration)
     {
+        if (data == null) return;
+
         var list = isPlayerTarget ? playerEffects : enemyEffects;
+
+        list.Add(new ActiveEffect
+        {
+            effectData = data,
+            value = val,
+            turnsLeft = data.isPermanentPassive ? 999 : duration, // 귀속 패시브는 무조건 999턴 고정
+            isNewlyApplied = !data.isPermanentPassive // 패시브는 새 버프 보호 플래그 제외
+        });
+
+        if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
+    }
+
+
+    public void AdvanceTurnActiveEffects(bool isPlayerTurn)
+    {
+        var list = isPlayerTurn ? playerEffects : enemyEffects;
         bool hasChanged = false;
 
-        // 리스트를 삭제할 때는 역순(Reverse) 순회가 가장 안전하고 최적화된 표준 방식입니다.
         for (int i = list.Count - 1; i >= 0; i--)
         {
+            // [수정] 귀속 패시브 종류는 턴 감소 로직을 완벽하게 패스합니다! (영원히 999턴 유지)
+            if (list[i].effectData.isPermanentPassive) continue;
+
             if (list[i].isNewlyApplied)
             {
                 list[i].isNewlyApplied = false;
@@ -121,7 +139,6 @@ public class BuffManager : MonoBehaviour
             CombatUIManager.Instance.RefreshBuffUI();
     }
 
-    // [최적화] 가드 스택 소모 로직을 캡슐화 (CombatManager가 리스트를 직접 건드리지 않게 함)
     public void ConsumeGuardEffect(bool isPlayerTarget)
     {
         var list = isPlayerTarget ? playerEffects : enemyEffects;
@@ -142,8 +159,13 @@ public class BuffManager : MonoBehaviour
 
         if (targetGuard != null)
         {
-            list.Remove(targetGuard);
-            if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
+            // 패시브 가드가 아니라면 소모 처리
+            if (!targetGuard.effectData.isPermanentPassive)
+            {
+                list.Remove(targetGuard);
+                if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
+                DevLog.Log($"[BuffManager] {(isPlayerTarget ? "아군" : "적군")}의 가드 버프 1스택이 소모되었습니다.");
+            }
         }
     }
 }

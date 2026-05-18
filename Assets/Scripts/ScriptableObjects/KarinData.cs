@@ -12,5 +12,6 @@ public class KarinData : ScriptableObject
     public Sprite ready;
     public Sprite CutIn;
     public Sprite UsingItem;
+    public Sprite battle;
     // 추가하고 싶은 표정이 있다면 여기에 계속 늘려주면 됩니다!
 }

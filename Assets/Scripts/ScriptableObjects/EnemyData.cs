@@ -21,7 +21,9 @@ public class EnemyData : ScriptableObject
     public int level;
     public int maxHp;
 
-    public int ActionPoints; 
+    public int ActionPoints;
+
+    public int currentHp;
 
     public int breakResistance; // 그로기 저항
     public float maxBreakGauge = 100f; // 최대 브레이크 수치
@@ -29,4 +31,15 @@ public class EnemyData : ScriptableObject
     public int defense;         // 방어
     public int speed;           // 속도
     public int luck;             // 운
+
+    [Header("특수 전투 스탯 (전투 중 실시간 변동)")]
+    public float damageGivenAmp = 0f;       // 가하는 피해 증폭 (%)
+    public float damageReduction = 0f;      // 받는 피해 감소 (%)
+    public float critRate = 0f;              // 크리티컬 확률 (%)
+    public float critDamage = 1.5f;          // 크리티컬 피해량 (기본 1.5f = 150%)
+    public float lifeSteal = 0f;            // 글로벌 흡혈률 (%)
+    public float trueDamageConversion = 0f;  // 방어 무시 고정피해 전환율 (%)
+    public float bonusAccuracy = 0f;         // 보너스 명중률 (%)
+    public float bonusEvasion = 0f;          // 보너스 회피율 (%)
+    public float healingReceivedAmp = 0f;   // 받는 회복량 증폭 (%)
 }

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd3669ee8af7e24c927d5508b5636aa, type: 3}
+  m_Name: Michael
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyNameKey: Michael
+  enemyImage: {fileID: 21300000, guid: 349510c06ffcef44abd96cf6a2feec5d, type: 3}
+  CutIn: {fileID: 21300000, guid: 657214891ca487e4f9f7e7f05163c7c7, type: 3}
+  hit: {fileID: 21300000, guid: 10795b22d4a0fb3409441e288918a5f1, type: 3}
+  evade: {fileID: 21300000, guid: 4aaf28389dbfe754996b0bd89586de5c, type: 3}
+  breakImage: {fileID: 21300000, guid: 4ff3a681121248449ad3787dd84320c5, type: 3}
+  guardImage: {fileID: 0}
+  aiBrain: {fileID: 11400000, guid: f8c30ce9b3f9b7b49adb06e467b46d40, type: 2}
+  level: 0
+  maxHp: 10000
+  ActionPoints: 10
+  currentHp: 10000
+  breakResistance: 100
+  maxBreakGauge: 200
+  strength: 20
+  defense: 20
+  speed: 20
+  luck: 20
+  damageGivenAmp: 0
+  damageReduction: 0
+  critRate: 0
+  critDamage: 1.5
+  lifeSteal: 0
+  trueDamageConversion: 0
+  bonusAccuracy: 0
+  bonusEvasion: 0
+  healingReceivedAmp: 0

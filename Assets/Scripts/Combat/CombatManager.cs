@@ -33,6 +33,17 @@ public class CombatManager : MonoBehaviour
     [Header("데이터 연결")]
     public PlayerData playerData;
 
+    [Header("특수 스탯 표시용 에셋 매핑 (Passives)")]
+    public StatusEffectData pEffect_DamageAmp;
+    public StatusEffectData pEffect_DamageReduction;
+    public StatusEffectData pEffect_CritRate;
+    public StatusEffectData pEffect_CritDamage;
+    public StatusEffectData pEffect_LifeSteal;
+    public StatusEffectData pEffect_TrueDamage;
+    public StatusEffectData pEffect_Accuracy;
+    public StatusEffectData pEffect_Evasion;
+    public StatusEffectData pEffect_HealAmp;
+
     private PlayerStats currentPlayerStats;
     public PlayerStats GetCurrentPlayerStats() => currentPlayerStats;
 
@@ -77,6 +88,39 @@ public class CombatManager : MonoBehaviour
 
     public bool IsPlayerSelectingPhase => currentMenuState == MenuState.CategorySelect || currentMenuState == MenuState.SkillSelect;
 
+    public void RefreshSpecialStatsProgressUI()
+    {
+        if (BuffManager.Instance == null) return;
+
+        // 1. 아군(Player) 특수 스탯 동기화
+        if (currentPlayerStats != null)
+        {
+            BuffManager.Instance.UpdatePermanentPassive(true, pEffect_DamageAmp, currentPlayerStats.finalDamageAmp);
+            BuffManager.Instance.UpdatePermanentPassive(true, pEffect_DamageReduction, currentPlayerStats.finalDamageReduction);
+            BuffManager.Instance.UpdatePermanentPassive(true, pEffect_CritRate, currentPlayerStats.critRate);
+            BuffManager.Instance.UpdatePermanentPassive(true, pEffect_CritDamage, currentPlayerStats.critDamage, 1.5f); // 기본값 1.5f 기준
+            BuffManager.Instance.UpdatePermanentPassive(true, pEffect_LifeSteal, currentPlayerStats.lifeSteal);
+            BuffManager.Instance.UpdatePermanentPassive(true, pEffect_TrueDamage, currentPlayerStats.trueDamageConversion);
+            BuffManager.Instance.UpdatePermanentPassive(true, pEffect_Accuracy, currentPlayerStats.bonusAccuracy);
+            BuffManager.Instance.UpdatePermanentPassive(true, pEffect_Evasion, currentPlayerStats.bonusEvasion);
+            BuffManager.Instance.UpdatePermanentPassive(true, pEffect_HealAmp, currentPlayerStats.healingReceivedAmp);
+        }
+
+        // 2. 적군(Enemy) 특수 스탯 동기화
+        if (currentEnemyData != null)
+        {
+            BuffManager.Instance.UpdatePermanentPassive(false, pEffect_DamageAmp, currentEnemyData.damageGivenAmp);
+            BuffManager.Instance.UpdatePermanentPassive(false, pEffect_DamageReduction, currentEnemyData.damageReduction);
+            BuffManager.Instance.UpdatePermanentPassive(false, pEffect_CritRate, currentEnemyData.critRate);
+            BuffManager.Instance.UpdatePermanentPassive(false, pEffect_CritDamage, currentEnemyData.critDamage, 1.5f);
+            BuffManager.Instance.UpdatePermanentPassive(false, pEffect_LifeSteal, currentEnemyData.lifeSteal);
+            BuffManager.Instance.UpdatePermanentPassive(false, pEffect_TrueDamage, currentEnemyData.trueDamageConversion);
+            BuffManager.Instance.UpdatePermanentPassive(false, pEffect_Accuracy, currentEnemyData.bonusAccuracy);
+            BuffManager.Instance.UpdatePermanentPassive(false, pEffect_Evasion, currentEnemyData.bonusEvasion);
+            BuffManager.Instance.UpdatePermanentPassive(false, pEffect_HealAmp, currentEnemyData.healingReceivedAmp);
+        }
+    }
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -112,7 +156,8 @@ public class CombatManager : MonoBehaviour
         {
             // 1. 순수 스탯 대신 '아이템이 적용된 스냅샷'을 전투 시작 데이터로 가져옵니다!
             currentPlayerStats = PlayerManager.Instance.GetItemModifiedStats();
-            currentEnemyData = PlayerManager.Instance.currentEnemyToFight;
+            currentEnemyData = Instantiate(PlayerManager.Instance.currentEnemyToFight);
+            currentEnemyData.currentHp = currentEnemyData.maxHp;
 
             // StatManager는 이제 이 '아이템 적용 스탯'을 베이스로 삼고 전투 버프를 계산합니다.
             if (StatManager.Instance != null)
@@ -125,7 +170,7 @@ public class CombatManager : MonoBehaviour
 
         if (currentEnemyData != null)
         {
-            currentEnemyHp = currentEnemyData.maxHp;
+            currentEnemyHp = currentEnemyData.currentHp;
             CombatUIManager.Instance.InitEnemyUI(currentEnemyData.maxHp, currentEnemyHp, currentEnemyData.enemyImage);
         }
 
@@ -150,6 +195,7 @@ public class CombatManager : MonoBehaviour
         {
             CombatUIManager.Instance.UpdateFastCombatIcon(isFastCombat);
         }
+        RefreshSpecialStatsProgressUI();
     }
 
     private void InitializeTurnQueue()
@@ -192,6 +238,8 @@ public class CombatManager : MonoBehaviour
         currentActiveEntity = currentTurnOwner;
         playerHpAtTurnStart = currentPlayerStats.currentHp;
         enemyHpAtTurnStart = currentEnemyHp;
+
+        RefreshSpecialStatsProgressUI();
 
         CombatUIManager.Instance.SetActionPanelActive(false);
         CombatUIManager.Instance.SetWaitingPanelActive(true);
@@ -400,50 +448,18 @@ public class CombatManager : MonoBehaviour
         // 1. AI 뇌(Brain)에게 이번 턴의 '행동 계획서'를 결재받습니다.
         if (currentEnemyData?.aiBrain != null)
         {
-            // 주의: 추후 EnemyAIBrain 스크립트를 수정하여 DecideNextAction 함수를 만들어야 합니다!
             intent = currentEnemyData.aiBrain.DecideNextAction(enemyTurnCount, currentPlayerStats, currentEnemyData);
             enemyTurnCount++;
         }
 
-        if (intent != null)
+        // 2. 계획서에 스킬이 정상적으로 들어있다면 실행합니다. (미카엘의 모든 행동)
+        if (intent != null && intent.skillToUse != null)
         {
-            // 2. 보스 전용 대사 출력 연출
-            if (!string.IsNullOrEmpty(intent.dialogueKey))
-            {
-                string diagText = GetTranslatedText(intent.dialogueKey);
-                float duration = intent.dialogueDuration > 0f ? intent.dialogueDuration : 1.5f;
-                yield return CombatUIManager.Instance.TypeCommentary(diagText, true, duration);
-            }
-
-            // 3. 기 모으기 (Charge) 연출
-            if (intent.isCharging)
-            {
-                string chargeMsg = !string.IsNullOrEmpty(intent.chargeComment)
-                    ? GetTranslatedText(intent.chargeComment)
-                    : $"{GetTranslatedText(currentEnemyData.enemyNameKey)}이(가) 강력한 공격을 준비합니다!";
-
-                // (선택) currentEnemyData.chargeImage 같은 기 모으기 전용 이미지가 있다면 여기서 교체
-                // CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.chargeImage);
-
-                yield return CombatUIManager.Instance.TypeCommentary(chargeMsg, true, 1.0f);
-
-                ResolveTurnEnd(); // 스킬을 쓰지 않고 턴을 넘깁니다.
-                yield break;
-            }
-
-            // 4. 실제 스킬 사용
-            if (intent.skillToUse != null)
-            {
-                PerformSkillRoutine(intent.skillToUse, false, intent.skillToUse.isUltimate);
-            }
-            else
-            {
-                ResolveTurnEnd(); // 스킬도 없고 차지(Charge)도 아니면 그냥 턴 넘김 (대기)
-            }
+            PerformSkillRoutine(intent.skillToUse, false, intent.skillToUse.isUltimate);
         }
         else
         {
-            // AI가 없거나 깡통인 경우 (기본 턴 넘김)
+            // AI가 없거나 깡통인 경우, 혹은 쉴 때 (대기)
             ResolveTurnEnd();
         }
     }
@@ -869,6 +885,8 @@ public class CombatManager : MonoBehaviour
 
     public bool ApplyDamageToEntity(bool isPlayerTarget, int damage)
     {
+        bool isDead = false; // 죽었는지 판정할 결과를 잠시 담아둘 변수
+
         if (isPlayerTarget)
         {
             int hpAfterDamage = currentPlayerStats.currentHp - damage;
@@ -882,42 +900,50 @@ public class CombatManager : MonoBehaviour
                 bool has6Point = syn.GetValueOrDefault(ItemClass.Berserker) >= 6;
                 bool hasLegendary = inventory.Exists(x => x.data.itemClass == ItemClass.Berserker && x.data.grade == ItemGrade.Legendary);
 
-                if (has6Point || hasLegendary) // 6점이거나 전설이거나 둘 중 하나라도 있다면!
+                if (has6Point || hasLegendary)
                 {
-                    currentState.hasResurrected = true; // 부활 기회 소모
+                    currentState.hasResurrected = true;
 
                     if (has6Point && hasLegendary)
                     {
-                        // 둘 다 있으면 100% 체력으로 완전 부활!
                         currentPlayerStats.currentHp = currentPlayerStats.maxHp;
                         CombatUIManager.Instance.SpawnDamageText("<color=#00FF00>Resurrect!</color>", false, true);
                         DevLog.Log("[불굴의 투지+전설] 치명상을 입었으나, 최대 체력으로 부활합니다!");
                     }
                     else
                     {
-                        // 하나만 있으면 체력 1로 버팀!
                         currentPlayerStats.currentHp = 1;
                         CombatUIManager.Instance.SpawnDamageText("<color=#FF0000>Endure!</color>", false, true);
                         DevLog.Log("[사신 거부] 치명상을 입었으나, 체력 1로 버텨냅니다!");
                     }
 
                     BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-                    return false; // 죽지 않았으므로 false 반환
+
+                    // 부활 직후에도 특수 스탯 UI 갱신!
+                    RefreshSpecialStatsProgressUI();
+                    return false; // 안 죽었으므로 여기서 함수 종료
                 }
             }
 
             // 부활 기믹이 안 터졌다면 정상적으로 데미지 적용
             currentPlayerStats.currentHp = Mathf.Max(0, hpAfterDamage);
             BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-            return currentPlayerStats.currentHp <= 0; // 죽었는지 여부 반환
+
+            isDead = currentPlayerStats.currentHp <= 0; // 결과 저장
         }
         else
         {
             // 적군 데미지 처리 (기존 동일)
             currentEnemyHp = Mathf.Max(0, currentEnemyHp - damage);
             BattleEventSystem.CallHpChanged(false, currentEnemyHp, currentEnemyData.maxHp);
-            return currentEnemyHp <= 0;
+
+            isDead = currentEnemyHp <= 0; // 결과 저장
         }
+
+        // [핵심] 리턴으로 빠져나가기 직전에 안전하게 UI를 갱신합니다!
+        RefreshSpecialStatsProgressUI();
+
+        return isDead; // 최종 결과 반환
     }
 
     public void EndCombat(bool isWin)
@@ -1017,8 +1043,8 @@ public class CombatManager : MonoBehaviour
                 yield return new WaitForSeconds(1.0f);
             }
 
-            if (currentActiveEntity.isPlayer) BuffManager.Instance.UpdateEffectsOnTurnEnd(true);
-            else if (currentActiveEntity.type == EntityType.Enemy) BuffManager.Instance.UpdateEffectsOnTurnEnd(false);
+            if (currentActiveEntity.isPlayer) BuffManager.Instance.AdvanceTurnActiveEffects(true);
+            else if (currentActiveEntity.type == EntityType.Enemy) BuffManager.Instance.AdvanceTurnActiveEffects(false);
 
             //  캐스터 시너지: 매 턴 종료 시 무작위 독립 버프 부여
             if (currentActiveEntity.isPlayer && PlayerManager.Instance != null)

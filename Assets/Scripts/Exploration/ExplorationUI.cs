@@ -24,6 +24,10 @@ public class ExplorationUI : MonoBehaviour
     public Image lastFacilityImage;   // 마지막 방문 시설
 
     [Header("우측 (랜덤 시설 3개 슬롯)")]
+    // [신규 추가] 명시적으로 끄고 켤 슬롯의 최상위 부모 오브젝트
+    public GameObject[] randomSlotRoots;
+
+    [Header("우측 (랜덤 시설 3개 슬롯)")]
     public Image[] randomFacilityImages;
     public Image[] randomOperatorImages;
     public TextMeshProUGUI[] randomRankTexts;
@@ -37,6 +41,15 @@ public class ExplorationUI : MonoBehaviour
 
     [Header("상단 재화 UI")]
     public TextMeshProUGUI goldText;
+
+    [Header("진척도 및 열쇠 UI")]
+    public TextMeshProUGUI keyCountText; // 열쇠 개수 (X0)
+
+    public GameObject explorationProgressParent; // 탐색 진행도 부모 객체
+    public GameObject[] explorationProgressIcons; // 7개의 탐색 진행 아이콘 (순서대로 넣으세요)
+
+    public GameObject battleProgressParent; // 전투 진행도 부모 객체
+    public GameObject[] battleProgressIcons; // 4개의 전투 진행 아이콘 (순서대로 넣으세요)
 
     public GameObject statusCanvas;
     public GameObject settingsCanvas;
@@ -93,68 +106,96 @@ public class ExplorationUI : MonoBehaviour
         else lastFacilityImage.gameObject.SetActive(false);
 
         // 3개 무작위 뽑기 및 화면 적용
-        currentOptions = ExplorationManager.Instance.GetRandomNodes(3);
+        currentOptions = ExplorationManager.Instance.GetCurrentOptions();
 
-        for (int i = 0; i < currentOptions.Count; i++)
+        for (int i = 0; i < 3; i++)
         {
             ExplorationNodeData data = currentOptions[i];
 
-            // 1. 공통 처리: 어떤 노드든 버튼 이미지는 띄운다.
-            if (randomFacilityImages[i] != null) randomFacilityImages[i].sprite = data.nodeImage;
+            // 1. 데이터가 null이면 그 슬롯(버튼) 전체를 꺼버립니다. (대칭용)
+            if (data == null)
+            {
+                if (randomSlotRoots != null && randomSlotRoots.Length > i && randomSlotRoots[i] != null)
+                {
+                    randomSlotRoots[i].SetActive(false);
+                }
+                continue;
+            }
 
-            // 2. 타입별 처리: 만약 이 데이터가 '시설(FacilityData)'이라면?
+            // 슬롯 활성화
+            if (randomSlotRoots != null && randomSlotRoots.Length > i && randomSlotRoots[i] != null)
+            {
+                randomSlotRoots[i].SetActive(true);
+            }
+
+            if (randomFacilityImages[i] != null)
+            {
+                randomFacilityImages[i].sprite = data.nodeImage;
+            }
+
+            // 2. 각 노드 타입별 UI 세팅 분기
             if (data is FacilityData facilityData)
             {
                 int currentRank = ExplorationManager.Instance.GetFacilityRank(facilityData.nodeID);
-
-                // 랭크 텍스트 켜기
-                if (randomRankTexts[i] != null)
-                {
-                    randomRankTexts[i].gameObject.SetActive(true);
-                    randomRankTexts[i].text = currentRank.ToString();
-                }
-
-                // 운영자 이미지 켜기 및 세팅
+                if (randomRankTexts[i] != null) { randomRankTexts[i].gameObject.SetActive(true); randomRankTexts[i].text = currentRank.ToString(); }
                 if (randomOperatorImages[i] != null)
                 {
                     randomOperatorImages[i].gameObject.SetActive(true);
-                    if (currentRank > 0 && facilityData.operatorImage != null)
-                        randomOperatorImages[i].sprite = facilityData.operatorImage;
-                    else
-                        randomOperatorImages[i].sprite = baitoNormal;
+                    randomOperatorImages[i].sprite = (currentRank > 0 && facilityData.operatorImage != null) ? facilityData.operatorImage : baitoNormal;
                 }
             }
-            // 만약 시설이 아니라 '이벤트'나 '위험(전투)' 칸이라면?
-            else
+            else if (data is BossSelectionNodeData bossData)
             {
-                // 랭크와 운영자 이미지를 아예 꺼버립니다! (버튼 아이콘만 남게 됨)
+                // 보스 선택창: 랭크 끄고, 운영자 자리에 보스 기본 SD를 띄웁니다!
+                if (randomRankTexts[i] != null) randomRankTexts[i].gameObject.SetActive(false);
+                if (randomOperatorImages[i] != null)
+                {
+                    randomOperatorImages[i].gameObject.SetActive(true);
+                    randomOperatorImages[i].sprite = bossData.bossData.defaultSD;
+                }
+            }
+            else if (data is PhaseBattleNodeData battleData)
+            {
+                // 전투: 랭크 끄고, 보스전일 때만 운영자(조력자 위치)에 보스 SD를 띄웁니다!
+                if (randomRankTexts[i] != null) randomRankTexts[i].gameObject.SetActive(false);
+                if (randomOperatorImages[i] != null)
+                {
+                    randomOperatorImages[i].gameObject.SetActive(battleData.isBossBattle);
+                    if (battleData.isBossBattle) randomOperatorImages[i].sprite = battleData.bossData.defaultSD;
+                }
+            }
+            else // 일반 위험/이벤트 노드
+            {
                 if (randomRankTexts[i] != null) randomRankTexts[i].gameObject.SetActive(false);
                 if (randomOperatorImages[i] != null) randomOperatorImages[i].gameObject.SetActive(false);
             }
         }
+        UpdateProgressUI();
     }
 
     // 시설 선택 UI 버튼에서 OnClick()으로 연결할 함수 (인자값으로 0, 1, 2를 넘겨줄 거에요)
     public void OnClickFacilitySlot(int slotIndex)
     {
-        if (slotIndex >= currentOptions.Count) return;
+        if (slotIndex >= currentOptions.Count || currentOptions[slotIndex] == null) return;
 
-        if (selectedIndex != -1 && selectedIndex != slotIndex)
-        {
-            ResetSelectedOperatorFace();
-        }
+        if (selectedIndex != -1 && selectedIndex != slotIndex) ResetSelectedOperatorFace();
 
         selectedIndex = slotIndex;
         ExplorationNodeData selectedData = currentOptions[slotIndex];
 
+        // 클릭 시 표정을 찡그리거나/준비 자세로 바꾸는 로직
         if (selectedData is FacilityData facilityData)
         {
             int currentRank = ExplorationManager.Instance.GetFacilityRank(facilityData.nodeID);
-
-            if (currentRank > 0 && facilityData.operatorSmileImage != null)
-                randomOperatorImages[slotIndex].sprite = facilityData.operatorSmileImage;
-            else
-                randomOperatorImages[slotIndex].sprite = baitoSmile;
+            randomOperatorImages[slotIndex].sprite = (currentRank > 0 && facilityData.operatorSmileImage != null) ? facilityData.operatorSmileImage : baitoSmile;
+        }
+        else if (selectedData is BossSelectionNodeData bossSelData)
+        {
+            randomOperatorImages[slotIndex].sprite = bossSelData.bossData.readySD; // 보스 선택 시 Ready SD!
+        }
+        else if (selectedData is PhaseBattleNodeData battleData && battleData.isBossBattle)
+        {
+            randomOperatorImages[slotIndex].sprite = battleData.bossData.readySD; // 보스전 돌입 전 Ready SD!
         }
 
         confirmPopup.SetActive(true);
@@ -164,19 +205,22 @@ public class ExplorationUI : MonoBehaviour
     // 클릭했던 시설의 운영자의 표정을 기본 상태로 되돌리는 함수
     private void ResetSelectedOperatorFace()
     {
-        if (selectedIndex == -1) return; // 선택된 게 없으면 패스
+        if (selectedIndex == -1 || currentOptions[selectedIndex] == null) return;
 
         ExplorationNodeData prevData = currentOptions[selectedIndex];
 
-        // [수정됨] 이전에 선택했던 노드가 '시설'이었을 때만 표정을 원상 복구합니다.
         if (prevData is FacilityData facilityData)
         {
             int prevRank = ExplorationManager.Instance.GetFacilityRank(facilityData.nodeID);
-
-            if (prevRank > 0 && facilityData.operatorImage != null)
-                randomOperatorImages[selectedIndex].sprite = facilityData.operatorImage;
-            else
-                randomOperatorImages[selectedIndex].sprite = baitoNormal;
+            randomOperatorImages[selectedIndex].sprite = (prevRank > 0 && facilityData.operatorImage != null) ? facilityData.operatorImage : baitoNormal;
+        }
+        else if (prevData is BossSelectionNodeData bossSelData)
+        {
+            randomOperatorImages[selectedIndex].sprite = bossSelData.bossData.defaultSD; // 보스 기본 SD 원상복구
+        }
+        else if (prevData is PhaseBattleNodeData battleData && battleData.isBossBattle)
+        {
+            randomOperatorImages[selectedIndex].sprite = battleData.bossData.defaultSD;
         }
     }
 
@@ -256,15 +300,23 @@ public class ExplorationUI : MonoBehaviour
                     karinDialogueText.text = LocalizationManager.Instance.GetText("msg_operator_not_unlocked");
                 }
             }
-            else if (data is DangerNodeData)
+            else if (data is BossSelectionNodeData)
             {
-                // 전투 노드를 눌렀을 때
-                karinDialogueText.text = LocalizationManager.Instance.GetText("msg_danger_selected");
+                // 예: "이 녀석을 다음 타겟으로 정한 거군요."
+                karinDialogueText.text = LocalizationManager.Instance.GetText("msg_boss_selected");
             }
-            else if (data is EventNodeData)
+            else if (data is PhaseBattleNodeData pBattle)
             {
-                // 이벤트 노드를 눌렀을 때
-                karinDialogueText.text = LocalizationManager.Instance.GetText("msg_event_selected");
+                if (pBattle.isBossBattle)
+                {
+                    // 예: "드디어 보스전이에요. 준비 단단히 하세요!"
+                    karinDialogueText.text = LocalizationManager.Instance.GetText("msg_boss_battle_ready");
+                }
+                else
+                {
+                    // 예: "전투가 곧 시작돼요. 조심하세요."
+                    karinDialogueText.text = LocalizationManager.Instance.GetText("msg_general_battle_ready");
+                }
             }
         }
     }
@@ -273,33 +325,34 @@ public class ExplorationUI : MonoBehaviour
     public void OnClickConfirm()
     {
         if (selectedIndex == -1) return;
-
         ExplorationNodeData targetData = currentOptions[selectedIndex];
+        confirmPopup.SetActive(false);
 
-        // [수정됨] 선택한 데이터의 타입에 따라 다른 로그와 행동을 준비합니다.
-        if (targetData is FacilityData facility)
+        if (targetData is BossSelectionNodeData bossSelect)
+        {
+            // 보스 픽! 턴을 진행하고 다시 화면을 새로고침합니다.
+            ExplorationManager.Instance.SelectTargetBoss(bossSelect.bossData);
+            selectedIndex = -1;
+            SetupNodes();
+            UpdateCharacterStates();
+            return; // 씬 전환 안 함
+        }
+        else if (targetData is FacilityData facility)
         {
             ExplorationManager.Instance.lastVisitedFacility = facility;
-            DevLog.Log($"[시설] {facility.nodeID} 씬으로 이동합니다...");
+            ExplorationManager.Instance.AdvanceExplorationTurn(); // 시설 탐색 1턴 소모!
             // SceneManager.LoadScene(facility.nodeID + "Scene"); 
         }
-        else if (targetData is EventNodeData eventNode)
+        else if (targetData is PhaseBattleNodeData pBattle)
         {
-            DevLog.Log($"[이벤트] {eventNode.nodeID} 발생! (이벤트 씬 로드)");
-            // SceneManager.LoadScene("EventScene"); 
-        }
-        else if (targetData is DangerNodeData dangerNode)
-        {
-            DevLog.Log($"[전투] LV.{dangerNode.enemyLevel} 적 출현! (전투 씬 로드)");
+            // 전투 우체통에 적군 배달
+            PlayerManager.Instance.currentEnemyToFight = pBattle.enemyToSpawn;
 
-            // 1. PlayerManager 우체통에 적 데이터를 쏙 넣어줍니다!
-            PlayerManager.Instance.currentEnemyToFight = dangerNode.enemyToSpawn;
+            // [중요!] 나중에 CombatManager에서 전투 승리 후 아래 코드를 호출해 주어야 다음 턴/페이즈로 넘어갑니다.
+            // ExplorationManager.Instance.AdvanceBattleTurn(pBattle.isBossBattle);
 
-            // 2. 이제 전투 씬으로 넘어갑니다.
             UnityEngine.SceneManagement.SceneManager.LoadScene("CombatScene");
         }
-
-        confirmPopup.SetActive(false);
     }
 
     // 체력바 업데이트 함수
@@ -331,4 +384,63 @@ public class ExplorationUI : MonoBehaviour
         }
     }
 
+    private void UpdateProgressUI()
+    {
+        if (ExplorationManager.Instance == null) return;
+
+        // 1. 열쇠 텍스트 업데이트
+        if (keyCountText != null)
+            keyCountText.text = $"X{ExplorationManager.Instance.currentKeys}";
+
+        GamePhase phase = ExplorationManager.Instance.currentPhase;
+        int turn = ExplorationManager.Instance.currentTurnInPhase;
+
+        // 2. 탐색 페이즈 (보스 선택 ~ 6턴 시설 이용)
+        if (phase == GamePhase.BossSelection || phase == GamePhase.Exploration)
+        {
+            if (explorationProgressParent != null) explorationProgressParent.SetActive(true);
+            if (battleProgressParent != null) battleProgressParent.SetActive(false); // 탐색 중엔 전투 진행도 숨김
+
+            int activeCount = (phase == GamePhase.BossSelection) ? 1 : (2 + turn);
+
+            if (explorationProgressIcons != null)
+            {
+                for (int i = 0; i < explorationProgressIcons.Length; i++)
+                {
+                    if (explorationProgressIcons[i] != null)
+                        explorationProgressIcons[i].SetActive(i < activeCount);
+                }
+            }
+        }
+        // 3. 전투 페이즈 (일반 전투 3번 ~ 보스전)
+        else if (phase == GamePhase.GeneralBattle || phase == GamePhase.BossBattle)
+        {
+            //  [수정] 전투 중에도 탐색 UI 부모를 끄지 않고 유지합니다!
+            if (explorationProgressParent != null) explorationProgressParent.SetActive(true);
+            if (battleProgressParent != null) battleProgressParent.SetActive(true);
+
+            //  [추가] 탐색 UI의 7개 아이콘은 꽉 채워진(모두 true) 상태로 둡니다.
+            if (explorationProgressIcons != null)
+            {
+                for (int i = 0; i < explorationProgressIcons.Length; i++)
+                {
+                    if (explorationProgressIcons[i] != null)
+                        explorationProgressIcons[i].SetActive(true);
+                }
+            }
+
+            // 일반 전투 중이면 (턴 수 + 1)개 점등, 보스전이면 4개 모두 점등
+            // 예: 첫 번째 일반전투(Turn 0) -> 1개 / 마지막 일반전투(Turn 2) -> 3개
+            int activeCount = (phase == GamePhase.BossBattle) ? 4 : (1 + turn);
+
+            if (battleProgressIcons != null)
+            {
+                for (int i = 0; i < battleProgressIcons.Length; i++)
+                {
+                    if (battleProgressIcons[i] != null)
+                        battleProgressIcons[i].SetActive(i < activeCount);
+                }
+            }
+        }
+    }
 }

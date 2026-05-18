@@ -22,6 +22,10 @@ public class StatusEffectData : ScriptableObject
     [TextArea]
     public string baseDescription;
 
+    [Header("귀속 및 출력 커스텀 설정")]
+    public bool isPermanentPassive; // 지울 수 없고 턴이 감소하지 않는 영구 버프/패시브 여부
+    public bool showStackDetails;   // 혈액 저주처럼 툴팁에 개별 스택/턴 정보를 낱낱이 보여줄지 여부
+
     // 합쳐진 수치 표현 (예: "(총 +{0})")
     public string valueFormat;
 }

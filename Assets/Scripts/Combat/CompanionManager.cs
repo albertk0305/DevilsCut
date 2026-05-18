@@ -75,8 +75,8 @@ public class CompanionManager : MonoBehaviour
             CombatUIManager.Instance.InterruptAndTypeCommentary("카린의 차례입니다!");
             yield return StartCoroutine(CombatUIManager.Instance.ShowCutIn(karinData.CutIn));
         }
-        if (karinData != null && karinData.ready != null)
-            CombatUIManager.Instance.SetCasterImage(true, karinData.ready);
+        if (karinData != null && karinData.battle != null)
+            CombatUIManager.Instance.SetCasterImage(true, karinData.battle);
 
         string itemName = GetTranslatedText(item.itemName);
         Coroutine textCoroutine = StartCoroutine(CombatUIManager.Instance.TypeCommentary($"카린이 {itemName}을(를) 사용했습니다!"));
