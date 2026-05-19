@@ -16,7 +16,7 @@ MonoBehaviour:
   effectName: MichaelStrBuff
   category: 2
   icon: {fileID: 21300000, guid: b06a08c67f032ad459626a9e86772e4e, type: 3}
-  targetStat: 0
+  targetStat: 1
   modifierType: 1
   specialType: 0
   baseDescription: 

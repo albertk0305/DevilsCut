@@ -5,8 +5,9 @@ public class SkillLogic_Michael_IronMaiden : SkillLogic_Michael_Base
 {
     public override float GetSkillBonusLifesteal(SkillData skill)
     {
-        // ±âº» ±Ã±Ø±â ÈíÇ÷·ü 40% + ¹ÌÄ«¿¤ ÆĞ½Ãºê(ÀÒÀº Ã¼·Â ºñ·Ê) ÈíÇ÷·üÀ» ÇÕ»ê!
-        return 0.40f + base.GetSkillBonusLifesteal(skill);
+        // [ÇÙ½É] ¹ÌÄ«¿¤ÀÇ ±âº» ÈíÇ÷·ü(enemy.lifeSteal)Àº AI°¡ °ü¸®ÇÏ°í,
+        // Ã¶Ã³³à ½ºÅ³¸¸ÀÇ °íÀ¯ ÈíÇ÷ º¸³Ê½º 40%¸¸ ÀÌ ÇÔ¼ö¿¡¼­ ´øÁ®Áİ´Ï´Ù!
+        return 0.40f;
     }
 
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)

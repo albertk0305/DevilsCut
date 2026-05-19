@@ -101,6 +101,19 @@ public class CompanionManager : MonoBehaviour
         {
             CombatUIManager.Instance.SetDefenderImage(isPlayerDefending, defenderHitSprite);
             CombatUIManager.Instance.SpawnDamageText(damage.ToString(), false, isPlayerDefending);
+
+            // [핵심] 여기서 즉시 데미지 적용 및 체력바 업데이트
+            bool isDead = CombatManager.Instance.ApplyDamageToEnemy(damage);
+
+            if (isDead)
+            {
+                // 연타 도중 적이 죽었으면 즉시 승리 처리 후 코루틴 종료!
+                yield return new WaitForSeconds(1.0f);
+                CombatUIManager.Instance.ClearCombatEffects();
+                CombatUIManager.Instance.ResetCasterImage(true);
+                CombatManager.Instance.EndCombat(true);
+                yield break;
+            }
         }
 
         yield return new WaitForSeconds(2.0f);
@@ -108,13 +121,9 @@ public class CompanionManager : MonoBehaviour
 
         CombatUIManager.Instance.ClearCombatEffects();
         CombatUIManager.Instance.ResetCasterImage(true);
-        if (damage > 0) CombatUIManager.Instance.ResetDefenderImage(isPlayerDefending);
+        if (damage > 0) CombatManager.Instance.RestoreDefenderImage(isPlayerDefending);
 
-        // 데미지 적용 및 승리 판정은 지휘관(CombatManager)에게 위임합니다.
-        if (damage > 0 && CombatManager.Instance.ApplyDamageToEnemy(damage))
-            CombatManager.Instance.EndCombat(true);
-        else
-            CombatManager.Instance.ResolveTurnEnd();
+        CombatManager.Instance.ResolveTurnEnd();
     }
 
     // ==========================================
@@ -204,7 +213,7 @@ public class CompanionManager : MonoBehaviour
 
         CombatUIManager.Instance.ClearCombatEffects();
         CombatUIManager.Instance.ResetCasterImage(true);
-        if (hitDamages.Count > 0) CombatUIManager.Instance.ResetDefenderImage(isPlayerDefending);
+        if (hitDamages.Count > 0) CombatManager.Instance.RestoreDefenderImage(isPlayerDefending);
 
         if (!isStartSkill)
         {

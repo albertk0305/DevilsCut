@@ -15,6 +15,10 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
     public float[] fullHouseHeals = { 0.20f, 0.30f, 0.50f };         // 눈금 5 (체력 회복량)
     public int[] jackpotMultipliers = { 30, 50, 100 };               // 눈금 6 (운 계수)
 
+    [Header("레벨별 그로기 수치")]
+    public float[] smallBlindBreak = { 5f, 10f, 15f };   // 눈금 2
+    public float[] jackpotBreak = { 30f, 40f, 50f };    // 눈금 6
+
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
         int playerLuck = StatManager.Instance.GetEffectiveStat(true, TargetStat.Luck);
@@ -51,11 +55,17 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
         int index = Mathf.Clamp(skillLevel - 1, 0, 2);
         string textToDisplay = "";
 
+        bool isBrokenNow = false;
+
         switch (dice)
         {
             case 1: // Snake Eyes
                 textToDisplay = "MUCK";
                 CombatManager.Instance.ApplyDamageToEntity(false, 1);
+                if (CombatUIManager.Instance != null)
+                {
+                    CombatUIManager.Instance.SpawnDamageText("1", false, false);
+                }
                 var supEntity = TurnManager.Instance.turnQueue.Find(e => e.type == EntityType.Supporter);
                 if (supEntity != null) supEntity.actionGauge -= 100f;
                 break;
@@ -65,6 +75,7 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
                 int lowDmg = Mathf.Max(1, Mathf.RoundToInt(pStats.strength * lowBetMultipliers[index]));
                 CombatManager.Instance.ApplyDamageToEntity(false, lowDmg);
                 CombatUIManager.Instance.SpawnDamageText(lowDmg.ToString(), false, false);
+                isBrokenNow = BreakManager.Instance.AddBreakDamage(false, smallBlindBreak[index]);
                 break;
 
             case 3: // Raise the Stakes
@@ -104,8 +115,14 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
                 int jackpotDmg = Mathf.Max(1, luckStat * jackpotMultipliers[index]);
                 CombatManager.Instance.ApplyDamageToEntity(false, jackpotDmg);
                 CombatUIManager.Instance.SpawnDamageText(jackpotDmg.ToString(), true, false);
+                isBrokenNow = BreakManager.Instance.AddBreakDamage(false, jackpotBreak[index]);
                 StyleRankManager.Instance.IncreaseRank(7); // 즉시 SSS 랭크 [cite: 53]
                 break;
+        }
+
+        if (isBrokenNow && CombatUIManager.Instance != null && TurnManager.Instance != null)
+        {
+            CombatUIManager.Instance.UpdateTurnOrderUI(TurnManager.Instance.GetFutureTurnIcons(5));
         }
 
         DevLog.Log($"[벨페고르 배틀] Lv.{skillLevel} 데스 로울: 주사위 {dice} ({textToDisplay})");

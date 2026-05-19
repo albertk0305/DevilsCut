@@ -15,7 +15,7 @@ MonoBehaviour:
   playerNamekey: sherry
   normal: {fileID: 21300000, guid: b397b6e04837b3d4ab452dc7c304de6a, type: 3}
   cutIn: {fileID: 21300000, guid: 46cff6a0058accd4994e85b1484cde8d, type: 3}
-  hit: {fileID: 21300000, guid: 346c760c1631278478fa765648dcdcd6, type: 3}
+  hit: {fileID: 21300000, guid: d05cbc7aef6d2264f8351a76172de11c, type: 3}
   evade: {fileID: 21300000, guid: 716f4d1f2a3b1a848a2b965d38a92cbf, type: 3}
   breakImage: {fileID: 21300000, guid: c500f7796f56a204c96cacdda253bb45, type: 3}
   guardImage: {fileID: 21300000, guid: 29774a436b5400940af5cf16381dfe08, type: 3}

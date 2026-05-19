@@ -10,6 +10,9 @@ public class SupporterLogic_Mammon_Battle : SupporterLogicBase
     public float[] dmgAtm = { 8.0f, 10.0f, 14.0f };        // 2: 강제 출금된 부도 금고
     public float[] dmgHolyWater = { 6.0f, 8.0f, 11.0f };   // 5: 원산지 위조: 타락한 성수
 
+    [Header("레벨별 그로기 수치")]
+    public float[] breakDamageValues = { 3f, 5f, 7f };
+
     public StatusEffectData burnDebuff;
     public float[] burnRates = { 0.02f, 0.03f, 0.05f };    // 화상 (최대체력비례)
     public StatusEffectData bleedDebuff;
@@ -88,6 +91,7 @@ public class SupporterLogic_Mammon_Battle : SupporterLogicBase
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, 2);
+        float totalBreakDamage = 0f;
 
         foreach (int itemCode in selectedItems)
         {
@@ -95,9 +99,14 @@ public class SupporterLogic_Mammon_Battle : SupporterLogicBase
             {
                 case 0: // 소이탄 (화상)
                     if (burnDebuff != null) BuffManager.Instance.AddEffect(false, burnDebuff, burnRates[index], 2);
+                    totalBreakDamage += breakDamageValues[index];
                     break;
                 case 1: // 식칼 (출혈)
                     if (bleedDebuff != null) BuffManager.Instance.AddEffect(false, bleedDebuff, bleedRates[index], 2);
+                    totalBreakDamage += breakDamageValues[index];
+                    break;
+                case 2: // 부도 금고 (그로기)
+                    totalBreakDamage += breakDamageValues[index];
                     break;
                 case 3: // [수정] 신용 등급 하락 통지서 (행동수치 즉시 상수 감소 + AP 퍼센트 디버프)
                     var enemyEntity = TurnManager.Instance.turnQueue.Find(e => e.type == EntityType.Enemy);
@@ -117,6 +126,9 @@ public class SupporterLogic_Mammon_Battle : SupporterLogicBase
                         BuffManager.Instance.AddEffect(false, item4SpeedDebuff, -item4SpeedDrops[index], 2);
                     }
                     break;
+                case 5: // 타락한 성수 (그로기)
+                    totalBreakDamage += breakDamageValues[index];
+                    break;
                 case 6: // 텅 빈 돈가방 (받는 피해 증폭)
                     if (dmgAmpDebuff != null) BuffManager.Instance.AddEffect(false, dmgAmpDebuff, dmgAmpRates[index], 2);
                     break;
@@ -127,6 +139,15 @@ public class SupporterLogic_Mammon_Battle : SupporterLogicBase
                 case 8: // 밀수 각성제 (주인공 주는 피해 증폭)
                     if (playerDmgGivenAmpBuff != null) BuffManager.Instance.AddEffect(true, playerDmgGivenAmpBuff, playerAmpRates[index], 2);
                     break;
+            }
+        }
+
+        if (totalBreakDamage > 0 && BreakManager.Instance != null && !BreakManager.Instance.IsBroken(false))
+        {
+            bool isBrokenNow = BreakManager.Instance.AddBreakDamage(false, totalBreakDamage);
+            if (isBrokenNow && CombatUIManager.Instance != null && TurnManager.Instance != null)
+            {
+                CombatUIManager.Instance.UpdateTurnOrderUI(TurnManager.Instance.GetFutureTurnIcons(5));
             }
         }
 

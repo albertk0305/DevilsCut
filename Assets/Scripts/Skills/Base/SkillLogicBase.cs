@@ -84,4 +84,9 @@ public class SkillLogicBase : ScriptableObject
     {
         return 0f;
     }
+
+    public virtual int TryProcessHitEffect(EnemyData enemy)
+    {
+        return 0; // 아무 효과도 없는 스킬은 0을 반환
+    }
 }

@@ -23,7 +23,7 @@ MonoBehaviour:
   evolutionCDescKey: 
   category: 5
   skillLevel: 1
-  skillActionImage: {fileID: 21300000, guid: 841c2aa23be10fc48aa30a61c22932a5, type: 3}
+  skillActionImage: {fileID: 21300000, guid: d8f20a3f4b482c34787700632b297cc0, type: 3}
   damageMultipliers:
   - 3
   breakPowers:

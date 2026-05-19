@@ -18,3 +18,4 @@ MonoBehaviour:
   bloodCurse: {fileID: 11400000, guid: e2d6221a6c3520a4da693db585c577b4, type: 2}
   blazingChainsaw: {fileID: 11400000, guid: 2ee167a135032e548b665601d9887936, type: 2}
   ironMaiden: {fileID: 11400000, guid: 83ec0c54a93d2f449864d1a91a322a50, type: 2}
+  phase2Marker: {fileID: 11400000, guid: 359298c83791b684e9183825b574e717, type: 2}

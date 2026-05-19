@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Lucifer_BattleSkill
   m_EditorClassIdentifier: Assembly-CSharp::SupporterLogic_Lucifer_Battle
   damageMultipliers:
+  - 15
   - 20
-  - 30
-  - 40
+  - 25
   armorPenetrations:
   - 0.2
   - 0.3
@@ -25,3 +25,7 @@ MonoBehaviour:
   - 0.35
   - 0.2
   hangoverApPenalty: 50
+  breakDamageValues:
+  - 20
+  - 30
+  - 40

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "EnemyAI_Michael", menuName = "EnemyAI/Michael Boss AI")]
@@ -14,38 +15,42 @@ public class EnemyAI_Michael : EnemyAIBase
     public SkillData blazingChainsaw;
     public SkillData ironMaiden;
 
+    public StatusEffectData phase2Marker;
+
     private int phase1Index = 0;
     private int phase2Index = 0;
-    private bool isPhase2 = false;
 
     public override EnemyActionIntent DecideNextAction(int currentTurnCount, PlayerStats pStats, EnemyData enemy)
     {
         EnemyActionIntent intent = new EnemyActionIntent();
 
-        // 현재 체력 퍼센트 계산 (CombatManager나 StatManager 구조에 맞게 수정해주세요)
-        // 예: float hpPct = (float)CombatManager.Instance.currentEnemyHp / enemy.maxHp;
-        float hpPct = 0.5f; // 임시
-
-        // 1. 광폭화 스킬 발동 (50% 이하가 된 최초의 턴)
-        if (!isPhase2 && hpPct <= 0.5f)
+        // 1. BuffManager에서 광폭화 마커가 있는지 확인 (isPhase2 변수 대신 이것을 사용!)
+        bool isEnraged = false;
+        if (BuffManager.Instance != null && phase2Marker != null)
         {
-            isPhase2 = true;
-            intent.skillToUse = enrageSkill; // 이번 턴은 광폭화 스킬을 쓰고 턴을 넘깁니다!
+            isEnraged = BuffManager.Instance.GetEffects(false).Exists(e => e.effectData == phase2Marker);
+        }
+
+        float hpPct = (float)enemy.currentHp / enemy.maxHp;
+
+        // 2. 광폭화 발동 조건: 광폭화 아님 && 체력 50% 이하
+        if (!isEnraged && hpPct <= 0.5f)
+        {
+            intent.skillToUse = enrageSkill;
             return intent;
         }
 
-        // 2. 그로기 처형 기믹
-        if (isPhase2 && BreakManager.Instance.IsBroken(true))
+        // 3. 그로기 처형 기믹
+        if (isEnraged && BreakManager.Instance.IsBroken(true))
         {
             intent.skillToUse = ironMaiden;
             return intent;
         }
 
-        // 3. 정규 루프
-        if (!isPhase2)
+        // 4. 패턴 루프
+        if (!isEnraged)
         {
-            if (phase1Index == 0) intent.skillToUse = chainBury;
-            else intent.skillToUse = chainsawScratch;
+            intent.skillToUse = (phase1Index == 0) ? chainBury : chainsawScratch;
             phase1Index = (phase1Index + 1) % 3;
         }
         else
@@ -60,5 +65,48 @@ public class EnemyAI_Michael : EnemyAIBase
         }
 
         return intent;
+    }
+
+    public override void UpdatePassives(EnemyData enemy)
+    {
+        if (enemy == null || enemy.maxHp <= 0) return;
+
+        float missingHpRatio = (float)(enemy.maxHp - enemy.currentHp) / enemy.maxHp;
+
+        // 1. 패시브 1: 잃은 체력 비례 피해 증폭 (항상 적용)
+        // 기획 공식: 잃은 체력 비율 * 1.2f (최대 120% 증폭)
+        enemy.damageGivenAmp = missingHpRatio * 1.2f;
+
+        // 2. 패시브 2: 광폭화 상태 시 잃은 체력 비례 흡혈률 적용
+        bool isEnraged = false;
+        if (BuffManager.Instance != null && phase2Marker != null)
+        {
+            isEnraged = BuffManager.Instance.GetEffects(false).Exists(e => e.effectData == phase2Marker);
+        }
+
+        if (isEnraged)
+        {
+            // 기획 공식: 기본 10% + (잃은 체력 비율 * 30%)
+            enemy.lifeSteal = 0.10f + (missingHpRatio * 0.30f);
+        }
+        else
+        {
+            // 광폭화 전에는 흡혈이 없음
+            enemy.lifeSteal = 0f;
+        }
+    }
+
+    public override List<SkillData> GetEnemySkills()
+    {
+        List<SkillData> skillList = new List<SkillData>();
+
+        if (chainBury != null) skillList.Add(chainBury);
+        if (chainsawScratch != null) skillList.Add(chainsawScratch);
+        if (enrageSkill != null) skillList.Add(enrageSkill);
+        if (bloodCurse != null) skillList.Add(bloodCurse);
+        if (blazingChainsaw != null) skillList.Add(blazingChainsaw);
+        if (ironMaiden != null) skillList.Add(ironMaiden);
+
+        return skillList;
     }
 }

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 
 public class CombatVisualUI : MonoBehaviour
 {
+    public static CombatVisualUI Instance;
+
     public TextMeshProUGUI commentaryText;
     public Image cutInImage;
     public GameObject critAlertImage;

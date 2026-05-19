@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class EnemyActionIntent
@@ -10,4 +11,12 @@ public class EnemyActionIntent
 public abstract class EnemyAIBase : ScriptableObject
 {
     public abstract EnemyActionIntent DecideNextAction(int currentTurnCount, PlayerStats pStats, EnemyData enemy);
+
+    // [신규 추가] 체력 변동 등 이벤트 발생 시 패시브 스탯을 갱신하기 위한 가상 함수
+    public virtual void UpdatePassives(EnemyData enemy) { }
+
+    public virtual List<SkillData> GetEnemySkills()
+    {
+        return new List<SkillData>();
+    }
 }

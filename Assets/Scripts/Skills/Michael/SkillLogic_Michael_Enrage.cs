@@ -8,20 +8,34 @@ public class SkillLogic_Michael_Enrage : SkillLogic_Michael_Base
     public StatusEffectData defBuff;    // 방어 증가 (+25%)
     public StatusEffectData lukDebuff;  // 운 감소 (-100%)
 
+    // [핵심] 요술 생존기처럼 빗나가지 않게 강제합니다.
+    public override bool AlwaysHits(SkillData skill) => true;
+
+    // [핵심] 피해 계수를 0으로 반환하여 CombatManager가 '유틸리티 스킬'로 인식하게 합니다.
+    public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
+    {
+        return 0f;
+    }
+
     public override void ApplyEffect(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         // 1. 체력 회복 (최대 체력의 50%)
-        enemy.currentHp = Mathf.Min(enemy.maxHp, enemy.currentHp + Mathf.RoundToInt(enemy.maxHp * 0.5f));
-
-        // 2. 스탯 버프 부여 (99턴으로 사실상 영구 적용)
-        if (BuffManager.Instance != null)
+        int healAmount = Mathf.RoundToInt(enemy.maxHp * 0.5f);
+        if (CombatManager.Instance != null)
         {
-            if (strBuff != null) BuffManager.Instance.AddEffect(false, strBuff, 0.25f, 99);
-            if (defBuff != null) BuffManager.Instance.AddEffect(false, defBuff, 0.25f, 99);
-            // 운 100% 감소 (-1.0f). StatManager에서 1 미만으로는 떨어지지 않게 보호되므로 사실상 1(최하치)이 됩니다.
-            if (lukDebuff != null) BuffManager.Instance.AddEffect(false, lukDebuff, -1.0f, 99);
+            // HealEntity를 호출하면 체력 업데이트, UI 갱신, 패시브 갱신까지 한 번에 처리됩니다.
+            CombatManager.Instance.HealEntity(false, healAmount);
+
+            // 텍스트 출력
+            if (CombatUIManager.Instance != null)
+                CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, false);
         }
 
-        DevLog.Log("[미카엘] 광폭화 스킬 발동! 50% 체력 회복 및 힘/방어 버프, 운 소멸!");
+        // 2. 스탯 버프 부여
+        if (strBuff != null) BuffManager.Instance.AddEffect(false, strBuff, 0.25f, 999);
+        if (defBuff != null) BuffManager.Instance.AddEffect(false, defBuff, 0.25f, 999);
+        if (lukDebuff != null) BuffManager.Instance.AddEffect(false, lukDebuff, -1.0f, 999);
+
+        DevLog.Log("[미카엘] 광폭화 스킬 발동! 50% 체력 회복 및 버프 적용.");
     }
 }

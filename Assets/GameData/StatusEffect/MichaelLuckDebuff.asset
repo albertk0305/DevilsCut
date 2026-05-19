@@ -16,7 +16,7 @@ MonoBehaviour:
   effectName: MichaelLuckDebuff
   category: 2
   icon: {fileID: 21300000, guid: 95cf21eec85cd2b4581d56cd44b9fa57, type: 3}
-  targetStat: 0
+  targetStat: 4
   modifierType: 1
   specialType: 0
   baseDescription: 

@@ -46,12 +46,22 @@ public class BuffSlotUI : MonoBehaviour
             }
         }
 
-        // 수치 포맷팅 정보가 있다면 총합 수치 노출
-        if (!string.IsNullOrEmpty(data.valueFormat) && displayTotal != 0f)
+        if (Mathf.Abs(displayTotal) > 0.0001f)
         {
             float finalPrintValue = data.modifierType == ModifierType.Percentage ? displayTotal * 100f : displayTotal;
             string sign = finalPrintValue > 0 ? "+" : "";
-            sb.Append(" ").Append(string.Format(data.valueFormat, $"{sign}{finalPrintValue:F0}"));
+            string unit = data.modifierType == ModifierType.Percentage ? "%" : "";
+
+            if (!string.IsNullOrEmpty(data.valueFormat))
+            {
+                // 인스펙터에 포맷을 적어뒀다면 (예: "(총 {0})") 그 포맷을 따름
+                sb.Append(" ").Append(string.Format(data.valueFormat, $"{sign}{finalPrintValue:F0}{unit}"));
+            }
+            else
+            {
+                // 인스펙터에 포맷을 안 적어뒀더라도 기본 형태로 강제 출력!
+                sb.Append($" (현재 적용 수치: {sign}{finalPrintValue:F0}{unit})");
+            }
         }
 
         // [수정] 1. 영구 패시브일 경우 깔끔하게 고유 문구 출력 후 종료

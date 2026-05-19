@@ -11,6 +11,9 @@ public class SupporterLogic_Lucifer_Battle : SupporterLogicBase
     public float[] hangoverChances = { 0.40f, 0.35f, 0.20f }; // 숙취 발동 확률
     public float hangoverApPenalty = 50f; // 루시퍼 AP 감소량
 
+    [Header("레벨별 그로기 수치")]
+    public float[] breakDamageValues = { 20f, 30f, 40f };
+
     public override int CalculateDamage(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, damageMultipliers.Length - 1);
@@ -32,6 +35,19 @@ public class SupporterLogic_Lucifer_Battle : SupporterLogicBase
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, hangoverChances.Length - 1);
+
+        // 그로기 데미지 적용
+        if (BreakManager.Instance != null && !BreakManager.Instance.IsBroken(false))
+        {
+            float breakDmg = breakDamageValues[index];
+            bool isBrokenNow = BreakManager.Instance.AddBreakDamage(false, breakDmg);
+
+            // 그로기 발동 시 턴 순서 UI 즉시 갱신
+            if (isBrokenNow && CombatUIManager.Instance != null && TurnManager.Instance != null)
+            {
+                CombatUIManager.Instance.UpdateTurnOrderUI(TurnManager.Instance.GetFutureTurnIcons(5));
+            }
+        }
 
         // 하이리스크: 숙취 발동 판정
         if (Random.value <= hangoverChances[index])

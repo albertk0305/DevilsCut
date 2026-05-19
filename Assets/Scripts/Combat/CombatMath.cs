@@ -82,7 +82,7 @@ public static class CombatMath
     }
 
     // 8. 브레이크 자연 회복량 산출 (maxGauge 매개변수 추가)
-    public static float GetBreakRecoveryAmount(float currentGauge, float maxGauge, float baseRecovery = 10f)
+    public static float GetBreakRecoveryAmount(float currentGauge, float maxGauge, float baseRecovery = 5f)
     {
         float ratio = currentGauge / maxGauge; // 100f 대신 최대치로 나눔
         float multiplier = 1.0f - (ratio * ratio);
