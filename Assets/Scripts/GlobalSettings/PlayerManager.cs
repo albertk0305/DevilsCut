@@ -308,10 +308,6 @@ public class PlayerManager : MonoBehaviour
 
         // 4. (기본 + 합산) * (1 + 곱산) 메인 스탯 연산
         modified.strength = Mathf.Max(1, Mathf.RoundToInt((stats.strength + flatStr) * (1f + pctStr)));
-
-
-        // 4. (기본 + 합산) * (1 + 곱산) 메인 스탯 연산
-        modified.strength = Mathf.Max(1, Mathf.RoundToInt((stats.strength + flatStr) * (1f + pctStr)));
         modified.defense = Mathf.Max(1, Mathf.RoundToInt((stats.defense + flatDef) * (1f + pctDef)));
         modified.speed = Mathf.Max(1, Mathf.RoundToInt((stats.speed + flatSpd) * (1f + pctSpd)));
         modified.luck = Mathf.Max(1, Mathf.RoundToInt((stats.luck + flatLuck) * (1f + pctLuck)));
