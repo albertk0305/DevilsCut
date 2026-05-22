@@ -581,29 +581,10 @@ public class CombatManager : MonoBehaviour
         EnqueueApplyEffectOnHit(skill, skillResult, isPlayerAttacking);
 
         // ④ 카운터 반격 판정
-        EnqueueMorningStarCounterIfNeeded(skillResult,presentationContext.isPlayerDefending,presentationContext.isPureUtility);
+        EnqueueMorningStarCounterIfNeeded(skillResult, presentationContext.isPlayerDefending, presentationContext.isPureUtility);
 
         // ⑤ 가드 버프 차감 및 인과율(반사) 판정
-        if (skillResult.isGuardTriggered)
-        {
-            BattleVisualizer.Instance.EnqueueAction(() => { StyleRankManager.Instance?.OnSupportActionUsed(); BuffManager.Instance.ConsumeGuardEffect(true); });
-
-            if (presentationContext.isPlayerDefending)
-            {
-                float reflectRatio = 0f;
-                // 방어력 비례 반사 비율 (예시 로직 - PlayerManager에 구현되어 있다면 호출)
-                if (PlayerManager.Instance != null) reflectRatio = PlayerManager.Instance.GetReflectRatio();
-
-                if (reflectRatio > 0f)
-                {
-                    int reflectDamage = Mathf.Max(1, Mathf.RoundToInt(skillResult.totalMitigatedDamage * reflectRatio));
-                    Sprite reflectSprite = playerData.reflectImage != null ? playerData.reflectImage : playerData.guardImage;
-
-                    BattleVisualizer.Instance.EnqueueAction(() => ApplyCounterAndReflectUI(reflectDamage, reflectSprite, true));
-                    BattleVisualizer.Instance.EnqueueDelay(2.0f);
-                }
-            }
-        }
+        EnqueueGuardAndReflectIfNeeded(skillResult, presentationContext.isPlayerDefending);
 
         // ⑥ 화면 및 상태 리셋
         EnqueueSkillReset(isPlayerAttacking, presentationContext.isPlayerDefending, isUltimate, skill);
@@ -866,45 +847,83 @@ public class CombatManager : MonoBehaviour
     SkillResult skillResult,
     bool isPlayerDefending,
     bool isPureUtility)
-{
-    bool isCounterTriggered = false;
-
-    if (!skillResult.anyHit && !isPureUtility && isPlayerDefending)
     {
-        var martialSkill = PlayerManager.Instance.unlockedSkills.Find(
-            s => s.category == SkillCategory.Martial);
+        bool isCounterTriggered = false;
 
-        if (martialSkill != null && martialSkill.skillLogic is SkillLogic_MorningStar msLogic)
+        if (!skillResult.anyHit && !isPureUtility && isPlayerDefending)
         {
-            bool hasEvasionBuff = BuffManager.Instance
-                .GetEffects(true)
-                .Exists(e => e.effectData == msLogic.evasionBuffData);
+            var martialSkill = PlayerManager.Instance.unlockedSkills.Find(
+                s => s.category == SkillCategory.Martial);
 
-            if (hasEvasionBuff && martialSkill.currentEvolution == SkillEvolution.PathA)
+            if (martialSkill != null && martialSkill.skillLogic is SkillLogic_MorningStar msLogic)
             {
-                isCounterTriggered = true;
+                bool hasEvasionBuff = BuffManager.Instance
+                    .GetEffects(true)
+                    .Exists(e => e.effectData == msLogic.evasionBuffData);
 
-                int levelIdx = Mathf.Clamp(
-                    martialSkill.skillLevel - 1,
-                    0,
-                    msLogic.pathA_CounterRates.Length - 1);
+                if (hasEvasionBuff && martialSkill.currentEvolution == SkillEvolution.PathA)
+                {
+                    isCounterTriggered = true;
 
-                int counterDmg = Mathf.RoundToInt(
-                    currentPlayerStats.strength * msLogic.pathA_CounterRates[levelIdx]);
+                    int levelIdx = Mathf.Clamp(
+                        martialSkill.skillLevel - 1,
+                        0,
+                        msLogic.pathA_CounterRates.Length - 1);
 
-                Sprite counterImage = msLogic.GetCounterActionImage(martialSkill);
+                    int counterDmg = Mathf.RoundToInt(
+                        currentPlayerStats.strength * msLogic.pathA_CounterRates[levelIdx]);
 
-                BattleVisualizer.Instance.EnqueueDelay(2.0f);
-                BattleVisualizer.Instance.EnqueueAction(() =>
-                    ApplyCounterAndReflectUI(counterDmg, counterImage, false));
-                BattleVisualizer.Instance.EnqueueDelay(2.0f);
+                    Sprite counterImage = msLogic.GetCounterActionImage(martialSkill);
+
+                    BattleVisualizer.Instance.EnqueueDelay(2.0f);
+                    BattleVisualizer.Instance.EnqueueAction(() =>
+                        ApplyCounterAndReflectUI(counterDmg, counterImage, false));
+                    BattleVisualizer.Instance.EnqueueDelay(2.0f);
+                }
             }
         }
+
+        if (!isCounterTriggered)
+            BattleVisualizer.Instance.EnqueueDelay(2.0f);
     }
 
-    if (!isCounterTriggered)
+    private void EnqueueGuardAndReflectIfNeeded(
+        SkillResult skillResult,
+        bool isPlayerDefending)
+    {
+        if (!skillResult.isGuardTriggered)
+            return;
+
+        BattleVisualizer.Instance.EnqueueAction(() =>
+        {
+            StyleRankManager.Instance?.OnSupportActionUsed();
+            BuffManager.Instance.ConsumeGuardEffect(true);
+        });
+
+        if (!isPlayerDefending)
+            return;
+
+        float reflectRatio = 0f;
+
+        if (PlayerManager.Instance != null)
+            reflectRatio = PlayerManager.Instance.GetReflectRatio();
+
+        if (reflectRatio <= 0f)
+            return;
+
+        int reflectDamage = Mathf.Max(
+            1,
+            Mathf.RoundToInt(skillResult.totalMitigatedDamage * reflectRatio));
+
+        Sprite reflectSprite = playerData.reflectImage != null
+            ? playerData.reflectImage
+            : playerData.guardImage;
+
+        BattleVisualizer.Instance.EnqueueAction(() =>
+            ApplyCounterAndReflectUI(reflectDamage, reflectSprite, true));
+
         BattleVisualizer.Instance.EnqueueDelay(2.0f);
-}
+    }
 
     // 스킬 시전 초기 연출 (이미지, 대사, 코스트 지불 등)
     private void ApplySkillCastUI(SkillData skill, bool isPlayerAttacking, SkillResult skillResult, string commentary, bool isPureUtility)
