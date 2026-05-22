@@ -979,9 +979,8 @@ public class CombatManager : MonoBehaviour
         presentationDirector?.ShowSpecialCastPresentationIfNeeded(skill, isPlayerAttacking);
         presentationDirector?.SetCasterImage(isPlayerAttacking, skill.skillActionImage);
         skill.skillLogic?.PaySkillCost(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking);
-        CompanionManager.Instance.UpdateEmotion(skillResult.anyHit ?
-            (isPlayerAttacking ? CompanionManager.Emotion.Happy : CompanionManager.Emotion.Worried) :
-            (isPlayerAttacking ? CompanionManager.Emotion.Worried : CompanionManager.Emotion.Happy));
+        CompanionManager.Emotion emotion = ResolveCompanionEmotionAfterSkillCast(skillResult, isPlayerAttacking);
+        CompanionManager.Instance.UpdateEmotion(emotion);
 
         // 2. 방어자 이미지 변경
         Sprite reactionSprite = ResolveDefenderReactionSprite(skillResult, isPlayerAttacking, isPureUtility);
@@ -992,6 +991,15 @@ public class CombatManager : MonoBehaviour
             commentary,
             skillResult.anyCrit && !isPureUtility
         );
+    }
+
+    private CompanionManager.Emotion ResolveCompanionEmotionAfterSkillCast(
+        SkillResult skillResult,
+        bool isPlayerAttacking)
+    {
+        return skillResult.anyHit ?
+            (isPlayerAttacking ? CompanionManager.Emotion.Happy : CompanionManager.Emotion.Worried) :
+            (isPlayerAttacking ? CompanionManager.Emotion.Worried : CompanionManager.Emotion.Happy);
     }
 
     // Defender reaction sprite
