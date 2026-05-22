@@ -1277,6 +1277,12 @@ public class CombatManager : MonoBehaviour
 
         ResetCasterImageAfterSkillIfNeeded(isPlayerAttacking);
 
+        RestoreDefenderImageAfterSkill(isPlayerAttacking, isPlayerDefending);
+
+    }
+
+    private void RestoreDefenderImageAfterSkill(bool isPlayerAttacking, bool isPlayerDefending)
+    {
         bool isDefenderBroken = (!isPlayerAttacking && BreakManager.Instance.IsBroken(true)) || (isPlayerAttacking && BreakManager.Instance.IsBroken(false));
 
         if (!isDefenderBroken)
