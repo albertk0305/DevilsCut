@@ -59,6 +59,7 @@ public class CombatManager : MonoBehaviour
     private int enemyHpAtTurnStart;
     private TurnEntity currentActiveEntity;
     private CombatActionMenuController actionMenuController;
+    private CombatPresentationDirector presentationDirector;
     public CombatState currentState = new CombatState();
 
     // [최적화] 코루틴 대기 객체 캐싱
@@ -90,6 +91,22 @@ public class CombatManager : MonoBehaviour
             ExecuteSkillFromActionMenu
         );
     }
+
+    private void EnsurePresentationDirector()
+{
+    if (presentationDirector != null) return;
+
+    if (CombatUIManager.Instance == null || BattleVisualizer.Instance == null)
+    {
+        DevLog.Log("[CombatManager] CombatPresentationDirector를 초기화할 수 없습니다.");
+        return;
+    }
+
+    presentationDirector = new CombatPresentationDirector(
+        CombatUIManager.Instance,
+        BattleVisualizer.Instance
+    );
+}
 
     public void RefreshSpecialStatsProgressUI()
     {
@@ -236,11 +253,12 @@ actionMenuController?.HideActionMenuAndShowWaiting();
     }
 
     private void UpdateTurnOrderUI()
-    {
-        List<Sprite> icons = TurnManager.Instance.GetFutureTurnIcons(5);
-        CombatUIManager.Instance.UpdateTurnOrderUI(icons);
-    }
+{
+    List<Sprite> icons = TurnManager.Instance.GetFutureTurnIcons(5);
 
+    EnsurePresentationDirector();
+    presentationDirector?.UpdateTurnOrder(icons);
+}
     // ==========================================================
     // 1. 메인 턴 분배기 (Switch 문으로 가독성 극대화)
     // ==========================================================
@@ -557,25 +575,24 @@ actionMenuController?.HideActionMenuAndShowWaiting();
         string skillName = GetTranslatedText(skill.skillNameKey);
 
         if (isUltimate)
-        {
-            Sprite cutInSprite = isPlayerAttacking ? playerData?.cutIn : currentEnemyData?.CutIn;
-            if (cutInSprite != null)
-            {
-                BattleVisualizer.Instance.EnqueueAction(() => CombatUIManager.Instance.InterruptAndTypeCommentary($"{attackerName}의 필살기!"));
-                BattleVisualizer.Instance.EnqueueCutIn(cutInSprite);
-            }
-        }
+{
+    Sprite cutInSprite = isPlayerAttacking ? playerData?.cutIn : currentEnemyData?.CutIn;
 
-        string commentary = "";
-        if (isPureUtility)
-        {
-            commentary = $"{attackerName}이(가) {skillName}을(를) 시전합니다!";
-        }
-        else
-        {
-            commentary = !skillResult.anyHit ? $"{attackerName}의 {skillName}이(가) 빗나갔습니다!" :
-                         (skillResult.anyCrit ? $"{attackerName}의 {skillName} 치명적으로 적중!" : $"{attackerName}의 {skillName} 적중!");
-        }
+    EnsurePresentationDirector();
+    presentationDirector?.EnqueueUltimateCutIn(cutInSprite, attackerName);
+}
+
+EnsurePresentationDirector();
+
+string commentary = presentationDirector != null
+    ? presentationDirector.BuildSkillCommentary(attackerName, skillName, skillResult, isPureUtility)
+    : isPureUtility
+        ? $"{attackerName}이(가) {skillName}을(를) 시전합니다!"
+        : !skillResult.anyHit
+            ? $"{attackerName}의 {skillName}이(가) 빗나갔습니다!"
+            : skillResult.anyCrit
+                ? $"{attackerName}의 {skillName} 치명적으로 적중!"
+                : $"{attackerName}의 {skillName} 적중!";
 
         // ① 스킬 시전 초기 연출
         BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, skillResult, commentary, isPureUtility));
@@ -903,7 +920,8 @@ actionMenuController?.HideActionMenuAndShowWaiting();
     // ==========================================================
     private void ResetCombatUI(bool isPlayerAttacking, bool isPlayerDefending, bool isUltimate, SkillData skill)
     {
-        CombatUIManager.Instance.ClearCombatEffects();
+        EnsurePresentationDirector();
+presentationDirector?.ClearCombatEffects();
 
         if (isPlayerAttacking)
 {
