@@ -611,23 +611,12 @@ public class CombatManager : MonoBehaviour
         }
 
         // ②-2. 다단 히트 연출 루프 (데미지 및 화면 텍스트 전담)
-        foreach (var hit in skillResult.hits)
-        {
-            BattleVisualizer.Instance.EnqueueAction(() =>
-            {
-                // [수정] ProcessMissAction에 skillResult를 넘겨서 1타라도 맞았으면 회피 모션을 막습니다.
-                if (!hit.isHit) ProcessMissAction(isPlayerAttacking, presentationContext.isPlayerDefending, presentationContext.isPureUtility, skillResult);
-                else ProcessHitAction(hit, isPlayerAttacking, presentationContext.isPlayerDefending, presentationContext.isPureUtility, skillResult, skill);
-            });
-            BattleVisualizer.Instance.EnqueueDelay(0.15f);
-        }
-
-        int successCount = 0;
-        foreach (var hit in skillResult.hits) { if (hit.isHit) successCount++; }
-        currentState.lastSuccessfulHits = successCount;
+        EnqueueSkillHitActions(skill,skillResult,isPlayerAttacking,presentationContext.isPlayerDefending,presentationContext.isPureUtility);
+        // 성공 hit 수 기록
+        UpdateLastSuccessfulHits(skillResult);
 
         // ③ 명중 시 특수효과 발동 로직 호출
-        BattleVisualizer.Instance.EnqueueAction(() => skill.skillLogic?.ApplyEffectOnHit(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking, skillResult.anyHit));
+        EnqueueApplyEffectOnHit(skill, skillResult, isPlayerAttacking);
 
         // ④ 카운터 반격 판정
         bool isCounterTriggered = false;
@@ -674,7 +663,7 @@ public class CombatManager : MonoBehaviour
         }
 
         // ⑥ 화면 및 상태 리셋
-        BattleVisualizer.Instance.EnqueueAction(() => ResetCombatUI(isPlayerAttacking, presentationContext.isPlayerDefending, isUltimate, skill));
+        EnqueueSkillReset(isPlayerAttacking,presentationContext.isPlayerDefending,isUltimate,skill);
 
         // ==========================================================
         // 3. 지휘관 권한 위임 및 턴 종료 대기
@@ -815,6 +804,64 @@ public class CombatManager : MonoBehaviour
         EnsurePresentationDirector();
         presentationDirector?.EnqueueUltimateCutIn(cutInSprite, attackerName);
     }
+
+    private void EnqueueSkillHitActions(
+    SkillData skill,
+    SkillResult skillResult,
+    bool isPlayerAttacking,
+    bool isPlayerDefending,
+    bool isPureUtility)
+{
+    foreach (var hit in skillResult.hits)
+    {
+        BattleVisualizer.Instance.EnqueueAction(() =>
+        {
+            if (!hit.isHit)
+                ProcessMissAction(isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult);
+            else
+                ProcessHitAction(hit, isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult, skill);
+        });
+
+        BattleVisualizer.Instance.EnqueueDelay(0.15f);
+    }
+}
+
+private void UpdateLastSuccessfulHits(SkillResult skillResult)
+{
+    int successCount = 0;
+
+    foreach (var hit in skillResult.hits)
+    {
+        if (hit.isHit)
+            successCount++;
+    }
+
+    currentState.lastSuccessfulHits = successCount;
+}
+
+private void EnqueueApplyEffectOnHit(
+    SkillData skill,
+    SkillResult skillResult,
+    bool isPlayerAttacking)
+{
+    BattleVisualizer.Instance.EnqueueAction(() =>
+        skill.skillLogic?.ApplyEffectOnHit(
+            skill,
+            currentPlayerStats,
+            currentEnemyData,
+            isPlayerAttacking,
+            skillResult.anyHit));
+}
+
+private void EnqueueSkillReset(
+    bool isPlayerAttacking,
+    bool isPlayerDefending,
+    bool isUltimate,
+    SkillData skill)
+{
+    BattleVisualizer.Instance.EnqueueAction(() =>
+        ResetCombatUI(isPlayerAttacking, isPlayerDefending, isUltimate, skill));
+}
 
     // 스킬 시전 초기 연출 (이미지, 대사, 코스트 지불 등)
     private void ApplySkillCastUI(SkillData skill, bool isPlayerAttacking, SkillResult skillResult, string commentary, bool isPureUtility)
