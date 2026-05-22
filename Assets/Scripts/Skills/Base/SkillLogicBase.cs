@@ -80,6 +80,12 @@ public class SkillLogicBase : ScriptableObject
         return skill.skillActionImage;
     }
 
+    public virtual bool TryGetSpecialCastPresentation(SkillData skill, out int count)
+    {
+        count = 0;
+        return false;
+    }
+
     public virtual float GetSkillBonusLifesteal(SkillData skill)
     {
         return 0f;

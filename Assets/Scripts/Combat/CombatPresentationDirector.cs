@@ -57,9 +57,11 @@ public sealed class CombatPresentationDirector
 {
     if (uiManager == null || skill == null) return;
 
-    if (skill.skillLogic is SkillLogic_FantasticDreamer dreamLogic)
+    if (skill.skillLogic == null) return;
+
+    if (skill.skillLogic.TryGetSpecialCastPresentation(skill, out int count))
     {
-        uiManager.ShowFantasticDreamerDice(dreamLogic.LastRolledStage, isPlayerAttacking);
+        uiManager.ShowFantasticDreamerDice(count, isPlayerAttacking);
     }
 }
 

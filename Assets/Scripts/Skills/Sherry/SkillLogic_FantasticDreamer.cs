@@ -33,6 +33,12 @@ public class SkillLogic_FantasticDreamer : SkillLogicBase
     private int lastRolledStage = 1;
     public int LastRolledStage => lastRolledStage;
 
+    public override bool TryGetSpecialCastPresentation(SkillData skill, out int count)
+    {
+        count = lastRolledStage;
+        return count > 0;
+    }
+
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         int luck = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Luck);
