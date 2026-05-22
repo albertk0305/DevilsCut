@@ -719,11 +719,10 @@ string commentary = presentationDirector != null
     // 스킬 시전 초기 연출 (이미지, 대사, 코스트 지불 등)
     private void ApplySkillCastUI(SkillData skill, bool isPlayerAttacking, SkillResult skillResult, string commentary, bool isPureUtility)
     {
-        if (skill.skillLogic is SkillLogic_FantasticDreamer dreamLogic)
-            CombatUIManager.Instance.ShowFantasticDreamerDice(dreamLogic.LastRolledStage, isPlayerAttacking);
+EnsurePresentationDirector();
 
-        // 1. 내 이미지 변경 및 코스트 지불
-        CombatUIManager.Instance.SetCasterImage(isPlayerAttacking, skill.skillActionImage);
+presentationDirector?.ShowFantasticDreamerDiceIfNeeded(skill, isPlayerAttacking);
+presentationDirector?.SetCasterImage(isPlayerAttacking, skill.skillActionImage);
         skill.skillLogic?.PaySkillCost(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking);
         CompanionManager.Instance.UpdateEmotion(skillResult.anyHit ?
             (isPlayerAttacking ? CompanionManager.Emotion.Happy : CompanionManager.Emotion.Worried) :
@@ -748,12 +747,12 @@ string commentary = presentationDirector != null
             if (!isPureUtility) reactionSprite = isPlayerAttacking ? currentEnemyData?.evade : playerData?.evade;
         }
 
-        CombatUIManager.Instance.SetDefenderImage(!isPlayerAttacking, reactionSprite);
-
-        // 3. 텍스트 및 크리티컬 연출
-        CombatUIManager.Instance.InterruptAndTypeCommentary(commentary);
-        if (skillResult.anyCrit && !isPureUtility)
-            CombatUIManager.Instance.StartCoroutine(CombatUIManager.Instance.ShowCritAlert());
+presentationDirector?.ShowCastResultPresentation(
+    !isPlayerAttacking,
+    reactionSprite,
+    commentary,
+    skillResult.anyCrit && !isPureUtility
+);
     }
 
     // 단일 타격 실패(회피) 연출

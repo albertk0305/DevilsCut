@@ -50,4 +50,38 @@ public sealed class CombatPresentationDirector
     {
         uiManager?.ClearCombatEffects();
     }
+
+    public void ShowFantasticDreamerDiceIfNeeded(
+    SkillData skill,
+    bool isPlayerAttacking)
+{
+    if (uiManager == null || skill == null) return;
+
+    if (skill.skillLogic is SkillLogic_FantasticDreamer dreamLogic)
+    {
+        uiManager.ShowFantasticDreamerDice(dreamLogic.LastRolledStage, isPlayerAttacking);
+    }
+}
+
+public void SetCasterImage(bool isPlayerAttacking, Sprite actionImage)
+{
+    uiManager?.SetCasterImage(isPlayerAttacking, actionImage);
+}
+
+public void ShowCastResultPresentation(
+    bool defenderIsPlayer,
+    Sprite defenderReactionSprite,
+    string commentary,
+    bool showCritAlert)
+{
+    if (uiManager == null) return;
+
+    uiManager.SetDefenderImage(defenderIsPlayer, defenderReactionSprite);
+    uiManager.InterruptAndTypeCommentary(commentary);
+
+    if (showCritAlert)
+    {
+        uiManager.StartCoroutine(uiManager.ShowCritAlert());
+    }
+}
 }
