@@ -81,6 +81,15 @@ public class CombatManager : MonoBehaviour
         public int defMaxHp;
     }
 
+    private struct SkillPresentationContext
+    {
+        public bool isPlayerDefending;
+        public bool isPureUtility;
+        public string attackerName;
+        public string skillName;
+        public string commentary;
+    }
+
     // [최적화] 코루틴 대기 객체 캐싱
     private readonly WaitForSeconds oneSecondWait = new WaitForSeconds(1.0f);
 
@@ -551,44 +560,17 @@ public class CombatManager : MonoBehaviour
         SkillCalculationContext calculationContext = BuildSkillCalculationContext(isPlayerAttacking);
         SkillResult skillResult = CalculateSkillResult(skill, isPlayerAttacking, calculationContext);
 
-        // ==========================================================
         // 2. 연출 대본 작성 (BattleVisualizer)
-        // ==========================================================
-        float baseMultForUI = skill.GetCurrentDamageMultiplier();
-        float logicMultForUI = skill.skillLogic != null ? skill.skillLogic.GetDamageMultiplier(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking) : 1f;
+        SkillPresentationContext presentationContext =
+    BuildSkillPresentationContext(skill, isPlayerAttacking, skillResult);
 
-        bool isAttackForUI = baseMultForUI > 0f || (baseMultForUI <= 0f && logicMultForUI > 0f && logicMultForUI != 1.0f);
-        bool isPureUtility = !isAttackForUI && !skill.forceHitReaction; // 여기서 선언!
-
-        bool isPlayerDefending = !isPlayerAttacking;
-        string attackerName = isPlayerAttacking ? (playerData != null ? GetTranslatedText(playerData.playerNamekey) : "주인공") : (currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "적");
-        string skillName = GetTranslatedText(skill.skillNameKey);
-
-        if (isUltimate)
-        {
-            Sprite cutInSprite = isPlayerAttacking ? playerData?.cutIn : currentEnemyData?.CutIn;
-
-            EnsurePresentationDirector();
-            presentationDirector?.EnqueueUltimateCutIn(cutInSprite, attackerName);
-        }
-
-        EnsurePresentationDirector();
-
-        string commentary = presentationDirector != null
-            ? presentationDirector.BuildSkillCommentary(attackerName, skillName, skillResult, isPureUtility)
-            : isPureUtility
-                ? $"{attackerName}이(가) {skillName}을(를) 시전합니다!"
-                : !skillResult.anyHit
-                    ? $"{attackerName}의 {skillName}이(가) 빗나갔습니다!"
-                    : skillResult.anyCrit
-                        ? $"{attackerName}의 {skillName} 치명적으로 적중!"
-                        : $"{attackerName}의 {skillName} 적중!";
+        EnqueueUltimateCutInIfNeeded(isUltimate, isPlayerAttacking, presentationContext.attackerName);
 
         // ① 스킬 시전 초기 연출
-        BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, skillResult, commentary, isPureUtility));
+        BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, skillResult, presentationContext.commentary, presentationContext.isPureUtility));
 
         // ②-1. [신규 추가] 전체 스킬 결과에 대한 1회성 판정 (스타일 랭크 및 회피 특수 효과)
-        if (isPlayerDefending && !isPureUtility)
+        if (presentationContext.isPlayerDefending && !presentationContext.isPureUtility)
         {
             bool isInvincible = BuffManager.Instance.GetEffects(true).Exists(e => e.effectData.specialType == SpecialEffectType.Invincible);
 
@@ -634,8 +616,8 @@ public class CombatManager : MonoBehaviour
             BattleVisualizer.Instance.EnqueueAction(() =>
             {
                 // [수정] ProcessMissAction에 skillResult를 넘겨서 1타라도 맞았으면 회피 모션을 막습니다.
-                if (!hit.isHit) ProcessMissAction(isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult);
-                else ProcessHitAction(hit, isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult, skill);
+                if (!hit.isHit) ProcessMissAction(isPlayerAttacking, presentationContext.isPlayerDefending, presentationContext.isPureUtility, skillResult);
+                else ProcessHitAction(hit, isPlayerAttacking, presentationContext.isPlayerDefending, presentationContext.isPureUtility, skillResult, skill);
             });
             BattleVisualizer.Instance.EnqueueDelay(0.15f);
         }
@@ -649,7 +631,7 @@ public class CombatManager : MonoBehaviour
 
         // ④ 카운터 반격 판정
         bool isCounterTriggered = false;
-        if (!skillResult.anyHit && !isPureUtility && isPlayerDefending)
+        if (!skillResult.anyHit && !presentationContext.isPureUtility && presentationContext.isPlayerDefending)
         {
             var martialSkill = PlayerManager.Instance.unlockedSkills.Find(s => s.category == SkillCategory.Martial);
             if (martialSkill != null && martialSkill.skillLogic is SkillLogic_MorningStar msLogic)
@@ -674,7 +656,7 @@ public class CombatManager : MonoBehaviour
         {
             BattleVisualizer.Instance.EnqueueAction(() => { StyleRankManager.Instance?.OnSupportActionUsed(); BuffManager.Instance.ConsumeGuardEffect(true); });
 
-            if (isPlayerDefending)
+            if (presentationContext.isPlayerDefending)
             {
                 float reflectRatio = 0f;
                 // 방어력 비례 반사 비율 (예시 로직 - PlayerManager에 구현되어 있다면 호출)
@@ -692,7 +674,7 @@ public class CombatManager : MonoBehaviour
         }
 
         // ⑥ 화면 및 상태 리셋
-        BattleVisualizer.Instance.EnqueueAction(() => ResetCombatUI(isPlayerAttacking, isPlayerDefending, isUltimate, skill));
+        BattleVisualizer.Instance.EnqueueAction(() => ResetCombatUI(isPlayerAttacking, presentationContext.isPlayerDefending, isUltimate, skill));
 
         // ==========================================================
         // 3. 지휘관 권한 위임 및 턴 종료 대기
@@ -772,6 +754,66 @@ public class CombatManager : MonoBehaviour
             defCurrentHp = isPlayerAttacking ? currentEnemyHp : currentPlayerStats.currentHp,
             defMaxHp = isPlayerAttacking ? currentEnemyData.maxHp : currentPlayerStats.maxHp
         };
+    }
+
+    private SkillPresentationContext BuildSkillPresentationContext(
+    SkillData skill,
+    bool isPlayerAttacking,
+    SkillResult skillResult)
+    {
+        float baseMultForUI = skill.GetCurrentDamageMultiplier();
+        float logicMultForUI = skill.skillLogic != null
+            ? skill.skillLogic.GetDamageMultiplier(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking)
+            : 1f;
+
+        bool isAttackForUI =
+            baseMultForUI > 0f ||
+            (baseMultForUI <= 0f && logicMultForUI > 0f && logicMultForUI != 1.0f);
+
+        bool isPureUtility = !isAttackForUI && !skill.forceHitReaction;
+        bool isPlayerDefending = !isPlayerAttacking;
+
+        string attackerName = isPlayerAttacking
+            ? (playerData != null ? GetTranslatedText(playerData.playerNamekey) : "주인공")
+            : (currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "적");
+
+        string skillName = GetTranslatedText(skill.skillNameKey);
+
+        EnsurePresentationDirector();
+
+        string commentary = presentationDirector != null
+            ? presentationDirector.BuildSkillCommentary(attackerName, skillName, skillResult, isPureUtility)
+            : isPureUtility
+                ? $"{attackerName}이(가) {skillName}을(를) 시전합니다!"
+                : !skillResult.anyHit
+                    ? $"{attackerName}의 {skillName}이(가) 빗나갔습니다!"
+                    : skillResult.anyCrit
+                        ? $"{attackerName}의 {skillName} 치명적으로 적중!"
+                        : $"{attackerName}의 {skillName} 적중!";
+
+        return new SkillPresentationContext
+        {
+            isPlayerDefending = isPlayerDefending,
+            isPureUtility = isPureUtility,
+            attackerName = attackerName,
+            skillName = skillName,
+            commentary = commentary
+        };
+    }
+
+    private void EnqueueUltimateCutInIfNeeded(
+        bool isUltimate,
+        bool isPlayerAttacking,
+        string attackerName)
+    {
+        if (!isUltimate) return;
+
+        Sprite cutInSprite = isPlayerAttacking
+            ? playerData?.cutIn
+            : currentEnemyData?.CutIn;
+
+        EnsurePresentationDirector();
+        presentationDirector?.EnqueueUltimateCutIn(cutInSprite, attackerName);
     }
 
     // 스킬 시전 초기 연출 (이미지, 대사, 코스트 지불 등)
