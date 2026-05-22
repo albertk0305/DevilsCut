@@ -810,24 +810,22 @@ public class CombatManager : MonoBehaviour
             var martialSkill = PlayerManager.Instance.unlockedSkills.Find(
                 s => s.category == SkillCategory.Martial);
 
-            if (martialSkill != null && martialSkill.skillLogic is SkillLogic_MorningStar msLogic)
+            if (martialSkill != null && martialSkill.skillLogic is IPerfectEvadeApRecoverySkillLogic apRecoveryLogic)
             {
-                bool hasEvasionBuff = BuffManager.Instance
-                    .GetEffects(true)
-                    .Exists(e => e.effectData == msLogic.evasionBuffData);
-
-                if (hasEvasionBuff &&
-                    martialSkill.currentEvolution == SkillEvolution.PathB &&
-                    !currentState.isMorningStarApRecoveredThisSkill)
+                if (apRecoveryLogic.TryGetPerfectEvadeApRecovery(
+                    martialSkill,
+                    BuffManager.Instance.GetEffects(true),
+                    currentState.isMorningStarApRecoveredThisSkill,
+                    out float apRecovery))
                 {
                     var playerEntity = TurnManager.Instance.turnQueue.Find(e => e.isPlayer);
 
                     if (playerEntity != null)
                     {
-                        playerEntity.actionGauge += msLogic.pathB_ApRecovery;
+                        playerEntity.actionGauge += apRecovery;
                         currentState.isMorningStarApRecoveredThisSkill = true;
 
-                        DevLog.Log($"[새벽별:난식] 완벽 회피 성공! 행동 게이지 {msLogic.pathB_ApRecovery} 회복.");
+                        DevLog.Log($"[새벽별:난식] 완벽 회피 성공! 행동 게이지 {apRecovery} 회복.");
                     }
                 }
             }
