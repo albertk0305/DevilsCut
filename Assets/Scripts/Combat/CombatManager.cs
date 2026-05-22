@@ -1184,13 +1184,7 @@ public class CombatManager : MonoBehaviour
             }
 
             // 4. 기 모으기 파괴 로직
-            if (currentState.isPlayerCharging && hit.damage > 0)
-            {
-                currentState.isPlayerCharging = false;
-                currentState.chargingSkill = null;
-                CombatUIManager.Instance.SpawnDamageText("Broken!", false, true);
-                DevLog.Log("[원기옥] 피격당하여 기 모으기가 취소되었습니다!");
-            }
+            CancelPlayerChargeIfInterrupted(hit);
         }
 
         if (isPlayerAttacking && !BreakManager.Instance.IsBroken(false))
@@ -1208,6 +1202,17 @@ public class CombatManager : MonoBehaviour
         {
             StyleRankManager.Instance.OnCriticalHit();
             currentState.hasRewardedCritThisSkill = true;
+        }
+    }
+
+    private void CancelPlayerChargeIfInterrupted(HitResult hit)
+    {
+        if (currentState.isPlayerCharging && hit.damage > 0)
+        {
+            currentState.isPlayerCharging = false;
+            currentState.chargingSkill = null;
+            CombatUIManager.Instance.SpawnDamageText("Broken!", false, true);
+            DevLog.Log("[원기옥] 피격당하여 기 모으기가 취소되었습니다!");
         }
     }
 
