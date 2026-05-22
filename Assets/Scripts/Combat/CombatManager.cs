@@ -1097,46 +1097,8 @@ public class CombatManager : MonoBehaviour
             ApplyDamageToEntity(false, hit.damage);
             AccumulatePlayerHitDamageIfBombInactive(hit);
 
-            // [신규] 데몬 시너지 / 흡혈 아이템 '글로벌 흡혈' 로직 적용
-            float currentLifeSteal = currentPlayerStats.lifeSteal;
+            ApplyPlayerLifestealAfterHit(hit, skill);
 
-            if (skill != null && skill.skillLogic != null)
-            {
-                currentLifeSteal += skill.skillLogic.GetSkillBonusLifesteal(skill);
-            }
-
-            // [데몬 희귀 아이템 - 귀면의 파편] 잃은 체력 비례 흡혈률 상승!
-            if (currentActiveEntity != null && currentActiveEntity.type == EntityType.Player && PlayerManager.Instance != null)
-            {
-                var demonRares = PlayerManager.Instance.inventory.FindAll(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Rare);
-                float missingRatio = (float)(currentPlayerStats.maxHp - currentPlayerStats.currentHp) / currentPlayerStats.maxHp;
-
-                foreach (var dRare in demonRares)
-                {
-                    float maxBonus = dRare.starLevel == 1 ? 0.02f : (dRare.starLevel == 2 ? 0.10f : 0.30f);
-                    currentLifeSteal += (missingRatio * maxBonus);
-                }
-            }
-
-            if (hit.damage > 0 && currentLifeSteal > 0f && currentActiveEntity != null && currentActiveEntity.type == EntityType.Player)
-            {
-                float baseHeal = hit.damage * currentLifeSteal;
-
-                // [신규] 마성 강화(4점) 및 오니의 검은 피(에픽) - 회복량 증폭 적용!
-                int healAmount = Mathf.RoundToInt(baseHeal * (1f + currentPlayerStats.healingReceivedAmp));
-
-                if (healAmount > 0)
-                {
-                    int excessHeal = (currentPlayerStats.currentHp + healAmount) - currentPlayerStats.maxHp;
-                    currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + healAmount, 0, currentPlayerStats.maxHp);
-
-                    CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-                    CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
-
-                    // [신규] 데몬 6점 및 전설 - 초과 회복 버프 발동
-                    if (excessHeal > 0) ApplyOverhealBuff(excessHeal);
-                }
-            }
         }
         else // 적(Enemy)이 공격했을 때의 처리
         {
@@ -1181,6 +1143,50 @@ public class CombatManager : MonoBehaviour
             currentState.chargingSkill = null;
             CombatUIManager.Instance.SpawnDamageText("Broken!", false, true);
             DevLog.Log("[원기옥] 피격당하여 기 모으기가 취소되었습니다!");
+        }
+    }
+
+    private void ApplyPlayerLifestealAfterHit(HitResult hit, SkillData skill)
+    {
+        // [신규] 데몬 시너지 / 흡혈 아이템 '글로벌 흡혈' 로직 적용
+        float currentLifeSteal = currentPlayerStats.lifeSteal;
+
+        if (skill != null && skill.skillLogic != null)
+        {
+            currentLifeSteal += skill.skillLogic.GetSkillBonusLifesteal(skill);
+        }
+
+        // [데몬 희귀 아이템 - 귀면의 파편] 잃은 체력 비례 흡혈률 상승!
+        if (currentActiveEntity != null && currentActiveEntity.type == EntityType.Player && PlayerManager.Instance != null)
+        {
+            var demonRares = PlayerManager.Instance.inventory.FindAll(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Rare);
+            float missingRatio = (float)(currentPlayerStats.maxHp - currentPlayerStats.currentHp) / currentPlayerStats.maxHp;
+
+            foreach (var dRare in demonRares)
+            {
+                float maxBonus = dRare.starLevel == 1 ? 0.02f : (dRare.starLevel == 2 ? 0.10f : 0.30f);
+                currentLifeSteal += (missingRatio * maxBonus);
+            }
+        }
+
+        if (hit.damage > 0 && currentLifeSteal > 0f && currentActiveEntity != null && currentActiveEntity.type == EntityType.Player)
+        {
+            float baseHeal = hit.damage * currentLifeSteal;
+
+            // [신규] 마성 강화(4점) 및 오니의 검은 피(에픽) - 회복량 증폭 적용!
+            int healAmount = Mathf.RoundToInt(baseHeal * (1f + currentPlayerStats.healingReceivedAmp));
+
+            if (healAmount > 0)
+            {
+                int excessHeal = (currentPlayerStats.currentHp + healAmount) - currentPlayerStats.maxHp;
+                currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + healAmount, 0, currentPlayerStats.maxHp);
+
+                CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
+                CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
+
+                // [신규] 데몬 6점 및 전설 - 초과 회복 버프 발동
+                if (excessHeal > 0) ApplyOverhealBuff(excessHeal);
+            }
         }
     }
 
