@@ -15,6 +15,18 @@ public class SkillLogicBase : ScriptableObject
         return 1.0f;
     }
 
+    public virtual bool TryOverrideBaseHitCalculation(
+        SkillData skill,
+        int attackerStrength,
+        int attackerDefense,
+        out float calculatedDamage,
+        out float breakPower)
+    {
+        calculatedDamage = 0f;
+        breakPower = 0f;
+        return false;
+    }
+
     public virtual void ApplyEffect(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
     }
