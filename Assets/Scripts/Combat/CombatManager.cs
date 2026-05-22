@@ -64,6 +64,7 @@ public class CombatManager : MonoBehaviour
     private CombatActionMenuController actionMenuController;
     private CombatPresentationDirector presentationDirector;
     private DamageResolutionService damageResolutionService;
+    private CombatTraitProcessor traitProcessor;
     private TurnEffectResolver turnEffectResolver;
     public CombatState currentState = new CombatState();
 
@@ -121,6 +122,17 @@ public class CombatManager : MonoBehaviour
                 damageResolutionService = new DamageResolutionService(RefreshSpecialStatsProgressUI);
 
             return damageResolutionService;
+        }
+    }
+
+    private CombatTraitProcessor Traits
+    {
+        get
+        {
+            if (traitProcessor == null)
+                traitProcessor = new CombatTraitProcessor();
+
+            return traitProcessor;
         }
     }
 
@@ -796,75 +808,16 @@ public class CombatManager : MonoBehaviour
             ApplyDamageToEntity(false, hit.damage);
             if (!currentState.isBombActive) currentState.accumulatedDamage += hit.damage;
 
-            // [신규] 데몬 시너지 / 흡혈 아이템 '글로벌 흡혈' 로직 적용
-            float currentLifeSteal = currentPlayerStats.lifeSteal;
+            Traits.ApplyPlayerLifestealAfterHit(hit, skill, currentPlayerStats, currentActiveEntity);
 
-            if (skill != null && skill.skillLogic != null)
-            {
-                currentLifeSteal += skill.skillLogic.GetSkillBonusLifesteal(skill);
-            }
-
-            // [데몬 희귀 아이템 - 귀면의 파편] 잃은 체력 비례 흡혈률 상승!
-            if (currentActiveEntity != null && currentActiveEntity.type == EntityType.Player && PlayerManager.Instance != null)
-            {
-                var demonRares = PlayerManager.Instance.inventory.FindAll(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Rare);
-                float missingRatio = (float)(currentPlayerStats.maxHp - currentPlayerStats.currentHp) / currentPlayerStats.maxHp;
-
-                foreach (var dRare in demonRares)
-                {
-                    float maxBonus = dRare.starLevel == 1 ? 0.02f : (dRare.starLevel == 2 ? 0.10f : 0.30f);
-                    currentLifeSteal += (missingRatio * maxBonus);
-                }
-            }
-
-            if (hit.damage > 0 && currentLifeSteal > 0f && currentActiveEntity != null && currentActiveEntity.type == EntityType.Player)
-            {
-                float baseHeal = hit.damage * currentLifeSteal;
-
-                // [신규] 마성 강화(4점) 및 오니의 검은 피(에픽) - 회복량 증폭 적용!
-                int healAmount = Mathf.RoundToInt(baseHeal * (1f + currentPlayerStats.healingReceivedAmp));
-
-                if (healAmount > 0)
-                {
-                    int excessHeal = (currentPlayerStats.currentHp + healAmount) - currentPlayerStats.maxHp;
-                    currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + healAmount, 0, currentPlayerStats.maxHp);
-
-                    CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-                    CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
-
-                    // [신규] 데몬 6점 및 전설 - 초과 회복 버프 발동
-                    if (excessHeal > 0) ApplyOverhealBuff(excessHeal);
-                }
-            }
         }
         else // 적(Enemy)이 공격했을 때의 처리
         {
             // 1. 일반 타격 데미지 적용 (단 한 번만!)
             ApplyDamageToEntity(true, hit.damage);
 
-            // 2. 적군 흡혈 로직
-            float enemyLifeSteal = currentEnemyData.lifeSteal;
-            if (skill != null && skill.skillLogic != null)
-                enemyLifeSteal += skill.skillLogic.GetSkillBonusLifesteal(skill);
+            Traits.ApplyEnemyLifestealAfterHit(hit, skill, currentEnemyData, ref currentEnemyHp);
 
-            if (hit.damage > 0 && enemyLifeSteal > 0f)
-            {
-                float baseHeal = hit.damage * enemyLifeSteal;
-                int healAmount = Mathf.RoundToInt(baseHeal * (1f + currentEnemyData.healingReceivedAmp));
-
-                if (healAmount > 0)
-                {
-                    currentEnemyHp = Mathf.Clamp(currentEnemyHp + healAmount, 0, currentEnemyData.maxHp);
-                    currentEnemyData.currentHp = currentEnemyHp;
-
-                    if (CombatUIManager.Instance != null)
-                    {
-                        CombatUIManager.Instance.enemyStatusUI.UpdateHP(currentEnemyHp, currentEnemyData.maxHp);
-                        CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, false);
-                    }
-                    DevLog.Log($"[적 흡혈] {healAmount} 회복!");
-                }
-            }
 
             // 3. [핵심] 특수 효과 처리 (스택 폭발 등)
             // 이제 하드코딩 없이 어떤 보스 스킬이든 TryProcessHitEffect가 구현되어 있으면 호출됩니다.
@@ -1144,34 +1097,8 @@ public class CombatManager : MonoBehaviour
     // =======================================================
     public void ApplyOverhealBuff(int excessHeal)
     {
-        if (PlayerManager.Instance == null) return;
-        var syn = PlayerManager.Instance.GetCurrentSynergies();
-        var inventory = PlayerManager.Instance.inventory;
+        Traits.ApplyOverhealBuff(excessHeal, currentPlayerStats);
 
-        bool has6Point = syn.GetValueOrDefault(ItemClass.Demon) >= 6;
-        bool hasLegendary = inventory.Exists(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Legendary);
-
-        if (!has6Point && !hasLegendary) return;
-
-        // 배율 산출: 기획안에 따라 최대 체력 비례 %당 1% (6점) + 0.5% (전설)
-        float multiplier = 0f;
-        if (has6Point) multiplier += 1.0f;
-        if (hasLegendary) multiplier += 0.5f;
-
-        // 공식: (초과 회복량 / 최대 체력) * 배율
-        // 예: 1000 체력 중 200 초과 회복 시 -> 0.2 * 1.5 = 0.3f (30% 증폭)
-        float ampValue = ((float)excessHeal / currentPlayerStats.maxHp) * multiplier;
-
-        if (ampValue > 0f)
-        {
-            StatusEffectData newBuff = ScriptableObject.CreateInstance<StatusEffectData>();
-            newBuff.category = EffectCategory.Buff;
-            newBuff.specialType = SpecialEffectType.DamageGivenAmp;
-            newBuff.effectName = "피의 폭주";
-
-            BuffManager.Instance.AddEffect(true, newBuff, ampValue, 1);
-            DevLog.Log($"[피의 폭주] 초과 회복 {excessHeal} 달성 -> 피해 증폭 {ampValue * 100:F1}% 버프 1턴 획득!");
-        }
     }
 
     public bool IsCurrentTurnOwner(bool isPlayerTarget)
