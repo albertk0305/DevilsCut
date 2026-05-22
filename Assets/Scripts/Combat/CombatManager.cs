@@ -1187,11 +1187,7 @@ public class CombatManager : MonoBehaviour
             CancelPlayerChargeIfInterrupted(hit);
         }
 
-        if (isPlayerAttacking && !BreakManager.Instance.IsBroken(false))
-            if (BreakManager.Instance.AddBreakDamage(false, hit.breakDamage)) UpdateTurnOrderUI();
-
-        if (!isPlayerAttacking && !BreakManager.Instance.IsBroken(true))
-            if (BreakManager.Instance.AddBreakDamage(true, hit.breakDamage)) UpdateTurnOrderUI();
+        ApplyBreakDamageAfterHit(hit, isPlayerAttacking);
 
         if (!isPureUtility) BattleEventSystem.CallDamageTaken(isPlayerDefending, hit.damage, hit.isCrit);
     }
@@ -1214,6 +1210,15 @@ public class CombatManager : MonoBehaviour
             CombatUIManager.Instance.SpawnDamageText("Broken!", false, true);
             DevLog.Log("[원기옥] 피격당하여 기 모으기가 취소되었습니다!");
         }
+    }
+
+    private void ApplyBreakDamageAfterHit(HitResult hit, bool isPlayerAttacking)
+    {
+        if (isPlayerAttacking && !BreakManager.Instance.IsBroken(false))
+            if (BreakManager.Instance.AddBreakDamage(false, hit.breakDamage)) UpdateTurnOrderUI();
+
+        if (!isPlayerAttacking && !BreakManager.Instance.IsBroken(true))
+            if (BreakManager.Instance.AddBreakDamage(true, hit.breakDamage)) UpdateTurnOrderUI();
     }
 
     // 새벽별 카운터 및 인과율 반사 연출
