@@ -90,6 +90,13 @@ public class CombatManager : MonoBehaviour
         public string commentary;
     }
 
+    private struct SkillExecutionContext
+    {
+        public SkillCalculationContext calculation;
+        public SkillResult result;
+        public SkillPresentationContext presentation;
+    }
+
     // [최적화] 코루틴 대기 객체 캐싱
     private readonly WaitForSeconds oneSecondWait = new WaitForSeconds(1.0f);
 
@@ -563,37 +570,38 @@ public class CombatManager : MonoBehaviour
             return;
 
         //  [복구됨] 실시간 스탯 산출 및 BattleCalculator 연산 (skillResult 생성)
-        SkillCalculationContext calculationContext = BuildSkillCalculationContext(isPlayerAttacking);
-        SkillResult skillResult = CalculateSkillResult(skill, isPlayerAttacking, calculationContext);
+        SkillExecutionContext executionContext = new SkillExecutionContext();
+        executionContext.calculation = BuildSkillCalculationContext(isPlayerAttacking);
+        executionContext.result = CalculateSkillResult(skill, isPlayerAttacking, executionContext.calculation);
 
         // 2. 연출 대본 작성 (BattleVisualizer)
-        SkillPresentationContext presentationContext =
-        BuildSkillPresentationContext(skill, isPlayerAttacking, skillResult);
+        executionContext.presentation =
+        BuildSkillPresentationContext(skill, isPlayerAttacking, executionContext.result);
 
-        EnqueueUltimateCutInIfNeeded(isUltimate, isPlayerAttacking, presentationContext.attackerName);
+        EnqueueUltimateCutInIfNeeded(isUltimate, isPlayerAttacking, executionContext.presentation.attackerName);
 
         // ① 스킬 시전 초기 연출
-        BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, skillResult, presentationContext.commentary, presentationContext.isPureUtility));
+        BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, executionContext.result, executionContext.presentation.commentary, executionContext.presentation.isPureUtility));
 
         // ②-1. [신규 추가] 전체 스킬 결과에 대한 1회성 판정 (스타일 랭크 및 회피 특수 효과)
-        ApplyImmediateDefenseOutcome(skillResult, presentationContext.isPlayerDefending, presentationContext.isPureUtility);
+        ApplyImmediateDefenseOutcome(executionContext.result, executionContext.presentation.isPlayerDefending, executionContext.presentation.isPureUtility);
 
         // ②-2. 다단 히트 연출 루프 (데미지 및 화면 텍스트 전담)
-        EnqueueSkillHitActions(skill, skillResult, isPlayerAttacking, presentationContext.isPlayerDefending, presentationContext.isPureUtility);
+        EnqueueSkillHitActions(skill, executionContext.result, isPlayerAttacking, executionContext.presentation.isPlayerDefending, executionContext.presentation.isPureUtility);
         // 성공 hit 수 기록
-        UpdateLastSuccessfulHits(skillResult);
+        UpdateLastSuccessfulHits(executionContext.result);
 
         // ③ 명중 시 특수효과 발동 로직 호출
-        EnqueueApplyEffectOnHit(skill, skillResult, isPlayerAttacking);
+        EnqueueApplyEffectOnHit(skill, executionContext.result, isPlayerAttacking);
 
         // ④ 카운터 반격 판정
-        EnqueueMorningStarCounterIfNeeded(skillResult, presentationContext.isPlayerDefending, presentationContext.isPureUtility);
+        EnqueueMorningStarCounterIfNeeded(executionContext.result, executionContext.presentation.isPlayerDefending, executionContext.presentation.isPureUtility);
 
         // ⑤ 가드 버프 차감 및 인과율(반사) 판정
-        EnqueueGuardAndReflectIfNeeded(skillResult, presentationContext.isPlayerDefending);
+        EnqueueGuardAndReflectIfNeeded(executionContext.result, executionContext.presentation.isPlayerDefending);
 
         // ⑥ 화면 및 상태 리셋
-        EnqueueSkillReset(isPlayerAttacking, presentationContext.isPlayerDefending, isUltimate, skill);
+        EnqueueSkillReset(isPlayerAttacking, executionContext.presentation.isPlayerDefending, isUltimate, skill);
 
         // 3. 지휘관 권한 위임 및 턴 종료 대기
         BattleVisualizer.Instance.StartSequence(() => CompleteSkillSequence(isPlayerAttacking));
