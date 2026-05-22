@@ -609,14 +609,19 @@ public class CombatManager : MonoBehaviour
 
     private bool TryBeginGiCharge(SkillData skill, bool isPlayerAttacking)
     {
-        if (!isPlayerAttacking) return false;
         if (skill == null) return false;
-        if (!(skill.skillLogic is SkillLogic_Gi)) return false;
-        if (skill.currentEvolution != SkillEvolution.PathC) return false;
-        if (currentState.isUnleashingCharge) return false;
+        if (!(skill.skillLogic is IChargeSkillLogic chargeLogic)) return false;
+        if (!chargeLogic.ShouldBeginCharge(
+            skill,
+            isPlayerAttacking,
+            currentState.isPlayerCharging,
+            currentState.isUnleashingCharge)) return false;
 
         currentState.isPlayerCharging = true;
         currentState.chargingSkill = skill;
+
+        if (skill.skillActionImage != null)
+        CombatUIManager.Instance.SetCasterImage(true, skill.skillActionImage);
 
         string pName = playerData != null
             ? GetTranslatedText(playerData.playerNamekey)
