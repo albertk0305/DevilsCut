@@ -67,6 +67,20 @@ public class CombatManager : MonoBehaviour
     private TurnEffectResolver turnEffectResolver;
     public CombatState currentState = new CombatState();
 
+    private struct SkillCalculationContext
+    {
+        public int atkStr;
+        public int atkDef;
+        public int atkLck;
+        public int atkSpd;
+
+        public int defDef;
+        public int defSpd;
+        public int defBR;
+        public int defCurrentHp;
+        public int defMaxHp;
+    }
+
     // [최적화] 코루틴 대기 객체 캐싱
     private readonly WaitForSeconds oneSecondWait = new WaitForSeconds(1.0f);
 
@@ -527,45 +541,15 @@ public class CombatManager : MonoBehaviour
         if (analysisUI != null) analysisUI.Close();
 
         // 1. 상태 스냅샷 및 초기화
-        currentState.wasEnemyBrokenAtSkillStart = BreakManager.Instance.IsBroken(false);
-        currentState.hasRewardedCritThisSkill = false;
-        currentState.isMorningStarApRecoveredThisSkill = false;
-        currentState.totalExcessHealThisSkill = 0;
+        ResetSkillExecutionState();
 
-        // ==========================================================
         //  [복구됨] 기(Ki) 차지(원기옥) 시작 판정
-        // ==========================================================
-        if (isPlayerAttacking && skill.skillLogic is SkillLogic_Gi && skill.currentEvolution == SkillEvolution.PathC && !currentState.isUnleashingCharge)
-        {
-            currentState.isPlayerCharging = true;
-            currentState.chargingSkill = skill;
-            string pName = playerData != null ? GetTranslatedText(playerData.playerNamekey) : "주인공";
-            StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{pName}이(가) 기를 모으기 시작합니다!"));
-            ResolveTurnEnd();
+        if (TryBeginGiCharge(skill, isPlayerAttacking))
             return;
-        }
 
-        // ==========================================================
         //  [복구됨] 실시간 스탯 산출 및 BattleCalculator 연산 (skillResult 생성)
-        // ==========================================================
-        int atkStr = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Strength);
-        int atkDef = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Defense);
-        int atkLck = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Luck);
-        int atkSpd = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Speed);
-
-        int defDef = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.Defense);
-        int defSpd = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.Speed);
-        int defBR = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.BreakResistance);
-        int defCurrentHp = isPlayerAttacking ? currentEnemyHp : currentPlayerStats.currentHp;
-        int defMaxHp = isPlayerAttacking ? currentEnemyData.maxHp : currentPlayerStats.maxHp;
-
-        // 연산 결과를 skillResult 변수에 담습니다!
-        SkillResult skillResult = BattleCalculator.CalculateSkill(
-            skill, isPlayerAttacking,
-            currentPlayerStats, currentEnemyData,
-            atkStr, atkDef, atkLck, atkSpd,
-            defDef, defSpd, defBR, defCurrentHp, defMaxHp
-        );
+        SkillCalculationContext calculationContext = BuildSkillCalculationContext(isPlayerAttacking);
+        SkillResult skillResult = CalculateSkillResult(skill, isPlayerAttacking, calculationContext);
 
         // ==========================================================
         // 2. 연출 대본 작성 (BattleVisualizer)
@@ -720,6 +704,74 @@ public class CombatManager : MonoBehaviour
             if (currentEnemyHp <= 0 || currentPlayerStats.currentHp <= 0) EndCombat(currentEnemyHp <= 0);
             else ResolveTurnEnd();
         });
+    }
+
+    private void ResetSkillExecutionState()
+    {
+        currentState.wasEnemyBrokenAtSkillStart = BreakManager.Instance.IsBroken(false);
+        currentState.hasRewardedCritThisSkill = false;
+        currentState.isMorningStarApRecoveredThisSkill = false;
+        currentState.totalExcessHealThisSkill = 0;
+    }
+
+    private bool TryBeginGiCharge(SkillData skill, bool isPlayerAttacking)
+    {
+        if (!isPlayerAttacking) return false;
+        if (skill == null) return false;
+        if (!(skill.skillLogic is SkillLogic_Gi)) return false;
+        if (skill.currentEvolution != SkillEvolution.PathC) return false;
+        if (currentState.isUnleashingCharge) return false;
+
+        currentState.isPlayerCharging = true;
+        currentState.chargingSkill = skill;
+
+        string pName = playerData != null
+            ? GetTranslatedText(playerData.playerNamekey)
+            : "주인공";
+
+        StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{pName}이(가) 기를 모으기 시작합니다!"));
+        ResolveTurnEnd();
+
+        return true;
+    }
+
+    private SkillResult CalculateSkillResult(
+        SkillData skill,
+        bool isPlayerAttacking,
+        SkillCalculationContext context)
+    {
+        return BattleCalculator.CalculateSkill(
+            skill,
+            isPlayerAttacking,
+            currentPlayerStats,
+            currentEnemyData,
+            context.atkStr,
+            context.atkDef,
+            context.atkLck,
+            context.atkSpd,
+            context.defDef,
+            context.defSpd,
+            context.defBR,
+            context.defCurrentHp,
+            context.defMaxHp
+        );
+    }
+
+    private SkillCalculationContext BuildSkillCalculationContext(bool isPlayerAttacking)
+    {
+        return new SkillCalculationContext
+        {
+            atkStr = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Strength),
+            atkDef = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Defense),
+            atkLck = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Luck),
+            atkSpd = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Speed),
+
+            defDef = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.Defense),
+            defSpd = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.Speed),
+            defBR = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.BreakResistance),
+            defCurrentHp = isPlayerAttacking ? currentEnemyHp : currentPlayerStats.currentHp,
+            defMaxHp = isPlayerAttacking ? currentEnemyData.maxHp : currentPlayerStats.maxHp
+        };
     }
 
     // 스킬 시전 초기 연출 (이미지, 대사, 코스트 지불 등)
