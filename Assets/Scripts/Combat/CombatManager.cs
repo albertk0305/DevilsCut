@@ -58,38 +58,38 @@ public class CombatManager : MonoBehaviour
     private int playerHpAtTurnStart;
     private int enemyHpAtTurnStart;
     private TurnEntity currentActiveEntity;
-
-    private enum MenuState { Hidden, CategorySelect, SkillSelect }
-    private MenuState currentMenuState = MenuState.Hidden;
-    private string GetCategoryLocalizationKey(SkillCategory category)
-    {
-        return category switch
-        {
-            SkillCategory.Sword => "cat_sword",
-            SkillCategory.Gun => "cat_gun",
-            SkillCategory.Martial => "cat_martial",
-            SkillCategory.Magic => "cat_magic",
-            SkillCategory.Oni => "cat_oni",
-            _ => "cat_unknown" // 예외 상황 대비
-        };
-    }
-    private SkillCategory selectedCategory;
-    private List<SkillData> currentDisplaySkills;
-    private readonly List<SkillCategory> categoryMenuOrder = new List<SkillCategory>
-    {
-        SkillCategory.Sword,
-        SkillCategory.Gun,
-        SkillCategory.Martial,
-        SkillCategory.Magic,
-        SkillCategory.Oni
-    };
-
+    private CombatActionMenuController actionMenuController;
     public CombatState currentState = new CombatState();
 
     // [최적화] 코루틴 대기 객체 캐싱
     private readonly WaitForSeconds oneSecondWait = new WaitForSeconds(1.0f);
 
-    public bool IsPlayerSelectingPhase => currentMenuState == MenuState.CategorySelect || currentMenuState == MenuState.SkillSelect;
+    public bool IsPlayerSelectingPhase
+    {
+        get
+        {
+            EnsureActionMenuController();
+            return actionMenuController != null && actionMenuController.IsPlayerSelectingPhase;
+        }
+    }
+
+    private void EnsureActionMenuController()
+    {
+        if (actionMenuController != null) return;
+
+        if (CombatUIManager.Instance == null)
+        {
+            DevLog.Log("[CombatManager] CombatUIManager.Instance가 없어 CombatActionMenuController를 초기화할 수 없습니다.");
+            return;
+        }
+
+        actionMenuController = new CombatActionMenuController(
+            CombatUIManager.Instance,
+            analysisUI,
+            () => currentEnemyData,
+            ExecuteSkillFromActionMenu
+        );
+    }
 
     public void RefreshSpecialStatsProgressUI()
     {
@@ -196,9 +196,8 @@ public class CombatManager : MonoBehaviour
         BuffManager.Instance?.ClearAllEffects();
         StyleRankManager.Instance?.InitCombat();
 
-        CombatUIManager.Instance.SetActionPanelActive(false);
-        CombatUIManager.Instance.SetWaitingPanelActive(true);
-        currentMenuState = MenuState.Hidden;
+        EnsureActionMenuController();
+actionMenuController?.HideActionMenuAndShowWaiting();
 
         bool isFastCombat = PlayerPrefs.GetInt("FastCombat", 0) == 1;
         Time.timeScale = isFastCombat ? 2.0f : 1.0f;
@@ -253,9 +252,8 @@ public class CombatManager : MonoBehaviour
 
         RefreshSpecialStatsProgressUI();
 
-        CombatUIManager.Instance.SetActionPanelActive(false);
-        CombatUIManager.Instance.SetWaitingPanelActive(true);
-        currentMenuState = MenuState.Hidden;
+        EnsureActionMenuController();
+actionMenuController?.HideActionMenuAndShowWaiting();
 
         yield return HandlePreTurnEffects(currentTurnOwner);
 
@@ -477,57 +475,27 @@ public class CombatManager : MonoBehaviour
     }
 
     public void ShowCategoryMenu()
-    {
-        CombatUIManager.Instance.SetActionPanelActive(true);
-        currentMenuState = MenuState.CategorySelect;
-
-        string[] keys = new string[categoryMenuOrder.Count];
-        for (int i = 0; i < categoryMenuOrder.Count; i++)
-        {
-            keys[i] = GetCategoryLocalizationKey(categoryMenuOrder[i]);
-        }
-
-        CombatUIManager.Instance.UpdateActionButtonsForCategory(keys);
-    }
+{
+    EnsureActionMenuController();
+    actionMenuController?.ShowCategoryMenu();
+}
 
     public void ShowSkillMenu(int categoryIndex)
-    {
-        currentMenuState = MenuState.SkillSelect;
-        selectedCategory = (SkillCategory)categoryIndex;
-        currentDisplaySkills = PlayerManager.Instance.GetSkillsByCategory(selectedCategory);
-
-        StyleRank currentRank = StyleRankManager.Instance.currentRank;
-        CombatUIManager.Instance.UpdateActionButtonsForSkills(currentDisplaySkills, currentRank);
-    }
+{
+    EnsureActionMenuController();
+    actionMenuController?.ShowSkillMenu(categoryIndex);
+}
 
     public void OnActionSlotClicked(int slotIndex)
-    {
-        if (currentMenuState == MenuState.CategorySelect)
-        {
-            if (slotIndex >= 0 && slotIndex < categoryMenuOrder.Count)
-            {
-                selectedCategory = categoryMenuOrder[slotIndex];
-                ShowSkillMenu(slotIndex);
-            }
-        }
-        else if (currentMenuState == MenuState.SkillSelect)
-        {
-            if (slotIndex == 4) ShowCategoryMenu();
-            else if (slotIndex < currentDisplaySkills.Count)
-            {
-                bool isUltimate = (slotIndex == 3);
-                ExecuteSkill(currentDisplaySkills[slotIndex], true, isUltimate);
-            }
-        }
-    }
+{
+    EnsureActionMenuController();
+    actionMenuController?.OnActionSlotClicked(slotIndex);
+}
 
-    private void ExecuteSkill(SkillData skill, bool isPlayerAttacking, bool isUltimate = false)
-    {
-        CombatUIManager.Instance.SetActionPanelActive(false);
-        CombatUIManager.Instance.SetWaitingPanelActive(true);
-        currentMenuState = MenuState.Hidden;
-        PerformSkillRoutine(skill, isPlayerAttacking, isUltimate);
-    }
+    private void ExecuteSkillFromActionMenu(SkillData skill, bool isPlayerAttacking, bool isUltimate = false)
+{
+    PerformSkillRoutine(skill, isPlayerAttacking, isUltimate);
+}
 
     // 스킬 처리 프로세스 (연산 -> 큐 적재 -> 실행)
     private void PerformSkillRoutine(SkillData skill, bool isPlayerAttacking, bool isUltimate = false)
@@ -938,11 +906,19 @@ public class CombatManager : MonoBehaviour
         CombatUIManager.Instance.ClearCombatEffects();
 
         if (isPlayerAttacking)
-        {
-            StyleRankManager.Instance.OnSkillUsed(selectedCategory);
-            StyleRankManager.Instance.ResetTurnState();
-            if (isUltimate) StyleRankManager.Instance.ResetRankForUltimate();
-        }
+{
+    EnsureActionMenuController();
+
+    SkillCategory usedCategory = skill != null
+        ? skill.category
+        : (actionMenuController != null ? actionMenuController.SelectedCategory : SkillCategory.Sword);
+
+    StyleRankManager.Instance.OnSkillUsed(usedCategory);
+    StyleRankManager.Instance.ResetTurnState();
+
+    if (isUltimate)
+        StyleRankManager.Instance.ResetRankForUltimate();
+}
 
         if (!(isPlayerAttacking && currentState.isPlayerCharging))
         {
@@ -1396,11 +1372,8 @@ public class CombatManager : MonoBehaviour
     }
 
     public void ToggleAnalysis()
-    {
-        // 플레이어 턴(스킬 선택 중)일 때만 오픈
-        if (!IsPlayerSelectingPhase) return;
-
-        if (analysisUI.gameObject.activeSelf) analysisUI.Close();
-        else analysisUI.Open(currentEnemyData);
-    }
+{
+    EnsureActionMenuController();
+    actionMenuController?.ToggleAnalysis();
+}
 }
