@@ -1095,7 +1095,7 @@ public class CombatManager : MonoBehaviour
         if (isPlayerAttacking)
         {
             ApplyDamageToEntity(false, hit.damage);
-            if (!currentState.isBombActive) currentState.accumulatedDamage += hit.damage;
+            AccumulatePlayerHitDamageIfBombInactive(hit);
 
             // [½Å±Ô] µ¥¸ó ½Ã³ÊÁö / ÈíÇ÷ ¾ÆÀÌÅÛ '±Û·Î¹ú ÈíÇ÷' ·ÎÁ÷ Àû¿ë
             float currentLifeSteal = currentPlayerStats.lifeSteal;
@@ -1187,6 +1187,11 @@ public class CombatManager : MonoBehaviour
             StyleRankManager.Instance.OnCriticalHit();
             currentState.hasRewardedCritThisSkill = true;
         }
+    }
+
+    private void AccumulatePlayerHitDamageIfBombInactive(HitResult hit)
+    {
+        if (!currentState.isBombActive) currentState.accumulatedDamage += hit.damage;
     }
 
     private void CancelPlayerChargeIfInterrupted(HitResult hit)
