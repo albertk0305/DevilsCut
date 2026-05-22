@@ -984,6 +984,22 @@ public class CombatManager : MonoBehaviour
             (isPlayerAttacking ? CompanionManager.Emotion.Worried : CompanionManager.Emotion.Happy));
 
         // 2. 방어자 이미지 변경
+        Sprite reactionSprite = ResolveDefenderReactionSprite(skillResult, isPlayerAttacking, isPureUtility);
+
+        presentationDirector?.ShowCastResultPresentation(
+            !isPlayerAttacking,
+            reactionSprite,
+            commentary,
+            skillResult.anyCrit && !isPureUtility
+        );
+    }
+
+    // Defender reaction sprite
+    private Sprite ResolveDefenderReactionSprite(
+        SkillResult skillResult,
+        bool isPlayerAttacking,
+        bool isPureUtility)
+    {
         Sprite reactionSprite = null;
         bool isDefenderInvincible = BuffManager.Instance.GetEffects(!isPlayerAttacking).Exists(e => e.effectData.specialType == SpecialEffectType.Invincible);
 
@@ -1002,16 +1018,10 @@ public class CombatManager : MonoBehaviour
             if (!isPureUtility) reactionSprite = isPlayerAttacking ? currentEnemyData?.evade : playerData?.evade;
         }
 
-        presentationDirector?.ShowCastResultPresentation(
-            !isPlayerAttacking,
-            reactionSprite,
-            commentary,
-            skillResult.anyCrit && !isPureUtility
-        );
+        return reactionSprite;
     }
 
-    // 단일 타격 실패(회피) 연출
-    // ==========================================================
+    // Miss presentation
     private void ProcessMissAction(bool isPlayerAttacking, bool isPlayerDefending, bool isPureUtility, SkillResult skillResult)
     {
         if (isPureUtility) return;
