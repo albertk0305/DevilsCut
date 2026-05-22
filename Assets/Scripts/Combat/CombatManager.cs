@@ -1144,28 +1144,7 @@ public class CombatManager : MonoBehaviour
             ApplyDamageToEntity(true, hit.damage);
 
             // 2. 적군 흡혈 로직
-            float enemyLifeSteal = currentEnemyData.lifeSteal;
-            if (skill != null && skill.skillLogic != null)
-                enemyLifeSteal += skill.skillLogic.GetSkillBonusLifesteal(skill);
-
-            if (hit.damage > 0 && enemyLifeSteal > 0f)
-            {
-                float baseHeal = hit.damage * enemyLifeSteal;
-                int healAmount = Mathf.RoundToInt(baseHeal * (1f + currentEnemyData.healingReceivedAmp));
-
-                if (healAmount > 0)
-                {
-                    currentEnemyHp = Mathf.Clamp(currentEnemyHp + healAmount, 0, currentEnemyData.maxHp);
-                    currentEnemyData.currentHp = currentEnemyHp;
-
-                    if (CombatUIManager.Instance != null)
-                    {
-                        CombatUIManager.Instance.enemyStatusUI.UpdateHP(currentEnemyHp, currentEnemyData.maxHp);
-                        CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, false);
-                    }
-                    DevLog.Log($"[적 흡혈] {healAmount} 회복!");
-                }
-            }
+            ApplyEnemyLifestealAfterHit(hit, skill);
 
             // 3. [핵심] 특수 효과 처리 (스택 폭발 등)
             // 이제 하드코딩 없이 어떤 보스 스킬이든 TryProcessHitEffect가 구현되어 있으면 호출됩니다.
@@ -1202,6 +1181,32 @@ public class CombatManager : MonoBehaviour
             currentState.chargingSkill = null;
             CombatUIManager.Instance.SpawnDamageText("Broken!", false, true);
             DevLog.Log("[원기옥] 피격당하여 기 모으기가 취소되었습니다!");
+        }
+    }
+
+    private void ApplyEnemyLifestealAfterHit(HitResult hit, SkillData skill)
+    {
+        float enemyLifeSteal = currentEnemyData.lifeSteal;
+        if (skill != null && skill.skillLogic != null)
+            enemyLifeSteal += skill.skillLogic.GetSkillBonusLifesteal(skill);
+
+        if (hit.damage > 0 && enemyLifeSteal > 0f)
+        {
+            float baseHeal = hit.damage * enemyLifeSteal;
+            int healAmount = Mathf.RoundToInt(baseHeal * (1f + currentEnemyData.healingReceivedAmp));
+
+            if (healAmount > 0)
+            {
+                currentEnemyHp = Mathf.Clamp(currentEnemyHp + healAmount, 0, currentEnemyData.maxHp);
+                currentEnemyData.currentHp = currentEnemyHp;
+
+                if (CombatUIManager.Instance != null)
+                {
+                    CombatUIManager.Instance.enemyStatusUI.UpdateHP(currentEnemyHp, currentEnemyData.maxHp);
+                    CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, false);
+                }
+                DevLog.Log($"[적 흡혈] {healAmount} 회복!");
+            }
         }
     }
 
