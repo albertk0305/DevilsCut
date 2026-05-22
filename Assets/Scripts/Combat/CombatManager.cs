@@ -120,6 +120,12 @@ public class CombatManager : MonoBehaviour
         );
     }
 
+    public void ToggleAnalysis()
+    {
+        EnsureActionMenuController();
+        actionMenuController?.ToggleAnalysis();
+    }
+
     private void EnsurePresentationDirector()
     {
         if (presentationDirector != null) return;
@@ -562,7 +568,7 @@ public class CombatManager : MonoBehaviour
 
         // 2. 연출 대본 작성 (BattleVisualizer)
         SkillPresentationContext presentationContext =
-    BuildSkillPresentationContext(skill, isPlayerAttacking, skillResult);
+        BuildSkillPresentationContext(skill, isPlayerAttacking, skillResult);
 
         EnqueueUltimateCutInIfNeeded(isUltimate, isPlayerAttacking, presentationContext.attackerName);
 
@@ -589,16 +595,8 @@ public class CombatManager : MonoBehaviour
         // ⑥ 화면 및 상태 리셋
         EnqueueSkillReset(isPlayerAttacking, presentationContext.isPlayerDefending, isUltimate, skill);
 
-        // ==========================================================
         // 3. 지휘관 권한 위임 및 턴 종료 대기
-        // ==========================================================
-        BattleVisualizer.Instance.StartSequence(() =>
-        {
-            if (isPlayerAttacking && currentState.isUnleashingCharge) currentState.isUnleashingCharge = false;
-
-            if (currentEnemyHp <= 0 || currentPlayerStats.currentHp <= 0) EndCombat(currentEnemyHp <= 0);
-            else ResolveTurnEnd();
-        });
+        BattleVisualizer.Instance.StartSequence(() => CompleteSkillSequence(isPlayerAttacking));
     }
 
     private void ResetSkillExecutionState()
@@ -925,6 +923,20 @@ public class CombatManager : MonoBehaviour
         BattleVisualizer.Instance.EnqueueDelay(2.0f);
     }
 
+    private void CompleteSkillSequence(bool isPlayerAttacking)
+    {
+        if (isPlayerAttacking && currentState.isUnleashingCharge)
+            currentState.isUnleashingCharge = false;
+
+        if (currentEnemyHp <= 0 || currentPlayerStats.currentHp <= 0)
+        {
+            EndCombat(currentEnemyHp <= 0);
+            return;
+        }
+
+        ResolveTurnEnd();
+    }
+
     // 스킬 시전 초기 연출 (이미지, 대사, 코스트 지불 등)
     private void ApplySkillCastUI(SkillData skill, bool isPlayerAttacking, SkillResult skillResult, string commentary, bool isPureUtility)
     {
@@ -1185,6 +1197,50 @@ public class CombatManager : MonoBehaviour
         );
     }
 
+    public void HealEntity(bool isPlayerTarget, int amount)
+    {
+        DamageResolver.HealEntity(
+            isPlayerTarget,
+            amount,
+            currentPlayerStats,
+            currentEnemyData,
+            ref currentEnemyHp
+        );
+    }
+
+    // 데몬 6점 및 전설 - 초과 회복(Over-heal) 비례 버프 발생기
+    public void ApplyOverhealBuff(int excessHeal)
+    {
+        if (PlayerManager.Instance == null) return;
+        var syn = PlayerManager.Instance.GetCurrentSynergies();
+        var inventory = PlayerManager.Instance.inventory;
+
+        bool has6Point = syn.GetValueOrDefault(ItemClass.Demon) >= 6;
+        bool hasLegendary = inventory.Exists(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Legendary);
+
+        if (!has6Point && !hasLegendary) return;
+
+        // 배율 산출: 기획안에 따라 최대 체력 비례 %당 1% (6점) + 0.5% (전설)
+        float multiplier = 0f;
+        if (has6Point) multiplier += 1.0f;
+        if (hasLegendary) multiplier += 0.5f;
+
+        // 공식: (초과 회복량 / 최대 체력) * 배율
+        // 예: 1000 체력 중 200 초과 회복 시 -> 0.2 * 1.5 = 0.3f (30% 증폭)
+        float ampValue = ((float)excessHeal / currentPlayerStats.maxHp) * multiplier;
+
+        if (ampValue > 0f)
+        {
+            StatusEffectData newBuff = ScriptableObject.CreateInstance<StatusEffectData>();
+            newBuff.category = EffectCategory.Buff;
+            newBuff.specialType = SpecialEffectType.DamageGivenAmp;
+            newBuff.effectName = "피의 폭주";
+
+            BuffManager.Instance.AddEffect(true, newBuff, ampValue, 1);
+            DevLog.Log($"[피의 폭주] 초과 회복 {excessHeal} 달성 -> 피해 증폭 {ampValue * 100:F1}% 버프 1턴 획득!");
+        }
+    }
+
     public void EndCombat(bool isWin)
     {
         if (PlayerManager.Instance != null && currentPlayerStats != null)
@@ -1343,40 +1399,6 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    // [신규] 데몬 6점 및 전설 - 초과 회복(Over-heal) 비례 버프 발생기
-    // =======================================================
-    public void ApplyOverhealBuff(int excessHeal)
-    {
-        if (PlayerManager.Instance == null) return;
-        var syn = PlayerManager.Instance.GetCurrentSynergies();
-        var inventory = PlayerManager.Instance.inventory;
-
-        bool has6Point = syn.GetValueOrDefault(ItemClass.Demon) >= 6;
-        bool hasLegendary = inventory.Exists(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Legendary);
-
-        if (!has6Point && !hasLegendary) return;
-
-        // 배율 산출: 기획안에 따라 최대 체력 비례 %당 1% (6점) + 0.5% (전설)
-        float multiplier = 0f;
-        if (has6Point) multiplier += 1.0f;
-        if (hasLegendary) multiplier += 0.5f;
-
-        // 공식: (초과 회복량 / 최대 체력) * 배율
-        // 예: 1000 체력 중 200 초과 회복 시 -> 0.2 * 1.5 = 0.3f (30% 증폭)
-        float ampValue = ((float)excessHeal / currentPlayerStats.maxHp) * multiplier;
-
-        if (ampValue > 0f)
-        {
-            StatusEffectData newBuff = ScriptableObject.CreateInstance<StatusEffectData>();
-            newBuff.category = EffectCategory.Buff;
-            newBuff.specialType = SpecialEffectType.DamageGivenAmp;
-            newBuff.effectName = "피의 폭주";
-
-            BuffManager.Instance.AddEffect(true, newBuff, ampValue, 1);
-            DevLog.Log($"[피의 폭주] 초과 회복 {excessHeal} 달성 -> 피해 증폭 {ampValue * 100:F1}% 버프 1턴 획득!");
-        }
-    }
-
     public bool IsCurrentTurnOwner(bool isPlayerTarget)
     {
         if (currentActiveEntity == null) return false;
@@ -1390,17 +1412,6 @@ public class CombatManager : MonoBehaviour
         if (string.IsNullOrEmpty(key)) return "";
         if (LocalizationManager.Instance != null) return LocalizationManager.Instance.GetText(key);
         return key;
-    }
-
-    public void HealEntity(bool isPlayerTarget, int amount)
-    {
-        DamageResolver.HealEntity(
-            isPlayerTarget,
-            amount,
-            currentPlayerStats,
-            currentEnemyData,
-            ref currentEnemyHp
-        );
     }
 
     public void RestoreDefenderImage(bool isPlayerTarget)
@@ -1422,11 +1433,5 @@ public class CombatManager : MonoBehaviour
             CombatUIManager.Instance.ResetDefenderImage(isPlayerTarget);
             DevLog.Log($"[이미지 복구] 일반 상태로 이미지를 복구합니다.");
         }
-    }
-
-    public void ToggleAnalysis()
-    {
-        EnsureActionMenuController();
-        actionMenuController?.ToggleAnalysis();
     }
 }
