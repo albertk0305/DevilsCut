@@ -578,33 +578,7 @@ public class CombatManager : MonoBehaviour
             isPlayerAttacking,
             isUltimate);
 
-        EnqueueUltimateCutInIfNeeded(executionContext);
-
-        // ① 스킬 시전 초기 연출
-        SkillResult castResult = executionContext.result;
-        string castCommentary = executionContext.presentation.commentary;
-        bool castIsPureUtility = executionContext.presentation.isPureUtility;
-        BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, castResult, castCommentary, castIsPureUtility));
-
-        // ②-1. [신규 추가] 전체 스킬 결과에 대한 1회성 판정 (스타일 랭크 및 회피 특수 효과)
-        ApplyImmediateDefenseOutcome(executionContext);
-
-        // ②-2. 다단 히트 연출 루프 (데미지 및 화면 텍스트 전담)
-        EnqueueSkillHitActions(executionContext);
-        // 성공 hit 수 기록
-        UpdateLastSuccessfulHits(executionContext);
-
-        // ③ 명중 시 특수효과 발동 로직 호출
-        EnqueueApplyEffectOnHit(executionContext);
-
-        // ④ 카운터 반격 판정
-        EnqueueMorningStarCounterIfNeeded(executionContext);
-
-        // ⑤ 가드 버프 차감 및 인과율(반사) 판정
-        EnqueueGuardAndReflectIfNeeded(executionContext);
-
-        // ⑥ 화면 및 상태 리셋
-        EnqueueSkillReset(executionContext);
+        EnqueueSkillExecutionSequence(executionContext);
 
         // 3. 지휘관 권한 위임 및 턴 종료 대기
         BattleVisualizer.Instance.StartSequence(() => CompleteSkillSequence(isPlayerAttacking));
@@ -642,6 +616,38 @@ public class CombatManager : MonoBehaviour
         ResolveTurnEnd();
 
         return true;
+    }
+
+    private void EnqueueSkillExecutionSequence(SkillExecutionContext context)
+    {
+        EnqueueUltimateCutInIfNeeded(context);
+
+        // Cast presentation
+        SkillData skill = context.skill;
+        bool isPlayerAttacking = context.isPlayerAttacking;
+        SkillResult castResult = context.result;
+        string castCommentary = context.presentation.commentary;
+        bool castIsPureUtility = context.presentation.isPureUtility;
+        BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, castResult, castCommentary, castIsPureUtility));
+
+        // Immediate defense outcome
+        ApplyImmediateDefenseOutcome(context);
+
+        // Hit actions
+        EnqueueSkillHitActions(context);
+        UpdateLastSuccessfulHits(context);
+
+        // On-hit skill effect
+        EnqueueApplyEffectOnHit(context);
+
+        // Counter
+        EnqueueMorningStarCounterIfNeeded(context);
+
+        // Guard and reflect
+        EnqueueGuardAndReflectIfNeeded(context);
+
+        // Reset
+        EnqueueSkillReset(context);
     }
 
     private SkillExecutionContext BuildSkillExecutionContext(
