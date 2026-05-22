@@ -573,16 +573,10 @@ public class CombatManager : MonoBehaviour
             return;
 
         //  [복구됨] 실시간 스탯 산출 및 BattleCalculator 연산 (skillResult 생성)
-        SkillExecutionContext executionContext = new SkillExecutionContext();
-        executionContext.skill = skill;
-        executionContext.isPlayerAttacking = isPlayerAttacking;
-        executionContext.isUltimate = isUltimate;
-        executionContext.calculation = BuildSkillCalculationContext(isPlayerAttacking);
-        executionContext.result = CalculateSkillResult(skill, isPlayerAttacking, executionContext.calculation);
-
-        // 2. 연출 대본 작성 (BattleVisualizer)
-        executionContext.presentation =
-        BuildSkillPresentationContext(skill, isPlayerAttacking, executionContext.result);
+        SkillExecutionContext executionContext = BuildSkillExecutionContext(
+            skill,
+            isPlayerAttacking,
+            isUltimate);
 
         EnqueueUltimateCutInIfNeeded(executionContext);
 
@@ -648,6 +642,28 @@ public class CombatManager : MonoBehaviour
         ResolveTurnEnd();
 
         return true;
+    }
+
+    private SkillExecutionContext BuildSkillExecutionContext(
+        SkillData skill,
+        bool isPlayerAttacking,
+        bool isUltimate)
+    {
+        SkillExecutionContext context = new SkillExecutionContext();
+        context.skill = skill;
+        context.isPlayerAttacking = isPlayerAttacking;
+        context.isUltimate = isUltimate;
+        context.calculation = BuildSkillCalculationContext(context.isPlayerAttacking);
+        context.result = CalculateSkillResult(
+            context.skill,
+            context.isPlayerAttacking,
+            context.calculation);
+        context.presentation = BuildSkillPresentationContext(
+            context.skill,
+            context.isPlayerAttacking,
+            context.result);
+
+        return context;
     }
 
     private SkillResult CalculateSkillResult(
