@@ -1273,20 +1273,7 @@ public class CombatManager : MonoBehaviour
         EnsurePresentationDirector();
         presentationDirector?.ClearCombatEffects();
 
-        if (isPlayerAttacking)
-        {
-            EnsureActionMenuController();
-
-            SkillCategory usedCategory = skill != null
-                ? skill.category
-                : (actionMenuController != null ? actionMenuController.SelectedCategory : SkillCategory.Sword);
-
-            StyleRankManager.Instance.OnSkillUsed(usedCategory);
-            StyleRankManager.Instance.ResetTurnState();
-
-            if (isUltimate)
-                StyleRankManager.Instance.ResetRankForUltimate();
-        }
+        UpdateStyleRankAfterSkillReset(isPlayerAttacking, isUltimate, skill);
 
         ResetCasterImageAfterSkillIfNeeded(isPlayerAttacking);
 
@@ -1305,6 +1292,24 @@ public class CombatManager : MonoBehaviour
             if (groggySprite != null) CombatUIManager.Instance.SetDefenderImage(isPlayerDefending, groggySprite);
             DevLog.Log($"[{(isPlayerDefending ? "주인공" : "적")}]가 아직 그로기 상태이므로 전용 Break 이미지로 복구합니다.");
         }
+    }
+
+    private void UpdateStyleRankAfterSkillReset(bool isPlayerAttacking, bool isUltimate, SkillData skill)
+    {
+        if (!isPlayerAttacking)
+            return;
+
+        EnsureActionMenuController();
+
+        SkillCategory usedCategory = skill != null
+            ? skill.category
+            : (actionMenuController != null ? actionMenuController.SelectedCategory : SkillCategory.Sword);
+
+        StyleRankManager.Instance.OnSkillUsed(usedCategory);
+        StyleRankManager.Instance.ResetTurnState();
+
+        if (isUltimate)
+            StyleRankManager.Instance.ResetRankForUltimate();
     }
 
     private void ResetCasterImageAfterSkillIfNeeded(bool isPlayerAttacking)
