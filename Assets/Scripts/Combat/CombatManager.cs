@@ -1093,32 +1093,36 @@ public class CombatManager : MonoBehaviour
         RewardCriticalHitIfNeeded(hit, isPlayerAttacking);
 
         if (isPlayerAttacking)
-        {
-            ApplyDamageToEntity(false, hit.damage);
-            AccumulatePlayerHitDamageIfBombInactive(hit);
-
-            ApplyPlayerLifestealAfterHit(hit, skill);
-
-        }
-        else // 적(Enemy)이 공격했을 때의 처리
-        {
-            // 1. 일반 타격 데미지 적용 (단 한 번만!)
-            ApplyDamageToEntity(true, hit.damage);
-
-            // 2. 적군 흡혈 로직
-            ApplyEnemyLifestealAfterHit(hit, skill);
-
-            // 3. [핵심] 특수 효과 처리 (스택 폭발 등)
-            // 이제 하드코딩 없이 어떤 보스 스킬이든 TryProcessHitEffect가 구현되어 있으면 호출됩니다.
-            ProcessEnemySpecialHitEffect(skill);
-
-            // 4. 기 모으기 파괴 로직
-            CancelPlayerChargeIfInterrupted(hit);
-        }
+            ProcessPlayerSuccessfulHit(hit, skill);
+        else
+            ProcessEnemySuccessfulHit(hit, skill);
 
         ApplyBreakDamageAfterHit(hit, isPlayerAttacking);
 
         if (!isPureUtility) BattleEventSystem.CallDamageTaken(isPlayerDefending, hit.damage, hit.isCrit);
+    }
+
+    private void ProcessPlayerSuccessfulHit(HitResult hit, SkillData skill)
+    {
+        ApplyDamageToEntity(false, hit.damage);
+        AccumulatePlayerHitDamageIfBombInactive(hit);
+        ApplyPlayerLifestealAfterHit(hit, skill);
+    }
+
+    private void ProcessEnemySuccessfulHit(HitResult hit, SkillData skill)
+    {
+        // 1. 일반 타격 데미지 적용 (단 한 번만!)
+        ApplyDamageToEntity(true, hit.damage);
+
+        // 2. 적군 흡혈 로직
+        ApplyEnemyLifestealAfterHit(hit, skill);
+
+        // 3. [핵심] 특수 효과 처리 (스택 폭발 등)
+        // 이제 하드코딩 없이 어떤 보스 스킬이든 TryProcessHitEffect가 구현되어 있으면 호출됩니다.
+        ProcessEnemySpecialHitEffect(skill);
+
+        // 4. 기 모으기 파괴 로직
+        CancelPlayerChargeIfInterrupted(hit);
     }
 
     private void RewardCriticalHitIfNeeded(HitResult hit, bool isPlayerAttacking)
