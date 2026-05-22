@@ -60,6 +60,7 @@ public class CombatManager : MonoBehaviour
     private TurnEntity currentActiveEntity;
     private CombatActionMenuController actionMenuController;
     private CombatPresentationDirector presentationDirector;
+    private DamageResolutionService damageResolutionService;
     public CombatState currentState = new CombatState();
 
     // [최적화] 코루틴 대기 객체 캐싱
@@ -106,6 +107,17 @@ public class CombatManager : MonoBehaviour
             CombatUIManager.Instance,
             BattleVisualizer.Instance
         );
+    }
+
+    private DamageResolutionService DamageResolver
+    {
+        get
+        {
+            if (damageResolutionService == null)
+                damageResolutionService = new DamageResolutionService(RefreshSpecialStatsProgressUI);
+
+            return damageResolutionService;
+        }
     }
 
     public void RefreshSpecialStatsProgressUI()
@@ -966,68 +978,14 @@ public class CombatManager : MonoBehaviour
 
     public bool ApplyDamageToEntity(bool isPlayerTarget, int damage)
     {
-        bool isDead = false; // 죽었는지 판정할 결과를 잠시 담아둘 변수
-
-        if (isPlayerTarget)
-        {
-            int hpAfterDamage = currentPlayerStats.currentHp - damage;
-
-            // 버서커 6시너지 & 전설 아이템 (사신 거부 / 부활)
-            if (hpAfterDamage <= 0 && PlayerManager.Instance != null && !currentState.hasResurrected)
-            {
-                var syn = PlayerManager.Instance.GetCurrentSynergies();
-                var inventory = PlayerManager.Instance.inventory;
-
-                bool has6Point = syn.GetValueOrDefault(ItemClass.Berserker) >= 6;
-                bool hasLegendary = inventory.Exists(x => x.data.itemClass == ItemClass.Berserker && x.data.grade == ItemGrade.Legendary);
-
-                if (has6Point || hasLegendary)
-                {
-                    currentState.hasResurrected = true;
-
-                    if (has6Point && hasLegendary)
-                    {
-                        currentPlayerStats.currentHp = currentPlayerStats.maxHp;
-                        CombatUIManager.Instance.SpawnDamageText("<color=#00FF00>Resurrect!</color>", false, true);
-                        DevLog.Log("[불굴의 투지+전설] 치명상을 입었으나, 최대 체력으로 부활합니다!");
-                    }
-                    else
-                    {
-                        currentPlayerStats.currentHp = 1;
-                        CombatUIManager.Instance.SpawnDamageText("<color=#FF0000>Endure!</color>", false, true);
-                        DevLog.Log("[사신 거부] 치명상을 입었으나, 체력 1로 버텨냅니다!");
-                    }
-
-                    BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-
-                    // 부활 직후에도 특수 스탯 UI 갱신!
-                    RefreshSpecialStatsProgressUI();
-                    return false; // 안 죽었으므로 여기서 함수 종료
-                }
-            }
-
-            // 부활 기믹이 안 터졌다면 정상적으로 데미지 적용
-            currentPlayerStats.currentHp = Mathf.Max(0, hpAfterDamage);
-            BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-
-            isDead = currentPlayerStats.currentHp <= 0; // 결과 저장
-        }
-        else
-        {
-            // 적군 데미지 처리 (기존 동일)
-            currentEnemyHp = Mathf.Max(0, currentEnemyHp - damage);
-            currentEnemyData.currentHp = currentEnemyHp;
-            currentEnemyData.aiBrain?.UpdatePassives(currentEnemyData);
-
-            BattleEventSystem.CallHpChanged(false, currentEnemyHp, currentEnemyData.maxHp);
-
-            isDead = currentEnemyHp <= 0; // 결과 저장
-        }
-
-        // [핵심] 리턴으로 빠져나가기 직전에 안전하게 UI를 갱신합니다!
-        RefreshSpecialStatsProgressUI();
-
-        return isDead; // 최종 결과 반환
+        return DamageResolver.ApplyDamageToEntity(
+            isPlayerTarget,
+            damage,
+            currentPlayerStats,
+            currentEnemyData,
+            currentState,
+            ref currentEnemyHp
+        );
     }
 
     public void EndCombat(bool isWin)
@@ -1344,27 +1302,13 @@ public class CombatManager : MonoBehaviour
 
     public void HealEntity(bool isPlayerTarget, int amount)
     {
-        if (isPlayerTarget)
-        {
-            currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + amount, 0, currentPlayerStats.maxHp);
-            BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-            if (CombatUIManager.Instance != null)
-                CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-        }
-        else
-        {
-            currentEnemyHp = Mathf.Clamp(currentEnemyHp + amount, 0, currentEnemyData.maxHp);
-            currentEnemyData.currentHp = currentEnemyHp;
-
-            // 회복된 체력에 맞춰서 패시브(피해 증폭률)도 실시간 리셋 연산
-            currentEnemyData.aiBrain?.UpdatePassives(currentEnemyData);
-
-            BattleEventSystem.CallHpChanged(false, currentEnemyHp, currentEnemyData.maxHp);
-            if (CombatUIManager.Instance != null)
-                CombatUIManager.Instance.enemyStatusUI.UpdateHP(currentEnemyHp, currentEnemyData.maxHp);
-        }
-
-        RefreshSpecialStatsProgressUI();
+        DamageResolver.HealEntity(
+            isPlayerTarget,
+            amount,
+            currentPlayerStats,
+            currentEnemyData,
+            ref currentEnemyHp
+        );
     }
 
     public void RestoreDefenderImage(bool isPlayerTarget)
