@@ -1169,19 +1169,7 @@ public class CombatManager : MonoBehaviour
 
             // 3. [핵심] 특수 효과 처리 (스택 폭발 등)
             // 이제 하드코딩 없이 어떤 보스 스킬이든 TryProcessHitEffect가 구현되어 있으면 호출됩니다.
-            int explosionDamage = skill.skillLogic.TryProcessHitEffect(currentEnemyData);
-
-            if (explosionDamage > 0)
-            {
-                // 특수 피해 적용 (이미 일반 데미지는 위에서 들어갔으므로 이것만 추가로 들어감)
-                CombatManager.Instance.ApplyDamageToEntity(true, explosionDamage);
-
-                // 연출: 피격 이미지 + 보라색 데미지 텍스트
-                CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
-                CombatUIManager.Instance.SpawnDamageText($"★{explosionDamage}", false, true);
-
-                DevLog.Log($"[스킬 특수 효과] 특수 피해 {explosionDamage} 발생!");
-            }
+            ProcessEnemySpecialHitEffect(skill);
 
             // 4. 기 모으기 파괴 로직
             CancelPlayerChargeIfInterrupted(hit);
@@ -1209,6 +1197,23 @@ public class CombatManager : MonoBehaviour
             currentState.chargingSkill = null;
             CombatUIManager.Instance.SpawnDamageText("Broken!", false, true);
             DevLog.Log("[원기옥] 피격당하여 기 모으기가 취소되었습니다!");
+        }
+    }
+
+    private void ProcessEnemySpecialHitEffect(SkillData skill)
+    {
+        int explosionDamage = skill.skillLogic.TryProcessHitEffect(currentEnemyData);
+
+        if (explosionDamage > 0)
+        {
+            // 특수 피해 적용 (이미 일반 데미지는 위에서 들어갔으므로 이것만 추가로 들어감)
+            CombatManager.Instance.ApplyDamageToEntity(true, explosionDamage);
+
+            // 연출: 피격 이미지 + 보라색 데미지 텍스트
+            CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
+            CombatUIManager.Instance.SpawnDamageText($"★{explosionDamage}", false, true);
+
+            DevLog.Log($"[스킬 특수 효과] 특수 피해 {explosionDamage} 발생!");
         }
     }
 
