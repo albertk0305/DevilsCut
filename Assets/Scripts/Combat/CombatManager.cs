@@ -989,7 +989,7 @@ public class CombatManager : MonoBehaviour
 
         presentationDirector?.ShowSpecialCastPresentationIfNeeded(skill, isPlayerAttacking);
         presentationDirector?.SetCasterImage(isPlayerAttacking, skill.skillActionImage);
-        skill.skillLogic?.PaySkillCost(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking);
+        PaySkillCostForCast(skill, isPlayerAttacking);
         CompanionManager.Emotion emotion = ResolveCompanionEmotionAfterSkillCast(skillResult, isPlayerAttacking);
         CompanionManager.Instance.UpdateEmotion(emotion);
 
@@ -1006,12 +1006,29 @@ public class CombatManager : MonoBehaviour
             showCritAlert = skillResult.anyCrit && !isPureUtility
         };
 
+        ShowSkillCastResultPresentation(presentationContext);
+    }
+
+    private void PaySkillCostForCast(
+        SkillData skill,
+        bool isPlayerAttacking)
+    {
+        skill.skillLogic?.PaySkillCost(
+            skill,
+            currentPlayerStats,
+            currentEnemyData,
+            isPlayerAttacking);
+    }
+
+    private void ShowSkillCastResultPresentation(SkillCastPresentationContext context)
+    {
+        EnsurePresentationDirector();
+
         presentationDirector?.ShowCastResultPresentation(
-            !presentationContext.isPlayerAttacking,
-            presentationContext.reactionSprite,
-            presentationContext.commentary,
-            presentationContext.showCritAlert
-        );
+            !context.isPlayerAttacking,
+            context.reactionSprite,
+            context.commentary,
+            context.showCritAlert);
     }
 
     private CompanionManager.Emotion ResolveCompanionEmotionAfterSkillCast(
