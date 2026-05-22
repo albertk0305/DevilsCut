@@ -93,20 +93,20 @@ public class CombatManager : MonoBehaviour
     }
 
     private void EnsurePresentationDirector()
-{
-    if (presentationDirector != null) return;
-
-    if (CombatUIManager.Instance == null || BattleVisualizer.Instance == null)
     {
-        DevLog.Log("[CombatManager] CombatPresentationDirector를 초기화할 수 없습니다.");
-        return;
-    }
+        if (presentationDirector != null) return;
 
-    presentationDirector = new CombatPresentationDirector(
-        CombatUIManager.Instance,
-        BattleVisualizer.Instance
-    );
-}
+        if (CombatUIManager.Instance == null || BattleVisualizer.Instance == null)
+        {
+            DevLog.Log("[CombatManager] CombatPresentationDirector를 초기화할 수 없습니다.");
+            return;
+        }
+
+        presentationDirector = new CombatPresentationDirector(
+            CombatUIManager.Instance,
+            BattleVisualizer.Instance
+        );
+    }
 
     public void RefreshSpecialStatsProgressUI()
     {
@@ -214,7 +214,7 @@ public class CombatManager : MonoBehaviour
         StyleRankManager.Instance?.InitCombat();
 
         EnsureActionMenuController();
-actionMenuController?.HideActionMenuAndShowWaiting();
+        actionMenuController?.HideActionMenuAndShowWaiting();
 
         bool isFastCombat = PlayerPrefs.GetInt("FastCombat", 0) == 1;
         Time.timeScale = isFastCombat ? 2.0f : 1.0f;
@@ -253,12 +253,12 @@ actionMenuController?.HideActionMenuAndShowWaiting();
     }
 
     private void UpdateTurnOrderUI()
-{
-    List<Sprite> icons = TurnManager.Instance.GetFutureTurnIcons(5);
+    {
+        List<Sprite> icons = TurnManager.Instance.GetFutureTurnIcons(5);
 
-    EnsurePresentationDirector();
-    presentationDirector?.UpdateTurnOrder(icons);
-}
+        EnsurePresentationDirector();
+        presentationDirector?.UpdateTurnOrder(icons);
+    }
     // ==========================================================
     // 1. 메인 턴 분배기 (Switch 문으로 가독성 극대화)
     // ==========================================================
@@ -271,7 +271,7 @@ actionMenuController?.HideActionMenuAndShowWaiting();
         RefreshSpecialStatsProgressUI();
 
         EnsureActionMenuController();
-actionMenuController?.HideActionMenuAndShowWaiting();
+        actionMenuController?.HideActionMenuAndShowWaiting();
 
         yield return HandlePreTurnEffects(currentTurnOwner);
 
@@ -280,16 +280,16 @@ actionMenuController?.HideActionMenuAndShowWaiting();
         switch (currentTurnOwner.type)
         {
             case EntityType.Enemy:
-                yield return HandleEnemyTurn(); 
+                yield return HandleEnemyTurn();
                 break;
             case EntityType.Player:
-                yield return HandlePlayerTurn(); 
+                yield return HandlePlayerTurn();
                 break;
             case EntityType.Karin:
                 yield return CompanionManager.Instance.ExecuteKarinTurn();
                 break;
             case EntityType.Supporter:
-                yield return HandleSupporterTurn(); 
+                yield return HandleSupporterTurn();
                 break;
         }
     }
@@ -493,27 +493,27 @@ actionMenuController?.HideActionMenuAndShowWaiting();
     }
 
     public void ShowCategoryMenu()
-{
-    EnsureActionMenuController();
-    actionMenuController?.ShowCategoryMenu();
-}
+    {
+        EnsureActionMenuController();
+        actionMenuController?.ShowCategoryMenu();
+    }
 
     public void ShowSkillMenu(int categoryIndex)
-{
-    EnsureActionMenuController();
-    actionMenuController?.ShowSkillMenu(categoryIndex);
-}
+    {
+        EnsureActionMenuController();
+        actionMenuController?.ShowSkillMenu(categoryIndex);
+    }
 
     public void OnActionSlotClicked(int slotIndex)
-{
-    EnsureActionMenuController();
-    actionMenuController?.OnActionSlotClicked(slotIndex);
-}
+    {
+        EnsureActionMenuController();
+        actionMenuController?.OnActionSlotClicked(slotIndex);
+    }
 
     private void ExecuteSkillFromActionMenu(SkillData skill, bool isPlayerAttacking, bool isUltimate = false)
-{
-    PerformSkillRoutine(skill, isPlayerAttacking, isUltimate);
-}
+    {
+        PerformSkillRoutine(skill, isPlayerAttacking, isUltimate);
+    }
 
     // 스킬 처리 프로세스 (연산 -> 큐 적재 -> 실행)
     private void PerformSkillRoutine(SkillData skill, bool isPlayerAttacking, bool isUltimate = false)
@@ -575,24 +575,24 @@ actionMenuController?.HideActionMenuAndShowWaiting();
         string skillName = GetTranslatedText(skill.skillNameKey);
 
         if (isUltimate)
-{
-    Sprite cutInSprite = isPlayerAttacking ? playerData?.cutIn : currentEnemyData?.CutIn;
+        {
+            Sprite cutInSprite = isPlayerAttacking ? playerData?.cutIn : currentEnemyData?.CutIn;
 
-    EnsurePresentationDirector();
-    presentationDirector?.EnqueueUltimateCutIn(cutInSprite, attackerName);
-}
+            EnsurePresentationDirector();
+            presentationDirector?.EnqueueUltimateCutIn(cutInSprite, attackerName);
+        }
 
-EnsurePresentationDirector();
+        EnsurePresentationDirector();
 
-string commentary = presentationDirector != null
-    ? presentationDirector.BuildSkillCommentary(attackerName, skillName, skillResult, isPureUtility)
-    : isPureUtility
-        ? $"{attackerName}이(가) {skillName}을(를) 시전합니다!"
-        : !skillResult.anyHit
-            ? $"{attackerName}의 {skillName}이(가) 빗나갔습니다!"
-            : skillResult.anyCrit
-                ? $"{attackerName}의 {skillName} 치명적으로 적중!"
-                : $"{attackerName}의 {skillName} 적중!";
+        string commentary = presentationDirector != null
+            ? presentationDirector.BuildSkillCommentary(attackerName, skillName, skillResult, isPureUtility)
+            : isPureUtility
+                ? $"{attackerName}이(가) {skillName}을(를) 시전합니다!"
+                : !skillResult.anyHit
+                    ? $"{attackerName}의 {skillName}이(가) 빗나갔습니다!"
+                    : skillResult.anyCrit
+                        ? $"{attackerName}의 {skillName} 치명적으로 적중!"
+                        : $"{attackerName}의 {skillName} 적중!";
 
         // ① 스킬 시전 초기 연출
         BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, skillResult, commentary, isPureUtility));
@@ -719,10 +719,10 @@ string commentary = presentationDirector != null
     // 스킬 시전 초기 연출 (이미지, 대사, 코스트 지불 등)
     private void ApplySkillCastUI(SkillData skill, bool isPlayerAttacking, SkillResult skillResult, string commentary, bool isPureUtility)
     {
-EnsurePresentationDirector();
+        EnsurePresentationDirector();
 
-presentationDirector?.ShowFantasticDreamerDiceIfNeeded(skill, isPlayerAttacking);
-presentationDirector?.SetCasterImage(isPlayerAttacking, skill.skillActionImage);
+        presentationDirector?.ShowFantasticDreamerDiceIfNeeded(skill, isPlayerAttacking);
+        presentationDirector?.SetCasterImage(isPlayerAttacking, skill.skillActionImage);
         skill.skillLogic?.PaySkillCost(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking);
         CompanionManager.Instance.UpdateEmotion(skillResult.anyHit ?
             (isPlayerAttacking ? CompanionManager.Emotion.Happy : CompanionManager.Emotion.Worried) :
@@ -747,12 +747,12 @@ presentationDirector?.SetCasterImage(isPlayerAttacking, skill.skillActionImage);
             if (!isPureUtility) reactionSprite = isPlayerAttacking ? currentEnemyData?.evade : playerData?.evade;
         }
 
-presentationDirector?.ShowCastResultPresentation(
-    !isPlayerAttacking,
-    reactionSprite,
-    commentary,
-    skillResult.anyCrit && !isPureUtility
-);
+        presentationDirector?.ShowCastResultPresentation(
+            !isPlayerAttacking,
+            reactionSprite,
+            commentary,
+            skillResult.anyCrit && !isPureUtility
+        );
     }
 
     // 단일 타격 실패(회피) 연출
@@ -920,22 +920,22 @@ presentationDirector?.ShowCastResultPresentation(
     private void ResetCombatUI(bool isPlayerAttacking, bool isPlayerDefending, bool isUltimate, SkillData skill)
     {
         EnsurePresentationDirector();
-presentationDirector?.ClearCombatEffects();
+        presentationDirector?.ClearCombatEffects();
 
         if (isPlayerAttacking)
-{
-    EnsureActionMenuController();
+        {
+            EnsureActionMenuController();
 
-    SkillCategory usedCategory = skill != null
-        ? skill.category
-        : (actionMenuController != null ? actionMenuController.SelectedCategory : SkillCategory.Sword);
+            SkillCategory usedCategory = skill != null
+                ? skill.category
+                : (actionMenuController != null ? actionMenuController.SelectedCategory : SkillCategory.Sword);
 
-    StyleRankManager.Instance.OnSkillUsed(usedCategory);
-    StyleRankManager.Instance.ResetTurnState();
+            StyleRankManager.Instance.OnSkillUsed(usedCategory);
+            StyleRankManager.Instance.ResetTurnState();
 
-    if (isUltimate)
-        StyleRankManager.Instance.ResetRankForUltimate();
-}
+            if (isUltimate)
+                StyleRankManager.Instance.ResetRankForUltimate();
+        }
 
         if (!(isPlayerAttacking && currentState.isPlayerCharging))
         {
@@ -1389,8 +1389,8 @@ presentationDirector?.ClearCombatEffects();
     }
 
     public void ToggleAnalysis()
-{
-    EnsureActionMenuController();
-    actionMenuController?.ToggleAnalysis();
-}
+    {
+        EnsureActionMenuController();
+        actionMenuController?.ToggleAnalysis();
+    }
 }
