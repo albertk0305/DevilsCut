@@ -1288,10 +1288,7 @@ public class CombatManager : MonoBehaviour
                 StyleRankManager.Instance.ResetRankForUltimate();
         }
 
-        if (!(isPlayerAttacking && currentState.isPlayerCharging))
-        {
-            CombatUIManager.Instance.ResetCasterImage(isPlayerAttacking);
-        }
+        ResetCasterImageAfterSkillIfNeeded(isPlayerAttacking);
 
         bool isDefenderBroken = (!isPlayerAttacking && BreakManager.Instance.IsBroken(true)) || (isPlayerAttacking && BreakManager.Instance.IsBroken(false));
 
@@ -1308,6 +1305,14 @@ public class CombatManager : MonoBehaviour
             if (groggySprite != null) CombatUIManager.Instance.SetDefenderImage(isPlayerDefending, groggySprite);
             DevLog.Log($"[{(isPlayerDefending ? "주인공" : "적")}]가 아직 그로기 상태이므로 전용 Break 이미지로 복구합니다.");
         }
+    }
+
+    private void ResetCasterImageAfterSkillIfNeeded(bool isPlayerAttacking)
+    {
+        if (isPlayerAttacking && currentState.isPlayerCharging)
+            return;
+
+        CombatUIManager.Instance.ResetCasterImage(isPlayerAttacking);
     }
 
     public bool ApplyDamageToEnemy(int damage)
