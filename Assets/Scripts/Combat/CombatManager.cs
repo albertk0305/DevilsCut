@@ -570,48 +570,10 @@ public class CombatManager : MonoBehaviour
         BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, skillResult, presentationContext.commentary, presentationContext.isPureUtility));
 
         // ②-1. [신규 추가] 전체 스킬 결과에 대한 1회성 판정 (스타일 랭크 및 회피 특수 효과)
-        if (presentationContext.isPlayerDefending && !presentationContext.isPureUtility)
-        {
-            bool isInvincible = BuffManager.Instance.GetEffects(true).Exists(e => e.effectData.specialType == SpecialEffectType.Invincible);
-
-            // [완전 회피] 모든 타격이 빗나갔을 때 딱 한 번만 발동!
-            if (!skillResult.anyHit)
-            {
-                StyleRankManager.Instance.OnEvade();
-
-                // 새벽별 난식 턴 당기기 (1회만 발동)
-                var martialSkill = PlayerManager.Instance.unlockedSkills.Find(s => s.category == SkillCategory.Martial);
-                if (martialSkill != null && martialSkill.skillLogic is SkillLogic_MorningStar msLogic)
-                {
-                    bool hasEvasionBuff = BuffManager.Instance.GetEffects(true).Exists(e => e.effectData == msLogic.evasionBuffData);
-                    if (hasEvasionBuff && martialSkill.currentEvolution == SkillEvolution.PathB && !currentState.isMorningStarApRecoveredThisSkill)
-                    {
-                        var playerEntity = TurnManager.Instance.turnQueue.Find(e => e.isPlayer);
-                        if (playerEntity != null)
-                        {
-                            playerEntity.actionGauge += msLogic.pathB_ApRecovery;
-                            currentState.isMorningStarApRecoveredThisSkill = true;
-                            DevLog.Log($"[새벽별:난식] 완벽 회피 성공! 행동 게이지 {msLogic.pathB_ApRecovery} 회복.");
-                        }
-                    }
-                }
-            }
-            // [피격] 1타라도 스쳤을 때 딱 한 번만 발동!
-            else
-            {
-                if (!skillResult.isGuardTriggered && !isInvincible)
-                {
-                    StyleRankManager.Instance.OnPlayerHit();
-                }
-                else if (isInvincible)
-                {
-                    DevLog.Log("[무하한] 무적 상태이므로 스타일 랭크가 감소하지 않습니다.");
-                }
-            }
-        }
+        ApplyImmediateDefenseOutcome(skillResult, presentationContext.isPlayerDefending, presentationContext.isPureUtility);
 
         // ②-2. 다단 히트 연출 루프 (데미지 및 화면 텍스트 전담)
-        EnqueueSkillHitActions(skill,skillResult,isPlayerAttacking,presentationContext.isPlayerDefending,presentationContext.isPureUtility);
+        EnqueueSkillHitActions(skill, skillResult, isPlayerAttacking, presentationContext.isPlayerDefending, presentationContext.isPureUtility);
         // 성공 hit 수 기록
         UpdateLastSuccessfulHits(skillResult);
 
@@ -663,7 +625,7 @@ public class CombatManager : MonoBehaviour
         }
 
         // ⑥ 화면 및 상태 리셋
-        EnqueueSkillReset(isPlayerAttacking,presentationContext.isPlayerDefending,isUltimate,skill);
+        EnqueueSkillReset(isPlayerAttacking, presentationContext.isPlayerDefending, isUltimate, skill);
 
         // ==========================================================
         // 3. 지휘관 권한 위임 및 턴 종료 대기
@@ -811,57 +773,113 @@ public class CombatManager : MonoBehaviour
     bool isPlayerAttacking,
     bool isPlayerDefending,
     bool isPureUtility)
-{
-    foreach (var hit in skillResult.hits)
+    {
+        foreach (var hit in skillResult.hits)
+        {
+            BattleVisualizer.Instance.EnqueueAction(() =>
+            {
+                if (!hit.isHit)
+                    ProcessMissAction(isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult);
+                else
+                    ProcessHitAction(hit, isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult, skill);
+            });
+
+            BattleVisualizer.Instance.EnqueueDelay(0.15f);
+        }
+    }
+
+    private void UpdateLastSuccessfulHits(SkillResult skillResult)
+    {
+        int successCount = 0;
+
+        foreach (var hit in skillResult.hits)
+        {
+            if (hit.isHit)
+                successCount++;
+        }
+
+        currentState.lastSuccessfulHits = successCount;
+    }
+
+    private void EnqueueApplyEffectOnHit(
+        SkillData skill,
+        SkillResult skillResult,
+        bool isPlayerAttacking)
     {
         BattleVisualizer.Instance.EnqueueAction(() =>
-        {
-            if (!hit.isHit)
-                ProcessMissAction(isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult);
-            else
-                ProcessHitAction(hit, isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult, skill);
-        });
-
-        BattleVisualizer.Instance.EnqueueDelay(0.15f);
+            skill.skillLogic?.ApplyEffectOnHit(
+                skill,
+                currentPlayerStats,
+                currentEnemyData,
+                isPlayerAttacking,
+                skillResult.anyHit));
     }
-}
 
-private void UpdateLastSuccessfulHits(SkillResult skillResult)
-{
-    int successCount = 0;
-
-    foreach (var hit in skillResult.hits)
+    private void EnqueueSkillReset(
+        bool isPlayerAttacking,
+        bool isPlayerDefending,
+        bool isUltimate,
+        SkillData skill)
     {
-        if (hit.isHit)
-            successCount++;
+        BattleVisualizer.Instance.EnqueueAction(() =>
+            ResetCombatUI(isPlayerAttacking, isPlayerDefending, isUltimate, skill));
     }
 
-    currentState.lastSuccessfulHits = successCount;
-}
+    private void ApplyImmediateDefenseOutcome(
+        SkillResult skillResult,
+        bool isPlayerDefending,
+        bool isPureUtility)
+    {
+        if (!isPlayerDefending || isPureUtility)
+            return;
 
-private void EnqueueApplyEffectOnHit(
-    SkillData skill,
-    SkillResult skillResult,
-    bool isPlayerAttacking)
-{
-    BattleVisualizer.Instance.EnqueueAction(() =>
-        skill.skillLogic?.ApplyEffectOnHit(
-            skill,
-            currentPlayerStats,
-            currentEnemyData,
-            isPlayerAttacking,
-            skillResult.anyHit));
-}
+        bool isInvincible = BuffManager.Instance
+            .GetEffects(true)
+            .Exists(e => e.effectData.specialType == SpecialEffectType.Invincible);
 
-private void EnqueueSkillReset(
-    bool isPlayerAttacking,
-    bool isPlayerDefending,
-    bool isUltimate,
-    SkillData skill)
-{
-    BattleVisualizer.Instance.EnqueueAction(() =>
-        ResetCombatUI(isPlayerAttacking, isPlayerDefending, isUltimate, skill));
-}
+        // 완전 회피
+        if (!skillResult.anyHit)
+        {
+            StyleRankManager.Instance.OnEvade();
+
+            var martialSkill = PlayerManager.Instance.unlockedSkills.Find(
+                s => s.category == SkillCategory.Martial);
+
+            if (martialSkill != null && martialSkill.skillLogic is SkillLogic_MorningStar msLogic)
+            {
+                bool hasEvasionBuff = BuffManager.Instance
+                    .GetEffects(true)
+                    .Exists(e => e.effectData == msLogic.evasionBuffData);
+
+                if (hasEvasionBuff &&
+                    martialSkill.currentEvolution == SkillEvolution.PathB &&
+                    !currentState.isMorningStarApRecoveredThisSkill)
+                {
+                    var playerEntity = TurnManager.Instance.turnQueue.Find(e => e.isPlayer);
+
+                    if (playerEntity != null)
+                    {
+                        playerEntity.actionGauge += msLogic.pathB_ApRecovery;
+                        currentState.isMorningStarApRecoveredThisSkill = true;
+
+                        DevLog.Log($"[새벽별:난식] 완벽 회피 성공! 행동 게이지 {msLogic.pathB_ApRecovery} 회복.");
+                    }
+                }
+            }
+
+            return;
+        }
+
+        // 피격
+        if (!skillResult.isGuardTriggered && !isInvincible)
+        {
+            StyleRankManager.Instance.OnPlayerHit();
+        }
+        else if (isInvincible)
+        {
+            DevLog.Log("[무하한] 무적 상태이므로 스타일 랭크가 감소하지 않습니다.");
+        }
+    }
 
     // 스킬 시전 초기 연출 (이미지, 대사, 코스트 지불 등)
     private void ApplySkillCastUI(SkillData skill, bool isPlayerAttacking, SkillResult skillResult, string commentary, bool isPureUtility)
