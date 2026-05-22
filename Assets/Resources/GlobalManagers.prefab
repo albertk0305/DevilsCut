@@ -139,6 +139,14 @@ MonoBehaviour:
     starLevel: 2
   - data: {fileID: 11400000, guid: eb29b40cbdb370348bb3bee35c84e192, type: 2}
     starLevel: 1
+  - data: {fileID: 11400000, guid: 134e3e0f6c7e4a34fa439a42a65f7cd9, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: feb908c5438531b4b905e53087a17f16, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: c132951b0111b7b429f073145de15314, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: 889a401a33b6f734cb11d8c8ec9e5310, type: 2}
+    starLevel: 1
   currentEnemyToFight: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
   unlockedSkills:
   - {fileID: 11400000, guid: 6f76bd2b0cc4916469f2ca32aba944e9, type: 2}

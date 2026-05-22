@@ -47,6 +47,9 @@ public class CombatManager : MonoBehaviour
     public StatusEffectData pEffect_Evasion;
     public StatusEffectData pEffect_HealAmp;
 
+    [Header("턴 효과 StatusEffectData 매핑")]
+[SerializeField] private TurnEffectResolverConfig turnEffectConfig;
+
     private PlayerStats currentPlayerStats;
     public PlayerStats GetCurrentPlayerStats() => currentPlayerStats;
 
@@ -61,6 +64,7 @@ public class CombatManager : MonoBehaviour
     private CombatActionMenuController actionMenuController;
     private CombatPresentationDirector presentationDirector;
     private DamageResolutionService damageResolutionService;
+    private TurnEffectResolver turnEffectResolver;
     public CombatState currentState = new CombatState();
 
     // [최적화] 코루틴 대기 객체 캐싱
@@ -119,6 +123,17 @@ public class CombatManager : MonoBehaviour
             return damageResolutionService;
         }
     }
+
+    private TurnEffectResolver TurnEffects
+{
+    get
+    {
+        if (turnEffectResolver == null)
+            turnEffectResolver = new TurnEffectResolver(turnEffectConfig);
+
+        return turnEffectResolver;
+    }
+}
 
     public void RefreshSpecialStatsProgressUI()
     {
@@ -315,28 +330,7 @@ public class CombatManager : MonoBehaviour
 
         if (owner.type == EntityType.Player && PlayerManager.Instance != null)
         {
-            var syn = PlayerManager.Instance.GetCurrentSynergies();
-            var inventory = PlayerManager.Instance.inventory;
-
-            // [트릭스터 4점]
-            if (syn.GetValueOrDefault(ItemClass.Trickster) >= 4) ApplyRandomTricksterStatDebuff(0.05f);
-
-            // [트릭스터 희귀] 가짜 웃음 수치 합산
-            var trickRares = inventory.FindAll(x => x.data.itemClass == ItemClass.Trickster && x.data.grade == ItemGrade.Rare);
-            float trickRareVal = 0f;
-            foreach (var r in trickRares) trickRareVal += r.starLevel == 1 ? 0.02f : (r.starLevel == 2 ? 0.08f : 0.25f);
-            if (trickRareVal > 0f) ApplyRandomTricksterStatDebuff(trickRareVal);
-
-            // [트릭스터 에픽] 기괴한 가면 수치 합산 (출혈, 화상 계수 분리)
-            var trickEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Trickster && x.data.grade == ItemGrade.Epic);
-            float trickEpicVal = 0f, trickBleedVal = 0f, trickBurnVal = 0f;
-            foreach (var e in trickEpics)
-            {
-                trickEpicVal += e.starLevel == 1 ? 0.02f : (e.starLevel == 2 ? 0.08f : 0.30f);
-                trickBleedVal += e.starLevel == 1 ? 1.0f : (e.starLevel == 2 ? 2.0f : 3.0f); // 100/200/300%
-                trickBurnVal += e.starLevel == 1 ? 0.02f : (e.starLevel == 2 ? 0.03f : 0.04f); // 2/3/4%
-            }
-            if (trickEpics.Count > 0) ApplyRandomTricksterEpicDebuff(trickEpicVal, trickBleedVal, trickBurnVal);
+            TurnEffects.ApplyTricksterPreTurnEffects(PlayerManager.Instance);
         }
 
         if (owner.type == EntityType.Enemy)
@@ -1091,116 +1085,11 @@ public class CombatManager : MonoBehaviour
             //  캐스터 시너지: 매 턴 종료 시 무작위 독립 버프 부여
             if (currentActiveEntity.isPlayer && PlayerManager.Instance != null)
             {
-                var syn = PlayerManager.Instance.GetCurrentSynergies();
-                var inventory = PlayerManager.Instance.inventory;
-
-                // [캐스터 4점] 매 턴 스탯 5% 버프 1개
-                if (syn.GetValueOrDefault(ItemClass.Caster) >= 4) ApplyRandomCasterStatBuff(0.05f);
-
-                // [캐스터 희귀] 수치를 모두 더한 뒤 1개의 버프만 생성
-                var casterRares = inventory.FindAll(x => x.data.itemClass == ItemClass.Caster && x.data.grade == ItemGrade.Rare);
-                float casterRareVal = 0f;
-                foreach (var casterRare in casterRares)
-                    casterRareVal += casterRare.starLevel == 1 ? 0.02f : (casterRare.starLevel == 2 ? 0.08f : 0.30f);
-
-                if (casterRareVal > 0f) ApplyRandomCasterStatBuff(casterRareVal);
-
-                // [캐스터 에픽] 수치를 모두 더한 뒤 1개의 버프만 생성
-                var casterEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Caster && x.data.grade == ItemGrade.Epic);
-                float casterEpicVal = 0f;
-                foreach (var casterEpic in casterEpics)
-                    casterEpicVal += casterEpic.starLevel == 1 ? 0.02f : (casterEpic.starLevel == 2 ? 0.08f : 0.30f);
-
-                if (casterEpicVal > 0f) ApplyRandomCasterEpicBuff(casterEpicVal);
+                TurnEffects.ApplyCasterTurnEndEffects(PlayerManager.Instance);
             }
         }
 
         CalculateNextTurn();
-    }
-
-    private void ApplyRandomCasterStatBuff(float value)
-    {
-        int rand = Random.Range(0, 4);
-        TargetStat target = TargetStat.Strength;
-        string statName = "힘";
-
-        if (rand == 1) { target = TargetStat.Defense; statName = "방어력"; }
-        else if (rand == 2) { target = TargetStat.Speed; statName = "속도"; }
-        else if (rand == 3) { target = TargetStat.Luck; statName = "운"; }
-
-        // CreateInstance를 사용해 메모리에 완전히 고유한 버프 인스턴스를 찍어냅니다. (서로 덮어쓰지 않음!)
-        StatusEffectData newBuff = ScriptableObject.CreateInstance<StatusEffectData>();
-        newBuff.category = EffectCategory.Buff;
-        newBuff.targetStat = target;
-        newBuff.modifierType = ModifierType.Percentage;
-        newBuff.effectName = $"마력 순환({statName})";
-
-        BuffManager.Instance.AddEffect(true, newBuff, value, 1); // 1턴 유지
-        DevLog.Log($"[캐스터 스탯 버프] 셰리에게 {statName} {value * 100}% 증가 버프가 독립 부여되었습니다.");
-    }
-
-    private void ApplyRandomCasterEpicBuff(float value)
-    {
-        int rand = Random.Range(0, 5);
-        SpecialEffectType specialType = SpecialEffectType.DamageGivenAmp;
-        string buffName = "피해 증폭";
-        float applyValue = value;
-
-        if (rand == 0) { specialType = SpecialEffectType.CritRateUp; buffName = "크리티컬 확률"; applyValue = value * 100f; } // 확률은 합산 연산이라 100을 곱함
-        else if (rand == 1) { specialType = SpecialEffectType.CritDamageUp; buffName = "크리티컬 피해량"; }
-        else if (rand == 2) { specialType = SpecialEffectType.EvasionUp; buffName = "회피율"; applyValue = value * 100f; }
-        else if (rand == 3) { specialType = SpecialEffectType.AccuracyUp; buffName = "명중률"; applyValue = value * 100f; }
-        else if (rand == 4) { specialType = SpecialEffectType.DamageGivenAmp; buffName = "주는 피해 증폭"; }
-
-        StatusEffectData newBuff = ScriptableObject.CreateInstance<StatusEffectData>();
-        newBuff.category = EffectCategory.Buff;
-        newBuff.specialType = specialType;
-        newBuff.effectName = $"마력 공명({buffName})";
-
-        BuffManager.Instance.AddEffect(true, newBuff, applyValue, 1);
-        DevLog.Log($"[캐스터 에픽 버프] 셰리에게 {buffName} +{applyValue} 버프가 독립 부여되었습니다.");
-    }
-
-    private void ApplyRandomTricksterStatDebuff(float value)
-    {
-        int rand = Random.Range(0, 4);
-        TargetStat target = TargetStat.Strength;
-        string statName = "힘";
-
-        if (rand == 1) { target = TargetStat.Defense; statName = "방어력"; }
-        else if (rand == 2) { target = TargetStat.Speed; statName = "속도"; }
-        else if (rand == 3) { target = TargetStat.Luck; statName = "운"; }
-
-        StatusEffectData newDebuff = ScriptableObject.CreateInstance<StatusEffectData>();
-        newDebuff.category = EffectCategory.Debuff;
-        newDebuff.targetStat = target;
-        newDebuff.modifierType = ModifierType.Percentage;
-        newDebuff.effectName = $"악의적 간섭({statName})";
-
-        BuffManager.Instance.AddEffect(false, newDebuff, -value, 1); // 감소이므로 -value를 전달
-        DevLog.Log($"[트릭스터] 적에게 {statName} {value * 100}% 감소 디버프 부여!");
-    }
-
-    private void ApplyRandomTricksterEpicDebuff(float statVal, float bleedVal, float burnVal)
-    {
-        int rand = Random.Range(0, 5);
-        SpecialEffectType specialType = SpecialEffectType.EvasionUp;
-        string debuffName = "회피율 감소";
-        float applyValue = -statVal * 100f; // 명중/회피는 상수로 -20 등의 수치 사용
-
-        if (rand == 0) { specialType = SpecialEffectType.EvasionUp; debuffName = "회피율 감소"; applyValue = -statVal * 100f; }
-        else if (rand == 1) { specialType = SpecialEffectType.DamageAmp; debuffName = "받는 피해 증가"; applyValue = statVal; } // Amp는 양수일 때 데미지 증가
-        else if (rand == 2) { specialType = SpecialEffectType.AccuracyUp; debuffName = "명중률 감소"; applyValue = -statVal * 100f; }
-        else if (rand == 3) { specialType = SpecialEffectType.Bleed; debuffName = "심연의 출혈"; applyValue = bleedVal; } // 출혈은 양수 배율
-        else if (rand == 4) { specialType = SpecialEffectType.Burn; debuffName = "지옥의 화상"; applyValue = burnVal; } // 화상도 양수 배율
-
-        StatusEffectData newDebuff = ScriptableObject.CreateInstance<StatusEffectData>();
-        newDebuff.category = EffectCategory.Debuff;
-        newDebuff.specialType = specialType;
-        newDebuff.effectName = $"기괴한 가면({debuffName})";
-
-        BuffManager.Instance.AddEffect(false, newDebuff, applyValue, 1);
-        DevLog.Log($"[트릭스터 에픽] 적에게 {debuffName} (수치:{applyValue}) 부여!");
     }
 
     private IEnumerator HandleSpecialExpirations()

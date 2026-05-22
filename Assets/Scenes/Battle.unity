@@ -12105,6 +12105,25 @@ MonoBehaviour:
   pEffect_Accuracy: {fileID: 11400000, guid: 72a8250f065a8184a922d62e64a6bdda, type: 2}
   pEffect_Evasion: {fileID: 11400000, guid: a8c172ff7d60f674a9161312bea8d33b, type: 2}
   pEffect_HealAmp: {fileID: 11400000, guid: d3cdea5880183cc40abd8ea87a6c16c9, type: 2}
+  turnEffectConfig:
+    casterStrengthBuff: {fileID: 11400000, guid: c162fcf09318ef64a9efa7f5b0b296a9, type: 2}
+    casterDefenseBuff: {fileID: 11400000, guid: 75bdff4d11fa7004c8c4e3d5bbad59e8, type: 2}
+    casterSpeedBuff: {fileID: 11400000, guid: e8d20a28861c5564dafedfee32459e10, type: 2}
+    casterLuckBuff: {fileID: 11400000, guid: a569419a3e42ae14095837715239e075, type: 2}
+    casterCritRateBuff: {fileID: 11400000, guid: 3f01209985e530d438ab8acb89a948cd, type: 2}
+    casterCritDamageBuff: {fileID: 11400000, guid: 0a4b6d9abeed66941a9833af9266cb86, type: 2}
+    casterEvasionBuff: {fileID: 11400000, guid: 1d369225d7e6757468233070e1a707e1, type: 2}
+    casterAccuracyBuff: {fileID: 11400000, guid: a8c569d636362224ab07a41f14b1ce6c, type: 2}
+    casterDamageGivenBuff: {fileID: 11400000, guid: c458342b0e8d43f4581e0d98bf043822, type: 2}
+    tricksterStrengthDebuff: {fileID: 11400000, guid: 267d37a3f34f5ce4a9fb4f5f3c5e78cf, type: 2}
+    tricksterDefenseDebuff: {fileID: 11400000, guid: 4c0c50a7baca7e54f8871349aa312cee, type: 2}
+    tricksterSpeedDebuff: {fileID: 11400000, guid: f645f972c4039c142858dd8837773eef, type: 2}
+    tricksterLuckDebuff: {fileID: 11400000, guid: 083aeb609c762d148a9cf975ee0382bf, type: 2}
+    tricksterEvasionDebuff: {fileID: 11400000, guid: 0563c866dbf64644f903fc6bf60184fd, type: 2}
+    tricksterDamageAmpDebuff: {fileID: 11400000, guid: 193bdd34505bdf64595a7e6af767f93a, type: 2}
+    tricksterAccuracyDebuff: {fileID: 11400000, guid: 62bd73ab444c02042a0778598cfeb9d1, type: 2}
+    tricksterBleedDebuff: {fileID: 11400000, guid: 519b890684db5b648873cb91b04eb090, type: 2}
+    tricksterBurnDebuff: {fileID: 11400000, guid: e425e5ecd952ccc4a9c2c82754677b96, type: 2}
 --- !u!4 &1018720924
 Transform:
   m_ObjectHideFlags: 0
