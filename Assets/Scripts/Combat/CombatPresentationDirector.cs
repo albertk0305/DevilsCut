@@ -51,7 +51,7 @@ public sealed class CombatPresentationDirector
         uiManager?.ClearCombatEffects();
     }
 
-    public void ShowFantasticDreamerDiceIfNeeded(
+    public void ShowSpecialCastPresentationIfNeeded(
     SkillData skill,
     bool isPlayerAttacking)
 {

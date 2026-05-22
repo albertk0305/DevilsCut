@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_MorningStar", menuName = "SkillLogic/Player/MorningStar")]
-public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySkillLogic
+public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySkillLogic, IPerfectEvadeCounterSkillLogic
 {
     [Header("회피 증가 버프 데이터")]
     public StatusEffectData evasionBuffData;
@@ -39,6 +39,34 @@ public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySki
         if (!activePlayerEffects.Exists(e => e.effectData == evasionBuffData)) return false;
 
         apRecovery = pathB_ApRecovery;
+        return true;
+    }
+
+    public bool TryGetPerfectEvadeCounter(
+        SkillData skill,
+        PlayerStats playerStats,
+        System.Collections.Generic.List<BuffManager.ActiveEffect> activePlayerEffects,
+        out int counterDamage,
+        out Sprite counterImage)
+    {
+        counterDamage = 0;
+        counterImage = null;
+
+        if (skill == null) return false;
+        if (playerStats == null) return false;
+        if (skill.currentEvolution != SkillEvolution.PathA) return false;
+        if (activePlayerEffects == null) return false;
+        if (!activePlayerEffects.Exists(e => e.effectData == evasionBuffData)) return false;
+
+        int levelIdx = Mathf.Clamp(
+            skill.skillLevel - 1,
+            0,
+            pathA_CounterRates.Length - 1);
+
+        counterDamage = Mathf.RoundToInt(
+            playerStats.strength * pathA_CounterRates[levelIdx]);
+        counterImage = GetCounterActionImage(skill);
+
         return true;
     }
 

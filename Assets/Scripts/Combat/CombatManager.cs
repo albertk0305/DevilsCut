@@ -856,25 +856,16 @@ public class CombatManager : MonoBehaviour
             var martialSkill = PlayerManager.Instance.unlockedSkills.Find(
                 s => s.category == SkillCategory.Martial);
 
-            if (martialSkill != null && martialSkill.skillLogic is SkillLogic_MorningStar msLogic)
+            if (martialSkill != null && martialSkill.skillLogic is IPerfectEvadeCounterSkillLogic counterLogic)
             {
-                bool hasEvasionBuff = BuffManager.Instance
-                    .GetEffects(true)
-                    .Exists(e => e.effectData == msLogic.evasionBuffData);
-
-                if (hasEvasionBuff && martialSkill.currentEvolution == SkillEvolution.PathA)
+                if (counterLogic.TryGetPerfectEvadeCounter(
+                    martialSkill,
+                    currentPlayerStats,
+                    BuffManager.Instance.GetEffects(true),
+                    out int counterDmg,
+                    out Sprite counterImage))
                 {
                     isCounterTriggered = true;
-
-                    int levelIdx = Mathf.Clamp(
-                        martialSkill.skillLevel - 1,
-                        0,
-                        msLogic.pathA_CounterRates.Length - 1);
-
-                    int counterDmg = Mathf.RoundToInt(
-                        currentPlayerStats.strength * msLogic.pathA_CounterRates[levelIdx]);
-
-                    Sprite counterImage = msLogic.GetCounterActionImage(martialSkill);
 
                     BattleVisualizer.Instance.EnqueueDelay(2.0f);
                     BattleVisualizer.Instance.EnqueueAction(() =>
@@ -945,7 +936,7 @@ public class CombatManager : MonoBehaviour
     {
         EnsurePresentationDirector();
 
-        presentationDirector?.ShowFantasticDreamerDiceIfNeeded(skill, isPlayerAttacking);
+        presentationDirector?.ShowSpecialCastPresentationIfNeeded(skill, isPlayerAttacking);
         presentationDirector?.SetCasterImage(isPlayerAttacking, skill.skillActionImage);
         skill.skillLogic?.PaySkillCost(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking);
         CompanionManager.Instance.UpdateEmotion(skillResult.anyHit ?

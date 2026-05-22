@@ -87,7 +87,7 @@ MonoBehaviour:
     maxBreakGauge: 100
     strength: 20
     defense: 20
-    speed: 200
+    speed: 20
     luck: 20
     currentGold: 0
     rejectedSupporterCount: 0
