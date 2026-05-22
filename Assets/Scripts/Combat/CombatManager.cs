@@ -90,6 +90,17 @@ public class CombatManager : MonoBehaviour
         public string commentary;
     }
 
+    private struct SkillCastPresentationContext
+    {
+        public SkillData skill;
+        public bool isPlayerAttacking;
+        public SkillResult skillResult;
+        public string commentary;
+        public bool isPureUtility;
+        public Sprite reactionSprite;
+        public bool showCritAlert;
+    }
+
     private struct SkillExecutionContext
     {
         public SkillData skill;
@@ -984,12 +995,22 @@ public class CombatManager : MonoBehaviour
 
         // 2. 방어자 이미지 변경
         Sprite reactionSprite = ResolveDefenderReactionSprite(skillResult, isPlayerAttacking, isPureUtility);
+        SkillCastPresentationContext presentationContext = new SkillCastPresentationContext
+        {
+            skill = skill,
+            isPlayerAttacking = isPlayerAttacking,
+            skillResult = skillResult,
+            commentary = commentary,
+            isPureUtility = isPureUtility,
+            reactionSprite = reactionSprite,
+            showCritAlert = skillResult.anyCrit && !isPureUtility
+        };
 
         presentationDirector?.ShowCastResultPresentation(
-            !isPlayerAttacking,
-            reactionSprite,
-            commentary,
-            skillResult.anyCrit && !isPureUtility
+            !presentationContext.isPlayerAttacking,
+            presentationContext.reactionSprite,
+            presentationContext.commentary,
+            presentationContext.showCritAlert
         );
     }
 
