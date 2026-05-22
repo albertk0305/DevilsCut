@@ -1090,11 +1090,7 @@ public class CombatManager : MonoBehaviour
     {
         if (isPureUtility) return;
 
-        if (hit.isCrit && isPlayerAttacking && !currentState.hasRewardedCritThisSkill)
-        {
-            StyleRankManager.Instance.OnCriticalHit();
-            currentState.hasRewardedCritThisSkill = true;
-        }
+        RewardCriticalHitIfNeeded(hit, isPlayerAttacking);
 
         if (isPlayerAttacking)
         {
@@ -1204,6 +1200,15 @@ public class CombatManager : MonoBehaviour
             if (BreakManager.Instance.AddBreakDamage(true, hit.breakDamage)) UpdateTurnOrderUI();
 
         if (!isPureUtility) BattleEventSystem.CallDamageTaken(isPlayerDefending, hit.damage, hit.isCrit);
+    }
+
+    private void RewardCriticalHitIfNeeded(HitResult hit, bool isPlayerAttacking)
+    {
+        if (hit.isCrit && isPlayerAttacking && !currentState.hasRewardedCritThisSkill)
+        {
+            StyleRankManager.Instance.OnCriticalHit();
+            currentState.hasRewardedCritThisSkill = true;
+        }
     }
 
     // 새벽별 카운터 및 인과율 반사 연출
