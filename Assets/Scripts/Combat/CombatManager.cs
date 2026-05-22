@@ -92,6 +92,9 @@ public class CombatManager : MonoBehaviour
 
     private struct SkillExecutionContext
     {
+        public SkillData skill;
+        public bool isPlayerAttacking;
+        public bool isUltimate;
         public SkillCalculationContext calculation;
         public SkillResult result;
         public SkillPresentationContext presentation;
@@ -571,6 +574,9 @@ public class CombatManager : MonoBehaviour
 
         //  [복구됨] 실시간 스탯 산출 및 BattleCalculator 연산 (skillResult 생성)
         SkillExecutionContext executionContext = new SkillExecutionContext();
+        executionContext.skill = skill;
+        executionContext.isPlayerAttacking = isPlayerAttacking;
+        executionContext.isUltimate = isUltimate;
         executionContext.calculation = BuildSkillCalculationContext(isPlayerAttacking);
         executionContext.result = CalculateSkillResult(skill, isPlayerAttacking, executionContext.calculation);
 
@@ -578,30 +584,33 @@ public class CombatManager : MonoBehaviour
         executionContext.presentation =
         BuildSkillPresentationContext(skill, isPlayerAttacking, executionContext.result);
 
-        EnqueueUltimateCutInIfNeeded(isUltimate, isPlayerAttacking, executionContext.presentation.attackerName);
+        EnqueueUltimateCutInIfNeeded(executionContext);
 
         // ① 스킬 시전 초기 연출
-        BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, executionContext.result, executionContext.presentation.commentary, executionContext.presentation.isPureUtility));
+        SkillResult castResult = executionContext.result;
+        string castCommentary = executionContext.presentation.commentary;
+        bool castIsPureUtility = executionContext.presentation.isPureUtility;
+        BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, castResult, castCommentary, castIsPureUtility));
 
         // ②-1. [신규 추가] 전체 스킬 결과에 대한 1회성 판정 (스타일 랭크 및 회피 특수 효과)
-        ApplyImmediateDefenseOutcome(executionContext.result, executionContext.presentation.isPlayerDefending, executionContext.presentation.isPureUtility);
+        ApplyImmediateDefenseOutcome(executionContext);
 
         // ②-2. 다단 히트 연출 루프 (데미지 및 화면 텍스트 전담)
-        EnqueueSkillHitActions(skill, executionContext.result, isPlayerAttacking, executionContext.presentation.isPlayerDefending, executionContext.presentation.isPureUtility);
+        EnqueueSkillHitActions(executionContext);
         // 성공 hit 수 기록
-        UpdateLastSuccessfulHits(executionContext.result);
+        UpdateLastSuccessfulHits(executionContext);
 
         // ③ 명중 시 특수효과 발동 로직 호출
-        EnqueueApplyEffectOnHit(skill, executionContext.result, isPlayerAttacking);
+        EnqueueApplyEffectOnHit(executionContext);
 
         // ④ 카운터 반격 판정
-        EnqueueMorningStarCounterIfNeeded(executionContext.result, executionContext.presentation.isPlayerDefending, executionContext.presentation.isPureUtility);
+        EnqueueMorningStarCounterIfNeeded(executionContext);
 
         // ⑤ 가드 버프 차감 및 인과율(반사) 판정
-        EnqueueGuardAndReflectIfNeeded(executionContext.result, executionContext.presentation.isPlayerDefending);
+        EnqueueGuardAndReflectIfNeeded(executionContext);
 
         // ⑥ 화면 및 상태 리셋
-        EnqueueSkillReset(isPlayerAttacking, executionContext.presentation.isPlayerDefending, isUltimate, skill);
+        EnqueueSkillReset(executionContext);
 
         // 3. 지휘관 권한 위임 및 턴 종료 대기
         BattleVisualizer.Instance.StartSequence(() => CompleteSkillSequence(isPlayerAttacking));
@@ -725,28 +734,26 @@ public class CombatManager : MonoBehaviour
         };
     }
 
-    private void EnqueueUltimateCutInIfNeeded(
-        bool isUltimate,
-        bool isPlayerAttacking,
-        string attackerName)
+    private void EnqueueUltimateCutInIfNeeded(SkillExecutionContext context)
     {
-        if (!isUltimate) return;
+        if (!context.isUltimate) return;
 
-        Sprite cutInSprite = isPlayerAttacking
+        Sprite cutInSprite = context.isPlayerAttacking
             ? playerData?.cutIn
             : currentEnemyData?.CutIn;
 
         EnsurePresentationDirector();
-        presentationDirector?.EnqueueUltimateCutIn(cutInSprite, attackerName);
+        presentationDirector?.EnqueueUltimateCutIn(cutInSprite, context.presentation.attackerName);
     }
 
-    private void EnqueueSkillHitActions(
-    SkillData skill,
-    SkillResult skillResult,
-    bool isPlayerAttacking,
-    bool isPlayerDefending,
-    bool isPureUtility)
+    private void EnqueueSkillHitActions(SkillExecutionContext context)
     {
+        SkillData skill = context.skill;
+        SkillResult skillResult = context.result;
+        bool isPlayerAttacking = context.isPlayerAttacking;
+        bool isPlayerDefending = context.presentation.isPlayerDefending;
+        bool isPureUtility = context.presentation.isPureUtility;
+
         foreach (var hit in skillResult.hits)
         {
             BattleVisualizer.Instance.EnqueueAction(() =>
@@ -761,8 +768,9 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    private void UpdateLastSuccessfulHits(SkillResult skillResult)
+    private void UpdateLastSuccessfulHits(SkillExecutionContext context)
     {
+        SkillResult skillResult = context.result;
         int successCount = 0;
 
         foreach (var hit in skillResult.hits)
@@ -774,35 +782,37 @@ public class CombatManager : MonoBehaviour
         currentState.lastSuccessfulHits = successCount;
     }
 
-    private void EnqueueApplyEffectOnHit(
-        SkillData skill,
-        SkillResult skillResult,
-        bool isPlayerAttacking)
+    private void EnqueueApplyEffectOnHit(SkillExecutionContext context)
     {
+        SkillData skill = context.skill;
+        bool isPlayerAttacking = context.isPlayerAttacking;
+        bool anyHit = context.result.anyHit;
+
         BattleVisualizer.Instance.EnqueueAction(() =>
             skill.skillLogic?.ApplyEffectOnHit(
                 skill,
                 currentPlayerStats,
                 currentEnemyData,
                 isPlayerAttacking,
-                skillResult.anyHit));
+                anyHit));
     }
 
-    private void EnqueueSkillReset(
-        bool isPlayerAttacking,
-        bool isPlayerDefending,
-        bool isUltimate,
-        SkillData skill)
+    private void EnqueueSkillReset(SkillExecutionContext context)
     {
+        bool isPlayerAttacking = context.isPlayerAttacking;
+        bool isPlayerDefending = context.presentation.isPlayerDefending;
+        bool isUltimate = context.isUltimate;
+        SkillData skill = context.skill;
+
         BattleVisualizer.Instance.EnqueueAction(() =>
             ResetCombatUI(isPlayerAttacking, isPlayerDefending, isUltimate, skill));
     }
 
-    private void ApplyImmediateDefenseOutcome(
-        SkillResult skillResult,
-        bool isPlayerDefending,
-        bool isPureUtility)
+    private void ApplyImmediateDefenseOutcome(SkillExecutionContext context)
     {
+        SkillResult skillResult = context.result;
+        bool isPlayerDefending = context.presentation.isPlayerDefending;
+        bool isPureUtility = context.presentation.isPureUtility;
         if (!isPlayerDefending || isPureUtility)
             return;
 
@@ -852,11 +862,11 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    private void EnqueueMorningStarCounterIfNeeded(
-    SkillResult skillResult,
-    bool isPlayerDefending,
-    bool isPureUtility)
+    private void EnqueueMorningStarCounterIfNeeded(SkillExecutionContext context)
     {
+        SkillResult skillResult = context.result;
+        bool isPlayerDefending = context.presentation.isPlayerDefending;
+        bool isPureUtility = context.presentation.isPureUtility;
         bool isCounterTriggered = false;
 
         if (!skillResult.anyHit && !isPureUtility && isPlayerDefending)
@@ -887,10 +897,10 @@ public class CombatManager : MonoBehaviour
             BattleVisualizer.Instance.EnqueueDelay(2.0f);
     }
 
-    private void EnqueueGuardAndReflectIfNeeded(
-        SkillResult skillResult,
-        bool isPlayerDefending)
+    private void EnqueueGuardAndReflectIfNeeded(SkillExecutionContext context)
     {
+        SkillResult skillResult = context.result;
+        bool isPlayerDefending = context.presentation.isPlayerDefending;
         if (!skillResult.isGuardTriggered)
             return;
 
