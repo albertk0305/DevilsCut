@@ -75,7 +75,8 @@ public class ExplorationManager : MonoBehaviour
         currentOptions.Clear();
         currentOptions.AddRange(BuildOptionsForCurrentPhase());
 
-        // TODO: SaveManager.Instance.AutoSaveContinue();
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.AutoSaveContinue();
         return currentOptions;
     }
 

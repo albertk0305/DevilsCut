@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2952436123089374904}
   - component: {fileID: 6879955947631341113}
   - component: {fileID: 4950642224689884447}
+  - component: {fileID: -3324259339741228890}
   m_Layer: 0
   m_Name: GlobalManagers
   m_TagString: Untagged
@@ -187,13 +188,7 @@ MonoBehaviour:
   savedExplorationCycle: 0
   savedExplorationTurnInPhase: 0
   savedExplorationKeys: 0
-  savedCurrentTargetBoss:
-    bossName: 
-    minionEnemy: {fileID: 0}
-    bossEnemy: {fileID: 0}
-    nodeIcon: {fileID: 0}
-    defaultSD: {fileID: 0}
-    readySD: {fileID: 0}
+  savedCurrentTargetBoss: {fileID: 0}
   savedLastVisitedNodeImage: {fileID: 0}
   savedLastVisitedFacility: {fileID: 0}
 --- !u!114 &4950642224689884447
@@ -208,3 +203,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d63663735aa9cb643bd3e14a83c22ca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TypewriterUtility
+--- !u!114 &-3324259339741228890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7079399663421639093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d13056115845a69d2b02b4eaae95f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveManager
+  itemDatabase: {fileID: 11400000, guid: 73acb4d637906a84d9d2d487f62f2f25, type: 2}
+  skillDatabase: {fileID: 11400000, guid: 76290af8dc408464c97b9f79baacf39b, type: 2}
+  karinItemDatabase: {fileID: 11400000, guid: fc4d3901e7bcedc4a8bc24b4e3cf490a, type: 2}
+  bossDatabase: {fileID: 11400000, guid: 2f67c6993d4dcb044ba42abfb6d0d490, type: 2}
+  supporterDatabase: {fileID: 11400000, guid: 51dd2413502c8f641a2cacd0d2de3478, type: 2}
+  explorationNodeDatabase: {fileID: 11400000, guid: 26ae2e9ee15b9434d87c9f75f4411ab4, type: 2}

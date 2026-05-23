@@ -389,6 +389,15 @@ public class ExplorationUI : MonoBehaviour
         }
     }
 
+    public void RefreshAfterContinueLoad()
+    {
+        selectedIndex = -1;
+        if (confirmPopup != null) confirmPopup.SetActive(false);
+        UpdateHPBar();
+        UpdateGoldUI();
+        SetupNodes();
+        UpdateCharacterStates();
+    }
     public void RefreshUI()
     {
         UpdateHPBar();           // 장비 교체로 체력이 변경되었을 수 있으니 갱신!
