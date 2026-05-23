@@ -51,11 +51,14 @@ public class CombatManager : MonoBehaviour
     [Header("턴 효과 StatusEffectData 매핑")]
     [SerializeField] private TurnEffectResolverConfig turnEffectConfig;
 
+    [SerializeField] private CombatDefeatUIController defeatUIController;
+
     private PlayerStats currentPlayerStats;
     public PlayerStats GetCurrentPlayerStats() => currentPlayerStats;
 
     private EnemyData currentEnemyData;
     public EnemyData GetCurrentEnemyData() => currentEnemyData;
+    private int battleStartPlayerHp;
 
     private bool combatEnded;
 
@@ -261,6 +264,7 @@ public class CombatManager : MonoBehaviour
         {
             // 1. 순수 스탯 대신 '아이템이 적용된 스냅샷'을 전투 시작 데이터로 가져옵니다!
             currentPlayerStats = PlayerManager.Instance.GetItemModifiedStats();
+            battleStartPlayerHp = currentPlayerStats.currentHp;
             currentEnemyData = Instantiate(PlayerManager.Instance.currentEnemyToFight);
             if (currentEnemyData.aiBrain != null)
             {
@@ -405,7 +409,8 @@ public class CombatManager : MonoBehaviour
                 yield return new WaitForSeconds(1.0f);
                 CombatUIManager.Instance.ResetDefenderImage(false);
 
-                if (currentEnemyHp <= 0) { EndCombat(false); yield break; }
+                if (CheckAndHandleBattleEnd())
+                    yield break;
             }
 
             if (burnEffect != null)
@@ -422,7 +427,8 @@ public class CombatManager : MonoBehaviour
                 yield return new WaitForSeconds(1.0f);
                 CombatUIManager.Instance.ResetDefenderImage(false);
 
-                if (currentEnemyHp <= 0) { EndCombat(false); yield break; }
+                if (CheckAndHandleBattleEnd())
+                    yield break;
             }
 
             if (currentState.isBombActive)
@@ -442,7 +448,8 @@ public class CombatManager : MonoBehaviour
                 yield return new WaitForSeconds(1.0f);
                 CombatUIManager.Instance.ResetDefenderImage(false);
 
-                if (currentEnemyHp <= 0) { EndCombat(false); yield break; }
+                if (CheckAndHandleBattleEnd())
+                    yield break;
             }
         }
     }
@@ -1414,31 +1421,31 @@ public class CombatManager : MonoBehaviour
 
         PlayerManager playerManager = PlayerManager.Instance;
 
-        if (playerManager != null && currentPlayerStats != null)
-        {
-            playerManager.stats.currentHp = currentPlayerStats.currentHp;
-        }
-
-        if (isWin && playerManager != null)
-        {
-            BattleRewardService.GrantReward(
-                playerManager,
-                playerManager.currentBattleReward
-            );
-
-            playerManager.pendingAdvanceBattleTurn = true;
-            playerManager.pendingBattleType = playerManager.currentBattleType;
-            playerManager.pendingBattlePhase = playerManager.currentBattlePhase;
-        }
-
         if (isWin)
         {
+            if (playerManager != null && currentPlayerStats != null)
+            {
+                playerManager.stats.currentHp = currentPlayerStats.currentHp;
+            }
+
+            if (playerManager != null)
+            {
+                BattleRewardService.GrantReward(
+                    playerManager,
+                    playerManager.currentBattleReward
+                );
+
+                playerManager.pendingAdvanceBattleTurn = true;
+                playerManager.pendingBattleType = playerManager.currentBattleType;
+                playerManager.pendingBattlePhase = playerManager.currentBattlePhase;
+            }
+
+            Time.timeScale = 1f;
             SceneManager.LoadScene("Exploration");
+            return;
         }
-        else
-        {
-            SceneManager.LoadScene("Exploration");
-        }
+
+        ShowDefeatUI();
     }
 
     public void ResolveTurnEnd()
@@ -1622,6 +1629,28 @@ public class CombatManager : MonoBehaviour
             // 3. 그로기 상태가 아니면 일반 이미지로 복구
             CombatUIManager.Instance.ResetDefenderImage(isPlayerTarget);
             DevLog.Log($"[이미지 복구] 일반 상태로 이미지를 복구합니다.");
+        }
+    }
+
+    public void RestorePlayerHpToBattleStart()
+    {
+        if (PlayerManager.Instance == null)
+            return;
+
+        PlayerManager.Instance.stats.currentHp = battleStartPlayerHp;
+    }
+
+    private void ShowDefeatUI()
+    {
+        Time.timeScale = 0f;
+
+        if (defeatUIController != null)
+        {
+            defeatUIController.ShowDefeat();
+        }
+        else
+        {
+            DevLog.LogError("CombatManager: CombatDefeatUIController가 연결되지 않았습니다.");
         }
     }
 }

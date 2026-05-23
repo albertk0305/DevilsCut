@@ -9,16 +9,19 @@ public class SettingsUI : MonoBehaviour
     public GameObject goToMainButton;    // 메인으로 가기 버튼
     public GameObject confirmationPopup; // 예/아니오 확인 팝업
     public Toggle fastCombatToggle;      // 전투 2배속 체크박스
+    public GameObject restartBattleButton; // 전투 재시작 버튼
 
     [Header("씬 이름 설정")]
     public string mainMenuSceneName = "MainMenu";
+    public string battleSceneName = "Battle";
 
     private float timeScaleBeforePause = 1f;
 
     private void OnEnable()
     {
+        string currentSceneName = SceneManager.GetActiveScene().name;
         // 1. 현재 씬 이름이 메인 메뉴라면?
-        if (SceneManager.GetActiveScene().name == mainMenuSceneName)
+        if (currentSceneName == mainMenuSceneName)
         {
             if (goToMainButton != null) goToMainButton.SetActive(false);
         }
@@ -26,6 +29,12 @@ public class SettingsUI : MonoBehaviour
         {
             if (goToMainButton != null) goToMainButton.SetActive(true);
         }
+
+        // 1-2. 전투 재시작 버튼은 Battle 씬에서만 표시
+        bool isBattleScene = currentSceneName == battleSceneName && CombatManager.Instance != null;
+
+        if (restartBattleButton != null)
+            restartBattleButton.SetActive(isBattleScene);
 
         // 2. 팝업은 초기화
         if (confirmationPopup != null) confirmationPopup.SetActive(false);
@@ -102,5 +111,26 @@ public class SettingsUI : MonoBehaviour
             // (탐색 씬에서 캐릭터가 2배 빨리 걸어 다니는 것을 방지)
             timeScaleBeforePause = 1.0f;
         }
+    }
+
+    public void RestartBattle()
+    {
+        if (CombatManager.Instance == null)
+        {
+            DevLog.LogWarning("전투 재시작 실패: CombatManager가 없습니다.");
+            return;
+        }
+
+        DevLog.Log("전투를 재시작합니다.");
+
+        if (confirmationPopup != null)
+            confirmationPopup.SetActive(false);
+
+        gameObject.SetActive(false);
+
+        CombatManager.Instance.RestorePlayerHpToBattleStart();
+
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(battleSceneName);
     }
 }

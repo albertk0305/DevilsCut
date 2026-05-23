@@ -4409,7 +4409,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2b5e624b9c5dcf74f8fa5123c2940125, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 346c760c1631278478fa765648dcdcd6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4657,7 +4657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &311812378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12075,6 +12075,7 @@ GameObject:
   - component: {fileID: 1018720932}
   - component: {fileID: 1018720931}
   - component: {fileID: 1018720933}
+  - component: {fileID: 1018720934}
   m_Layer: 0
   m_Name: CombatManager
   m_TagString: Untagged
@@ -12124,6 +12125,7 @@ MonoBehaviour:
     tricksterAccuracyDebuff: {fileID: 11400000, guid: 62bd73ab444c02042a0778598cfeb9d1, type: 2}
     tricksterBleedDebuff: {fileID: 11400000, guid: 519b890684db5b648873cb91b04eb090, type: 2}
     tricksterBurnDebuff: {fileID: 11400000, guid: e425e5ecd952ccc4a9c2c82754677b96, type: 2}
+  defeatUIController: {fileID: 1018720934}
 --- !u!4 &1018720924
 Transform:
   m_ObjectHideFlags: 0
@@ -12269,6 +12271,30 @@ MonoBehaviour:
   playerDamagePos: {fileID: 1604949711}
   enemyDamagePos: {fileID: 14121795}
   diceVisualPrefab: {fileID: 5212986272314342761, guid: 202306b2a06e0664e991b28971e25e9c, type: 3}
+--- !u!114 &1018720934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018720922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806ef892b8afc704cb2c422f2beb9d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatDefeatUIController
+  defeatCanvasRoot: {fileID: 311812377}
+  messageText: {fileID: 1237848963}
+  leftButton: {fileID: 998903251}
+  rightButton: {fileID: 2026580335}
+  leftButtonText: {fileID: 2110843996}
+  rightButtonText: {fileID: 952252433}
+  sherryImage: {fileID: 304171249}
+  sherryDefeatImage: {fileID: 21300000, guid: 346c760c1631278478fa765648dcdcd6, type: 3}
+  sherryDeadImage: {fileID: 21300000, guid: 2b5e624b9c5dcf74f8fa5123c2940125, type: 3}
+  battleSceneName: Battle
+  mainMenuSceneName: MainMenu
+  typeInterval: 0.035
 --- !u!1 &1024095176
 GameObject:
   m_ObjectHideFlags: 0

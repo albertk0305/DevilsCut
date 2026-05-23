@@ -80,8 +80,8 @@ MonoBehaviour:
     level: 1
     maxExp: 100
     currentExp: 0
-    maxHp: 10000
-    currentHp: 10000
+    maxHp: 3000
+    currentHp: 3000
     ActionPoints: 10
     breakResistance: 50
     maxBreakGauge: 100
@@ -152,6 +152,15 @@ MonoBehaviour:
   - data: {fileID: 11400000, guid: 33a2221e23ee2854b964296daa7812a5, type: 2}
     starLevel: 1
   currentEnemyToFight: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
+  currentBattleReward:
+    exp: 0
+    gold: 0
+    keys: 0
+  currentBattleType: 0
+  currentBattlePhase: 0
+  pendingAdvanceBattleTurn: 0
+  pendingBattleType: 0
+  pendingBattlePhase: 0
   unlockedSkills:
   - {fileID: 11400000, guid: 6f76bd2b0cc4916469f2ca32aba944e9, type: 2}
   - {fileID: 11400000, guid: 64802653b7803204a93d67678bd46cd7, type: 2}
@@ -173,6 +182,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 29d3bd789538da743944bd773eae5c74, type: 2}
   - {fileID: 11400000, guid: 28f8f6eeac00dbb479903e4cfe924ead, type: 2}
   - {fileID: 11400000, guid: 3e32ee87390d2c543bb844e722adb623, type: 2}
+  hasSavedExplorationState: 0
+  savedExplorationPhase: 0
+  savedExplorationCycle: 0
+  savedExplorationTurnInPhase: 0
+  savedExplorationKeys: 0
+  savedCurrentTargetBoss:
+    bossName: 
+    minionEnemy: {fileID: 0}
+    bossEnemy: {fileID: 0}
+    nodeIcon: {fileID: 0}
+    defaultSD: {fileID: 0}
+    readySD: {fileID: 0}
+  savedLastVisitedNodeImage: {fileID: 0}
+  savedLastVisitedFacility: {fileID: 0}
 --- !u!114 &4950642224689884447
 MonoBehaviour:
   m_ObjectHideFlags: 0
