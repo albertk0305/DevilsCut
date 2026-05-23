@@ -112,8 +112,8 @@ public class ExplorationUI : MonoBehaviour
             lastFacilityImage.gameObject.SetActive(false);
         }
 
-        // 3개 무작위 뽑기 및 화면 적용
-        currentOptions = ExplorationManager.Instance.GetCurrentOptions();
+        // ExplorationManager가 확정해 둔 현재 선택지를 화면에 적용합니다.
+        currentOptions = new List<ExplorationNodeData>(ExplorationManager.Instance.CurrentOptions);
 
         for (int i = 0; i < 3; i++)
         {
@@ -351,6 +351,9 @@ public class ExplorationUI : MonoBehaviour
             ExplorationManager.Instance.lastVisitedFacility = facility;
             ExplorationManager.Instance.lastVisitedNodeImage = facility.nodeImage;
             ExplorationManager.Instance.AdvanceExplorationTurn(); // 시설 탐색 1턴 소모!
+            selectedIndex = -1;
+            SetupNodes();
+            UpdateCharacterStates();
             // SceneManager.LoadScene(facility.nodeID + "Scene"); 
         }
         else if (targetData is PhaseBattleNodeData pBattle)

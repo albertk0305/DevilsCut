@@ -3,6 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewKarinItem", menuName = "GameData/KarinItem")]
 public class KarinItemData : ScriptableObject
 {
+    [Header("저장용 고유 ID")]
+    public string itemID;
+
     public string itemName;
     public Sprite itemIcon; // 우측 버튼과 메인 화면에 뜰 이미지
 

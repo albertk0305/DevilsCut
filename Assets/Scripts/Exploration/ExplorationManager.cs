@@ -10,6 +10,7 @@ public enum GamePhase { BossSelection, Exploration, GeneralBattle, BossBattle, G
 [System.Serializable]
 public class BossEncounterData
 {
+    public string bossID;
     public string bossName;
     public EnemyData minionEnemy; // 해당 보스의 일반 몹 (부하)
     public EnemyData bossEnemy;   // 보스 본인
@@ -54,6 +55,16 @@ public class ExplorationManager : MonoBehaviour
     public BossEncounterData trueFinalBoss;
     public BossEncounterData currentTargetBoss; // 유저가 이번 페이즈에 픽한 보스
 
+    private readonly List<ExplorationNodeData> currentOptions = new List<ExplorationNodeData>();
+    public IReadOnlyList<ExplorationNodeData> CurrentOptions
+    {
+        get
+        {
+            EnsureCurrentOptions();
+            return currentOptions;
+        }
+    }
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -63,6 +74,7 @@ public class ExplorationManager : MonoBehaviour
     {
         RestoreStateFromPlayerManagerIfNeeded();
         ApplyPendingBattleProgressIfNeeded();
+        EnsureCurrentOptions();
         SaveStateToPlayerManager();
     }
 
@@ -70,7 +82,29 @@ public class ExplorationManager : MonoBehaviour
     // [핵심] 현재 상태에 맞춰 화면에 뿌려줄 3개의 슬롯 데이터를 만듭니다.
     // 빈 슬롯은 null을 넣어 UI가 위치를(대칭을) 잡을 수 있게 합니다.
     // =========================================================
+    public IReadOnlyList<ExplorationNodeData> GenerateCurrentOptions()
+    {
+        currentOptions.Clear();
+        currentOptions.AddRange(BuildOptionsForCurrentPhase());
+
+        // TODO: SaveManager.Instance.AutoSaveContinue();
+        return currentOptions;
+    }
+
+    private void EnsureCurrentOptions()
+    {
+        if (currentOptions.Count != 3)
+            GenerateCurrentOptions();
+    }
+
+    // 기존 호출부 호환용. 이미 확정된 선택지가 있으면 새로 랜덤을 돌리지 않습니다.
     public List<ExplorationNodeData> GetCurrentOptions()
+    {
+        EnsureCurrentOptions();
+        return new List<ExplorationNodeData>(currentOptions);
+    }
+
+    private List<ExplorationNodeData> BuildOptionsForCurrentPhase()
     {
         List<ExplorationNodeData> options = new List<ExplorationNodeData> { null, null, null };
 
@@ -171,6 +205,7 @@ public class ExplorationManager : MonoBehaviour
         currentPhase = GamePhase.Exploration;
         currentTurnInPhase = 0;
         DevLog.Log($"[사이클 {currentCycle}] 목표 보스 '{selected.bossName}' 선택 완료. 탐색 페이즈 돌입!");
+        GenerateCurrentOptions();
     }
 
     public void AdvanceExplorationTurn()
@@ -182,6 +217,7 @@ public class ExplorationManager : MonoBehaviour
             currentTurnInPhase = 0;
             DevLog.Log("탐색 6턴 종료. 일반 전투 페이즈 돌입!");
         }
+        GenerateCurrentOptions();
         ExplorationManager.Instance.SaveStateToPlayerManager();
     }
 
@@ -217,7 +253,47 @@ public class ExplorationManager : MonoBehaviour
             DevLog.Log($"보스 처치! 다음 사이클({currentCycle})로 넘어갑니다.");
         }
 
+        GenerateCurrentOptions();
         SaveStateToPlayerManager();
+    }
+
+    public List<SavedExplorationOption> GetCurrentOptionsForSave()
+    {
+        EnsureCurrentOptions();
+
+        List<SavedExplorationOption> savedOptions = new List<SavedExplorationOption>();
+
+        for (int i = 0; i < currentOptions.Count; i++)
+        {
+            ExplorationNodeData option = currentOptions[i];
+            SavedExplorationOption saved = new SavedExplorationOption
+            {
+                slotIndex = i,
+                optionType = "None"
+            };
+
+            if (option is FacilityData facility)
+            {
+                saved.optionType = "Facility";
+                saved.nodeID = facility.nodeID;
+            }
+            else if (option is BossSelectionNodeData bossSelection)
+            {
+                saved.optionType = "BossSelection";
+                saved.bossID = bossSelection.bossData != null ? bossSelection.bossData.bossID : null;
+            }
+            else if (option is PhaseBattleNodeData battleData)
+            {
+                saved.optionType = battleData.isBossBattle ? "BossBattle" : "GeneralBattle";
+                saved.bossID = battleData.bossData != null ? battleData.bossData.bossID : null;
+                saved.battleType = battleData.isBossBattle ? BattleType.Boss : BattleType.General;
+                saved.isBossBattle = battleData.isBossBattle;
+            }
+
+            savedOptions.Add(saved);
+        }
+
+        return savedOptions;
     }
 
     public int GetFacilityRank(string id)

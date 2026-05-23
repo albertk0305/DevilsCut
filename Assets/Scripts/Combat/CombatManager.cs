@@ -1632,6 +1632,42 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void RestorePlayerSideImage()
+    {
+        if (CombatUIManager.Instance == null)
+            return;
+
+        // 1. 셰리가 그로기 상태라면 무조건 그로기 이미지 유지
+        if (BreakManager.Instance != null && BreakManager.Instance.IsBroken(true))
+        {
+            if (playerData != null && playerData.breakImage != null)
+            {
+                CombatUIManager.Instance.SetCasterImage(true, playerData.breakImage);
+            }
+            else
+            {
+                CombatUIManager.Instance.ResetCasterImage(true);
+            }
+
+            DevLog.Log("[이미지 복구] 셰리가 그로기 상태이므로 Break 이미지로 복구합니다.");
+            return;
+        }
+
+        // 2. 셰리가 기 모으기 중이면 기 모으기 이미지 유지
+        if (currentState != null &&
+            currentState.isPlayerCharging &&
+            currentState.chargingSkill != null &&
+            currentState.chargingSkill.skillActionImage != null)
+        {
+            CombatUIManager.Instance.SetCasterImage(true, currentState.chargingSkill.skillActionImage);
+            DevLog.Log("[이미지 복구] 셰리가 기 모으기 중이므로 차지 이미지를 유지합니다.");
+            return;
+        }
+
+        // 3. 그 외에는 일반 이미지로 복구
+        CombatUIManager.Instance.ResetCasterImage(true);
+    }
+
     public void RestorePlayerHpToBattleStart()
     {
         if (PlayerManager.Instance == null)

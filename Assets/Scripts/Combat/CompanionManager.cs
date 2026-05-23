@@ -110,7 +110,7 @@ public class CompanionManager : MonoBehaviour
                 // 연타 도중 적이 죽었으면 즉시 승리 처리 후 코루틴 종료!
                 yield return new WaitForSeconds(1.0f);
                 CombatUIManager.Instance.ClearCombatEffects();
-                CombatUIManager.Instance.ResetCasterImage(true);
+                CombatManager.Instance.RestorePlayerSideImage();
                 CombatManager.Instance.EndCombat(true);
                 yield break;
             }
@@ -120,8 +120,10 @@ public class CompanionManager : MonoBehaviour
         yield return textCoroutine;
 
         CombatUIManager.Instance.ClearCombatEffects();
-        CombatUIManager.Instance.ResetCasterImage(true);
-        if (damage > 0) CombatManager.Instance.RestoreDefenderImage(isPlayerDefending);
+        CombatManager.Instance.RestorePlayerSideImage();
+
+        if (damage > 0)
+            CombatManager.Instance.RestoreDefenderImage(isPlayerDefending);
 
         CombatManager.Instance.ResolveTurnEnd();
     }
@@ -194,7 +196,7 @@ public class CompanionManager : MonoBehaviour
                     // 연타 도중 적이 죽었으면 즉시 승리 처리 후 코루틴 종료!
                     yield return new WaitForSeconds(1.0f);
                     CombatUIManager.Instance.ClearCombatEffects();
-                    CombatUIManager.Instance.ResetCasterImage(true);
+                    CombatManager.Instance.RestorePlayerSideImage();
                     CombatManager.Instance.EndCombat(true);
                     yield break;
                 }
@@ -203,7 +205,7 @@ public class CompanionManager : MonoBehaviour
                 if (i < hitDamages.Count - 1)
                 {
                     yield return new WaitForSeconds(0.15f);
-                    CombatUIManager.Instance.ResetDefenderImage(isPlayerDefending);
+                    CombatManager.Instance.RestoreDefenderImage(isPlayerDefending);
                 }
             }
         }
@@ -212,8 +214,10 @@ public class CompanionManager : MonoBehaviour
         yield return textCoroutine;
 
         CombatUIManager.Instance.ClearCombatEffects();
-        CombatUIManager.Instance.ResetCasterImage(true);
-        if (hitDamages.Count > 0) CombatManager.Instance.RestoreDefenderImage(isPlayerDefending);
+        CombatManager.Instance.RestorePlayerSideImage();
+
+        if (hitDamages.Count > 0)
+            CombatManager.Instance.RestoreDefenderImage(isPlayerDefending);
 
         if (!isStartSkill)
         {

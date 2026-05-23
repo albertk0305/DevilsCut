@@ -6,6 +6,9 @@ public enum SkillEvolution { None, PathA, PathB, PathC }
 [CreateAssetMenu(fileName = "NewSkill", menuName = "GameData/Skill")]
 public class SkillData : ScriptableObject
 {
+    [Header("저장용 고유 ID")]
+    public string skillID;
+
     [Header("스킬 고유 로직 (진화 포함)")]
     public SkillLogicBase skillLogic;
 
