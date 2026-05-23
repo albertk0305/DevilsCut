@@ -1082,14 +1082,21 @@ public class CombatManager : MonoBehaviour
 
         BattleEventSystem.CallEvaded(isPlayerDefending);
 
-        // [핵심 수정 2] 1타라도 스친 다단히트 공격이라면 회피 모션을 띄우지 않고 묵묵히 피격(Hit) 상태를 유지합니다!
-        if (!skillResult.anyHit)
-        {
-            Sprite evadeSprite = isPlayerDefending ? playerData?.evade : currentEnemyData?.evade;
-            CombatUIManager.Instance.SetDefenderImage(!isPlayerAttacking, evadeSprite);
-        }
+        ShowEvadePresentationIfNeeded(isPlayerAttacking, isPlayerDefending, skillResult);
 
         // (StyleRank 및 새벽별 로직은 PerformSkillRoutine으로 이관되어 삭제됨)
+    }
+
+    private void ShowEvadePresentationIfNeeded(
+        bool isPlayerAttacking,
+        bool isPlayerDefending,
+        SkillResult skillResult)
+    {
+        if (skillResult.anyHit)
+            return;
+
+        Sprite evadeSprite = isPlayerDefending ? playerData?.evade : currentEnemyData?.evade;
+        CombatUIManager.Instance.SetDefenderImage(!isPlayerAttacking, evadeSprite);
     }
 
     // 단일 타격 성공(명중) 연출
