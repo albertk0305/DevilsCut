@@ -17,6 +17,9 @@ public class EnemyData : ScriptableObject
     [Header("적 AI 설정")]
     public EnemyAIBase aiBrain;
 
+    [Header("스탯 보정치")]
+    public EnemyStatModifier statModifier;
+
     [Header("전투 스탯")]
     public int level;
     public int maxHp;

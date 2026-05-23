@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class CombatState
 {
@@ -55,6 +56,8 @@ public class CombatManager : MonoBehaviour
 
     private EnemyData currentEnemyData;
     public EnemyData GetCurrentEnemyData() => currentEnemyData;
+
+    private bool combatEnded;
 
     private int currentEnemyHp;
     private int enemyTurnCount = 0;
@@ -617,7 +620,7 @@ public class CombatManager : MonoBehaviour
         currentState.chargingSkill = skill;
 
         if (skill.skillActionImage != null)
-        CombatUIManager.Instance.SetCasterImage(true, skill.skillActionImage);
+            CombatUIManager.Instance.SetCasterImage(true, skill.skillActionImage);
 
         string pName = playerData != null
             ? GetTranslatedText(playerData.playerNamekey)
@@ -1404,12 +1407,38 @@ public class CombatManager : MonoBehaviour
 
     public void EndCombat(bool isWin)
     {
-        if (PlayerManager.Instance != null && currentPlayerStats != null)
+        if (combatEnded)
+            return;
+
+        combatEnded = true;
+
+        PlayerManager playerManager = PlayerManager.Instance;
+
+        if (playerManager != null && currentPlayerStats != null)
         {
-            PlayerManager.Instance.stats.currentHp = currentPlayerStats.currentHp;
+            playerManager.stats.currentHp = currentPlayerStats.currentHp;
         }
 
-        // TODO: 전투 종료 씬 전환 및 보상 로직
+        if (isWin && playerManager != null)
+        {
+            BattleRewardService.GrantReward(
+                playerManager,
+                playerManager.currentBattleReward
+            );
+
+            playerManager.pendingAdvanceBattleTurn = true;
+            playerManager.pendingBattleType = playerManager.currentBattleType;
+            playerManager.pendingBattlePhase = playerManager.currentBattlePhase;
+        }
+
+        if (isWin)
+        {
+            SceneManager.LoadScene("Exploration");
+        }
+        else
+        {
+            SceneManager.LoadScene("Exploration");
+        }
     }
 
     public void ResolveTurnEnd()

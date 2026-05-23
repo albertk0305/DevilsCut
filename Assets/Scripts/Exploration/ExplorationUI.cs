@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
-using TMPro; 
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 //탐색 씬 UI 제어 코드
 public class ExplorationUI : MonoBehaviour
@@ -57,6 +58,8 @@ public class ExplorationUI : MonoBehaviour
     private List<ExplorationNodeData> currentOptions = new List<ExplorationNodeData>(); // 현재 선택지들
     private int selectedIndex = -1; // 현재 클릭된 시설의 번호 (0, 1, 2)
 
+    [SerializeField] private CombatEncounterBuilder encounterBuilder;
+
     void Start()
     {
         InitializeSceneUI();
@@ -97,13 +100,17 @@ public class ExplorationUI : MonoBehaviour
 
     private void SetupNodes()
     {
-        FacilityData lastFacility = ExplorationManager.Instance.lastVisitedFacility;
-        if (lastFacility != null && lastFacility.nodeImage != null)
+        Sprite lastNodeImage = ExplorationManager.Instance.lastVisitedNodeImage;
+
+        if (lastNodeImage != null)
         {
-            lastFacilityImage.sprite = lastFacility.nodeImage;
+            lastFacilityImage.sprite = lastNodeImage;
             lastFacilityImage.gameObject.SetActive(true);
         }
-        else lastFacilityImage.gameObject.SetActive(false);
+        else
+        {
+            lastFacilityImage.gameObject.SetActive(false);
+        }
 
         // 3개 무작위 뽑기 및 화면 적용
         currentOptions = ExplorationManager.Instance.GetCurrentOptions();
@@ -332,6 +339,8 @@ public class ExplorationUI : MonoBehaviour
         {
             // 보스 픽! 턴을 진행하고 다시 화면을 새로고침합니다.
             ExplorationManager.Instance.SelectTargetBoss(bossSelect.bossData);
+            ExplorationManager.Instance.lastVisitedNodeImage = bossSelect.nodeImage;
+            ExplorationManager.Instance.SaveStateToPlayerManager();
             selectedIndex = -1;
             SetupNodes();
             UpdateCharacterStates();
@@ -340,18 +349,27 @@ public class ExplorationUI : MonoBehaviour
         else if (targetData is FacilityData facility)
         {
             ExplorationManager.Instance.lastVisitedFacility = facility;
+            ExplorationManager.Instance.lastVisitedNodeImage = facility.nodeImage;
             ExplorationManager.Instance.AdvanceExplorationTurn(); // 시설 탐색 1턴 소모!
             // SceneManager.LoadScene(facility.nodeID + "Scene"); 
         }
         else if (targetData is PhaseBattleNodeData pBattle)
         {
-            // 전투 우체통에 적군 배달
-            PlayerManager.Instance.currentEnemyToFight = pBattle.enemyToSpawn;
+            BattleType battleType = pBattle.isBossBattle ? BattleType.Boss : BattleType.General;
+            int phase = ExplorationManager.Instance.currentCycle;
 
-            // [중요!] 나중에 CombatManager에서 전투 승리 후 아래 코드를 호출해 주어야 다음 턴/페이즈로 넘어갑니다.
-            // ExplorationManager.Instance.AdvanceBattleTurn(pBattle.isBossBattle);
+            if (encounterBuilder == null)
+            {
+                Debug.LogError("ExplorationUI: CombatEncounterBuilder가 연결되지 않았습니다.");
+                return;
+            }
 
-            UnityEngine.SceneManagement.SceneManager.LoadScene("CombatScene");
+            bool prepared = encounterBuilder.PrepareEncounter(pBattle.enemyToSpawn, battleType, phase);
+            if (!prepared)
+                return;
+            ExplorationManager.Instance.lastVisitedNodeImage = pBattle.nodeImage;
+            ExplorationManager.Instance.SaveStateToPlayerManager();
+            SceneManager.LoadScene("Battle");
         }
     }
 

@@ -87,8 +87,28 @@ public class PlayerManager : MonoBehaviour
     [Header("전투 진입 데이터 (임시 저장소)")]
     public EnemyData currentEnemyToFight; // 탐색 씬에서 넘겨준 적 데이터를 전투 씬까지 배달해 줄 변수
 
+    [Header("Current Battle Context")]
+    public BattleReward currentBattleReward;
+    public BattleType currentBattleType;
+    public int currentBattlePhase;
+
+    [Header("Pending Exploration Progress")]
+    public bool pendingAdvanceBattleTurn;
+    public BattleType pendingBattleType;
+    public int pendingBattlePhase;
+
     [Header("플레이어 해금 스킬")]
     public List<SkillData> unlockedSkills = new List<SkillData>();
+
+    [Header("Saved Exploration State")]
+    public bool hasSavedExplorationState;
+    public GamePhase savedExplorationPhase;
+    public int savedExplorationCycle;
+    public int savedExplorationTurnInPhase;
+    public int savedExplorationKeys;
+    public BossEncounterData savedCurrentTargetBoss;
+    public Sprite savedLastVisitedNodeImage;
+    public FacilityData savedLastVisitedFacility;
 
     // 특정 카테고리의 스킬만 쏙쏙 뽑아주는 헬퍼 함수
     public List<SkillData> GetSkillsByCategory(SkillCategory category)

@@ -1644,8 +1644,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1654074079}
   - {fileID: 654814111}
+  - {fileID: 1654074079}
   - {fileID: 1690582268}
   m_Father: {fileID: 1603835343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2825,6 +2825,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1223019333}
   - component: {fileID: 1223019332}
+  - component: {fileID: 1223019334}
   m_Layer: 0
   m_Name: ExplorationManager
   m_TagString: Untagged
@@ -2853,15 +2854,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d9283b90c9f23094887b9911afdd4058, type: 2}
   - {fileID: 11400000, guid: 0510bba5566c3e449988d77a65541805, type: 2}
   lastVisitedFacility: {fileID: 0}
-  currentPhase: 3
+  currentPhase: 2
   currentCycle: 1
   currentTurnInPhase: 0
   currentKeys: 0
   bossSelectionEventIcon: {fileID: 21300000, guid: a290edb1d6fb15046af8721e77ae9ba0, type: 3}
   remainingMidBosses:
   - bossName: Michael
-    minionEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    bossEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
+    minionEnemy: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
+    bossEnemy: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
     nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
     defaultSD: {fileID: 21300000, guid: 841c2aa23be10fc48aa30a61c22932a5, type: 3}
     readySD: {fileID: 21300000, guid: c3b64a72403bd9948bae5063ce07fadf, type: 3}
@@ -2917,8 +2918,8 @@ MonoBehaviour:
     readySD: {fileID: 21300000, guid: da79cbad617c59340982926206081691, type: 3}
   currentTargetBoss:
     bossName: michael
-    minionEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    bossEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
+    minionEnemy: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
+    bossEnemy: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
     nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
     defaultSD: {fileID: 21300000, guid: 841c2aa23be10fc48aa30a61c22932a5, type: 3}
     readySD: {fileID: 21300000, guid: c3b64a72403bd9948bae5063ce07fadf, type: 3}
@@ -2937,6 +2938,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1223019334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223019331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea0a3d6599aae44487eb931a07f0694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatEncounterBuilder
+  battleBalanceDatabase: {fileID: 11400000, guid: 1e298d00ee2de16459deef20b61ce54d, type: 2}
 --- !u!1 &1237032188
 GameObject:
   m_ObjectHideFlags: 0
@@ -3776,6 +3790,7 @@ MonoBehaviour:
   - {fileID: 714054176}
   statusCanvas: {fileID: 368076949}
   settingsCanvas: {fileID: 1369678688}
+  encounterBuilder: {fileID: 1223019334}
 --- !u!1 &1610099446
 GameObject:
   m_ObjectHideFlags: 0
@@ -4166,8 +4181,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1024166212}
   - {fileID: 839332021}
+  - {fileID: 1024166212}
   - {fileID: 570892982}
   m_Father: {fileID: 1603835343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4204,8 +4219,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1610099447}
   - {fileID: 1706874431}
+  - {fileID: 1610099447}
   - {fileID: 1654041437}
   m_Father: {fileID: 1603835343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4993,7 +5008,28 @@ MonoBehaviour:
   equippedKarinItem: {fileID: 11400000, guid: 3af5d2d3d0ac65e4e81a7df77f56e141, type: 2}
   inventory: []
   currentEnemyToFight: {fileID: 0}
+  currentBattleReward:
+    exp: 0
+    gold: 0
+    keys: 0
+  currentBattleType: 0
+  currentBattlePhase: 0
+  pendingAdvanceBattleTurn: 0
+  pendingBattleType: 0
+  pendingBattlePhase: 0
   unlockedSkills: []
+  hasSavedExplorationState: 0
+  savedExplorationPhase: 0
+  savedExplorationCycle: 0
+  savedExplorationTurnInPhase: 0
+  savedExplorationKeys: 0
+  savedCurrentTargetBoss:
+    bossName: 
+    minionEnemy: {fileID: 0}
+    bossEnemy: {fileID: 0}
+    nodeIcon: {fileID: 0}
+    defaultSD: {fileID: 0}
+    readySD: {fileID: 0}
 --- !u!4 &1744572012
 Transform:
   m_ObjectHideFlags: 0

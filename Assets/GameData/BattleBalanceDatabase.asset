@@ -1,0 +1,402 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb0a345d07838614c9aeb73ccae75ff5, type: 3}
+  m_Name: BattleBalanceDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::BattleBalanceDatabase
+  phases:
+  - phase: 1
+    generalBattleReward:
+      exp: 250
+      gold: 800
+      keys: 0
+    bossBattleReward:
+      exp: 1200
+      gold: 3000
+      keys: 1
+    finalBossReward:
+      exp: 0
+      gold: 0
+      keys: 0
+    generalEnemyStats:
+      level: 1
+      maxHp: 1500
+      actionPoints: 7
+      breakResistance: 10
+      maxBreakGauge: 30
+      strength: 8
+      defense: 8
+      speed: 8
+      luck: 8
+    bossEnemyStats:
+      level: 12
+      maxHp: 8000
+      actionPoints: 10
+      breakResistance: 15
+      maxBreakGauge: 100
+      strength: 12
+      defense: 12
+      speed: 12
+      luck: 12
+    finalBossStats:
+      level: 0
+      maxHp: 0
+      actionPoints: 0
+      breakResistance: 0
+      maxBreakGauge: 0
+      strength: 0
+      defense: 0
+      speed: 0
+      luck: 0
+  - phase: 2
+    generalBattleReward:
+      exp: 850
+      gold: 1200
+      keys: 0
+    bossBattleReward:
+      exp: 4500
+      gold: 5000
+      keys: 1
+    finalBossReward:
+      exp: 0
+      gold: 0
+      keys: 0
+    generalEnemyStats:
+      level: 13
+      maxHp: 4000
+      actionPoints: 12
+      breakResistance: 18
+      maxBreakGauge: 45
+      strength: 14
+      defense: 14
+      speed: 14
+      luck: 14
+    bossEnemyStats:
+      level: 24
+      maxHp: 18000
+      actionPoints: 18
+      breakResistance: 25
+      maxBreakGauge: 120
+      strength: 20
+      defense: 20
+      speed: 20
+      luck: 20
+    finalBossStats:
+      level: 0
+      maxHp: 0
+      actionPoints: 0
+      breakResistance: 0
+      maxBreakGauge: 0
+      strength: 0
+      defense: 0
+      speed: 0
+      luck: 0
+  - phase: 3
+    generalBattleReward:
+      exp: 2200
+      gold: 2000
+      keys: 0
+    bossBattleReward:
+      exp: 11000
+      gold: 8000
+      keys: 1
+    finalBossReward:
+      exp: 0
+      gold: 0
+      keys: 0
+    generalEnemyStats:
+      level: 25
+      maxHp: 10000
+      actionPoints: 22
+      breakResistance: 28
+      maxBreakGauge: 60
+      strength: 22
+      defense: 22
+      speed: 22
+      luck: 22
+    bossEnemyStats:
+      level: 36
+      maxHp: 45000
+      actionPoints: 30
+      breakResistance: 40
+      maxBreakGauge: 150
+      strength: 32
+      defense: 32
+      speed: 32
+      luck: 32
+    finalBossStats:
+      level: 0
+      maxHp: 0
+      actionPoints: 0
+      breakResistance: 0
+      maxBreakGauge: 0
+      strength: 0
+      defense: 0
+      speed: 0
+      luck: 0
+  - phase: 4
+    generalBattleReward:
+      exp: 5500
+      gold: 3000
+      keys: 0
+    bossBattleReward:
+      exp: 25000
+      gold: 12000
+      keys: 1
+    finalBossReward:
+      exp: 0
+      gold: 0
+      keys: 0
+    generalEnemyStats:
+      level: 37
+      maxHp: 25000
+      actionPoints: 35
+      breakResistance: 45
+      maxBreakGauge: 80
+      strength: 35
+      defense: 35
+      speed: 35
+      luck: 35
+    bossEnemyStats:
+      level: 48
+      maxHp: 85000
+      actionPoints: 45
+      breakResistance: 60
+      maxBreakGauge: 180
+      strength: 48
+      defense: 48
+      speed: 48
+      luck: 48
+    finalBossStats:
+      level: 0
+      maxHp: 0
+      actionPoints: 0
+      breakResistance: 0
+      maxBreakGauge: 0
+      strength: 0
+      defense: 0
+      speed: 0
+      luck: 0
+  - phase: 5
+    generalBattleReward:
+      exp: 12000
+      gold: 5000
+      keys: 0
+    bossBattleReward:
+      exp: 55000
+      gold: 18000
+      keys: 1
+    finalBossReward:
+      exp: 0
+      gold: 0
+      keys: 0
+    generalEnemyStats:
+      level: 49
+      maxHp: 50000
+      actionPoints: 55
+      breakResistance: 65
+      maxBreakGauge: 110
+      strength: 52
+      defense: 52
+      speed: 52
+      luck: 52
+    bossEnemyStats:
+      level: 60
+      maxHp: 140000
+      actionPoints: 65
+      breakResistance: 85
+      maxBreakGauge: 220
+      strength: 68
+      defense: 68
+      speed: 68
+      luck: 68
+    finalBossStats:
+      level: 0
+      maxHp: 0
+      actionPoints: 0
+      breakResistance: 0
+      maxBreakGauge: 0
+      strength: 0
+      defense: 0
+      speed: 0
+      luck: 0
+  - phase: 6
+    generalBattleReward:
+      exp: 25000
+      gold: 8000
+      keys: 0
+    bossBattleReward:
+      exp: 120000
+      gold: 25000
+      keys: 1
+    finalBossReward:
+      exp: 0
+      gold: 0
+      keys: 0
+    generalEnemyStats:
+      level: 61
+      maxHp: 90000
+      actionPoints: 70
+      breakResistance: 85
+      maxBreakGauge: 140
+      strength: 75
+      defense: 75
+      speed: 75
+      luck: 75
+    bossEnemyStats:
+      level: 72
+      maxHp: 220000
+      actionPoints: 85
+      breakResistance: 115
+      maxBreakGauge: 250
+      strength: 92
+      defense: 92
+      speed: 92
+      luck: 92
+    finalBossStats:
+      level: 0
+      maxHp: 0
+      actionPoints: 0
+      breakResistance: 0
+      maxBreakGauge: 0
+      strength: 0
+      defense: 0
+      speed: 0
+      luck: 0
+  - phase: 7
+    generalBattleReward:
+      exp: 55000
+      gold: 12000
+      keys: 0
+    bossBattleReward:
+      exp: 250000
+      gold: 40000
+      keys: 1
+    finalBossReward:
+      exp: 0
+      gold: 0
+      keys: 0
+    generalEnemyStats:
+      level: 73
+      maxHp: 140000
+      actionPoints: 85
+      breakResistance: 110
+      maxBreakGauge: 180
+      strength: 100
+      defense: 100
+      speed: 100
+      luck: 100
+    bossEnemyStats:
+      level: 84
+      maxHp: 340000
+      actionPoints: 105
+      breakResistance: 135
+      maxBreakGauge: 280
+      strength: 120
+      defense: 120
+      speed: 120
+      luck: 120
+    finalBossStats:
+      level: 0
+      maxHp: 0
+      actionPoints: 0
+      breakResistance: 0
+      maxBreakGauge: 0
+      strength: 0
+      defense: 0
+      speed: 0
+      luck: 0
+  - phase: 8
+    generalBattleReward:
+      exp: 110000
+      gold: 15000
+      keys: 0
+    bossBattleReward:
+      exp: 500000
+      gold: 60000
+      keys: 0
+    finalBossReward:
+      exp: 0
+      gold: 0
+      keys: 0
+    generalEnemyStats:
+      level: 85
+      maxHp: 200000
+      actionPoints: 100
+      breakResistance: 130
+      maxBreakGauge: 220
+      strength: 125
+      defense: 125
+      speed: 125
+      luck: 125
+    bossEnemyStats:
+      level: 100
+      maxHp: 650000
+      actionPoints: 120
+      breakResistance: 150
+      maxBreakGauge: 300
+      strength: 150
+      defense: 150
+      speed: 150
+      luck: 150
+    finalBossStats:
+      level: 0
+      maxHp: 0
+      actionPoints: 0
+      breakResistance: 0
+      maxBreakGauge: 0
+      strength: 0
+      defense: 0
+      speed: 0
+      luck: 0
+  - phase: 9
+    generalBattleReward:
+      exp: 200000
+      gold: 20000
+      keys: 0
+    bossBattleReward:
+      exp: 0
+      gold: 0
+      keys: 0
+    finalBossReward:
+      exp: 1000000
+      gold: 100000
+      keys: 0
+    generalEnemyStats:
+      level: 97
+      maxHp: 270000
+      actionPoints: 115
+      breakResistance: 150
+      maxBreakGauge: 250
+      strength: 150
+      defense: 150
+      speed: 150
+      luck: 150
+    bossEnemyStats:
+      level: 0
+      maxHp: 0
+      actionPoints: 0
+      breakResistance: 0
+      maxBreakGauge: 0
+      strength: 0
+      defense: 0
+      speed: 0
+      luck: 0
+    finalBossStats:
+      level: 120
+      maxHp: 1200000
+      actionPoints: 150
+      breakResistance: 180
+      maxBreakGauge: 360
+      strength: 200
+      defense: 200
+      speed: 200
+      luck: 200

@@ -20,6 +20,15 @@ MonoBehaviour:
   breakImage: {fileID: 21300000, guid: 6252af5dae7757b4ba19f4947aca6d34, type: 3}
   guardImage: {fileID: 0}
   aiBrain: {fileID: 11400000, guid: f8c30ce9b3f9b7b49adb06e467b46d40, type: 2}
+  statModifier:
+    maxHpPercent: 0
+    actionPointsPercent: 0
+    breakResistancePercent: 0
+    maxBreakGaugePercent: 0
+    strengthPercent: 0.35
+    defensePercent: 0.35
+    speedPercent: -0.2
+    luckPercent: -0.5
   level: 0
   maxHp: 10000
   ActionPoints: 10

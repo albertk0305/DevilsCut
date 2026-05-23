@@ -32,6 +32,7 @@ public class ExplorationManager : MonoBehaviour
     [Header("동적 데이터 (저장될 내용들)")]
     public Dictionary<string, int> facilityRanks = new Dictionary<string, int>();
     public FacilityData lastVisitedFacility;
+    public Sprite lastVisitedNodeImage;
 
     // =========================================================
     // [추가] 게임 진행 (페이즈 및 턴) 트래킹 변수들
@@ -56,6 +57,13 @@ public class ExplorationManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null) Instance = this;
+    }
+
+    private void Start()
+    {
+        RestoreStateFromPlayerManagerIfNeeded();
+        ApplyPendingBattleProgressIfNeeded();
+        SaveStateToPlayerManager();
     }
 
     // =========================================================
@@ -174,6 +182,7 @@ public class ExplorationManager : MonoBehaviour
             currentTurnInPhase = 0;
             DevLog.Log("탐색 6턴 종료. 일반 전투 페이즈 돌입!");
         }
+        ExplorationManager.Instance.SaveStateToPlayerManager();
     }
 
     public void AdvanceBattleTurn(bool isBoss)
@@ -181,6 +190,7 @@ public class ExplorationManager : MonoBehaviour
         if (!isBoss)
         {
             currentTurnInPhase++;
+
             if (currentTurnInPhase >= 3)
             {
                 currentPhase = GamePhase.BossBattle;
@@ -190,10 +200,15 @@ public class ExplorationManager : MonoBehaviour
         }
         else
         {
-            // [수정] 7사이클까지만 중간보스 리스트 차감
-            if (currentCycle <= 7) remainingMidBosses.Remove(currentTargetBoss);
+            if (IsCurrentBattleMidBoss())
+            {
+                currentKeys++;
+                DevLog.Log($"[중간보스 보상] Key +1, 현재 Key: {currentKeys}");
+            }
 
-            // 열쇠 획득은 CombatManager에서 ExplorationManager.Instance.currentKeys++; 로 올려주시면 됩니다!
+            // [수정] 7사이클까지만 중간보스 리스트 차감
+            if (currentCycle <= 7)
+                remainingMidBosses.Remove(currentTargetBoss);
 
             currentCycle++;
             currentTargetBoss = null;
@@ -201,11 +216,82 @@ public class ExplorationManager : MonoBehaviour
             currentTurnInPhase = 0;
             DevLog.Log($"보스 처치! 다음 사이클({currentCycle})로 넘어갑니다.");
         }
+
+        SaveStateToPlayerManager();
     }
 
     public int GetFacilityRank(string id)
     {
         if (facilityRanks.ContainsKey(id)) return facilityRanks[id];
         return 0;
+    }
+
+    private void ApplyPendingBattleProgressIfNeeded()
+    {
+        PlayerManager playerManager = PlayerManager.Instance;
+
+        if (playerManager == null)
+            return;
+
+        if (!playerManager.pendingAdvanceBattleTurn)
+            return;
+
+        bool isBossBattle =
+            playerManager.pendingBattleType == BattleType.Boss ||
+            playerManager.pendingBattleType == BattleType.FinalBoss;
+
+        playerManager.pendingAdvanceBattleTurn = false;
+
+        AdvanceBattleTurn(isBossBattle);
+    }
+
+    public void SaveStateToPlayerManager()
+    {
+        PlayerManager playerManager = PlayerManager.Instance;
+
+        if (playerManager == null)
+            return;
+
+        playerManager.hasSavedExplorationState = true;
+        playerManager.savedExplorationPhase = currentPhase;
+        playerManager.savedExplorationCycle = currentCycle;
+        playerManager.savedExplorationTurnInPhase = currentTurnInPhase;
+        playerManager.savedExplorationKeys = currentKeys;
+        playerManager.savedCurrentTargetBoss = currentTargetBoss;
+        playerManager.savedLastVisitedNodeImage = lastVisitedNodeImage;
+        playerManager.savedLastVisitedFacility = lastVisitedFacility;
+    }
+
+    private void RestoreStateFromPlayerManagerIfNeeded()
+    {
+        PlayerManager playerManager = PlayerManager.Instance;
+
+        if (playerManager == null)
+            return;
+
+        if (!playerManager.hasSavedExplorationState)
+            return;
+
+        currentPhase = playerManager.savedExplorationPhase;
+        currentCycle = playerManager.savedExplorationCycle;
+        currentTurnInPhase = playerManager.savedExplorationTurnInPhase;
+        currentKeys = playerManager.savedExplorationKeys;
+        currentTargetBoss = playerManager.savedCurrentTargetBoss;
+        lastVisitedNodeImage = playerManager.savedLastVisitedNodeImage;
+        lastVisitedFacility = playerManager.savedLastVisitedFacility;
+    }
+
+    private bool IsCurrentBattleMidBoss()
+    {
+        if (currentTargetBoss == null)
+            return false;
+
+        if (finalBoss != null && currentTargetBoss == finalBoss)
+            return false;
+
+        if (trueFinalBoss != null && currentTargetBoss == trueFinalBoss)
+            return false;
+
+        return true;
     }
 }
