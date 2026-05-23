@@ -973,13 +973,21 @@ public class CombatManager : MonoBehaviour
         if (isPlayerAttacking && currentState.isUnleashingCharge)
             currentState.isUnleashingCharge = false;
 
+        if (CheckAndHandleBattleEnd())
+            return;
+
+        ResolveTurnEnd();
+    }
+
+    private bool CheckAndHandleBattleEnd()
+    {
         if (currentEnemyHp <= 0 || currentPlayerStats.currentHp <= 0)
         {
             EndCombat(currentEnemyHp <= 0);
-            return;
+            return true;
         }
 
-        ResolveTurnEnd();
+        return false;
     }
 
     // 스킬 시전 초기 연출 (이미지, 대사, 코스트 지불 등)
