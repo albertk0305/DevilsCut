@@ -15,6 +15,18 @@ public class SkillLogicBase : ScriptableObject
         return 1.0f;
     }
 
+    public virtual bool TryOverrideBaseHitCalculation(
+        SkillData skill,
+        int attackerStrength,
+        int attackerDefense,
+        out float calculatedDamage,
+        out float breakPower)
+    {
+        calculatedDamage = 0f;
+        breakPower = 0f;
+        return false;
+    }
+
     public virtual void ApplyEffect(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
     }
@@ -78,6 +90,12 @@ public class SkillLogicBase : ScriptableObject
     {
         // 기본적으로는 스킬의 일반 액션 이미지를 반환하여 하위 호환성을 유지합니다.
         return skill.skillActionImage;
+    }
+
+    public virtual bool TryGetSpecialCastPresentation(SkillData skill, out int count)
+    {
+        count = 0;
+        return false;
     }
 
     public virtual float GetSkillBonusLifesteal(SkillData skill)

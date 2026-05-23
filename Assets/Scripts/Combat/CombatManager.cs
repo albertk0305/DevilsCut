@@ -47,6 +47,9 @@ public class CombatManager : MonoBehaviour
     public StatusEffectData pEffect_Evasion;
     public StatusEffectData pEffect_HealAmp;
 
+    [Header("턴 효과 StatusEffectData 매핑")]
+    [SerializeField] private TurnEffectResolverConfig turnEffectConfig;
+
     private PlayerStats currentPlayerStats;
     public PlayerStats GetCurrentPlayerStats() => currentPlayerStats;
 
@@ -58,38 +61,129 @@ public class CombatManager : MonoBehaviour
     private int playerHpAtTurnStart;
     private int enemyHpAtTurnStart;
     private TurnEntity currentActiveEntity;
-
-    private enum MenuState { Hidden, CategorySelect, SkillSelect }
-    private MenuState currentMenuState = MenuState.Hidden;
-    private string GetCategoryLocalizationKey(SkillCategory category)
-    {
-        return category switch
-        {
-            SkillCategory.Sword => "cat_sword",
-            SkillCategory.Gun => "cat_gun",
-            SkillCategory.Martial => "cat_martial",
-            SkillCategory.Magic => "cat_magic",
-            SkillCategory.Oni => "cat_oni",
-            _ => "cat_unknown" // 예외 상황 대비
-        };
-    }
-    private SkillCategory selectedCategory;
-    private List<SkillData> currentDisplaySkills;
-    private readonly List<SkillCategory> categoryMenuOrder = new List<SkillCategory>
-    {
-        SkillCategory.Sword,
-        SkillCategory.Gun,
-        SkillCategory.Martial,
-        SkillCategory.Magic,
-        SkillCategory.Oni
-    };
-
+    private CombatActionMenuController actionMenuController;
+    private CombatPresentationDirector presentationDirector;
+    private DamageResolutionService damageResolutionService;
+    private TurnEffectResolver turnEffectResolver;
     public CombatState currentState = new CombatState();
+
+    private struct SkillCalculationContext
+    {
+        public int atkStr;
+        public int atkDef;
+        public int atkLck;
+        public int atkSpd;
+
+        public int defDef;
+        public int defSpd;
+        public int defBR;
+        public int defCurrentHp;
+        public int defMaxHp;
+    }
+
+    private struct SkillPresentationContext
+    {
+        public bool isPlayerDefending;
+        public bool isPureUtility;
+        public string attackerName;
+        public string skillName;
+        public string commentary;
+    }
+
+    private struct SkillCastPresentationContext
+    {
+        public SkillData skill;
+        public bool isPlayerAttacking;
+        public SkillResult skillResult;
+        public string commentary;
+        public bool isPureUtility;
+        public Sprite reactionSprite;
+        public bool showCritAlert;
+    }
+
+    private struct SkillExecutionContext
+    {
+        public SkillData skill;
+        public bool isPlayerAttacking;
+        public bool isUltimate;
+        public SkillCalculationContext calculation;
+        public SkillResult result;
+        public SkillPresentationContext presentation;
+    }
 
     // [최적화] 코루틴 대기 객체 캐싱
     private readonly WaitForSeconds oneSecondWait = new WaitForSeconds(1.0f);
 
-    public bool IsPlayerSelectingPhase => currentMenuState == MenuState.CategorySelect || currentMenuState == MenuState.SkillSelect;
+    public bool IsPlayerSelectingPhase
+    {
+        get
+        {
+            EnsureActionMenuController();
+            return actionMenuController != null && actionMenuController.IsPlayerSelectingPhase;
+        }
+    }
+
+    private void EnsureActionMenuController()
+    {
+        if (actionMenuController != null) return;
+
+        if (CombatUIManager.Instance == null)
+        {
+            DevLog.Log("[CombatManager] CombatUIManager.Instance가 없어 CombatActionMenuController를 초기화할 수 없습니다.");
+            return;
+        }
+
+        actionMenuController = new CombatActionMenuController(
+            CombatUIManager.Instance,
+            analysisUI,
+            () => currentEnemyData,
+            ExecuteSkillFromActionMenu
+        );
+    }
+
+    public void ToggleAnalysis()
+    {
+        EnsureActionMenuController();
+        actionMenuController?.ToggleAnalysis();
+    }
+
+    private void EnsurePresentationDirector()
+    {
+        if (presentationDirector != null) return;
+
+        if (CombatUIManager.Instance == null || BattleVisualizer.Instance == null)
+        {
+            DevLog.Log("[CombatManager] CombatPresentationDirector를 초기화할 수 없습니다.");
+            return;
+        }
+
+        presentationDirector = new CombatPresentationDirector(
+            CombatUIManager.Instance,
+            BattleVisualizer.Instance
+        );
+    }
+
+    private DamageResolutionService DamageResolver
+    {
+        get
+        {
+            if (damageResolutionService == null)
+                damageResolutionService = new DamageResolutionService(RefreshSpecialStatsProgressUI);
+
+            return damageResolutionService;
+        }
+    }
+
+    private TurnEffectResolver TurnEffects
+    {
+        get
+        {
+            if (turnEffectResolver == null)
+                turnEffectResolver = new TurnEffectResolver(turnEffectConfig);
+
+            return turnEffectResolver;
+        }
+    }
 
     public void RefreshSpecialStatsProgressUI()
     {
@@ -196,9 +290,8 @@ public class CombatManager : MonoBehaviour
         BuffManager.Instance?.ClearAllEffects();
         StyleRankManager.Instance?.InitCombat();
 
-        CombatUIManager.Instance.SetActionPanelActive(false);
-        CombatUIManager.Instance.SetWaitingPanelActive(true);
-        currentMenuState = MenuState.Hidden;
+        EnsureActionMenuController();
+        actionMenuController?.HideActionMenuAndShowWaiting();
 
         bool isFastCombat = PlayerPrefs.GetInt("FastCombat", 0) == 1;
         Time.timeScale = isFastCombat ? 2.0f : 1.0f;
@@ -239,9 +332,10 @@ public class CombatManager : MonoBehaviour
     private void UpdateTurnOrderUI()
     {
         List<Sprite> icons = TurnManager.Instance.GetFutureTurnIcons(5);
-        CombatUIManager.Instance.UpdateTurnOrderUI(icons);
-    }
 
+        EnsurePresentationDirector();
+        presentationDirector?.UpdateTurnOrder(icons);
+    }
     // ==========================================================
     // 1. 메인 턴 분배기 (Switch 문으로 가독성 극대화)
     // ==========================================================
@@ -253,9 +347,8 @@ public class CombatManager : MonoBehaviour
 
         RefreshSpecialStatsProgressUI();
 
-        CombatUIManager.Instance.SetActionPanelActive(false);
-        CombatUIManager.Instance.SetWaitingPanelActive(true);
-        currentMenuState = MenuState.Hidden;
+        EnsureActionMenuController();
+        actionMenuController?.HideActionMenuAndShowWaiting();
 
         yield return HandlePreTurnEffects(currentTurnOwner);
 
@@ -264,16 +357,16 @@ public class CombatManager : MonoBehaviour
         switch (currentTurnOwner.type)
         {
             case EntityType.Enemy:
-                yield return HandleEnemyTurn(); 
+                yield return HandleEnemyTurn();
                 break;
             case EntityType.Player:
-                yield return HandlePlayerTurn(); 
+                yield return HandlePlayerTurn();
                 break;
             case EntityType.Karin:
                 yield return CompanionManager.Instance.ExecuteKarinTurn();
                 break;
             case EntityType.Supporter:
-                yield return HandleSupporterTurn(); 
+                yield return HandleSupporterTurn();
                 break;
         }
     }
@@ -287,28 +380,7 @@ public class CombatManager : MonoBehaviour
 
         if (owner.type == EntityType.Player && PlayerManager.Instance != null)
         {
-            var syn = PlayerManager.Instance.GetCurrentSynergies();
-            var inventory = PlayerManager.Instance.inventory;
-
-            // [트릭스터 4점]
-            if (syn.GetValueOrDefault(ItemClass.Trickster) >= 4) ApplyRandomTricksterStatDebuff(0.05f);
-
-            // [트릭스터 희귀] 가짜 웃음 수치 합산
-            var trickRares = inventory.FindAll(x => x.data.itemClass == ItemClass.Trickster && x.data.grade == ItemGrade.Rare);
-            float trickRareVal = 0f;
-            foreach (var r in trickRares) trickRareVal += r.starLevel == 1 ? 0.02f : (r.starLevel == 2 ? 0.08f : 0.25f);
-            if (trickRareVal > 0f) ApplyRandomTricksterStatDebuff(trickRareVal);
-
-            // [트릭스터 에픽] 기괴한 가면 수치 합산 (출혈, 화상 계수 분리)
-            var trickEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Trickster && x.data.grade == ItemGrade.Epic);
-            float trickEpicVal = 0f, trickBleedVal = 0f, trickBurnVal = 0f;
-            foreach (var e in trickEpics)
-            {
-                trickEpicVal += e.starLevel == 1 ? 0.02f : (e.starLevel == 2 ? 0.08f : 0.30f);
-                trickBleedVal += e.starLevel == 1 ? 1.0f : (e.starLevel == 2 ? 2.0f : 3.0f); // 100/200/300%
-                trickBurnVal += e.starLevel == 1 ? 0.02f : (e.starLevel == 2 ? 0.03f : 0.04f); // 2/3/4%
-            }
-            if (trickEpics.Count > 0) ApplyRandomTricksterEpicDebuff(trickEpicVal, trickBleedVal, trickBurnVal);
+            TurnEffects.ApplyTricksterPreTurnEffects(PlayerManager.Instance);
         }
 
         if (owner.type == EntityType.Enemy)
@@ -478,54 +550,24 @@ public class CombatManager : MonoBehaviour
 
     public void ShowCategoryMenu()
     {
-        CombatUIManager.Instance.SetActionPanelActive(true);
-        currentMenuState = MenuState.CategorySelect;
-
-        string[] keys = new string[categoryMenuOrder.Count];
-        for (int i = 0; i < categoryMenuOrder.Count; i++)
-        {
-            keys[i] = GetCategoryLocalizationKey(categoryMenuOrder[i]);
-        }
-
-        CombatUIManager.Instance.UpdateActionButtonsForCategory(keys);
+        EnsureActionMenuController();
+        actionMenuController?.ShowCategoryMenu();
     }
 
     public void ShowSkillMenu(int categoryIndex)
     {
-        currentMenuState = MenuState.SkillSelect;
-        selectedCategory = (SkillCategory)categoryIndex;
-        currentDisplaySkills = PlayerManager.Instance.GetSkillsByCategory(selectedCategory);
-
-        StyleRank currentRank = StyleRankManager.Instance.currentRank;
-        CombatUIManager.Instance.UpdateActionButtonsForSkills(currentDisplaySkills, currentRank);
+        EnsureActionMenuController();
+        actionMenuController?.ShowSkillMenu(categoryIndex);
     }
 
     public void OnActionSlotClicked(int slotIndex)
     {
-        if (currentMenuState == MenuState.CategorySelect)
-        {
-            if (slotIndex >= 0 && slotIndex < categoryMenuOrder.Count)
-            {
-                selectedCategory = categoryMenuOrder[slotIndex];
-                ShowSkillMenu(slotIndex);
-            }
-        }
-        else if (currentMenuState == MenuState.SkillSelect)
-        {
-            if (slotIndex == 4) ShowCategoryMenu();
-            else if (slotIndex < currentDisplaySkills.Count)
-            {
-                bool isUltimate = (slotIndex == 3);
-                ExecuteSkill(currentDisplaySkills[slotIndex], true, isUltimate);
-            }
-        }
+        EnsureActionMenuController();
+        actionMenuController?.OnActionSlotClicked(slotIndex);
     }
 
-    private void ExecuteSkill(SkillData skill, bool isPlayerAttacking, bool isUltimate = false)
+    private void ExecuteSkillFromActionMenu(SkillData skill, bool isPlayerAttacking, bool isUltimate = false)
     {
-        CombatUIManager.Instance.SetActionPanelActive(false);
-        CombatUIManager.Instance.SetWaitingPanelActive(true);
-        currentMenuState = MenuState.Hidden;
         PerformSkillRoutine(skill, isPlayerAttacking, isUltimate);
     }
 
@@ -535,216 +577,483 @@ public class CombatManager : MonoBehaviour
         if (analysisUI != null) analysisUI.Close();
 
         // 1. 상태 스냅샷 및 초기화
+        ResetSkillExecutionState();
+
+        //  [복구됨] 기(Ki) 차지(원기옥) 시작 판정
+        if (TryBeginGiCharge(skill, isPlayerAttacking))
+            return;
+
+        //  [복구됨] 실시간 스탯 산출 및 BattleCalculator 연산 (skillResult 생성)
+        SkillExecutionContext executionContext = BuildSkillExecutionContext(
+            skill,
+            isPlayerAttacking,
+            isUltimate);
+
+        EnqueueSkillExecutionSequence(executionContext);
+
+        // 3. 지휘관 권한 위임 및 턴 종료 대기
+        BattleVisualizer.Instance.StartSequence(() => CompleteSkillSequence(isPlayerAttacking));
+    }
+
+    private void ResetSkillExecutionState()
+    {
         currentState.wasEnemyBrokenAtSkillStart = BreakManager.Instance.IsBroken(false);
         currentState.hasRewardedCritThisSkill = false;
         currentState.isMorningStarApRecoveredThisSkill = false;
         currentState.totalExcessHealThisSkill = 0;
+    }
 
-        // ==========================================================
-        //  [복구됨] 기(Ki) 차지(원기옥) 시작 판정
-        // ==========================================================
-        if (isPlayerAttacking && skill.skillLogic is SkillLogic_Gi && skill.currentEvolution == SkillEvolution.PathC && !currentState.isUnleashingCharge)
-        {
-            currentState.isPlayerCharging = true;
-            currentState.chargingSkill = skill;
-            string pName = playerData != null ? GetTranslatedText(playerData.playerNamekey) : "주인공";
-            StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{pName}이(가) 기를 모으기 시작합니다!"));
-            ResolveTurnEnd();
-            return;
-        }
+    private bool TryBeginGiCharge(SkillData skill, bool isPlayerAttacking)
+    {
+        if (skill == null) return false;
+        if (!(skill.skillLogic is IChargeSkillLogic chargeLogic)) return false;
+        if (!chargeLogic.ShouldBeginCharge(
+            skill,
+            isPlayerAttacking,
+            currentState.isPlayerCharging,
+            currentState.isUnleashingCharge)) return false;
 
-        // ==========================================================
-        //  [복구됨] 실시간 스탯 산출 및 BattleCalculator 연산 (skillResult 생성)
-        // ==========================================================
-        int atkStr = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Strength);
-        int atkDef = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Defense);
-        int atkLck = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Luck);
-        int atkSpd = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Speed);
+        currentState.isPlayerCharging = true;
+        currentState.chargingSkill = skill;
 
-        int defDef = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.Defense);
-        int defSpd = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.Speed);
-        int defBR = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.BreakResistance);
-        int defCurrentHp = isPlayerAttacking ? currentEnemyHp : currentPlayerStats.currentHp;
-        int defMaxHp = isPlayerAttacking ? currentEnemyData.maxHp : currentPlayerStats.maxHp;
+        if (skill.skillActionImage != null)
+        CombatUIManager.Instance.SetCasterImage(true, skill.skillActionImage);
 
-        // 연산 결과를 skillResult 변수에 담습니다!
-        SkillResult skillResult = BattleCalculator.CalculateSkill(
-            skill, isPlayerAttacking,
-            currentPlayerStats, currentEnemyData,
-            atkStr, atkDef, atkLck, atkSpd,
-            defDef, defSpd, defBR, defCurrentHp, defMaxHp
+        string pName = playerData != null
+            ? GetTranslatedText(playerData.playerNamekey)
+            : "주인공";
+
+        StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{pName}이(가) 기를 모으기 시작합니다!"));
+        ResolveTurnEnd();
+
+        return true;
+    }
+
+    private void EnqueueSkillExecutionSequence(SkillExecutionContext context)
+    {
+        EnqueueUltimateCutInIfNeeded(context);
+
+        // Cast presentation
+        SkillData skill = context.skill;
+        bool isPlayerAttacking = context.isPlayerAttacking;
+        SkillResult castResult = context.result;
+        string castCommentary = context.presentation.commentary;
+        bool castIsPureUtility = context.presentation.isPureUtility;
+        BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, castResult, castCommentary, castIsPureUtility));
+
+        // Immediate defense outcome
+        ApplyImmediateDefenseOutcome(context);
+
+        // Hit actions
+        EnqueueSkillHitActions(context);
+        UpdateLastSuccessfulHits(context);
+
+        // On-hit skill effect
+        EnqueueApplyEffectOnHit(context);
+
+        // Counter
+        EnqueueMorningStarCounterIfNeeded(context);
+
+        // Guard and reflect
+        EnqueueGuardAndReflectIfNeeded(context);
+
+        // Reset
+        EnqueueSkillReset(context);
+    }
+
+    private SkillExecutionContext BuildSkillExecutionContext(
+        SkillData skill,
+        bool isPlayerAttacking,
+        bool isUltimate)
+    {
+        SkillExecutionContext context = new SkillExecutionContext();
+        context.skill = skill;
+        context.isPlayerAttacking = isPlayerAttacking;
+        context.isUltimate = isUltimate;
+        context.calculation = BuildSkillCalculationContext(context.isPlayerAttacking);
+        context.result = CalculateSkillResult(
+            context.skill,
+            context.isPlayerAttacking,
+            context.calculation);
+        context.presentation = BuildSkillPresentationContext(
+            context.skill,
+            context.isPlayerAttacking,
+            context.result);
+
+        return context;
+    }
+
+    private SkillResult CalculateSkillResult(
+        SkillData skill,
+        bool isPlayerAttacking,
+        SkillCalculationContext context)
+    {
+        return BattleCalculator.CalculateSkill(
+            skill,
+            isPlayerAttacking,
+            currentPlayerStats,
+            currentEnemyData,
+            context.atkStr,
+            context.atkDef,
+            context.atkLck,
+            context.atkSpd,
+            context.defDef,
+            context.defSpd,
+            context.defBR,
+            context.defCurrentHp,
+            context.defMaxHp
         );
+    }
 
-        // ==========================================================
-        // 2. 연출 대본 작성 (BattleVisualizer)
-        // ==========================================================
+    private SkillCalculationContext BuildSkillCalculationContext(bool isPlayerAttacking)
+    {
+        return new SkillCalculationContext
+        {
+            atkStr = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Strength),
+            atkDef = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Defense),
+            atkLck = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Luck),
+            atkSpd = StatManager.Instance.GetEffectiveStat(isPlayerAttacking, TargetStat.Speed),
+
+            defDef = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.Defense),
+            defSpd = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.Speed),
+            defBR = StatManager.Instance.GetEffectiveStat(!isPlayerAttacking, TargetStat.BreakResistance),
+            defCurrentHp = isPlayerAttacking ? currentEnemyHp : currentPlayerStats.currentHp,
+            defMaxHp = isPlayerAttacking ? currentEnemyData.maxHp : currentPlayerStats.maxHp
+        };
+    }
+
+    private SkillPresentationContext BuildSkillPresentationContext(
+    SkillData skill,
+    bool isPlayerAttacking,
+    SkillResult skillResult)
+    {
         float baseMultForUI = skill.GetCurrentDamageMultiplier();
-        float logicMultForUI = skill.skillLogic != null ? skill.skillLogic.GetDamageMultiplier(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking) : 1f;
+        float logicMultForUI = skill.skillLogic != null
+            ? skill.skillLogic.GetDamageMultiplier(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking)
+            : 1f;
 
-        bool isAttackForUI = baseMultForUI > 0f || (baseMultForUI <= 0f && logicMultForUI > 0f && logicMultForUI != 1.0f);
-        bool isPureUtility = !isAttackForUI && !skill.forceHitReaction; // 여기서 선언!
+        bool isAttackForUI =
+            baseMultForUI > 0f ||
+            (baseMultForUI <= 0f && logicMultForUI > 0f && logicMultForUI != 1.0f);
 
+        bool isPureUtility = !isAttackForUI && !skill.forceHitReaction;
         bool isPlayerDefending = !isPlayerAttacking;
-        string attackerName = isPlayerAttacking ? (playerData != null ? GetTranslatedText(playerData.playerNamekey) : "주인공") : (currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "적");
+
+        string attackerName = isPlayerAttacking
+            ? (playerData != null ? GetTranslatedText(playerData.playerNamekey) : "주인공")
+            : (currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "적");
+
         string skillName = GetTranslatedText(skill.skillNameKey);
 
-        if (isUltimate)
+        EnsurePresentationDirector();
+
+        string commentary = presentationDirector != null
+            ? presentationDirector.BuildSkillCommentary(attackerName, skillName, skillResult, isPureUtility)
+            : isPureUtility
+                ? $"{attackerName}이(가) {skillName}을(를) 시전합니다!"
+                : !skillResult.anyHit
+                    ? $"{attackerName}의 {skillName}이(가) 빗나갔습니다!"
+                    : skillResult.anyCrit
+                        ? $"{attackerName}의 {skillName} 치명적으로 적중!"
+                        : $"{attackerName}의 {skillName} 적중!";
+
+        return new SkillPresentationContext
         {
-            Sprite cutInSprite = isPlayerAttacking ? playerData?.cutIn : currentEnemyData?.CutIn;
-            if (cutInSprite != null)
-            {
-                BattleVisualizer.Instance.EnqueueAction(() => CombatUIManager.Instance.InterruptAndTypeCommentary($"{attackerName}의 필살기!"));
-                BattleVisualizer.Instance.EnqueueCutIn(cutInSprite);
-            }
-        }
+            isPlayerDefending = isPlayerDefending,
+            isPureUtility = isPureUtility,
+            attackerName = attackerName,
+            skillName = skillName,
+            commentary = commentary
+        };
+    }
 
-        string commentary = "";
-        if (isPureUtility)
-        {
-            commentary = $"{attackerName}이(가) {skillName}을(를) 시전합니다!";
-        }
-        else
-        {
-            commentary = !skillResult.anyHit ? $"{attackerName}의 {skillName}이(가) 빗나갔습니다!" :
-                         (skillResult.anyCrit ? $"{attackerName}의 {skillName} 치명적으로 적중!" : $"{attackerName}의 {skillName} 적중!");
-        }
+    private void EnqueueUltimateCutInIfNeeded(SkillExecutionContext context)
+    {
+        if (!context.isUltimate) return;
 
-        // ① 스킬 시전 초기 연출
-        BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, skillResult, commentary, isPureUtility));
+        Sprite cutInSprite = context.isPlayerAttacking
+            ? playerData?.cutIn
+            : currentEnemyData?.CutIn;
 
-        // ②-1. [신규 추가] 전체 스킬 결과에 대한 1회성 판정 (스타일 랭크 및 회피 특수 효과)
-        if (isPlayerDefending && !isPureUtility)
-        {
-            bool isInvincible = BuffManager.Instance.GetEffects(true).Exists(e => e.effectData.specialType == SpecialEffectType.Invincible);
+        EnsurePresentationDirector();
+        presentationDirector?.EnqueueUltimateCutIn(cutInSprite, context.presentation.attackerName);
+    }
 
-            // [완전 회피] 모든 타격이 빗나갔을 때 딱 한 번만 발동!
-            if (!skillResult.anyHit)
-            {
-                StyleRankManager.Instance.OnEvade();
+    private void EnqueueSkillHitActions(SkillExecutionContext context)
+    {
+        SkillData skill = context.skill;
+        SkillResult skillResult = context.result;
+        bool isPlayerAttacking = context.isPlayerAttacking;
+        bool isPlayerDefending = context.presentation.isPlayerDefending;
+        bool isPureUtility = context.presentation.isPureUtility;
 
-                // 새벽별 난식 턴 당기기 (1회만 발동)
-                var martialSkill = PlayerManager.Instance.unlockedSkills.Find(s => s.category == SkillCategory.Martial);
-                if (martialSkill != null && martialSkill.skillLogic is SkillLogic_MorningStar msLogic)
-                {
-                    bool hasEvasionBuff = BuffManager.Instance.GetEffects(true).Exists(e => e.effectData == msLogic.evasionBuffData);
-                    if (hasEvasionBuff && martialSkill.currentEvolution == SkillEvolution.PathB && !currentState.isMorningStarApRecoveredThisSkill)
-                    {
-                        var playerEntity = TurnManager.Instance.turnQueue.Find(e => e.isPlayer);
-                        if (playerEntity != null)
-                        {
-                            playerEntity.actionGauge += msLogic.pathB_ApRecovery;
-                            currentState.isMorningStarApRecoveredThisSkill = true;
-                            DevLog.Log($"[새벽별:난식] 완벽 회피 성공! 행동 게이지 {msLogic.pathB_ApRecovery} 회복.");
-                        }
-                    }
-                }
-            }
-            // [피격] 1타라도 스쳤을 때 딱 한 번만 발동!
-            else
-            {
-                if (!skillResult.isGuardTriggered && !isInvincible)
-                {
-                    StyleRankManager.Instance.OnPlayerHit();
-                }
-                else if (isInvincible)
-                {
-                    DevLog.Log("[무하한] 무적 상태이므로 스타일 랭크가 감소하지 않습니다.");
-                }
-            }
-        }
-
-        // ②-2. 다단 히트 연출 루프 (데미지 및 화면 텍스트 전담)
         foreach (var hit in skillResult.hits)
         {
             BattleVisualizer.Instance.EnqueueAction(() =>
             {
-                // [수정] ProcessMissAction에 skillResult를 넘겨서 1타라도 맞았으면 회피 모션을 막습니다.
-                if (!hit.isHit) ProcessMissAction(isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult);
-                else ProcessHitAction(hit, isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult, skill);
+                if (!hit.isHit)
+                    ProcessMissAction(isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult);
+                else
+                    ProcessHitAction(hit, isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult, skill);
             });
+
             BattleVisualizer.Instance.EnqueueDelay(0.15f);
         }
+    }
 
+    private void UpdateLastSuccessfulHits(SkillExecutionContext context)
+    {
+        SkillResult skillResult = context.result;
         int successCount = 0;
-        foreach (var hit in skillResult.hits) { if (hit.isHit) successCount++; }
+
+        foreach (var hit in skillResult.hits)
+        {
+            if (hit.isHit)
+                successCount++;
+        }
+
         currentState.lastSuccessfulHits = successCount;
+    }
 
-        // ③ 명중 시 특수효과 발동 로직 호출
-        BattleVisualizer.Instance.EnqueueAction(() => skill.skillLogic?.ApplyEffectOnHit(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking, skillResult.anyHit));
+    private void EnqueueApplyEffectOnHit(SkillExecutionContext context)
+    {
+        SkillData skill = context.skill;
+        bool isPlayerAttacking = context.isPlayerAttacking;
+        bool anyHit = context.result.anyHit;
 
-        // ④ 카운터 반격 판정
+        BattleVisualizer.Instance.EnqueueAction(() =>
+            skill.skillLogic?.ApplyEffectOnHit(
+                skill,
+                currentPlayerStats,
+                currentEnemyData,
+                isPlayerAttacking,
+                anyHit));
+    }
+
+    private void EnqueueSkillReset(SkillExecutionContext context)
+    {
+        bool isPlayerAttacking = context.isPlayerAttacking;
+        bool isPlayerDefending = context.presentation.isPlayerDefending;
+        bool isUltimate = context.isUltimate;
+        SkillData skill = context.skill;
+
+        BattleVisualizer.Instance.EnqueueAction(() =>
+            ResetCombatUI(isPlayerAttacking, isPlayerDefending, isUltimate, skill));
+    }
+
+    private void ApplyImmediateDefenseOutcome(SkillExecutionContext context)
+    {
+        SkillResult skillResult = context.result;
+        bool isPlayerDefending = context.presentation.isPlayerDefending;
+        bool isPureUtility = context.presentation.isPureUtility;
+        if (!isPlayerDefending || isPureUtility)
+            return;
+
+        bool isInvincible = BuffManager.Instance
+            .GetEffects(true)
+            .Exists(e => e.effectData.specialType == SpecialEffectType.Invincible);
+
+        // 완전 회피
+        if (!skillResult.anyHit)
+        {
+            StyleRankManager.Instance.OnEvade();
+
+            var martialSkill = PlayerManager.Instance.unlockedSkills.Find(
+                s => s.category == SkillCategory.Martial);
+
+            if (martialSkill != null && martialSkill.skillLogic is IPerfectEvadeApRecoverySkillLogic apRecoveryLogic)
+            {
+                if (apRecoveryLogic.TryGetPerfectEvadeApRecovery(
+                    martialSkill,
+                    BuffManager.Instance.GetEffects(true),
+                    currentState.isMorningStarApRecoveredThisSkill,
+                    out float apRecovery))
+                {
+                    var playerEntity = TurnManager.Instance.turnQueue.Find(e => e.isPlayer);
+
+                    if (playerEntity != null)
+                    {
+                        playerEntity.actionGauge += apRecovery;
+                        currentState.isMorningStarApRecoveredThisSkill = true;
+
+                        DevLog.Log($"[새벽별:난식] 완벽 회피 성공! 행동 게이지 {apRecovery} 회복.");
+                    }
+                }
+            }
+
+            return;
+        }
+
+        // 피격
+        if (!skillResult.isGuardTriggered && !isInvincible)
+        {
+            StyleRankManager.Instance.OnPlayerHit();
+        }
+        else if (isInvincible)
+        {
+            DevLog.Log("[무하한] 무적 상태이므로 스타일 랭크가 감소하지 않습니다.");
+        }
+    }
+
+    private void EnqueueMorningStarCounterIfNeeded(SkillExecutionContext context)
+    {
+        SkillResult skillResult = context.result;
+        bool isPlayerDefending = context.presentation.isPlayerDefending;
+        bool isPureUtility = context.presentation.isPureUtility;
         bool isCounterTriggered = false;
+
         if (!skillResult.anyHit && !isPureUtility && isPlayerDefending)
         {
-            var martialSkill = PlayerManager.Instance.unlockedSkills.Find(s => s.category == SkillCategory.Martial);
-            if (martialSkill != null && martialSkill.skillLogic is SkillLogic_MorningStar msLogic)
+            var martialSkill = PlayerManager.Instance.unlockedSkills.Find(
+                s => s.category == SkillCategory.Martial);
+
+            if (martialSkill != null && martialSkill.skillLogic is IPerfectEvadeCounterSkillLogic counterLogic)
             {
-                if (BuffManager.Instance.GetEffects(true).Exists(e => e.effectData == msLogic.evasionBuffData) && martialSkill.currentEvolution == SkillEvolution.PathA)
+                if (counterLogic.TryGetPerfectEvadeCounter(
+                    martialSkill,
+                    currentPlayerStats,
+                    BuffManager.Instance.GetEffects(true),
+                    out int counterDmg,
+                    out Sprite counterImage))
                 {
                     isCounterTriggered = true;
-                    int levelIdx = Mathf.Clamp(martialSkill.skillLevel - 1, 0, msLogic.pathA_CounterRates.Length - 1);
-                    int counterDmg = Mathf.RoundToInt(currentPlayerStats.strength * msLogic.pathA_CounterRates[levelIdx]);
-                    Sprite counterImage = msLogic.GetCounterActionImage(martialSkill);
 
                     BattleVisualizer.Instance.EnqueueDelay(2.0f);
-                    BattleVisualizer.Instance.EnqueueAction(() => ApplyCounterAndReflectUI(counterDmg, counterImage, false));
-                    BattleVisualizer.Instance.EnqueueDelay(2.0f);
-                }
-            }
-        }
-        if (!isCounterTriggered) BattleVisualizer.Instance.EnqueueDelay(2.0f);
-
-        // ⑤ 가드 버프 차감 및 인과율(반사) 판정
-        if (skillResult.isGuardTriggered)
-        {
-            BattleVisualizer.Instance.EnqueueAction(() => { StyleRankManager.Instance?.OnSupportActionUsed(); BuffManager.Instance.ConsumeGuardEffect(true); });
-
-            if (isPlayerDefending)
-            {
-                float reflectRatio = 0f;
-                // 방어력 비례 반사 비율 (예시 로직 - PlayerManager에 구현되어 있다면 호출)
-                if (PlayerManager.Instance != null) reflectRatio = PlayerManager.Instance.GetReflectRatio();
-
-                if (reflectRatio > 0f)
-                {
-                    int reflectDamage = Mathf.Max(1, Mathf.RoundToInt(skillResult.totalMitigatedDamage * reflectRatio));
-                    Sprite reflectSprite = playerData.reflectImage != null ? playerData.reflectImage : playerData.guardImage;
-
-                    BattleVisualizer.Instance.EnqueueAction(() => ApplyCounterAndReflectUI(reflectDamage, reflectSprite, true));
+                    BattleVisualizer.Instance.EnqueueAction(() =>
+                        ApplyCounterAndReflectUI(counterDmg, counterImage, false));
                     BattleVisualizer.Instance.EnqueueDelay(2.0f);
                 }
             }
         }
 
-        // ⑥ 화면 및 상태 리셋
-        BattleVisualizer.Instance.EnqueueAction(() => ResetCombatUI(isPlayerAttacking, isPlayerDefending, isUltimate, skill));
+        if (!isCounterTriggered)
+            BattleVisualizer.Instance.EnqueueDelay(2.0f);
+    }
 
-        // ==========================================================
-        // 3. 지휘관 권한 위임 및 턴 종료 대기
-        // ==========================================================
-        BattleVisualizer.Instance.StartSequence(() =>
+    private void EnqueueGuardAndReflectIfNeeded(SkillExecutionContext context)
+    {
+        SkillResult skillResult = context.result;
+        bool isPlayerDefending = context.presentation.isPlayerDefending;
+        if (!skillResult.isGuardTriggered)
+            return;
+
+        BattleVisualizer.Instance.EnqueueAction(() =>
         {
-            if (isPlayerAttacking && currentState.isUnleashingCharge) currentState.isUnleashingCharge = false;
-
-            if (currentEnemyHp <= 0 || currentPlayerStats.currentHp <= 0) EndCombat(currentEnemyHp <= 0);
-            else ResolveTurnEnd();
+            StyleRankManager.Instance?.OnSupportActionUsed();
+            BuffManager.Instance.ConsumeGuardEffect(true);
         });
+
+        if (!isPlayerDefending)
+            return;
+
+        float reflectRatio = 0f;
+
+        if (PlayerManager.Instance != null)
+            reflectRatio = PlayerManager.Instance.GetReflectRatio();
+
+        if (reflectRatio <= 0f)
+            return;
+
+        int reflectDamage = Mathf.Max(
+            1,
+            Mathf.RoundToInt(skillResult.totalMitigatedDamage * reflectRatio));
+
+        Sprite reflectSprite = playerData.reflectImage != null
+            ? playerData.reflectImage
+            : playerData.guardImage;
+
+        BattleVisualizer.Instance.EnqueueAction(() =>
+            ApplyCounterAndReflectUI(reflectDamage, reflectSprite, true));
+
+        BattleVisualizer.Instance.EnqueueDelay(2.0f);
+    }
+
+    private void CompleteSkillSequence(bool isPlayerAttacking)
+    {
+        if (isPlayerAttacking && currentState.isUnleashingCharge)
+            currentState.isUnleashingCharge = false;
+
+        if (CheckAndHandleBattleEnd())
+            return;
+
+        ResolveTurnEnd();
+    }
+
+    private bool CheckAndHandleBattleEnd()
+    {
+        if (currentEnemyHp <= 0 || currentPlayerStats.currentHp <= 0)
+        {
+            EndCombat(currentEnemyHp <= 0);
+            return true;
+        }
+
+        return false;
     }
 
     // 스킬 시전 초기 연출 (이미지, 대사, 코스트 지불 등)
     private void ApplySkillCastUI(SkillData skill, bool isPlayerAttacking, SkillResult skillResult, string commentary, bool isPureUtility)
     {
-        if (skill.skillLogic is SkillLogic_FantasticDreamer dreamLogic)
-            CombatUIManager.Instance.ShowFantasticDreamerDice(dreamLogic.LastRolledStage, isPlayerAttacking);
+        EnsurePresentationDirector();
 
-        // 1. 내 이미지 변경 및 코스트 지불
-        CombatUIManager.Instance.SetCasterImage(isPlayerAttacking, skill.skillActionImage);
-        skill.skillLogic?.PaySkillCost(skill, currentPlayerStats, currentEnemyData, isPlayerAttacking);
-        CompanionManager.Instance.UpdateEmotion(skillResult.anyHit ?
-            (isPlayerAttacking ? CompanionManager.Emotion.Happy : CompanionManager.Emotion.Worried) :
-            (isPlayerAttacking ? CompanionManager.Emotion.Worried : CompanionManager.Emotion.Happy));
+        presentationDirector?.ShowSpecialCastPresentationIfNeeded(skill, isPlayerAttacking);
+        presentationDirector?.SetCasterImage(isPlayerAttacking, skill.skillActionImage);
+        PaySkillCostForCast(skill, isPlayerAttacking);
+        CompanionManager.Emotion emotion = ResolveCompanionEmotionAfterSkillCast(skillResult, isPlayerAttacking);
+        CompanionManager.Instance.UpdateEmotion(emotion);
 
         // 2. 방어자 이미지 변경
+        Sprite reactionSprite = ResolveDefenderReactionSprite(skillResult, isPlayerAttacking, isPureUtility);
+        SkillCastPresentationContext presentationContext = new SkillCastPresentationContext
+        {
+            skill = skill,
+            isPlayerAttacking = isPlayerAttacking,
+            skillResult = skillResult,
+            commentary = commentary,
+            isPureUtility = isPureUtility,
+            reactionSprite = reactionSprite,
+            showCritAlert = skillResult.anyCrit && !isPureUtility
+        };
+
+        ShowSkillCastResultPresentation(presentationContext);
+    }
+
+    private void PaySkillCostForCast(
+        SkillData skill,
+        bool isPlayerAttacking)
+    {
+        skill.skillLogic?.PaySkillCost(
+            skill,
+            currentPlayerStats,
+            currentEnemyData,
+            isPlayerAttacking);
+    }
+
+    private void ShowSkillCastResultPresentation(SkillCastPresentationContext context)
+    {
+        EnsurePresentationDirector();
+
+        presentationDirector?.ShowCastResultPresentation(
+            !context.isPlayerAttacking,
+            context.reactionSprite,
+            context.commentary,
+            context.showCritAlert);
+    }
+
+    private CompanionManager.Emotion ResolveCompanionEmotionAfterSkillCast(
+        SkillResult skillResult,
+        bool isPlayerAttacking)
+    {
+        return skillResult.anyHit ?
+            (isPlayerAttacking ? CompanionManager.Emotion.Happy : CompanionManager.Emotion.Worried) :
+            (isPlayerAttacking ? CompanionManager.Emotion.Worried : CompanionManager.Emotion.Happy);
+    }
+
+    // Defender reaction sprite
+    private Sprite ResolveDefenderReactionSprite(
+        SkillResult skillResult,
+        bool isPlayerAttacking,
+        bool isPureUtility)
+    {
         Sprite reactionSprite = null;
         bool isDefenderInvincible = BuffManager.Instance.GetEffects(!isPlayerAttacking).Exists(e => e.effectData.specialType == SpecialEffectType.Invincible);
 
@@ -763,30 +1072,31 @@ public class CombatManager : MonoBehaviour
             if (!isPureUtility) reactionSprite = isPlayerAttacking ? currentEnemyData?.evade : playerData?.evade;
         }
 
-        CombatUIManager.Instance.SetDefenderImage(!isPlayerAttacking, reactionSprite);
-
-        // 3. 텍스트 및 크리티컬 연출
-        CombatUIManager.Instance.InterruptAndTypeCommentary(commentary);
-        if (skillResult.anyCrit && !isPureUtility)
-            CombatUIManager.Instance.StartCoroutine(CombatUIManager.Instance.ShowCritAlert());
+        return reactionSprite;
     }
 
-    // 단일 타격 실패(회피) 연출
-    // ==========================================================
+    // Miss presentation
     private void ProcessMissAction(bool isPlayerAttacking, bool isPlayerDefending, bool isPureUtility, SkillResult skillResult)
     {
         if (isPureUtility) return;
 
         BattleEventSystem.CallEvaded(isPlayerDefending);
 
-        // [핵심 수정 2] 1타라도 스친 다단히트 공격이라면 회피 모션을 띄우지 않고 묵묵히 피격(Hit) 상태를 유지합니다!
-        if (!skillResult.anyHit)
-        {
-            Sprite evadeSprite = isPlayerDefending ? playerData?.evade : currentEnemyData?.evade;
-            CombatUIManager.Instance.SetDefenderImage(!isPlayerAttacking, evadeSprite);
-        }
+        ShowEvadePresentationIfNeeded(isPlayerAttacking, isPlayerDefending, skillResult);
 
         // (StyleRank 및 새벽별 로직은 PerformSkillRoutine으로 이관되어 삭제됨)
+    }
+
+    private void ShowEvadePresentationIfNeeded(
+        bool isPlayerAttacking,
+        bool isPlayerDefending,
+        SkillResult skillResult)
+    {
+        if (skillResult.anyHit)
+            return;
+
+        Sprite evadeSprite = isPlayerDefending ? playerData?.evade : currentEnemyData?.evade;
+        CombatUIManager.Instance.SetDefenderImage(!isPlayerAttacking, evadeSprite);
     }
 
     // 단일 타격 성공(명중) 연출
@@ -795,120 +1105,160 @@ public class CombatManager : MonoBehaviour
     {
         if (isPureUtility) return;
 
+        RewardCriticalHitIfNeeded(hit, isPlayerAttacking);
+
+        if (isPlayerAttacking)
+            ProcessPlayerSuccessfulHit(hit, skill);
+        else
+            ProcessEnemySuccessfulHit(hit, skill);
+
+        ApplyBreakDamageAfterHit(hit, isPlayerAttacking);
+
+        if (!isPureUtility) BattleEventSystem.CallDamageTaken(isPlayerDefending, hit.damage, hit.isCrit);
+    }
+
+    private void ProcessPlayerSuccessfulHit(HitResult hit, SkillData skill)
+    {
+        ApplyDamageToEntity(false, hit.damage);
+        AccumulatePlayerHitDamageIfBombInactive(hit);
+        ApplyPlayerLifestealAfterHit(hit, skill);
+    }
+
+    private void ProcessEnemySuccessfulHit(HitResult hit, SkillData skill)
+    {
+        // 1. 일반 타격 데미지 적용 (단 한 번만!)
+        ApplyDamageToEntity(true, hit.damage);
+
+        // 2. 적군 흡혈 로직
+        ApplyEnemyLifestealAfterHit(hit, skill);
+
+        // 3. [핵심] 특수 효과 처리 (스택 폭발 등)
+        // 이제 하드코딩 없이 어떤 보스 스킬이든 TryProcessHitEffect가 구현되어 있으면 호출됩니다.
+        ProcessEnemySpecialHitEffect(skill);
+
+        // 4. 기 모으기 파괴 로직
+        CancelPlayerChargeIfInterrupted(hit);
+    }
+
+    private void RewardCriticalHitIfNeeded(HitResult hit, bool isPlayerAttacking)
+    {
         if (hit.isCrit && isPlayerAttacking && !currentState.hasRewardedCritThisSkill)
         {
             StyleRankManager.Instance.OnCriticalHit();
             currentState.hasRewardedCritThisSkill = true;
         }
+    }
 
-        if (isPlayerAttacking)
+    private void AccumulatePlayerHitDamageIfBombInactive(HitResult hit)
+    {
+        if (!currentState.isBombActive) currentState.accumulatedDamage += hit.damage;
+    }
+
+    private void CancelPlayerChargeIfInterrupted(HitResult hit)
+    {
+        if (currentState.isPlayerCharging && hit.damage > 0)
         {
-            ApplyDamageToEntity(false, hit.damage);
-            if (!currentState.isBombActive) currentState.accumulatedDamage += hit.damage;
-
-            // [신규] 데몬 시너지 / 흡혈 아이템 '글로벌 흡혈' 로직 적용
-            float currentLifeSteal = currentPlayerStats.lifeSteal;
-
-            if (skill != null && skill.skillLogic != null)
-            {
-                currentLifeSteal += skill.skillLogic.GetSkillBonusLifesteal(skill);
-            }
-
-            // [데몬 희귀 아이템 - 귀면의 파편] 잃은 체력 비례 흡혈률 상승!
-            if (currentActiveEntity != null && currentActiveEntity.type == EntityType.Player && PlayerManager.Instance != null)
-            {
-                var demonRares = PlayerManager.Instance.inventory.FindAll(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Rare);
-                float missingRatio = (float)(currentPlayerStats.maxHp - currentPlayerStats.currentHp) / currentPlayerStats.maxHp;
-
-                foreach (var dRare in demonRares)
-                {
-                    float maxBonus = dRare.starLevel == 1 ? 0.02f : (dRare.starLevel == 2 ? 0.10f : 0.30f);
-                    currentLifeSteal += (missingRatio * maxBonus);
-                }
-            }
-
-            if (hit.damage > 0 && currentLifeSteal > 0f && currentActiveEntity != null && currentActiveEntity.type == EntityType.Player)
-            {
-                float baseHeal = hit.damage * currentLifeSteal;
-
-                // [신규] 마성 강화(4점) 및 오니의 검은 피(에픽) - 회복량 증폭 적용!
-                int healAmount = Mathf.RoundToInt(baseHeal * (1f + currentPlayerStats.healingReceivedAmp));
-
-                if (healAmount > 0)
-                {
-                    int excessHeal = (currentPlayerStats.currentHp + healAmount) - currentPlayerStats.maxHp;
-                    currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + healAmount, 0, currentPlayerStats.maxHp);
-
-                    CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-                    CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
-
-                    // [신규] 데몬 6점 및 전설 - 초과 회복 버프 발동
-                    if (excessHeal > 0) ApplyOverhealBuff(excessHeal);
-                }
-            }
+            currentState.isPlayerCharging = false;
+            currentState.chargingSkill = null;
+            CombatUIManager.Instance.SpawnDamageText("Broken!", false, true);
+            DevLog.Log("[원기옥] 피격당하여 기 모으기가 취소되었습니다!");
         }
-        else // 적(Enemy)이 공격했을 때의 처리
+    }
+
+    private void ApplyPlayerLifestealAfterHit(HitResult hit, SkillData skill)
+    {
+        // [신규] 데몬 시너지 / 흡혈 아이템 '글로벌 흡혈' 로직 적용
+        float currentLifeSteal = currentPlayerStats.lifeSteal;
+
+        if (skill != null && skill.skillLogic != null)
         {
-            // 1. 일반 타격 데미지 적용 (단 한 번만!)
-            ApplyDamageToEntity(true, hit.damage);
+            currentLifeSteal += skill.skillLogic.GetSkillBonusLifesteal(skill);
+        }
 
-            // 2. 적군 흡혈 로직
-            float enemyLifeSteal = currentEnemyData.lifeSteal;
-            if (skill != null && skill.skillLogic != null)
-                enemyLifeSteal += skill.skillLogic.GetSkillBonusLifesteal(skill);
+        // [데몬 희귀 아이템 - 귀면의 파편] 잃은 체력 비례 흡혈률 상승!
+        if (currentActiveEntity != null && currentActiveEntity.type == EntityType.Player && PlayerManager.Instance != null)
+        {
+            var demonRares = PlayerManager.Instance.inventory.FindAll(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Rare);
+            float missingRatio = (float)(currentPlayerStats.maxHp - currentPlayerStats.currentHp) / currentPlayerStats.maxHp;
 
-            if (hit.damage > 0 && enemyLifeSteal > 0f)
+            foreach (var dRare in demonRares)
             {
-                float baseHeal = hit.damage * enemyLifeSteal;
-                int healAmount = Mathf.RoundToInt(baseHeal * (1f + currentEnemyData.healingReceivedAmp));
-
-                if (healAmount > 0)
-                {
-                    currentEnemyHp = Mathf.Clamp(currentEnemyHp + healAmount, 0, currentEnemyData.maxHp);
-                    currentEnemyData.currentHp = currentEnemyHp;
-
-                    if (CombatUIManager.Instance != null)
-                    {
-                        CombatUIManager.Instance.enemyStatusUI.UpdateHP(currentEnemyHp, currentEnemyData.maxHp);
-                        CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, false);
-                    }
-                    DevLog.Log($"[적 흡혈] {healAmount} 회복!");
-                }
-            }
-
-            // 3. [핵심] 특수 효과 처리 (스택 폭발 등)
-            // 이제 하드코딩 없이 어떤 보스 스킬이든 TryProcessHitEffect가 구현되어 있으면 호출됩니다.
-            int explosionDamage = skill.skillLogic.TryProcessHitEffect(currentEnemyData);
-
-            if (explosionDamage > 0)
-            {
-                // 특수 피해 적용 (이미 일반 데미지는 위에서 들어갔으므로 이것만 추가로 들어감)
-                CombatManager.Instance.ApplyDamageToEntity(true, explosionDamage);
-
-                // 연출: 피격 이미지 + 보라색 데미지 텍스트
-                CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
-                CombatUIManager.Instance.SpawnDamageText($"★{explosionDamage}", false, true);
-
-                DevLog.Log($"[스킬 특수 효과] 특수 피해 {explosionDamage} 발생!");
-            }
-
-            // 4. 기 모으기 파괴 로직
-            if (currentState.isPlayerCharging && hit.damage > 0)
-            {
-                currentState.isPlayerCharging = false;
-                currentState.chargingSkill = null;
-                CombatUIManager.Instance.SpawnDamageText("Broken!", false, true);
-                DevLog.Log("[원기옥] 피격당하여 기 모으기가 취소되었습니다!");
+                float maxBonus = dRare.starLevel == 1 ? 0.02f : (dRare.starLevel == 2 ? 0.10f : 0.30f);
+                currentLifeSteal += (missingRatio * maxBonus);
             }
         }
 
+        if (hit.damage > 0 && currentLifeSteal > 0f && currentActiveEntity != null && currentActiveEntity.type == EntityType.Player)
+        {
+            float baseHeal = hit.damage * currentLifeSteal;
+
+            // [신규] 마성 강화(4점) 및 오니의 검은 피(에픽) - 회복량 증폭 적용!
+            int healAmount = Mathf.RoundToInt(baseHeal * (1f + currentPlayerStats.healingReceivedAmp));
+
+            if (healAmount > 0)
+            {
+                int excessHeal = (currentPlayerStats.currentHp + healAmount) - currentPlayerStats.maxHp;
+                currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + healAmount, 0, currentPlayerStats.maxHp);
+
+                CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
+                CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
+
+                // [신규] 데몬 6점 및 전설 - 초과 회복 버프 발동
+                if (excessHeal > 0) ApplyOverhealBuff(excessHeal);
+            }
+        }
+    }
+
+    private void ApplyEnemyLifestealAfterHit(HitResult hit, SkillData skill)
+    {
+        float enemyLifeSteal = currentEnemyData.lifeSteal;
+        if (skill != null && skill.skillLogic != null)
+            enemyLifeSteal += skill.skillLogic.GetSkillBonusLifesteal(skill);
+
+        if (hit.damage > 0 && enemyLifeSteal > 0f)
+        {
+            float baseHeal = hit.damage * enemyLifeSteal;
+            int healAmount = Mathf.RoundToInt(baseHeal * (1f + currentEnemyData.healingReceivedAmp));
+
+            if (healAmount > 0)
+            {
+                currentEnemyHp = Mathf.Clamp(currentEnemyHp + healAmount, 0, currentEnemyData.maxHp);
+                currentEnemyData.currentHp = currentEnemyHp;
+
+                if (CombatUIManager.Instance != null)
+                {
+                    CombatUIManager.Instance.enemyStatusUI.UpdateHP(currentEnemyHp, currentEnemyData.maxHp);
+                    CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, false);
+                }
+                DevLog.Log($"[적 흡혈] {healAmount} 회복!");
+            }
+        }
+    }
+
+    private void ProcessEnemySpecialHitEffect(SkillData skill)
+    {
+        int explosionDamage = skill.skillLogic.TryProcessHitEffect(currentEnemyData);
+
+        if (explosionDamage > 0)
+        {
+            // 특수 피해 적용 (이미 일반 데미지는 위에서 들어갔으므로 이것만 추가로 들어감)
+            CombatManager.Instance.ApplyDamageToEntity(true, explosionDamage);
+
+            // 연출: 피격 이미지 + 보라색 데미지 텍스트
+            CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
+            CombatUIManager.Instance.SpawnDamageText($"★{explosionDamage}", false, true);
+
+            DevLog.Log($"[스킬 특수 효과] 특수 피해 {explosionDamage} 발생!");
+        }
+    }
+
+    private void ApplyBreakDamageAfterHit(HitResult hit, bool isPlayerAttacking)
+    {
         if (isPlayerAttacking && !BreakManager.Instance.IsBroken(false))
             if (BreakManager.Instance.AddBreakDamage(false, hit.breakDamage)) UpdateTurnOrderUI();
 
         if (!isPlayerAttacking && !BreakManager.Instance.IsBroken(true))
             if (BreakManager.Instance.AddBreakDamage(true, hit.breakDamage)) UpdateTurnOrderUI();
-
-        if (!isPureUtility) BattleEventSystem.CallDamageTaken(isPlayerDefending, hit.damage, hit.isCrit);
     }
 
     // 새벽별 카운터 및 인과율 반사 연출
@@ -935,20 +1285,19 @@ public class CombatManager : MonoBehaviour
     // ==========================================================
     private void ResetCombatUI(bool isPlayerAttacking, bool isPlayerDefending, bool isUltimate, SkillData skill)
     {
-        CombatUIManager.Instance.ClearCombatEffects();
+        EnsurePresentationDirector();
+        presentationDirector?.ClearCombatEffects();
 
-        if (isPlayerAttacking)
-        {
-            StyleRankManager.Instance.OnSkillUsed(selectedCategory);
-            StyleRankManager.Instance.ResetTurnState();
-            if (isUltimate) StyleRankManager.Instance.ResetRankForUltimate();
-        }
+        UpdateStyleRankAfterSkillReset(isPlayerAttacking, isUltimate, skill);
 
-        if (!(isPlayerAttacking && currentState.isPlayerCharging))
-        {
-            CombatUIManager.Instance.ResetCasterImage(isPlayerAttacking);
-        }
+        ResetCasterImageAfterSkillIfNeeded(isPlayerAttacking);
 
+        RestoreDefenderImageAfterSkill(isPlayerAttacking, isPlayerDefending);
+
+    }
+
+    private void RestoreDefenderImageAfterSkill(bool isPlayerAttacking, bool isPlayerDefending)
+    {
         bool isDefenderBroken = (!isPlayerAttacking && BreakManager.Instance.IsBroken(true)) || (isPlayerAttacking && BreakManager.Instance.IsBroken(false));
 
         if (!isDefenderBroken)
@@ -966,6 +1315,32 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    private void UpdateStyleRankAfterSkillReset(bool isPlayerAttacking, bool isUltimate, SkillData skill)
+    {
+        if (!isPlayerAttacking)
+            return;
+
+        EnsureActionMenuController();
+
+        SkillCategory usedCategory = skill != null
+            ? skill.category
+            : (actionMenuController != null ? actionMenuController.SelectedCategory : SkillCategory.Sword);
+
+        StyleRankManager.Instance.OnSkillUsed(usedCategory);
+        StyleRankManager.Instance.ResetTurnState();
+
+        if (isUltimate)
+            StyleRankManager.Instance.ResetRankForUltimate();
+    }
+
+    private void ResetCasterImageAfterSkillIfNeeded(bool isPlayerAttacking)
+    {
+        if (isPlayerAttacking && currentState.isPlayerCharging)
+            return;
+
+        CombatUIManager.Instance.ResetCasterImage(isPlayerAttacking);
+    }
+
     public bool ApplyDamageToEnemy(int damage)
     {
         return ApplyDamageToEntity(false, damage);
@@ -973,68 +1348,58 @@ public class CombatManager : MonoBehaviour
 
     public bool ApplyDamageToEntity(bool isPlayerTarget, int damage)
     {
-        bool isDead = false; // 죽었는지 판정할 결과를 잠시 담아둘 변수
+        return DamageResolver.ApplyDamageToEntity(
+            isPlayerTarget,
+            damage,
+            currentPlayerStats,
+            currentEnemyData,
+            currentState,
+            ref currentEnemyHp
+        );
+    }
 
-        if (isPlayerTarget)
+    public void HealEntity(bool isPlayerTarget, int amount)
+    {
+        DamageResolver.HealEntity(
+            isPlayerTarget,
+            amount,
+            currentPlayerStats,
+            currentEnemyData,
+            ref currentEnemyHp
+        );
+    }
+
+    // 데몬 6점 및 전설 - 초과 회복(Over-heal) 비례 버프 발생기
+    public void ApplyOverhealBuff(int excessHeal)
+    {
+        if (PlayerManager.Instance == null) return;
+        var syn = PlayerManager.Instance.GetCurrentSynergies();
+        var inventory = PlayerManager.Instance.inventory;
+
+        bool has6Point = syn.GetValueOrDefault(ItemClass.Demon) >= 6;
+        bool hasLegendary = inventory.Exists(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Legendary);
+
+        if (!has6Point && !hasLegendary) return;
+
+        // 배율 산출: 기획안에 따라 최대 체력 비례 %당 1% (6점) + 0.5% (전설)
+        float multiplier = 0f;
+        if (has6Point) multiplier += 1.0f;
+        if (hasLegendary) multiplier += 0.5f;
+
+        // 공식: (초과 회복량 / 최대 체력) * 배율
+        // 예: 1000 체력 중 200 초과 회복 시 -> 0.2 * 1.5 = 0.3f (30% 증폭)
+        float ampValue = ((float)excessHeal / currentPlayerStats.maxHp) * multiplier;
+
+        if (ampValue > 0f)
         {
-            int hpAfterDamage = currentPlayerStats.currentHp - damage;
+            StatusEffectData newBuff = ScriptableObject.CreateInstance<StatusEffectData>();
+            newBuff.category = EffectCategory.Buff;
+            newBuff.specialType = SpecialEffectType.DamageGivenAmp;
+            newBuff.effectName = "피의 폭주";
 
-            // 버서커 6시너지 & 전설 아이템 (사신 거부 / 부활)
-            if (hpAfterDamage <= 0 && PlayerManager.Instance != null && !currentState.hasResurrected)
-            {
-                var syn = PlayerManager.Instance.GetCurrentSynergies();
-                var inventory = PlayerManager.Instance.inventory;
-
-                bool has6Point = syn.GetValueOrDefault(ItemClass.Berserker) >= 6;
-                bool hasLegendary = inventory.Exists(x => x.data.itemClass == ItemClass.Berserker && x.data.grade == ItemGrade.Legendary);
-
-                if (has6Point || hasLegendary)
-                {
-                    currentState.hasResurrected = true;
-
-                    if (has6Point && hasLegendary)
-                    {
-                        currentPlayerStats.currentHp = currentPlayerStats.maxHp;
-                        CombatUIManager.Instance.SpawnDamageText("<color=#00FF00>Resurrect!</color>", false, true);
-                        DevLog.Log("[불굴의 투지+전설] 치명상을 입었으나, 최대 체력으로 부활합니다!");
-                    }
-                    else
-                    {
-                        currentPlayerStats.currentHp = 1;
-                        CombatUIManager.Instance.SpawnDamageText("<color=#FF0000>Endure!</color>", false, true);
-                        DevLog.Log("[사신 거부] 치명상을 입었으나, 체력 1로 버텨냅니다!");
-                    }
-
-                    BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-
-                    // 부활 직후에도 특수 스탯 UI 갱신!
-                    RefreshSpecialStatsProgressUI();
-                    return false; // 안 죽었으므로 여기서 함수 종료
-                }
-            }
-
-            // 부활 기믹이 안 터졌다면 정상적으로 데미지 적용
-            currentPlayerStats.currentHp = Mathf.Max(0, hpAfterDamage);
-            BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-
-            isDead = currentPlayerStats.currentHp <= 0; // 결과 저장
+            BuffManager.Instance.AddEffect(true, newBuff, ampValue, 1);
+            DevLog.Log($"[피의 폭주] 초과 회복 {excessHeal} 달성 -> 피해 증폭 {ampValue * 100:F1}% 버프 1턴 획득!");
         }
-        else
-        {
-            // 적군 데미지 처리 (기존 동일)
-            currentEnemyHp = Mathf.Max(0, currentEnemyHp - damage);
-            currentEnemyData.currentHp = currentEnemyHp;
-            currentEnemyData.aiBrain?.UpdatePassives(currentEnemyData);
-
-            BattleEventSystem.CallHpChanged(false, currentEnemyHp, currentEnemyData.maxHp);
-
-            isDead = currentEnemyHp <= 0; // 결과 저장
-        }
-
-        // [핵심] 리턴으로 빠져나가기 직전에 안전하게 UI를 갱신합니다!
-        RefreshSpecialStatsProgressUI();
-
-        return isDead; // 최종 결과 반환
     }
 
     public void EndCombat(bool isWin)
@@ -1140,116 +1505,11 @@ public class CombatManager : MonoBehaviour
             //  캐스터 시너지: 매 턴 종료 시 무작위 독립 버프 부여
             if (currentActiveEntity.isPlayer && PlayerManager.Instance != null)
             {
-                var syn = PlayerManager.Instance.GetCurrentSynergies();
-                var inventory = PlayerManager.Instance.inventory;
-
-                // [캐스터 4점] 매 턴 스탯 5% 버프 1개
-                if (syn.GetValueOrDefault(ItemClass.Caster) >= 4) ApplyRandomCasterStatBuff(0.05f);
-
-                // [캐스터 희귀] 수치를 모두 더한 뒤 1개의 버프만 생성
-                var casterRares = inventory.FindAll(x => x.data.itemClass == ItemClass.Caster && x.data.grade == ItemGrade.Rare);
-                float casterRareVal = 0f;
-                foreach (var casterRare in casterRares)
-                    casterRareVal += casterRare.starLevel == 1 ? 0.02f : (casterRare.starLevel == 2 ? 0.08f : 0.30f);
-
-                if (casterRareVal > 0f) ApplyRandomCasterStatBuff(casterRareVal);
-
-                // [캐스터 에픽] 수치를 모두 더한 뒤 1개의 버프만 생성
-                var casterEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Caster && x.data.grade == ItemGrade.Epic);
-                float casterEpicVal = 0f;
-                foreach (var casterEpic in casterEpics)
-                    casterEpicVal += casterEpic.starLevel == 1 ? 0.02f : (casterEpic.starLevel == 2 ? 0.08f : 0.30f);
-
-                if (casterEpicVal > 0f) ApplyRandomCasterEpicBuff(casterEpicVal);
+                TurnEffects.ApplyCasterTurnEndEffects(PlayerManager.Instance);
             }
         }
 
         CalculateNextTurn();
-    }
-
-    private void ApplyRandomCasterStatBuff(float value)
-    {
-        int rand = Random.Range(0, 4);
-        TargetStat target = TargetStat.Strength;
-        string statName = "힘";
-
-        if (rand == 1) { target = TargetStat.Defense; statName = "방어력"; }
-        else if (rand == 2) { target = TargetStat.Speed; statName = "속도"; }
-        else if (rand == 3) { target = TargetStat.Luck; statName = "운"; }
-
-        // CreateInstance를 사용해 메모리에 완전히 고유한 버프 인스턴스를 찍어냅니다. (서로 덮어쓰지 않음!)
-        StatusEffectData newBuff = ScriptableObject.CreateInstance<StatusEffectData>();
-        newBuff.category = EffectCategory.Buff;
-        newBuff.targetStat = target;
-        newBuff.modifierType = ModifierType.Percentage;
-        newBuff.effectName = $"마력 순환({statName})";
-
-        BuffManager.Instance.AddEffect(true, newBuff, value, 1); // 1턴 유지
-        DevLog.Log($"[캐스터 스탯 버프] 셰리에게 {statName} {value * 100}% 증가 버프가 독립 부여되었습니다.");
-    }
-
-    private void ApplyRandomCasterEpicBuff(float value)
-    {
-        int rand = Random.Range(0, 5);
-        SpecialEffectType specialType = SpecialEffectType.DamageGivenAmp;
-        string buffName = "피해 증폭";
-        float applyValue = value;
-
-        if (rand == 0) { specialType = SpecialEffectType.CritRateUp; buffName = "크리티컬 확률"; applyValue = value * 100f; } // 확률은 합산 연산이라 100을 곱함
-        else if (rand == 1) { specialType = SpecialEffectType.CritDamageUp; buffName = "크리티컬 피해량"; }
-        else if (rand == 2) { specialType = SpecialEffectType.EvasionUp; buffName = "회피율"; applyValue = value * 100f; }
-        else if (rand == 3) { specialType = SpecialEffectType.AccuracyUp; buffName = "명중률"; applyValue = value * 100f; }
-        else if (rand == 4) { specialType = SpecialEffectType.DamageGivenAmp; buffName = "주는 피해 증폭"; }
-
-        StatusEffectData newBuff = ScriptableObject.CreateInstance<StatusEffectData>();
-        newBuff.category = EffectCategory.Buff;
-        newBuff.specialType = specialType;
-        newBuff.effectName = $"마력 공명({buffName})";
-
-        BuffManager.Instance.AddEffect(true, newBuff, applyValue, 1);
-        DevLog.Log($"[캐스터 에픽 버프] 셰리에게 {buffName} +{applyValue} 버프가 독립 부여되었습니다.");
-    }
-
-    private void ApplyRandomTricksterStatDebuff(float value)
-    {
-        int rand = Random.Range(0, 4);
-        TargetStat target = TargetStat.Strength;
-        string statName = "힘";
-
-        if (rand == 1) { target = TargetStat.Defense; statName = "방어력"; }
-        else if (rand == 2) { target = TargetStat.Speed; statName = "속도"; }
-        else if (rand == 3) { target = TargetStat.Luck; statName = "운"; }
-
-        StatusEffectData newDebuff = ScriptableObject.CreateInstance<StatusEffectData>();
-        newDebuff.category = EffectCategory.Debuff;
-        newDebuff.targetStat = target;
-        newDebuff.modifierType = ModifierType.Percentage;
-        newDebuff.effectName = $"악의적 간섭({statName})";
-
-        BuffManager.Instance.AddEffect(false, newDebuff, -value, 1); // 감소이므로 -value를 전달
-        DevLog.Log($"[트릭스터] 적에게 {statName} {value * 100}% 감소 디버프 부여!");
-    }
-
-    private void ApplyRandomTricksterEpicDebuff(float statVal, float bleedVal, float burnVal)
-    {
-        int rand = Random.Range(0, 5);
-        SpecialEffectType specialType = SpecialEffectType.EvasionUp;
-        string debuffName = "회피율 감소";
-        float applyValue = -statVal * 100f; // 명중/회피는 상수로 -20 등의 수치 사용
-
-        if (rand == 0) { specialType = SpecialEffectType.EvasionUp; debuffName = "회피율 감소"; applyValue = -statVal * 100f; }
-        else if (rand == 1) { specialType = SpecialEffectType.DamageAmp; debuffName = "받는 피해 증가"; applyValue = statVal; } // Amp는 양수일 때 데미지 증가
-        else if (rand == 2) { specialType = SpecialEffectType.AccuracyUp; debuffName = "명중률 감소"; applyValue = -statVal * 100f; }
-        else if (rand == 3) { specialType = SpecialEffectType.Bleed; debuffName = "심연의 출혈"; applyValue = bleedVal; } // 출혈은 양수 배율
-        else if (rand == 4) { specialType = SpecialEffectType.Burn; debuffName = "지옥의 화상"; applyValue = burnVal; } // 화상도 양수 배율
-
-        StatusEffectData newDebuff = ScriptableObject.CreateInstance<StatusEffectData>();
-        newDebuff.category = EffectCategory.Debuff;
-        newDebuff.specialType = specialType;
-        newDebuff.effectName = $"기괴한 가면({debuffName})";
-
-        BuffManager.Instance.AddEffect(false, newDebuff, applyValue, 1);
-        DevLog.Log($"[트릭스터 에픽] 적에게 {debuffName} (수치:{applyValue}) 부여!");
     }
 
     private IEnumerator HandleSpecialExpirations()
@@ -1300,40 +1560,6 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    // [신규] 데몬 6점 및 전설 - 초과 회복(Over-heal) 비례 버프 발생기
-    // =======================================================
-    public void ApplyOverhealBuff(int excessHeal)
-    {
-        if (PlayerManager.Instance == null) return;
-        var syn = PlayerManager.Instance.GetCurrentSynergies();
-        var inventory = PlayerManager.Instance.inventory;
-
-        bool has6Point = syn.GetValueOrDefault(ItemClass.Demon) >= 6;
-        bool hasLegendary = inventory.Exists(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Legendary);
-
-        if (!has6Point && !hasLegendary) return;
-
-        // 배율 산출: 기획안에 따라 최대 체력 비례 %당 1% (6점) + 0.5% (전설)
-        float multiplier = 0f;
-        if (has6Point) multiplier += 1.0f;
-        if (hasLegendary) multiplier += 0.5f;
-
-        // 공식: (초과 회복량 / 최대 체력) * 배율
-        // 예: 1000 체력 중 200 초과 회복 시 -> 0.2 * 1.5 = 0.3f (30% 증폭)
-        float ampValue = ((float)excessHeal / currentPlayerStats.maxHp) * multiplier;
-
-        if (ampValue > 0f)
-        {
-            StatusEffectData newBuff = ScriptableObject.CreateInstance<StatusEffectData>();
-            newBuff.category = EffectCategory.Buff;
-            newBuff.specialType = SpecialEffectType.DamageGivenAmp;
-            newBuff.effectName = "피의 폭주";
-
-            BuffManager.Instance.AddEffect(true, newBuff, ampValue, 1);
-            DevLog.Log($"[피의 폭주] 초과 회복 {excessHeal} 달성 -> 피해 증폭 {ampValue * 100:F1}% 버프 1턴 획득!");
-        }
-    }
-
     public bool IsCurrentTurnOwner(bool isPlayerTarget)
     {
         if (currentActiveEntity == null) return false;
@@ -1347,31 +1573,6 @@ public class CombatManager : MonoBehaviour
         if (string.IsNullOrEmpty(key)) return "";
         if (LocalizationManager.Instance != null) return LocalizationManager.Instance.GetText(key);
         return key;
-    }
-
-    public void HealEntity(bool isPlayerTarget, int amount)
-    {
-        if (isPlayerTarget)
-        {
-            currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + amount, 0, currentPlayerStats.maxHp);
-            BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-            if (CombatUIManager.Instance != null)
-                CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
-        }
-        else
-        {
-            currentEnemyHp = Mathf.Clamp(currentEnemyHp + amount, 0, currentEnemyData.maxHp);
-            currentEnemyData.currentHp = currentEnemyHp;
-
-            // 회복된 체력에 맞춰서 패시브(피해 증폭률)도 실시간 리셋 연산
-            currentEnemyData.aiBrain?.UpdatePassives(currentEnemyData);
-
-            BattleEventSystem.CallHpChanged(false, currentEnemyHp, currentEnemyData.maxHp);
-            if (CombatUIManager.Instance != null)
-                CombatUIManager.Instance.enemyStatusUI.UpdateHP(currentEnemyHp, currentEnemyData.maxHp);
-        }
-
-        RefreshSpecialStatsProgressUI();
     }
 
     public void RestoreDefenderImage(bool isPlayerTarget)
@@ -1393,14 +1594,5 @@ public class CombatManager : MonoBehaviour
             CombatUIManager.Instance.ResetDefenderImage(isPlayerTarget);
             DevLog.Log($"[이미지 복구] 일반 상태로 이미지를 복구합니다.");
         }
-    }
-
-    public void ToggleAnalysis()
-    {
-        // 플레이어 턴(스킬 선택 중)일 때만 오픈
-        if (!IsPlayerSelectingPhase) return;
-
-        if (analysisUI.gameObject.activeSelf) analysisUI.Close();
-        else analysisUI.Open(currentEnemyData);
     }
 }

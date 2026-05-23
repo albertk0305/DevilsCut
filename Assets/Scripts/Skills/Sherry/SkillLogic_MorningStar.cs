@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_MorningStar", menuName = "SkillLogic/Player/MorningStar")]
-public class SkillLogic_MorningStar : SkillLogicBase
+public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySkillLogic, IPerfectEvadeCounterSkillLogic
 {
     [Header("회피 증가 버프 데이터")]
     public StatusEffectData evasionBuffData;
@@ -23,6 +23,52 @@ public class SkillLogic_MorningStar : SkillLogicBase
     [Header("진화 C (Final Form) - 종식")]
     [Tooltip("최종 회피율 1%당 상승할 데미지 배율")]
     public float pathC_ConversionRate = 0.03f;
+
+    public bool TryGetPerfectEvadeApRecovery(
+        SkillData skill,
+        System.Collections.Generic.List<BuffManager.ActiveEffect> activePlayerEffects,
+        bool hasAlreadyRecoveredThisSkill,
+        out float apRecovery)
+    {
+        apRecovery = 0f;
+
+        if (skill == null) return false;
+        if (skill.currentEvolution != SkillEvolution.PathB) return false;
+        if (hasAlreadyRecoveredThisSkill) return false;
+        if (activePlayerEffects == null) return false;
+        if (!activePlayerEffects.Exists(e => e.effectData == evasionBuffData)) return false;
+
+        apRecovery = pathB_ApRecovery;
+        return true;
+    }
+
+    public bool TryGetPerfectEvadeCounter(
+        SkillData skill,
+        PlayerStats playerStats,
+        System.Collections.Generic.List<BuffManager.ActiveEffect> activePlayerEffects,
+        out int counterDamage,
+        out Sprite counterImage)
+    {
+        counterDamage = 0;
+        counterImage = null;
+
+        if (skill == null) return false;
+        if (playerStats == null) return false;
+        if (skill.currentEvolution != SkillEvolution.PathA) return false;
+        if (activePlayerEffects == null) return false;
+        if (!activePlayerEffects.Exists(e => e.effectData == evasionBuffData)) return false;
+
+        int levelIdx = Mathf.Clamp(
+            skill.skillLevel - 1,
+            0,
+            pathA_CounterRates.Length - 1);
+
+        counterDamage = Mathf.RoundToInt(
+            playerStats.strength * pathA_CounterRates[levelIdx]);
+        counterImage = GetCounterActionImage(skill);
+
+        return true;
+    }
 
     // [진화 C] 회피율을 데미지 배율로 치환
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)

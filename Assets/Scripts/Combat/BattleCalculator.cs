@@ -104,12 +104,16 @@ public static class BattleCalculator
                 float currentBreakPower = skill.GetCurrentBreakPower();
 
                 // Path C (제물의 낙인) 특수 공식 적용
-                if (skill.currentEvolution == SkillEvolution.PathC && skill.skillLogic is SkillLogic_Courage)
+                if (skill.skillLogic != null &&
+                    skill.skillLogic.TryOverrideBaseHitCalculation(
+                        skill,
+                        attackerStrength,
+                        attackerDefense,
+                        out float overrideDamage,
+                        out float overrideBreakPower))
                 {
-                    int combinedStat = attackerStrength + attackerDefense;
-                    int cIndex = Mathf.Clamp(skill.skillLevel - 1, 0, skill.evolutionC_DamageMultipliers.Length - 1);
-                    calculatedDamage = combinedStat * skill.evolutionC_DamageMultipliers[cIndex];
-                    currentBreakPower = skill.evolutionC_BreakPowers[cIndex];
+                    calculatedDamage = overrideDamage;
+                    currentBreakPower = overrideBreakPower;
                 }
 
                 // 2. 외부 보정 (스킬 고유 로직, 스타일 랭크, 그로기 증폭)

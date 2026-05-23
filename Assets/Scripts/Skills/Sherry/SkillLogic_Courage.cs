@@ -10,6 +10,30 @@ public class SkillLogic_Courage : SkillLogicBase
     [Header("레벨별 피해 감소율")]
     public float[] damageReductionRates = { 0.3f, 0.4f, 0.5f };
 
+    public override bool TryOverrideBaseHitCalculation(
+        SkillData skill,
+        int attackerStrength,
+        int attackerDefense,
+        out float calculatedDamage,
+        out float breakPower)
+    {
+        calculatedDamage = 0f;
+        breakPower = 0f;
+
+        if (skill == null) return false;
+        if (skill.currentEvolution != SkillEvolution.PathC) return false;
+
+        int combinedStat = attackerStrength + attackerDefense;
+        int index = Mathf.Clamp(
+            skill.skillLevel - 1,
+            0,
+            skill.evolutionC_DamageMultipliers.Length - 1);
+
+        calculatedDamage = combinedStat * skill.evolutionC_DamageMultipliers[index];
+        breakPower = skill.evolutionC_BreakPowers[index];
+        return true;
+    }
+
     //  매개변수로 넘어온 skill을 그대로 씁니다!
     public override void ApplyEffect(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {

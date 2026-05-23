@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Gi", menuName = "SkillLogic/Player/Gi")]
-public class SkillLogic_Gi : SkillLogicBase
+public class SkillLogic_Gi : SkillLogicBase, IChargeSkillLogic
 {
     [Header("기본/진화 공용: 그로기 증폭률")]
     public float[] bonusDamageRatesOnBreak = { 0.30f, 0.45f, 0.60f };
@@ -15,6 +15,18 @@ public class SkillLogic_Gi : SkillLogicBase
 
     [Header("진화 C (Spirit Bomb) - 1턴 차지")]
     public float[] pathC_ChargeDamageMult = { 2.5f, 3.0f, 3.5f };
+
+    public bool ShouldBeginCharge(
+        SkillData skill,
+        bool isPlayerAttacking,
+        bool isAlreadyCharging,
+        bool isUnleashingCharge)
+    {
+        return isPlayerAttacking &&
+            skill != null &&
+            skill.currentEvolution == SkillEvolution.PathC &&
+            !isUnleashingCharge;
+    }
 
     // 1. [진화 B] 스킬 코스트 지불 (체력 소모)
     public override void PaySkillCost(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
