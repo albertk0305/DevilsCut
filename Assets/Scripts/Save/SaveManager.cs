@@ -18,10 +18,15 @@ public class SaveManager : MonoBehaviour
 
     private bool isLoading;
     private bool suppressAutoSave;
+    private bool pendingContinueLoad;
+    private const int MaxClearRecordCount = 20;
 
     private string ContinueSavePath => Path.Combine(Application.persistentDataPath, "continue_save.json");
     private string TempSavePath => Path.Combine(Application.persistentDataPath, "continue_save.json.tmp");
     private string BackupSavePath => Path.Combine(Application.persistentDataPath, "continue_save.json.bak");
+    private string ClearRecordsPath => Path.Combine(Application.persistentDataPath, "clear_records.json");
+    private string TempClearRecordsPath => Path.Combine(Application.persistentDataPath, "clear_records.json.tmp");
+    private string BackupClearRecordsPath => Path.Combine(Application.persistentDataPath, "clear_records.json.bak");
 
     public bool IsAutoSaveSuppressed => isLoading || suppressAutoSave;
 
@@ -83,6 +88,33 @@ public class SaveManager : MonoBehaviour
         return File.Exists(ContinueSavePath) || File.Exists(BackupSavePath);
     }
 
+    public bool RequestLoadContinueOnNextExplorationStart()
+    {
+        if (!HasContinueSave())
+        {
+            pendingContinueLoad = false;
+            DevLog.LogWarning("[Save] Continue load request failed: save file not found.");
+            return false;
+        }
+
+        pendingContinueLoad = true;
+        return true;
+    }
+
+    public bool ConsumePendingContinueLoadRequest()
+    {
+        if (!pendingContinueLoad)
+            return false;
+
+        pendingContinueLoad = false;
+        return true;
+    }
+
+    public void CancelPendingContinueLoadRequest()
+    {
+        pendingContinueLoad = false;
+    }
+
     public bool TryLoadContinueSave()
     {
         if (!HasContinueSave())
@@ -124,28 +156,143 @@ public class SaveManager : MonoBehaviour
         DevLog.Log("[Save] Continue save deleted.");
     }
 
+    public List<ClearRecordSaveData> LoadClearRecords()
+    {
+        if (TryLoadClearRecordCollectionFromPath(ClearRecordsPath, out ClearRecordCollectionSaveData collection))
+            return collection.records ?? new List<ClearRecordSaveData>();
+
+        if (File.Exists(ClearRecordsPath))
+            DevLog.LogWarning("[Save] Primary clear records failed. Trying backup.");
+
+        if (TryLoadClearRecordCollectionFromPath(BackupClearRecordsPath, out collection))
+        {
+            DevLog.LogWarning($"[Save] Backup clear records loaded: {BackupClearRecordsPath}");
+            return collection.records ?? new List<ClearRecordSaveData>();
+        }
+
+        return new List<ClearRecordSaveData>();
+    }
+
+    public bool SaveClearRecords(List<ClearRecordSaveData> records)
+    {
+        List<ClearRecordSaveData> normalizedRecords = records ?? new List<ClearRecordSaveData>();
+        TrimClearRecords(normalizedRecords);
+
+        ClearRecordCollectionSaveData collection = new ClearRecordCollectionSaveData
+        {
+            version = 1,
+            records = normalizedRecords
+        };
+
+        try
+        {
+            string json = JsonUtility.ToJson(collection, true);
+            WriteFileSafely(json, ClearRecordsPath, TempClearRecordsPath, BackupClearRecordsPath);
+            DevLog.Log($"[Save] Clear records saved: {ClearRecordsPath}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            DevLog.LogWarning($"[Save] Clear records save failed: {ex.Message}");
+            return false;
+        }
+    }
+
+    public bool AddClearRecord(string resultType)
+    {
+        if (PlayerManager.Instance == null)
+        {
+            DevLog.LogWarning("[Save] Clear record add failed: PlayerManager missing.");
+            return false;
+        }
+
+        PlayerGrowthSaveData playerData = BuildPlayerGrowthSaveData(PlayerManager.Instance);
+        int finalCycle = 0;
+        int clearTurnOrScore = 0;
+
+        if (ExplorationManager.Instance != null)
+        {
+            finalCycle = ExplorationManager.Instance.currentCycle;
+            clearTurnOrScore = ExplorationManager.Instance.currentKeys;
+        }
+        else if (PlayerManager.Instance.hasSavedExplorationState)
+        {
+            finalCycle = PlayerManager.Instance.savedExplorationCycle;
+        }
+
+        ClearRecordSaveData record = new ClearRecordSaveData
+        {
+            version = 1,
+            recordID = Guid.NewGuid().ToString("N"),
+            savedAt = DateTime.UtcNow.ToString("o"),
+            playerName = playerData.playerName,
+            resultType = resultType,
+            finalCycle = finalCycle,
+            finalLevel = playerData.level,
+            finalGold = playerData.currentGold,
+            rejectedSupporterCount = playerData.rejectedSupporterCount,
+            player = playerData,
+            reachedCycle = finalCycle,
+            defeatedBossCount = Mathf.Max(0, finalCycle - 1),
+            clearTurnOrScore = clearTurnOrScore
+        };
+
+        List<ClearRecordSaveData> records = LoadClearRecords();
+        records.Insert(0, record);
+        TrimClearRecords(records);
+
+        return SaveClearRecords(records);
+    }
+
+    public bool DeleteClearRecord(string recordID)
+    {
+        if (string.IsNullOrEmpty(recordID))
+            return false;
+
+        List<ClearRecordSaveData> records = LoadClearRecords();
+        int removedCount = records.RemoveAll(record => record != null && record.recordID == recordID);
+
+        if (removedCount <= 0)
+            return false;
+
+        return SaveClearRecords(records);
+    }
+
+    public void DeleteAllClearRecords()
+    {
+        DeleteFileIfExists(ClearRecordsPath);
+        DeleteFileIfExists(TempClearRecordsPath);
+        DeleteFileIfExists(BackupClearRecordsPath);
+        DevLog.Log("[Save] Clear records deleted.");
+    }
+
     private void WriteContinueSaveSafely(string json)
+    {
+        WriteFileSafely(json, ContinueSavePath, TempSavePath, BackupSavePath);
+    }
+
+    private void WriteFileSafely(string json, string savePath, string tempPath, string backupPath)
     {
         Directory.CreateDirectory(Application.persistentDataPath);
 
-        if (File.Exists(TempSavePath))
-            File.Delete(TempSavePath);
+        if (File.Exists(tempPath))
+            File.Delete(tempPath);
 
-        File.WriteAllText(TempSavePath, json);
+        File.WriteAllText(tempPath, json);
 
-        if (File.Exists(BackupSavePath))
-            File.Delete(BackupSavePath);
+        if (File.Exists(backupPath))
+            File.Delete(backupPath);
 
-        if (File.Exists(ContinueSavePath))
-            File.Copy(ContinueSavePath, BackupSavePath);
+        if (File.Exists(savePath))
+            File.Copy(savePath, backupPath);
 
-        if (File.Exists(ContinueSavePath))
-            File.Delete(ContinueSavePath);
+        if (File.Exists(savePath))
+            File.Delete(savePath);
 
-        File.Move(TempSavePath, ContinueSavePath);
+        File.Move(tempPath, savePath);
 
-        if (File.Exists(TempSavePath))
-            File.Delete(TempSavePath);
+        if (File.Exists(tempPath))
+            File.Delete(tempPath);
     }
 
     private bool TryLoadFromPath(string path, out ContinueSaveData data)
@@ -173,6 +320,47 @@ public class SaveManager : MonoBehaviour
             DevLog.LogWarning($"[Save] Failed to read continue save '{path}': {ex.Message}");
             return false;
         }
+    }
+
+    private bool TryLoadClearRecordCollectionFromPath(string path, out ClearRecordCollectionSaveData collection)
+    {
+        collection = null;
+
+        if (!File.Exists(path))
+            return false;
+
+        try
+        {
+            string json = File.ReadAllText(path);
+            collection = JsonUtility.FromJson<ClearRecordCollectionSaveData>(json);
+
+            if (collection == null)
+            {
+                DevLog.LogWarning($"[Save] Invalid clear records data: {path}");
+                return false;
+            }
+
+            if (collection.records == null)
+                collection.records = new List<ClearRecordSaveData>();
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            DevLog.LogWarning($"[Save] Failed to read clear records '{path}': {ex.Message}");
+            return false;
+        }
+    }
+
+    private void TrimClearRecords(List<ClearRecordSaveData> records)
+    {
+        if (records == null)
+            return;
+
+        records.RemoveAll(record => record == null);
+
+        if (records.Count > MaxClearRecordCount)
+            records.RemoveRange(MaxClearRecordCount, records.Count - MaxClearRecordCount);
     }
 
     private ContinueSaveData BuildContinueSaveData()

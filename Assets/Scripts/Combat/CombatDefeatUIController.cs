@@ -51,7 +51,7 @@ public class CombatDefeatUIController : MonoBehaviour
             sherryImage.sprite = sherryDefeatImage;
 
         SetupDefeatChoiceButtons();
-        TypeMessage("패배했습니다...");
+        TypeMessage("?�배?�습?�다...");
     }
 
     private void Hide()
@@ -126,7 +126,7 @@ public class CombatDefeatUIController : MonoBehaviour
             return;
 
         SetupGiveUpConfirmButtons();
-        TypeMessage("정말로 포기하시겠습니까?");
+        TypeMessage("?�말�??�기?�시겠습?�까?");
     }
 
     private void OnClickCancelGiveUp()
@@ -138,7 +138,7 @@ public class CombatDefeatUIController : MonoBehaviour
             sherryImage.sprite = sherryDefeatImage;
 
         SetupDefeatChoiceButtons();
-        TypeMessage("패배했습니다...");
+        TypeMessage("?�배?�습?�다...");
     }
 
     private void OnClickConfirmGiveUp()
@@ -154,18 +154,49 @@ public class CombatDefeatUIController : MonoBehaviour
         if (rightButton != null)
             rightButton.gameObject.SetActive(false);
 
+        SaveGiveUpRecordAndDeleteContinueSave();
+
         if (sherryImage != null && sherryDeadImage != null)
             sherryImage.sprite = sherryDeadImage;
 
-        // TODO: 패배 시점까지의 캐릭터 성장/진행 데이터 저장
-        // SaveManager.SaveDefeatRecord(PlayerManager.Instance);
 
         StartCoroutine(FinalizeGiveUpRoutine());
     }
 
+    private void SaveGiveUpRecordAndDeleteContinueSave()
+    {
+        if (SaveManager.Instance == null)
+        {
+            DevLog.LogWarning("[Save] Give Up record skipped: SaveManager missing.");
+            return;
+        }
+
+        try
+        {
+            bool saved = SaveManager.Instance.AddClearRecord("GiveUp");
+            if (saved)
+                DevLog.Log("[Save] Give Up clear record saved.");
+            else
+                DevLog.LogWarning("[Save] Give Up clear record save failed.");
+        }
+        catch (System.Exception ex)
+        {
+            DevLog.LogWarning($"[Save] Give Up clear record save exception: {ex.Message}");
+        }
+
+        try
+        {
+            SaveManager.Instance.DeleteContinueSave();
+        }
+        catch (System.Exception ex)
+        {
+            DevLog.LogWarning($"[Save] Continue save delete after Give Up failed: {ex.Message}");
+        }
+    }
+
     private IEnumerator FinalizeGiveUpRoutine()
     {
-        yield return TypeMessageRoutine("당신의 여정은 여기까지입니다.\n지금까지의 여정은 기록됩니다.");
+        yield return TypeMessageRoutine("?�신???�정?� ?�기까�??�니??\n지금까지???�정?� 기록?�니??");
 
         yield return new WaitForSecondsRealtime(1.0f);
 

@@ -14,12 +14,25 @@ public class ContinueSaveData
 public class ClearRecordSaveData
 {
     public int version;
+    public string recordID;
     public string savedAt;
+    public string playerName;
     public string resultType;
+    public int finalCycle;
+    public int finalLevel;
+    public int finalGold;
+    public int rejectedSupporterCount;
     public PlayerGrowthSaveData player;
     public int reachedCycle;
     public int defeatedBossCount;
     public int clearTurnOrScore;
+}
+
+[Serializable]
+public class ClearRecordCollectionSaveData
+{
+    public int version;
+    public List<ClearRecordSaveData> records = new List<ClearRecordSaveData>();
 }
 
 [Serializable]

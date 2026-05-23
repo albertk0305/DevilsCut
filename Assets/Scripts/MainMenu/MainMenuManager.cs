@@ -1,23 +1,102 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 //메인메뉴 제어 코드
 public class MainMenuManager : MonoBehaviour
 {
     // 추가된 부분: 설정 창 UI 패널을 연결할 변수
     public GameObject settingsPanel;
+    public Button continueButton;
+    public GameObject confirmNewGamePanel;
+    public TextMeshProUGUI confirmNewGameText;
+    public string explorationSceneName = "Exploration";
+
+    private const string NewGameOverwriteMessage = "저장된 진행 상황이 있습니다.\n새 게임을 시작하면 기존 이어하기 데이터가 삭제됩니다.\n정말 새로 시작하시겠습니까?";
 
     void Start()
     {
         // 게임 시작 시 설정 창은 숨겨둠
         if (settingsPanel != null) settingsPanel.SetActive(false);
+        if (confirmNewGamePanel != null) confirmNewGamePanel.SetActive(false);
+        UpdateContinueButtonState();
+    }
+
+    private void OnEnable()
+    {
+        UpdateContinueButtonState();
+    }
+
+    private void UpdateContinueButtonState()
+    {
+        if (continueButton == null)
+            return;
+
+        continueButton.interactable = SaveManager.Instance != null && SaveManager.Instance.HasContinueSave();
     }
 
     // '시작하기' 버튼을 눌렀을 때 실행될 함수
     public void OnClickStart()
     {
+        if (SaveManager.Instance == null)
+        {
+            DevLog.LogWarning("[Save] SaveManager가 없어 저장 데이터 확인 없이 새 게임을 시작합니다.");
+            StartNewGameInternal();
+            return;
+        }
+
+        if (SaveManager.Instance.HasContinueSave())
+        {
+            ShowNewGameConfirmPanel();
+            return;
+        }
+
+        StartNewGameInternal();
+    }
+
+    public void OnConfirmNewGameYes()
+    {
+        if (confirmNewGamePanel != null)
+            confirmNewGamePanel.SetActive(false);
+
+        if (SaveManager.Instance != null)
+        {
+            SaveManager.Instance.CancelPendingContinueLoadRequest();
+            SaveManager.Instance.DeleteContinueSave();
+        }
+
+        UpdateContinueButtonState();
+        StartNewGameInternal();
+    }
+
+    public void OnConfirmNewGameNo()
+    {
+        if (confirmNewGamePanel != null)
+            confirmNewGamePanel.SetActive(false);
+    }
+
+    private void ShowNewGameConfirmPanel()
+    {
+        if (confirmNewGameText != null)
+            confirmNewGameText.text = NewGameOverwriteMessage;
+
+        if (confirmNewGamePanel != null)
+        {
+            confirmNewGamePanel.SetActive(true);
+            return;
+        }
+
+        DevLog.LogWarning("[Save] 새 게임 확인 팝업이 연결되지 않아 바로 새 게임을 시작합니다.");
+        StartNewGameInternal();
+    }
+
+    private void StartNewGameInternal()
+    {
         // Debug.Log를 DevLog.Log로 변경!
         DevLog.Log("새 게임 시작!");
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.CancelPendingContinueLoadRequest();
         // 나중에 실제 게임 씬이 만들어지면 아래 주석(//)을 지우고 "GameScene" 부분에 실제 씬 이름을 넣으면 돼.
         // SceneManager.LoadScene("GameScene"); 
     }
@@ -25,8 +104,21 @@ public class MainMenuManager : MonoBehaviour
     // '이어하기' 버튼을 눌렀을 때 실행될 함수
     public void OnClickContinue()
     {
+        if (SaveManager.Instance == null)
+        {
+            DevLog.LogWarning("[Save] 이어하기 실패: SaveManager가 없습니다.");
+            UpdateContinueButtonState();
+            return;
+        }
+
+        if (!SaveManager.Instance.RequestLoadContinueOnNextExplorationStart())
+        {
+            UpdateContinueButtonState();
+            return;
+        }
+
         DevLog.Log("이어하기 데이터 불러오기!");
-        // 나중에 세이브/로드 시스템을 만들면 여기에 코드를 추가할 거야.
+        SceneManager.LoadScene(explorationSceneName);
     }
 
     // '도움말' 버튼을 눌렀을 때 실행될 함수

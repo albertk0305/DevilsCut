@@ -60,6 +60,21 @@ public class ExplorationManager : MonoBehaviour
 
     private void Start()
     {
+        if (SaveManager.Instance != null && SaveManager.Instance.ConsumePendingContinueLoadRequest())
+        {
+            if (SaveManager.Instance.TryLoadContinueSave())
+            {
+                SaveStateToPlayerManager();
+            }
+            else
+            {
+                DevLog.LogWarning("[Save] Continue load failed after Exploration scene loaded.");
+                SetEmptyCurrentOptions();
+            }
+
+            return;
+        }
+
         RestoreStateFromPlayerManagerIfNeeded();
         ApplyPendingBattleProgressIfNeeded();
         EnsureCurrentOptions();
@@ -84,6 +99,14 @@ public class ExplorationManager : MonoBehaviour
     {
         if (currentOptions.Count != 3)
             GenerateCurrentOptions();
+    }
+
+    private void SetEmptyCurrentOptions()
+    {
+        currentOptions.Clear();
+        currentOptions.Add(null);
+        currentOptions.Add(null);
+        currentOptions.Add(null);
     }
 
     // 기존 호출부 호환용. 이미 확정된 선택지가 있으면 새로 랜덤을 돌리지 않습니다.
