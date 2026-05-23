@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c21964c0d27d4aec8b10ac0cacf40876, type: 3}
+  m_Name: Gabriel
+  m_EditorClassIdentifier: Assembly-CSharp::BossEncounterData
+  bossID: Gabriel
+  bossName: Gabriel
+  minionEnemy: {fileID: 0}
+  bossEnemy: {fileID: 11400000, guid: fc72105156f142548bdaf4eb83ff3669, type: 2}
+  nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
+  defaultSD: {fileID: 21300000, guid: 18c3cdd3f895f5d419b43378b4b10981, type: 3}
+  readySD: {fileID: 21300000, guid: 797421e3937d1954d904394aede48a1f, type: 3}

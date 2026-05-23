@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e02acdb935644458559277d3c42d95, type: 3}
   m_Name: HandOfFate
   m_EditorClassIdentifier: Assembly-CSharp::KarinItemData
+  itemID: HandOfFate
   itemName: HandOfFate
   itemIcon: {fileID: 21300000, guid: 84989b4247a0f7d45babeb430335bd61, type: 3}
   itemDescription: 

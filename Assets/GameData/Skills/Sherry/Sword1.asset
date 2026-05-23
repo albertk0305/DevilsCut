@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
   m_Name: Sword1
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillID: Courage
   skillLogic: {fileID: 11400000, guid: 85367be98eb2e004687516471043ae43, type: 2}
   skillNameKey: skill_name_sword1
   skillDescKey: skill_desc_sword1

@@ -2861,79 +2861,16 @@ MonoBehaviour:
   currentKeys: 0
   bossSelectionEventIcon: {fileID: 21300000, guid: a290edb1d6fb15046af8721e77ae9ba0, type: 3}
   remainingMidBosses:
-  - bossID: 
-    bossName: Michael
-    minionEnemy: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
-    bossEnemy: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
-    nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
-    defaultSD: {fileID: 21300000, guid: 841c2aa23be10fc48aa30a61c22932a5, type: 3}
-    readySD: {fileID: 21300000, guid: c3b64a72403bd9948bae5063ce07fadf, type: 3}
-  - bossID: 
-    bossName: Gabriel
-    minionEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    bossEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
-    defaultSD: {fileID: 21300000, guid: 18c3cdd3f895f5d419b43378b4b10981, type: 3}
-    readySD: {fileID: 21300000, guid: 797421e3937d1954d904394aede48a1f, type: 3}
-  - bossID: 
-    bossName: Remiel
-    minionEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    bossEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
-    defaultSD: {fileID: 21300000, guid: d2e08b0dc53c02644941d4bf4a757f05, type: 3}
-    readySD: {fileID: 21300000, guid: a8ecb4856f03a2c49bda269c13f623f1, type: 3}
-  - bossID: 
-    bossName: Uriel
-    minionEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    bossEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
-    defaultSD: {fileID: 21300000, guid: 027d90228636f9841bca7031bdb226f6, type: 3}
-    readySD: {fileID: 21300000, guid: fa4332fd9466fd84ca05e1a3d17cacf5, type: 3}
-  - bossID: 
-    bossName: Sariel
-    minionEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    bossEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
-    defaultSD: {fileID: 21300000, guid: ee6b917a547e7094ab95160ee8712a77, type: 3}
-    readySD: {fileID: 21300000, guid: 024dae18f0fdfee48bd246f74f16ce27, type: 3}
-  - bossID: 
-    bossName: Raphael
-    minionEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    bossEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
-    defaultSD: {fileID: 21300000, guid: 1d43918a1647eeb4aa45ced9cbe931dc, type: 3}
-    readySD: {fileID: 21300000, guid: 00cf3addb85b6ad4fa98b23be59f2f3e, type: 3}
-  - bossID: 
-    bossName: Raguel
-    minionEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    bossEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
-    defaultSD: {fileID: 21300000, guid: 6a365247ccfb4244ba1f7f66f1e195c5, type: 3}
-    readySD: {fileID: 21300000, guid: a29ff8d92c42d9546907619081494c1a, type: 3}
-  finalBoss:
-    bossID: 
-    bossName: Hibiki
-    minionEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    bossEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
-    defaultSD: {fileID: 21300000, guid: e554e3e2d66e4914fb2c558548c2d84f, type: 3}
-    readySD: {fileID: 21300000, guid: 5d7d867c910d47a4fa2bd17bda555b9f, type: 3}
-  trueFinalBoss:
-    bossID: 
-    bossName: A.R.E.T.E
-    minionEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    bossEnemy: {fileID: 11400000, guid: d994d890932581140a6bda38e8d8217e, type: 2}
-    nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
-    defaultSD: {fileID: 21300000, guid: fd8af8e23e8f9a6438e50bcbc44c2edc, type: 3}
-    readySD: {fileID: 21300000, guid: da79cbad617c59340982926206081691, type: 3}
-  currentTargetBoss:
-    bossID: 
-    bossName: michael
-    minionEnemy: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
-    bossEnemy: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
-    nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
-    defaultSD: {fileID: 21300000, guid: 841c2aa23be10fc48aa30a61c22932a5, type: 3}
-    readySD: {fileID: 21300000, guid: c3b64a72403bd9948bae5063ce07fadf, type: 3}
+  - {fileID: 11400000, guid: e85faee9f42677d4ab2fd90fea94e782, type: 2}
+  - {fileID: 11400000, guid: 859bb2941d360024e883050150eac840, type: 2}
+  - {fileID: 11400000, guid: f5f2f0d3088bbd845b922d39e3baac91, type: 2}
+  - {fileID: 11400000, guid: 05ca4b8101762bf4982469dd66af5efa, type: 2}
+  - {fileID: 11400000, guid: 6d98e6415c3f2184da047fe403cc673d, type: 2}
+  - {fileID: 11400000, guid: c198c9a5c96497f43b9a141e3164cd02, type: 2}
+  - {fileID: 11400000, guid: f964aeca8bc9b61489ac034e53915db4, type: 2}
+  finalBoss: {fileID: 11400000, guid: 192190b9551cbff4c848293d78575f8b, type: 2}
+  trueFinalBoss: {fileID: 11400000, guid: 2fd74834f772af842940fc981481e673, type: 2}
+  currentTargetBoss: {fileID: 0}
 --- !u!4 &1223019333
 Transform:
   m_ObjectHideFlags: 0
@@ -5034,14 +4971,7 @@ MonoBehaviour:
   savedExplorationCycle: 0
   savedExplorationTurnInPhase: 0
   savedExplorationKeys: 0
-  savedCurrentTargetBoss:
-    bossID: 
-    bossName: 
-    minionEnemy: {fileID: 0}
-    bossEnemy: {fileID: 0}
-    nodeIcon: {fileID: 0}
-    defaultSD: {fileID: 0}
-    readySD: {fileID: 0}
+  savedCurrentTargetBoss: {fileID: 0}
   savedLastVisitedNodeImage: {fileID: 0}
   savedLastVisitedFacility: {fileID: 0}
 --- !u!4 &1744572012

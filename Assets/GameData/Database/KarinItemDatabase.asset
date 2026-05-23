@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2150b01e5365435d8a168a700125ed2b, type: 3}
+  m_Name: KarinItemDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::KarinItemDatabase
+  allItems:
+  - {fileID: 11400000, guid: 0cad6596c97017d4d9b78610c19cfb66, type: 2}
+  - {fileID: 11400000, guid: c9b70313515a3ee42be983ab30ca5840, type: 2}
+  - {fileID: 11400000, guid: f478bcd6e86517640947d6953cc1191c, type: 2}
+  - {fileID: 11400000, guid: 544c07f8f3a0db545b8ca94f0d2f3f1e, type: 2}
+  - {fileID: 11400000, guid: 16ee4116a2f792e48afb9d04de33eedf, type: 2}
+  - {fileID: 11400000, guid: 1f62c13dc91f5f34e8003534a0fe132f, type: 2}
+  - {fileID: 11400000, guid: b054c90722762c849b1e7315164d103b, type: 2}
+  - {fileID: 11400000, guid: 631ce009890953f42ac8af6d4d8d38d4, type: 2}
+  - {fileID: 11400000, guid: 89dc7b1cb6e8101428049f81fd1ce5fc, type: 2}
+  - {fileID: 11400000, guid: ecf15723f0f58834f8e830c1390d3f12, type: 2}
+  - {fileID: 11400000, guid: d6942cd227d2d1d4485b16902f8ff885, type: 2}

@@ -7,18 +7,6 @@ using System.Linq;
 // =========================================================
 public enum GamePhase { BossSelection, Exploration, GeneralBattle, BossBattle, GameClear }
 
-[System.Serializable]
-public class BossEncounterData
-{
-    public string bossID;
-    public string bossName;
-    public EnemyData minionEnemy; // 해당 보스의 일반 몹 (부하)
-    public EnemyData bossEnemy;   // 보스 본인
-    public Sprite nodeIcon;       // 선택지에 띄울 시설용(전투) 아이콘
-    public Sprite defaultSD;      // 조력자 위치에 띄울 기본 SD
-    public Sprite readySD;        // 클릭 시 띄울 준비 SD
-}
-
 // UI 슬롯과 자연스럽게 연동하기 위한 더미 노드 데이터
 public class BossSelectionNodeData : ExplorationNodeData { public BossEncounterData bossData; }
 public class PhaseBattleNodeData : DangerNodeData { public BossEncounterData bossData; public bool isBossBattle; }
@@ -243,8 +231,13 @@ public class ExplorationManager : MonoBehaviour
             }
 
             // [수정] 7사이클까지만 중간보스 리스트 차감
-            if (currentCycle <= 7)
-                remainingMidBosses.Remove(currentTargetBoss);
+            if (currentCycle <= 7 && remainingMidBosses != null)
+            {
+                if (currentTargetBoss != null && !string.IsNullOrEmpty(currentTargetBoss.bossID))
+                    remainingMidBosses.RemoveAll(b => b != null && b.bossID == currentTargetBoss.bossID);
+                else
+                    remainingMidBosses.Remove(currentTargetBoss);
+            }
 
             currentCycle++;
             currentTargetBoss = null;
@@ -296,6 +289,180 @@ public class ExplorationManager : MonoBehaviour
         return savedOptions;
     }
 
+    public bool RestoreCurrentOptionsFromSave(List<SavedExplorationOption> savedOptions, BossDatabase bossDatabase, ExplorationNodeDatabase nodeDatabase)
+    {
+        if (savedOptions == null || savedOptions.Count != 3)
+        {
+            DevLog.LogWarning("[Save] currentOptions 복원 실패: 저장된 선택지가 3개가 아닙니다.");
+            return false;
+        }
+
+        List<ExplorationNodeData> restoredOptions = new List<ExplorationNodeData> { null, null, null };
+        bool[] restoredSlots = new bool[3];
+
+        foreach (SavedExplorationOption savedOption in savedOptions)
+        {
+            if (savedOption == null)
+            {
+                DevLog.LogWarning("[Save] currentOptions 복원 실패: 비어있는 선택지 데이터가 있습니다.");
+                return false;
+            }
+
+            int slotIndex = savedOption.slotIndex;
+            if (slotIndex < 0 || slotIndex >= 3)
+            {
+                DevLog.LogWarning($"[Save] currentOptions 복원 실패: 잘못된 슬롯 인덱스 {slotIndex}.");
+                return false;
+            }
+
+            if (restoredSlots[slotIndex])
+            {
+                DevLog.LogWarning($"[Save] currentOptions 복원 실패: 중복 슬롯 인덱스 {slotIndex}.");
+                return false;
+            }
+
+            ExplorationNodeData restoredNode = CreateOptionFromSave(savedOption, bossDatabase, nodeDatabase);
+            if (savedOption.optionType != "None" && restoredNode == null)
+            {
+                DevLog.LogWarning($"[Save] currentOptions 복원 실패: {savedOption.optionType} 슬롯 {slotIndex} 복원 불가.");
+                return false;
+            }
+
+            restoredOptions[slotIndex] = restoredNode;
+            restoredSlots[slotIndex] = true;
+        }
+
+        for (int i = 0; i < restoredSlots.Length; i++)
+        {
+            if (!restoredSlots[i])
+            {
+                DevLog.LogWarning($"[Save] currentOptions 복원 실패: 슬롯 {i} 데이터가 없습니다.");
+                return false;
+            }
+        }
+
+        currentOptions.Clear();
+        currentOptions.AddRange(restoredOptions);
+        return true;
+    }
+
+    private ExplorationNodeData CreateOptionFromSave(SavedExplorationOption savedOption, BossDatabase bossDatabase, ExplorationNodeDatabase nodeDatabase)
+    {
+        switch (savedOption.optionType)
+        {
+            case "None":
+                return null;
+
+            case "Facility":
+                if (nodeDatabase == null)
+                {
+                    DevLog.LogWarning("[Save] Facility 선택지 복원 실패: ExplorationNodeDatabase가 없습니다.");
+                    return null;
+                }
+                return nodeDatabase.GetByID(savedOption.nodeID);
+
+            case "BossSelection":
+            {
+                BossEncounterData boss = FindBossForSave(savedOption.bossID, bossDatabase);
+                if (boss == null)
+                    return null;
+
+                return CreateBossNode(boss);
+            }
+
+            case "GeneralBattle":
+            case "BossBattle":
+            {
+                BossEncounterData boss = FindBossForSave(savedOption.bossID, bossDatabase);
+                if (boss == null)
+                    return null;
+
+                bool isBossBattle = savedOption.optionType == "BossBattle";
+                PhaseBattleNodeData battleNode = ScriptableObject.CreateInstance<PhaseBattleNodeData>();
+                battleNode.bossData = boss;
+                battleNode.isBossBattle = isBossBattle;
+                battleNode.enemyToSpawn = isBossBattle ? boss.bossEnemy : boss.minionEnemy;
+                battleNode.nodeImage = boss.nodeIcon;
+                return battleNode;
+            }
+
+            default:
+                DevLog.LogWarning($"[Save] 알 수 없는 선택지 타입: {savedOption.optionType}");
+                return null;
+        }
+    }
+
+    private BossEncounterData FindBossForSave(string bossID, BossDatabase bossDatabase)
+    {
+        if (bossDatabase == null)
+        {
+            DevLog.LogWarning("[Save] 보스 복원 실패: BossDatabase가 없습니다.");
+            return null;
+        }
+
+        return bossDatabase.GetByID(bossID);
+    }
+
+    public string GetCurrentTargetBossIDForSave()
+    {
+        return currentTargetBoss != null ? currentTargetBoss.bossID : null;
+    }
+
+    public List<string> GetRemainingMidBossIDsForSave()
+    {
+        List<string> bossIDs = new List<string>();
+
+        if (remainingMidBosses == null)
+            return bossIDs;
+
+        foreach (BossEncounterData boss in remainingMidBosses)
+        {
+            if (boss != null)
+                bossIDs.Add(boss.bossID);
+        }
+
+        return bossIDs;
+    }
+
+    public bool RestoreBossProgressFromSave(string currentTargetBossID, List<string> remainingMidBossIDs, BossDatabase bossDatabase)
+    {
+        if (bossDatabase == null)
+        {
+            DevLog.LogWarning("[Save] 보스 진행도 복원 실패: BossDatabase가 없습니다.");
+            return false;
+        }
+
+        BossEncounterData restoredTargetBoss = null;
+        if (!string.IsNullOrEmpty(currentTargetBossID))
+        {
+            restoredTargetBoss = bossDatabase.GetByID(currentTargetBossID);
+            if (restoredTargetBoss == null)
+            {
+                DevLog.LogWarning($"[Save] currentTargetBoss 복원 실패: {currentTargetBossID}");
+                return false;
+            }
+        }
+
+        List<BossEncounterData> restoredRemainingBosses = new List<BossEncounterData>();
+        if (remainingMidBossIDs != null)
+        {
+            foreach (string bossID in remainingMidBossIDs)
+            {
+                BossEncounterData boss = bossDatabase.GetByID(bossID);
+                if (boss == null)
+                {
+                    DevLog.LogWarning($"[Save] remainingMidBoss 복원 실패: {bossID}");
+                    return false;
+                }
+
+                restoredRemainingBosses.Add(boss);
+            }
+        }
+
+        currentTargetBoss = restoredTargetBoss;
+        remainingMidBosses = restoredRemainingBosses;
+        return true;
+    }
     public int GetFacilityRank(string id)
     {
         if (facilityRanks.ContainsKey(id)) return facilityRanks[id];
@@ -357,15 +524,25 @@ public class ExplorationManager : MonoBehaviour
         lastVisitedFacility = playerManager.savedLastVisitedFacility;
     }
 
+    private bool IsSameBoss(BossEncounterData a, BossEncounterData b)
+    {
+        if (a == null || b == null)
+            return false;
+
+        if (!string.IsNullOrEmpty(a.bossID) && !string.IsNullOrEmpty(b.bossID))
+            return a.bossID == b.bossID;
+
+        return a == b;
+    }
     private bool IsCurrentBattleMidBoss()
     {
         if (currentTargetBoss == null)
             return false;
 
-        if (finalBoss != null && currentTargetBoss == finalBoss)
+        if (IsSameBoss(currentTargetBoss, finalBoss))
             return false;
 
-        if (trueFinalBoss != null && currentTargetBoss == trueFinalBoss)
+        if (IsSameBoss(currentTargetBoss, trueFinalBoss))
             return false;
 
         return true;

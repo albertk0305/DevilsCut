@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e02acdb935644458559277d3c42d95, type: 3}
   m_Name: P38
   m_EditorClassIdentifier: Assembly-CSharp::KarinItemData
+  itemID: ManhattanJoke
   itemName: P38
   itemIcon: {fileID: 21300000, guid: 34f701fb8fa03e14caa00f6f46310a4a, type: 3}
   itemDescription: p38 desc

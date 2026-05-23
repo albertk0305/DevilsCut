@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e02acdb935644458559277d3c42d95, type: 3}
   m_Name: GodKnows
   m_EditorClassIdentifier: Assembly-CSharp::KarinItemData
+  itemID: GodKnows
   itemName: GodKnows
   itemIcon: {fileID: 21300000, guid: c6a70af5b90a5334db8f5472f21fa4f0, type: 3}
   itemDescription: 

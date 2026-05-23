@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
   m_Name: Hit1
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillID: MorningStar
   skillLogic: {fileID: 11400000, guid: b4d382fed9961b24ba47f147a5449fe8, type: 2}
   skillNameKey: skill_name_hit1
   skillDescKey: skill_desc_hit1
