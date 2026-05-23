@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossEncounterData
   bossID: ARETE
   bossName: ARETE
-  minionEnemy: {fileID: 0}
+  minionEnemy: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
   bossEnemy: {fileID: 11400000, guid: 1d22750423d45d345b0ba1e431e84d98, type: 2}
   nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
   defaultSD: {fileID: 21300000, guid: fd8af8e23e8f9a6438e50bcbc44c2edc, type: 3}

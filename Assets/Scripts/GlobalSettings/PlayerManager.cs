@@ -100,6 +100,11 @@ public class PlayerManager : MonoBehaviour
     [Header("플레이어 해금 스킬")]
     public List<SkillData> unlockedSkills = new List<SkillData>();
 
+    [Header("새 게임 기본 지급")]
+    public List<SkillData> defaultSkills = new List<SkillData>();
+    public List<KarinItemData> defaultKarinItems = new List<KarinItemData>();
+    public KarinItemData defaultEquippedKarinItem;
+
     [Header("Saved Exploration State")]
     public bool hasSavedExplorationState;
     public GamePhase savedExplorationPhase;
@@ -130,6 +135,92 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void ResetForNewGame()
+    {
+        stats = new PlayerStats
+        {
+            level = 1,
+            maxExp = 100,
+            currentExp = 0,
+            maxHp = 1000,
+            currentHp = 1000,
+            ActionPoints = 10,
+            breakResistance = 10,
+            maxBreakGauge = 50f,
+            strength = 10,
+            defense = 10,
+            speed = 10,
+            luck = 10,
+            currentGold = 0,
+            rejectedSupporterCount = 0,
+            finalDamageAmp = 0f,
+            finalDamageReduction = 0f,
+            critRate = 0f,
+            critDamage = 1.5f,
+            lifeSteal = 0f,
+            trueDamageConversion = 0f,
+            bonusAccuracy = 0f,
+            bonusEvasion = 0f,
+            healingReceivedAmp = 0f
+        };
+
+        inventory.Clear();
+
+        unlockedSkills.Clear();
+        foreach (SkillData defaultSkill in defaultSkills)
+        {
+            if (defaultSkill == null)
+                continue;
+
+            SkillData runtimeSkill = Instantiate(defaultSkill);
+            runtimeSkill.skillLevel = 1;
+            runtimeSkill.currentEvolution = SkillEvolution.None;
+            unlockedSkills.Add(runtimeSkill);
+        }
+
+        unlockedSupporters.Clear();
+        activeSupporter = null;
+
+        ownedKarinItems.Clear();
+        foreach (KarinItemData defaultItem in defaultKarinItems)
+        {
+            if (defaultItem != null && !ownedKarinItems.Contains(defaultItem))
+                ownedKarinItems.Add(defaultItem);
+        }
+
+        equippedKarinItem = null;
+        if (defaultEquippedKarinItem != null)
+        {
+            if (!ownedKarinItems.Contains(defaultEquippedKarinItem))
+                ownedKarinItems.Add(defaultEquippedKarinItem);
+
+            equippedKarinItem = defaultEquippedKarinItem;
+        }
+        else if (ownedKarinItems.Count > 0)
+        {
+            equippedKarinItem = ownedKarinItems[0];
+        }
+
+        currentEnemyToFight = null;
+        currentBattleReward = new BattleReward();
+        currentBattleType = default;
+        currentBattlePhase = 0;
+
+        pendingAdvanceBattleTurn = false;
+        pendingBattleType = default;
+        pendingBattlePhase = 0;
+
+        hasSavedExplorationState = false;
+        savedExplorationPhase = GamePhase.BossSelection;
+        savedExplorationCycle = 1;
+        savedExplorationTurnInPhase = 0;
+        savedExplorationKeys = 0;
+        savedCurrentTargetBoss = null;
+        savedLastVisitedNodeImage = null;
+        savedLastVisitedFacility = null;
+
+        DevLog.Log("[PlayerManager] 새 게임 상태로 초기화했습니다.");
+    }
     // 데미지를 입었을 때 호출할 함수 예시
     public void TakeDamage(int damage)
     {

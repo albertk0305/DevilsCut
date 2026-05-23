@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossEncounterData
   bossID: Uriel
   bossName: Uriel
-  minionEnemy: {fileID: 0}
+  minionEnemy: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
   bossEnemy: {fileID: 11400000, guid: 380de80b8fab34246a7fe00112c70372, type: 2}
   nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
   defaultSD: {fileID: 21300000, guid: 027d90228636f9841bca7031bdb226f6, type: 3}

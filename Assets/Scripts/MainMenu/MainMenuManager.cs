@@ -93,14 +93,18 @@ public class MainMenuManager : MonoBehaviour
 
     private void StartNewGameInternal()
     {
-        // Debug.Log를 DevLog.Log로 변경!
         DevLog.Log("새 게임 시작!");
+
         if (SaveManager.Instance != null)
             SaveManager.Instance.CancelPendingContinueLoadRequest();
-        // 나중에 실제 게임 씬이 만들어지면 아래 주석(//)을 지우고 "GameScene" 부분에 실제 씬 이름을 넣으면 돼.
-        // SceneManager.LoadScene("GameScene"); 
-    }
 
+        if (PlayerManager.Instance != null)
+            PlayerManager.Instance.ResetForNewGame();
+        else
+            DevLog.LogWarning("[NewGame] PlayerManager가 없어 플레이어 상태 초기화를 건너뜁니다.");
+
+        SceneManager.LoadScene(explorationSceneName);
+    }
     // '이어하기' 버튼을 눌렀을 때 실행될 함수
     public void OnClickContinue()
     {
