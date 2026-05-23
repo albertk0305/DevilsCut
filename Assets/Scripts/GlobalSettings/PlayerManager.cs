@@ -210,15 +210,49 @@ public class PlayerManager : MonoBehaviour
     // =========================================================
     public Dictionary<ItemClass, int> GetCurrentSynergies()
     {
-        var synergies = new Dictionary<ItemClass, int>();
+        Dictionary<string, OwnedItem> bestItemById = new Dictionary<string, OwnedItem>();
 
-        foreach (var item in inventory)
+        foreach (OwnedItem item in inventory)
         {
-            if (!synergies.ContainsKey(item.data.itemClass))
-                synergies[item.data.itemClass] = 0;
+            if (item == null || item.data == null)
+                continue;
 
-            synergies[item.data.itemClass] += item.data.GetSynergyPoints(item.starLevel);
+            string itemId = item.data.itemID;
+
+            if (string.IsNullOrEmpty(itemId))
+            {
+                DevLog.LogWarning($"[시너지 계산] itemID가 비어있는 아이템이 있습니다: {item.data.name}");
+                continue;
+            }
+
+            if (!bestItemById.TryGetValue(itemId, out OwnedItem currentBest))
+            {
+                bestItemById[itemId] = item;
+                continue;
+            }
+
+            int currentBestPoints = currentBest.data.GetSynergyPoints(currentBest.starLevel);
+            int newItemPoints = item.data.GetSynergyPoints(item.starLevel);
+
+            if (newItemPoints > currentBestPoints)
+            {
+                bestItemById[itemId] = item;
+            }
         }
+
+        Dictionary<ItemClass, int> synergies = new Dictionary<ItemClass, int>();
+
+        foreach (OwnedItem item in bestItemById.Values)
+        {
+            ItemClass itemClass = item.data.itemClass;
+            int points = item.data.GetSynergyPoints(item.starLevel);
+
+            if (!synergies.ContainsKey(itemClass))
+                synergies[itemClass] = 0;
+
+            synergies[itemClass] += points;
+        }
+
         return synergies;
     }
 
