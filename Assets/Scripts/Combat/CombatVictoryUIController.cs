@@ -200,7 +200,12 @@ public class CombatVictoryUIController : MonoBehaviour
             resultMessageText.gameObject.SetActive(true);
 
         messageQueue.Clear();
-        messageQueue.Enqueue(BuildResultMessage(rewardResult));
+        messageQueue.Enqueue(BuildRewardResultMessage(rewardResult));
+
+        string levelUpMessage = BuildLevelUpMessage(rewardResult);
+        if (!string.IsNullOrEmpty(levelUpMessage))
+            messageQueue.Enqueue(levelUpMessage);
+
         StartNextMessage();
     }
 
@@ -359,10 +364,12 @@ public class CombatVictoryUIController : MonoBehaviour
         int exp = rewardResult != null ? rewardResult.expGranted : 0;
         int gold = rewardResult != null ? rewardResult.goldGranted : 0;
         int keys = rewardResult != null ? rewardResult.keysGranted : 0;
+        int expBonus = rewardResult != null && rewardResult.rewardModifierResult != null ? rewardResult.rewardModifierResult.expBonus : 0;
+        int goldBonus = rewardResult != null && rewardResult.rewardModifierResult != null ? rewardResult.rewardModifierResult.goldBonus : 0;
 
         StringBuilder builder = new StringBuilder();
-        builder.AppendLine($"EXP +{exp}");
-        builder.AppendLine($"Gold +{gold}");
+        builder.AppendLine($"EXP: {FormatRewardAmount(exp, expBonus)}");
+        builder.AppendLine($"Gold: {FormatRewardAmount(gold, goldBonus)}");
 
         if (keys > 0)
             builder.AppendLine($"Key +{keys}");
@@ -370,12 +377,30 @@ public class CombatVictoryUIController : MonoBehaviour
         return builder.ToString().TrimEnd();
     }
 
-    private string BuildResultMessage(VictoryRewardGrantResult rewardResult)
+    private string BuildRewardResultMessage(VictoryRewardGrantResult rewardResult)
+    {
+        ModifiedBattleRewardResult modifiedReward = rewardResult != null ? rewardResult.rewardModifierResult : null;
+
+        if (modifiedReward != null)
+        {
+            string bonusMessage = modifiedReward.BuildBonusMessage();
+            if (!string.IsNullOrEmpty(bonusMessage))
+                return bonusMessage;
+
+            return modifiedReward.BuildFinalRewardLine();
+        }
+
+        int exp = rewardResult != null ? rewardResult.expGranted : 0;
+        int gold = rewardResult != null ? rewardResult.goldGranted : 0;
+        return $"EXP {exp} / Gold {gold} \uD68D\uB4DD!";
+    }
+
+    private string BuildLevelUpMessage(VictoryRewardGrantResult rewardResult)
     {
         LevelUpResult levelUp = rewardResult != null ? rewardResult.levelUpResult : null;
 
         if (levelUp == null || !levelUp.HasLevelUp)
-            return "\uBCF4\uC0C1\uC744 \uD68D\uB4DD\uD588\uC2B5\uB2C8\uB2E4.";
+            return "";
 
         StringBuilder builder = new StringBuilder();
         StatGrowthSummary growth = levelUp.totalGrowth;
@@ -387,6 +412,14 @@ public class CombatVictoryUIController : MonoBehaviour
         AppendGrowthLine(builder, ("AP", growth.actionPoints), ("LUCK", growth.luck));
 
         return builder.ToString().TrimEnd();
+    }
+
+    private string FormatRewardAmount(int amount, int bonus)
+    {
+        if (bonus > 0)
+            return $"{amount} (+{bonus})";
+
+        return amount.ToString();
     }
 
     private void AppendGrowthLine(StringBuilder builder, params (string label, int amount)[] stats)

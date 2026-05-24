@@ -19,10 +19,11 @@ public static class BattleRewardService
             return result;
         }
 
-        BattleReward modifiedReward = ApplyVictoryRewardModifiers(playerManager, reward);
+        ModifiedBattleRewardResult modifiedReward = ApplyVictoryRewardModifiers(playerManager, reward);
 
-        result.expGranted = modifiedReward != null ? modifiedReward.exp : 0;
-        result.goldGranted = modifiedReward != null ? modifiedReward.gold : 0;
+        result.rewardModifierResult = modifiedReward;
+        result.expGranted = modifiedReward != null ? modifiedReward.finalExp : 0;
+        result.goldGranted = modifiedReward != null ? modifiedReward.finalGold : 0;
         result.keysGranted = 0;
 
         int beforeLevel = playerManager.stats.level;
@@ -43,17 +44,12 @@ public static class BattleRewardService
         return result;
     }
 
-    public static BattleReward ApplyVictoryRewardModifiers(PlayerManager playerManager, BattleReward reward)
+    public static ModifiedBattleRewardResult ApplyVictoryRewardModifiers(PlayerManager playerManager, BattleReward reward)
     {
         if (reward == null)
-            return new BattleReward();
+            return SupporterBattleRewardModifierService.ApplySupporterRewardModifiers(playerManager, 0, 0);
 
-        return new BattleReward
-        {
-            exp = reward.exp,
-            gold = reward.gold,
-            keys = reward.keys
-        };
+        return SupporterBattleRewardModifierService.ApplySupporterRewardModifiers(playerManager, reward.exp, reward.gold);
     }
 }
 
@@ -62,5 +58,6 @@ public class VictoryRewardGrantResult
     public int expGranted;
     public int goldGranted;
     public int keysGranted;
+    public ModifiedBattleRewardResult rewardModifierResult;
     public LevelUpResult levelUpResult;
 }
