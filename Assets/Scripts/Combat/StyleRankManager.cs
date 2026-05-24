@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-// 랭크 단계를 정의하는 열거형
 public enum StyleRank { None, D, C, B, A, S, SS, SSS }
 
 public class StyleRankManager : MonoBehaviour
@@ -9,10 +8,9 @@ public class StyleRankManager : MonoBehaviour
 
     public StyleRank currentRank = StyleRank.None;
 
-    // 이전 턴에 사용한 스킬 카테고리를 기억
     private SkillCategory previousCategory;
-    private bool isFirstSkill = true; // 게임 시작 후 첫 스킬인지 확인
-    private bool hasCritThisTurn = false; // 이번 턴에 크리티컬이 이미 터졌는지 확인
+    private bool isFirstSkill = true;
+    private bool hasCritThisTurn = false;
 
     private void Awake()
     {
@@ -22,21 +20,19 @@ public class StyleRankManager : MonoBehaviour
     public void InitCombat()
     {
         currentRank = StyleRank.None;
-        previousCategory = SkillCategory.None; // 아직 아무 스킬도 안 쓴 상태로! (에러 방지를 위해 enum에 None이 없다면 적당히 초기화)
+        previousCategory = SkillCategory.None;
         isFirstSkill = true;
         hasCritThisTurn = false;
 
-        UpdateUI(); // UI도 None 상태(투명)로 업데이트합니다.
+        UpdateUI();
         DevLog.Log("[스타일 랭크] 전투 시작! 랭크가 초기화되었습니다.");
     }
 
-    // 매 턴이 끝날 때마다 호출하여 턴 단위 변수들을 초기화합니다.
     public void ResetTurnState()
     {
         hasCritThisTurn = false;
     }
 
-    // 1. 스킬 사용 조건 (다른 계열 사용 시 상승)
     public void OnSkillUsed(SkillCategory usedCategory)
     {
         if (isFirstSkill || usedCategory != previousCategory)
@@ -48,7 +44,6 @@ public class StyleRankManager : MonoBehaviour
         isFirstSkill = false;
     }
 
-    // 2. 크리티컬 조건 (한 턴에 한 번만)
     public void OnCriticalHit()
     {
         if (!hasCritThisTurn)
@@ -58,19 +53,16 @@ public class StyleRankManager : MonoBehaviour
         }
     }
 
-    // 3. 회피 성공 조건
     public void OnEvade()
     {
         IncreaseRank();
     }
 
-    // 4. 적 그로기 조건
     public void OnEnemyBreak()
     {
         IncreaseRank();
     }
 
-    // 5. 피격 조건 (랭크 하락)
     public void OnPlayerHit()
     {
         DecreaseRank();
@@ -80,11 +72,9 @@ public class StyleRankManager : MonoBehaviour
     {
         IncreaseRank();
 
-        // 참고: 카린과 조력자는 셰리의 스킬 카테고리(검, 총 등)와 무관하므로
-        // previousCategory 변수를 덮어쓰지 않고 랭크만 깔끔하게 올립니다!
+        // Support actions raise rank without changing Sherry's previous skill category.
     }
 
-    // --- 내부 랭크 조절 로직 ---
     private void IncreaseRank()
     {
         if (currentRank < StyleRank.SSS)
@@ -107,7 +97,6 @@ public class StyleRankManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        // UI 매니저에게 랭크 이미지를 바꾸라고 지시합니다.
         CombatUIManager.Instance.UpdateStyleRankUI(currentRank);
     }
 
@@ -123,8 +112,7 @@ public class StyleRankManager : MonoBehaviour
 
     public float GetRankDamageMultiplier()
     {
-        // [최적화] Enum의 정수값(None=0, D=1 ~ SSS=7)을 이용해 스위치문을 수학 공식 한 줄로 압축!
-        // 0일 땐 1.0f, 1일 땐 1.1f, 7일 땐 1.7f가 반환됩니다.
+        // None=0, D=1 ... SSS=7 maps to 1.0x through 1.7x.
         return 1.0f + ((int)currentRank * 0.1f);
     }
 

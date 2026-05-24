@@ -2,12 +2,8 @@
 using UnityEngine;
 using System.Linq;
 
-// =========================================================
-// [추가] 게임의 현재 흐름 상태를 정의합니다.
-// =========================================================
 public enum GamePhase { BossSelection, Exploration, GeneralBattle, BossBattle, GameClear }
 
-// UI 슬롯과 자연스럽게 연동하기 위한 더미 노드 데이터
 public class BossSelectionNodeData : ExplorationNodeData { public BossEncounterData bossData; }
 public class PhaseBattleNodeData : DangerNodeData { public BossEncounterData bossData; public bool isBossBattle; }
 
@@ -23,13 +19,10 @@ public class ExplorationManager : MonoBehaviour
     public FacilityData lastVisitedFacility;
     public Sprite lastVisitedNodeImage;
 
-    // =========================================================
-    // [추가] 게임 진행 (페이즈 및 턴) 트래킹 변수들
-    // =========================================================
     [Header("게임 흐름 제어 (Phase & Turn)")]
     public GamePhase currentPhase = GamePhase.BossSelection;
-    public int currentCycle = 1; // 1~7: 중간보스, 8: 최종보스, 9: 진최종보스
-    public int currentTurnInPhase = 0; // 탐색(0~5), 일반전투(0~2) 진행도
+    public int currentCycle = 1;
+    public int currentTurnInPhase = 0;
 
     [Header("재화 및 진행도")]
     public int currentKeys = 0;
@@ -38,10 +31,10 @@ public class ExplorationManager : MonoBehaviour
     public Sprite bossSelectionEventIcon;
 
     [Header("보스 데이터 세팅")]
-    public List<BossEncounterData> remainingMidBosses; // 7명의 중간보스 리스트
+    public List<BossEncounterData> remainingMidBosses;
     public BossEncounterData finalBoss;
     public BossEncounterData trueFinalBoss;
-    public BossEncounterData currentTargetBoss; // 유저가 이번 페이즈에 픽한 보스
+    public BossEncounterData currentTargetBoss;
 
     private readonly List<ExplorationNodeData> currentOptions = new List<ExplorationNodeData>();
     public IReadOnlyList<ExplorationNodeData> CurrentOptions
@@ -81,10 +74,7 @@ public class ExplorationManager : MonoBehaviour
         SaveStateToPlayerManager();
     }
 
-    // =========================================================
-    // [핵심] 현재 상태에 맞춰 화면에 뿌려줄 3개의 슬롯 데이터를 만듭니다.
-    // 빈 슬롯은 null을 넣어 UI가 위치를(대칭을) 잡을 수 있게 합니다.
-    // =========================================================
+    // Builds exactly three UI slots; null entries keep symmetric layouts.
     public IReadOnlyList<ExplorationNodeData> GenerateCurrentOptions()
     {
         currentOptions.Clear();
@@ -109,7 +99,7 @@ public class ExplorationManager : MonoBehaviour
         currentOptions.Add(null);
     }
 
-    // 기존 호출부 호환용. 이미 확정된 선택지가 있으면 새로 랜덤을 돌리지 않습니다.
+    // Compatibility path: reuse confirmed options instead of rerolling.
     public List<ExplorationNodeData> GetCurrentOptions()
     {
         EnsureCurrentOptions();
@@ -125,7 +115,6 @@ public class ExplorationManager : MonoBehaviour
             case GamePhase.BossSelection:
                 List<BossEncounterData> candidates = GetBossCandidates();
 
-                // 대칭 배치 로직
                 if (candidates.Count >= 3)
                 {
                     options[0] = CreateBossNode(candidates[0]);
@@ -134,17 +123,16 @@ public class ExplorationManager : MonoBehaviour
                 }
                 else if (candidates.Count == 2)
                 {
-                    options[0] = CreateBossNode(candidates[0]); // 왼쪽
-                    options[2] = CreateBossNode(candidates[1]); // 오른쪽
+                    options[0] = CreateBossNode(candidates[0]);
+                    options[2] = CreateBossNode(candidates[1]);
                 }
                 else if (candidates.Count == 1)
                 {
-                    options[1] = CreateBossNode(candidates[0]); // 가운데
+                    options[1] = CreateBossNode(candidates[0]);
                 }
                 break;
 
             case GamePhase.Exploration:
-                // 기존 탐색: 랜덤 3개
                 var randoms = allNodes.OrderBy(x => Random.value).Take(3).ToList();
                 for (int i = 0; i < randoms.Count; i++) options[i] = randoms[i];
                 break;
@@ -155,7 +143,7 @@ public class ExplorationManager : MonoBehaviour
                     DevLog.LogWarning("[경고] GeneralBattle 진입했으나 currentTargetBoss가 null입니다!");
                     break;
                 }
-                // 일반 전투: 가운데(1번)에만 부하 몬스터 노드 배치
+                // Battle phases use the center slot only.
                 var minionNode = ScriptableObject.CreateInstance<PhaseBattleNodeData>();
                 minionNode.bossData = currentTargetBoss;
                 minionNode.isBossBattle = false;
@@ -170,7 +158,6 @@ public class ExplorationManager : MonoBehaviour
                     DevLog.LogWarning("[경고] BossBattle 진입했으나 currentTargetBoss가 null입니다!");
                     break;
                 }
-                // 보스 전투: 가운데(1번)에만 보스 노드 배치
                 var bossNode = ScriptableObject.CreateInstance<PhaseBattleNodeData>();
                 bossNode.bossData = currentTargetBoss;
                 bossNode.isBossBattle = true;
@@ -195,7 +182,6 @@ public class ExplorationManager : MonoBehaviour
 
     private BossSelectionNodeData CreateBossNode(BossEncounterData data)
     {
-        // 방어 코드: 데이터가 비어있으면 노드도 만들지 않고 null 반환 (검은 화면 방지!)
         if (data == null)
         {
             DevLog.LogWarning($"[경고] 보스 데이터가 비어있습니다! 인스펙터를 확인해주세요.");
@@ -208,9 +194,6 @@ public class ExplorationManager : MonoBehaviour
         return node;
     }
 
-    // =========================================================
-    // [핵심] 유저가 버튼을 눌러 다음 단계로 넘어갈 때 턴을 진행시킵니다.
-    // =========================================================
     public void SelectTargetBoss(BossEncounterData selected)
     {
         currentTargetBoss = selected;
@@ -223,7 +206,7 @@ public class ExplorationManager : MonoBehaviour
     public void AdvanceExplorationTurn()
     {
         currentTurnInPhase++;
-        if (currentTurnInPhase >= 6) // 6턴 꽉 채웠으면
+        if (currentTurnInPhase >= 6)
         {
             currentPhase = GamePhase.GeneralBattle;
             currentTurnInPhase = 0;
@@ -254,7 +237,7 @@ public class ExplorationManager : MonoBehaviour
                 DevLog.Log($"[중간보스 보상] Key +1, 현재 Key: {currentKeys}");
             }
 
-            // [수정] 7사이클까지만 중간보스 리스트 차감
+            // Only mid-boss cycles consume entries from the remaining list.
             if (currentCycle <= 7 && remainingMidBosses != null)
             {
                 if (currentTargetBoss != null && !string.IsNullOrEmpty(currentTargetBoss.bossID))

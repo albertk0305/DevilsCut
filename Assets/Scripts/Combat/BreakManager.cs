@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-// [분리] 그로기(Break) 게이지의 누적, 스노우볼 보정, 발동 판정 및 자연 회복을 전담합니다.
+// Owns break gauge accumulation, recovery, and break-state transitions.
 public class BreakManager : MonoBehaviour
 {
     public static BreakManager Instance;
@@ -16,7 +16,6 @@ public class BreakManager : MonoBehaviour
         if (Instance == null) Instance = this;
     }
 
-    // 전투 시작 시 초기화
     public void InitBreakState()
     {
         playerBreak = 0f;
@@ -35,7 +34,6 @@ public class BreakManager : MonoBehaviour
     public bool IsBroken(bool isPlayer) => isPlayer ? isPlayerBroken : isEnemyBroken;
     public float GetBreakGauge(bool isPlayer) => isPlayer ? playerBreak : enemyBreak;
 
-    // [추가] 실시간으로 플레이어/적의 최대 브레이크 수치를 가져오는 헬퍼 함수
     private float GetMaxGauge(bool isPlayer)
     {
         if (CombatManager.Instance == null) return 100f;
@@ -44,15 +42,14 @@ public class BreakManager : MonoBehaviour
             : CombatManager.Instance.GetCurrentEnemyData().maxBreakGauge;
     }
 
-    // 브레이크 데미지 누적 및 발동 확인 (방금 브레이크가 터졌다면 true 반환)
+    // Returns true only when this damage triggers a new break.
     public bool AddBreakDamage(bool isPlayerTarget, float damage)
     {
         if (IsBroken(isPlayerTarget)) return false;
 
         float currentGauge = isPlayerTarget ? playerBreak : enemyBreak;
-        float maxGauge = GetMaxGauge(isPlayerTarget); // 대상의 최대치 호출
+        float maxGauge = GetMaxGauge(isPlayerTarget);
 
-        // 수학 연산에 최대치 전달
         float snowballMult = CombatMath.GetBreakSnowballMultiplier(currentGauge, maxGauge);
         float finalDamage = damage * snowballMult;
 
@@ -60,27 +57,26 @@ public class BreakManager : MonoBehaviour
         {
             playerBreak += finalDamage;
             if (playerBreak >= maxGauge) { TriggerBreak(true); return true; }
-            else CombatUIManager.Instance.UpdatePlayerBreak((playerBreak / maxGauge) * 100f); // UI에는 0~100% 비율로 변환 전달
+            else CombatUIManager.Instance.UpdatePlayerBreak((playerBreak / maxGauge) * 100f);
         }
         else
         {
             enemyBreak += finalDamage;
             if (enemyBreak >= maxGauge) { TriggerBreak(false); return true; }
-            else CombatUIManager.Instance.UpdateEnemyBreak((enemyBreak / maxGauge) * 100f); // UI에는 0~100% 비율로 변환 전달
+            else CombatUIManager.Instance.UpdateEnemyBreak((enemyBreak / maxGauge) * 100f);
         }
         return false;
     }
 
-    // 브레이크(그로기) 터졌을 때의 내부 처리
     private void TriggerBreak(bool isPlayerTarget)
     {
         float maxGauge = GetMaxGauge(isPlayerTarget);
 
         if (isPlayerTarget)
         {
-            playerBreak = maxGauge; // 100f 대신 maxGauge로 고정
+            playerBreak = maxGauge;
             isPlayerBroken = true;
-            CombatUIManager.Instance.UpdatePlayerBreak(100f); // 꽉 찬 UI(100%) 표출
+            CombatUIManager.Instance.UpdatePlayerBreak(100f);
             TurnManager.Instance.ResetGauge(EntityType.Player);
             CombatUIManager.Instance.playerStatusUI.SetBreakGaugeState(true);
 
@@ -89,9 +85,9 @@ public class BreakManager : MonoBehaviour
         }
         else
         {
-            enemyBreak = maxGauge; // 100f 대신 maxGauge로 고정
+            enemyBreak = maxGauge;
             isEnemyBroken = true;
-            CombatUIManager.Instance.UpdateEnemyBreak(100f); // 꽉 찬 UI(100%) 표출
+            CombatUIManager.Instance.UpdateEnemyBreak(100f);
             TurnManager.Instance.ResetGauge(EntityType.Enemy);
             CombatUIManager.Instance.enemyStatusUI.SetBreakGaugeState(true);
 
@@ -104,7 +100,6 @@ public class BreakManager : MonoBehaviour
         DevLog.Log($"[브레이크 발동!] {(isPlayerTarget ? "아군" : "적")}이 그로기 상태에 빠졌습니다!");
     }
 
-    // 턴 종료 시 자연 회복 로직
     public void RecoverBreakOnTurnEnd(bool isPlayerTarget, bool tookDamage)
     {
         if (IsBroken(isPlayerTarget)) return;
@@ -116,19 +111,18 @@ public class BreakManager : MonoBehaviour
         {
             float recovery = CombatMath.GetBreakRecoveryAmount(playerBreak, maxGauge);
             playerBreak = Mathf.Max(0f, playerBreak - recovery);
-            CombatUIManager.Instance.UpdatePlayerBreak((playerBreak / maxGauge) * 100f); // 비율 환산
+            CombatUIManager.Instance.UpdatePlayerBreak((playerBreak / maxGauge) * 100f);
             DevLog.Log($"[그로기 회복] 셰리: -{recovery:F1} (현재: {playerBreak:F1})");
         }
         else if (!isPlayerTarget && enemyBreak > 0f)
         {
             float recovery = CombatMath.GetBreakRecoveryAmount(enemyBreak, maxGauge);
             enemyBreak = Mathf.Max(0f, enemyBreak - recovery);
-            CombatUIManager.Instance.UpdateEnemyBreak((enemyBreak / maxGauge) * 100f); // 비율 환산
+            CombatUIManager.Instance.UpdateEnemyBreak((enemyBreak / maxGauge) * 100f);
             DevLog.Log($"[그로기 회복] 적: -{recovery:F1} (현재: {enemyBreak:F1})");
         }
     }
 
-    // 그로기 기상 처리
     public void WakeUpFromBreak(bool isPlayer)
     {
         if (isPlayer)
@@ -137,7 +131,6 @@ public class BreakManager : MonoBehaviour
             playerBreak = 0f;
             CombatUIManager.Instance.UpdatePlayerBreak(0f);
 
-            // [추가] 기상 시 평소 게이지 이미지로 원상 복구!
             CombatUIManager.Instance.playerStatusUI.SetBreakGaugeState(false);
         }
         else
@@ -146,7 +139,6 @@ public class BreakManager : MonoBehaviour
             enemyBreak = 0f;
             CombatUIManager.Instance.UpdateEnemyBreak(0f);
 
-            // [추가] 기상 시 평소 게이지 이미지로 원상 복구!
             CombatUIManager.Instance.enemyStatusUI.SetBreakGaugeState(false);
 
             if (CombatManager.Instance != null)
