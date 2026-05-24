@@ -12,33 +12,30 @@ public class EquipmentItemData : ScriptableObject
 {
     [Header("기본 정보")]
     public string itemID;
-    public string itemNameKey; // 다국어 Key
+    public string itemNameKey;
     public Sprite itemIcon;
-    [TextArea] public string itemDescKey; // 다국어 Key
+    [TextArea] public string itemDescKey;
     [Header("장비 스탯 효과")]
-    public string itemBonusKey; // 다국어 Key
+    public string itemBonusKey;
 
     [Header("등급 및 시너지")]
     public ItemGrade grade;
-    public ItemClass itemClass; // 어떤 시너지에 속하는가?
+    public ItemClass itemClass;
 
-    // 현재 아이템의 성급 (인게임에서 동일 아이템 획득 시 1 -> 2 -> 3으로 증가)
-    // ScriptableObject 원본이 오염되지 않도록 인벤토리 저장용 클래스에서 따로 래핑해서 쓰는 것을 권장합니다.
+    // Runtime inventory should wrap this data so the ScriptableObject asset is not mutated.
     [Range(1, 3)]
     public int currentStarLevel = 1;
 
-    // 현재 아이템이 제공하는 시너지 점수 계산 함수
     public int GetSynergyPoints()
     {
-        // 전설 등급은 합성이 불가능하고 기본적으로 2점의 시너지 가치를 지닙니다.
+        // Legendary items cannot be merged and are always worth 2 synergy points.
         if (grade == ItemGrade.Legendary) return 2;
 
-        // 일반, 희귀, 에픽은 자신의 성급(1~3)만큼 점수를 제공합니다.
         return currentStarLevel;
     }
 
     [Header("1단계 합 연산 스탯 보너스 (1성/2성/3성)")]
-    // 배열 크기는 항상 3 (1성, 2성, 3성 수치)
+    // Arrays map star levels 1, 2, and 3.
     public int[] flatStrength = new int[3];
     public int[] flatDefense = new int[3];
     public int[] flatSpeed = new int[3];
@@ -48,7 +45,7 @@ public class EquipmentItemData : ScriptableObject
     public int[] flatBreakResistance = new int[3];
 
     [Header("2단계 곱 연산 스탯 보너스 (1성/2성/3성)")]
-    // 예: 0.15f = 15% 증가
+    // Example: 0.15f means +15%.
     public float[] pctStrength = new float[3];
     public float[] pctDefense = new float[3];
     public float[] pctSpeed = new float[3];
@@ -57,25 +54,20 @@ public class EquipmentItemData : ScriptableObject
     public float[] pctAP = new float[3];
 
     [Header("특수 전투 보너스 (1성/2성/3성)")]
-    public float[] finalDamageAmp = new float[3]; // 최종 피해 증폭 (%)
-    public float[] finalDamageReduction = new float[3]; // 받는 최종 피해 감소 (%)
-    public float[] critRateBonus = new float[3];  // 크리티컬 확률 합산 (%)
-    public float[] critDamageBonus = new float[3]; // 크리티컬 피해량 합산 (%)
-    public float[] lifeStealRate = new float[3];  // 흡혈률 (%)
+    public float[] finalDamageAmp = new float[3];
+    public float[] finalDamageReduction = new float[3];
+    public float[] critRateBonus = new float[3];
+    public float[] critDamageBonus = new float[3];
+    public float[] lifeStealRate = new float[3];
 
-    // ==========================================
-    // 데이터 겟(Get) 헬퍼 함수들
-    // ==========================================
     private int GetIndex(int starLevel) => Mathf.Clamp(starLevel - 1, 0, 2);
 
-    // 시너지 점수 계산기
     public int GetSynergyPoints(int starLevel)
     {
-        if (grade == ItemGrade.Legendary) return 2; // 전설은 2점
-        return starLevel; // 나머지는 성급(1~3)만큼
+        if (grade == ItemGrade.Legendary) return 2;
+        return starLevel;
     }
 
-    // 스탯 수치 반환기
     public int GetFlatStr(int starLevel) => flatStrength.Length > 0 ? flatStrength[GetIndex(starLevel)] : 0;
     public int GetFlatDef(int starLevel) => flatDefense.Length > 0 ? flatDefense[GetIndex(starLevel)] : 0;
     public int GetFlatSpd(int starLevel) => flatSpeed.Length > 0 ? flatSpeed[GetIndex(starLevel)] : 0;

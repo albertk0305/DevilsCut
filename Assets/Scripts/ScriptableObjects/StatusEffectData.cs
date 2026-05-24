@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-//  효과가 어떤 작용을 하는지 정의하는 열거형들
 public enum EffectCategory { Buff, Debuff, Special }
 public enum TargetStat { None, Strength, Defense, Speed, Luck, BreakResistance, AP }
 public enum ModifierType { Flat, Percentage }
@@ -9,23 +8,22 @@ public enum SpecialEffectType { None, Guard, Reflect, AbsoluteGuard, EvasionUp, 
 [CreateAssetMenu(fileName = "NewStatusEffect", menuName = "GameData/StatusEffect")]
 public class StatusEffectData : ScriptableObject
 {
-    public string effectID;       // 고유 ID 
-    public string effectName;     // 효과 이름 
+    public string effectID;
+    public string effectName;
     public EffectCategory category;
-    public Sprite icon;           // UI 아이콘
+    public Sprite icon;
 
     [Header("효과 로직 설정")]
-    public TargetStat targetStat;       // 올릴 스탯 (특수 효과면 None)
-    public ModifierType modifierType;   // 합 연산(Flat)인지 곱 연산(Percentage)인지
-    public SpecialEffectType specialType; // 가드, 독 등 특수 로직용
+    public TargetStat targetStat;
+    public ModifierType modifierType;
+    public SpecialEffectType specialType;
 
     [TextArea]
     public string baseDescription;
 
     [Header("귀속 및 출력 커스텀 설정")]
-    public bool isPermanentPassive; // 지울 수 없고 턴이 감소하지 않는 영구 버프/패시브 여부
-    public bool showStackDetails;   // 혈액 저주처럼 툴팁에 개별 스택/턴 정보를 낱낱이 보여줄지 여부
+    public bool isPermanentPassive;
+    public bool showStackDetails;
 
-    // 합쳐진 수치 표현 (예: "(총 +{0})")
     public string valueFormat;
 }

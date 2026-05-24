@@ -28,7 +28,7 @@ public class SkillData : ScriptableObject
 
     [Header("스킬 기본 설정")]
     public SkillCategory category;
-    public int skillLevel = 1; // 현재 스킬 레벨 (기본값 1)
+    public int skillLevel = 1;
 
     [Header("스킬 연출")]
     public Sprite skillActionImage;
@@ -60,10 +60,10 @@ public class SkillData : ScriptableObject
     public int[] hitCounts = { 1 };
 
     [Header("스킬 진화 (로그라이크)")]
-    public SkillEvolution currentEvolution = SkillEvolution.None; // 현재 선택된 진화 상태
+    public SkillEvolution currentEvolution = SkillEvolution.None;
 
     [Tooltip("진화 1(PathA - 인과율 등)의 레벨별 계수")]
-    public float[] evolutionA_Multipliers = { 0.5f, 0.75f, 1.0f }; // 반사율: 50%, 75%, 100%
+    public float[] evolutionA_Multipliers = { 0.5f, 0.75f, 1.0f };
 
     [Tooltip("진화 B (고드 핸드) 레벨별 계수 (피해 감소율)")]
     public float[] evolutionB_Multipliers = { 0.4f, 0.5f, 0.6f };
@@ -78,7 +78,6 @@ public class SkillData : ScriptableObject
     {
         if (damageMultipliers == null || damageMultipliers.Length == 0) return 0f;
 
-        // 인덱스는 0부터 시작하므로 레벨에서 1을 뺍니다. (Lv 1 -> index 0)
         int index = Mathf.Clamp(skillLevel - 1, 0, damageMultipliers.Length - 1);
         return damageMultipliers[index];
     }
@@ -102,7 +101,7 @@ public class SkillData : ScriptableObject
     {
         if (hitCounts == null || hitCounts.Length == 0) return 1;
         int index = Mathf.Clamp(skillLevel - 1, 0, hitCounts.Length - 1);
-        return Mathf.Max(1, hitCounts[index]); // 최소 1타는 보장
+        return Mathf.Max(1, hitCounts[index]);
     }
 
     public float GetCurrentBonusAccuracy()
