@@ -15,6 +15,8 @@ public class StatusUI : MonoBehaviour
     public TextMeshProUGUI spdText;
     public TextMeshProUGUI lukText;
 
+    public TextMeshProUGUI maxBreakGaugeText;
+
     private void OnEnable()
     {
         Refresh();
@@ -44,6 +46,7 @@ public class StatusUI : MonoBehaviour
         spdText.text = GetComprehensiveStatString("Spd", TargetStat.Speed, baseStats.speed, displayStats.speed, useCombatStats);
         lukText.text = GetComprehensiveStatString("Luk", TargetStat.Luck, baseStats.luck, displayStats.luck, useCombatStats);
         breakResText.text = GetComprehensiveStatString("BR", TargetStat.BreakResistance, baseStats.breakResistance, displayStats.breakResistance, useCombatStats);
+        if (maxBreakGaugeText != null) maxBreakGaugeText.text = $"{displayStats.maxBreakGauge}";
 
         if (useCombatStats)
         {

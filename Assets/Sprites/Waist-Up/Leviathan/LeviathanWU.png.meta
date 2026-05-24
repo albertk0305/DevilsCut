@@ -116,10 +116,10 @@ TextureImporter:
       name: LeviathanWU_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 373
         y: 0
-        width: 2048
-        height: 2048
+        width: 1318
+        height: 2003
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

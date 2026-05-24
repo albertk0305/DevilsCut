@@ -9,6 +9,7 @@ public class AnalysisUI : MonoBehaviour
     [Header("UI 요소")]
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI levelText;
+    public TextMeshProUGUI maxBreakGaugeText;
 
     [Header("스탯 텍스트 (순수 수치+공식만 표기)")]
     [Tooltip("0:BR, 1:AP, 2:Str, 3:Def, 4:Spd, 5:Luk")]
@@ -61,6 +62,9 @@ public class AnalysisUI : MonoBehaviour
             int displayLevel = Mathf.Max(1, enemy.level);
             levelText.text = $"Lv.{displayLevel}";
         }
+
+        if (maxBreakGaugeText != null)
+            maxBreakGaugeText.text = enemy.maxBreakGauge.ToString();
 
         statTexts[0].text = GetEnemyComprehensiveStatString(TargetStat.BreakResistance, enemy.breakResistance);
         statTexts[1].text = GetEnemyComprehensiveStatString(TargetStat.AP, enemy.ActionPoints);
