@@ -51,7 +51,7 @@ public class CombatDefeatUIController : MonoBehaviour
             sherryImage.sprite = sherryDefeatImage;
 
         SetupDefeatChoiceButtons();
-        TypeMessage("?�배?�습?�다...");
+        TypeMessage("패배했습니다...");
     }
 
     private void Hide()
@@ -126,7 +126,7 @@ public class CombatDefeatUIController : MonoBehaviour
             return;
 
         SetupGiveUpConfirmButtons();
-        TypeMessage("?�말�??�기?�시겠습?�까?");
+        TypeMessage("정말로 포기하시겠습니까?");
     }
 
     private void OnClickCancelGiveUp()
@@ -138,7 +138,7 @@ public class CombatDefeatUIController : MonoBehaviour
             sherryImage.sprite = sherryDefeatImage;
 
         SetupDefeatChoiceButtons();
-        TypeMessage("?�배?�습?�다...");
+        TypeMessage("패배했습니다...");
     }
 
     private void OnClickConfirmGiveUp()
@@ -196,7 +196,7 @@ public class CombatDefeatUIController : MonoBehaviour
 
     private IEnumerator FinalizeGiveUpRoutine()
     {
-        yield return TypeMessageRoutine("?�신???�정?� ?�기까�??�니??\n지금까지???�정?� 기록?�니??");
+        yield return TypeMessageRoutine("정말로 포기하시겠습니까?\n지금까지의 기록이 삭제됩니다.");
 
         yield return new WaitForSecondsRealtime(1.0f);
 
