@@ -15,22 +15,21 @@ public class SkillLogic_WorldWithoutReason : SkillLogicBase
     public StatusEffectData breakRegenBuff;
 
     [Header("진화 C: 구속제어술식 (회복량 -> 피해 전환율)")]
-    // Lv1: 회복량의 50%, Lv2: 75%, Lv3: 100% 피해
+    // HP cost/recovery rule.
     public float[] pathC_DamageRates = { 0.5f, 0.75f, 1.0f };
 
-    // 요술 계열 생존기이므로 빗나가지 않고 무조건 발동합니다.
     public override bool AlwaysHits(SkillData skill) => true;
 
-    // [진화 C]를 공격기로 인식시키기 위한 타수 설정
+    // Path C rule.
     public override int GetHitCount(SkillData skill)
     {
         return (skill.currentEvolution == SkillEvolution.PathC) ? 1 : 0;
     }
 
-    // [진화 C]를 공격기로 인식시키기 위한 계수 설정
+    // Path C rule.
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
-        if (skill.currentEvolution == SkillEvolution.PathC) return 1.0f; // 0이 아니면 시스템이 공격기로 인식함
+        if (skill.currentEvolution == SkillEvolution.PathC) return 1.0f;
         return 0f;
     }
 
@@ -40,15 +39,15 @@ public class SkillLogic_WorldWithoutReason : SkillLogicBase
 
         int index = Mathf.Clamp(skill.skillLevel - 1, 0, healRates.Length - 1);
 
-        // 1. 체력 회복 연산
+        // HP cost/recovery rule.
         float baseHeal = pStats.maxHp * healRates[index];
-        // [추가] 데몬 시너지 회복량 증폭
+        // HP cost/recovery rule.
         int healAmount = Mathf.RoundToInt(baseHeal * (1f + pStats.healingReceivedAmp));
 
         int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
         pStats.currentHp = Mathf.Clamp(pStats.currentHp + healAmount, 0, pStats.maxHp);
 
-        // 2. 체력 UI 업데이트 및 회복 텍스트 띄우기
+        // HP cost/recovery rule.
         if (CombatUIManager.Instance != null)
         {
             CombatUIManager.Instance.playerStatusUI.UpdateHP(pStats.currentHp, pStats.maxHp);
@@ -58,7 +57,7 @@ public class SkillLogic_WorldWithoutReason : SkillLogicBase
         if (excessHeal > 0 && CombatManager.Instance != null)
             CombatManager.Instance.ApplyOverhealBuff(excessHeal);
 
-        // 3. 버스트(그로기) 게이지 즉시 감소 연산
+        // Break rule.
         float breakRecover = breakRecoveryAmounts[index];
         if (BreakManager.Instance != null)
         {
@@ -68,7 +67,7 @@ public class SkillLogic_WorldWithoutReason : SkillLogicBase
         DevLog.Log($"[이성이 없는 세계] 체력 {healAmount} 회복, 그로기 수치 {breakRecover} 감소.");
 
         // ---------------------------------------------------------
-        // [진화 A] 샤인: 모든 디버프 해제
+        // Path A rule.
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.PathA)
         {
@@ -82,14 +81,14 @@ public class SkillLogic_WorldWithoutReason : SkillLogicBase
         }
 
         // ---------------------------------------------------------
-        // [진화 B] 초재생: 3턴간 매 턴 시작 시 HP/그로기 10%씩 지속 회복
+        // Path B rule.
         // ---------------------------------------------------------
         else if (skill.currentEvolution == SkillEvolution.PathB)
         {
-            // HP 재생 버프 (10%)
+            // HP cost/recovery rule.
             if (hpRegenBuff != null) BuffManager.Instance.AddEffect(true, hpRegenBuff, 0.1f, 3);
 
-            // 그로기 재생 버프 (수치로 maxBreakGauge의 10%를 계산해서 전달)
+            // Break rule.
             if (breakRegenBuff != null)
             {
                 float breakValue = pStats.maxBreakGauge * 0.1f;
@@ -100,15 +99,14 @@ public class SkillLogic_WorldWithoutReason : SkillLogicBase
         }
 
         // ---------------------------------------------------------
-        // [진화 C] 구속제어술식: 나의 회복량을 적의 피해량으로 치환!
+        // Path C rule.
         // ---------------------------------------------------------
         else if (skill.currentEvolution == SkillEvolution.PathC)
         {
             float damageRate = pathC_DamageRates[index];
             int reflectionDamage = Mathf.RoundToInt(healAmount * damageRate);
 
-            // BattleCalculator를 속여서 UI 타격 연출(피격 모션)을 띄우게 한 뒤, 
-            // 실제로 적의 체력을 깎는 것은 여기서 수동으로 처리합니다!
+            // HP cost/recovery rule.
             CombatManager.Instance.ApplyDamageToEnemy(reflectionDamage);
             CombatUIManager.Instance.SpawnDamageText(reflectionDamage.ToString(), true, false);
 

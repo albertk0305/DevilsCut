@@ -11,7 +11,7 @@ public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySki
 
     [Header("진화 A (Annihilation) - 멸식")]
     [Tooltip("반격 시 셰리의 힘(STR) 스탯에 곱해질 계수")]
-    public float[] pathA_CounterRates = { 0.5f, 0.8f, 1.2f }; // 1.2배면 꽤 아픈 카운터!
+    public float[] pathA_CounterRates = { 0.5f, 0.8f, 1.2f };
 
     [Tooltip("멸식 카운터 발동 시 사용할 전용 이미지 (Icon이 아닌 Action 이미지)")]
     public Sprite counterActionImage;
@@ -70,16 +70,15 @@ public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySki
         return true;
     }
 
-    // [진화 C] 회피율을 데미지 배율로 치환
+    // Path C rule.
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC && isPlayerAttacking)
         {
-            // 1. 원래 스킬이 부여했어야 할 기본 회피율
             int index = Mathf.Clamp(skill.skillLevel - 1, 0, evasionBonusRates.Length - 1);
             float baseEvasion = evasionBonusRates[index];
 
-            // 2. 현재 셰리에게 걸려있는 다른 '회피율 버프'들 합산 (조력자 버프 등)
+            // Buff/debuff rule.
             float extraEvasion = 0f;
             var buffs = BuffManager.Instance.GetEffects(true);
             foreach (var eff in buffs)
@@ -88,7 +87,7 @@ public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySki
                     extraEvasion += eff.value;
             }
 
-            // 3. 최종 데미지 뻥튀기 연산
+            // Damage scaling rule.
             float totalEvasion = baseEvasion + extraEvasion;
             float bonusMult = totalEvasion * pathC_ConversionRate;
 
@@ -100,7 +99,7 @@ public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySki
 
     public override void ApplyEffect(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
-        // [진화 C] 에선 회피율 버프를 부여하지 않고 딜로 태워버림!
+        // Path C rule.
         if (skill.currentEvolution == SkillEvolution.PathC) return;
 
         if (evasionBuffData != null)
@@ -115,12 +114,11 @@ public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySki
 
     public override Sprite GetCounterActionImage(SkillData skill)
     {
-        // 이미지 슬롯이 비어있지 않다면 전용 이미지를 반환합니다.
         if (skill.currentEvolution == SkillEvolution.PathA && counterActionImage != null)
         {
             return counterActionImage;
         }
-        // 비어있거나 진화A가 아니라면 기본 이미지를 반환합니다.
+        // Path A rule.
         return base.GetCounterActionImage(skill);
     }
 }

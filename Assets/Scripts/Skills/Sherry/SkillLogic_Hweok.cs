@@ -19,9 +19,9 @@ public class SkillLogic_Hweok : SkillLogicBase
     public float[] breakRecoveryAmounts = { 50f, 80f, 100f };
 
     [Header("진화 A: 반전술식 (잃은 체력/그로기 비례 힘 증가)")]
-    public StatusEffectData pathA_StrengthFlatBuff; // 힘 고정치(Flat) 버프
-    public float[] pathA_HpToStrengthRates = { 0.05f, 0.10f, 0.15f }; // 체력 100 잃었을 때 * 0.1 = 힘 10 증가
-    public float[] pathA_BreakToStrengthRates = { 0.3f, 0.5f, 0.8f }; // 그로기 50 쌓였을 때 * 0.5 = 힘 25 증가
+    public StatusEffectData pathA_StrengthFlatBuff;
+    public float[] pathA_HpToStrengthRates = { 0.05f, 0.10f, 0.15f };
+    public float[] pathA_BreakToStrengthRates = { 0.3f, 0.5f, 0.8f };
 
     [Header("진화 B: 무하한 (무적)")]
     public StatusEffectData pathB_InvincibleBuff;
@@ -31,7 +31,7 @@ public class SkillLogic_Hweok : SkillLogicBase
 
     public override bool AlwaysHits(SkillData skill) => true;
 
-    // ApplyEffectOnHit 대신 기존처럼 즉발 적용인 ApplyEffect 사용 (필살기 및 생존기)
+    // Turn gauge rule.
     public override void ApplyEffect(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (!isPlayerAttacking) return;
@@ -40,7 +40,7 @@ public class SkillLogic_Hweok : SkillLogicBase
         float buffValue = statBuffRates[index];
 
         // ---------------------------------------------------------
-        // [진화 A] 반전술식: 회복 '전'의 잃은 체력과 그로기 수치를 미리 스냅샷!
+        // Path A rule.
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.PathA)
         {
@@ -59,15 +59,15 @@ public class SkillLogic_Hweok : SkillLogicBase
             }
         }
 
-        // 1. 전 스탯(공/방/속/운) 3턴 버프 부여
+        // Buff/debuff rule.
         if (strengthBuff != null) BuffManager.Instance.AddEffect(true, strengthBuff, buffValue, 3);
         if (defenseBuff != null) BuffManager.Instance.AddEffect(true, defenseBuff, buffValue, 3);
         if (speedBuff != null) BuffManager.Instance.AddEffect(true, speedBuff, buffValue, 3);
         if (luckBuff != null) BuffManager.Instance.AddEffect(true, luckBuff, buffValue, 3);
 
-        // 2. 체력 회복 연산 및 UI 업데이트
+        // HP cost/recovery rule.
         float baseHeal = pStats.maxHp * healRates[index];
-        // [추가] 데몬 시너지 회복량 증폭
+        // HP cost/recovery rule.
         int healAmount = Mathf.RoundToInt(baseHeal * (1f + pStats.healingReceivedAmp));
 
         int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
@@ -82,14 +82,14 @@ public class SkillLogic_Hweok : SkillLogicBase
         if (excessHeal > 0 && CombatManager.Instance != null)
             CombatManager.Instance.ApplyOverhealBuff(excessHeal);
 
-        // 3. 버스트(그로기) 게이지 감소 연산
+        // Break rule.
         float breakRecover = breakRecoveryAmounts[index];
         if (BreakManager.Instance != null) BreakManager.Instance.RecoverBreakInstantly(true, breakRecover);
 
         DevLog.Log($"[스킬 효과] 회옥 발동! 전 스탯 {buffValue * 100}% 증가, 체력 {healAmount} 회복, 버스트 {breakRecover} 감소.");
 
         // ---------------------------------------------------------
-        // [진화 B] 무하한: 999턴짜리 무적 버프 부여
+        // Path B rule.
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.PathB && pathB_InvincibleBuff != null)
         {
@@ -98,7 +98,7 @@ public class SkillLogic_Hweok : SkillLogicBase
         }
 
         // ---------------------------------------------------------
-        // [진화 C] 무량공처: 적에게 스턴 부여
+        // Path C rule.
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.PathC && pathC_StunDebuff != null)
         {

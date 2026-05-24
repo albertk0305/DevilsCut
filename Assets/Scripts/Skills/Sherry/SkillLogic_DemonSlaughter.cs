@@ -31,9 +31,8 @@ public class SkillLogic_DemonSlaughter : SkillLogicBase
 
         if (skill.currentEvolution == SkillEvolution.PathA && isPlayerAttacking)
         {
-            // [진화 A] 고정 데미지 치환 트릭
-            // CombatManager의 private HP를 직접 건드리지 않고, 적의 최대 체력에 비례한 '고정 수치'를 
-            // 내 깡딜에 대비한 '배율(Multiplier)'로 환산하여 얹어줍니다! (방어무시 효과도 자동으로 받음)
+            // Path A rule.
+            // HP cost/recovery rule.
             float maxHpDamage = enemy.maxHp * pathA_MaxHpRates[index];
             float myBaseDamage = pStats.strength * skill.GetCurrentDamageMultiplier();
 
@@ -44,10 +43,10 @@ public class SkillLogic_DemonSlaughter : SkillLogicBase
         }
         else if (skill.currentEvolution == SkillEvolution.PathC && isPlayerAttacking)
         {
-            // [진화 C] 적에게 걸린 디버프 개수 카운트
+            // Path C rule.
             int debuffCount = 0;
 
-            // BuffManager에서 적군(false)의 상태 이상 리스트를 가져와서 'Debuff' 카테고리만 셉니다.
+            // Buff/debuff rule.
             var enemyEffects = BuffManager.Instance.GetEffects(false);
             foreach (var eff in enemyEffects)
             {
@@ -66,30 +65,29 @@ public class SkillLogic_DemonSlaughter : SkillLogicBase
 
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
-        // 타격이 적중했을 때만 흡혈 발동
+        // Lifesteal rule.
         if (!isHit) return;
 
-        // [진화 B] 유지력 강화 (흡혈)
+        // Path B rule.
         if (skill.currentEvolution == SkillEvolution.PathB && isPlayerAttacking)
         {
             int index = Mathf.Clamp(skill.skillLevel - 1, 0, pathB_LifestealRates.Length - 1);
             float lifestealRate = pathB_LifestealRates[index];
 
-            // 1. 역몽에서 썼던 '예상 데미지 역산' 공식을 사용해 방어 무시가 적용된 찐 데미지를 구합니다.
+            // Damage scaling rule.
             float skillMult = skill.GetCurrentDamageMultiplier() * GetDamageMultiplier(skill, pStats, enemy, isPlayerAttacking);
             int defenderDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
 
             float penRatio = GetArmorPenetrationRatio(skill, skill.skillLevel);
-            // 방어 무시가 적용된 실제 피해 감소율 계산
+            // Damage scaling rule.
             float drPercent = CombatMath.GetDamageReduction(defenderDef) * (1f - penRatio);
 
             float expectedDamage = (pStats.strength * skillMult) * (1f - drPercent);
 
-            // 2. 체력 흡수 연산
+            // HP cost/recovery rule.
             int healAmount = Mathf.RoundToInt(expectedDamage * lifestealRate);
             pStats.currentHp = Mathf.Clamp(pStats.currentHp + healAmount, 0, pStats.maxHp);
 
-            // 3. UI 연출
             if (CombatUIManager.Instance != null)
             {
                 CombatUIManager.Instance.playerStatusUI.UpdateHP(pStats.currentHp, pStats.maxHp);

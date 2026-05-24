@@ -16,18 +16,18 @@ public class SkillLogic_Yurokhwahong : SkillLogicBase
     [Tooltip("유효 속도(ES) 몇 당 1타씩 추가할지")]
     public float pathC_SpeedPerHit = 25f;
 
-    // 1. [진화 C] 타수 결정 로직
+    // Path C rule.
     public override int GetHitCount(SkillData skill)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
             int levelIdx = Mathf.Clamp(skill.skillLevel - 1, 0, pathC_BaseHits.Length - 1);
-            int baseHit = pathC_BaseHits[levelIdx]; // 레벨에 따른 기본 타수
+            int baseHit = pathC_BaseHits[levelIdx];
 
             int speed = StatManager.Instance.GetEffectiveStat(true, TargetStat.Speed);
             float es = CombatMath.GetEffectiveSpeed(speed);
 
-            // ES에 따른 추가 타수 (내림 처리)
+            // Multi-hit rule.
             int extraHit = Mathf.FloorToInt(es / pathC_SpeedPerHit);
 
             return baseHit + extraHit;
@@ -35,19 +35,19 @@ public class SkillLogic_Yurokhwahong : SkillLogicBase
         return base.GetHitCount(skill);
     }
 
-    // 2. [진화 C] 한 발당 데미지 계수 (고정 위력)
+    // Path C rule.
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC && isPlayerAttacking)
         {
             int levelIdx = Mathf.Clamp(skill.skillLevel - 1, 0, pathC_BaseHits.Length - 1);
-            // 핵심: 기본 타수로만 나눕니다. 타수가 늘어나도 이 위력은 유지됩니다!
+            // Multi-hit rule.
             return 1.0f / pathC_BaseHits[levelIdx];
         }
         return 1.0f;
     }
 
-    // 3. [진화 A & C] 브레이크 수치 보정
+    // Path A rule.
     public override float GetBreakMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC && isPlayerAttacking)
@@ -59,7 +59,7 @@ public class SkillLogic_Yurokhwahong : SkillLogicBase
         float multiplier = 1.0f;
         if (skill.currentEvolution == SkillEvolution.PathA && isPlayerAttacking)
         {
-            // [진화 A] 오버플로우 계산 로직 (기존 유지)
+            // Path A rule.
             int mySpeed = StatManager.Instance.GetEffectiveStat(true, TargetStat.Speed);
             int enemySpeed = StatManager.Instance.GetEffectiveStat(false, TargetStat.Speed);
             float myES = CombatMath.GetEffectiveSpeed(mySpeed);
@@ -92,13 +92,13 @@ public class SkillLogic_Yurokhwahong : SkillLogicBase
         }
     }
 
-    // [진화 C] 다단히트 변환에 따른 명중률 80% 페널티 적용
+    // Path C rule.
     public override float GetBaseAccuracy(SkillData skill)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
-            return 80f; // 칠화팔열(다단히트) 상태일 때는 명중률을 강제로 80으로 낮춤
+            return 80f;
         }
-        return base.GetBaseAccuracy(skill); // 기본값(90) 유지
+        return base.GetBaseAccuracy(skill);
     }
 }

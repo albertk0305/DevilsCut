@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Linq; // RemoveAll 등에 사용
+using System.Linq;
 
 [CreateAssetMenu(fileName = "Asmodeus_BattleSkill", menuName = "SupporterLogic/Asmodeus/Battle Skill")]
 public class SupporterLogic_Asmodeus_Battle : SupporterLogicBase
@@ -12,16 +12,16 @@ public class SupporterLogic_Asmodeus_Battle : SupporterLogicBase
     public int duration = 3;
 
     [Header("레벨별 수치 설정")]
-    public float[] healRates = { 0.15f, 0.20f, 0.30f }; // 체력 회복률
-    public float[] buffValues = { 0.15f, 0.20f, 0.25f }; // 전 스탯 상승률
+    public float[] healRates = { 0.15f, 0.20f, 0.30f };
+    public float[] buffValues = { 0.15f, 0.20f, 0.25f };
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, healRates.Length - 1);
 
-        // 1. 체력 회복
+        // HP cost/recovery rule.
         float baseHeal = pStats.maxHp * healRates[index];
-        // [추가] 데몬 시너지 회복량 증폭
+        // HP cost/recovery rule.
         int healAmount = Mathf.RoundToInt(baseHeal * (1f + pStats.healingReceivedAmp));
 
         int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
@@ -34,11 +34,11 @@ public class SupporterLogic_Asmodeus_Battle : SupporterLogicBase
             CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
         }
 
-        // [추가] 데몬 시너지 초과 회복 버프 연동
+        // HP cost/recovery rule.
         if (excessHeal > 0 && CombatManager.Instance != null)
             CombatManager.Instance.ApplyOverhealBuff(excessHeal);
 
-        // 2. 디버프 전체 정화 (레벨 무관 공통 효과)
+        // Buff/debuff rule.
         if (BuffManager.Instance != null)
         {
             var playerEffects = BuffManager.Instance.GetEffects(true);
@@ -48,7 +48,7 @@ public class SupporterLogic_Asmodeus_Battle : SupporterLogicBase
                 DevLog.Log($"[아스모데우스 배틀] 부정적인 효과 {removedCount}개를 정화했습니다!");
         }
 
-        // 3. 전 스탯 상승 버프 부여
+        // Buff/debuff rule.
         float currentBuffValue = buffValues[index];
         if (BuffManager.Instance != null)
         {

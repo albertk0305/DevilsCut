@@ -10,31 +10,31 @@ public class SkillLogic_MagicBullet : SkillLogicBase
     public float pathA_CritBonusPerHit = 15f;
 
     [Header("진화 B (Magia)")]
-    public StatusEffectData speedDownDebuff; // 속도 감소 디버프 연결
+    public StatusEffectData speedDownDebuff;
     [Tooltip("레벨별 속도 감소율 (제안: 20%, 25%, 30%)")]
     public float[] pathB_SpeedDownRates = { -0.20f, -0.25f, -0.30f };
 
     [Header("진화 C (Tiro Finale)")]
     [Tooltip("단타 압축 시 제공되는 방어 무시 비율")]
-    public float pathC_ArmorPenetration = 0.30f; // 30% 방관
+    public float pathC_ArmorPenetration = 0.30f;
 
     // ==========================================
-    // 타수 & 명중률 조작 (진화 C)
+    // Path C rule.
     // ==========================================
     public override int GetHitCount(SkillData skill)
     {
-        if (skill.currentEvolution == SkillEvolution.PathC) return 1; // 단타 압축!
+        if (skill.currentEvolution == SkillEvolution.PathC) return 1;
         return base.GetHitCount(skill);
     }
 
     public override float GetBaseAccuracy(SkillData skill)
     {
-        if (skill.currentEvolution == SkillEvolution.PathC) return 90f; // 단타는 90%로 복구
-        return 80f; // 다단히트는 80% 페널티 유지
+        if (skill.currentEvolution == SkillEvolution.PathC) return 90f;
+        return 80f;
     }
 
     // ==========================================
-    // 실시간 다이내믹 보정 (진화 A)
+    // Path A rule.
     // ==========================================
     public override float GetDynamicDamageMultiplier(SkillData skill, int consecutiveHits)
     {
@@ -55,19 +55,19 @@ public class SkillLogic_MagicBullet : SkillLogicBase
     }
 
     // ==========================================
-    // 압축 데미지 및 방어 무시 (진화 C)
+    // Path C rule.
     // ==========================================
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
-            return skill.GetCurrentHitCount(); // 원래 타수(4,6,8)만큼 데미지 뻥튀기!
+            return skill.GetCurrentHitCount();
         return 1.0f;
     }
 
     public override float GetBreakMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
-            return skill.GetCurrentHitCount(); // 브레이크 수치도 타수만큼 뻥튀기!
+            return skill.GetCurrentHitCount();
         return 1.0f;
     }
 
@@ -78,11 +78,11 @@ public class SkillLogic_MagicBullet : SkillLogicBase
     }
 
     // ==========================================
-    // 디버프 부여 (진화 B)
+    // Path B rule.
     // ==========================================
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
-        if (!isHit) return; // 빗나가면 속도 감소 부여 안 함!
+        if (!isHit) return;
 
         if (skill.currentEvolution == SkillEvolution.PathB && isPlayerAttacking && speedDownDebuff != null)
         {

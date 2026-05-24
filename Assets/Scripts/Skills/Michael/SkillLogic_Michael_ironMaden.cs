@@ -5,8 +5,8 @@ public class SkillLogic_Michael_IronMaiden : SkillLogic_Michael_Base
 {
     public override float GetSkillBonusLifesteal(SkillData skill)
     {
-        // [핵심] 미카엘의 기본 흡혈률(enemy.lifeSteal)은 AI가 관리하고,
-        // 철처녀 스킬만의 고유 흡혈 보너스 40%만 이 함수에서 던져줍니다!
+        // Lifesteal rule.
+        // Lifesteal rule.
         return 0.40f;
     }
 

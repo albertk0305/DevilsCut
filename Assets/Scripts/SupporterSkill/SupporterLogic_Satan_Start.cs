@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 
-// [패시브 스킬 공간]
-// TODO: 탐색 씬 구현 시, 사탄 패시브 '워 아이 니' 로직 추가 예정
-// (전투 승리 시 획득 경험치 10% / 20% / 35% 증가)
+// Passive hook.
+// Passive hook.
 
 [CreateAssetMenu(fileName = "Satan_StartSkill", menuName = "SupporterLogic/Satan/Start Skill")]
 public class SupporterLogic_Satan_Start : SupporterLogicBase
 {
     [Header("버프 에셋 설정")]
-    public StatusEffectData strBuff; // 공격력 상승 버프 (TargetStat = Strength)
-    public StatusEffectData defBuff; // 방어력 상승 버프 (TargetStat = Defense)
+    public StatusEffectData strBuff;
+    public StatusEffectData defBuff;
     public int duration = 3;
 
     [Header("레벨별 버프 배율 (%)")]
@@ -19,7 +18,7 @@ public class SupporterLogic_Satan_Start : SupporterLogicBase
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, buffRates.Length - 1);
 
-        // 3턴 동안 셰리의 공격력과 방어력을 동시에 폭발적으로 증가
+        // Turn gauge rule.
         if (strBuff != null)
             BuffManager.Instance.AddEffect(true, strBuff, buffRates[index], duration);
 

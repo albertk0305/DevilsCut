@@ -9,17 +9,17 @@ public class SupporterLogic_Beelzebub_Battle : SupporterLogicBase
     public int hitCount = 6;
 
     [Header("레벨별 데미지/그로기 설정")]
-    public float[] baseDamageValues = { 1.0f, 1.5f, 2.0f }; // 타당 힘 계수
-    public float[] breakDamageValues = { 1.5f, 2.0f, 3.0f }; // 타당 그로기 수치
+    public float[] baseDamageValues = { 1.0f, 1.5f, 2.0f };
+    public float[] breakDamageValues = { 1.5f, 2.0f, 3.0f };
 
     [Header("출혈 설정")]
     public StatusEffectData bleedDebuff;
-    public float[] bleedChances = { 0.20f, 0.30f, 0.40f }; // 타당 출혈 확률
-    public float[] bleedRates = { 0.8f, 1.0f, 1.2f };      // 스택당 출혈 위력
+    public float[] bleedChances = { 0.20f, 0.30f, 0.40f };
+    public float[] bleedRates = { 0.8f, 1.0f, 1.2f };
     public int bleedDuration = 3;
 
     [Header("데미지 증폭")]
-    public float[] debuffBoostRates = { 0.15f, 0.20f, 0.25f }; // 디버프당 증폭량
+    public float[] debuffBoostRates = { 0.15f, 0.20f, 0.25f };
 
     private int storedBleedStacks = 0;
 
@@ -57,14 +57,13 @@ public class SupporterLogic_Beelzebub_Battle : SupporterLogicBase
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, bleedRates.Length - 1);
 
-        // 1. 계산 중 쌓였던 출혈 스택 한 번에 부여
         if (storedBleedStacks > 0 && bleedDebuff != null)
         {
             BuffManager.Instance.AddEffect(false, bleedDebuff, bleedRates[index] * storedBleedStacks, bleedDuration);
             DevLog.Log($"[백화요란: 콜라주] Lv.{skillLevel} 발동! 출혈 {storedBleedStacks}회 중첩.");
         }
 
-        // 2. 그로기 데미지 적용
+        // Break rule.
         if (BreakManager.Instance != null && !BreakManager.Instance.IsBroken(false))
         {
             float totalBreak = breakDamageValues[index] * hitCount;

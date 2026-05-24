@@ -9,21 +9,20 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
     public StatusEffectData damageAmpDebuff;
 
     [Header("레벨별 주사위 보상 계수")]
-    public float[] lowBetMultipliers = { 5.0f, 10.0f, 15.0f };       // 눈금 2 (힘 계수)
-    public float[] raiseStakesAmps = { 0.30f, 0.50f, 0.80f };        // 눈금 3 (주는 피해 증가량)
-    public float[] doubleDownAmps = { 0.70f, 1.00f, 1.50f };         // 눈금 4 (다음 타격 증폭량)
-    public float[] fullHouseHeals = { 0.20f, 0.30f, 0.50f };         // 눈금 5 (체력 회복량)
-    public int[] jackpotMultipliers = { 30, 50, 100 };               // 눈금 6 (운 계수)
+    public float[] lowBetMultipliers = { 5.0f, 10.0f, 15.0f };
+    public float[] raiseStakesAmps = { 0.30f, 0.50f, 0.80f };
+    public float[] doubleDownAmps = { 0.70f, 1.00f, 1.50f };
+    public float[] fullHouseHeals = { 0.20f, 0.30f, 0.50f };
+    public int[] jackpotMultipliers = { 30, 50, 100 };
 
     [Header("레벨별 그로기 수치")]
-    public float[] smallBlindBreak = { 5f, 10f, 15f };   // 눈금 2
-    public float[] jackpotBreak = { 30f, 40f, 50f };    // 눈금 6
+    public float[] smallBlindBreak = { 5f, 10f, 15f };
+    public float[] jackpotBreak = { 30f, 40f, 50f };
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
         int playerLuck = StatManager.Instance.GetEffectiveStat(true, TargetStat.Luck);
 
-        // 1. 가중치 계산 (운 스탯 기반 확률 변동은 그대로 유지) [cite: 47]
         float[] weights = new float[6];
         weights[0] = Mathf.Max(10f, 100f - (playerLuck * 1.5f));
         weights[1] = Mathf.Max(20f, 100f - (playerLuck * 1.0f));
@@ -83,7 +82,7 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
                 if (damageGivenAmpBuff != null)
                     BuffManager.Instance.AddEffect(true, damageGivenAmpBuff, raiseStakesAmps[index], 3);
                 if (damageAmpDebuff != null)
-                    BuffManager.Instance.AddEffect(true, damageAmpDebuff, 0.30f, 3); // 받는 피해 페널티는 30% 고정 [cite: 50]
+                    BuffManager.Instance.AddEffect(true, damageAmpDebuff, 0.30f, 3);
                 break;
 
             case 4: // Double Down
@@ -96,7 +95,7 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
                 textToDisplay = "REBUY";
 
                 float baseHeal = pStats.maxHp * fullHouseHeals[index];
-                // [추가] 데몬 시너지 회복량 증폭
+                // HP cost/recovery rule.
                 int healAmount = Mathf.RoundToInt(baseHeal * (1f + pStats.healingReceivedAmp));
                 int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
 
@@ -104,7 +103,7 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
                 CombatUIManager.Instance.playerStatusUI.UpdateHP(pStats.currentHp, pStats.maxHp);
                 BuffManager.Instance.GetEffects(true).RemoveAll(e => e.effectData.category == EffectCategory.Debuff);
 
-                // [추가] 데몬 시너지 초과 회복 버프 연동
+                // HP cost/recovery rule.
                 if (excessHeal > 0 && CombatManager.Instance != null)
                     CombatManager.Instance.ApplyOverhealBuff(excessHeal);
                 break;
@@ -116,7 +115,7 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
                 CombatManager.Instance.ApplyDamageToEntity(false, jackpotDmg);
                 CombatUIManager.Instance.SpawnDamageText(jackpotDmg.ToString(), true, false);
                 isBrokenNow = BreakManager.Instance.AddBreakDamage(false, jackpotBreak[index]);
-                StyleRankManager.Instance.IncreaseRank(7); // 즉시 SSS 랭크 [cite: 53]
+                StyleRankManager.Instance.IncreaseRank(7);
                 break;
         }
 

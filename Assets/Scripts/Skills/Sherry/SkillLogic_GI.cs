@@ -28,7 +28,7 @@ public class SkillLogic_Gi : SkillLogicBase, IChargeSkillLogic
             !isUnleashingCharge;
     }
 
-    // 1. [진화 B] 스킬 코스트 지불 (체력 소모)
+    // Path B rule.
     public override void PaySkillCost(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (isPlayerAttacking && skill.currentEvolution == SkillEvolution.PathB)
@@ -46,24 +46,24 @@ public class SkillLogic_Gi : SkillLogicBase, IChargeSkillLogic
         }
     }
 
-    // 2. 데미지 배율 결정 (그로기 증폭 + 진화 보너스)
+    // Break rule.
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         float multiplier = 1.0f;
         int levelIdx = Mathf.Clamp(skill.skillLevel - 1, 0, 2);
 
-        // [기본 효과] 타겟이 그로기 상태면 증폭
+        // Break rule.
         if (BreakManager.Instance.IsBroken(!isPlayerAttacking))
         {
             multiplier += bonusDamageRatesOnBreak[levelIdx];
         }
 
-        // [진화 B] 상시 데미지 추가 보너스
+        // Path B rule.
         if (skill.currentEvolution == SkillEvolution.PathB)
         {
             multiplier += pathB_DamageBonus[levelIdx];
         }
-        // [진화 C] 차지 해방 시 폭발적 데미지 (기본 1.0 무시하고 전용 계수 사용)
+        // Path C rule.
         else if (skill.currentEvolution == SkillEvolution.PathC && CombatManager.Instance.currentState.isUnleashingCharge)
         {
             return pathC_ChargeDamageMult[levelIdx];
@@ -72,12 +72,12 @@ public class SkillLogic_Gi : SkillLogicBase, IChargeSkillLogic
         return multiplier;
     }
 
-    // 3. 명중 시 특수 효과 (진화 A & C)
+    // Path A rule.
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
         if (!isHit || !isPlayerAttacking) return;
 
-        // [진화 A] 보너스 턴 획득
+        // Path A rule.
         if (skill.currentEvolution == SkillEvolution.PathA)
         {
             if (CombatManager.Instance.currentState.wasEnemyBrokenAtSkillStart && BreakManager.Instance.IsBroken(false) && !CombatManager.Instance.currentState.hasUsedKiExtraTurn)
@@ -91,10 +91,10 @@ public class SkillLogic_Gi : SkillLogicBase, IChargeSkillLogic
                 }
             }
         }
-        // [진화 C] 스타일 랭크업 보너스
+        // Path C rule.
         else if (skill.currentEvolution == SkillEvolution.PathC && CombatManager.Instance.currentState.isUnleashingCharge)
         {
-            StyleRankManager.Instance.OnCriticalHit(); // 보너스로 랭크 한 단계 더 상승
+            StyleRankManager.Instance.OnCriticalHit();
         }
     }
 }

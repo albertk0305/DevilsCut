@@ -34,13 +34,10 @@ public class SkillLogic_Courage : SkillLogicBase
         return true;
     }
 
-    //  매개변수로 넘어온 skill을 그대로 씁니다!
     public override void ApplyEffect(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (isPlayerAttacking && guardBuffData != null)
         {
-            // PlayerManager 검색 로직 통째로 삭제! 
-            // skill.skillLevel 과 skill.currentEvolution 을 바로 씁니다.
 
             if (skill.currentEvolution == SkillEvolution.PathC)
             {
