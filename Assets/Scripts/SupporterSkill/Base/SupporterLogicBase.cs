@@ -1,16 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 
-// ¸ğµç Á¶·ÂÀÚ ½ºÅ³(°³Àü, ÀüÅõ)ÀÇ ºÎ¸ğ Å¬·¡½ºÀÔ´Ï´Ù.
+// ëª¨ë“  ì¡°ë ¥ì ìŠ¤í‚¬(ê°œì „, ì „íˆ¬)ì˜ ë¶€ëª¨ í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 public class SupporterLogicBase : ScriptableObject
 {
-    // 1. ´ÜÀÏ Å¸°İ µ¥¹ÌÁö °è»ê (±âº»°ª 0)
+    // 1. ë‹¨ì¼ íƒ€ê²© ë°ë¯¸ì§€ ê³„ì‚° (ê¸°ë³¸ê°’ 0)
     public virtual int CalculateDamage(PlayerStats pStats, EnemyData enemy, int skillLevel = 1) { return 0; }
 
-    // 1-2. ´Ù´ÜÈ÷Æ® µ¥¹ÌÁö °è»ê (±âº»°ª null)
-    // ¸®½ºÆ®¿¡ µ¥¹ÌÁö¸¦ ´ã¾Æ ¹İÈ¯ÇÏ¸é CompanionManager°¡ ¾Ë¾Æ¼­ ¿¬Å¸ ¿¬ÃâÀ» ÇØÁİ´Ï´Ù!
+    // 1-2. ë‹¤ë‹¨íˆíŠ¸ ë°ë¯¸ì§€ ê³„ì‚° (ê¸°ë³¸ê°’ null)
+    // ë¦¬ìŠ¤íŠ¸ì— ë°ë¯¸ì§€ë¥¼ ë‹´ì•„ ë°˜í™˜í•˜ë©´ CompanionManagerê°€ ì•Œì•„ì„œ ì—°íƒ€ ì—°ì¶œì„ í•´ì¤ë‹ˆë‹¤!
     public virtual List<int> CalculateMultiHitDamages(PlayerStats pStats, EnemyData enemy, int skillLevel = 1) { return null; }
 
-    // 2. Æ¯¼ö È¿°ú ¹ßµ¿ (¹öÇÁ, µğ¹öÇÁ µî)
+    // 2. íŠ¹ìˆ˜ íš¨ê³¼ ë°œë™ (ë²„í”„, ë””ë²„í”„ ë“±)
     public virtual void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1) { }
 }

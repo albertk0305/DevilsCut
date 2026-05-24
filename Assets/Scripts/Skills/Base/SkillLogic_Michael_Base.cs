@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class SkillLogic_Michael_Base : SkillLogicBase
 {
@@ -9,31 +9,31 @@ public class SkillLogic_Michael_Base : SkillLogicBase
         float currentHp = enemy.currentHp;
         float missingHpRatio = (maxHp - currentHp) / maxHp;
 
-        // ±âÈ¹ °ø½Ä Àû¿ë
+        // ê¸°íš ê³µì‹ ì ìš©
         float passiveMultiplier = 1.0f + (missingHpRatio * 1.2f);
 
-        // ½ÇÁ¦ µ¥ÀÌÅÍ¿¡ ¹İ¿µ (ÀÌ°Ô °»½ÅµÇ¾î¾ß UI°¡ º¯ÇÔ)
+        // ì‹¤ì œ ë°ì´í„°ì— ë°˜ì˜ (ì´ê²Œ ê°±ì‹ ë˜ì–´ì•¼ UIê°€ ë³€í•¨)
         enemy.damageGivenAmp = passiveMultiplier - 1.0f;
     }
 
-    // [ÆĞ½Ãºê 1] ÀÚÇĞÀû ÀÎ°ú (ÀÒÀº Ã¼·Â ºñ·Ê ÇÇÇØ ÁõÆø)
+    // [íŒ¨ì‹œë¸Œ 1] ìí•™ì  ì¸ê³¼ (ìƒì€ ì²´ë ¥ ë¹„ë¡€ í”¼í•´ ì¦í­)
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
-        // ¹ÌÄ«¿¤ÀÇ °ø°İÀÏ ¶§¸¸ Àû¿ë
+        // ë¯¸ì¹´ì—˜ì˜ ê³µê²©ì¼ ë•Œë§Œ ì ìš©
         if (isPlayerAttacking) return 1.0f;
 
-        // [ÇÙ½É] °ø½Ä ÆÄÆíÈ­ ¹æÁö!
-        // µ¥¹ÌÁö °è»ê Á÷Àü¿¡ AI¿¡°Ô "ÃÖ½Å ÆĞ½Ãºê ¼öÄ¡·Î ¾÷µ¥ÀÌÆ® ÇØÁà!"¶ó°í ¿äÃ»ÇÑ µÚ ±× °ªÀ» ±×´ë·Î ¾¹´Ï´Ù.
+        // [í•µì‹¬] ê³µì‹ íŒŒí¸í™” ë°©ì§€!
+        // ë°ë¯¸ì§€ ê³„ì‚° ì§ì „ì— AIì—ê²Œ "ìµœì‹  íŒ¨ì‹œë¸Œ ìˆ˜ì¹˜ë¡œ ì—…ë°ì´íŠ¸ í•´ì¤˜!"ë¼ê³  ìš”ì²­í•œ ë’¤ ê·¸ ê°’ì„ ê·¸ëŒ€ë¡œ ì”ë‹ˆë‹¤.
         if (enemy.aiBrain is EnemyAI_Michael michaelAi)
         {
             michaelAi.UpdatePassives(enemy);
         }
 
-        // enemy.damageGivenAmp¿¡´Â ÀÌ¹Ì ÃÖ½ÅÈ­µÈ (missingHpRatio * 1.2f) °ªÀÌ µé¾îÀÖ½À´Ï´Ù.
+        // enemy.damageGivenAmpì—ëŠ” ì´ë¯¸ ìµœì‹ í™”ëœ (missingHpRatio * 1.2f) ê°’ì´ ë“¤ì–´ìˆìŠµë‹ˆë‹¤.
         return 1.0f + enemy.damageGivenAmp;
     }
 
-    // [ÆĞ½Ãºê 2] ±¤ÆøÈ­ ÈíÇ÷ (2ÆäÀÌÁî Àü¿ë ÀÒÀº Ã¼·Â ºñ·Ê ÇÇÈí)
+    // [íŒ¨ì‹œë¸Œ 2] ê´‘í­í™” í¡í˜ˆ (2í˜ì´ì¦ˆ ì „ìš© ìƒì€ ì²´ë ¥ ë¹„ë¡€ í”¼í¡)
     public override float GetSkillBonusLifesteal(SkillData skill)
     {
         return 0f;

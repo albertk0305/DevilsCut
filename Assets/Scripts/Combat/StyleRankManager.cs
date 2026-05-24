@@ -1,6 +1,6 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-// ·©Å© ´Ü°è¸¦ Á¤ÀÇÇÏ´Â ¿­°ÅÇü
+// ë­í¬ ë‹¨ê³„ë¥¼ ì •ì˜í•˜ëŠ” ì—´ê±°í˜•
 public enum StyleRank { None, D, C, B, A, S, SS, SSS }
 
 public class StyleRankManager : MonoBehaviour
@@ -9,10 +9,10 @@ public class StyleRankManager : MonoBehaviour
 
     public StyleRank currentRank = StyleRank.None;
 
-    // ÀÌÀü ÅÏ¿¡ »ç¿ëÇÑ ½ºÅ³ Ä«Å×°í¸®¸¦ ±â¾ï
+    // ì´ì „ í„´ì— ì‚¬ìš©í•œ ìŠ¤í‚¬ ì¹´í…Œê³ ë¦¬ë¥¼ ê¸°ì–µ
     private SkillCategory previousCategory;
-    private bool isFirstSkill = true; // °ÔÀÓ ½ÃÀÛ ÈÄ Ã¹ ½ºÅ³ÀÎÁö È®ÀÎ
-    private bool hasCritThisTurn = false; // ÀÌ¹ø ÅÏ¿¡ Å©¸®Æ¼ÄÃÀÌ ÀÌ¹Ì ÅÍÁ³´ÂÁö È®ÀÎ
+    private bool isFirstSkill = true; // ê²Œì„ ì‹œì‘ í›„ ì²« ìŠ¤í‚¬ì¸ì§€ í™•ì¸
+    private bool hasCritThisTurn = false; // ì´ë²ˆ í„´ì— í¬ë¦¬í‹°ì»¬ì´ ì´ë¯¸ í„°ì¡ŒëŠ”ì§€ í™•ì¸
 
     private void Awake()
     {
@@ -22,21 +22,21 @@ public class StyleRankManager : MonoBehaviour
     public void InitCombat()
     {
         currentRank = StyleRank.None;
-        previousCategory = SkillCategory.None; // ¾ÆÁ÷ ¾Æ¹« ½ºÅ³µµ ¾È ¾´ »óÅÂ·Î! (¿¡·¯ ¹æÁö¸¦ À§ÇØ enum¿¡ NoneÀÌ ¾ø´Ù¸é Àû´çÈ÷ ÃÊ±âÈ­)
+        previousCategory = SkillCategory.None; // ì•„ì§ ì•„ë¬´ ìŠ¤í‚¬ë„ ì•ˆ ì“´ ìƒíƒœë¡œ! (ì—ëŸ¬ ë°©ì§€ë¥¼ ìœ„í•´ enumì— Noneì´ ì—†ë‹¤ë©´ ì ë‹¹íˆ ì´ˆê¸°í™”)
         isFirstSkill = true;
         hasCritThisTurn = false;
 
-        UpdateUI(); // UIµµ None »óÅÂ(Åõ¸í)·Î ¾÷µ¥ÀÌÆ®ÇÕ´Ï´Ù.
-        DevLog.Log("[½ºÅ¸ÀÏ ·©Å©] ÀüÅõ ½ÃÀÛ! ·©Å©°¡ ÃÊ±âÈ­µÇ¾ú½À´Ï´Ù.");
+        UpdateUI(); // UIë„ None ìƒíƒœ(íˆ¬ëª…)ë¡œ ì—…ë°ì´íŠ¸í•©ë‹ˆë‹¤.
+        DevLog.Log("[ìŠ¤íƒ€ì¼ ë­í¬] ì „íˆ¬ ì‹œì‘! ë­í¬ê°€ ì´ˆê¸°í™”ë˜ì—ˆìŠµë‹ˆë‹¤.");
     }
 
-    // ¸Å ÅÏÀÌ ³¡³¯ ¶§¸¶´Ù È£ÃâÇÏ¿© ÅÏ ´ÜÀ§ º¯¼öµéÀ» ÃÊ±âÈ­ÇÕ´Ï´Ù.
+    // ë§¤ í„´ì´ ëë‚  ë•Œë§ˆë‹¤ í˜¸ì¶œí•˜ì—¬ í„´ ë‹¨ìœ„ ë³€ìˆ˜ë“¤ì„ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
     public void ResetTurnState()
     {
         hasCritThisTurn = false;
     }
 
-    // 1. ½ºÅ³ »ç¿ë Á¶°Ç (´Ù¸¥ °è¿­ »ç¿ë ½Ã »ó½Â)
+    // 1. ìŠ¤í‚¬ ì‚¬ìš© ì¡°ê±´ (ë‹¤ë¥¸ ê³„ì—´ ì‚¬ìš© ì‹œ ìƒìŠ¹)
     public void OnSkillUsed(SkillCategory usedCategory)
     {
         if (isFirstSkill || usedCategory != previousCategory)
@@ -48,7 +48,7 @@ public class StyleRankManager : MonoBehaviour
         isFirstSkill = false;
     }
 
-    // 2. Å©¸®Æ¼ÄÃ Á¶°Ç (ÇÑ ÅÏ¿¡ ÇÑ ¹ø¸¸)
+    // 2. í¬ë¦¬í‹°ì»¬ ì¡°ê±´ (í•œ í„´ì— í•œ ë²ˆë§Œ)
     public void OnCriticalHit()
     {
         if (!hasCritThisTurn)
@@ -58,19 +58,19 @@ public class StyleRankManager : MonoBehaviour
         }
     }
 
-    // 3. È¸ÇÇ ¼º°ø Á¶°Ç
+    // 3. íšŒí”¼ ì„±ê³µ ì¡°ê±´
     public void OnEvade()
     {
         IncreaseRank();
     }
 
-    // 4. Àû ±×·Î±â Á¶°Ç
+    // 4. ì  ê·¸ë¡œê¸° ì¡°ê±´
     public void OnEnemyBreak()
     {
         IncreaseRank();
     }
 
-    // 5. ÇÇ°İ Á¶°Ç (·©Å© ÇÏ¶ô)
+    // 5. í”¼ê²© ì¡°ê±´ (ë­í¬ í•˜ë½)
     public void OnPlayerHit()
     {
         DecreaseRank();
@@ -80,17 +80,17 @@ public class StyleRankManager : MonoBehaviour
     {
         IncreaseRank();
 
-        // Âü°í: Ä«¸°°ú Á¶·ÂÀÚ´Â ¼Î¸®ÀÇ ½ºÅ³ Ä«Å×°í¸®(°Ë, ÃÑ µî)¿Í ¹«°üÇÏ¹Ç·Î
-        // previousCategory º¯¼ö¸¦ µ¤¾î¾²Áö ¾Ê°í ·©Å©¸¸ ±ò²ûÇÏ°Ô ¿Ã¸³´Ï´Ù!
+        // ì°¸ê³ : ì¹´ë¦°ê³¼ ì¡°ë ¥ìëŠ” ì…°ë¦¬ì˜ ìŠ¤í‚¬ ì¹´í…Œê³ ë¦¬(ê²€, ì´ ë“±)ì™€ ë¬´ê´€í•˜ë¯€ë¡œ
+        // previousCategory ë³€ìˆ˜ë¥¼ ë®ì–´ì“°ì§€ ì•Šê³  ë­í¬ë§Œ ê¹”ë”í•˜ê²Œ ì˜¬ë¦½ë‹ˆë‹¤!
     }
 
-    // --- ³»ºÎ ·©Å© Á¶Àı ·ÎÁ÷ ---
+    // --- ë‚´ë¶€ ë­í¬ ì¡°ì ˆ ë¡œì§ ---
     private void IncreaseRank()
     {
         if (currentRank < StyleRank.SSS)
         {
             currentRank++;
-            DevLog.Log($"[½ºÅ¸ÀÏ ·©Å© UP!] ÇöÀç ·©Å©: {currentRank}");
+            DevLog.Log($"[ìŠ¤íƒ€ì¼ ë­í¬ UP!] í˜„ì¬ ë­í¬: {currentRank}");
             UpdateUI();
         }
     }
@@ -100,14 +100,14 @@ public class StyleRankManager : MonoBehaviour
         if (currentRank > StyleRank.None)
         {
             currentRank--;
-            DevLog.Log($"[½ºÅ¸ÀÏ ·©Å© DOWN...] ÇöÀç ·©Å©: {currentRank}");
+            DevLog.Log($"[ìŠ¤íƒ€ì¼ ë­í¬ DOWN...] í˜„ì¬ ë­í¬: {currentRank}");
             UpdateUI();
         }
     }
 
     private void UpdateUI()
     {
-        // UI ¸Å´ÏÀú¿¡°Ô ·©Å© ÀÌ¹ÌÁö¸¦ ¹Ù²Ù¶ó°í Áö½ÃÇÕ´Ï´Ù.
+        // UI ë§¤ë‹ˆì €ì—ê²Œ ë­í¬ ì´ë¯¸ì§€ë¥¼ ë°”ê¾¸ë¼ê³  ì§€ì‹œí•©ë‹ˆë‹¤.
         CombatUIManager.Instance.UpdateStyleRankUI(currentRank);
     }
 
@@ -118,13 +118,13 @@ public class StyleRankManager : MonoBehaviour
         isFirstSkill = true;
 
         UpdateUI();
-        DevLog.Log("[½ºÅ¸ÀÏ ·©Å©] ±Ã±Ø±â »ç¿ë! ·©Å©°¡ NoneÀ¸·Î ÃÊ±âÈ­µÇ¾ú½À´Ï´Ù.");
+        DevLog.Log("[ìŠ¤íƒ€ì¼ ë­í¬] ê¶ê·¹ê¸° ì‚¬ìš©! ë­í¬ê°€ Noneìœ¼ë¡œ ì´ˆê¸°í™”ë˜ì—ˆìŠµë‹ˆë‹¤.");
     }
 
     public float GetRankDamageMultiplier()
     {
-        // [ÃÖÀûÈ­] EnumÀÇ Á¤¼ö°ª(None=0, D=1 ~ SSS=7)À» ÀÌ¿ëÇØ ½ºÀ§Ä¡¹®À» ¼öÇĞ °ø½Ä ÇÑ ÁÙ·Î ¾ĞÃà!
-        // 0ÀÏ ¶© 1.0f, 1ÀÏ ¶© 1.1f, 7ÀÏ ¶© 1.7f°¡ ¹İÈ¯µË´Ï´Ù.
+        // [ìµœì í™”] Enumì˜ ì •ìˆ˜ê°’(None=0, D=1 ~ SSS=7)ì„ ì´ìš©í•´ ìŠ¤ìœ„ì¹˜ë¬¸ì„ ìˆ˜í•™ ê³µì‹ í•œ ì¤„ë¡œ ì••ì¶•!
+        // 0ì¼ ë• 1.0f, 1ì¼ ë• 1.1f, 7ì¼ ë• 1.7fê°€ ë°˜í™˜ë©ë‹ˆë‹¤.
         return 1.0f + ((int)currentRank * 0.1f);
     }
 
@@ -137,7 +137,7 @@ public class StyleRankManager : MonoBehaviour
                 currentRank++;
             }
         }
-        DevLog.Log($"[½ºÅ¸ÀÏ ·©Å©] ±Ş»ó½Â! ÇöÀç ·©Å©: {currentRank}");
+        DevLog.Log($"[ìŠ¤íƒ€ì¼ ë­í¬] ê¸‰ìƒìŠ¹! í˜„ì¬ ë­í¬: {currentRank}");
         UpdateUI();
     }
 }

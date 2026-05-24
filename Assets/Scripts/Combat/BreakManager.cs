@@ -1,6 +1,6 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-// [ºÐ¸®] ±×·Î±â(Break) °ÔÀÌÁöÀÇ ´©Àû, ½º³ë¿ìº¼ º¸Á¤, ¹ßµ¿ ÆÇÁ¤ ¹× ÀÚ¿¬ È¸º¹À» Àü´ãÇÕ´Ï´Ù.
+// [ë¶„ë¦¬] ê·¸ë¡œê¸°(Break) ê²Œì´ì§€ì˜ ëˆ„ì , ìŠ¤ë…¸ìš°ë³¼ ë³´ì •, ë°œë™ íŒì • ë° ìžì—° íšŒë³µì„ ì „ë‹´í•©ë‹ˆë‹¤.
 public class BreakManager : MonoBehaviour
 {
     public static BreakManager Instance;
@@ -16,7 +16,7 @@ public class BreakManager : MonoBehaviour
         if (Instance == null) Instance = this;
     }
 
-    // ÀüÅõ ½ÃÀÛ ½Ã ÃÊ±âÈ­
+    // ì „íˆ¬ ì‹œìž‘ ì‹œ ì´ˆê¸°í™”
     public void InitBreakState()
     {
         playerBreak = 0f;
@@ -29,13 +29,13 @@ public class BreakManager : MonoBehaviour
             CombatUIManager.Instance.UpdatePlayerBreak(playerBreak);
             CombatUIManager.Instance.UpdateEnemyBreak(enemyBreak);
         }
-        DevLog.Log("[BreakManager] ±×·Î±â(Break) »óÅÂ ÃÊ±âÈ­ ¿Ï·á");
+        DevLog.Log("[BreakManager] ê·¸ë¡œê¸°(Break) ìƒíƒœ ì´ˆê¸°í™” ì™„ë£Œ");
     }
 
     public bool IsBroken(bool isPlayer) => isPlayer ? isPlayerBroken : isEnemyBroken;
     public float GetBreakGauge(bool isPlayer) => isPlayer ? playerBreak : enemyBreak;
 
-    // [Ãß°¡] ½Ç½Ã°£À¸·Î ÇÃ·¹ÀÌ¾î/ÀûÀÇ ÃÖ´ë ºê·¹ÀÌÅ© ¼öÄ¡¸¦ °¡Á®¿À´Â ÇïÆÛ ÇÔ¼ö
+    // [ì¶”ê°€] ì‹¤ì‹œê°„ìœ¼ë¡œ í”Œë ˆì´ì–´/ì ì˜ ìµœëŒ€ ë¸Œë ˆì´í¬ ìˆ˜ì¹˜ë¥¼ ê°€ì ¸ì˜¤ëŠ” í—¬í¼ í•¨ìˆ˜
     private float GetMaxGauge(bool isPlayer)
     {
         if (CombatManager.Instance == null) return 100f;
@@ -44,15 +44,15 @@ public class BreakManager : MonoBehaviour
             : CombatManager.Instance.GetCurrentEnemyData().maxBreakGauge;
     }
 
-    // ºê·¹ÀÌÅ© µ¥¹ÌÁö ´©Àû ¹× ¹ßµ¿ È®ÀÎ (¹æ±Ý ºê·¹ÀÌÅ©°¡ ÅÍÁ³´Ù¸é true ¹ÝÈ¯)
+    // ë¸Œë ˆì´í¬ ë°ë¯¸ì§€ ëˆ„ì  ë° ë°œë™ í™•ì¸ (ë°©ê¸ˆ ë¸Œë ˆì´í¬ê°€ í„°ì¡Œë‹¤ë©´ true ë°˜í™˜)
     public bool AddBreakDamage(bool isPlayerTarget, float damage)
     {
         if (IsBroken(isPlayerTarget)) return false;
 
         float currentGauge = isPlayerTarget ? playerBreak : enemyBreak;
-        float maxGauge = GetMaxGauge(isPlayerTarget); // ´ë»óÀÇ ÃÖ´ëÄ¡ È£Ãâ
+        float maxGauge = GetMaxGauge(isPlayerTarget); // ëŒ€ìƒì˜ ìµœëŒ€ì¹˜ í˜¸ì¶œ
 
-        // ¼öÇÐ ¿¬»ê¿¡ ÃÖ´ëÄ¡ Àü´Þ
+        // ìˆ˜í•™ ì—°ì‚°ì— ìµœëŒ€ì¹˜ ì „ë‹¬
         float snowballMult = CombatMath.GetBreakSnowballMultiplier(currentGauge, maxGauge);
         float finalDamage = damage * snowballMult;
 
@@ -60,27 +60,27 @@ public class BreakManager : MonoBehaviour
         {
             playerBreak += finalDamage;
             if (playerBreak >= maxGauge) { TriggerBreak(true); return true; }
-            else CombatUIManager.Instance.UpdatePlayerBreak((playerBreak / maxGauge) * 100f); // UI¿¡´Â 0~100% ºñÀ²·Î º¯È¯ Àü´Þ
+            else CombatUIManager.Instance.UpdatePlayerBreak((playerBreak / maxGauge) * 100f); // UIì—ëŠ” 0~100% ë¹„ìœ¨ë¡œ ë³€í™˜ ì „ë‹¬
         }
         else
         {
             enemyBreak += finalDamage;
             if (enemyBreak >= maxGauge) { TriggerBreak(false); return true; }
-            else CombatUIManager.Instance.UpdateEnemyBreak((enemyBreak / maxGauge) * 100f); // UI¿¡´Â 0~100% ºñÀ²·Î º¯È¯ Àü´Þ
+            else CombatUIManager.Instance.UpdateEnemyBreak((enemyBreak / maxGauge) * 100f); // UIì—ëŠ” 0~100% ë¹„ìœ¨ë¡œ ë³€í™˜ ì „ë‹¬
         }
         return false;
     }
 
-    // ºê·¹ÀÌÅ©(±×·Î±â) ÅÍÁ³À» ¶§ÀÇ ³»ºÎ Ã³¸®
+    // ë¸Œë ˆì´í¬(ê·¸ë¡œê¸°) í„°ì¡Œì„ ë•Œì˜ ë‚´ë¶€ ì²˜ë¦¬
     private void TriggerBreak(bool isPlayerTarget)
     {
         float maxGauge = GetMaxGauge(isPlayerTarget);
 
         if (isPlayerTarget)
         {
-            playerBreak = maxGauge; // 100f ´ë½Å maxGauge·Î °íÁ¤
+            playerBreak = maxGauge; // 100f ëŒ€ì‹  maxGaugeë¡œ ê³ ì •
             isPlayerBroken = true;
-            CombatUIManager.Instance.UpdatePlayerBreak(100f); // ²Ë Âù UI(100%) Ç¥Ãâ
+            CombatUIManager.Instance.UpdatePlayerBreak(100f); // ê½‰ ì°¬ UI(100%) í‘œì¶œ
             TurnManager.Instance.ResetGauge(EntityType.Player);
             CombatUIManager.Instance.playerStatusUI.SetBreakGaugeState(true);
 
@@ -89,9 +89,9 @@ public class BreakManager : MonoBehaviour
         }
         else
         {
-            enemyBreak = maxGauge; // 100f ´ë½Å maxGauge·Î °íÁ¤
+            enemyBreak = maxGauge; // 100f ëŒ€ì‹  maxGaugeë¡œ ê³ ì •
             isEnemyBroken = true;
-            CombatUIManager.Instance.UpdateEnemyBreak(100f); // ²Ë Âù UI(100%) Ç¥Ãâ
+            CombatUIManager.Instance.UpdateEnemyBreak(100f); // ê½‰ ì°¬ UI(100%) í‘œì¶œ
             TurnManager.Instance.ResetGauge(EntityType.Enemy);
             CombatUIManager.Instance.enemyStatusUI.SetBreakGaugeState(true);
 
@@ -101,10 +101,10 @@ public class BreakManager : MonoBehaviour
             if (enemyData != null && enemyData.breakImage != null)
                 CombatUIManager.Instance.SetDefenderImage(false, enemyData.breakImage);
         }
-        DevLog.Log($"[ºê·¹ÀÌÅ© ¹ßµ¿!] {(isPlayerTarget ? "¾Æ±º" : "Àû")}ÀÌ ±×·Î±â »óÅÂ¿¡ ºüÁ³½À´Ï´Ù!");
+        DevLog.Log($"[ë¸Œë ˆì´í¬ ë°œë™!] {(isPlayerTarget ? "ì•„êµ°" : "ì ")}ì´ ê·¸ë¡œê¸° ìƒíƒœì— ë¹ ì¡ŒìŠµë‹ˆë‹¤!");
     }
 
-    // ÅÏ Á¾·á ½Ã ÀÚ¿¬ È¸º¹ ·ÎÁ÷
+    // í„´ ì¢…ë£Œ ì‹œ ìžì—° íšŒë³µ ë¡œì§
     public void RecoverBreakOnTurnEnd(bool isPlayerTarget, bool tookDamage)
     {
         if (IsBroken(isPlayerTarget)) return;
@@ -116,19 +116,19 @@ public class BreakManager : MonoBehaviour
         {
             float recovery = CombatMath.GetBreakRecoveryAmount(playerBreak, maxGauge);
             playerBreak = Mathf.Max(0f, playerBreak - recovery);
-            CombatUIManager.Instance.UpdatePlayerBreak((playerBreak / maxGauge) * 100f); // ºñÀ² È¯»ê
-            DevLog.Log($"[±×·Î±â È¸º¹] ¼Î¸®: -{recovery:F1} (ÇöÀç: {playerBreak:F1})");
+            CombatUIManager.Instance.UpdatePlayerBreak((playerBreak / maxGauge) * 100f); // ë¹„ìœ¨ í™˜ì‚°
+            DevLog.Log($"[ê·¸ë¡œê¸° íšŒë³µ] ì…°ë¦¬: -{recovery:F1} (í˜„ìž¬: {playerBreak:F1})");
         }
         else if (!isPlayerTarget && enemyBreak > 0f)
         {
             float recovery = CombatMath.GetBreakRecoveryAmount(enemyBreak, maxGauge);
             enemyBreak = Mathf.Max(0f, enemyBreak - recovery);
-            CombatUIManager.Instance.UpdateEnemyBreak((enemyBreak / maxGauge) * 100f); // ºñÀ² È¯»ê
-            DevLog.Log($"[±×·Î±â È¸º¹] Àû: -{recovery:F1} (ÇöÀç: {enemyBreak:F1})");
+            CombatUIManager.Instance.UpdateEnemyBreak((enemyBreak / maxGauge) * 100f); // ë¹„ìœ¨ í™˜ì‚°
+            DevLog.Log($"[ê·¸ë¡œê¸° íšŒë³µ] ì : -{recovery:F1} (í˜„ìž¬: {enemyBreak:F1})");
         }
     }
 
-    // ±×·Î±â ±â»ó Ã³¸®
+    // ê·¸ë¡œê¸° ê¸°ìƒ ì²˜ë¦¬
     public void WakeUpFromBreak(bool isPlayer)
     {
         if (isPlayer)
@@ -137,7 +137,7 @@ public class BreakManager : MonoBehaviour
             playerBreak = 0f;
             CombatUIManager.Instance.UpdatePlayerBreak(0f);
 
-            // [Ãß°¡] ±â»ó ½Ã Æò¼Ò °ÔÀÌÁö ÀÌ¹ÌÁö·Î ¿ø»ó º¹±¸!
+            // [ì¶”ê°€] ê¸°ìƒ ì‹œ í‰ì†Œ ê²Œì´ì§€ ì´ë¯¸ì§€ë¡œ ì›ìƒ ë³µêµ¬!
             CombatUIManager.Instance.playerStatusUI.SetBreakGaugeState(false);
         }
         else
@@ -146,7 +146,7 @@ public class BreakManager : MonoBehaviour
             enemyBreak = 0f;
             CombatUIManager.Instance.UpdateEnemyBreak(0f);
 
-            // [Ãß°¡] ±â»ó ½Ã Æò¼Ò °ÔÀÌÁö ÀÌ¹ÌÁö·Î ¿ø»ó º¹±¸!
+            // [ì¶”ê°€] ê¸°ìƒ ì‹œ í‰ì†Œ ê²Œì´ì§€ ì´ë¯¸ì§€ë¡œ ì›ìƒ ë³µêµ¬!
             CombatUIManager.Instance.enemyStatusUI.SetBreakGaugeState(false);
 
             if (CombatManager.Instance != null)
@@ -166,7 +166,7 @@ public class BreakManager : MonoBehaviour
         {
             playerBreak = Mathf.Max(0f, playerBreak - amount);
             CombatUIManager.Instance.UpdatePlayerBreak((playerBreak / maxGauge) * 100f);
-            DevLog.Log($"[±×·Î±â Áï½Ã È¸º¹] ¼Î¸®ÀÇ ¹ö½ºÆ® °ÔÀÌÁö°¡ {amount} °¨¼ÒÇß½À´Ï´Ù. (ÇöÀç: {playerBreak:F1})");
+            DevLog.Log($"[ê·¸ë¡œê¸° ì¦‰ì‹œ íšŒë³µ] ì…°ë¦¬ì˜ ë²„ìŠ¤íŠ¸ ê²Œì´ì§€ê°€ {amount} ê°ì†Œí–ˆìŠµë‹ˆë‹¤. (í˜„ìž¬: {playerBreak:F1})");
         }
         else if (!isPlayerTarget && enemyBreak > 0f)
         {

@@ -1,32 +1,32 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-// [ÆĞ½Ãºê ½ºÅ³ °ø°£]
-// TODO: Å½»ö ¾À ±¸Çö ½Ã, »çÅº ÆĞ½Ãºê '¿ö ¾ÆÀÌ ´Ï' ·ÎÁ÷ Ãß°¡ ¿¹Á¤
-// (ÀüÅõ ½Â¸® ½Ã È¹µæ °æÇèÄ¡ 10% / 20% / 35% Áõ°¡)
+// [íŒ¨ì‹œë¸Œ ìŠ¤í‚¬ ê³µê°„]
+// TODO: íƒìƒ‰ ì”¬ êµ¬í˜„ ì‹œ, ì‚¬íƒ„ íŒ¨ì‹œë¸Œ 'ì›Œ ì•„ì´ ë‹ˆ' ë¡œì§ ì¶”ê°€ ì˜ˆì •
+// (ì „íˆ¬ ìŠ¹ë¦¬ ì‹œ íšë“ ê²½í—˜ì¹˜ 10% / 20% / 35% ì¦ê°€)
 
 [CreateAssetMenu(fileName = "Satan_StartSkill", menuName = "SupporterLogic/Satan/Start Skill")]
 public class SupporterLogic_Satan_Start : SupporterLogicBase
 {
-    [Header("¹öÇÁ ¿¡¼Â ¼³Á¤")]
-    public StatusEffectData strBuff; // °ø°İ·Â »ó½Â ¹öÇÁ (TargetStat = Strength)
-    public StatusEffectData defBuff; // ¹æ¾î·Â »ó½Â ¹öÇÁ (TargetStat = Defense)
+    [Header("ë²„í”„ ì—ì…‹ ì„¤ì •")]
+    public StatusEffectData strBuff; // ê³µê²©ë ¥ ìƒìŠ¹ ë²„í”„ (TargetStat = Strength)
+    public StatusEffectData defBuff; // ë°©ì–´ë ¥ ìƒìŠ¹ ë²„í”„ (TargetStat = Defense)
     public int duration = 3;
 
-    [Header("·¹º§º° ¹öÇÁ ¹èÀ² (%)")]
+    [Header("ë ˆë²¨ë³„ ë²„í”„ ë°°ìœ¨ (%)")]
     public float[] buffRates = { 0.15f, 0.25f, 0.35f };
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, buffRates.Length - 1);
 
-        // 3ÅÏ µ¿¾È ¼Î¸®ÀÇ °ø°İ·Â°ú ¹æ¾î·ÂÀ» µ¿½Ã¿¡ Æø¹ßÀûÀ¸·Î Áõ°¡
+        // 3í„´ ë™ì•ˆ ì…°ë¦¬ì˜ ê³µê²©ë ¥ê³¼ ë°©ì–´ë ¥ì„ ë™ì‹œì— í­ë°œì ìœ¼ë¡œ ì¦ê°€
         if (strBuff != null)
             BuffManager.Instance.AddEffect(true, strBuff, buffRates[index], duration);
 
         if (defBuff != null)
             BuffManager.Instance.AddEffect(true, defBuff, buffRates[index], duration);
 
-        DevLog.Log($"[·Ï¿Â] Lv.{skillLevel} ¹ßµ¿! ¼Î¸®ÀÇ °ø°İ·Â/¹æ¾î·Â {buffRates[index] * 100}% Áõ°¡ ¹öÇÁ 3ÅÏ ºÎ¿©.");
+        DevLog.Log($"[ë¡ì˜¨] Lv.{skillLevel} ë°œë™! ì…°ë¦¬ì˜ ê³µê²©ë ¥/ë°©ì–´ë ¥ {buffRates[index] * 100}% ì¦ê°€ ë²„í”„ 3í„´ ë¶€ì—¬.");
         if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
     }
 }

@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_FantasticDreamer", menuName = "SkillLogic/Player/FantasticDreamer")]
 public class SkillLogic_FantasticDreamer : SkillLogicBase
 {
-    [Header("´Ü°èº° µô °è¼ö (1´Ü°è ~ 5´Ü°è)")]
+    [Header("ë‹¨ê³„ë³„ ë”œ ê³„ìˆ˜ (1ë‹¨ê³„ ~ 5ë‹¨ê³„)")]
     private readonly float[][] stageMultipliers = new float[][]
     {
         new float[] { 3.0f, 6.0f, 9.0f, 12.0f, 18.0f },
@@ -11,7 +11,7 @@ public class SkillLogic_FantasticDreamer : SkillLogicBase
         new float[] { 5.0f, 9.0f, 13.0f, 18.0f, 26.0f }
     };
 
-    [Header("´Ü°èº° ºê·¹ÀÌÅ© ¼öÄ¡ (1´Ü°è ~ 5´Ü°è)")]
+    [Header("ë‹¨ê³„ë³„ ë¸Œë ˆì´í¬ ìˆ˜ì¹˜ (1ë‹¨ê³„ ~ 5ë‹¨ê³„)")]
     private readonly float[][] stageBreakPowers = new float[][]
     {
         new float[] { 4.0f, 9.0f, 14.0f, 18.0f, 22.0f },
@@ -19,15 +19,15 @@ public class SkillLogic_FantasticDreamer : SkillLogicBase
         new float[] { 6.0f, 11.0f, 18.0f, 24.0f, 28.0f }
     };
 
-    [Header("ÁøÈ­ B (Explosion) ¼³Á¤")]
-    public float[] stage6Multipliers = { 30.0f, 40.0f, 50.0f }; // ¿¢½ºÄ®¸®¹ö ÀÌ»óÀÇ µô
+    [Header("ì§„í™” B (Explosion) ì„¤ì •")]
+    public float[] stage6Multipliers = { 30.0f, 40.0f, 50.0f }; // ì—‘ìŠ¤ì¹¼ë¦¬ë²„ ì´ìƒì˜ ë”œ
     public float[] stage6BreakPowers = { 25.0f, 30.0f, 35.0f };
-    public float stage6ArmorPenetration = 0.50f; // 50% ¹æ¾î ¹«½Ã
+    public float stage6ArmorPenetration = 0.50f; // 50% ë°©ì–´ ë¬´ì‹œ
 
-    [Header("ÁøÈ­ C (Steal) ¼³Á¤")]
-    public StatusEffectData luckUpBuff;     // ¼Î¸® ¿î »ó½Â (Flat)
-    public StatusEffectData luckDownDebuff; // Àû ¿î ÇÏ¶ô (Flat)
-    public float luckStealAmount = 15f;     // ÇÑ ¹ø¿¡ ÈÉÄ¥ °íÁ¤ ¼öÄ¡
+    [Header("ì§„í™” C (Steal) ì„¤ì •")]
+    public StatusEffectData luckUpBuff;     // ì…°ë¦¬ ìš´ ìƒìŠ¹ (Flat)
+    public StatusEffectData luckDownDebuff; // ì  ìš´ í•˜ë½ (Flat)
+    public float luckStealAmount = 15f;     // í•œ ë²ˆì— í›”ì¹  ê³ ì • ìˆ˜ì¹˜
 
     [System.NonSerialized]
     private int lastRolledStage = 1;
@@ -51,18 +51,18 @@ public class SkillLogic_FantasticDreamer : SkillLogicBase
 
         float totalWeight = w1 + w2 + w3 + w4 + w5;
 
-        // [ÁøÈ­ B] ÀÍ½ºÇÃ·ÎÀü: °¡ÁßÄ¡ Ç®¿¡ 6´Ü°è(w6) ±Ø¾Ç È®·ü·Î Ãß°¡!
+        // [ì§„í™” B] ìµìŠ¤í”Œë¡œì „: ê°€ì¤‘ì¹˜ í’€ì— 6ë‹¨ê³„(w6) ê·¹ì•… í™•ë¥ ë¡œ ì¶”ê°€!
         float w6 = 0f;
         if (skill.currentEvolution == SkillEvolution.PathB && isPlayerAttacking)
         {
-            // ±âº» 1% ~ ¿î 200ÀÏ ¶§ 15%·Î º¸Á¤
+            // ê¸°ë³¸ 1% ~ ìš´ 200ì¼ ë•Œ 15%ë¡œ ë³´ì •
             float targetProb = Mathf.Clamp(0.01f + (luck / 200f) * 0.14f, 0.01f, 0.15f);
             w6 = (targetProb * totalWeight) / (1f - targetProb);
         }
 
         float roll = Random.Range(0f, totalWeight + w6);
 
-        // ·ê·¿ ÆÇÁ¤
+        // ë£°ë › íŒì •
         if (skill.currentEvolution == SkillEvolution.PathB && roll >= totalWeight) lastRolledStage = 6;
         else if (roll < w1) lastRolledStage = 1;
         else if (roll < w1 + w2) lastRolledStage = 2;
@@ -70,17 +70,17 @@ public class SkillLogic_FantasticDreamer : SkillLogicBase
         else if (roll < w1 + w2 + w3 + w4) lastRolledStage = 4;
         else lastRolledStage = 5;
 
-        // [ÁøÈ­ A] ÃÖ°­±Ş Çà¿î (ÃµÀå ½Ã½ºÅÛ)
+        // [ì§„í™” A] ìµœê°•ê¸‰ í–‰ìš´ (ì²œì¥ ì‹œìŠ¤í…œ)
         if (skill.currentEvolution == SkillEvolution.PathA && lastRolledStage == 1)
         {
             lastRolledStage = 3;
-            DevLog.Log("[ÁøÈ­ A] ÃÖ°­±Ş Çà¿î ¹ßµ¿! 1´Ü°è¸¦ 3´Ü°è·Î °­Á¦ º¸Á¤ÇÕ´Ï´Ù.");
+            DevLog.Log("[ì§„í™” A] ìµœê°•ê¸‰ í–‰ìš´ ë°œë™! 1ë‹¨ê³„ë¥¼ 3ë‹¨ê³„ë¡œ ê°•ì œ ë³´ì •í•©ë‹ˆë‹¤.");
         }
 
         int levelIndex = Mathf.Clamp(skill.skillLevel - 1, 0, 2);
         float finalMultiplier = (lastRolledStage == 6) ? stage6Multipliers[levelIndex] : stageMultipliers[levelIndex][lastRolledStage - 1];
 
-        DevLog.Log($"[ÆÇÅ¸½ºÆ½ µå¸®¸Ó] ´çÃ·: {lastRolledStage}´Ü°è! (ÃÖÁ¾ µô °è¼ö: {finalMultiplier})");
+        DevLog.Log($"[íŒíƒ€ìŠ¤í‹± ë“œë¦¬ë¨¸] ë‹¹ì²¨: {lastRolledStage}ë‹¨ê³„! (ìµœì¢… ë”œ ê³„ìˆ˜: {finalMultiplier})");
         return finalMultiplier;
     }
 
@@ -90,7 +90,7 @@ public class SkillLogic_FantasticDreamer : SkillLogicBase
         return (lastRolledStage == 6) ? stage6BreakPowers[levelIndex] : stageBreakPowers[levelIndex][lastRolledStage - 1];
     }
 
-    // [ÁøÈ­ B] 6´Ü°è ´çÃ· ½Ã ¹æ¾î·Â 50% ¹«½Ã
+    // [ì§„í™” B] 6ë‹¨ê³„ ë‹¹ì²¨ ì‹œ ë°©ì–´ë ¥ 50% ë¬´ì‹œ
     public override float GetArmorPenetrationRatio(SkillData skill, int skillLevel)
     {
         if (skill.currentEvolution == SkillEvolution.PathB && lastRolledStage == 6)
@@ -98,7 +98,7 @@ public class SkillLogic_FantasticDreamer : SkillLogicBase
         return base.GetArmorPenetrationRatio(skill, skillLevel);
     }
 
-    // [ÁøÈ­ C] ½ºÆ¿ (¿î °­Å»)
+    // [ì§„í™” C] ìŠ¤í‹¸ (ìš´ ê°•íƒˆ)
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
         if (!isHit) return;
@@ -107,7 +107,7 @@ public class SkillLogic_FantasticDreamer : SkillLogicBase
         {
             if (luckUpBuff != null && luckDownDebuff != null)
             {
-                // 1. ¹öÇÁ ¸Å´ÏÀú¿¡¼­ ÇöÀç °É·ÁÀÖ´Â ¿î »ó½Â/ÇÏ¶ô ¹öÇÁ¸¦ Ã£¾Æ ±âÁ¸ ¼öÄ¡¸¦ ÆÄ¾ÇÇÕ´Ï´Ù.
+                // 1. ë²„í”„ ë§¤ë‹ˆì €ì—ì„œ í˜„ì¬ ê±¸ë ¤ìˆëŠ” ìš´ ìƒìŠ¹/í•˜ë½ ë²„í”„ë¥¼ ì°¾ì•„ ê¸°ì¡´ ìˆ˜ì¹˜ë¥¼ íŒŒì•…í•©ë‹ˆë‹¤.
                 float currentLuckUp = 0f;
                 float currentLuckDown = 0f;
 
@@ -117,15 +117,15 @@ public class SkillLogic_FantasticDreamer : SkillLogicBase
                 var existingEnemyDebuff = BuffManager.Instance.GetEffects(false).Find(e => e.effectData == luckDownDebuff);
                 if (existingEnemyDebuff != null) currentLuckDown = existingEnemyDebuff.value;
 
-                // 2. ±âÁ¸ ¼öÄ¡¿¡ ÀÌ¹ø¿¡ ÈÉÄ¥ ¼öÄ¡(15)¸¦ ´©Àû(Stack)ÇÕ´Ï´Ù.
+                // 2. ê¸°ì¡´ ìˆ˜ì¹˜ì— ì´ë²ˆì— í›”ì¹  ìˆ˜ì¹˜(15)ë¥¼ ëˆ„ì (Stack)í•©ë‹ˆë‹¤.
                 float newLuckUp = currentLuckUp + luckStealAmount;
                 float newLuckDown = currentLuckDown + luckStealAmount;
 
-                // 3. ´©ÀûµÈ ÃÖÁ¾ ¼öÄ¡·Î °»½Å! (BuffManager°¡ Mathf.Max·Î ¾Ë¾Æ¼­ ´õ Å« ¼öÄ¡·Î µ¤¾î¾º¿ö Áİ´Ï´Ù)
+                // 3. ëˆ„ì ëœ ìµœì¢… ìˆ˜ì¹˜ë¡œ ê°±ì‹ ! (BuffManagerê°€ Mathf.Maxë¡œ ì•Œì•„ì„œ ë” í° ìˆ˜ì¹˜ë¡œ ë®ì–´ì”Œì›Œ ì¤ë‹ˆë‹¤)
                 BuffManager.Instance.AddEffect(true, luckUpBuff, newLuckUp, 999);
                 BuffManager.Instance.AddEffect(false, luckDownDebuff, newLuckDown, 999);
 
-                DevLog.Log($"[ÁøÈ­ C] ½ºÆ¿ ¹ßµ¿! ÀûÀÇ ¿îÀ» °è¼Ó ÈÉÃÄ ´©Àû °­Å»·®ÀÌ {newLuckUp}ÀÌ µÇ¾ú½À´Ï´Ù!");
+                DevLog.Log($"[ì§„í™” C] ìŠ¤í‹¸ ë°œë™! ì ì˜ ìš´ì„ ê³„ì† í›”ì³ ëˆ„ì  ê°•íƒˆëŸ‰ì´ {newLuckUp}ì´ ë˜ì—ˆìŠµë‹ˆë‹¤!");
             }
         }
     }

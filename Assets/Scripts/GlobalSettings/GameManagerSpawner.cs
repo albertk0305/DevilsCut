@@ -1,26 +1,26 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-//°ÔÀÓ ¸Å´ÏÀú ÃÖÃÊ ½ºÆùÇØÁÖ´Â ÄÚµå
+//ê²Œì„ ë§¤ë‹ˆì € ìµœì´ˆ ìŠ¤í°í•´ì£¼ëŠ” ì½”ë“œ
 public static class GameManagerSpawner
 {
-    // À¯´ÏÆ¼°¡ ÇÃ·¹ÀÌ(¢º) ¹öÆ°À» ´©¸£°Å³ª ºôµåµÈ °ÔÀÓÀ» ÄÓ ¶§ '¹«Á¶°Ç °¡Àå ¸ÕÀú' ÇÑ ¹ø ½ÇÇàÇØ ÁÖ´Â ¸¶¹ıÀÇ ÄÚµå
+    // ìœ ë‹ˆí‹°ê°€ í”Œë ˆì´(â–¶) ë²„íŠ¼ì„ ëˆ„ë¥´ê±°ë‚˜ ë¹Œë“œëœ ê²Œì„ì„ ì¼¤ ë•Œ 'ë¬´ì¡°ê±´ ê°€ì¥ ë¨¼ì €' í•œ ë²ˆ ì‹¤í–‰í•´ ì£¼ëŠ” ë§ˆë²•ì˜ ì½”ë“œ
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void SpawnManagers()
     {
-        // 1. ÀÌ¹Ì ¾À¿¡ ¸Å´ÏÀú°¡ Á¸ÀçÇÏ´ÂÁö È®ÀÎ (Áßº¹ ¼ÒÈ¯ ¹æÁö)
+        // 1. ì´ë¯¸ ì”¬ì— ë§¤ë‹ˆì €ê°€ ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸ (ì¤‘ë³µ ì†Œí™˜ ë°©ì§€)
         if (Object.FindAnyObjectByType<LocalizationManager>() != null) return;
 
-        // 2. Resources Æú´õ¿¡ ³Ö¾îµĞ ÇÁ¸®ÆÕÀ» ÀÚµ¿À¸·Î Ã£¾Æ¼­ Çã°ø¿¡ ¼ÒÈ¯!
+        // 2. Resources í´ë”ì— ë„£ì–´ë‘” í”„ë¦¬íŒ¹ì„ ìë™ìœ¼ë¡œ ì°¾ì•„ì„œ í—ˆê³µì— ì†Œí™˜!
         GameObject prefab = Resources.Load<GameObject>("GlobalManagers");
 
         if (prefab != null)
         {
             Object.Instantiate(prefab);
-            DevLog.Log("±Û·Î¹ú ¸Å´ÏÀú ÀÚµ¿ »ı¼º ¿Ï·á!");
+            DevLog.Log("ê¸€ë¡œë²Œ ë§¤ë‹ˆì € ìë™ ìƒì„± ì™„ë£Œ!");
         }
         else
         {
-            DevLog.LogError("Resources Æú´õ¿¡¼­ 'GlobalManagers' ÇÁ¸®ÆÕÀ» Ã£À» ¼ö ¾ø¾î!");
+            DevLog.LogError("Resources í´ë”ì—ì„œ 'GlobalManagers' í”„ë¦¬íŒ¹ì„ ì°¾ì„ ìˆ˜ ì—†ì–´!");
         }
     }
 }

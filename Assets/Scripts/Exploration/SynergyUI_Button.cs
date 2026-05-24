@@ -1,36 +1,36 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class SynergyUI_Button : MonoBehaviour
 {
-    [Header("¹öÆ° µ¥ÀÌÅÍ")]
-    public int requiredPoints; // È°¼ºÈ­ ÇÊ¿ä Á¡¼ö (¿¹: 2, 4, 6)
-    public string synergyNameKey; // ½Ã³ÊÁö ÀÌ¸§ (¿¹: "²ÉÀÇ ³ë·¡")
-    [TextArea] public string synergyDescKey; // ½Ã³ÊÁö ¼³¸í
+    [Header("ë²„íŠ¼ ë°ì´í„°")]
+    public int requiredPoints; // í™œì„±í™” í•„ìš” ì ìˆ˜ (ì˜ˆ: 2, 4, 6)
+    public string synergyNameKey; // ì‹œë„ˆì§€ ì´ë¦„ (ì˜ˆ: "ê½ƒì˜ ë…¸ëž˜")
+    [TextArea] public string synergyDescKey; // ì‹œë„ˆì§€ ì„¤ëª…
 
-    [Header("UI ÄÄÆ÷³ÍÆ®")]
+    [Header("UI ì»´í¬ë„ŒíŠ¸")]
     public TextMeshProUGUI nameText;
-    public GameObject activeBorder; // È°¼ºÈ­ ½Ã ÄÑÁú Å×µÎ¸®
+    public GameObject activeBorder; // í™œì„±í™” ì‹œ ì¼œì§ˆ í…Œë‘ë¦¬
     public Button myButton;
 
     private SynergyUI_Manager manager;
 
-    //  [Ãß°¡] ¸Å°³º¯¼ö °ªÀ» ÀúÀåÇÏ¿© OnClick¿¡¼­µµ »ç¿ëÇÒ ¼ö ÀÖµµ·Ï ¸â¹ö º¯¼ö¸¦ ¼±¾ðÇÕ´Ï´Ù.
+    //  [ì¶”ê°€] ë§¤ê°œë³€ìˆ˜ ê°’ì„ ì €ìž¥í•˜ì—¬ OnClickì—ì„œë„ ì‚¬ìš©í•  ìˆ˜ ìžˆë„ë¡ ë©¤ë²„ ë³€ìˆ˜ë¥¼ ì„ ì–¸í•©ë‹ˆë‹¤.
     private int currentPoints;
 
     public void InitButton(int currentPoints, SynergyUI_Manager mgr)
     {
         manager = mgr;
 
-        // [Ãß°¡] ¸Å°³º¯¼ö·Î Àü´Þ¹ÞÀº Á¡¼ö¸¦ Å¬·¡½º º¯¼ö¿¡ ¾ÈÀüÇÏ°Ô ¹é¾÷ÇÕ´Ï´Ù.
-        // (ÀÌ¸§ÀÌ °°À¸¹Ç·Î this.¸¦ ºÙ¿©¼­ ±¸ºÐÇÕ´Ï´Ù)
+        // [ì¶”ê°€] ë§¤ê°œë³€ìˆ˜ë¡œ ì „ë‹¬ë°›ì€ ì ìˆ˜ë¥¼ í´ëž˜ìŠ¤ ë³€ìˆ˜ì— ì•ˆì „í•˜ê²Œ ë°±ì—…í•©ë‹ˆë‹¤.
+        // (ì´ë¦„ì´ ê°™ìœ¼ë¯€ë¡œ this.ë¥¼ ë¶™ì—¬ì„œ êµ¬ë¶„í•©ë‹ˆë‹¤)
         this.currentPoints = currentPoints;
 
-        // ÅØ½ºÆ® ¼¼ÆÃ (¹ø¿ª ¸Å´ÏÀú°¡ ÀÖ´Ù¸é ¾º¿ì±â)
+        // í…ìŠ¤íŠ¸ ì„¸íŒ… (ë²ˆì—­ ë§¤ë‹ˆì €ê°€ ìžˆë‹¤ë©´ ì”Œìš°ê¸°)
         nameText.text = LocalizationManager.Instance != null ? LocalizationManager.Instance.GetText(synergyNameKey) : synergyNameKey;
 
-        // ³» Á¡¼ö°¡ ¿ä±¸ Á¡¼ö¸¦ ³Ñ°å´Ù¸é Å×µÎ¸® È°¼ºÈ­!
+        // ë‚´ ì ìˆ˜ê°€ ìš”êµ¬ ì ìˆ˜ë¥¼ ë„˜ê²¼ë‹¤ë©´ í…Œë‘ë¦¬ í™œì„±í™”!
         activeBorder.SetActive(currentPoints >= requiredPoints);
 
         myButton.onClick.RemoveAllListeners();
@@ -41,7 +41,7 @@ public class SynergyUI_Button : MonoBehaviour
     {
         if (manager != null)
         {
-            // ÀÌÁ¦ Å¬·¡½º ¸â¹ö º¯¼ö¿¡ ÀúÀåµÈ currentPoints ´öºÐ¿¡ ¿¡·¯ ¾øÀÌ ¾ÈÀüÇÏ°Ô ÆÇ´ÜÇÒ ¼ö ÀÖ½À´Ï´Ù!
+            // ì´ì œ í´ëž˜ìŠ¤ ë©¤ë²„ ë³€ìˆ˜ì— ì €ìž¥ëœ currentPoints ë•ë¶„ì— ì—ëŸ¬ ì—†ì´ ì•ˆì „í•˜ê²Œ íŒë‹¨í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤!
             manager.ShowDescription(synergyNameKey, synergyDescKey, currentPoints >= requiredPoints);
         }
     }

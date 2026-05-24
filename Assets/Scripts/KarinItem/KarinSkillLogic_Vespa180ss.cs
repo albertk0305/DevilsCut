@@ -1,16 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "KarinItem_Vespa", menuName = "KarinItems/Vespa")]
 public class KarinItemLogic_Vespa : KarinItemLogicBase
 {
-    [Header("¹öÇÁ ¼³Á¤")]
-    public StatusEffectData apBuffData; // À§¿¡¼­ ¸¸µç AP Boost ¿¡¼Â ¿¬°á
-    public float apBoostValue = 0.3f;   // 30% »ó½Â 
-    public int duration = 3;            // 3ÅÏ Áö¼Ó 
+    [Header("ë²„í”„ ì„¤ì •")]
+    public StatusEffectData apBuffData; // ìœ„ì—ì„œ ë§Œë“  AP Boost ì—ì…‹ ì—°ê²°
+    public float apBoostValue = 0.3f;   // 30% ìƒìŠ¹ 
+    public int duration = 3;            // 3í„´ ì§€ì† 
 
     public override int CalculateDamage(PlayerStats pStats, EnemyData eData)
     {
-        // À¯Æ¿¸®Æ¼ ¹«±âÀÌ¹Ç·Î µ¥¹ÌÁö´Â 0ÀÔ´Ï´Ù. 
+        // ìœ í‹¸ë¦¬í‹° ë¬´ê¸°ì´ë¯€ë¡œ ë°ë¯¸ì§€ëŠ” 0ì…ë‹ˆë‹¤. 
         return 0;
     }
 
@@ -18,13 +18,13 @@ public class KarinItemLogic_Vespa : KarinItemLogicBase
     {
         if (apBuffData == null) return;
 
-        // ¼Î¸®(Player)¿¡°Ô 30% AP »ó½Â ¹öÇÁ¸¦ 3ÅÏ°£ ºÎ¿©ÇÕ´Ï´Ù. 
-        // ÀÌ ¹öÇÁ°¡ °É·ÁÀÖ´Â µ¿¾È StatManager´Â ¼Î¸®ÀÇ AP¸¦ 1.3¹è·Î °è»êÇÕ´Ï´Ù. 
+        // ì…°ë¦¬(Player)ì—ê²Œ 30% AP ìƒìŠ¹ ë²„í”„ë¥¼ 3í„´ê°„ ë¶€ì—¬í•©ë‹ˆë‹¤. 
+        // ì´ ë²„í”„ê°€ ê±¸ë ¤ìˆëŠ” ë™ì•ˆ StatManagerëŠ” ì…°ë¦¬ì˜ APë¥¼ 1.3ë°°ë¡œ ê³„ì‚°í•©ë‹ˆë‹¤. 
         BuffManager.Instance.AddEffect(true, apBuffData, apBoostValue, duration);
 
-        DevLog.Log($"[Vespa180ss] ¼Î¸®¿¡°Ô 3ÅÏ°£ {apBoostValue * 100}% AP »ó½Â ¹öÇÁ¸¦ ºÎ¿©Çß½À´Ï´Ù.");
+        DevLog.Log($"[Vespa180ss] ì…°ë¦¬ì—ê²Œ 3í„´ê°„ {apBoostValue * 100}% AP ìƒìŠ¹ ë²„í”„ë¥¼ ë¶€ì—¬í–ˆìŠµë‹ˆë‹¤.");
 
-        // UI °»½Å (¹öÇÁ ¾ÆÀÌÄÜ Ç¥½Ã)
+        // UI ê°±ì‹  (ë²„í”„ ì•„ì´ì½˜ í‘œì‹œ)
         if (CombatUIManager.Instance != null)
         {
             CombatUIManager.Instance.RefreshBuffUI();

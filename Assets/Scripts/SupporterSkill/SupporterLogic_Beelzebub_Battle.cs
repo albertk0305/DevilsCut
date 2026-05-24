@@ -1,25 +1,25 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
 [CreateAssetMenu(fileName = "Beelzebub_BattleSkill", menuName = "SupporterLogic/Beelzebub/Battle Skill")]
 public class SupporterLogic_Beelzebub_Battle : SupporterLogicBase
 {
-    [Header("´Ù´ÜÈ÷Æ® ¼³Á¤")]
+    [Header("ë‹¤ë‹¨íˆíŠ¸ ì„¤ì •")]
     public int hitCount = 6;
 
-    [Header("·¹º§º° µ¥¹ÌÁö/±×·Î±â ¼³Á¤")]
-    public float[] baseDamageValues = { 1.0f, 1.5f, 2.0f }; // Å¸´ç Èû °è¼ö
-    public float[] breakDamageValues = { 1.5f, 2.0f, 3.0f }; // Å¸´ç ±×·Î±â ¼öÄ¡
+    [Header("ë ˆë²¨ë³„ ë°ë¯¸ì§€/ê·¸ë¡œê¸° ì„¤ì •")]
+    public float[] baseDamageValues = { 1.0f, 1.5f, 2.0f }; // íƒ€ë‹¹ í˜ ê³„ìˆ˜
+    public float[] breakDamageValues = { 1.5f, 2.0f, 3.0f }; // íƒ€ë‹¹ ê·¸ë¡œê¸° ìˆ˜ì¹˜
 
-    [Header("ÃâÇ÷ ¼³Á¤")]
+    [Header("ì¶œí˜ˆ ì„¤ì •")]
     public StatusEffectData bleedDebuff;
-    public float[] bleedChances = { 0.20f, 0.30f, 0.40f }; // Å¸´ç ÃâÇ÷ È®·ü
-    public float[] bleedRates = { 0.8f, 1.0f, 1.2f };      // ½ºÅÃ´ç ÃâÇ÷ À§·Â
+    public float[] bleedChances = { 0.20f, 0.30f, 0.40f }; // íƒ€ë‹¹ ì¶œí˜ˆ í™•ë¥ 
+    public float[] bleedRates = { 0.8f, 1.0f, 1.2f };      // ìŠ¤íƒë‹¹ ì¶œí˜ˆ ìœ„ë ¥
     public int bleedDuration = 3;
 
-    [Header("µ¥¹ÌÁö ÁõÆø")]
-    public float[] debuffBoostRates = { 0.15f, 0.20f, 0.25f }; // µğ¹öÇÁ´ç ÁõÆø·®
+    [Header("ë°ë¯¸ì§€ ì¦í­")]
+    public float[] debuffBoostRates = { 0.15f, 0.20f, 0.25f }; // ë””ë²„í”„ë‹¹ ì¦í­ëŸ‰
 
     private int storedBleedStacks = 0;
 
@@ -57,14 +57,14 @@ public class SupporterLogic_Beelzebub_Battle : SupporterLogicBase
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, bleedRates.Length - 1);
 
-        // 1. °è»ê Áß ½×¿´´ø ÃâÇ÷ ½ºÅÃ ÇÑ ¹ø¿¡ ºÎ¿©
+        // 1. ê³„ì‚° ì¤‘ ìŒ“ì˜€ë˜ ì¶œí˜ˆ ìŠ¤íƒ í•œ ë²ˆì— ë¶€ì—¬
         if (storedBleedStacks > 0 && bleedDebuff != null)
         {
             BuffManager.Instance.AddEffect(false, bleedDebuff, bleedRates[index] * storedBleedStacks, bleedDuration);
-            DevLog.Log($"[¹éÈ­¿ä¶õ: Äİ¶óÁÖ] Lv.{skillLevel} ¹ßµ¿! ÃâÇ÷ {storedBleedStacks}È¸ ÁßÃ¸.");
+            DevLog.Log($"[ë°±í™”ìš”ë€: ì½œë¼ì£¼] Lv.{skillLevel} ë°œë™! ì¶œí˜ˆ {storedBleedStacks}íšŒ ì¤‘ì²©.");
         }
 
-        // 2. ±×·Î±â µ¥¹ÌÁö Àû¿ë
+        // 2. ê·¸ë¡œê¸° ë°ë¯¸ì§€ ì ìš©
         if (BreakManager.Instance != null && !BreakManager.Instance.IsBroken(false))
         {
             float totalBreak = breakDamageValues[index] * hitCount;

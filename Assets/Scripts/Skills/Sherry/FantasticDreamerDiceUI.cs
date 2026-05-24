@@ -1,20 +1,20 @@
-using UnityEngine;
-using UnityEngine.UI; // Image ÄÄÆ÷³ÍÆ® Á¢±ÙÀ» À§ÇØ Ãß°¡
+ï»¿using UnityEngine;
+using UnityEngine.UI; // Image ì»´í¬ë„ŒíŠ¸ ì ‘ê·¼ì„ ìœ„í•´ ì¶”ê°€
 
 public class FantasticDreamerDiceUI : MonoBehaviour
 {
-    [SerializeField] private GameObject[] diceObjects; // ÁÖ»çÀ§ ¿ÀºêÁ§Æ® ¹è¿­ (ÀÎ½ºÆåÅÍ¿¡¼­ ÇÒ´çµÊ)
+    [SerializeField] private GameObject[] diceObjects; // ì£¼ì‚¬ìœ„ ì˜¤ë¸Œì íŠ¸ ë°°ì—´ (ì¸ìŠ¤í™í„°ì—ì„œ í• ë‹¹ë¨)
 
     public void Setup(int count)
     {
-        // ¸ğµç ÁÖ»çÀ§ ºñÈ°¼ºÈ­
+        // ëª¨ë“  ì£¼ì‚¬ìœ„ ë¹„í™œì„±í™”
         foreach (var dice in diceObjects)
         {
             if (dice != null)
                 dice.SetActive(false);
         }
 
-        // °³¼ö¿¡ ¸Â°Ô ÁÖ»çÀ§ È°¼ºÈ­
+        // ê°œìˆ˜ì— ë§ê²Œ ì£¼ì‚¬ìœ„ í™œì„±í™”
         int diceToActivate = Mathf.Min(count, diceObjects.Length);
         for (int i = 0; i < diceToActivate; i++)
         {
@@ -24,7 +24,7 @@ public class FantasticDreamerDiceUI : MonoBehaviour
     }
 
     // ==========================================
-    // [½Å±Ô Ãß°¡] È°¼ºÈ­µÈ ÁÖ»çÀ§(¹öÆ°)µéÀÇ »ö»ó¸¸ º¯°æÇÏ´Â ÇÔ¼ö
+    // [ì‹ ê·œ ì¶”ê°€] í™œì„±í™”ëœ ì£¼ì‚¬ìœ„(ë²„íŠ¼)ë“¤ì˜ ìƒ‰ìƒë§Œ ë³€ê²½í•˜ëŠ” í•¨ìˆ˜
     // ==========================================
     public void SetDiceColor(Color color)
     {
@@ -32,10 +32,10 @@ public class FantasticDreamerDiceUI : MonoBehaviour
 
         foreach (var dice in diceObjects)
         {
-            // È°¼ºÈ­µÈ ÁÖ»çÀ§ ¿ÀºêÁ§Æ®¸¸ ´ë»óÀ¸·Î ÇÕ´Ï´Ù.
+            // í™œì„±í™”ëœ ì£¼ì‚¬ìœ„ ì˜¤ë¸Œì íŠ¸ë§Œ ëŒ€ìƒìœ¼ë¡œ í•©ë‹ˆë‹¤.
             if (dice != null && dice.activeSelf)
             {
-                // ÁÖ»çÀ§ ¿ÀºêÁ§Æ® ÀÚÃ¼¿¡ ºÙ¾îÀÖ´Â Image ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿É´Ï´Ù.
+                // ì£¼ì‚¬ìœ„ ì˜¤ë¸Œì íŠ¸ ìì²´ì— ë¶™ì–´ìˆëŠ” Image ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
                 Image diceImage = dice.GetComponent<Image>();
                 if (diceImage != null)
                 {

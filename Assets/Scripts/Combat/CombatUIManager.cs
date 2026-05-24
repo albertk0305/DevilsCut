@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,18 +7,18 @@ public class CombatUIManager : MonoBehaviour
 {
     public static CombatUIManager Instance;
 
-    [Header("UI ¸ğµâ ¿¬°á (½Å¼³ ºÎ¼­)")]
+    [Header("UI ëª¨ë“ˆ ì—°ê²° (ì‹ ì„¤ ë¶€ì„œ)")]
     public EntityStatusUI playerStatusUI;
     public EntityStatusUI enemyStatusUI;
     public ActionMenuUI actionMenuUI;
     public CombatVisualUI visualUI;
 
-    [Header("±âÅ¸ UI (¸Å´ÏÀú Á÷¼Ó)")]
+    [Header("ê¸°íƒ€ UI (ë§¤ë‹ˆì € ì§ì†)")]
     public Image[] turnOrderIcons;
     public Image karinProfileImage;
     public Image supporterProfileImage;
 
-    [Header("2¹è¼Ó UI")]
+    [Header("2ë°°ì† UI")]
     public GameObject fastCombatIcon;
 
     private void Awake()
@@ -28,7 +28,7 @@ public class CombatUIManager : MonoBehaviour
 
     private void Start()
     {
-        // ÀüÅõ ¾ÀÀÌ ½ÃÀÛµÉ ¶§, ÇöÀç 2¹è¼Ó »óÅÂ¸¦ È®ÀÎÇÏ°í Áï½Ã Àû¿ëÇÕ´Ï´Ù.
+        // ì „íˆ¬ ì”¬ì´ ì‹œì‘ë  ë•Œ, í˜„ì¬ 2ë°°ì† ìƒíƒœë¥¼ í™•ì¸í•˜ê³  ì¦‰ì‹œ ì ìš©í•©ë‹ˆë‹¤.
         bool isFast = PlayerPrefs.GetInt("FastCombat", 0) == 1;
         Time.timeScale = isFast ? 2.0f : 1.0f;
 
@@ -38,7 +38,7 @@ public class CombatUIManager : MonoBehaviour
     private void OnDestroy()
     {
         Time.timeScale = 1.0f;
-        DevLog.Log("ÀüÅõ Á¾·á: Å¸ÀÓ½ºÄÉÀÏÀ» 1.0À¸·Î º¹±¸ÇÕ´Ï´Ù.");
+        DevLog.Log("ì „íˆ¬ ì¢…ë£Œ: íƒ€ì„ìŠ¤ì¼€ì¼ì„ 1.0ìœ¼ë¡œ ë³µêµ¬í•©ë‹ˆë‹¤.");
     }
 
     public void UpdateFastCombatIcon(bool isFast)
@@ -50,7 +50,7 @@ public class CombatUIManager : MonoBehaviour
     }
 
     // ==========================================
-    // 0. ÀÌº¥Æ® ¹æ¼Û ±¸µ¶ (¼ö½Å ÈÄ °¢ ºÎ¼­·Î Àü´Ş)
+    // 0. ì´ë²¤íŠ¸ ë°©ì†¡ êµ¬ë… (ìˆ˜ì‹  í›„ ê° ë¶€ì„œë¡œ ì „ë‹¬)
     // ==========================================
     private void OnEnable()
     {
@@ -76,7 +76,7 @@ public class CombatUIManager : MonoBehaviour
     private void HandleEvaded(bool isPlayerTarget) => visualUI.SpawnDamageText("Miss", false, isPlayerTarget);
 
     // ==========================================
-    // 1. ÃÊ±â ¼Â¾÷ À§ÀÓ
+    // 1. ì´ˆê¸° ì…‹ì—… ìœ„ì„
     // ==========================================
     public void InitPlayerUI(int maxHp, int currentHp, Sprite normalSprite) => playerStatusUI.InitUI(maxHp, currentHp, normalSprite);
     public void InitEnemyUI(int maxHp, int currentHp, Sprite enemySprite) => enemyStatusUI.InitUI(maxHp, currentHp, enemySprite);
@@ -101,7 +101,7 @@ public class CombatUIManager : MonoBehaviour
         if (visualUI != null)
         {
             visualUI.ClearCombatEffects();
-            visualUI.ClearDiceVisual(); // [Ãß°¡µÊ]
+            visualUI.ClearDiceVisual(); // [ì¶”ê°€ë¨]
         }
     }
 
@@ -112,7 +112,7 @@ public class CombatUIManager : MonoBehaviour
     }
 
     // ==========================================
-    // 2. ±âÅ¸ Á÷¼Ó ±â´É (ÅÏ ´ë±â¿­)
+    // 2. ê¸°íƒ€ ì§ì† ê¸°ëŠ¥ (í„´ ëŒ€ê¸°ì—´)
     // ==========================================
     public void UpdateTurnOrderUI(List<Sprite> icons)
     {
@@ -128,7 +128,7 @@ public class CombatUIManager : MonoBehaviour
     }
 
     // ==========================================
-    // 3. ÇÏ´Ü ¸Ş´º ¹öÆ° À§ÀÓ
+    // 3. í•˜ë‹¨ ë©”ë‰´ ë²„íŠ¼ ìœ„ì„
     // ==========================================
     public void SetActionPanelActive(bool isActive) => actionMenuUI.SetActionPanelActive(isActive);
     public void SetWaitingPanelActive(bool isActive) => actionMenuUI.SetWaitingPanelActive(isActive);
@@ -137,7 +137,7 @@ public class CombatUIManager : MonoBehaviour
     public void UpdateStyleRankUI(StyleRank rank) => actionMenuUI.UpdateStyleRank(rank);
 
     // ==========================================
-    // 4. ÀüÅõ µ¥ÀÌÅÍ ¹× ¿¬Ãâ À§ÀÓ
+    // 4. ì „íˆ¬ ë°ì´í„° ë° ì—°ì¶œ ìœ„ì„
     // ==========================================
     public void SetCasterImage(bool isPlayer, Sprite skillSprite)
     {

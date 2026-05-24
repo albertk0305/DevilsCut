@@ -1,12 +1,12 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Michael_IronMaiden", menuName = "SkillLogic/Michael/IronMaiden")]
 public class SkillLogic_Michael_IronMaiden : SkillLogic_Michael_Base
 {
     public override float GetSkillBonusLifesteal(SkillData skill)
     {
-        // [ÇÙ½É] ¹ÌÄ«¿¤ÀÇ ±âº» ÈíÇ÷·ü(enemy.lifeSteal)Àº AI°¡ °ü¸®ÇÏ°í,
-        // Ã¶Ã³³à ½ºÅ³¸¸ÀÇ °íÀ¯ ÈíÇ÷ º¸³Ê½º 40%¸¸ ÀÌ ÇÔ¼ö¿¡¼­ ´øÁ®Áİ´Ï´Ù!
+        // [í•µì‹¬] ë¯¸ì¹´ì—˜ì˜ ê¸°ë³¸ í¡í˜ˆë¥ (enemy.lifeSteal)ì€ AIê°€ ê´€ë¦¬í•˜ê³ ,
+        // ì² ì²˜ë…€ ìŠ¤í‚¬ë§Œì˜ ê³ ìœ  í¡í˜ˆ ë³´ë„ˆìŠ¤ 40%ë§Œ ì´ í•¨ìˆ˜ì—ì„œ ë˜ì ¸ì¤ë‹ˆë‹¤!
         return 0.40f;
     }
 
@@ -21,7 +21,7 @@ public class SkillLogic_Michael_IronMaiden : SkillLogic_Michael_Base
                 if (entity.type == EntityType.Player)
                 {
                     entity.actionGauge -= 40f;
-                    DevLog.Log("[Ã¶Ã³³à] ¼Î¸®ÀÇ Çàµ¿ °ÔÀÌÁö°¡ 40 Â÷°¨µÇ¾î ÅÏÀÌ ¹Ğ·Á³³´Ï´Ù!");
+                    DevLog.Log("[ì² ì²˜ë…€] ì…°ë¦¬ì˜ í–‰ë™ ê²Œì´ì§€ê°€ 40 ì°¨ê°ë˜ì–´ í„´ì´ ë°€ë ¤ë‚©ë‹ˆë‹¤!");
                     break;
                 }
             }

@@ -1,22 +1,22 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Thanatos", menuName = "SkillLogic/Player/Thanatos")]
 public class SkillLogic_Thanatos : SkillLogicBase
 {
-    [Header("µğ¹öÇÁ/¹öÇÁ µ¥ÀÌÅÍ")]
-    public StatusEffectData defDownDebuff; // Àû ¹æ¾î·Â °¨¼Ò
-    public StatusEffectData defUpBuff;     // [ÁøÈ­ A] ³» ¹æ¾î·Â Èí¼ö(Áõ°¡)
+    [Header("ë””ë²„í”„/ë²„í”„ ë°ì´í„°")]
+    public StatusEffectData defDownDebuff; // ì  ë°©ì–´ë ¥ ê°ì†Œ
+    public StatusEffectData defUpBuff;     // [ì§„í™” A] ë‚´ ë°©ì–´ë ¥ í¡ìˆ˜(ì¦ê°€)
 
-    [Header("·¹º§º° ¹æ¾î·Â °¨¼ÒÀ²")]
+    [Header("ë ˆë²¨ë³„ ë°©ì–´ë ¥ ê°ì†Œìœ¨")]
     public float[] defDownRates = { -0.10f, -0.15f, -0.20f };
 
-    [Header("ÁøÈ­ B (Burn My Dread) ¼³Á¤")]
-    [Tooltip("±âº» µ¥¹ÌÁö ¹èÀ² (¿¹: 0.5 = 50%·Î °¨¼Ò)")]
+    [Header("ì§„í™” B (Burn My Dread) ì„¤ì •")]
+    [Tooltip("ê¸°ë³¸ ë°ë¯¸ì§€ ë°°ìœ¨ (ì˜ˆ: 0.5 = 50%ë¡œ ê°ì†Œ)")]
     public float pathB_BaseMult = 0.5f;
-    [Tooltip("°ÔÀÌÁö 100%ÀÏ ¶§ Ãß°¡µÇ´Â ÃÖ´ë ÁõÆø·® (¿¹: 1.5¸é ÃÖ´ë 2.0¹è)")]
+    [Tooltip("ê²Œì´ì§€ 100%ì¼ ë•Œ ì¶”ê°€ë˜ëŠ” ìµœëŒ€ ì¦í­ëŸ‰ (ì˜ˆ: 1.5ë©´ ìµœëŒ€ 2.0ë°°)")]
     public float pathB_MaxBonus = 1.5f;
 
-    // [ÁøÈ­ C] Å¸°İ È½¼ö¸¦ 8Å¸·Î º¯°æÇÕ´Ï´Ù.
+    // [ì§„í™” C] íƒ€ê²© íšŸìˆ˜ë¥¼ 8íƒ€ë¡œ ë³€ê²½í•©ë‹ˆë‹¤.
     public override int GetHitCount(SkillData skill)
     {
         if (skill.currentEvolution == SkillEvolution.PathC) return 8;
@@ -27,46 +27,46 @@ public class SkillLogic_Thanatos : SkillLogicBase
     {
         if (skill.currentEvolution == SkillEvolution.PathB)
         {
-            // [ÁøÈ­ B] ÀûÀÇ ÇöÀç ±×·Î±â °ÔÀÌÁö ºñ·Ê Æøµô
+            // [ì§„í™” B] ì ì˜ í˜„ì¬ ê·¸ë¡œê¸° ê²Œì´ì§€ ë¹„ë¡€ í­ë”œ
             float targetGauge = BreakManager.Instance.GetBreakGauge(!isPlayerAttacking);
             float bonus = (targetGauge / 100f) * pathB_MaxBonus;
             return pathB_BaseMult + bonus;
         }
         else if (skill.currentEvolution == SkillEvolution.PathC)
         {
-            // [ÁøÈ­ C] 8Å¸·Î ³ª´µ¹Ç·Î µ¥¹ÌÁö °è¼ö¸¦ 8µîºĞ ÇÕ´Ï´Ù.
+            // [ì§„í™” C] 8íƒ€ë¡œ ë‚˜ë‰˜ë¯€ë¡œ ë°ë¯¸ì§€ ê³„ìˆ˜ë¥¼ 8ë“±ë¶„ í•©ë‹ˆë‹¤.
             return 1.0f / 8.0f;
         }
-        return 1.0f; // ÀÏ¹İ »óÅÂ ¶Ç´Â ÁøÈ­ A
+        return 1.0f; // ì¼ë°˜ ìƒíƒœ ë˜ëŠ” ì§„í™” A
     }
 
     public override float GetBreakMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
-            // [ÁøÈ­ C] 8Å¸·Î ³ª´µ¹Ç·Î ºê·¹ÀÌÅ© ¼öÄ¡µµ 8µîºĞ ÇÕ´Ï´Ù.
+            // [ì§„í™” C] 8íƒ€ë¡œ ë‚˜ë‰˜ë¯€ë¡œ ë¸Œë ˆì´í¬ ìˆ˜ì¹˜ë„ 8ë“±ë¶„ í•©ë‹ˆë‹¤.
             return 1.0f / 8.0f;
         }
         return 1.0f;
     }
 
-    // ÁøÈ­ C (º¸¸§´Ş ¾Æ·¡ÀÇ »î)ÀÏ ¶§ ´Ù´ÜÈ÷Æ® Æä³ÎÆ¼·Î ¸íÁß·ü 80% Àû¿ë
+    // ì§„í™” C (ë³´ë¦„ë‹¬ ì•„ë˜ì˜ ì‚¶)ì¼ ë•Œ ë‹¤ë‹¨íˆíŠ¸ í˜ë„í‹°ë¡œ ëª…ì¤‘ë¥  80% ì ìš©
     public override float GetBaseAccuracy(SkillData skill)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
-            return 80f; // ÁøÈ­ C (8Å¸ ´Ù´ÜÈ÷Æ®)ÀÏ ¶§ °­Á¦·Î ¸íÁß·ü 80 ¹İÈ¯
+            return 80f; // ì§„í™” C (8íƒ€ ë‹¤ë‹¨íˆíŠ¸)ì¼ ë•Œ ê°•ì œë¡œ ëª…ì¤‘ë¥  80 ë°˜í™˜
         }
         return base.GetBaseAccuracy(skill);
     }
 
-    // [¼öÁ¤µÊ] ÀûÁß(isHit) ½Ã¿¡¸¸ Àû¿ëµÇµµ·Ï ¿À¹ö¶óÀÌµå
+    // [ìˆ˜ì •ë¨] ì ì¤‘(isHit) ì‹œì—ë§Œ ì ìš©ë˜ë„ë¡ ì˜¤ë²„ë¼ì´ë“œ
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
-        // 1. °ø°İÀÌ ¿ÏÀüÈ÷ ºø³ª°¬´Ù¸é µğ¹öÇÁ¸¦ °ÉÁö ¾Ê°í Á¾·áÇÕ´Ï´Ù.
+        // 1. ê³µê²©ì´ ì™„ì „íˆ ë¹—ë‚˜ê°”ë‹¤ë©´ ë””ë²„í”„ë¥¼ ê±¸ì§€ ì•Šê³  ì¢…ë£Œí•©ë‹ˆë‹¤.
         if (!isHit)
         {
-            DevLog.Log("[½ºÅ³ È¿°ú] Å¸³ªÅä½º°¡ ºø³ª°¡ ¹æ¾î·Â °¨¼Ò È¿°ú°¡ Àû¿ëµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            DevLog.Log("[ìŠ¤í‚¬ íš¨ê³¼] íƒ€ë‚˜í† ìŠ¤ê°€ ë¹—ë‚˜ê°€ ë°©ì–´ë ¥ ê°ì†Œ íš¨ê³¼ê°€ ì ìš©ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
             return;
         }
 
@@ -75,23 +75,23 @@ public class SkillLogic_Thanatos : SkillLogicBase
             int index = Mathf.Clamp(skill.skillLevel - 1, 0, defDownRates.Length - 1);
             float rate = defDownRates[index];
 
-            // 2. Àû¿¡°Ô ¹æ¾î·Â °¨¼Ò µğ¹öÇÁ 3ÅÏ ºÎ¿©
-            // (ÁøÈ­ CÀÇ ´Ù´Ü È÷Æ®¿©µµ ¿©±â¼­ 1¹ø¸¸ ½ÇÇàµÇ¹Ç·Î Àı´ë ÁßÃ¸µÇÁö ¾Ê½À´Ï´Ù!)
+            // 2. ì ì—ê²Œ ë°©ì–´ë ¥ ê°ì†Œ ë””ë²„í”„ 3í„´ ë¶€ì—¬
+            // (ì§„í™” Cì˜ ë‹¤ë‹¨ íˆíŠ¸ì—¬ë„ ì—¬ê¸°ì„œ 1ë²ˆë§Œ ì‹¤í–‰ë˜ë¯€ë¡œ ì ˆëŒ€ ì¤‘ì²©ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤!)
             BuffManager.Instance.AddEffect(false, defDownDebuff, rate, 3);
-            DevLog.Log($"[½ºÅ³ È¿°ú] Å¸³ªÅä½º ÀûÁß! ÀûÀÇ ¹æ¾î·ÂÀÌ 3ÅÏ°£ {Mathf.Abs(rate * 100)}% °¨¼ÒÇÕ´Ï´Ù.");
+            DevLog.Log($"[ìŠ¤í‚¬ íš¨ê³¼] íƒ€ë‚˜í† ìŠ¤ ì ì¤‘! ì ì˜ ë°©ì–´ë ¥ì´ 3í„´ê°„ {Mathf.Abs(rate * 100)}% ê°ì†Œí•©ë‹ˆë‹¤.");
 
-            // 3. [ÁøÈ­ A] ¹ãÀ» ¹°µé¿©¶ó - ±ğ¾Æ³½ ¼öÄ¡¸¸Å­ ³» ¹æ¾î·Â »ó½Â
+            // 3. [ì§„í™” A] ë°¤ì„ ë¬¼ë“¤ì—¬ë¼ - ê¹ì•„ë‚¸ ìˆ˜ì¹˜ë§Œí¼ ë‚´ ë°©ì–´ë ¥ ìƒìŠ¹
             if (skill.currentEvolution == SkillEvolution.PathA && defUpBuff != null)
             {
-                // [ÇÙ½É] ÀûÀÇ 'º£ÀÌ½º ¹æ¾î·Â'¿¡¼­ ½ÇÁ¦·Î ±ğ¿©³ª°£ Àı´ë ¼öÄ¡¸¦ °è»êÇÕ´Ï´Ù.
-                // ¿¹: Àû ¹æ¾î·Â 500 * 0.20 = 100
+                // [í•µì‹¬] ì ì˜ 'ë² ì´ìŠ¤ ë°©ì–´ë ¥'ì—ì„œ ì‹¤ì œë¡œ ê¹ì—¬ë‚˜ê°„ ì ˆëŒ€ ìˆ˜ì¹˜ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤.
+                // ì˜ˆ: ì  ë°©ì–´ë ¥ 500 * 0.20 = 100
                 float actualReductionValue = enemy.defense * Mathf.Abs(rate);
 
-                // °è»êµÈ '100'ÀÌ¶ó´Â ¼öÄ¡¸¦ ³» ¹æ¾î·Â¿¡ »ó¼ö·Î ´õÇØÁİ´Ï´Ù.
-                // (ÁÖÀÇ: À¯´ÏÆ¼ ÀÎ½ºÆåÅÍ¿¡¼­ defUpBuffÀÇ Modifier TypeÀ» 'Flat'À¸·Î ¼³Á¤ÇØ¾ß ÇÕ´Ï´Ù!)
+                // ê³„ì‚°ëœ '100'ì´ë¼ëŠ” ìˆ˜ì¹˜ë¥¼ ë‚´ ë°©ì–´ë ¥ì— ìƒìˆ˜ë¡œ ë”í•´ì¤ë‹ˆë‹¤.
+                // (ì£¼ì˜: ìœ ë‹ˆí‹° ì¸ìŠ¤í™í„°ì—ì„œ defUpBuffì˜ Modifier Typeì„ 'Flat'ìœ¼ë¡œ ì„¤ì •í•´ì•¼ í•©ë‹ˆë‹¤!)
                 BuffManager.Instance.AddEffect(true, defUpBuff, actualReductionValue, 3);
 
-                DevLog.Log($"[ÁøÈ­ È¿°ú] ¹ãÀ» ¹°µé¿©¶ó! ÀûÀÇ ¹æ¾î·ÂÀ» {actualReductionValue:F1}¸¸Å­ Èí¼öÇÏ¿© ³» ¹æ¾î·ÂÀÌ »ó½ÂÇÕ´Ï´Ù.");
+                DevLog.Log($"[ì§„í™” íš¨ê³¼] ë°¤ì„ ë¬¼ë“¤ì—¬ë¼! ì ì˜ ë°©ì–´ë ¥ì„ {actualReductionValue:F1}ë§Œí¼ í¡ìˆ˜í•˜ì—¬ ë‚´ ë°©ì–´ë ¥ì´ ìƒìŠ¹í•©ë‹ˆë‹¤.");
             }
         }
     }

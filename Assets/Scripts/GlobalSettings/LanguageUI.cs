@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using TMPro; 
 
 [RequireComponent(typeof(TMP_Dropdown))]
-//¼³Á¤ UI¿¡¼­ µå·Ó´Ù¿îÀ¸·Î ¾ğ¾î º¯°æÇØÁÖ´Â ÄÚµå
+//ì„¤ì • UIì—ì„œ ë“œë¡­ë‹¤ìš´ìœ¼ë¡œ ì–¸ì–´ ë³€ê²½í•´ì£¼ëŠ” ì½”ë“œ
 public class LanguageUI : MonoBehaviour
 {
     private TMP_Dropdown dropdown;
@@ -11,14 +11,14 @@ public class LanguageUI : MonoBehaviour
     {
         dropdown = GetComponent<TMP_Dropdown>();
 
-        // 1. ÇöÀç ÀúÀåµÈ ¾ğ¾î ¼³Á¤¿¡ ¸Â°Ô µå·Ó´Ù¿îÀÇ ÃÊ±â °ªÀ» ¼¼ÆÃÇØ
+        // 1. í˜„ì¬ ì €ì¥ëœ ì–¸ì–´ ì„¤ì •ì— ë§ê²Œ ë“œë¡­ë‹¤ìš´ì˜ ì´ˆê¸° ê°’ì„ ì„¸íŒ…í•´
         if (LocalizationManager.Instance != null)
         {
-            // Enum °ªÀ» int·Î º¯È¯ÇØ¼­ µå·Ó´Ù¿î ÀÎµ¦½º(0, 1)¿Í ¸ÂÃçÁà
+            // Enum ê°’ì„ intë¡œ ë³€í™˜í•´ì„œ ë“œë¡­ë‹¤ìš´ ì¸ë±ìŠ¤(0, 1)ì™€ ë§ì¶°ì¤˜
             dropdown.value = (int)LocalizationManager.Instance.currentLanguage;
         }
 
-        // 2. µå·Ó´Ù¿î °ªÀÌ ¹Ù²ğ ¶§ ½ÇÇàµÉ ÇÔ¼ö ¿¬°á
+        // 2. ë“œë¡­ë‹¤ìš´ ê°’ì´ ë°”ë€” ë•Œ ì‹¤í–‰ë  í•¨ìˆ˜ ì—°ê²°
         dropdown.onValueChanged.AddListener(OnDropdownValueChanged);
     }
 
@@ -26,8 +26,8 @@ public class LanguageUI : MonoBehaviour
     {
         if (LocalizationManager.Instance == null) return;
 
-        // µå·Ó´Ù¿î ÀÎµ¦½º¿¡ µû¶ó ¸Å´ÏÀúÀÇ ÇÔ¼ö¸¦ È£ÃâÇØ
-        // 0: Korean, 1: English (¿ì¸®°¡ ¼³Á¤ÇÑ ¼ø¼­ ±âÁØÀÌ¾ß)
+        // ë“œë¡­ë‹¤ìš´ ì¸ë±ìŠ¤ì— ë”°ë¼ ë§¤ë‹ˆì €ì˜ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•´
+        // 0: Korean, 1: English (ìš°ë¦¬ê°€ ì„¤ì •í•œ ìˆœì„œ ê¸°ì¤€ì´ì•¼)
         if (index == 0)
         {
             LocalizationManager.Instance.SetKorean();
@@ -37,6 +37,6 @@ public class LanguageUI : MonoBehaviour
             LocalizationManager.Instance.SetEnglish();
         }
 
-        DevLog.Log($"¾ğ¾î º¯°æµÊ: {(index == 0 ? "ÇÑ±¹¾î" : "¿µ¾î")}");
+        DevLog.Log($"ì–¸ì–´ ë³€ê²½ë¨: {(index == 0 ? "í•œêµ­ì–´" : "ì˜ì–´")}");
     }
 }

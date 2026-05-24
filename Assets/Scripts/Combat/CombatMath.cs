@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-// static Å¬·¡½º·Î ¸¸µé¸é À¯´ÏÆ¼ ÇÏÀÌ¾î¶óÅ°¿¡ ³ÖÀ» ÇÊ¿ä ¾øÀÌ 'CombatMath.ÇÔ¼öÀÌ¸§()'À¸·Î Áï½Ã ¾µ ¼ö ÀÖ½À´Ï´Ù!
+// static í´ë˜ìŠ¤ë¡œ ë§Œë“¤ë©´ ìœ ë‹ˆí‹° í•˜ì´ì–´ë¼í‚¤ì— ë„£ì„ í•„ìš” ì—†ì´ 'CombatMath.í•¨ìˆ˜ì´ë¦„()'ìœ¼ë¡œ ì¦‰ì‹œ ì“¸ ìˆ˜ ìˆìŠµë‹ˆë‹¤!
 public static class CombatMath
 {
-    // 1. À¯È¿ ¼Óµµ º¯È¯
+    // 1. ìœ íš¨ ì†ë„ ë³€í™˜
     public static float GetEffectiveSpeed(int speed)
     {
         if (speed <= 100) return speed;
@@ -11,7 +11,7 @@ public static class CombatMath
         return 150f + (speed - 200f) / 10f;
     }
 
-    // 2. ¸íÁß/È¸ÇÇ ÆÇÁ¤ (Hit or Miss)
+    // 2. ëª…ì¤‘/íšŒí”¼ íŒì • (Hit or Miss)
     public static bool CheckHitSuccess(float baseAccuracy, int attackerSpeed, int defenderSpeed, float extraEvasion = 0f)
     {
         float attackerES = GetEffectiveSpeed(attackerSpeed);
@@ -27,12 +27,12 @@ public static class CombatMath
         finalHitRate = Mathf.Clamp(finalHitRate, 5f, 95f);
         float randomRoll = Random.Range(0f, 100f);
 
-        DevLog.Log($"[¸íÁß ¿¬»ê] À¯È¿¼Óµµ Â÷ÀÌ: {deltaES:F1} / º¸Á¤Ä¡: {hitModifier:F1}% / ÃÖÁ¾ ¸íÁß·ü: {finalHitRate:F1}% / ÁÖ»çÀ§ °á°ú: {randomRoll:F1}");
+        DevLog.Log($"[ëª…ì¤‘ ì—°ì‚°] ìœ íš¨ì†ë„ ì°¨ì´: {deltaES:F1} / ë³´ì •ì¹˜: {hitModifier:F1}% / ìµœì¢… ëª…ì¤‘ë¥ : {finalHitRate:F1}% / ì£¼ì‚¬ìœ„ ê²°ê³¼: {randomRoll:F1}");
 
         return randomRoll <= finalHitRate;
     }
 
-    // 3. Å©¸®Æ¼ÄÃ È®·ü Á¡°¨ °ø½Ä
+    // 3. í¬ë¦¬í‹°ì»¬ í™•ë¥  ì ê° ê³µì‹
     public static float GetCriticalRate(int luck)
     {
         if (luck <= 100) return luck * 0.66f;
@@ -40,7 +40,7 @@ public static class CombatMath
         else return 95f + 5f * ((luck - 200f) / (luck - 100f));
     }
 
-    // 4. Å©¸®Æ¼ÄÃ ÃÖÁ¾ ÆÇÁ¤
+    // 4. í¬ë¦¬í‹°ì»¬ ìµœì¢… íŒì •
     public static bool CheckCriticalSuccess(float skillBonusCrit, int attackerLuck)
     {
         float statCritRate = GetCriticalRate(attackerLuck);
@@ -49,12 +49,12 @@ public static class CombatMath
         finalCritRate = Mathf.Clamp(finalCritRate, 0f, 100f);
         float randomRoll = Random.Range(0f, 100f);
 
-        DevLog.Log($"[Å©¸® ¿¬»ê] ¿î:{attackerLuck} -> ½ºÅÈÈ®·ü:{statCritRate:F1}% / ½ºÅ³º¸Á¤:{skillBonusCrit}% / ÃÖÁ¾È®·ü:{finalCritRate:F1}% / ÁÖ»çÀ§:{randomRoll:F1}");
+        DevLog.Log($"[í¬ë¦¬ ì—°ì‚°] ìš´:{attackerLuck} -> ìŠ¤íƒ¯í™•ë¥ :{statCritRate:F1}% / ìŠ¤í‚¬ë³´ì •:{skillBonusCrit}% / ìµœì¢…í™•ë¥ :{finalCritRate:F1}% / ì£¼ì‚¬ìœ„:{randomRoll:F1}");
 
         return randomRoll <= finalCritRate;
     }
 
-    // 5. ¹æ¾î·Â(DEF) ±â¹İ ÇÇÇØ °¨¼ÒÀ²(DR) ¿¬»ê
+    // 5. ë°©ì–´ë ¥(DEF) ê¸°ë°˜ í”¼í•´ ê°ì†Œìœ¨(DR) ì—°ì‚°
     public static float GetDamageReduction(int defense)
     {
         float drPercent = 0f;
@@ -66,7 +66,7 @@ public static class CombatMath
         return drPercent / 100f;
     }
 
-    // 6. ºê·¹ÀÌÅ© ÀúÇ×¿¡ µû¸¥ °¨¼ÒÀ²
+    // 6. ë¸Œë ˆì´í¬ ì €í•­ì— ë”°ë¥¸ ê°ì†Œìœ¨
     public static float GetBreakDamageReduction(int br)
     {
         if (br <= 100) return br / 200f;
@@ -74,36 +74,36 @@ public static class CombatMath
         else return 0.75f + ((br - 200f) / 2000f);
     }
 
-    // 7. ºê·¹ÀÌÅ© ´©Àû ½º³ë¿ìº¼ °¡ÁßÄ¡ (maxGauge ¸Å°³º¯¼ö Ãß°¡)
+    // 7. ë¸Œë ˆì´í¬ ëˆ„ì  ìŠ¤ë…¸ìš°ë³¼ ê°€ì¤‘ì¹˜ (maxGauge ë§¤ê°œë³€ìˆ˜ ì¶”ê°€)
     public static float GetBreakSnowballMultiplier(float currentGauge, float maxGauge)
     {
-        float ratio = currentGauge / maxGauge; // 100f ´ë½Å ÃÖ´ëÄ¡·Î ³ª´®
+        float ratio = currentGauge / maxGauge; // 100f ëŒ€ì‹  ìµœëŒ€ì¹˜ë¡œ ë‚˜ëˆ”
         return 1.0f + (ratio * ratio);
     }
 
-    // 8. ºê·¹ÀÌÅ© ÀÚ¿¬ È¸º¹·® »êÃâ (maxGauge ¸Å°³º¯¼ö Ãß°¡)
+    // 8. ë¸Œë ˆì´í¬ ìì—° íšŒë³µëŸ‰ ì‚°ì¶œ (maxGauge ë§¤ê°œë³€ìˆ˜ ì¶”ê°€)
     public static float GetBreakRecoveryAmount(float currentGauge, float maxGauge, float baseRecovery = 5f)
     {
-        float ratio = currentGauge / maxGauge; // 100f ´ë½Å ÃÖ´ëÄ¡·Î ³ª´®
+        float ratio = currentGauge / maxGauge; // 100f ëŒ€ì‹  ìµœëŒ€ì¹˜ë¡œ ë‚˜ëˆ”
         float multiplier = 1.0f - (ratio * ratio);
         multiplier = Mathf.Max(0.1f, multiplier);
         return baseRecovery * multiplier;
     }
 
-    // ÀÒÀº Ã¼·Â ºñ·Ê ÁõÆø ¹èÀ² °è»ê (ÅëÀÏ °ø½Ä)
-    // Multiplier = 1.0 + (ÀÒÀº Ã¼·Â ºñÀ²) * ÃÖ´ë ÁõÆøÄ¡
+    // ìƒì€ ì²´ë ¥ ë¹„ë¡€ ì¦í­ ë°°ìœ¨ ê³„ì‚° (í†µì¼ ê³µì‹)
+    // Multiplier = 1.0 + (ìƒì€ ì²´ë ¥ ë¹„ìœ¨) * ìµœëŒ€ ì¦í­ì¹˜
     public static float GetMissingHPMultiplier(int maxHp, int currentHp, float maxBonus)
     {
         if (maxHp <= 0) return 1.0f;
 
-        // 1. ÀÒÀº Ã¼·Â ºñÁß °è»ê (0.0 ~ 1.0)
+        // 1. ìƒì€ ì²´ë ¥ ë¹„ì¤‘ ê³„ì‚° (0.0 ~ 1.0)
         float missingRatio = (float)(maxHp - currentHp) / maxHp;
 
-        // 2. ÃÖÁ¾ ¹èÀ² ¹İÈ¯
+        // 2. ìµœì¢… ë°°ìœ¨ ë°˜í™˜
         return 1.0f + (missingRatio * maxBonus);
     }
 
-    // ½ºÅÈ°ú º¸Á¤Ä¡¸¦ ÇÕ»êÇÑ 'ÃÖÁ¾ Å©¸®Æ¼ÄÃ È®·ü'À» ¹Ì¸® °è»êÇØ¼­ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+    // ìŠ¤íƒ¯ê³¼ ë³´ì •ì¹˜ë¥¼ í•©ì‚°í•œ 'ìµœì¢… í¬ë¦¬í‹°ì»¬ í™•ë¥ 'ì„ ë¯¸ë¦¬ ê³„ì‚°í•´ì„œ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
     public static float GetFinalCritRate(float bonusCritRate, int luck)
     {
         float statCritRate = GetCriticalRate(luck);

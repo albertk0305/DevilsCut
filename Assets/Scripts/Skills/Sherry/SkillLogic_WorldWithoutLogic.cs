@@ -1,36 +1,36 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_WorldWithoutReason", menuName = "SkillLogic/Player/WorldWithoutReason")]
 public class SkillLogic_WorldWithoutReason : SkillLogicBase
 {
-    [Header("±âº»: ·¹º§º° Ã¼·Â È¸º¹·ü (%)")]
+    [Header("ê¸°ë³¸: ë ˆë²¨ë³„ ì²´ë ¥ íšŒë³µë¥  (%)")]
     // Lv.1: 20%, Lv.2: 30%, Lv.3: 40%
     public float[] healRates = { 0.20f, 0.30f, 0.40f };
 
-    [Header("±âº»: ·¹º§º° ¹ö½ºÆ®(±×·Î±â) °¨¼Ò·®")]
+    [Header("ê¸°ë³¸: ë ˆë²¨ë³„ ë²„ìŠ¤íŠ¸(ê·¸ë¡œê¸°) ê°ì†ŒëŸ‰")]
     public float[] breakRecoveryAmounts = { 30f, 50f, 100f };
 
-    [Header("ÁøÈ­ B: ÃÊÀç»ı ¹öÇÁ")]
+    [Header("ì§„í™” B: ì´ˆì¬ìƒ ë²„í”„")]
     public StatusEffectData hpRegenBuff;
     public StatusEffectData breakRegenBuff;
 
-    [Header("ÁøÈ­ C: ±¸¼ÓÁ¦¾î¼ú½Ä (È¸º¹·® -> ÇÇÇØ ÀüÈ¯À²)")]
-    // Lv1: È¸º¹·®ÀÇ 50%, Lv2: 75%, Lv3: 100% ÇÇÇØ
+    [Header("ì§„í™” C: êµ¬ì†ì œì–´ìˆ ì‹ (íšŒë³µëŸ‰ -> í”¼í•´ ì „í™˜ìœ¨)")]
+    // Lv1: íšŒë³µëŸ‰ì˜ 50%, Lv2: 75%, Lv3: 100% í”¼í•´
     public float[] pathC_DamageRates = { 0.5f, 0.75f, 1.0f };
 
-    // ¿ä¼ú °è¿­ »ıÁ¸±âÀÌ¹Ç·Î ºø³ª°¡Áö ¾Ê°í ¹«Á¶°Ç ¹ßµ¿ÇÕ´Ï´Ù.
+    // ìš”ìˆ  ê³„ì—´ ìƒì¡´ê¸°ì´ë¯€ë¡œ ë¹—ë‚˜ê°€ì§€ ì•Šê³  ë¬´ì¡°ê±´ ë°œë™í•©ë‹ˆë‹¤.
     public override bool AlwaysHits(SkillData skill) => true;
 
-    // [ÁøÈ­ C]¸¦ °ø°İ±â·Î ÀÎ½Ä½ÃÅ°±â À§ÇÑ Å¸¼ö ¼³Á¤
+    // [ì§„í™” C]ë¥¼ ê³µê²©ê¸°ë¡œ ì¸ì‹ì‹œí‚¤ê¸° ìœ„í•œ íƒ€ìˆ˜ ì„¤ì •
     public override int GetHitCount(SkillData skill)
     {
         return (skill.currentEvolution == SkillEvolution.PathC) ? 1 : 0;
     }
 
-    // [ÁøÈ­ C]¸¦ °ø°İ±â·Î ÀÎ½Ä½ÃÅ°±â À§ÇÑ °è¼ö ¼³Á¤
+    // [ì§„í™” C]ë¥¼ ê³µê²©ê¸°ë¡œ ì¸ì‹ì‹œí‚¤ê¸° ìœ„í•œ ê³„ìˆ˜ ì„¤ì •
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
-        if (skill.currentEvolution == SkillEvolution.PathC) return 1.0f; // 0ÀÌ ¾Æ´Ï¸é ½Ã½ºÅÛÀÌ °ø°İ±â·Î ÀÎ½ÄÇÔ
+        if (skill.currentEvolution == SkillEvolution.PathC) return 1.0f; // 0ì´ ì•„ë‹ˆë©´ ì‹œìŠ¤í…œì´ ê³µê²©ê¸°ë¡œ ì¸ì‹í•¨
         return 0f;
     }
 
@@ -40,15 +40,15 @@ public class SkillLogic_WorldWithoutReason : SkillLogicBase
 
         int index = Mathf.Clamp(skill.skillLevel - 1, 0, healRates.Length - 1);
 
-        // 1. Ã¼·Â È¸º¹ ¿¬»ê
+        // 1. ì²´ë ¥ íšŒë³µ ì—°ì‚°
         float baseHeal = pStats.maxHp * healRates[index];
-        // [Ãß°¡] µ¥¸ó ½Ã³ÊÁö È¸º¹·® ÁõÆø
+        // [ì¶”ê°€] ë°ëª¬ ì‹œë„ˆì§€ íšŒë³µëŸ‰ ì¦í­
         int healAmount = Mathf.RoundToInt(baseHeal * (1f + pStats.healingReceivedAmp));
 
         int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
         pStats.currentHp = Mathf.Clamp(pStats.currentHp + healAmount, 0, pStats.maxHp);
 
-        // 2. Ã¼·Â UI ¾÷µ¥ÀÌÆ® ¹× È¸º¹ ÅØ½ºÆ® ¶ç¿ì±â
+        // 2. ì²´ë ¥ UI ì—…ë°ì´íŠ¸ ë° íšŒë³µ í…ìŠ¤íŠ¸ ë„ìš°ê¸°
         if (CombatUIManager.Instance != null)
         {
             CombatUIManager.Instance.playerStatusUI.UpdateHP(pStats.currentHp, pStats.maxHp);
@@ -58,17 +58,17 @@ public class SkillLogic_WorldWithoutReason : SkillLogicBase
         if (excessHeal > 0 && CombatManager.Instance != null)
             CombatManager.Instance.ApplyOverhealBuff(excessHeal);
 
-        // 3. ¹ö½ºÆ®(±×·Î±â) °ÔÀÌÁö Áï½Ã °¨¼Ò ¿¬»ê
+        // 3. ë²„ìŠ¤íŠ¸(ê·¸ë¡œê¸°) ê²Œì´ì§€ ì¦‰ì‹œ ê°ì†Œ ì—°ì‚°
         float breakRecover = breakRecoveryAmounts[index];
         if (BreakManager.Instance != null)
         {
             BreakManager.Instance.RecoverBreakInstantly(true, breakRecover);
         }
 
-        DevLog.Log($"[ÀÌ¼ºÀÌ ¾ø´Â ¼¼°è] Ã¼·Â {healAmount} È¸º¹, ±×·Î±â ¼öÄ¡ {breakRecover} °¨¼Ò.");
+        DevLog.Log($"[ì´ì„±ì´ ì—†ëŠ” ì„¸ê³„] ì²´ë ¥ {healAmount} íšŒë³µ, ê·¸ë¡œê¸° ìˆ˜ì¹˜ {breakRecover} ê°ì†Œ.");
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ A] »şÀÎ: ¸ğµç µğ¹öÇÁ ÇØÁ¦
+        // [ì§„í™” A] ìƒ¤ì¸: ëª¨ë“  ë””ë²„í”„ í•´ì œ
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.PathA)
         {
@@ -77,42 +77,42 @@ public class SkillLogic_WorldWithoutReason : SkillLogicBase
             if (removedCount > 0)
             {
                 CombatUIManager.Instance.RefreshBuffUI();
-                DevLog.Log($"[ÁøÈ­ A] »şÀÎ ¹ßµ¿! {removedCount}°³ÀÇ Ä¡¸íÀûÀÎ µğ¹öÇÁ¸¦ Áï½Ã Á¤È­Çß½À´Ï´Ù.");
+                DevLog.Log($"[ì§„í™” A] ìƒ¤ì¸ ë°œë™! {removedCount}ê°œì˜ ì¹˜ëª…ì ì¸ ë””ë²„í”„ë¥¼ ì¦‰ì‹œ ì •í™”í–ˆìŠµë‹ˆë‹¤.");
             }
         }
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ B] ÃÊÀç»ı: 3ÅÏ°£ ¸Å ÅÏ ½ÃÀÛ ½Ã HP/±×·Î±â 10%¾¿ Áö¼Ó È¸º¹
+        // [ì§„í™” B] ì´ˆì¬ìƒ: 3í„´ê°„ ë§¤ í„´ ì‹œì‘ ì‹œ HP/ê·¸ë¡œê¸° 10%ì”© ì§€ì† íšŒë³µ
         // ---------------------------------------------------------
         else if (skill.currentEvolution == SkillEvolution.PathB)
         {
-            // HP Àç»ı ¹öÇÁ (10%)
+            // HP ì¬ìƒ ë²„í”„ (10%)
             if (hpRegenBuff != null) BuffManager.Instance.AddEffect(true, hpRegenBuff, 0.1f, 3);
 
-            // ±×·Î±â Àç»ı ¹öÇÁ (¼öÄ¡·Î maxBreakGaugeÀÇ 10%¸¦ °è»êÇØ¼­ Àü´Ş)
+            // ê·¸ë¡œê¸° ì¬ìƒ ë²„í”„ (ìˆ˜ì¹˜ë¡œ maxBreakGaugeì˜ 10%ë¥¼ ê³„ì‚°í•´ì„œ ì „ë‹¬)
             if (breakRegenBuff != null)
             {
                 float breakValue = pStats.maxBreakGauge * 0.1f;
                 BuffManager.Instance.AddEffect(true, breakRegenBuff, breakValue, 3);
             }
 
-            DevLog.Log("[ÁøÈ­ B] ÃÊÀç»ı ¹ßµ¿! 3ÅÏ°£ Áö¼ÓÀûÀÎ »ı¸í·Â ¹× ±×·Î±â È¸º¹ »óÅÂ¿¡ µ¹ÀÔÇÕ´Ï´Ù.");
+            DevLog.Log("[ì§„í™” B] ì´ˆì¬ìƒ ë°œë™! 3í„´ê°„ ì§€ì†ì ì¸ ìƒëª…ë ¥ ë° ê·¸ë¡œê¸° íšŒë³µ ìƒíƒœì— ëŒì…í•©ë‹ˆë‹¤.");
         }
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ C] ±¸¼ÓÁ¦¾î¼ú½Ä: ³ªÀÇ È¸º¹·®À» ÀûÀÇ ÇÇÇØ·®À¸·Î Ä¡È¯!
+        // [ì§„í™” C] êµ¬ì†ì œì–´ìˆ ì‹: ë‚˜ì˜ íšŒë³µëŸ‰ì„ ì ì˜ í”¼í•´ëŸ‰ìœ¼ë¡œ ì¹˜í™˜!
         // ---------------------------------------------------------
         else if (skill.currentEvolution == SkillEvolution.PathC)
         {
             float damageRate = pathC_DamageRates[index];
             int reflectionDamage = Mathf.RoundToInt(healAmount * damageRate);
 
-            // BattleCalculator¸¦ ¼Ó¿©¼­ UI Å¸°İ ¿¬Ãâ(ÇÇ°İ ¸ğ¼Ç)À» ¶ç¿ì°Ô ÇÑ µÚ, 
-            // ½ÇÁ¦·Î ÀûÀÇ Ã¼·ÂÀ» ±ğ´Â °ÍÀº ¿©±â¼­ ¼öµ¿À¸·Î Ã³¸®ÇÕ´Ï´Ù!
+            // BattleCalculatorë¥¼ ì†ì—¬ì„œ UI íƒ€ê²© ì—°ì¶œ(í”¼ê²© ëª¨ì…˜)ì„ ë„ìš°ê²Œ í•œ ë’¤, 
+            // ì‹¤ì œë¡œ ì ì˜ ì²´ë ¥ì„ ê¹ëŠ” ê²ƒì€ ì—¬ê¸°ì„œ ìˆ˜ë™ìœ¼ë¡œ ì²˜ë¦¬í•©ë‹ˆë‹¤!
             CombatManager.Instance.ApplyDamageToEnemy(reflectionDamage);
             CombatUIManager.Instance.SpawnDamageText(reflectionDamage.ToString(), true, false);
 
-            DevLog.Log($"[ÁøÈ­ C] ±¸¼ÓÁ¦¾î¼ú½Ä ¹ßµ¿! ¼Î¸®°¡ È¸º¹ÇÑ »ı¸í·ÂÀÇ {damageRate * 100}%¸¦ Àû¿¡°Ô Ä¡¸íÀûÀÎ Ä«¿îÅÍ ÇÇÇØ({reflectionDamage})·Î µÇµ¹·ÁÁİ´Ï´Ù!");
+            DevLog.Log($"[ì§„í™” C] êµ¬ì†ì œì–´ìˆ ì‹ ë°œë™! ì…°ë¦¬ê°€ íšŒë³µí•œ ìƒëª…ë ¥ì˜ {damageRate * 100}%ë¥¼ ì ì—ê²Œ ì¹˜ëª…ì ì¸ ì¹´ìš´í„° í”¼í•´({reflectionDamage})ë¡œ ë˜ëŒë ¤ì¤ë‹ˆë‹¤!");
         }
     }
 }

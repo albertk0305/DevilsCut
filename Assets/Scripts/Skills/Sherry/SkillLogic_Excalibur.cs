@@ -1,20 +1,20 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Excalibur", menuName = "SkillLogic/Player/Excalibur")]
 public class SkillLogic_Excalibur : SkillLogicBase
 {
-    [Header("±âº»: ·¹º§º° ¹æ¾î ¹«½Ã ºñÀ²")]
+    [Header("ê¸°ë³¸: ë ˆë²¨ë³„ ë°©ì–´ ë¬´ì‹œ ë¹„ìœ¨")]
     public float[] armorPenetrationRates = { 0.30f, 0.40f, 0.50f };
 
-    [Header("ÁøÈ­ B (Avalon) ¼³Á¤")]
-    public StatusEffectData avalonBuff; // ¼º°ËÀÇ °¡È£ (HpRegen)
-    public float avalonHealRate = 0.30f; // ÅÏ´ç ÃÖ´ë Ã¼·ÂÀÇ 30% È¸º¹
+    [Header("ì§„í™” B (Avalon) ì„¤ì •")]
+    public StatusEffectData avalonBuff; // ì„±ê²€ì˜ ê°€í˜¸ (HpRegen)
+    public float avalonHealRate = 0.30f; // í„´ë‹¹ ìµœëŒ€ ì²´ë ¥ì˜ 30% íšŒë³µ
 
-    [Header("ÁøÈ­ C (Morgan) ¼³Á¤")]
-    public StatusEffectData morganDebuff; // ¹Ş´Â ÇÇÇØ ÁõÆø ÀúÁÖ (DamageAmp)
-    public float[] morganAmpRates = { 0.50f, 0.60f, 0.70f }; // ÁõÆø·ü 50~70%
+    [Header("ì§„í™” C (Morgan) ì„¤ì •")]
+    public StatusEffectData morganDebuff; // ë°›ëŠ” í”¼í•´ ì¦í­ ì €ì£¼ (DamageAmp)
+    public float[] morganAmpRates = { 0.50f, 0.60f, 0.70f }; // ì¦í­ë¥  50~70%
 
-    // [ÁøÈ­ A] ÀÎºñÀúºí ¿¡¾î: ÁøÈ­ AÀÏ °æ¿ì ¹«Á¶°Ç ÀûÁß!
+    // [ì§„í™” A] ì¸ë¹„ì €ë¸” ì—ì–´: ì§„í™” Aì¼ ê²½ìš° ë¬´ì¡°ê±´ ì ì¤‘!
     public override bool AlwaysHits(SkillData skill)
     {
         if (skill.currentEvolution == SkillEvolution.PathA) return true;
@@ -23,7 +23,7 @@ public class SkillLogic_Excalibur : SkillLogicBase
 
     public override float GetArmorPenetrationRatio(SkillData skill, int skillLevel)
     {
-        // [ÁøÈ­ C] ¸ğ¸£°£: ¹æ¾î ¹«½Ã È¿°ú ¿ÏÀü »èÁ¦
+        // [ì§„í™” C] ëª¨ë¥´ê°„: ë°©ì–´ ë¬´ì‹œ íš¨ê³¼ ì™„ì „ ì‚­ì œ
         if (skill.currentEvolution == SkillEvolution.PathC) return 0f;
 
         int index = Mathf.Clamp(skillLevel - 1, 0, armorPenetrationRates.Length - 1);
@@ -36,19 +36,19 @@ public class SkillLogic_Excalibur : SkillLogicBase
 
         if (isPlayerAttacking)
         {
-            // [ÁøÈ­ B] ¾Æ¹ß·Ğ: 3ÅÏ °£ ¸Å ÅÏ 30% È¸º¹ ¹öÇÁ ºÎ¿©
+            // [ì§„í™” B] ì•„ë°œë¡ : 3í„´ ê°„ ë§¤ í„´ 30% íšŒë³µ ë²„í”„ ë¶€ì—¬
             if (skill.currentEvolution == SkillEvolution.PathB && avalonBuff != null)
             {
                 BuffManager.Instance.AddEffect(true, avalonBuff, avalonHealRate, 3);
-                DevLog.Log($"[ÁøÈ­ B] ¾Æ¹ß·Ğ ¹ßµ¿! 3ÅÏ°£ ¸Å ÅÏ ÃÖ´ë Ã¼·ÂÀÇ {avalonHealRate * 100}%¸¦ È¸º¹ÇÕ´Ï´Ù.");
+                DevLog.Log($"[ì§„í™” B] ì•„ë°œë¡  ë°œë™! 3í„´ê°„ ë§¤ í„´ ìµœëŒ€ ì²´ë ¥ì˜ {avalonHealRate * 100}%ë¥¼ íšŒë³µí•©ë‹ˆë‹¤.");
             }
 
-            // [ÁøÈ­ C] ¸ğ¸£°£: 3ÅÏ °£ ÀûÀÌ ¹Ş´Â ÇÇÇØ ´ëÆø ÁõÆø µğ¹öÇÁ ºÎ¿©
+            // [ì§„í™” C] ëª¨ë¥´ê°„: 3í„´ ê°„ ì ì´ ë°›ëŠ” í”¼í•´ ëŒ€í­ ì¦í­ ë””ë²„í”„ ë¶€ì—¬
             if (skill.currentEvolution == SkillEvolution.PathC && morganDebuff != null)
             {
                 int index = Mathf.Clamp(skill.skillLevel - 1, 0, morganAmpRates.Length - 1);
                 BuffManager.Instance.AddEffect(false, morganDebuff, morganAmpRates[index], 3);
-                DevLog.Log($"[ÁøÈ­ C] ¸ğ¸£°£ ¹ßµ¿! 3ÅÏ°£ ÀûÀÌ ¹Ş´Â ÇÇÇØ°¡ {morganAmpRates[index] * 100}% ÁõÆøµË´Ï´Ù.");
+                DevLog.Log($"[ì§„í™” C] ëª¨ë¥´ê°„ ë°œë™! 3í„´ê°„ ì ì´ ë°›ëŠ” í”¼í•´ê°€ {morganAmpRates[index] * 100}% ì¦í­ë©ë‹ˆë‹¤.");
             }
         }
     }

@@ -1,19 +1,19 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "KarinItem_Rickenbacker4001", menuName = "KarinItems/Rickenbacker 4001")]
 public class KarinItemLogic_Rickenbacker4001 : KarinItemLogicBase
 {
-    [Header("¹öÇÁ ¼³Á¤ (2Á¾)")]
-    public StatusEffectData defBuffData;   // À§¿¡¼­ ¸¸µç Buff_DEF_Up ¿¬°á
-    public StatusEffectData speedBuffData; // À§¿¡¼­ ¸¸µç Buff_SPD_Up ¿¬°á
+    [Header("ë²„í”„ ì„¤ì • (2ì¢…)")]
+    public StatusEffectData defBuffData;   // ìœ„ì—ì„œ ë§Œë“  Buff_DEF_Up ì—°ê²°
+    public StatusEffectData speedBuffData; // ìœ„ì—ì„œ ë§Œë“  Buff_SPD_Up ì—°ê²°
 
-    [Header("¼öÄ¡ ¼³Á¤")]
-    public float buffValue = 0.15f;        // 15% »ó½Â 
-    public int duration = 3;               // 3ÅÏ Áö¼Ó 
+    [Header("ìˆ˜ì¹˜ ì„¤ì •")]
+    public float buffValue = 0.15f;        // 15% ìƒìŠ¹ 
+    public int duration = 3;               // 3í„´ ì§€ì† 
 
     public override int CalculateDamage(PlayerStats pStats, EnemyData eData)
     {
-        // À¯Æ¿¸®Æ¼ ¹«±âÀÌ¹Ç·Î Á÷Á¢ÀûÀÎ µ¥¹ÌÁö´Â 0ÀÔ´Ï´Ù.
+        // ìœ í‹¸ë¦¬í‹° ë¬´ê¸°ì´ë¯€ë¡œ ì§ì ‘ì ì¸ ë°ë¯¸ì§€ëŠ” 0ì…ë‹ˆë‹¤.
         return 0;
     }
 
@@ -21,14 +21,14 @@ public class KarinItemLogic_Rickenbacker4001 : KarinItemLogicBase
     {
         bool isBuffApplied = false;
 
-        // 1. ¹æ¾î·Â(DEF) ¹öÇÁ ºÎ¿©
+        // 1. ë°©ì–´ë ¥(DEF) ë²„í”„ ë¶€ì—¬
         if (defBuffData != null)
         {
             BuffManager.Instance.AddEffect(true, defBuffData, buffValue, duration);
             isBuffApplied = true;
         }
 
-        // 2. ¼Óµµ(S) ¹öÇÁ ºÎ¿©
+        // 2. ì†ë„(S) ë²„í”„ ë¶€ì—¬
         if (speedBuffData != null)
         {
             BuffManager.Instance.AddEffect(true, speedBuffData, buffValue, duration);
@@ -37,9 +37,9 @@ public class KarinItemLogic_Rickenbacker4001 : KarinItemLogicBase
 
         if (isBuffApplied)
         {
-            DevLog.Log($"[Rickenbacker 4001] ¼Î¸®¿¡°Ô 3ÅÏ°£ ¹æ¾î·Â(DEF)°ú ¼Óµµ(S) {buffValue * 100}% »ó½Â ¹öÇÁ¸¦ ºÎ¿©Çß½À´Ï´Ù.");
+            DevLog.Log($"[Rickenbacker 4001] ì…°ë¦¬ì—ê²Œ 3í„´ê°„ ë°©ì–´ë ¥(DEF)ê³¼ ì†ë„(S) {buffValue * 100}% ìƒìŠ¹ ë²„í”„ë¥¼ ë¶€ì—¬í–ˆìŠµë‹ˆë‹¤.");
 
-            // UI °»½Å (¹öÇÁ ¾ÆÀÌÄÜµéÀÌ »óÅÂÃ¢¿¡ Ç¥½ÃµË´Ï´Ù)
+            // UI ê°±ì‹  (ë²„í”„ ì•„ì´ì½˜ë“¤ì´ ìƒíƒœì°½ì— í‘œì‹œë©ë‹ˆë‹¤)
             if (CombatUIManager.Instance != null)
             {
                 CombatUIManager.Instance.RefreshBuffUI();

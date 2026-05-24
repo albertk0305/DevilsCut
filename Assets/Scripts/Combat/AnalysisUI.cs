@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
@@ -6,16 +6,16 @@ using System.Collections.Generic;
 
 public class AnalysisUI : MonoBehaviour
 {
-    [Header("UI ¿ä¼Ò")]
+    [Header("UI ìš”ì†Œ")]
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI maxBreakGaugeText;
 
-    [Header("½ºÅÈ ÅØ½ºÆ® (¼ø¼ö ¼öÄ¡+°ø½Ä¸¸ Ç¥±â)")]
+    [Header("ìŠ¤íƒ¯ í…ìŠ¤íŠ¸ (ìˆœìˆ˜ ìˆ˜ì¹˜+ê³µì‹ë§Œ í‘œê¸°)")]
     [Tooltip("0:BR, 1:AP, 2:Str, 3:Def, 4:Spd, 5:Luk")]
     public TextMeshProUGUI[] statTexts;
 
-    [Header("¹Ì¸® ¹èÄ¡µÈ 8°³ÀÇ ½ºÅ³ ¹öÆ° ¸ñ·Ï")]
+    [Header("ë¯¸ë¦¬ ë°°ì¹˜ëœ 8ê°œì˜ ìŠ¤í‚¬ ë²„íŠ¼ ëª©ë¡")]
     public Button[] staticSkillButtons;
 
     public void Open(EnemyData enemy)
@@ -24,17 +24,17 @@ public class AnalysisUI : MonoBehaviour
 
         gameObject.SetActive(true);
 
-        // 1. Ã¢ÀÌ ¿­¸± ¶§ ´Ü ÇÑ ¹ø¸¸ ÃÖ½Å ½ºÅÈ ¹× ½ºÅ³ Á¤º¸¸¦ ¼¼ÆÃÇÕ´Ï´Ù. (ÃÖÀûÈ­)
+        // 1. ì°½ì´ ì—´ë¦´ ë•Œ ë‹¨ í•œ ë²ˆë§Œ ìµœì‹  ìŠ¤íƒ¯ ë° ìŠ¤í‚¬ ì •ë³´ë¥¼ ì„¸íŒ…í•©ë‹ˆë‹¤. (ìµœì í™”)
         UpdateStats(enemy);
         SetupSkills(enemy);
 
-        // 2. À¯´ÏÆ¼ UI ·¹ÀÌ¾Æ¿ô ¾ĞÃà ¹ö±×¸¦ ¸·±â À§ÇØ 1ÇÁ·¹ÀÓ µÚ¿¡ ¸®ºôµåÇÕ´Ï´Ù.
+        // 2. ìœ ë‹ˆí‹° UI ë ˆì´ì•„ì›ƒ ì••ì¶• ë²„ê·¸ë¥¼ ë§‰ê¸° ìœ„í•´ 1í”„ë ˆì„ ë’¤ì— ë¦¬ë¹Œë“œí•©ë‹ˆë‹¤.
         StartCoroutine(RefreshLayoutRoutine(enemy));
     }
 
     private IEnumerator RefreshLayoutRoutine(EnemyData enemy)
     {
-        // ¿ÀºêÁ§Æ®°¡ ÄÑÁö°í ÅØ½ºÆ®°¡ ÁÖÀÔµÈ ÈÄ, UI°¡ Å©±â¸¦ Á¤»óÀûÀ¸·Î °è»êÇÏµµ·Ï 1ÇÁ·¹ÀÓ ´ë±â
+        // ì˜¤ë¸Œì íŠ¸ê°€ ì¼œì§€ê³  í…ìŠ¤íŠ¸ê°€ ì£¼ì…ëœ í›„, UIê°€ í¬ê¸°ë¥¼ ì •ìƒì ìœ¼ë¡œ ê³„ì‚°í•˜ë„ë¡ 1í”„ë ˆì„ ëŒ€ê¸°
         yield return null;
 
         if (staticSkillButtons != null && staticSkillButtons.Length > 0 && staticSkillButtons[0] != null)
@@ -42,7 +42,7 @@ public class AnalysisUI : MonoBehaviour
             RectTransform parentRect = staticSkillButtons[0].transform.parent.GetComponent<RectTransform>();
             if (parentRect != null)
             {
-                // ºÎ¸ğ ·¹ÀÌ¾Æ¿ô ±×·ì(Vertical/Grid µî) °­Á¦ »õ·Î°íÄ§ -> ±ÛÀÚ°¡ »Ğ ÇÏ°í ³ªÅ¸³²
+                // ë¶€ëª¨ ë ˆì´ì•„ì›ƒ ê·¸ë£¹(Vertical/Grid ë“±) ê°•ì œ ìƒˆë¡œê³ ì¹¨ -> ê¸€ìê°€ ë¿… í•˜ê³  ë‚˜íƒ€ë‚¨
                 LayoutRebuilder.ForceRebuildLayoutImmediate(parentRect);
             }
         }
@@ -50,7 +50,7 @@ public class AnalysisUI : MonoBehaviour
     }
 
     // =========================================================
-    //  Àû±º Àü¿ë ½ºÅÈ ºĞÇØ±â (Ã¢ ¿­¸± ¶§ 1È¸ ¿¬»ê)
+    //  ì êµ° ì „ìš© ìŠ¤íƒ¯ ë¶„í•´ê¸° (ì°½ ì—´ë¦´ ë•Œ 1íšŒ ì—°ì‚°)
     // =========================================================
     private void UpdateStats(EnemyData enemy)
     {
@@ -101,7 +101,7 @@ public class AnalysisUI : MonoBehaviour
         int finalStat = Mathf.RoundToInt((baseVal + flatBuff) * (1f + pctBuff));
         finalStat = Mathf.Max(1, finalStat);
 
-        // AP´Â ¼öÄ¡¸¸, ´Ù¸¥ ½ºÅÈÀº ¹öÇÁ°¡ ¾øÀ» °æ¿ì ¼öÄ¡¸¸ ¹İÈ¯
+        // APëŠ” ìˆ˜ì¹˜ë§Œ, ë‹¤ë¥¸ ìŠ¤íƒ¯ì€ ë²„í”„ê°€ ì—†ì„ ê²½ìš° ìˆ˜ì¹˜ë§Œ ë°˜í™˜
         if (targetStat == TargetStat.AP) return $"{finalStat}";
         if (!hasCombatMods) return $"{finalStat}";
 
@@ -112,13 +112,13 @@ public class AnalysisUI : MonoBehaviour
     }
 
     // =========================================================
-    //  Á¤Àû ¹öÆ° 8°³ ¸ÅÇÎ ¹× ¹ø¿ª 
+    //  ì •ì  ë²„íŠ¼ 8ê°œ ë§¤í•‘ ë° ë²ˆì—­ 
     // =========================================================
     private void SetupSkills(EnemyData enemy)
     {
         if (staticSkillButtons == null || staticSkillButtons.Length == 0) return;
 
-        // ÀüºÎ ºñÈ°¼ºÈ­ ÃÊ±âÈ­
+        // ì „ë¶€ ë¹„í™œì„±í™” ì´ˆê¸°í™”
         for (int i = 0; i < staticSkillButtons.Length; i++)
         {
             if (staticSkillButtons[i] != null) staticSkillButtons[i].gameObject.SetActive(false);

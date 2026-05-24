@@ -1,6 +1,6 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-//  È¿°ú°¡ ¾î¶² ÀÛ¿ëÀ» ÇÏ´ÂÁö Á¤ÀÇÇÏ´Â ¿­°ÅÇüµé
+//  íš¨ê³¼ê°€ ì–´ë–¤ ì‘ìš©ì„ í•˜ëŠ”ì§€ ì •ì˜í•˜ëŠ” ì—´ê±°í˜•ë“¤
 public enum EffectCategory { Buff, Debuff, Special }
 public enum TargetStat { None, Strength, Defense, Speed, Luck, BreakResistance, AP }
 public enum ModifierType { Flat, Percentage }
@@ -9,23 +9,23 @@ public enum SpecialEffectType { None, Guard, Reflect, AbsoluteGuard, EvasionUp, 
 [CreateAssetMenu(fileName = "NewStatusEffect", menuName = "GameData/StatusEffect")]
 public class StatusEffectData : ScriptableObject
 {
-    public string effectID;       // °íÀ¯ ID 
-    public string effectName;     // È¿°ú ÀÌ¸§ 
+    public string effectID;       // ê³ ìœ  ID 
+    public string effectName;     // íš¨ê³¼ ì´ë¦„ 
     public EffectCategory category;
-    public Sprite icon;           // UI ¾ÆÀÌÄÜ
+    public Sprite icon;           // UI ì•„ì´ì½˜
 
-    [Header("È¿°ú ·ÎÁ÷ ¼³Á¤")]
-    public TargetStat targetStat;       // ¿Ã¸± ½ºÅÈ (Æ¯¼ö È¿°ú¸é None)
-    public ModifierType modifierType;   // ÇÕ ¿¬»ê(Flat)ÀÎÁö °ö ¿¬»ê(Percentage)ÀÎÁö
-    public SpecialEffectType specialType; // °¡µå, µ¶ µî Æ¯¼ö ·ÎÁ÷¿ë
+    [Header("íš¨ê³¼ ë¡œì§ ì„¤ì •")]
+    public TargetStat targetStat;       // ì˜¬ë¦´ ìŠ¤íƒ¯ (íŠ¹ìˆ˜ íš¨ê³¼ë©´ None)
+    public ModifierType modifierType;   // í•© ì—°ì‚°(Flat)ì¸ì§€ ê³± ì—°ì‚°(Percentage)ì¸ì§€
+    public SpecialEffectType specialType; // ê°€ë“œ, ë… ë“± íŠ¹ìˆ˜ ë¡œì§ìš©
 
     [TextArea]
     public string baseDescription;
 
-    [Header("±Í¼Ó ¹× Ãâ·Â Ä¿½ºÅÒ ¼³Á¤")]
-    public bool isPermanentPassive; // Áö¿ï ¼ö ¾ø°í ÅÏÀÌ °¨¼ÒÇÏÁö ¾Ê´Â ¿µ±¸ ¹öÇÁ/ÆĞ½Ãºê ¿©ºÎ
-    public bool showStackDetails;   // Ç÷¾× ÀúÁÖÃ³·³ ÅøÆÁ¿¡ °³º° ½ºÅÃ/ÅÏ Á¤º¸¸¦ ³¹³¹ÀÌ º¸¿©ÁÙÁö ¿©ºÎ
+    [Header("ê·€ì† ë° ì¶œë ¥ ì»¤ìŠ¤í…€ ì„¤ì •")]
+    public bool isPermanentPassive; // ì§€ìš¸ ìˆ˜ ì—†ê³  í„´ì´ ê°ì†Œí•˜ì§€ ì•ŠëŠ” ì˜êµ¬ ë²„í”„/íŒ¨ì‹œë¸Œ ì—¬ë¶€
+    public bool showStackDetails;   // í˜ˆì•¡ ì €ì£¼ì²˜ëŸ¼ íˆ´íŒì— ê°œë³„ ìŠ¤íƒ/í„´ ì •ë³´ë¥¼ ë‚±ë‚±ì´ ë³´ì—¬ì¤„ì§€ ì—¬ë¶€
 
-    // ÇÕÃÄÁø ¼öÄ¡ Ç¥Çö (¿¹: "(ÃÑ +{0})")
+    // í•©ì³ì§„ ìˆ˜ì¹˜ í‘œí˜„ (ì˜ˆ: "(ì´ +{0})")
     public string valueFormat;
 }

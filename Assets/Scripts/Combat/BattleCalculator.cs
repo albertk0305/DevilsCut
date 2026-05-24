@@ -1,7 +1,7 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 
-// [ºĞ¸®] CombatManager¿¡ ÀÖ´ø ±¸Á¶Ã¼¸¦ ÀÌ°÷À¸·Î ÀÌ»ç!
+// [ë¶„ë¦¬] CombatManagerì— ìˆë˜ êµ¬ì¡°ì²´ë¥¼ ì´ê³³ìœ¼ë¡œ ì´ì‚¬!
 public struct HitResult
 {
     public bool isHit;
@@ -10,7 +10,7 @@ public struct HitResult
     public float breakDamage;
 }
 
-// ½ºÅ³ ÇÑ ¹ø »ç¿ë(´Ù´Ü È÷Æ® Æ÷ÇÔ)ÀÇ Á¾ÇÕ °á°ú¸¦ ´ã´Â µ¥ÀÌÅÍ Åë
+// ìŠ¤í‚¬ í•œ ë²ˆ ì‚¬ìš©(ë‹¤ë‹¨ íˆíŠ¸ í¬í•¨)ì˜ ì¢…í•© ê²°ê³¼ë¥¼ ë‹´ëŠ” ë°ì´í„° í†µ
 public class SkillResult
 {
     public List<HitResult> hits = new List<HitResult>();
@@ -20,7 +20,7 @@ public class SkillResult
     public int totalMitigatedDamage = 0;
 }
 
-// [ÇÙ½É] ¿ÀÁ÷ '¼öÇĞÀû °è»ê'¸¸ Àü´ãÇÏ¸ç, UI³ª ÀÌÆåÆ®¿¡´Â ÀüÇô °ü¿©ÇÏÁö ¾Ê½À´Ï´Ù.
+// [í•µì‹¬] ì˜¤ì§ 'ìˆ˜í•™ì  ê³„ì‚°'ë§Œ ì „ë‹´í•˜ë©°, UIë‚˜ ì´í™íŠ¸ì—ëŠ” ì „í˜€ ê´€ì—¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
 public static class BattleCalculator
 {
     public static SkillResult CalculateSkill(
@@ -32,7 +32,7 @@ public static class BattleCalculator
         SkillResult result = new SkillResult();
         int totalHits = skill.skillLogic != null ? skill.skillLogic.GetHitCount(skill) : skill.GetCurrentHitCount();
 
-        // ¹æ¾îÀÚÀÇ °¡µå ¹öÇÁ Ã£±â (È®Àå¼ºÀ» À§ÇØ ¾Æ±º/Àû±º ¸ğµÎ ÆÇÁ¤ °¡´ÉÇÏ°Ô ±¸Çö)
+        // ë°©ì–´ìì˜ ê°€ë“œ ë²„í”„ ì°¾ê¸° (í™•ì¥ì„±ì„ ìœ„í•´ ì•„êµ°/ì êµ° ëª¨ë‘ íŒì • ê°€ëŠ¥í•˜ê²Œ êµ¬í˜„)
         var guardEffect = BuffManager.Instance.GetEffects(!isPlayerAttacking)
             .Find(e => e.effectData.specialType == SpecialEffectType.Guard || e.effectData.specialType == SpecialEffectType.AbsoluteGuard);
 
@@ -42,13 +42,13 @@ public static class BattleCalculator
         {
             if (effect.effectData.specialType == SpecialEffectType.EvasionUp)
             {
-                defenderExtraEvasion += effect.value; // ¿¹: 20, 30, 40 ÇÕ»ê
+                defenderExtraEvasion += effect.value; // ì˜ˆ: 20, 30, 40 í•©ì‚°
             }
         }
 
-        if (!isPlayerAttacking) defenderExtraEvasion += pStats.bonusEvasion; // ¹æ¾îÀÚ ÁÖÀÎ°øÀÏ °æ¿ì º¹¼­ 4Á¡ È¸ÇÇÀ² º¸Á¤
+        if (!isPlayerAttacking) defenderExtraEvasion += pStats.bonusEvasion; // ë°©ì–´ì ì£¼ì¸ê³µì¼ ê²½ìš° ë³µì„œ 4ì  íšŒí”¼ìœ¨ ë³´ì •
 
-        int consecutiveHits = 0; // ¿¬¼Ó ÀûÁß Ä«¿îÅÍ ÃÊ±âÈ­
+        int consecutiveHits = 0; // ì—°ì† ì ì¤‘ ì¹´ìš´í„° ì´ˆê¸°í™”
 
         bool isDefenderBroken = BreakManager.Instance.IsBroken(!isPlayerAttacking);
 
@@ -71,11 +71,11 @@ public static class BattleCalculator
                 float currentBaseAccuracy = skill.skillLogic != null ? skill.skillLogic.GetBaseAccuracy(skill) : skill.baseAccuracy;
                 float finalAccuracy = currentBaseAccuracy + skill.GetCurrentBonusAccuracy();
 
-                // º¹¼­ 4Á¡ º¸Á¤ (ÁÖÀÎ°ø °ø°İ ½Ã¿¡¸¸)
+                // ë³µì„œ 4ì  ë³´ì • (ì£¼ì¸ê³µ ê³µê²© ì‹œì—ë§Œ)
                 if (isPlayerAttacking) finalAccuracy += pStats.bonusAccuracy;
 
-                // [ÇÙ½É ¼öÁ¤] °ø°İ ÁÖÃ¼ »ó°ü¾øÀÌ '¸íÁß·ü º¸Á¤' ¹öÇÁ/µğ¹öÇÁ¸¦ ÇÕ»ê!
-                // Æ®¸¯½ºÅÍÀÇ '¸íÁß·ü °¨¼Ò(-30)' µğ¹öÇÁ°¡ Àû±º °ø°İ ½Ã¿¡ ±ğ¿©³ª°¡µµ·Ï ¿¬µ¿µË´Ï´Ù.
+                // [í•µì‹¬ ìˆ˜ì •] ê³µê²© ì£¼ì²´ ìƒê´€ì—†ì´ 'ëª…ì¤‘ë¥  ë³´ì •' ë²„í”„/ë””ë²„í”„ë¥¼ í•©ì‚°!
+                // íŠ¸ë¦­ìŠ¤í„°ì˜ 'ëª…ì¤‘ë¥  ê°ì†Œ(-30)' ë””ë²„í”„ê°€ ì êµ° ê³µê²© ì‹œì— ê¹ì—¬ë‚˜ê°€ë„ë¡ ì—°ë™ë©ë‹ˆë‹¤.
                 var attackerEffectsForAcc = BuffManager.Instance.GetEffects(isPlayerAttacking);
                 foreach (var eff in attackerEffectsForAcc)
                 {
@@ -90,20 +90,20 @@ public static class BattleCalculator
             {
                 result.anyHit = true;
 
-                // 1. ±âº» µ¥¹ÌÁö ¹× ºê·¹ÀÌÅ© ¼öÄ¡ »êÃâ
+                // 1. ê¸°ë³¸ ë°ë¯¸ì§€ ë° ë¸Œë ˆì´í¬ ìˆ˜ì¹˜ ì‚°ì¶œ
                 float baseMult = skill.GetCurrentDamageMultiplier();
                 float logicMult = skill.skillLogic != null ? skill.skillLogic.GetDamageMultiplier(skill, pStats, eData, isPlayerAttacking) : 1f;
 
-                // ¿øº»ÀÌ ¹öÇÁ(baseMult°¡ 0)¶óµµ, ·ÎÁ÷¿¡¼­ °è¼ö¸¦ Áá´Ù¸é ÀÌ ½ºÅ³Àº ÀÌÁ¦ °ø°İ±â(isAttackSkill)ÀÔ´Ï´Ù!
+                // ì›ë³¸ì´ ë²„í”„(baseMultê°€ 0)ë¼ë„, ë¡œì§ì—ì„œ ê³„ìˆ˜ë¥¼ ì¤¬ë‹¤ë©´ ì´ ìŠ¤í‚¬ì€ ì´ì œ ê³µê²©ê¸°(isAttackSkill)ì…ë‹ˆë‹¤!
                 bool isAttackSkill = baseMult > 0f || (baseMult <= 0f && logicMult > 0f && logicMult != 1.0f);
 
-                if (baseMult <= 0f && isAttackSkill) baseMult = 1.0f; // °ø°İ±â·Î È®ÀÎµÈ ³ğ¸¸ ¹èÀ²À» »ì·ÁÁİ´Ï´Ù.
+                if (baseMult <= 0f && isAttackSkill) baseMult = 1.0f; // ê³µê²©ê¸°ë¡œ í™•ì¸ëœ ë†ˆë§Œ ë°°ìœ¨ì„ ì‚´ë ¤ì¤ë‹ˆë‹¤.
 
-                // 1. ±âº» µ¥¹ÌÁö ¹× ºê·¹ÀÌÅ© ¼öÄ¡ »êÃâ
+                // 1. ê¸°ë³¸ ë°ë¯¸ì§€ ë° ë¸Œë ˆì´í¬ ìˆ˜ì¹˜ ì‚°ì¶œ
                 float calculatedDamage = attackerStrength * baseMult;
                 float currentBreakPower = skill.GetCurrentBreakPower();
 
-                // Path C (Á¦¹°ÀÇ ³«ÀÎ) Æ¯¼ö °ø½Ä Àû¿ë
+                // Path C (ì œë¬¼ì˜ ë‚™ì¸) íŠ¹ìˆ˜ ê³µì‹ ì ìš©
                 if (skill.skillLogic != null &&
                     skill.skillLogic.TryOverrideBaseHitCalculation(
                         skill,
@@ -116,10 +116,10 @@ public static class BattleCalculator
                     currentBreakPower = overrideBreakPower;
                 }
 
-                // 2. ¿ÜºÎ º¸Á¤ (½ºÅ³ °íÀ¯ ·ÎÁ÷, ½ºÅ¸ÀÏ ·©Å©, ±×·Î±â ÁõÆø)
+                // 2. ì™¸ë¶€ ë³´ì • (ìŠ¤í‚¬ ê³ ìœ  ë¡œì§, ìŠ¤íƒ€ì¼ ë­í¬, ê·¸ë¡œê¸° ì¦í­)
                 if (skill.skillLogic != null)
                 {
-                    calculatedDamage *= logicMult; // ¿©±â¼­ À§¿¡¼­ °è»êÇØµĞ logicMult¸¦ °öÇØ ÃÖÁ¾ µ¥¹ÌÁö¸¦ »½Æ¢±âÇÕ´Ï´Ù!
+                    calculatedDamage *= logicMult; // ì—¬ê¸°ì„œ ìœ„ì—ì„œ ê³„ì‚°í•´ë‘” logicMultë¥¼ ê³±í•´ ìµœì¢… ë°ë¯¸ì§€ë¥¼ ë»¥íŠ€ê¸°í•©ë‹ˆë‹¤!
                     calculatedDamage *= skill.skillLogic.GetDynamicDamageMultiplier(skill, consecutiveHits);
                 }
 
@@ -129,7 +129,7 @@ public static class BattleCalculator
                 if (!isPlayerAttacking && BreakManager.Instance.IsBroken(true)) calculatedDamage *= 2.0f;
                 else if (isPlayerAttacking && BreakManager.Instance.IsBroken(false)) calculatedDamage *= 2.0f;
 
-                // 3. Å©¸®Æ¼ÄÃ ÆÇÁ¤
+                // 3. í¬ë¦¬í‹°ì»¬ íŒì •
                 if (isAttackSkill)
                 {
                     float dynamicCrit = skill.skillLogic != null ? skill.skillLogic.GetDynamicCritRateBonus(skill, consecutiveHits) : 0f;
@@ -139,7 +139,7 @@ public static class BattleCalculator
                     {
                         totalCritRateBonus += (pStats.critRate * 100f);
 
-                        // [Ä³½ºÅÍ ¿¡ÇÈ ¿¬µ¿] Å©¸®Æ¼ÄÃ È®·ü º¸Á¤ ¹öÇÁ ÇÕ»ê
+                        // [ìºìŠ¤í„° ì—í”½ ì—°ë™] í¬ë¦¬í‹°ì»¬ í™•ë¥  ë³´ì • ë²„í”„ í•©ì‚°
                         var attackerEffectsForCrit = BuffManager.Instance.GetEffects(true);
                         foreach (var eff in attackerEffectsForCrit)
                             if (eff.effectData != null && eff.effectData.specialType == SpecialEffectType.CritRateUp) totalCritRateBonus += eff.value;
@@ -155,7 +155,7 @@ public static class BattleCalculator
                         {
                             finalCritMult += (pStats.critDamage - 1.5f);
 
-                            // [Ä³½ºÅÍ ¿¡ÇÈ ¿¬µ¿] Å©¸®Æ¼ÄÃ ÇÇÇØ·® ÁõÆø ¹öÇÁ ÇÕ»ê
+                            // [ìºìŠ¤í„° ì—í”½ ì—°ë™] í¬ë¦¬í‹°ì»¬ í”¼í•´ëŸ‰ ì¦í­ ë²„í”„ í•©ì‚°
                             var attackerEffectsForCritDmg = BuffManager.Instance.GetEffects(true);
                             foreach (var eff in attackerEffectsForCritDmg)
                                 if (eff.effectData != null && eff.effectData.specialType == SpecialEffectType.CritDamageUp) finalCritMult += eff.value;
@@ -171,7 +171,7 @@ public static class BattleCalculator
                 }
 
                 // ==========================================================
-                // 4. ÇÇÇØ ÁõÆø(Amp) ¼öÄ¡ ÇÕ»ê ¹× ¼±Àû¿ë
+                // 4. í”¼í•´ ì¦í­(Amp) ìˆ˜ì¹˜ í•©ì‚° ë° ì„ ì ìš©
                 // ==========================================================
                 float damageAmp = 0f;
                 float damageGivenAmp = 0f;
@@ -188,7 +188,7 @@ public static class BattleCalculator
                     var syn = PlayerManager.Instance.GetCurrentSynergies();
                     var inventory = PlayerManager.Instance.inventory;
 
-                    // [¼¼ÀÌ¹ö ¿¡ÇÈ ¾ÆÀÌÅÛ - Æ÷½ÄÀÚÀÇ ÀÌ»¡] Àû Ã¼·ÂÀÌ 70% ÀÌ»óÀÏ ¶§ ÃÖÁ¾ ÇÇÇØ ÁõÆø
+                    // [ì„¸ì´ë²„ ì—í”½ ì•„ì´í…œ - í¬ì‹ìì˜ ì´ë¹¨] ì  ì²´ë ¥ì´ 70% ì´ìƒì¼ ë•Œ ìµœì¢… í”¼í•´ ì¦í­
                     if (defenderMaxHp > 0 && ((float)defenderCurrentHp / defenderMaxHp) >= 0.7f)
                     {
                         var saberEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Saber && x.data.grade == ItemGrade.Epic);
@@ -204,13 +204,13 @@ public static class BattleCalculator
 
                     if (apDiff > 0)
                     {
-                        // [¾î»õ½Å 4Á¡] AP Â÷ÀÌ 1´ç 1% (0.01) ÇÇÇØ ÁõÆø
+                        // [ì–´ìƒˆì‹  4ì ] AP ì°¨ì´ 1ë‹¹ 1% (0.01) í”¼í•´ ì¦í­
                         if (syn.GetValueOrDefault(ItemClass.Assassin) >= 4)
                         {
                             damageGivenAmp += (apDiff * 0.01f);
                         }
 
-                        // [¾î»õ½Å ¿¡ÇÈ ¾ÆÀÌÅÛ - ¾Ï»ìÀÚÀÇ ºñ¼ö] AP Â÷ÀÌ¿¡ ºñ·ÊÇÏ¿© ÁõÆø
+                        // [ì–´ìƒˆì‹  ì—í”½ ì•„ì´í…œ - ì•”ì‚´ìì˜ ë¹„ìˆ˜] AP ì°¨ì´ì— ë¹„ë¡€í•˜ì—¬ ì¦í­
                         var assassinEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Assassin && x.data.grade == ItemGrade.Epic);
                         foreach (var assassinEpic in assassinEpics)
                         {
@@ -220,7 +220,7 @@ public static class BattleCalculator
                         }
                     }
 
-                    // º¹¼­ ¼Óµµ Â÷ÀÌ¿¡ ºñ·ÊÇÏ¿© ÁõÆø
+                    // ë³µì„œ ì†ë„ ì°¨ì´ì— ë¹„ë¡€í•˜ì—¬ ì¦í­
                     int spdDiff = attackerSpeed - defenderSpeed;
 
                     if (spdDiff > 0)
@@ -234,7 +234,7 @@ public static class BattleCalculator
                         }
                     }
 
-                    // Ä³½ºÅÍ 6Á¡ ¹× Àü¼³: ÇöÀç °É·ÁÀÖ´Â "¹öÇÁ"ÀÇ °³¼ö¸¦ ¼Á´Ï´Ù!
+                    // ìºìŠ¤í„° 6ì  ë° ì „ì„¤: í˜„ì¬ ê±¸ë ¤ìˆëŠ” "ë²„í”„"ì˜ ê°œìˆ˜ë¥¼ ì…‰ë‹ˆë‹¤!
                     int activeBuffCount = 0;
                     foreach (var eff in attackerEffects)
                     {
@@ -244,14 +244,14 @@ public static class BattleCalculator
                     if (activeBuffCount > 0)
                     {
                         if (syn.GetValueOrDefault(ItemClass.Caster) >= 6)
-                            damageGivenAmp += (activeBuffCount * 0.03f); // 1°³´ç 3% ÁõÆø
+                            damageGivenAmp += (activeBuffCount * 0.03f); // 1ê°œë‹¹ 3% ì¦í­
 
                         var casterLegendary = inventory.Find(x => x.data.itemClass == ItemClass.Caster && x.data.grade == ItemGrade.Legendary);
                         if (casterLegendary != null)
-                            damageGivenAmp += (activeBuffCount * 0.02f); // Àü¼³ ÀåÂø ½Ã 1°³´ç 2% Ãß°¡ ÁõÆø
+                            damageGivenAmp += (activeBuffCount * 0.02f); // ì „ì„¤ ì¥ì°© ì‹œ 1ê°œë‹¹ 2% ì¶”ê°€ ì¦í­
                     }
 
-                    // [Æ®¸¯½ºÅÍ 6Á¡ ¹× Àü¼³] Àû¿¡°Ô °É·ÁÀÖ´Â "µğ¹öÇÁ"ÀÇ °³¼ö¸¦ ¼Á´Ï´Ù!
+                    // [íŠ¸ë¦­ìŠ¤í„° 6ì  ë° ì „ì„¤] ì ì—ê²Œ ê±¸ë ¤ìˆëŠ” "ë””ë²„í”„"ì˜ ê°œìˆ˜ë¥¼ ì…‰ë‹ˆë‹¤!
                     int activeDebuffCount = 0;
                     foreach (var eff in defenderEffects)
                     {
@@ -261,20 +261,20 @@ public static class BattleCalculator
                     if (activeDebuffCount > 0)
                     {
                         if (syn.GetValueOrDefault(ItemClass.Trickster) >= 6)
-                            damageGivenAmp += (activeDebuffCount * 0.03f); // 1°³´ç 3% ÁõÆø
+                            damageGivenAmp += (activeDebuffCount * 0.03f); // 1ê°œë‹¹ 3% ì¦í­
 
                         var tricksterLegendary = inventory.Find(x => x.data.itemClass == ItemClass.Trickster && x.data.grade == ItemGrade.Legendary);
                         if (tricksterLegendary != null)
-                            damageGivenAmp += (activeDebuffCount * 0.02f); // Àü¼³ ÀåÂø ½Ã 1°³´ç 2% Ãß°¡ ÁõÆø
+                            damageGivenAmp += (activeDebuffCount * 0.02f); // ì „ì„¤ ì¥ì°© ì‹œ 1ê°œë‹¹ 2% ì¶”ê°€ ì¦í­
                     }
 
-                    // [¹ö¼­Ä¿ 4Á¡] ÀÒÀº Ã¼·Â ºñÁß¿¡ µû¶ó ÃÖ´ë 50% ÇÇÇØ ÁõÆø
+                    // [ë²„ì„œì»¤ 4ì ] ìƒì€ ì²´ë ¥ ë¹„ì¤‘ì— ë”°ë¼ ìµœëŒ€ 50% í”¼í•´ ì¦í­
                     if (syn.GetValueOrDefault(ItemClass.Berserker) >= 4)
                     {
                         damageGivenAmp += (CombatMath.GetMissingHPMultiplier(pStats.maxHp, pStats.currentHp, 0.50f) - 1.0f);
                     }
 
-                    // [¹ö¼­Ä¿ Èñ±Í] ±¤Àü»çÀÇ ÁõÇ¥ (ÀÒÀº Ã¼·Â ºñ·Ê Æøµô)
+                    // [ë²„ì„œì»¤ í¬ê·€] ê´‘ì „ì‚¬ì˜ ì¦í‘œ (ìƒì€ ì²´ë ¥ ë¹„ë¡€ í­ë”œ)
                     var berserkerRares = inventory.FindAll(x => x.data.itemClass == ItemClass.Berserker && x.data.grade == ItemGrade.Rare);
                     foreach (var bRare in berserkerRares)
                     {
@@ -284,7 +284,7 @@ public static class BattleCalculator
                 }
                 if (isPlayerAttacking) damageGivenAmp += pStats.finalDamageAmp;
 
-                // (defenderEffects´Â »ó´Ü¿¡ ÀÌ¹Ì var·Î ¼±¾ğµÈ º¯¼ö¸¦ ±×´ë·Î Àç»ç¿ëÇÕ´Ï´Ù)
+                // (defenderEffectsëŠ” ìƒë‹¨ì— ì´ë¯¸ varë¡œ ì„ ì–¸ëœ ë³€ìˆ˜ë¥¼ ê·¸ëŒ€ë¡œ ì¬ì‚¬ìš©í•©ë‹ˆë‹¤)
                 foreach (var eff in defenderEffects)
                 {
                     if (eff.effectData.specialType == SpecialEffectType.DamageAmp) damageAmp += eff.value;
@@ -292,54 +292,54 @@ public static class BattleCalculator
                 }
                 if (!isPlayerAttacking) damageReduction += pStats.finalDamageReduction;
 
-                //  [¹ö±× ÇÈ½º] ÁÖ´Â ÇÇÇØ ÁõÆø°ú ¹Ş´Â ÇÇÇØ ÁõÆøÀ» ÇÕ»ê(totalAmp)ÇÏ¿© ÀüÃ¼ ÆÄÀÌ¸¦ ¸ÕÀú Å°¿ó´Ï´Ù!
+                //  [ë²„ê·¸ í”½ìŠ¤] ì£¼ëŠ” í”¼í•´ ì¦í­ê³¼ ë°›ëŠ” í”¼í•´ ì¦í­ì„ í•©ì‚°(totalAmp)í•˜ì—¬ ì „ì²´ íŒŒì´ë¥¼ ë¨¼ì € í‚¤ì›ë‹ˆë‹¤!
                 float totalAmp = damageAmp + damageGivenAmp;
                 if (totalAmp > 0f) calculatedDamage *= (1f + totalAmp);
 
 
                 // ==========================================================
-                // 5. °íÁ¤ ÇÇÇØ ºĞÇÒ ¹× ¹æ¾î·Â / ÇÇÇØ °¨¼Ò(Reduction) ºĞ¸® Àû¿ë
+                // 5. ê³ ì • í”¼í•´ ë¶„í•  ë° ë°©ì–´ë ¥ / í”¼í•´ ê°ì†Œ(Reduction) ë¶„ë¦¬ ì ìš©
                 // ==========================================================
                 float armorPenRatio = skill.skillLogic != null ? skill.skillLogic.GetArmorPenetrationRatio(skill, skill.skillLevel) : 0f;
                 if (isPlayerAttacking) armorPenRatio += pStats.trueDamageConversion;
 
-                armorPenRatio = Mathf.Clamp01(armorPenRatio); // ÃÖ´ë 100%±îÁö¸¸ Á¦ÇÑ
+                armorPenRatio = Mathf.Clamp01(armorPenRatio); // ìµœëŒ€ 100%ê¹Œì§€ë§Œ ì œí•œ
 
                 float fixedDamage = calculatedDamage * armorPenRatio;
                 float normalDamage = calculatedDamage * (1f - armorPenRatio);
 
-                // ÀÏ¹İ ÇÇÇØ¿¡¸¸ ½ºÅÈ ¹æ¾î·Â(Defense DR) °¨¼â Àû¿ë
+                // ì¼ë°˜ í”¼í•´ì—ë§Œ ìŠ¤íƒ¯ ë°©ì–´ë ¥(Defense DR) ê°ì‡„ ì ìš©
                 normalDamage *= (1f - CombatMath.GetDamageReduction(defenderDefense));
 
-                //  [ÇÙ½É ¼öÁ¤] ÀÏ¹İ ÇÇÇØ¿¡¸¸ µ¥¹ÌÁö °¨¼Ò(Damage Reduction) ¹öÇÁ/½ºÅÈ Àû¿ë (°íÁ¤ ÇÇÇØ´Â Àı´ë ±ğÀÌÁö ¾ÊÀ½!)
+                //  [í•µì‹¬ ìˆ˜ì •] ì¼ë°˜ í”¼í•´ì—ë§Œ ë°ë¯¸ì§€ ê°ì†Œ(Damage Reduction) ë²„í”„/ìŠ¤íƒ¯ ì ìš© (ê³ ì • í”¼í•´ëŠ” ì ˆëŒ€ ê¹ì´ì§€ ì•ŠìŒ!)
                 if (damageReduction > 0f) normalDamage *= (1f - Mathf.Clamp01(damageReduction));
 
 
                 // ==========================================================
-                // 6. ÀÎ°úÀ²(¹İ»ç)À» À§ÇÑ '°¡µå Á÷Àü µ¥¹ÌÁö' ½º³À¼¦ ÀúÀå
+                // 6. ì¸ê³¼ìœ¨(ë°˜ì‚¬)ì„ ìœ„í•œ 'ê°€ë“œ ì§ì „ ë°ë¯¸ì§€' ìŠ¤ëƒ…ìƒ· ì €ì¥
                 // ==========================================================
                 int originalDamage = Mathf.RoundToInt(fixedDamage + normalDamage);
                 if (originalDamage <= 0) originalDamage = 1;
 
 
                 // ==========================================================
-                // 7. °¡µå(Guard) ¹× °« ÇÚµå(AbsoluteGuard) ¹æ¾î Àû¿ë
+                // 7. ê°€ë“œ(Guard) ë° ê°“ í•¸ë“œ(AbsoluteGuard) ë°©ì–´ ì ìš©
                 // ==========================================================
                 if (guardEffect != null && (normalDamage + fixedDamage) > 0)
                 {
                     float reductionRate = guardEffect.value > 0f ? guardEffect.value : 0.5f;
 
-                    // °¡µå ¿ª½Ã ±âº»ÀûÀ¸·Î ÀÏ¹İ ÇÇÇØ¸¸ ÁÙÀÔ´Ï´Ù.
+                    // ê°€ë“œ ì—­ì‹œ ê¸°ë³¸ì ìœ¼ë¡œ ì¼ë°˜ í”¼í•´ë§Œ ì¤„ì…ë‹ˆë‹¤.
                     normalDamage *= (1f - reductionRate);
 
-                    // Àı´ë °¡µå(AbsoluteGuard) È¿°úÀÏ ¶§¸¸ ¿¹¿ÜÀûÀ¸·Î °íÁ¤ ÇÇÇØµµ ¸·¾Æ³À´Ï´Ù.
+                    // ì ˆëŒ€ ê°€ë“œ(AbsoluteGuard) íš¨ê³¼ì¼ ë•Œë§Œ ì˜ˆì™¸ì ìœ¼ë¡œ ê³ ì • í”¼í•´ë„ ë§‰ì•„ëƒ…ë‹ˆë‹¤.
                     if (guardEffect.effectData.specialType == SpecialEffectType.AbsoluteGuard)
                         fixedDamage *= (1f - reductionRate);
 
                     result.isGuardTriggered = true;
                 }
 
-                // ÃÖÁ¾ µ¥¹ÌÁö ÇÕ»ê
+                // ìµœì¢… ë°ë¯¸ì§€ í•©ì‚°
                 calculatedDamage = fixedDamage + normalDamage;
                 hit.damage = Mathf.RoundToInt(calculatedDamage);
 
@@ -347,20 +347,20 @@ public static class BattleCalculator
 
                 if (invincibleEffect != null)
                 {
-                    hit.damage = 0; // ¹«ÀûÀÌ¸é ÃÖ¼Ò µ¥¹ÌÁö ¹«½ÃÇÏ°í ¹«Á¶°Ç 0!
+                    hit.damage = 0; // ë¬´ì ì´ë©´ ìµœì†Œ ë°ë¯¸ì§€ ë¬´ì‹œí•˜ê³  ë¬´ì¡°ê±´ 0!
                 }
                 else if (isAttackSkill)
                 {
-                    if (hit.damage <= 0) hit.damage = 1; // °ø°İ±â¸é ÃÖ¼Ò µ¥¹ÌÁö 1 º¸Àå
+                    if (hit.damage <= 0) hit.damage = 1; // ê³µê²©ê¸°ë©´ ìµœì†Œ ë°ë¯¸ì§€ 1 ë³´ì¥
                 }
                 else
                 {
-                    hit.damage = 0; // ¼ø¼ö ¹öÇÁ/µğ¹öÇÁÀÏ ¶§¸¸ µ¥¹ÌÁö 0 °íÁ¤
+                    hit.damage = 0; // ìˆœìˆ˜ ë²„í”„/ë””ë²„í”„ì¼ ë•Œë§Œ ë°ë¯¸ì§€ 0 ê³ ì •
                 }
 
                 if (result.isGuardTriggered) result.totalMitigatedDamage += (originalDamage - hit.damage);
 
-                // 8. ºê·¹ÀÌÅ© µ¥¹ÌÁö ¿¬»ê
+                // 8. ë¸Œë ˆì´í¬ ë°ë¯¸ì§€ ì—°ì‚°
                 if (isPlayerAttacking && !BreakManager.Instance.IsBroken(false))
                 {
                     hit.breakDamage = currentBreakPower * (skill.skillLogic != null ? skill.skillLogic.GetBreakMultiplier(skill, pStats, eData, isPlayerAttacking) : 1f);

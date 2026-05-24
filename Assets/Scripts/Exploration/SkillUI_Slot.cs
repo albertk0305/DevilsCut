@@ -1,25 +1,25 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class SkillUI_Slot : MonoBehaviour
 {
-    [Header("UI ¿¬°á")]
-    public TextMeshProUGUI skillNameText;   // ½ºÅ³ ÀÌ¸§
-    public TextMeshProUGUI skillLevelText;  // ¿ìÃø »ó´Ü 1,2,3 ·¹º§
-    public GameObject evolutionBorder;      // ³ë¶õ»ö Å×µÎ¸® ÀÌ¹ÌÁö ¿ÀºêÁ§Æ®
-    public Button slotButton;               // Å¬¸¯ °¨Áö¿ë ¹öÆ°
+    [Header("UI ì—°ê²°")]
+    public TextMeshProUGUI skillNameText;   // ìŠ¤í‚¬ ì´ë¦„
+    public TextMeshProUGUI skillLevelText;  // ìš°ì¸¡ ìƒë‹¨ 1,2,3 ë ˆë²¨
+    public GameObject evolutionBorder;      // ë…¸ë€ìƒ‰ í…Œë‘ë¦¬ ì´ë¯¸ì§€ ì˜¤ë¸Œì íŠ¸
+    public Button slotButton;               // í´ë¦­ ê°ì§€ìš© ë²„íŠ¼
 
-    private SkillData mySkill;              // ÀÌ ½½·ÔÀÌ ´ã´çÇÏ´Â ½ºÅ³ µ¥ÀÌÅÍ
-    private SkillUI_Manager myManager;      // Áß¾Ó ÅëÁ¦ ¸Å´ÏÀú
+    private SkillData mySkill;              // ì´ ìŠ¬ë¡¯ì´ ë‹´ë‹¹í•˜ëŠ” ìŠ¤í‚¬ ë°ì´í„°
+    private SkillUI_Manager myManager;      // ì¤‘ì•™ í†µì œ ë§¤ë‹ˆì €
 
-    // ¸Å´ÏÀú°¡ ÀÌ ½½·ÔÀ» ÃÊ±âÈ­ÇÒ ¶§ ºÎ¸£´Â ÇÔ¼ö
+    // ë§¤ë‹ˆì €ê°€ ì´ ìŠ¬ë¡¯ì„ ì´ˆê¸°í™”í•  ë•Œ ë¶€ë¥´ëŠ” í•¨ìˆ˜
     public void InitSlot(SkillData skill, SkillUI_Manager manager)
     {
         mySkill = skill;
         myManager = manager;
 
-        // ½ºÅ³ÀÌ ¾ø°Å³ª µ¥ÀÌÅÍ°¡ ´©¶ôµÈ °æ¿ì (¹æ¾î ÄÚµå)
+        // ìŠ¤í‚¬ì´ ì—†ê±°ë‚˜ ë°ì´í„°ê°€ ëˆ„ë½ëœ ê²½ìš° (ë°©ì–´ ì½”ë“œ)
         if (mySkill == null)
         {
             skillNameText.text = "???";
@@ -31,20 +31,20 @@ public class SkillUI_Slot : MonoBehaviour
 
         slotButton.interactable = true;
 
-        // 1. ÀÌ¸§°ú ·¹º§ ¼¼ÆÃ
+        // 1. ì´ë¦„ê³¼ ë ˆë²¨ ì„¸íŒ…
         skillNameText.text = LocalizationManager.Instance != null ? LocalizationManager.Instance.GetText(skill.skillNameKey) : skill.skillNameKey;
         skillLevelText.text = skill.skillLevel.ToString();
 
-        // 2. ÁøÈ­ Å×µÎ¸® ON/OFF (NoneÀÌ ¾Æ´Ï¸é ÄÑ±â)
+        // 2. ì§„í™” í…Œë‘ë¦¬ ON/OFF (Noneì´ ì•„ë‹ˆë©´ ì¼œê¸°)
         bool isEvolved = skill.currentEvolution != SkillEvolution.None;
         evolutionBorder.SetActive(isEvolved);
 
-        // 3. ¹öÆ° Å¬¸¯ ÀÌº¥Æ® ¿¬°á (±âÁ¸ ¿¬°á Áö¿ì°í »õ·Î ´Ş±â)
+        // 3. ë²„íŠ¼ í´ë¦­ ì´ë²¤íŠ¸ ì—°ê²° (ê¸°ì¡´ ì—°ê²° ì§€ìš°ê³  ìƒˆë¡œ ë‹¬ê¸°)
         slotButton.onClick.RemoveAllListeners();
         slotButton.onClick.AddListener(OnClickSlot);
     }
 
-    // À¯Àú°¡ ÀÌ ½ºÅ³ ¹öÆ°À» ´­·¶À» ¶§!
+    // ìœ ì €ê°€ ì´ ìŠ¤í‚¬ ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ!
     private void OnClickSlot()
     {
         if (myManager != null && mySkill != null)

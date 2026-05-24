@@ -1,33 +1,33 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Yurokhwahong", menuName = "SkillLogic/Player/Yurokhwahong")]
 public class SkillLogic_Yurokhwahong : SkillLogicBase
 {
-    [Header("ÁøÈ­ A (Hakushu Kassai)")]
+    [Header("ì§„í™” A (Hakushu Kassai)")]
     public float pathA_BreakBonusRate = 1.0f;
 
-    [Header("ÁøÈ­ B (Bihwanakyeop)")]
+    [Header("ì§„í™” B (Bihwanakyeop)")]
     public StatusEffectData noEvasionDebuff;
     public int pathB_DebuffTurns = 2;
 
-    [Header("ÁøÈ­ C (Chilhwapalryeol) - ¹ë·±½Ì ¼öÁ¤")]
-    [Tooltip("·¹º§º° ±âº» Å¸¼ö (Lv1=2, Lv2=3, Lv3=4)")]
+    [Header("ì§„í™” C (Chilhwapalryeol) - ë°¸ëŸ°ì‹± ìˆ˜ì •")]
+    [Tooltip("ë ˆë²¨ë³„ ê¸°ë³¸ íƒ€ìˆ˜ (Lv1=2, Lv2=3, Lv3=4)")]
     public int[] pathC_BaseHits = { 2, 3, 4 };
-    [Tooltip("À¯È¿ ¼Óµµ(ES) ¸î ´ç 1Å¸¾¿ Ãß°¡ÇÒÁö")]
+    [Tooltip("ìœ íš¨ ì†ë„(ES) ëª‡ ë‹¹ 1íƒ€ì”© ì¶”ê°€í• ì§€")]
     public float pathC_SpeedPerHit = 25f;
 
-    // 1. [ÁøÈ­ C] Å¸¼ö °áÁ¤ ·ÎÁ÷
+    // 1. [ì§„í™” C] íƒ€ìˆ˜ ê²°ì • ë¡œì§
     public override int GetHitCount(SkillData skill)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
             int levelIdx = Mathf.Clamp(skill.skillLevel - 1, 0, pathC_BaseHits.Length - 1);
-            int baseHit = pathC_BaseHits[levelIdx]; // ·¹º§¿¡ µû¸¥ ±âº» Å¸¼ö
+            int baseHit = pathC_BaseHits[levelIdx]; // ë ˆë²¨ì— ë”°ë¥¸ ê¸°ë³¸ íƒ€ìˆ˜
 
             int speed = StatManager.Instance.GetEffectiveStat(true, TargetStat.Speed);
             float es = CombatMath.GetEffectiveSpeed(speed);
 
-            // ES¿¡ µû¸¥ Ãß°¡ Å¸¼ö (³»¸² Ã³¸®)
+            // ESì— ë”°ë¥¸ ì¶”ê°€ íƒ€ìˆ˜ (ë‚´ë¦¼ ì²˜ë¦¬)
             int extraHit = Mathf.FloorToInt(es / pathC_SpeedPerHit);
 
             return baseHit + extraHit;
@@ -35,19 +35,19 @@ public class SkillLogic_Yurokhwahong : SkillLogicBase
         return base.GetHitCount(skill);
     }
 
-    // 2. [ÁøÈ­ C] ÇÑ ¹ß´ç µ¥¹ÌÁö °è¼ö (°íÁ¤ À§·Â)
+    // 2. [ì§„í™” C] í•œ ë°œë‹¹ ë°ë¯¸ì§€ ê³„ìˆ˜ (ê³ ì • ìœ„ë ¥)
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC && isPlayerAttacking)
         {
             int levelIdx = Mathf.Clamp(skill.skillLevel - 1, 0, pathC_BaseHits.Length - 1);
-            // ÇÙ½É: ±âº» Å¸¼ö·Î¸¸ ³ª´¯´Ï´Ù. Å¸¼ö°¡ ´Ã¾î³ªµµ ÀÌ À§·ÂÀº À¯ÁöµË´Ï´Ù!
+            // í•µì‹¬: ê¸°ë³¸ íƒ€ìˆ˜ë¡œë§Œ ë‚˜ëˆ•ë‹ˆë‹¤. íƒ€ìˆ˜ê°€ ëŠ˜ì–´ë‚˜ë„ ì´ ìœ„ë ¥ì€ ìœ ì§€ë©ë‹ˆë‹¤!
             return 1.0f / pathC_BaseHits[levelIdx];
         }
         return 1.0f;
     }
 
-    // 3. [ÁøÈ­ A & C] ºê·¹ÀÌÅ© ¼öÄ¡ º¸Á¤
+    // 3. [ì§„í™” A & C] ë¸Œë ˆì´í¬ ìˆ˜ì¹˜ ë³´ì •
     public override float GetBreakMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC && isPlayerAttacking)
@@ -59,7 +59,7 @@ public class SkillLogic_Yurokhwahong : SkillLogicBase
         float multiplier = 1.0f;
         if (skill.currentEvolution == SkillEvolution.PathA && isPlayerAttacking)
         {
-            // [ÁøÈ­ A] ¿À¹öÇÃ·Î¿ì °è»ê ·ÎÁ÷ (±âÁ¸ À¯Áö)
+            // [ì§„í™” A] ì˜¤ë²„í”Œë¡œìš° ê³„ì‚° ë¡œì§ (ê¸°ì¡´ ìœ ì§€)
             int mySpeed = StatManager.Instance.GetEffectiveStat(true, TargetStat.Speed);
             int enemySpeed = StatManager.Instance.GetEffectiveStat(false, TargetStat.Speed);
             float myES = CombatMath.GetEffectiveSpeed(mySpeed);
@@ -88,17 +88,17 @@ public class SkillLogic_Yurokhwahong : SkillLogicBase
         if (skill.currentEvolution == SkillEvolution.PathB && isPlayerAttacking && noEvasionDebuff != null)
         {
             BuffManager.Instance.AddEffect(false, noEvasionDebuff, -10f, pathB_DebuffTurns);
-            DevLog.Log($"[ÁøÈ­ B] ºñÈ­³«¿± ÀûÁß! Àû È¸ÇÇ ºÀ¼â.");
+            DevLog.Log($"[ì§„í™” B] ë¹„í™”ë‚™ì—½ ì ì¤‘! ì  íšŒí”¼ ë´‰ì‡„.");
         }
     }
 
-    // [ÁøÈ­ C] ´Ù´ÜÈ÷Æ® º¯È¯¿¡ µû¸¥ ¸íÁß·ü 80% Æä³ÎÆ¼ Àû¿ë
+    // [ì§„í™” C] ë‹¤ë‹¨íˆíŠ¸ ë³€í™˜ì— ë”°ë¥¸ ëª…ì¤‘ë¥  80% í˜ë„í‹° ì ìš©
     public override float GetBaseAccuracy(SkillData skill)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
-            return 80f; // Ä¥È­ÆÈ¿­(´Ù´ÜÈ÷Æ®) »óÅÂÀÏ ¶§´Â ¸íÁß·üÀ» °­Á¦·Î 80À¸·Î ³·Ãã
+            return 80f; // ì¹ í™”íŒ”ì—´(ë‹¤ë‹¨íˆíŠ¸) ìƒíƒœì¼ ë•ŒëŠ” ëª…ì¤‘ë¥ ì„ ê°•ì œë¡œ 80ìœ¼ë¡œ ë‚®ì¶¤
         }
-        return base.GetBaseAccuracy(skill); // ±âº»°ª(90) À¯Áö
+        return base.GetBaseAccuracy(skill); // ê¸°ë³¸ê°’(90) ìœ ì§€
     }
 }

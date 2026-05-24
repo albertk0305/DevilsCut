@@ -1,18 +1,18 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-// [ºĞ¸®] ÀüÅõÀÇ ½Ã°¢Àû ¿¬Ãâ°ú Å¸ÀÌ¹ÖÀ» Àü´ãÇÏ´Â '´ëº»(Queue)' ½Ã½ºÅÛÀÔ´Ï´Ù.
+// [ë¶„ë¦¬] ì „íˆ¬ì˜ ì‹œê°ì  ì—°ì¶œê³¼ íƒ€ì´ë°ì„ ì „ë‹´í•˜ëŠ” 'ëŒ€ë³¸(Queue)' ì‹œìŠ¤í…œì…ë‹ˆë‹¤.
 public class BattleVisualizer : MonoBehaviour
 {
     public static BattleVisualizer Instance;
 
-    // ¿¬Ãâ ´ëº»ÀÌ ½×ÀÌ´Â ´ë±â¿­(Queue)
+    // ì—°ì¶œ ëŒ€ë³¸ì´ ìŒ“ì´ëŠ” ëŒ€ê¸°ì—´(Queue)
     private Queue<IEnumerator> visualQueue = new Queue<IEnumerator>();
     private bool isPlaying = false;
 
-    // ¸ğµç ¿¬ÃâÀÌ ³¡³µÀ» ¶§ ÁöÈÖ°ü¿¡°Ô º¸°íÇÒ Äİ¹é ÇÔ¼ö
+    // ëª¨ë“  ì—°ì¶œì´ ëë‚¬ì„ ë•Œ ì§€íœ˜ê´€ì—ê²Œ ë³´ê³ í•  ì½œë°± í•¨ìˆ˜
     private Action onSequenceComplete;
 
     private void Awake()
@@ -21,10 +21,10 @@ public class BattleVisualizer : MonoBehaviour
     }
 
     // ==========================================
-    // 1. ´ëº» ½ÇÇà Á¦¾î (ÁöÈÖ°ü¿ë)
+    // 1. ëŒ€ë³¸ ì‹¤í–‰ ì œì–´ (ì§€íœ˜ê´€ìš©)
     // ==========================================
 
-    // ½×¿©ÀÖ´Â ´ëº»(¿¬Ãâ)À» ¼ø¼­´ë·Î ½ÇÇàÇÏ°í, ´Ù ³¡³ª¸é ÁöÈÖ°ü¿¡°Ô ¿Ï·á º¸°í¸¦ ÇÕ´Ï´Ù.
+    // ìŒ“ì—¬ìˆëŠ” ëŒ€ë³¸(ì—°ì¶œ)ì„ ìˆœì„œëŒ€ë¡œ ì‹¤í–‰í•˜ê³ , ë‹¤ ëë‚˜ë©´ ì§€íœ˜ê´€ì—ê²Œ ì™„ë£Œ ë³´ê³ ë¥¼ í•©ë‹ˆë‹¤.
     public void StartSequence(Action onComplete)
     {
         onSequenceComplete = onComplete;
@@ -34,18 +34,18 @@ public class BattleVisualizer : MonoBehaviour
         }
         else if (visualQueue.Count == 0)
         {
-            // ¿¬ÃâÇÒ ´ëº»ÀÌ ¾øÀ¸¸é Áï½Ã ¿Ï·á Ã³¸®
+            // ì—°ì¶œí•  ëŒ€ë³¸ì´ ì—†ìœ¼ë©´ ì¦‰ì‹œ ì™„ë£Œ ì²˜ë¦¬
             CompleteSequence();
         }
     }
 
-    // Å¥¿¡¼­ ¿¬ÃâÀ» ÇÏ³ª¾¿ ²¨³»¼­ ½ÇÇàÇÏ´Â ¹«ÇÑ ·çÇÁ ÄÚ·çÆ¾
+    // íì—ì„œ ì—°ì¶œì„ í•˜ë‚˜ì”© êº¼ë‚´ì„œ ì‹¤í–‰í•˜ëŠ” ë¬´í•œ ë£¨í”„ ì½”ë£¨í‹´
     private IEnumerator PlayQueueRoutine()
     {
         isPlaying = true;
         while (visualQueue.Count > 0)
         {
-            // ¾ÕÀÇ ¿¬ÃâÀÌ ³¡³¯ ¶§±îÁö ¿Ïº®ÇÏ°Ô ±â´Ù·È´Ù°¡ ´ÙÀ½ ¿¬Ãâ·Î ³Ñ¾î°©´Ï´Ù.
+            // ì•ì˜ ì—°ì¶œì´ ëë‚  ë•Œê¹Œì§€ ì™„ë²½í•˜ê²Œ ê¸°ë‹¤ë ¸ë‹¤ê°€ ë‹¤ìŒ ì—°ì¶œë¡œ ë„˜ì–´ê°‘ë‹ˆë‹¤.
             yield return StartCoroutine(visualQueue.Dequeue());
         }
         isPlaying = false;
@@ -59,16 +59,16 @@ public class BattleVisualizer : MonoBehaviour
     }
 
     // ==========================================
-    // 2. ´ëº» ÀÛ¼º¿ë ÇïÆÛ ÇÔ¼öµé (Enqueue)
+    // 2. ëŒ€ë³¸ ì‘ì„±ìš© í—¬í¼ í•¨ìˆ˜ë“¤ (Enqueue)
     // ==========================================
 
-    // ÄÚ·çÆ¾(¾Ö´Ï¸ŞÀÌ¼Ç µî)À» ´ëº»¿¡ ³Ö½À´Ï´Ù.
+    // ì½”ë£¨í‹´(ì• ë‹ˆë©”ì´ì…˜ ë“±)ì„ ëŒ€ë³¸ì— ë„£ìŠµë‹ˆë‹¤.
     public void EnqueueVisual(IEnumerator visualRoutine)
     {
         visualQueue.Enqueue(visualRoutine);
     }
 
-    // [ÇÙ½É] Æ¯Á¤ ¿¬Ãâ Å¸ÀÌ¹Ö¿¡ ¼ø¼ö ·ÎÁ÷(HP ±ğ±â, ¹æ¼Û ÄÑ±â µî)À» ½ÇÇàÇÏ°Ô ¸¸µì´Ï´Ù.
+    // [í•µì‹¬] íŠ¹ì • ì—°ì¶œ íƒ€ì´ë°ì— ìˆœìˆ˜ ë¡œì§(HP ê¹ê¸°, ë°©ì†¡ ì¼œê¸° ë“±)ì„ ì‹¤í–‰í•˜ê²Œ ë§Œë“­ë‹ˆë‹¤.
     public void EnqueueAction(Action logicAction)
     {
         visualQueue.Enqueue(ActionRoutine(logicAction));
@@ -76,24 +76,24 @@ public class BattleVisualizer : MonoBehaviour
 
     private IEnumerator ActionRoutine(Action action)
     {
-        action?.Invoke(); // ·ÎÁ÷ Áï½Ã ½ÇÇà
-        yield return null; // 1ÇÁ·¹ÀÓ ´ë±â ÈÄ ´ÙÀ½ ¿¬Ãâ·Î ½º¹«½ºÇÏ°Ô ³Ñ¾î°¨
+        action?.Invoke(); // ë¡œì§ ì¦‰ì‹œ ì‹¤í–‰
+        yield return null; // 1í”„ë ˆì„ ëŒ€ê¸° í›„ ë‹¤ìŒ ì—°ì¶œë¡œ ìŠ¤ë¬´ìŠ¤í•˜ê²Œ ë„˜ì–´ê°
     }
 
-    // ÄÆÀÎ ¿¬Ãâ ´ëº»
+    // ì»·ì¸ ì—°ì¶œ ëŒ€ë³¸
     public void EnqueueCutIn(Sprite cutInSprite)
     {
         if (cutInSprite != null)
             EnqueueVisual(CombatUIManager.Instance.ShowCutIn(cutInSprite));
     }
 
-    // ÅØ½ºÆ® Å¸ÀÌÇÎ ´ëº»
+    // í…ìŠ¤íŠ¸ íƒ€ì´í•‘ ëŒ€ë³¸
     public void EnqueueCommentary(string text, bool autoProceed = true, float delayAfter = 1.0f)
     {
         EnqueueVisual(CombatUIManager.Instance.TypeCommentary(text, autoProceed, delayAfter));
     }
 
-    // ´Ü¼ø ´ë±â ½Ã°£ ´ëº»
+    // ë‹¨ìˆœ ëŒ€ê¸° ì‹œê°„ ëŒ€ë³¸
     public void EnqueueDelay(float seconds)
     {
         visualQueue.Enqueue(DelayRoutine(seconds));

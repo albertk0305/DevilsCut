@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_OnisTreasure", menuName = "SkillLogic/Player/OnisTreasure")]
 public class SkillLogic_OnisTreasure : SkillLogicBase
 {
     // ==========================================
-    // [ÁøÈ­ A] ÄÃ·ºÅÍ EX: ¿î ½ºÅÈ ºñ·Ê Å¸¼ö Ãß°¡
+    // [ì§„í™” A] ì»¬ë ‰í„° EX: ìš´ ìŠ¤íƒ¯ ë¹„ë¡€ íƒ€ìˆ˜ ì¶”ê°€
     // ==========================================
     public override int GetHitCount(SkillData skill)
     {
@@ -12,15 +12,15 @@ public class SkillLogic_OnisTreasure : SkillLogicBase
 
         if (skill.currentEvolution == SkillEvolution.PathA)
         {
-            // StatManager¸¦ ÅëÇØ ÇöÀç ÀüÅõ ÁßÀÎ ¼Î¸®ÀÇ ½Ç½Ã°£ '¿î(Luck)' ½ºÅÈÀ» °¡Á®¿É´Ï´Ù.
+            // StatManagerë¥¼ í†µí•´ í˜„ìž¬ ì „íˆ¬ ì¤‘ì¸ ì…°ë¦¬ì˜ ì‹¤ì‹œê°„ 'ìš´(Luck)' ìŠ¤íƒ¯ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
             int currentLuck = StatManager.Instance.GetEffectiveStat(true, TargetStat.Luck);
 
-            // ¿î 10´ç 1Å¸¾¿ Ãß°¡
+            // ìš´ 10ë‹¹ 1íƒ€ì”© ì¶”ê°€
             int extraHits = currentLuck / 10;
 
             if (extraHits > 0)
             {
-                DevLog.Log($"[ÁøÈ­ A] ÄÃ·ºÅÍ EX ¹ßµ¿! ¿î({currentLuck}) ºñ·Ê Å¸¼ö {extraHits}Å¸ Ãß°¡! (ÃÑ {baseHits + extraHits}Å¸ ¹ß»ç)");
+                DevLog.Log($"[ì§„í™” A] ì»¬ë ‰í„° EX ë°œë™! ìš´({currentLuck}) ë¹„ë¡€ íƒ€ìˆ˜ {extraHits}íƒ€ ì¶”ê°€! (ì´ {baseHits + extraHits}íƒ€ ë°œì‚¬)");
             }
             return baseHits + extraHits;
         }
@@ -29,52 +29,52 @@ public class SkillLogic_OnisTreasure : SkillLogicBase
     }
 
     // ==========================================
-    // [ÁøÈ­ B] ¿¤Å°µÎ: ÀüÅº ÇÊÁß
+    // [ì§„í™” B] ì—˜í‚¤ë‘: ì „íƒ„ í•„ì¤‘
     // ==========================================
     public override bool AlwaysHits(SkillData skill)
     {
         if (skill.currentEvolution == SkillEvolution.PathB)
         {
-            return true; // ¸íÁß·ü ·ÎÁ÷À» ¹«½ÃÇÏ°í ¹«Á¶°Ç 100% ¸íÁß!
+            return true; // ëª…ì¤‘ë¥  ë¡œì§ì„ ë¬´ì‹œí•˜ê³  ë¬´ì¡°ê±´ 100% ëª…ì¤‘!
         }
         return base.AlwaysHits(skill);
     }
 
     // ==========================================
-    // [ÁøÈ­ C] ¿¡´©¸¶ ¿¤¸®½Ã: Å©¸®Æ¼ÄÃ º¸Á¤ »èÁ¦
+    // [ì§„í™” C] ì—ëˆ„ë§ˆ ì—˜ë¦¬ì‹œ: í¬ë¦¬í‹°ì»¬ ë³´ì • ì‚­ì œ
     // ==========================================
     public override float GetDynamicCritRateBonus(SkillData skill, int consecutiveHits)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
-            // ½ºÅ³ µ¥ÀÌÅÍ¿¡ ÀûÇôÀÖ´Â ±âº» Å©¸®Æ¼ÄÃ º¸Á¤Ä¡¸¦ '¸¶ÀÌ³Ê½º'·Î ¹ÝÈ¯ÇÏ¿©
-            // ÇÕ»ê °á°ú¸¦ 0À¸·Î ¸¸µé¾î ¹ö¸³´Ï´Ù! (Å©¸®Æ¼ÄÃ º¸Á¤ ¿ÏÀü »èÁ¦)
+            // ìŠ¤í‚¬ ë°ì´í„°ì— ì í˜€ìžˆëŠ” ê¸°ë³¸ í¬ë¦¬í‹°ì»¬ ë³´ì •ì¹˜ë¥¼ 'ë§ˆì´ë„ˆìŠ¤'ë¡œ ë°˜í™˜í•˜ì—¬
+            // í•©ì‚° ê²°ê³¼ë¥¼ 0ìœ¼ë¡œ ë§Œë“¤ì–´ ë²„ë¦½ë‹ˆë‹¤! (í¬ë¦¬í‹°ì»¬ ë³´ì • ì™„ì „ ì‚­ì œ)
             return -skill.GetCurrentBonusCritRate();
         }
         return base.GetDynamicCritRateBonus(skill, consecutiveHits);
     }
 
     // ==========================================
-    // [ÁøÈ­ C] ¿¡´©¸¶ ¿¤¸®½Ã: ¹öÇÁ ÀÏ¼Ò (Á¤È­)
+    // [ì§„í™” C] ì—ëˆ„ë§ˆ ì—˜ë¦¬ì‹œ: ë²„í”„ ì¼ì†Œ (ì •í™”)
     // ==========================================
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
-        // ´Ü ÇÑ ¹ßµµ ¸ÂÃßÁö ¸øÇÏ°í ÀüºÎ ºø³ª°¬´Ù¸é ¹öÇÁ¸¦ Áö¿ìÁö ¸øÇÔ
+        // ë‹¨ í•œ ë°œë„ ë§žì¶”ì§€ ëª»í•˜ê³  ì „ë¶€ ë¹—ë‚˜ê°”ë‹¤ë©´ ë²„í”„ë¥¼ ì§€ìš°ì§€ ëª»í•¨
         if (!isHit) return;
 
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
-            // °ø°Ý ´ë»ó(Àû)ÀÇ »óÅÂÀÌ»ó ¸®½ºÆ®¸¦ °¡Á®¿É´Ï´Ù.
+            // ê³µê²© ëŒ€ìƒ(ì )ì˜ ìƒíƒœì´ìƒ ë¦¬ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
             var targetEffects = BuffManager.Instance.GetEffects(!isPlayerAttacking);
 
-            // ¸®½ºÆ®¿¡¼­ Category°¡ 'Buff(ÀÌ·Î¿î È¿°ú)'ÀÎ °Í¸¸ ¸ðÁ¶¸® Ã£¾Æ °­Á¦·Î »èÁ¦(RemoveAll)ÇÕ´Ï´Ù!
+            // ë¦¬ìŠ¤íŠ¸ì—ì„œ Categoryê°€ 'Buff(ì´ë¡œìš´ íš¨ê³¼)'ì¸ ê²ƒë§Œ ëª¨ì¡°ë¦¬ ì°¾ì•„ ê°•ì œë¡œ ì‚­ì œ(RemoveAll)í•©ë‹ˆë‹¤!
             int removedCount = targetEffects.RemoveAll(e => e.effectData.category == EffectCategory.Buff);
 
             if (removedCount > 0)
             {
-                DevLog.Log($"[ÁøÈ­ C] ¿¡´©¸¶ ¿¤¸®½Ã ¹ßµ¿! ÀûÀÇ ÀÌ·Î¿î È¿°ú {removedCount}°³¸¦ »ê»êÁ¶°¢ ³Â½À´Ï´Ù!");
+                DevLog.Log($"[ì§„í™” C] ì—ëˆ„ë§ˆ ì—˜ë¦¬ì‹œ ë°œë™! ì ì˜ ì´ë¡œìš´ íš¨ê³¼ {removedCount}ê°œë¥¼ ì‚°ì‚°ì¡°ê° ëƒˆìŠµë‹ˆë‹¤!");
 
-                // UI °»½Å (º¸½ºÀÇ Ã¼·Â¹Ù ¾Æ·¡¿¡ ÀÖ´ø ¹öÇÁ ¾ÆÀÌÄÜµéÀÌ Áï½Ã ½Ï »ç¶óÁü)
+                // UI ê°±ì‹  (ë³´ìŠ¤ì˜ ì²´ë ¥ë°” ì•„ëž˜ì— ìžˆë˜ ë²„í”„ ì•„ì´ì½˜ë“¤ì´ ì¦‰ì‹œ ì‹¹ ì‚¬ë¼ì§)
                 if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
             }
         }

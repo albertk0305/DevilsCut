@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
 public class SynergyUI_Manager : MonoBehaviour
 {
-    public List<SynergyUI_Column> allColumns; // 11°³ÀÇ ¼¼·ÎÁÙ ¿¬°á
-    public TextMeshProUGUI descriptionText;   // ÇÏ´Ü ¼³¸í Ãâ·ÂÃ¢
+    public List<SynergyUI_Column> allColumns; // 11ê°œì˜ ì„¸ë¡œì¤„ ì—°ê²°
+    public TextMeshProUGUI descriptionText;   // í•˜ë‹¨ ì„¤ëª… ì¶œë ¥ì°½
 
     private void OnEnable()
     {
@@ -16,20 +16,20 @@ public class SynergyUI_Manager : MonoBehaviour
     {
         if (PlayerManager.Instance == null) return;
 
-        // 1. ÇöÀç ÀÎº¥Åä¸®ÀÇ ½Ã³ÊÁö Á¡¼ö »çÀü °¡Á®¿À±â
+        // 1. í˜„ì¬ ì¸ë²¤í† ë¦¬ì˜ ì‹œë„ˆì§€ ì ìˆ˜ ì‚¬ì „ ê°€ì ¸ì˜¤ê¸°
         var syn = PlayerManager.Instance.GetCurrentSynergies();
 
-        // 2. ÄÃ·³ ¼¼ÆÃ
+        // 2. ì»¬ëŸ¼ ì„¸íŒ…
         foreach (var column in allColumns)
         {
             int points = 0;
 
-            // [ÇÙ½É] 11¹øÂ° Å¬·¡½º¶ó¸é ¾ÆÀÌÅÛÀÌ ¾Æ´Ï¶ó '¿µÀÔ °ÅÀı È½¼ö'¸¦ Á¡¼ö·Î ¾¹´Ï´Ù!
+            // [í•µì‹¬] 11ë²ˆì§¸ í´ë˜ìŠ¤ë¼ë©´ ì•„ì´í…œì´ ì•„ë‹ˆë¼ 'ì˜ì… ê±°ì ˆ íšŸìˆ˜'ë¥¼ ì ìˆ˜ë¡œ ì”ë‹ˆë‹¤!
             if (column.myClass == ItemClass.LoneWolf)
             {
                 points = PlayerManager.Instance.stats.rejectedSupporterCount;
             }
-            // ±âÁ¸ 1~10¹øÂ° Å¬·¡½ºµéÀº ¾ÆÀÌÅÛ ½Ã³ÊÁö »çÀüÀ» ÂüÁ¶ÇÕ´Ï´Ù.
+            // ê¸°ì¡´ 1~10ë²ˆì§¸ í´ë˜ìŠ¤ë“¤ì€ ì•„ì´í…œ ì‹œë„ˆì§€ ì‚¬ì „ì„ ì°¸ì¡°í•©ë‹ˆë‹¤.
             else if (syn.ContainsKey(column.myClass))
             {
                 points = syn[column.myClass];
@@ -38,7 +38,7 @@ public class SynergyUI_Manager : MonoBehaviour
             column.UpdateColumn(points, this);
         }
 
-        descriptionText.text = "È®ÀÎÇÒ ½Ã³ÊÁö¸¦ ¼±ÅÃÇØ ÁÖ¼¼¿ä.";
+        descriptionText.text = "í™•ì¸í•  ì‹œë„ˆì§€ë¥¼ ì„ íƒí•´ ì£¼ì„¸ìš”.";
     }
 
     public void ShowDescription(string nameKey, string descKey, bool isActive)
@@ -46,9 +46,9 @@ public class SynergyUI_Manager : MonoBehaviour
         string nameStr = LocalizationManager.Instance != null ? LocalizationManager.Instance.GetText(nameKey) : nameKey;
         string descStr = LocalizationManager.Instance != null ? LocalizationManager.Instance.GetText(descKey) : descKey;
 
-        string statusTag = isActive ? "<color=#00FF00>[È°¼ºÈ­µÊ]</color>" : "<color=#888888>[ºñÈ°¼ºÈ­]</color>";
+        string statusTag = isActive ? "<color=#00FF00>[í™œì„±í™”ë¨]</color>" : "<color=#888888>[ë¹„í™œì„±í™”]</color>";
 
-        // ÇÏ´Ü ÅØ½ºÆ® Áï½Ã Ãâ·Â
+        // í•˜ë‹¨ í…ìŠ¤íŠ¸ ì¦‰ì‹œ ì¶œë ¥
         descriptionText.text = $"<b>{nameStr}</b> {statusTag}\n\n{descStr}";
     }
 }

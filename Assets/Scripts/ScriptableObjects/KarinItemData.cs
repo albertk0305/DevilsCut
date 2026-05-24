@@ -1,20 +1,20 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewKarinItem", menuName = "GameData/KarinItem")]
 public class KarinItemData : ScriptableObject
 {
-    [Header("ÀúÀå¿ë °íÀ¯ ID")]
+    [Header("ì €ì¥ìš© ê³ ìœ  ID")]
     public string itemID;
 
     public string itemName;
-    public Sprite itemIcon; // ¿ìÃø ¹öÆ°°ú ¸ŞÀÎ È­¸é¿¡ ¶ã ÀÌ¹ÌÁö
+    public Sprite itemIcon; // ìš°ì¸¡ ë²„íŠ¼ê³¼ ë©”ì¸ í™”ë©´ì— ëœ° ì´ë¯¸ì§€
 
-    [TextArea] public string itemDescription; // Àåºñ ¼³¸í ÅØ½ºÆ®
+    [TextArea] public string itemDescription; // ì¥ë¹„ ì„¤ëª… í…ìŠ¤íŠ¸
 
-    [Header("Ä«¸° ´ë»ç")]
-    public string previewDialogue; // ¸ñ·Ï¿¡¼­ ´­·¯¼­ °í¹Î ÁßÀÏ ¶§ ³ª¿À´Â ´ë»ç
-    public string equipDialogue;   // Àåºñ(Equip) ÇßÀ» ¶§ ³ª¿À´Â ´ë»ç
+    [Header("ì¹´ë¦° ëŒ€ì‚¬")]
+    public string previewDialogue; // ëª©ë¡ì—ì„œ ëˆŒëŸ¬ì„œ ê³ ë¯¼ ì¤‘ì¼ ë•Œ ë‚˜ì˜¤ëŠ” ëŒ€ì‚¬
+    public string equipDialogue;   // ì¥ë¹„(Equip) í–ˆì„ ë•Œ ë‚˜ì˜¤ëŠ” ëŒ€ì‚¬
 
-    [Header("¾ÆÀÌÅÛ È¿°ú ·ÎÁ÷")]
+    [Header("ì•„ì´í…œ íš¨ê³¼ ë¡œì§")]
     public KarinItemLogicBase itemLogic;
 }

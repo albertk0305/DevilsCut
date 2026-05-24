@@ -1,16 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "EnemyAI_Michael", menuName = "EnemyAI/Michael Boss AI")]
 public class EnemyAI_Michael : EnemyAIBase
 {
-    [Header("1ÆäÀÌÁî ½ºÅ³")]
+    [Header("1í˜ì´ì¦ˆ ìŠ¤í‚¬")]
     public SkillData chainBury;
     public SkillData chainsawScratch;
 
-    [Header("2ÆäÀÌÁî ½ºÅ³")]
-    public SkillData enrageSkill; // [Ãß°¡] ±¤ÆøÈ­ ½ºÅ³ (È¸º¹ ¹× ¹öÇÁ ½ÃÀü¿ë)
+    [Header("2í˜ì´ì¦ˆ ìŠ¤í‚¬")]
+    public SkillData enrageSkill; // [ì¶”ê°€] ê´‘í­í™” ìŠ¤í‚¬ (íšŒë³µ ë° ë²„í”„ ì‹œì „ìš©)
     public SkillData bloodCurse;
     public SkillData blazingChainsaw;
     public SkillData ironMaiden;
@@ -24,7 +24,7 @@ public class EnemyAI_Michael : EnemyAIBase
     {
         EnemyActionIntent intent = new EnemyActionIntent();
 
-        // 1. BuffManager¿¡¼­ ±¤ÆøÈ­ ¸¶Ä¿°¡ ÀÖ´ÂÁö È®ÀÎ (isPhase2 º¯¼ö ´ë½Å ÀÌ°ÍÀ» »ç¿ë!)
+        // 1. BuffManagerì—ì„œ ê´‘í­í™” ë§ˆì»¤ê°€ ìˆëŠ”ì§€ í™•ì¸ (isPhase2 ë³€ìˆ˜ ëŒ€ì‹  ì´ê²ƒì„ ì‚¬ìš©!)
         bool isEnraged = false;
         if (BuffManager.Instance != null && phase2Marker != null)
         {
@@ -33,21 +33,21 @@ public class EnemyAI_Michael : EnemyAIBase
 
         float hpPct = (float)enemy.currentHp / enemy.maxHp;
 
-        // 2. ±¤ÆøÈ­ ¹ßµ¿ Á¶°Ç: ±¤ÆøÈ­ ¾Æ´Ô && Ã¼·Â 50% ÀÌÇÏ
+        // 2. ê´‘í­í™” ë°œë™ ì¡°ê±´: ê´‘í­í™” ì•„ë‹˜ && ì²´ë ¥ 50% ì´í•˜
         if (!isEnraged && hpPct <= 0.5f)
         {
             intent.skillToUse = enrageSkill;
             return intent;
         }
 
-        // 3. ±×·Î±â Ã³Çü ±â¹Í
+        // 3. ê·¸ë¡œê¸° ì²˜í˜• ê¸°ë¯¹
         if (isEnraged && BreakManager.Instance.IsBroken(true))
         {
             intent.skillToUse = ironMaiden;
             return intent;
         }
 
-        // 4. ÆĞÅÏ ·çÇÁ
+        // 4. íŒ¨í„´ ë£¨í”„
         if (!isEnraged)
         {
             intent.skillToUse = (phase1Index == 0) ? chainBury : chainsawScratch;
@@ -73,11 +73,11 @@ public class EnemyAI_Michael : EnemyAIBase
 
         float missingHpRatio = (float)(enemy.maxHp - enemy.currentHp) / enemy.maxHp;
 
-        // 1. ÆĞ½Ãºê 1: ÀÒÀº Ã¼·Â ºñ·Ê ÇÇÇØ ÁõÆø (Ç×»ó Àû¿ë)
-        // ±âÈ¹ °ø½Ä: ÀÒÀº Ã¼·Â ºñÀ² * 1.2f (ÃÖ´ë 120% ÁõÆø)
+        // 1. íŒ¨ì‹œë¸Œ 1: ìƒì€ ì²´ë ¥ ë¹„ë¡€ í”¼í•´ ì¦í­ (í•­ìƒ ì ìš©)
+        // ê¸°íš ê³µì‹: ìƒì€ ì²´ë ¥ ë¹„ìœ¨ * 1.2f (ìµœëŒ€ 120% ì¦í­)
         enemy.damageGivenAmp = missingHpRatio * 1.2f;
 
-        // 2. ÆĞ½Ãºê 2: ±¤ÆøÈ­ »óÅÂ ½Ã ÀÒÀº Ã¼·Â ºñ·Ê ÈíÇ÷·ü Àû¿ë
+        // 2. íŒ¨ì‹œë¸Œ 2: ê´‘í­í™” ìƒíƒœ ì‹œ ìƒì€ ì²´ë ¥ ë¹„ë¡€ í¡í˜ˆë¥  ì ìš©
         bool isEnraged = false;
         if (BuffManager.Instance != null && phase2Marker != null)
         {
@@ -86,12 +86,12 @@ public class EnemyAI_Michael : EnemyAIBase
 
         if (isEnraged)
         {
-            // ±âÈ¹ °ø½Ä: ±âº» 10% + (ÀÒÀº Ã¼·Â ºñÀ² * 30%)
+            // ê¸°íš ê³µì‹: ê¸°ë³¸ 10% + (ìƒì€ ì²´ë ¥ ë¹„ìœ¨ * 30%)
             enemy.lifeSteal = 0.10f + (missingHpRatio * 0.30f);
         }
         else
         {
-            // ±¤ÆøÈ­ Àü¿¡´Â ÈíÇ÷ÀÌ ¾øÀ½
+            // ê´‘í­í™” ì „ì—ëŠ” í¡í˜ˆì´ ì—†ìŒ
             enemy.lifeSteal = 0f;
         }
     }

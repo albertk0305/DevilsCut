@@ -1,24 +1,24 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class CombatState
 {
-    // ±â(Ki) °ü·Ã
+    // ê¸°(Ki) ê´€ë ¨
     public bool isPlayerCharging = false;
     public bool isUnleashingCharge = false;
     public SkillData chargingSkill = null;
     public bool hasUsedKiExtraTurn = false;
 
-    // Å©·ç¼¼ÀÌ´õ/ÆøÅº °ü·Ã
+    // í¬ë£¨ì„¸ì´ë”/í­íƒ„ ê´€ë ¨
     public bool isBombActive = false;
     public int savedBombDamage = 0;
 
-    // ½ºÅÈ/µ¥¹ÌÁö ±â·Ï °ü·Ã
+    // ìŠ¤íƒ¯/ë°ë¯¸ì§€ ê¸°ë¡ ê´€ë ¨
     public int accumulatedDamage = 0;
     public int lastSuccessfulHits = 0;
-    public bool wasEnemyBrokenAtSkillStart = false; // ÁøÈ­ B ÆäÀÌ¹é¿ë ½º³À¼¦
+    public bool wasEnemyBrokenAtSkillStart = false; // ì§„í™” B í˜ì´ë°±ìš© ìŠ¤ëƒ…ìƒ·
 
     public bool hasRewardedCritThisSkill = false;
     public bool isMorningStarApRecoveredThisSkill = false;
@@ -31,13 +31,13 @@ public class CombatManager : MonoBehaviour
 {
     public static CombatManager Instance;
 
-    [Header("µ¥ÀÌÅÍ ¿¬°á")]
+    [Header("ë°ì´í„° ì—°ê²°")]
     public PlayerData playerData;
 
-    [Header("ºĞ¼®Ã¢")]
+    [Header("ë¶„ì„ì°½")]
     public AnalysisUI analysisUI;
 
-    [Header("Æ¯¼ö ½ºÅÈ Ç¥½Ã¿ë ¿¡¼Â ¸ÅÇÎ (Passives)")]
+    [Header("íŠ¹ìˆ˜ ìŠ¤íƒ¯ í‘œì‹œìš© ì—ì…‹ ë§¤í•‘ (Passives)")]
     public StatusEffectData pEffect_DamageAmp;
     public StatusEffectData pEffect_DamageReduction;
     public StatusEffectData pEffect_CritRate;
@@ -48,7 +48,7 @@ public class CombatManager : MonoBehaviour
     public StatusEffectData pEffect_Evasion;
     public StatusEffectData pEffect_HealAmp;
 
-    [Header("ÅÏ È¿°ú StatusEffectData ¸ÅÇÎ")]
+    [Header("í„´ íš¨ê³¼ StatusEffectData ë§¤í•‘")]
     [SerializeField] private TurnEffectResolverConfig turnEffectConfig;
 
     [SerializeField] private CombatDefeatUIController defeatUIController;
@@ -118,7 +118,7 @@ public class CombatManager : MonoBehaviour
         public SkillPresentationContext presentation;
     }
 
-    // [ÃÖÀûÈ­] ÄÚ·çÆ¾ ´ë±â °´Ã¼ Ä³½Ì
+    // [ìµœì í™”] ì½”ë£¨í‹´ ëŒ€ê¸° ê°ì²´ ìºì‹±
     private readonly WaitForSeconds oneSecondWait = new WaitForSeconds(1.0f);
 
     public bool IsPlayerSelectingPhase
@@ -136,7 +136,7 @@ public class CombatManager : MonoBehaviour
 
         if (CombatUIManager.Instance == null)
         {
-            DevLog.Log("[CombatManager] CombatUIManager.Instance°¡ ¾ø¾î CombatActionMenuController¸¦ ÃÊ±âÈ­ÇÒ ¼ö ¾ø½À´Ï´Ù.");
+            DevLog.Log("[CombatManager] CombatUIManager.Instanceê°€ ì—†ì–´ CombatActionMenuControllerë¥¼ ì´ˆê¸°í™”í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
             return;
         }
 
@@ -160,7 +160,7 @@ public class CombatManager : MonoBehaviour
 
         if (CombatUIManager.Instance == null || BattleVisualizer.Instance == null)
         {
-            DevLog.Log("[CombatManager] CombatPresentationDirector¸¦ ÃÊ±âÈ­ÇÒ ¼ö ¾ø½À´Ï´Ù.");
+            DevLog.Log("[CombatManager] CombatPresentationDirectorë¥¼ ì´ˆê¸°í™”í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
             return;
         }
 
@@ -196,13 +196,13 @@ public class CombatManager : MonoBehaviour
     {
         if (BuffManager.Instance == null) return;
 
-        // 1. ¾Æ±º(Player) Æ¯¼ö ½ºÅÈ µ¿±âÈ­
+        // 1. ì•„êµ°(Player) íŠ¹ìˆ˜ ìŠ¤íƒ¯ ë™ê¸°í™”
         if (currentPlayerStats != null)
         {
             BuffManager.Instance.UpdatePermanentPassive(true, pEffect_DamageAmp, currentPlayerStats.finalDamageAmp);
             BuffManager.Instance.UpdatePermanentPassive(true, pEffect_DamageReduction, currentPlayerStats.finalDamageReduction);
             BuffManager.Instance.UpdatePermanentPassive(true, pEffect_CritRate, currentPlayerStats.critRate);
-            BuffManager.Instance.UpdatePermanentPassive(true, pEffect_CritDamage, currentPlayerStats.critDamage, 1.5f); // ±âº»°ª 1.5f ±âÁØ
+            BuffManager.Instance.UpdatePermanentPassive(true, pEffect_CritDamage, currentPlayerStats.critDamage, 1.5f); // ê¸°ë³¸ê°’ 1.5f ê¸°ì¤€
             BuffManager.Instance.UpdatePermanentPassive(true, pEffect_LifeSteal, currentPlayerStats.lifeSteal);
             BuffManager.Instance.UpdatePermanentPassive(true, pEffect_TrueDamage, currentPlayerStats.trueDamageConversion);
             BuffManager.Instance.UpdatePermanentPassive(true, pEffect_Accuracy, currentPlayerStats.bonusAccuracy);
@@ -210,7 +210,7 @@ public class CombatManager : MonoBehaviour
             BuffManager.Instance.UpdatePermanentPassive(true, pEffect_HealAmp, currentPlayerStats.healingReceivedAmp);
         }
 
-        // 2. Àû±º(Enemy) Æ¯¼ö ½ºÅÈ µ¿±âÈ­
+        // 2. ì êµ°(Enemy) íŠ¹ìˆ˜ ìŠ¤íƒ¯ ë™ê¸°í™”
         if (currentEnemyData != null)
         {
             BuffManager.Instance.UpdatePermanentPassive(false, pEffect_DamageAmp, currentEnemyData.damageGivenAmp);
@@ -244,9 +244,9 @@ public class CombatManager : MonoBehaviour
 
     private IEnumerator CombatStartPhaseRoutine()
     {
-        string eName = currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "Àû";
+        string eName = currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "ì ";
 
-        yield return CombatUIManager.Instance.TypeCommentary($"{eName} Á¶¿ì!", true, 1.0f);
+        yield return CombatUIManager.Instance.TypeCommentary($"{eName} ì¡°ìš°!", true, 1.0f);
         yield return oneSecondWait;
 
         SupporterData activeSup = PlayerManager.Instance.activeSupporter;
@@ -263,7 +263,7 @@ public class CombatManager : MonoBehaviour
     {
         if (PlayerManager.Instance != null)
         {
-            // 1. ¼ø¼ö ½ºÅÈ ´ë½Å '¾ÆÀÌÅÛÀÌ Àû¿ëµÈ ½º³À¼¦'À» ÀüÅõ ½ÃÀÛ µ¥ÀÌÅÍ·Î °¡Á®¿É´Ï´Ù!
+            // 1. ìˆœìˆ˜ ìŠ¤íƒ¯ ëŒ€ì‹  'ì•„ì´í…œì´ ì ìš©ëœ ìŠ¤ëƒ…ìƒ·'ì„ ì „íˆ¬ ì‹œì‘ ë°ì´í„°ë¡œ ê°€ì ¸ì˜µë‹ˆë‹¤!
             currentPlayerStats = PlayerManager.Instance.GetItemModifiedStats();
             battleStartPlayerHp = currentPlayerStats.currentHp;
             currentEnemyData = Instantiate(PlayerManager.Instance.currentEnemyToFight);
@@ -273,12 +273,12 @@ public class CombatManager : MonoBehaviour
             }
             currentEnemyData.currentHp = currentEnemyData.maxHp;
 
-            // StatManager´Â ÀÌÁ¦ ÀÌ '¾ÆÀÌÅÛ Àû¿ë ½ºÅÈ'À» º£ÀÌ½º·Î »ï°í ÀüÅõ ¹öÇÁ¸¦ °è»êÇÕ´Ï´Ù.
+            // StatManagerëŠ” ì´ì œ ì´ 'ì•„ì´í…œ ì ìš© ìŠ¤íƒ¯'ì„ ë² ì´ìŠ¤ë¡œ ì‚¼ê³  ì „íˆ¬ ë²„í”„ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤.
             if (StatManager.Instance != null)
                 StatManager.Instance.InitStats(currentPlayerStats, currentEnemyData);
         }
 
-        // 2. ±× ÀÌÈÄ¿¡ UI°¡ ¼¼ÆÃµÈ ½ºÅÈÀ» ±â¹İÀ¸·Î Ã¼·Â¹Ù¸¦ ±×¸³´Ï´Ù.
+        // 2. ê·¸ ì´í›„ì— UIê°€ ì„¸íŒ…ëœ ìŠ¤íƒ¯ì„ ê¸°ë°˜ìœ¼ë¡œ ì²´ë ¥ë°”ë¥¼ ê·¸ë¦½ë‹ˆë‹¤.
         if (currentPlayerStats != null && playerData != null)
             CombatUIManager.Instance.InitPlayerUI(currentPlayerStats.maxHp, currentPlayerStats.currentHp, playerData.normal);
 
@@ -345,7 +345,7 @@ public class CombatManager : MonoBehaviour
         presentationDirector?.UpdateTurnOrder(icons);
     }
     // ==========================================================
-    // 1. ¸ŞÀÎ ÅÏ ºĞ¹è±â (Switch ¹®À¸·Î °¡µ¶¼º ±Ø´ëÈ­)
+    // 1. ë©”ì¸ í„´ ë¶„ë°°ê¸° (Switch ë¬¸ìœ¼ë¡œ ê°€ë…ì„± ê·¹ëŒ€í™”)
     // ==========================================================
     private IEnumerator ProcessTurnRoutine(TurnEntity currentTurnOwner)
     {
@@ -380,11 +380,11 @@ public class CombatManager : MonoBehaviour
     }
 
     // ==========================================================
-    // 2. ÅÏ ½ÃÀÛ Àü °øÅë È¿°ú Ã³¸® (µµÆ® µô, ½ÃÇÑÆøÅº µî)
+    // 2. í„´ ì‹œì‘ ì „ ê³µí†µ íš¨ê³¼ ì²˜ë¦¬ (ë„íŠ¸ ë”œ, ì‹œí•œí­íƒ„ ë“±)
     // ==========================================================
     private IEnumerator HandlePreTurnEffects(TurnEntity owner)
     {
-        string eName = currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "Àû";
+        string eName = currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "ì ";
 
         if (owner.type == EntityType.Player && PlayerManager.Instance != null)
         {
@@ -403,9 +403,9 @@ public class CombatManager : MonoBehaviour
                 ApplyDamageToEntity(false, bleedDmg);
 
                 CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit);
-                CombatUIManager.Instance.SpawnDamageText("¡Ú" + bleedDmg.ToString(), false, false);
+                CombatUIManager.Instance.SpawnDamageText("â˜…" + bleedDmg.ToString(), false, false);
 
-                yield return CombatUIManager.Instance.TypeCommentary($"½É¿¬ÀÇ ÃâÇ÷! {eName}ÀÌ(°¡) {bleedDmg}ÀÇ Áö¼Ó ÇÇÇØ¸¦ ÀÔ½À´Ï´Ù.", true, 0.5f);
+                yield return CombatUIManager.Instance.TypeCommentary($"ì‹¬ì—°ì˜ ì¶œí˜ˆ! {eName}ì´(ê°€) {bleedDmg}ì˜ ì§€ì† í”¼í•´ë¥¼ ì…ìŠµë‹ˆë‹¤.", true, 0.5f);
 
                 yield return new WaitForSeconds(1.0f);
                 CombatUIManager.Instance.ResetDefenderImage(false);
@@ -416,14 +416,14 @@ public class CombatManager : MonoBehaviour
 
             if (burnEffect != null)
             {
-                // ÃÖ´ë Ã¼·Â¿¡ ºñ·ÊÇÑ °íÁ¤ ÇÇÇØ
+                // ìµœëŒ€ ì²´ë ¥ì— ë¹„ë¡€í•œ ê³ ì • í”¼í•´
                 int burnDmg = Mathf.Max(1, Mathf.RoundToInt(currentEnemyData.maxHp * burnEffect.value));
                 ApplyDamageToEntity(false, burnDmg);
 
                 CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit);
-                CombatUIManager.Instance.SpawnDamageText("¡Ú" + burnDmg.ToString(), false, false);
+                CombatUIManager.Instance.SpawnDamageText("â˜…" + burnDmg.ToString(), false, false);
 
-                yield return CombatUIManager.Instance.TypeCommentary($"Áö¿ÁÀÇ ÇÃ¶÷º£! {eName}ÀÌ(°¡) {burnDmg}ÀÇ È­»ó ÇÇÇØ¸¦ ÀÔ½À´Ï´Ù.", true, 0.5f);
+                yield return CombatUIManager.Instance.TypeCommentary($"ì§€ì˜¥ì˜ í”ŒëŒë² ! {eName}ì´(ê°€) {burnDmg}ì˜ í™”ìƒ í”¼í•´ë¥¼ ì…ìŠµë‹ˆë‹¤.", true, 0.5f);
 
                 yield return new WaitForSeconds(1.0f);
                 CombatUIManager.Instance.ResetDefenderImage(false);
@@ -440,11 +440,11 @@ public class CombatManager : MonoBehaviour
 
                 CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit);
 
-                yield return CombatUIManager.Instance.TypeCommentary("¶ó½ºÆ® Æ®·¹ÀÎ È¨ ¹ßµ¿!!", true, 0.5f);
+                yield return CombatUIManager.Instance.TypeCommentary("ë¼ìŠ¤íŠ¸ íŠ¸ë ˆì¸ í™ˆ ë°œë™!!", true, 0.5f);
 
                 ApplyDamageToEntity(false, currentState.savedBombDamage);
-                CombatUIManager.Instance.SpawnDamageText("¡Ú" + currentState.savedBombDamage.ToString(), false, false);
-                DevLog.Log($"[¶ó½ºÆ® Æ®·¹ÀÎ È¨] Àû¿¡°Ô {currentState.savedBombDamage}ÀÇ È®Á¤ ÇÇÇØ¸¦ ÀÔÈü´Ï´Ù!");
+                CombatUIManager.Instance.SpawnDamageText("â˜…" + currentState.savedBombDamage.ToString(), false, false);
+                DevLog.Log($"[ë¼ìŠ¤íŠ¸ íŠ¸ë ˆì¸ í™ˆ] ì ì—ê²Œ {currentState.savedBombDamage}ì˜ í™•ì • í”¼í•´ë¥¼ ì…í™ë‹ˆë‹¤!");
 
                 yield return new WaitForSeconds(1.0f);
                 CombatUIManager.Instance.ResetDefenderImage(false);
@@ -456,45 +456,45 @@ public class CombatManager : MonoBehaviour
     }
 
     // ==========================================================
-    // 3. Àû(Enemy) ÅÏ ·ÎÁ÷
+    // 3. ì (Enemy) í„´ ë¡œì§
     // ==========================================================
     private IEnumerator HandleEnemyTurn()
     {
-        string eName = currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "Àû";
+        string eName = currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "ì ";
         var enemyEffects = BuffManager.Instance.GetEffects(false);
         var stunEffect = enemyEffects.Find(e => e.effectData.specialType == SpecialEffectType.Stun);
         if (stunEffect != null)
         {
             enemyEffects.Remove(stunEffect);
             CombatUIManager.Instance.RefreshBuffUI();
-            yield return CombatUIManager.Instance.TypeCommentary($"{eName}Àº(´Â) ¹«·®°øÃ³ÀÇ È¿°ú·Î Çàµ¿ÇÒ ¼ö ¾ø½À´Ï´Ù!", true, 1.0f);
+            yield return CombatUIManager.Instance.TypeCommentary($"{eName}ì€(ëŠ”) ë¬´ëŸ‰ê³µì²˜ì˜ íš¨ê³¼ë¡œ í–‰ë™í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤!", true, 1.0f);
             ResolveTurnEnd();
             yield break;
         }
 
         if (BreakManager.Instance.IsBroken(false))
         {
-            yield return CombatUIManager.Instance.TypeCommentary($"{eName}ÀÌ(°¡) ±×·Î±â »óÅÂ¿¡¼­ Á¤½ÅÀ» Â÷·È½À´Ï´Ù.");
+            yield return CombatUIManager.Instance.TypeCommentary($"{eName}ì´(ê°€) ê·¸ë¡œê¸° ìƒíƒœì—ì„œ ì •ì‹ ì„ ì°¨ë ¸ìŠµë‹ˆë‹¤.");
             BreakManager.Instance.WakeUpFromBreak(false);
             CombatUIManager.Instance.ResetDefenderImage(false);
             ResolveTurnEnd();
             yield break;
         }
 
-        yield return CombatUIManager.Instance.TypeCommentary($"{eName}ÀÇ Â÷·ÊÀÔ´Ï´Ù!");
+        yield return CombatUIManager.Instance.TypeCommentary($"{eName}ì˜ ì°¨ë¡€ì…ë‹ˆë‹¤!");
         yield return EnemyTurnRoutine();
     }
 
     // ==========================================================
-    // 4. ÇÃ·¹ÀÌ¾î(Player) ÅÏ ·ÎÁ÷
+    // 4. í”Œë ˆì´ì–´(Player) í„´ ë¡œì§
     // ==========================================================
     private IEnumerator HandlePlayerTurn()
     {
-        string pName = playerData != null ? GetTranslatedText(playerData.playerNamekey) : "ÁÖÀÎ°ø";
+        string pName = playerData != null ? GetTranslatedText(playerData.playerNamekey) : "ì£¼ì¸ê³µ";
 
         if (BreakManager.Instance.IsBroken(true))
         {
-            yield return CombatUIManager.Instance.TypeCommentary($"{pName}ÀÌ(°¡) ±×·Î±â »óÅÂ¿¡¼­ Á¤½ÅÀ» Â÷·È½À´Ï´Ù.");
+            yield return CombatUIManager.Instance.TypeCommentary($"{pName}ì´(ê°€) ê·¸ë¡œê¸° ìƒíƒœì—ì„œ ì •ì‹ ì„ ì°¨ë ¸ìŠµë‹ˆë‹¤.");
             BreakManager.Instance.WakeUpFromBreak(true);
             CombatUIManager.Instance.ResetDefenderImage(true);
             CombatUIManager.Instance.ResetCasterImage(true);
@@ -506,20 +506,20 @@ public class CombatManager : MonoBehaviour
         {
             currentState.isPlayerCharging = false;
             currentState.isUnleashingCharge = true;
-            yield return CombatUIManager.Instance.TypeCommentary($"{pName}ÀÌ(°¡) ¸ğ¾ÆµĞ ±â¸¦ ¹æÃâÇÕ´Ï´Ù!", true, 1.0f);
-            DevLog.Log("[¿ø±â¿Á] ¸ğÀº ±â¸¦ ¹ß»çÇÕ´Ï´Ù!");
+            yield return CombatUIManager.Instance.TypeCommentary($"{pName}ì´(ê°€) ëª¨ì•„ë‘” ê¸°ë¥¼ ë°©ì¶œí•©ë‹ˆë‹¤!", true, 1.0f);
+            DevLog.Log("[ì›ê¸°ì˜¥] ëª¨ì€ ê¸°ë¥¼ ë°œì‚¬í•©ë‹ˆë‹¤!");
             PerformSkillRoutine(currentState.chargingSkill, true);
         }
         else
         {
             CombatUIManager.Instance.SetWaitingPanelActive(false);
             ShowCategoryMenu();
-            yield return CombatUIManager.Instance.TypeCommentary($"{pName}, ¹«½¼ °ø°İÀ» ÇÒ±î¿ä?", false);
+            yield return CombatUIManager.Instance.TypeCommentary($"{pName}, ë¬´ìŠ¨ ê³µê²©ì„ í• ê¹Œìš”?", false);
         }
     }
 
     // ==========================================================
-    // 5. Á¶·ÂÀÚ(Supporter) ÅÏ ·ÎÁ÷
+    // 5. ì¡°ë ¥ì(Supporter) í„´ ë¡œì§
     // ==========================================================
     private IEnumerator HandleSupporterTurn()
     {
@@ -540,21 +540,21 @@ public class CombatManager : MonoBehaviour
 
         EnemyActionIntent intent = null;
 
-        // 1. AI ³ú(Brain)¿¡°Ô ÀÌ¹ø ÅÏÀÇ 'Çàµ¿ °èÈ¹¼­'¸¦ °áÀç¹Ş½À´Ï´Ù.
+        // 1. AI ë‡Œ(Brain)ì—ê²Œ ì´ë²ˆ í„´ì˜ 'í–‰ë™ ê³„íšì„œ'ë¥¼ ê²°ì¬ë°›ìŠµë‹ˆë‹¤.
         if (currentEnemyData?.aiBrain != null)
         {
             intent = currentEnemyData.aiBrain.DecideNextAction(enemyTurnCount, currentPlayerStats, currentEnemyData);
             enemyTurnCount++;
         }
 
-        // 2. °èÈ¹¼­¿¡ ½ºÅ³ÀÌ Á¤»óÀûÀ¸·Î µé¾îÀÖ´Ù¸é ½ÇÇàÇÕ´Ï´Ù. (¹ÌÄ«¿¤ÀÇ ¸ğµç Çàµ¿)
+        // 2. ê³„íšì„œì— ìŠ¤í‚¬ì´ ì •ìƒì ìœ¼ë¡œ ë“¤ì–´ìˆë‹¤ë©´ ì‹¤í–‰í•©ë‹ˆë‹¤. (ë¯¸ì¹´ì—˜ì˜ ëª¨ë“  í–‰ë™)
         if (intent != null && intent.skillToUse != null)
         {
             PerformSkillRoutine(intent.skillToUse, false, intent.skillToUse.isUltimate);
         }
         else
         {
-            // AI°¡ ¾ø°Å³ª ±øÅëÀÎ °æ¿ì, È¤Àº ½¯ ¶§ (´ë±â)
+            // AIê°€ ì—†ê±°ë‚˜ ê¹¡í†µì¸ ê²½ìš°, í˜¹ì€ ì‰´ ë•Œ (ëŒ€ê¸°)
             ResolveTurnEnd();
         }
     }
@@ -582,19 +582,19 @@ public class CombatManager : MonoBehaviour
         PerformSkillRoutine(skill, isPlayerAttacking, isUltimate);
     }
 
-    // ½ºÅ³ Ã³¸® ÇÁ·Î¼¼½º (¿¬»ê -> Å¥ ÀûÀç -> ½ÇÇà)
+    // ìŠ¤í‚¬ ì²˜ë¦¬ í”„ë¡œì„¸ìŠ¤ (ì—°ì‚° -> í ì ì¬ -> ì‹¤í–‰)
     private void PerformSkillRoutine(SkillData skill, bool isPlayerAttacking, bool isUltimate = false)
     {
         if (analysisUI != null) analysisUI.Close();
 
-        // 1. »óÅÂ ½º³À¼¦ ¹× ÃÊ±âÈ­
+        // 1. ìƒíƒœ ìŠ¤ëƒ…ìƒ· ë° ì´ˆê¸°í™”
         ResetSkillExecutionState();
 
-        //  [º¹±¸µÊ] ±â(Ki) Â÷Áö(¿ø±â¿Á) ½ÃÀÛ ÆÇÁ¤
+        //  [ë³µêµ¬ë¨] ê¸°(Ki) ì°¨ì§€(ì›ê¸°ì˜¥) ì‹œì‘ íŒì •
         if (TryBeginGiCharge(skill, isPlayerAttacking))
             return;
 
-        //  [º¹±¸µÊ] ½Ç½Ã°£ ½ºÅÈ »êÃâ ¹× BattleCalculator ¿¬»ê (skillResult »ı¼º)
+        //  [ë³µêµ¬ë¨] ì‹¤ì‹œê°„ ìŠ¤íƒ¯ ì‚°ì¶œ ë° BattleCalculator ì—°ì‚° (skillResult ìƒì„±)
         SkillExecutionContext executionContext = BuildSkillExecutionContext(
             skill,
             isPlayerAttacking,
@@ -602,7 +602,7 @@ public class CombatManager : MonoBehaviour
 
         EnqueueSkillExecutionSequence(executionContext);
 
-        // 3. ÁöÈÖ°ü ±ÇÇÑ À§ÀÓ ¹× ÅÏ Á¾·á ´ë±â
+        // 3. ì§€íœ˜ê´€ ê¶Œí•œ ìœ„ì„ ë° í„´ ì¢…ë£Œ ëŒ€ê¸°
         BattleVisualizer.Instance.StartSequence(() => CompleteSkillSequence(isPlayerAttacking));
     }
 
@@ -632,9 +632,9 @@ public class CombatManager : MonoBehaviour
 
         string pName = playerData != null
             ? GetTranslatedText(playerData.playerNamekey)
-            : "ÁÖÀÎ°ø";
+            : "ì£¼ì¸ê³µ";
 
-        StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{pName}ÀÌ(°¡) ±â¸¦ ¸ğÀ¸±â ½ÃÀÛÇÕ´Ï´Ù!"));
+        StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{pName}ì´(ê°€) ê¸°ë¥¼ ëª¨ìœ¼ê¸° ì‹œì‘í•©ë‹ˆë‹¤!"));
         ResolveTurnEnd();
 
         return true;
@@ -751,8 +751,8 @@ public class CombatManager : MonoBehaviour
         bool isPlayerDefending = !isPlayerAttacking;
 
         string attackerName = isPlayerAttacking
-            ? (playerData != null ? GetTranslatedText(playerData.playerNamekey) : "ÁÖÀÎ°ø")
-            : (currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "Àû");
+            ? (playerData != null ? GetTranslatedText(playerData.playerNamekey) : "ì£¼ì¸ê³µ")
+            : (currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "ì ");
 
         string skillName = GetTranslatedText(skill.skillNameKey);
 
@@ -761,12 +761,12 @@ public class CombatManager : MonoBehaviour
         string commentary = presentationDirector != null
             ? presentationDirector.BuildSkillCommentary(attackerName, skillName, skillResult, isPureUtility)
             : isPureUtility
-                ? $"{attackerName}ÀÌ(°¡) {skillName}À»(¸¦) ½ÃÀüÇÕ´Ï´Ù!"
+                ? $"{attackerName}ì´(ê°€) {skillName}ì„(ë¥¼) ì‹œì „í•©ë‹ˆë‹¤!"
                 : !skillResult.anyHit
-                    ? $"{attackerName}ÀÇ {skillName}ÀÌ(°¡) ºø³ª°¬½À´Ï´Ù!"
+                    ? $"{attackerName}ì˜ {skillName}ì´(ê°€) ë¹—ë‚˜ê°”ìŠµë‹ˆë‹¤!"
                     : skillResult.anyCrit
-                        ? $"{attackerName}ÀÇ {skillName} Ä¡¸íÀûÀ¸·Î ÀûÁß!"
-                        : $"{attackerName}ÀÇ {skillName} ÀûÁß!";
+                        ? $"{attackerName}ì˜ {skillName} ì¹˜ëª…ì ìœ¼ë¡œ ì ì¤‘!"
+                        : $"{attackerName}ì˜ {skillName} ì ì¤‘!";
 
         return new SkillPresentationContext
         {
@@ -864,7 +864,7 @@ public class CombatManager : MonoBehaviour
             .GetEffects(true)
             .Exists(e => e.effectData.specialType == SpecialEffectType.Invincible);
 
-        // ¿ÏÀü È¸ÇÇ
+        // ì™„ì „ íšŒí”¼
         if (!skillResult.anyHit)
         {
             StyleRankManager.Instance.OnEvade();
@@ -887,7 +887,7 @@ public class CombatManager : MonoBehaviour
                         playerEntity.actionGauge += apRecovery;
                         currentState.isMorningStarApRecoveredThisSkill = true;
 
-                        DevLog.Log($"[»õº®º°:³­½Ä] ¿Ïº® È¸ÇÇ ¼º°ø! Çàµ¿ °ÔÀÌÁö {apRecovery} È¸º¹.");
+                        DevLog.Log($"[ìƒˆë²½ë³„:ë‚œì‹] ì™„ë²½ íšŒí”¼ ì„±ê³µ! í–‰ë™ ê²Œì´ì§€ {apRecovery} íšŒë³µ.");
                     }
                 }
             }
@@ -895,14 +895,14 @@ public class CombatManager : MonoBehaviour
             return;
         }
 
-        // ÇÇ°İ
+        // í”¼ê²©
         if (!skillResult.isGuardTriggered && !isInvincible)
         {
             StyleRankManager.Instance.OnPlayerHit();
         }
         else if (isInvincible)
         {
-            DevLog.Log("[¹«ÇÏÇÑ] ¹«Àû »óÅÂÀÌ¹Ç·Î ½ºÅ¸ÀÏ ·©Å©°¡ °¨¼ÒÇÏÁö ¾Ê½À´Ï´Ù.");
+            DevLog.Log("[ë¬´í•˜í•œ] ë¬´ì  ìƒíƒœì´ë¯€ë¡œ ìŠ¤íƒ€ì¼ ë­í¬ê°€ ê°ì†Œí•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
         }
     }
 
@@ -1001,7 +1001,7 @@ public class CombatManager : MonoBehaviour
         return false;
     }
 
-    // ½ºÅ³ ½ÃÀü ÃÊ±â ¿¬Ãâ (ÀÌ¹ÌÁö, ´ë»ç, ÄÚ½ºÆ® ÁöºÒ µî)
+    // ìŠ¤í‚¬ ì‹œì „ ì´ˆê¸° ì—°ì¶œ (ì´ë¯¸ì§€, ëŒ€ì‚¬, ì½”ìŠ¤íŠ¸ ì§€ë¶ˆ ë“±)
     private void ApplySkillCastUI(SkillData skill, bool isPlayerAttacking, SkillResult skillResult, string commentary, bool isPureUtility)
     {
         EnsurePresentationDirector();
@@ -1012,7 +1012,7 @@ public class CombatManager : MonoBehaviour
         CompanionManager.Emotion emotion = ResolveCompanionEmotionAfterSkillCast(skillResult, isPlayerAttacking);
         CompanionManager.Instance.UpdateEmotion(emotion);
 
-        // 2. ¹æ¾îÀÚ ÀÌ¹ÌÁö º¯°æ
+        // 2. ë°©ì–´ì ì´ë¯¸ì§€ ë³€ê²½
         Sprite reactionSprite = ResolveDefenderReactionSprite(skillResult, isPlayerAttacking, isPureUtility);
         SkillCastPresentationContext presentationContext = new SkillCastPresentationContext
         {
@@ -1095,7 +1095,7 @@ public class CombatManager : MonoBehaviour
 
         ShowEvadePresentationIfNeeded(isPlayerAttacking, isPlayerDefending, skillResult);
 
-        // (StyleRank ¹× »õº®º° ·ÎÁ÷Àº PerformSkillRoutineÀ¸·Î ÀÌ°üµÇ¾î »èÁ¦µÊ)
+        // (StyleRank ë° ìƒˆë²½ë³„ ë¡œì§ì€ PerformSkillRoutineìœ¼ë¡œ ì´ê´€ë˜ì–´ ì‚­ì œë¨)
     }
 
     private void ShowEvadePresentationIfNeeded(
@@ -1110,7 +1110,7 @@ public class CombatManager : MonoBehaviour
         CombatUIManager.Instance.SetDefenderImage(!isPlayerAttacking, evadeSprite);
     }
 
-    // ´ÜÀÏ Å¸°İ ¼º°ø(¸íÁß) ¿¬Ãâ
+    // ë‹¨ì¼ íƒ€ê²© ì„±ê³µ(ëª…ì¤‘) ì—°ì¶œ
     // ==========================================================
     private void ProcessHitAction(HitResult hit, bool isPlayerAttacking, bool isPlayerDefending, bool isPureUtility, SkillResult skillResult, SkillData skill)
     {
@@ -1137,17 +1137,17 @@ public class CombatManager : MonoBehaviour
 
     private void ProcessEnemySuccessfulHit(HitResult hit, SkillData skill)
     {
-        // 1. ÀÏ¹İ Å¸°İ µ¥¹ÌÁö Àû¿ë (´Ü ÇÑ ¹ø¸¸!)
+        // 1. ì¼ë°˜ íƒ€ê²© ë°ë¯¸ì§€ ì ìš© (ë‹¨ í•œ ë²ˆë§Œ!)
         ApplyDamageToEntity(true, hit.damage);
 
-        // 2. Àû±º ÈíÇ÷ ·ÎÁ÷
+        // 2. ì êµ° í¡í˜ˆ ë¡œì§
         ApplyEnemyLifestealAfterHit(hit, skill);
 
-        // 3. [ÇÙ½É] Æ¯¼ö È¿°ú Ã³¸® (½ºÅÃ Æø¹ß µî)
-        // ÀÌÁ¦ ÇÏµåÄÚµù ¾øÀÌ ¾î¶² º¸½º ½ºÅ³ÀÌµç TryProcessHitEffect°¡ ±¸ÇöµÇ¾î ÀÖÀ¸¸é È£ÃâµË´Ï´Ù.
+        // 3. [í•µì‹¬] íŠ¹ìˆ˜ íš¨ê³¼ ì²˜ë¦¬ (ìŠ¤íƒ í­ë°œ ë“±)
+        // ì´ì œ í•˜ë“œì½”ë”© ì—†ì´ ì–´ë–¤ ë³´ìŠ¤ ìŠ¤í‚¬ì´ë“  TryProcessHitEffectê°€ êµ¬í˜„ë˜ì–´ ìˆìœ¼ë©´ í˜¸ì¶œë©ë‹ˆë‹¤.
         ProcessEnemySpecialHitEffect(skill);
 
-        // 4. ±â ¸ğÀ¸±â ÆÄ±« ·ÎÁ÷
+        // 4. ê¸° ëª¨ìœ¼ê¸° íŒŒê´´ ë¡œì§
         CancelPlayerChargeIfInterrupted(hit);
     }
 
@@ -1172,13 +1172,13 @@ public class CombatManager : MonoBehaviour
             currentState.isPlayerCharging = false;
             currentState.chargingSkill = null;
             CombatUIManager.Instance.SpawnDamageText("Broken!", false, true);
-            DevLog.Log("[¿ø±â¿Á] ÇÇ°İ´çÇÏ¿© ±â ¸ğÀ¸±â°¡ Ãë¼ÒµÇ¾ú½À´Ï´Ù!");
+            DevLog.Log("[ì›ê¸°ì˜¥] í”¼ê²©ë‹¹í•˜ì—¬ ê¸° ëª¨ìœ¼ê¸°ê°€ ì·¨ì†Œë˜ì—ˆìŠµë‹ˆë‹¤!");
         }
     }
 
     private void ApplyPlayerLifestealAfterHit(HitResult hit, SkillData skill)
     {
-        // [½Å±Ô] µ¥¸ó ½Ã³ÊÁö / ÈíÇ÷ ¾ÆÀÌÅÛ '±Û·Î¹ú ÈíÇ÷' ·ÎÁ÷ Àû¿ë
+        // [ì‹ ê·œ] ë°ëª¬ ì‹œë„ˆì§€ / í¡í˜ˆ ì•„ì´í…œ 'ê¸€ë¡œë²Œ í¡í˜ˆ' ë¡œì§ ì ìš©
         float currentLifeSteal = currentPlayerStats.lifeSteal;
 
         if (skill != null && skill.skillLogic != null)
@@ -1186,7 +1186,7 @@ public class CombatManager : MonoBehaviour
             currentLifeSteal += skill.skillLogic.GetSkillBonusLifesteal(skill);
         }
 
-        // [µ¥¸ó Èñ±Í ¾ÆÀÌÅÛ - ±Í¸éÀÇ ÆÄÆí] ÀÒÀº Ã¼·Â ºñ·Ê ÈíÇ÷·ü »ó½Â!
+        // [ë°ëª¬ í¬ê·€ ì•„ì´í…œ - ê·€ë©´ì˜ íŒŒí¸] ìƒì€ ì²´ë ¥ ë¹„ë¡€ í¡í˜ˆë¥  ìƒìŠ¹!
         if (currentActiveEntity != null && currentActiveEntity.type == EntityType.Player && PlayerManager.Instance != null)
         {
             var demonRares = PlayerManager.Instance.inventory.FindAll(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Rare);
@@ -1203,7 +1203,7 @@ public class CombatManager : MonoBehaviour
         {
             float baseHeal = hit.damage * currentLifeSteal;
 
-            // [½Å±Ô] ¸¶¼º °­È­(4Á¡) ¹× ¿À´ÏÀÇ °ËÀº ÇÇ(¿¡ÇÈ) - È¸º¹·® ÁõÆø Àû¿ë!
+            // [ì‹ ê·œ] ë§ˆì„± ê°•í™”(4ì ) ë° ì˜¤ë‹ˆì˜ ê²€ì€ í”¼(ì—í”½) - íšŒë³µëŸ‰ ì¦í­ ì ìš©!
             int healAmount = Mathf.RoundToInt(baseHeal * (1f + currentPlayerStats.healingReceivedAmp));
 
             if (healAmount > 0)
@@ -1214,7 +1214,7 @@ public class CombatManager : MonoBehaviour
                 CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
                 CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
 
-                // [½Å±Ô] µ¥¸ó 6Á¡ ¹× Àü¼³ - ÃÊ°ú È¸º¹ ¹öÇÁ ¹ßµ¿
+                // [ì‹ ê·œ] ë°ëª¬ 6ì  ë° ì „ì„¤ - ì´ˆê³¼ íšŒë³µ ë²„í”„ ë°œë™
                 if (excessHeal > 0) ApplyOverhealBuff(excessHeal);
             }
         }
@@ -1241,7 +1241,7 @@ public class CombatManager : MonoBehaviour
                     CombatUIManager.Instance.enemyStatusUI.UpdateHP(currentEnemyHp, currentEnemyData.maxHp);
                     CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, false);
                 }
-                DevLog.Log($"[Àû ÈíÇ÷] {healAmount} È¸º¹!");
+                DevLog.Log($"[ì  í¡í˜ˆ] {healAmount} íšŒë³µ!");
             }
         }
     }
@@ -1252,14 +1252,14 @@ public class CombatManager : MonoBehaviour
 
         if (explosionDamage > 0)
         {
-            // Æ¯¼ö ÇÇÇØ Àû¿ë (ÀÌ¹Ì ÀÏ¹İ µ¥¹ÌÁö´Â À§¿¡¼­ µé¾î°¬À¸¹Ç·Î ÀÌ°Í¸¸ Ãß°¡·Î µé¾î°¨)
+            // íŠ¹ìˆ˜ í”¼í•´ ì ìš© (ì´ë¯¸ ì¼ë°˜ ë°ë¯¸ì§€ëŠ” ìœ„ì—ì„œ ë“¤ì–´ê°”ìœ¼ë¯€ë¡œ ì´ê²ƒë§Œ ì¶”ê°€ë¡œ ë“¤ì–´ê°)
             CombatManager.Instance.ApplyDamageToEntity(true, explosionDamage);
 
-            // ¿¬Ãâ: ÇÇ°İ ÀÌ¹ÌÁö + º¸¶ó»ö µ¥¹ÌÁö ÅØ½ºÆ®
+            // ì—°ì¶œ: í”¼ê²© ì´ë¯¸ì§€ + ë³´ë¼ìƒ‰ ë°ë¯¸ì§€ í…ìŠ¤íŠ¸
             CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
-            CombatUIManager.Instance.SpawnDamageText($"¡Ú{explosionDamage}", false, true);
+            CombatUIManager.Instance.SpawnDamageText($"â˜…{explosionDamage}", false, true);
 
-            DevLog.Log($"[½ºÅ³ Æ¯¼ö È¿°ú] Æ¯¼ö ÇÇÇØ {explosionDamage} ¹ß»ı!");
+            DevLog.Log($"[ìŠ¤í‚¬ íŠ¹ìˆ˜ íš¨ê³¼] íŠ¹ìˆ˜ í”¼í•´ {explosionDamage} ë°œìƒ!");
         }
     }
 
@@ -1272,7 +1272,7 @@ public class CombatManager : MonoBehaviour
             if (BreakManager.Instance.AddBreakDamage(true, hit.breakDamage)) UpdateTurnOrderUI();
     }
 
-    // »õº®º° Ä«¿îÅÍ ¹× ÀÎ°úÀ² ¹İ»ç ¿¬Ãâ
+    // ìƒˆë²½ë³„ ì¹´ìš´í„° ë° ì¸ê³¼ìœ¨ ë°˜ì‚¬ ì—°ì¶œ
     // ==========================================================
     private void ApplyCounterAndReflectUI(int damage, Sprite defenderImage, bool isReflect)
     {
@@ -1283,16 +1283,16 @@ public class CombatManager : MonoBehaviour
         if (isReflect)
         {
             BattleEventSystem.CallDamageTaken(false, damage, false);
-            CombatUIManager.Instance.InterruptAndTypeCommentary($"[ÀÎ°úÀ² ¹ßµ¿!] Æ¨°Ü³½ ÈûÀ¸·Î Àû¿¡°Ô {damage}ÀÇ °íÁ¤ ÇÇÇØ¸¦ ¹İ»çÇÕ´Ï´Ù!");
+            CombatUIManager.Instance.InterruptAndTypeCommentary($"[ì¸ê³¼ìœ¨ ë°œë™!] íŠ•ê²¨ë‚¸ í˜ìœ¼ë¡œ ì ì—ê²Œ {damage}ì˜ ê³ ì • í”¼í•´ë¥¼ ë°˜ì‚¬í•©ë‹ˆë‹¤!");
         }
         else
         {
             CombatUIManager.Instance.SpawnDamageText(damage.ToString(), false, false);
-            DevLog.Log($"[»õº®º°:¸ê½Ä] Ä«¿îÅÍ ¹ßµ¿! {damage} ÇÇÇØ");
+            DevLog.Log($"[ìƒˆë²½ë³„:ë©¸ì‹] ì¹´ìš´í„° ë°œë™! {damage} í”¼í•´");
         }
     }
 
-    // È­¸é º¹±¸ (ÀÌÆåÆ®, ·©Å©, ÀÌ¹ÌÁö ÃÊ±âÈ­)
+    // í™”ë©´ ë³µêµ¬ (ì´í™íŠ¸, ë­í¬, ì´ë¯¸ì§€ ì´ˆê¸°í™”)
     // ==========================================================
     private void ResetCombatUI(bool isPlayerAttacking, bool isPlayerDefending, bool isUltimate, SkillData skill)
     {
@@ -1322,7 +1322,7 @@ public class CombatManager : MonoBehaviour
         {
             Sprite groggySprite = isPlayerDefending ? playerData?.breakImage : currentEnemyData?.breakImage;
             if (groggySprite != null) CombatUIManager.Instance.SetDefenderImage(isPlayerDefending, groggySprite);
-            DevLog.Log($"[{(isPlayerDefending ? "ÁÖÀÎ°ø" : "Àû")}]°¡ ¾ÆÁ÷ ±×·Î±â »óÅÂÀÌ¹Ç·Î Àü¿ë Break ÀÌ¹ÌÁö·Î º¹±¸ÇÕ´Ï´Ù.");
+            DevLog.Log($"[{(isPlayerDefending ? "ì£¼ì¸ê³µ" : "ì ")}]ê°€ ì•„ì§ ê·¸ë¡œê¸° ìƒíƒœì´ë¯€ë¡œ ì „ìš© Break ì´ë¯¸ì§€ë¡œ ë³µêµ¬í•©ë‹ˆë‹¤.");
         }
     }
 
@@ -1380,7 +1380,7 @@ public class CombatManager : MonoBehaviour
         );
     }
 
-    // µ¥¸ó 6Á¡ ¹× Àü¼³ - ÃÊ°ú È¸º¹(Over-heal) ºñ·Ê ¹öÇÁ ¹ß»ı±â
+    // ë°ëª¬ 6ì  ë° ì „ì„¤ - ì´ˆê³¼ íšŒë³µ(Over-heal) ë¹„ë¡€ ë²„í”„ ë°œìƒê¸°
     public void ApplyOverhealBuff(int excessHeal)
     {
         if (PlayerManager.Instance == null) return;
@@ -1392,13 +1392,13 @@ public class CombatManager : MonoBehaviour
 
         if (!has6Point && !hasLegendary) return;
 
-        // ¹èÀ² »êÃâ: ±âÈ¹¾È¿¡ µû¶ó ÃÖ´ë Ã¼·Â ºñ·Ê %´ç 1% (6Á¡) + 0.5% (Àü¼³)
+        // ë°°ìœ¨ ì‚°ì¶œ: ê¸°íšì•ˆì— ë”°ë¼ ìµœëŒ€ ì²´ë ¥ ë¹„ë¡€ %ë‹¹ 1% (6ì ) + 0.5% (ì „ì„¤)
         float multiplier = 0f;
         if (has6Point) multiplier += 1.0f;
         if (hasLegendary) multiplier += 0.5f;
 
-        // °ø½Ä: (ÃÊ°ú È¸º¹·® / ÃÖ´ë Ã¼·Â) * ¹èÀ²
-        // ¿¹: 1000 Ã¼·Â Áß 200 ÃÊ°ú È¸º¹ ½Ã -> 0.2 * 1.5 = 0.3f (30% ÁõÆø)
+        // ê³µì‹: (ì´ˆê³¼ íšŒë³µëŸ‰ / ìµœëŒ€ ì²´ë ¥) * ë°°ìœ¨
+        // ì˜ˆ: 1000 ì²´ë ¥ ì¤‘ 200 ì´ˆê³¼ íšŒë³µ ì‹œ -> 0.2 * 1.5 = 0.3f (30% ì¦í­)
         float ampValue = ((float)excessHeal / currentPlayerStats.maxHp) * multiplier;
 
         if (ampValue > 0f)
@@ -1406,10 +1406,10 @@ public class CombatManager : MonoBehaviour
             StatusEffectData newBuff = ScriptableObject.CreateInstance<StatusEffectData>();
             newBuff.category = EffectCategory.Buff;
             newBuff.specialType = SpecialEffectType.DamageGivenAmp;
-            newBuff.effectName = "ÇÇÀÇ ÆøÁÖ";
+            newBuff.effectName = "í”¼ì˜ í­ì£¼";
 
             BuffManager.Instance.AddEffect(true, newBuff, ampValue, 1);
-            DevLog.Log($"[ÇÇÀÇ ÆøÁÖ] ÃÊ°ú È¸º¹ {excessHeal} ´Ş¼º -> ÇÇÇØ ÁõÆø {ampValue * 100:F1}% ¹öÇÁ 1ÅÏ È¹µæ!");
+            DevLog.Log($"[í”¼ì˜ í­ì£¼] ì´ˆê³¼ íšŒë³µ {excessHeal} ë‹¬ì„± -> í”¼í•´ ì¦í­ {ampValue * 100:F1}% ë²„í”„ 1í„´ íšë“!");
         }
     }
 
@@ -1479,7 +1479,7 @@ public class CombatManager : MonoBehaviour
             if (removed > 0)
             {
                 CombatUIManager.Instance.RefreshBuffUI();
-                DevLog.Log("[¹«ÇÏÇÑ] ÀûÀÇ ÅÏÀÌ Á¾·áµÇ¾î ¹«Àû È¿°ú°¡ ÇØÁ¦µÇ¾ú½À´Ï´Ù.");
+                DevLog.Log("[ë¬´í•˜í•œ] ì ì˜ í„´ì´ ì¢…ë£Œë˜ì–´ ë¬´ì  íš¨ê³¼ê°€ í•´ì œë˜ì—ˆìŠµë‹ˆë‹¤.");
             }
         }
 
@@ -1508,27 +1508,27 @@ public class CombatManager : MonoBehaviour
 
             if (hpRegenRate > 0f || breakRegenRate > 0f)
             {
-                string targetName = isPlayerTurn ? (playerData != null ? GetTranslatedText(playerData.playerNamekey) : "¼Î¸®") : "Àû";
+                string targetName = isPlayerTurn ? (playerData != null ? GetTranslatedText(playerData.playerNamekey) : "ì…°ë¦¬") : "ì ";
 
-                // 1. È¸º¹ ¾Ë¸² ÅØ½ºÆ® Ãâ·Â (0.5ÃÊ°£ Å¸ÀÚ Ä¡µí Ãâ·Â)
-                yield return CombatUIManager.Instance.TypeCommentary($"{targetName}ÀÇ Áö¼Ó È¸º¹ È¿°ú ¹ßµ¿!", true, 0.5f);
+                // 1. íšŒë³µ ì•Œë¦¼ í…ìŠ¤íŠ¸ ì¶œë ¥ (0.5ì´ˆê°„ íƒ€ì ì¹˜ë“¯ ì¶œë ¥)
+                yield return CombatUIManager.Instance.TypeCommentary($"{targetName}ì˜ ì§€ì† íšŒë³µ íš¨ê³¼ ë°œë™!", true, 0.5f);
 
-                // 2. ½ÇÁ¦ È¸º¹ ¼öÄ¡ ¿¬»ê ¹× µ¥¹ÌÁö ÅØ½ºÆ® ÆË¾÷
+                // 2. ì‹¤ì œ íšŒë³µ ìˆ˜ì¹˜ ì—°ì‚° ë° ë°ë¯¸ì§€ í…ìŠ¤íŠ¸ íŒì—…
                 if (hpRegenRate > 0f)
                 {
                     if (isPlayerTurn)
                     {
                         float baseHeal = currentPlayerStats.maxHp * hpRegenRate;
-                        // [¼öÁ¤] Àç»ı È¿°ú¿¡µµ È¸º¹ ÁõÆø È¿À²ÀÌ ¶È°°ÀÌ Àû¿ëµË´Ï´Ù!
+                        // [ìˆ˜ì •] ì¬ìƒ íš¨ê³¼ì—ë„ íšŒë³µ ì¦í­ íš¨ìœ¨ì´ ë˜‘ê°™ì´ ì ìš©ë©ë‹ˆë‹¤!
                         int healAmount = Mathf.RoundToInt(baseHeal * (1f + currentPlayerStats.healingReceivedAmp));
                         int excessHeal = (currentPlayerStats.currentHp + healAmount) - currentPlayerStats.maxHp;
 
                         currentPlayerStats.currentHp = Mathf.Clamp(currentPlayerStats.currentHp + healAmount, 0, currentPlayerStats.maxHp);
                         CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
                         CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
-                        DevLog.Log($"[Àç»ı] ÅÏ Á¾·á! ¼Î¸®ÀÇ Ã¼·ÂÀÌ {healAmount} È¸º¹µÇ¾ú½À´Ï´Ù.");
+                        DevLog.Log($"[ì¬ìƒ] í„´ ì¢…ë£Œ! ì…°ë¦¬ì˜ ì²´ë ¥ì´ {healAmount} íšŒë³µë˜ì—ˆìŠµë‹ˆë‹¤.");
 
-                        // [½Å±Ô] Àç»ıÀ¸·Î ³ÑÄ£ Ã¼·Âµµ ÇÇÀÇ ÆøÁÖ¸¦ ¹ßµ¿½ÃÅµ´Ï´Ù!
+                        // [ì‹ ê·œ] ì¬ìƒìœ¼ë¡œ ë„˜ì¹œ ì²´ë ¥ë„ í”¼ì˜ í­ì£¼ë¥¼ ë°œë™ì‹œí‚µë‹ˆë‹¤!
                         if (excessHeal > 0) ApplyOverhealBuff(excessHeal);
                     }
                     else
@@ -1542,18 +1542,18 @@ public class CombatManager : MonoBehaviour
 
                 if (breakRegenRate > 0f)
                 {
-                    // ÅÏ Á¾·á ½Ã ±×·Î±â °ÔÀÌÁö Áï½Ã È¸º¹
+                    // í„´ ì¢…ë£Œ ì‹œ ê·¸ë¡œê¸° ê²Œì´ì§€ ì¦‰ì‹œ íšŒë³µ
                     BreakManager.Instance.RecoverBreakInstantly(isPlayerTurn, breakRegenRate);
                 }
 
-                // 3. À¯Àú°¡ ÃÊ·Ï»ö È¸º¹ µ¥¹ÌÁö ÅØ½ºÆ®¿Í UI ¹Ù°¡ Â÷¿À¸£´Â °ÍÀ» °¨»óÇÒ ¼ö ÀÖµµ·Ï 1ÃÊ ´ë±â!
+                // 3. ìœ ì €ê°€ ì´ˆë¡ìƒ‰ íšŒë³µ ë°ë¯¸ì§€ í…ìŠ¤íŠ¸ì™€ UI ë°”ê°€ ì°¨ì˜¤ë¥´ëŠ” ê²ƒì„ ê°ìƒí•  ìˆ˜ ìˆë„ë¡ 1ì´ˆ ëŒ€ê¸°!
                 yield return new WaitForSeconds(1.0f);
             }
 
             if (currentActiveEntity.isPlayer) BuffManager.Instance.AdvanceTurnActiveEffects(true);
             else if (currentActiveEntity.type == EntityType.Enemy) BuffManager.Instance.AdvanceTurnActiveEffects(false);
 
-            //  Ä³½ºÅÍ ½Ã³ÊÁö: ¸Å ÅÏ Á¾·á ½Ã ¹«ÀÛÀ§ µ¶¸³ ¹öÇÁ ºÎ¿©
+            //  ìºìŠ¤í„° ì‹œë„ˆì§€: ë§¤ í„´ ì¢…ë£Œ ì‹œ ë¬´ì‘ìœ„ ë…ë¦½ ë²„í”„ ë¶€ì—¬
             if (currentActiveEntity.isPlayer && PlayerManager.Instance != null)
             {
                 TurnEffects.ApplyCasterTurnEndEffects(PlayerManager.Instance);
@@ -1568,42 +1568,42 @@ public class CombatManager : MonoBehaviour
         bool isPlayerTurn = currentActiveEntity.isPlayer;
         var effects = BuffManager.Instance.GetEffects(isPlayerTurn);
 
-        // ¸¸·áµÉ È¿°úµé Ã£±â (turnsLeft°¡ 1ÀÌ°í isNewlyApplied°¡ falseÀÎ °Í)
+        // ë§Œë£Œë  íš¨ê³¼ë“¤ ì°¾ê¸° (turnsLeftê°€ 1ì´ê³  isNewlyAppliedê°€ falseì¸ ê²ƒ)
         for (int i = effects.Count - 1; i >= 0; i--)
         {
             var e = effects[i];
             if (e.turnsLeft == 1 && !e.isNewlyApplied)
             {
-                // 1. [ÁøÈ­ A] °ú¿­ Æø¹ß (ÁÖÀÎ°ø ÇÇ°İ)
+                // 1. [ì§„í™” A] ê³¼ì—´ í­ë°œ (ì£¼ì¸ê³µ í”¼ê²©)
                 if (e.effectData.specialType == SpecialEffectType.Overheat)
                 {
-                    yield return CombatUIManager.Instance.TypeCommentary("°ú¿­(Overheat) µğ¹öÇÁ ¹ßµ¿!!", true, 0.5f);
+                    yield return CombatUIManager.Instance.TypeCommentary("ê³¼ì—´(Overheat) ë””ë²„í”„ ë°œë™!!", true, 0.5f);
 
                     int selfDamage = Mathf.RoundToInt(currentPlayerStats.currentHp * 0.4f);
                     ApplyDamageToEntity(true, selfDamage);
 
-                    CombatUIManager.Instance.SetDefenderImage(true, playerData.hit); // ÁÖÀÎ°ø ÇÇ°İ ÀÌ¹ÌÁö
-                    CombatUIManager.Instance.SpawnDamageText("¡Ú" + selfDamage.ToString(), false, true);
+                    CombatUIManager.Instance.SetDefenderImage(true, playerData.hit); // ì£¼ì¸ê³µ í”¼ê²© ì´ë¯¸ì§€
+                    CombatUIManager.Instance.SpawnDamageText("â˜…" + selfDamage.ToString(), false, true);
                     BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
 
                     yield return new WaitForSeconds(1.0f);
                     CombatUIManager.Instance.ResetDefenderImage(true);
                 }
 
-                // 2. [ÁøÈ­ B] ÇÇÇØ ´©Àû Æø¹ß (Àû ÇÇ°İ)
+                // 2. [ì§„í™” B] í”¼í•´ ëˆ„ì  í­ë°œ (ì  í”¼ê²©)
                 if (e.effectData.specialType == SpecialEffectType.DamageAccumulator)
                 {
-                    yield return CombatUIManager.Instance.TypeCommentary("·¿ À¯ ´Ù¿î(Let You Down) Ãß°¡ ÇÇÇØ ¹ßµ¿!", true, 0.5f);
+                    yield return CombatUIManager.Instance.TypeCommentary("ë › ìœ  ë‹¤ìš´(Let You Down) ì¶”ê°€ í”¼í•´ ë°œë™!", true, 0.5f);
 
-                    // ±â·ÏµÈ ÇÇÇØÀÇ 50%¸¦ Ãß°¡·Î ÀÔÈû
+                    // ê¸°ë¡ëœ í”¼í•´ì˜ 50%ë¥¼ ì¶”ê°€ë¡œ ì…í˜
                     int extraDmg = Mathf.RoundToInt(currentState.accumulatedDamage * 0.5f);
                     ApplyDamageToEntity(false, extraDmg);
 
-                    CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit); // Àû ÇÇ°İ ÀÌ¹ÌÁö
-                    CombatUIManager.Instance.SpawnDamageText("¡Ú" + extraDmg.ToString(), false, false);
+                    CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit); // ì  í”¼ê²© ì´ë¯¸ì§€
+                    CombatUIManager.Instance.SpawnDamageText("â˜…" + extraDmg.ToString(), false, false);
                     BattleEventSystem.CallHpChanged(false, currentEnemyHp, currentEnemyData.maxHp);
 
-                    currentState.accumulatedDamage = 0; // ÃÊ±âÈ­
+                    currentState.accumulatedDamage = 0; // ì´ˆê¸°í™”
                     yield return new WaitForSeconds(1.0f);
                     CombatUIManager.Instance.ResetDefenderImage(false);
                 }
@@ -1628,22 +1628,22 @@ public class CombatManager : MonoBehaviour
 
     public void RestoreDefenderImage(bool isPlayerTarget)
     {
-        // 1. ´ë»óÀÌ ±×·Î±â »óÅÂÀÎÁö È®ÀÎ
+        // 1. ëŒ€ìƒì´ ê·¸ë¡œê¸° ìƒíƒœì¸ì§€ í™•ì¸
         bool isBroken = BreakManager.Instance.IsBroken(isPlayerTarget);
 
         if (isBroken)
         {
-            // 2. ±×·Î±â »óÅÂ¶ó¸é ±×·Î±â ÀÌ¹ÌÁö·Î º¹±¸
+            // 2. ê·¸ë¡œê¸° ìƒíƒœë¼ë©´ ê·¸ë¡œê¸° ì´ë¯¸ì§€ë¡œ ë³µêµ¬
             Sprite breakSprite = isPlayerTarget ? playerData?.breakImage : currentEnemyData?.breakImage;
             if (breakSprite != null)
                 CombatUIManager.Instance.SetDefenderImage(isPlayerTarget, breakSprite);
-            DevLog.Log($"[ÀÌ¹ÌÁö º¹±¸] {(isPlayerTarget ? "ÁÖÀÎ°ø" : "Àû")}ÀÌ ±×·Î±â »óÅÂÀÌ¹Ç·Î ±×·Î±â ÀÌ¹ÌÁö¸¦ À¯ÁöÇÕ´Ï´Ù.");
+            DevLog.Log($"[ì´ë¯¸ì§€ ë³µêµ¬] {(isPlayerTarget ? "ì£¼ì¸ê³µ" : "ì ")}ì´ ê·¸ë¡œê¸° ìƒíƒœì´ë¯€ë¡œ ê·¸ë¡œê¸° ì´ë¯¸ì§€ë¥¼ ìœ ì§€í•©ë‹ˆë‹¤.");
         }
         else
         {
-            // 3. ±×·Î±â »óÅÂ°¡ ¾Æ´Ï¸é ÀÏ¹İ ÀÌ¹ÌÁö·Î º¹±¸
+            // 3. ê·¸ë¡œê¸° ìƒíƒœê°€ ì•„ë‹ˆë©´ ì¼ë°˜ ì´ë¯¸ì§€ë¡œ ë³µêµ¬
             CombatUIManager.Instance.ResetDefenderImage(isPlayerTarget);
-            DevLog.Log($"[ÀÌ¹ÌÁö º¹±¸] ÀÏ¹İ »óÅÂ·Î ÀÌ¹ÌÁö¸¦ º¹±¸ÇÕ´Ï´Ù.");
+            DevLog.Log($"[ì´ë¯¸ì§€ ë³µêµ¬] ì¼ë°˜ ìƒíƒœë¡œ ì´ë¯¸ì§€ë¥¼ ë³µêµ¬í•©ë‹ˆë‹¤.");
         }
     }
 
@@ -1652,7 +1652,7 @@ public class CombatManager : MonoBehaviour
         if (CombatUIManager.Instance == null)
             return;
 
-        // 1. ¼Î¸®°¡ ±×·Î±â »óÅÂ¶ó¸é ¹«Á¶°Ç ±×·Î±â ÀÌ¹ÌÁö À¯Áö
+        // 1. ì…°ë¦¬ê°€ ê·¸ë¡œê¸° ìƒíƒœë¼ë©´ ë¬´ì¡°ê±´ ê·¸ë¡œê¸° ì´ë¯¸ì§€ ìœ ì§€
         if (BreakManager.Instance != null && BreakManager.Instance.IsBroken(true))
         {
             if (playerData != null && playerData.breakImage != null)
@@ -1664,22 +1664,22 @@ public class CombatManager : MonoBehaviour
                 CombatUIManager.Instance.ResetCasterImage(true);
             }
 
-            DevLog.Log("[ÀÌ¹ÌÁö º¹±¸] ¼Î¸®°¡ ±×·Î±â »óÅÂÀÌ¹Ç·Î Break ÀÌ¹ÌÁö·Î º¹±¸ÇÕ´Ï´Ù.");
+            DevLog.Log("[ì´ë¯¸ì§€ ë³µêµ¬] ì…°ë¦¬ê°€ ê·¸ë¡œê¸° ìƒíƒœì´ë¯€ë¡œ Break ì´ë¯¸ì§€ë¡œ ë³µêµ¬í•©ë‹ˆë‹¤.");
             return;
         }
 
-        // 2. ¼Î¸®°¡ ±â ¸ğÀ¸±â ÁßÀÌ¸é ±â ¸ğÀ¸±â ÀÌ¹ÌÁö À¯Áö
+        // 2. ì…°ë¦¬ê°€ ê¸° ëª¨ìœ¼ê¸° ì¤‘ì´ë©´ ê¸° ëª¨ìœ¼ê¸° ì´ë¯¸ì§€ ìœ ì§€
         if (currentState != null &&
             currentState.isPlayerCharging &&
             currentState.chargingSkill != null &&
             currentState.chargingSkill.skillActionImage != null)
         {
             CombatUIManager.Instance.SetCasterImage(true, currentState.chargingSkill.skillActionImage);
-            DevLog.Log("[ÀÌ¹ÌÁö º¹±¸] ¼Î¸®°¡ ±â ¸ğÀ¸±â ÁßÀÌ¹Ç·Î Â÷Áö ÀÌ¹ÌÁö¸¦ À¯ÁöÇÕ´Ï´Ù.");
+            DevLog.Log("[ì´ë¯¸ì§€ ë³µêµ¬] ì…°ë¦¬ê°€ ê¸° ëª¨ìœ¼ê¸° ì¤‘ì´ë¯€ë¡œ ì°¨ì§€ ì´ë¯¸ì§€ë¥¼ ìœ ì§€í•©ë‹ˆë‹¤.");
             return;
         }
 
-        // 3. ±× ¿Ü¿¡´Â ÀÏ¹İ ÀÌ¹ÌÁö·Î º¹±¸
+        // 3. ê·¸ ì™¸ì—ëŠ” ì¼ë°˜ ì´ë¯¸ì§€ë¡œ ë³µêµ¬
         CombatUIManager.Instance.ResetCasterImage(true);
     }
 
@@ -1701,7 +1701,7 @@ public class CombatManager : MonoBehaviour
         }
         else
         {
-            DevLog.LogError("CombatManager: CombatDefeatUIController°¡ ¿¬°áµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            DevLog.LogError("CombatManager: CombatDefeatUIControllerê°€ ì—°ê²°ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
         }
     }
 }

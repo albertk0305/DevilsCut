@@ -1,12 +1,12 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
-using TMPro; // ÅØ½ºÆ® Á¦¾î¿¡ ÇÊ¿ä
-using UnityEngine.InputSystem; // ÅÍÄ¡/Å¬¸¯ °¨Áö¿¡ ÇÊ¿ä
-using UnityEngine.EventSystems; // UI Å¬¸¯ °¨Áö¿¡ ÇÊ¼ö!
+using TMPro; // í…ìŠ¤íŠ¸ ì œì–´ì— í•„ìš”
+using UnityEngine.InputSystem; // í„°ì¹˜/í´ë¦­ ê°ì§€ì— í•„ìš”
+using UnityEngine.EventSystems; // UI í´ë¦­ ê°ì§€ì— í•„ìˆ˜!
 
 public class TypewriterUtility : MonoBehaviour
 {
-    // ¾îµğ¼­µç ºÎ¸¦ ¼ö ÀÖµµ·Ï ½Ì±ÛÅæÀ¸·Î ¸¸µì´Ï´Ù.
+    // ì–´ë””ì„œë“  ë¶€ë¥¼ ìˆ˜ ìˆë„ë¡ ì‹±ê¸€í†¤ìœ¼ë¡œ ë§Œë“­ë‹ˆë‹¤.
     public static TypewriterUtility Instance;
 
     private void Awake()
@@ -14,7 +14,7 @@ public class TypewriterUtility : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // ¾ÀÀÌ ³Ñ¾î°¡µµ ÆÄ±«µÇÁö ¾Ê°Ô À¯ÁöÇÕ´Ï´Ù!
+            DontDestroyOnLoad(gameObject); // ì”¬ì´ ë„˜ì–´ê°€ë„ íŒŒê´´ë˜ì§€ ì•Šê²Œ ìœ ì§€í•©ë‹ˆë‹¤!
         }
         else
         {
@@ -22,19 +22,19 @@ public class TypewriterUtility : MonoBehaviour
         }
     }
 
-    // ¾î¶² ÅØ½ºÆ® Ã¢(targetText)ÀÌµç ÀÌ ÇÔ¼ö¿¡ ´øÁ®ÁÖ¸é Å¸ÀÌÇÎ È¿°ú¸¦ Àû¿ëÇØ Áİ´Ï´Ù.
+    // ì–´ë–¤ í…ìŠ¤íŠ¸ ì°½(targetText)ì´ë“  ì´ í•¨ìˆ˜ì— ë˜ì ¸ì£¼ë©´ íƒ€ì´í•‘ íš¨ê³¼ë¥¼ ì ìš©í•´ ì¤ë‹ˆë‹¤.
     public IEnumerator TypeText(TextMeshProUGUI targetText, string message, bool autoProceed = true, float delayAfter = 0.5f)
     {
         targetText.text = "";
         bool skipTyping = false;
-        float typeSpeed = 0.03f; // ½ºÇÇµğÇÑ ÅØ½ºÆ® Ãâ·Â ¼Óµµ
+        float typeSpeed = 0.03f; // ìŠ¤í”¼ë””í•œ í…ìŠ¤íŠ¸ ì¶œë ¥ ì†ë„
 
-        // 1. Å¸ÀÌÇÎ ¿¬Ãâ
+        // 1. íƒ€ì´í•‘ ì—°ì¶œ
         for (int i = 0; i < message.Length; i++)
         {
             if (Pointer.current != null && Pointer.current.press.wasPressedThisFrame)
             {
-                // ÇÙ½É ·ÎÁ÷: UI(¹öÆ° µî)¸¦ Å¬¸¯ÇÑ °Ô ¾Æ´Ò ¶§¸¸ ½ºÅµ!
+                // í•µì‹¬ ë¡œì§: UI(ë²„íŠ¼ ë“±)ë¥¼ í´ë¦­í•œ ê²Œ ì•„ë‹ ë•Œë§Œ ìŠ¤í‚µ!
                 if (!IsPointerOverUI())
                 {
                     skipTyping = true;
@@ -53,17 +53,17 @@ public class TypewriterUtility : MonoBehaviour
 
         targetText.text = message;
 
-        // 2. Ãâ·Â ¿Ï·á ÈÄ ´ë±â ¿¬Ãâ
+        // 2. ì¶œë ¥ ì™„ë£Œ í›„ ëŒ€ê¸° ì—°ì¶œ
         if (autoProceed)
         {
-            yield return null; // ÀÌº¥Æ® ¼Ò¸ğ¸¦ À§ÇØ ÇÑ ÇÁ·¹ÀÓ ½°
+            yield return null; // ì´ë²¤íŠ¸ ì†Œëª¨ë¥¼ ìœ„í•´ í•œ í”„ë ˆì„ ì‰¼
             float timer = 0f;
 
             while (timer < delayAfter)
             {
                 if (Pointer.current != null && Pointer.current.press.wasPressedThisFrame)
                 {
-                    // ´ë±â ÁßÀÏ ¶§µµ UI Å¬¸¯ÀÌ ¾Æ´Ò ¶§¸¸ ´ÙÀ½À¸·Î Áï½Ã ³Ñ¾î°¨!
+                    // ëŒ€ê¸° ì¤‘ì¼ ë•Œë„ UI í´ë¦­ì´ ì•„ë‹ ë•Œë§Œ ë‹¤ìŒìœ¼ë¡œ ì¦‰ì‹œ ë„˜ì–´ê°!
                     if (!IsPointerOverUI()) break;
                 }
                 timer += Time.deltaTime;
@@ -72,7 +72,7 @@ public class TypewriterUtility : MonoBehaviour
         }
     }
 
-    // ¸¶¿ì½º³ª ¸ğ¹ÙÀÏ ÅÍÄ¡°¡ ÇöÀç UI ¿ä¼Ò(¹öÆ°, ÆĞ³Î µî)¸¦ °¡¸®Å°°í ÀÖ´ÂÁö °Ë»çÇÏ´Â ÇÔ¼ö
+    // ë§ˆìš°ìŠ¤ë‚˜ ëª¨ë°”ì¼ í„°ì¹˜ê°€ í˜„ì¬ UI ìš”ì†Œ(ë²„íŠ¼, íŒ¨ë„ ë“±)ë¥¼ ê°€ë¦¬í‚¤ê³  ìˆëŠ”ì§€ ê²€ì‚¬í•˜ëŠ” í•¨ìˆ˜
     private bool IsPointerOverUI()
     {
         if (EventSystem.current == null) return false;

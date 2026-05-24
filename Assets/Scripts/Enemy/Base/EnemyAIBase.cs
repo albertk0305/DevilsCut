@@ -1,18 +1,18 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
 public class EnemyActionIntent
 {
-    public SkillData skillToUse; // ÀÌ°Í¸¸ ³²±â°í ´Ù Áö¿öµµ ¿Ïº®ÇÏ°Ô µ¹¾Æ°©´Ï´Ù!
+    public SkillData skillToUse; // ì´ê²ƒë§Œ ë‚¨ê¸°ê³  ë‹¤ ì§€ì›Œë„ ì™„ë²½í•˜ê²Œ ëŒì•„ê°‘ë‹ˆë‹¤!
 }
 
-// ¸ğµç Àû AI ½ºÅ©¸³Æ®ÀÇ 'ºÎ¸ğ'°¡ µÉ Ãß»ó Å¬·¡½º
+// ëª¨ë“  ì  AI ìŠ¤í¬ë¦½íŠ¸ì˜ 'ë¶€ëª¨'ê°€ ë  ì¶”ìƒ í´ë˜ìŠ¤
 public abstract class EnemyAIBase : ScriptableObject
 {
     public abstract EnemyActionIntent DecideNextAction(int currentTurnCount, PlayerStats pStats, EnemyData enemy);
 
-    // [½Å±Ô Ãß°¡] Ã¼·Â º¯µ¿ µî ÀÌº¥Æ® ¹ß»ı ½Ã ÆĞ½Ãºê ½ºÅÈÀ» °»½ÅÇÏ±â À§ÇÑ °¡»ó ÇÔ¼ö
+    // [ì‹ ê·œ ì¶”ê°€] ì²´ë ¥ ë³€ë™ ë“± ì´ë²¤íŠ¸ ë°œìƒ ì‹œ íŒ¨ì‹œë¸Œ ìŠ¤íƒ¯ì„ ê°±ì‹ í•˜ê¸° ìœ„í•œ ê°€ìƒ í•¨ìˆ˜
     public virtual void UpdatePassives(EnemyData enemy) { }
 
     public virtual List<SkillData> GetEnemySkills()

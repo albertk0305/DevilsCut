@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-// ¸ğµç Ä«¸° ¾ÆÀÌÅÛ ·ÎÁ÷ÀÇ ºÎ¸ğ Å¬·¡½º
+// ëª¨ë“  ì¹´ë¦° ì•„ì´í…œ ë¡œì§ì˜ ë¶€ëª¨ í´ë˜ìŠ¤
 public abstract class KarinItemLogicBase : ScriptableObject
 {
-    // Àû¿¡°Ô ÀÔÈú µ¥¹ÌÁö¸¦ °è»êÇÏ¿© ¹İÈ¯
+    // ì ì—ê²Œ ì…í ë°ë¯¸ì§€ë¥¼ ê³„ì‚°í•˜ì—¬ ë°˜í™˜
     public abstract int CalculateDamage(PlayerStats pStats, EnemyData eData);
 
-    // °ø°İ ¸íÁß ½Ã ¹ßµ¿ÇÒ Æ¯¼ö È¿°ú (¹öÇÁ, µğ¹öÇÁ, ±×·Î±â µî)
+    // ê³µê²© ëª…ì¤‘ ì‹œ ë°œë™í•  íŠ¹ìˆ˜ íš¨ê³¼ (ë²„í”„, ë””ë²„í”„, ê·¸ë¡œê¸° ë“±)
     public abstract void ApplyEffect(PlayerStats pStats, EnemyData eData);
 }

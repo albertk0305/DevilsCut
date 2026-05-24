@@ -1,32 +1,32 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_EmptyBox", menuName = "SkillLogic/Player/EmptyBox")]
 public class SkillLogic_EmptyBox : SkillLogicBase
 {
-    [Header("Àû¿¡°Ô ºÎ¿©ÇÒ È¿°ú µ¥ÀÌÅÍ")]
-    public StatusEffectData enemyStrBuff; // Àû °ø°İ·Â Áõ°¡ (±¤ÆøÈ­)
-    public StatusEffectData enemyDefDebuff; // Àû ¹æ¾î·Â °¨¼Ò (¹æ¾î ÇãÁ¡)
+    [Header("ì ì—ê²Œ ë¶€ì—¬í•  íš¨ê³¼ ë°ì´í„°")]
+    public StatusEffectData enemyStrBuff; // ì  ê³µê²©ë ¥ ì¦ê°€ (ê´‘í­í™”)
+    public StatusEffectData enemyDefDebuff; // ì  ë°©ì–´ë ¥ ê°ì†Œ (ë°©ì–´ í—ˆì )
 
-    [Header("ÁøÈ­ A: È¸ÇÇ ¹öÇÁ")]
+    [Header("ì§„í™” A: íšŒí”¼ ë²„í”„")]
     public StatusEffectData evasionBuff;
     public float[] pathA_EvasionRates = { 0.50f, 0.60f, 0.75f };
 
-    [Header("ÁøÈ­ B: ´ÙÀ½ ÅÏ ÇÇÇØ ÁõÆø")]
-    // º¯¼ö¸íÀ» ¸íÈ®ÇÏ°Ô DamageGivenAmp·Î º¯°æÇß½À´Ï´Ù.
+    [Header("ì§„í™” B: ë‹¤ìŒ í„´ í”¼í•´ ì¦í­")]
+    // ë³€ìˆ˜ëª…ì„ ëª…í™•í•˜ê²Œ DamageGivenAmpë¡œ ë³€ê²½í–ˆìŠµë‹ˆë‹¤.
     public StatusEffectData damageGivenAmpBuff;
     public float[] pathB_AmpRates = { 0.50f, 0.75f, 1.00f };
 
-    [Header("ÁøÈ­ C: 1ÅÏ °¡µå (½ºÅ¸ÀÏ º¸È£)")]
+    [Header("ì§„í™” C: 1í„´ ê°€ë“œ (ìŠ¤íƒ€ì¼ ë³´í˜¸)")]
     public StatusEffectData guardBuff;
     public float[] pathC_GuardRates = { 0.30f, 0.45f, 0.60f };
 
-    [Header("·¹º§º° Àû °ø°İ·Â Áõ°¡À² (%)")]
+    [Header("ë ˆë²¨ë³„ ì  ê³µê²©ë ¥ ì¦ê°€ìœ¨ (%)")]
     public float[] strBuffRates = { 0f, 0.20f, 0.40f };
 
-    [Header("·¹º§º° Àû ¹æ¾î·Â °¨¼ÒÀ² (%)")]
+    [Header("ë ˆë²¨ë³„ ì  ë°©ì–´ë ¥ ê°ì†Œìœ¨ (%)")]
     public float[] defDebuffRates = { 0f, -0.10f, -0.20f };
 
-    // µµ¹ß ½ºÅ³ÀÌ¹Ç·Î ºø³ª°¡Áö ¾Ê°í ¹«Á¶°Ç ÀûÁßÇÕ´Ï´Ù.
+    // ë„ë°œ ìŠ¤í‚¬ì´ë¯€ë¡œ ë¹—ë‚˜ê°€ì§€ ì•Šê³  ë¬´ì¡°ê±´ ì ì¤‘í•©ë‹ˆë‹¤.
     public override bool AlwaysHits(SkillData skill) => true;
 
     public override void ApplyEffect(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
@@ -35,42 +35,42 @@ public class SkillLogic_EmptyBox : SkillLogicBase
 
         int index = Mathf.Clamp(skill.skillLevel - 1, 0, strBuffRates.Length - 1);
 
-        // 1. ½ºÅ¸ÀÏ ·©Å© Áï½Ã 3´Ü°è »ó½Â (°øÅë È¿°ú)
+        // 1. ìŠ¤íƒ€ì¼ ë­í¬ ì¦‰ì‹œ 3ë‹¨ê³„ ìƒìŠ¹ (ê³µí†µ íš¨ê³¼)
         if (StyleRankManager.Instance != null)
         {
-            StyleRankManager.Instance.IncreaseRank(2); // D -> B ±ÙÃ³·Î ÆßÇÎ
+            StyleRankManager.Instance.IncreaseRank(2); // D -> B ê·¼ì²˜ë¡œ íŒí•‘
         }
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ A] ´©±¸µµ µÉ ¼ö ¾ø´Â ³ª´Ï±î: 1ÅÏ°£ ´ëÆø È¸ÇÇ
+        // [ì§„í™” A] ëˆ„êµ¬ë„ ë  ìˆ˜ ì—†ëŠ” ë‚˜ë‹ˆê¹Œ: 1í„´ê°„ ëŒ€í­ íšŒí”¼
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.PathA && evasionBuff != null)
         {
             BuffManager.Instance.AddEffect(true, evasionBuff, pathA_EvasionRates[index], 1);
-            DevLog.Log($"[ÁøÈ­ A] ºó »óÀÚ! 1ÅÏ°£ È¸ÇÇÀ²ÀÌ {pathA_EvasionRates[index] * 100}% »ó½ÂÇÕ´Ï´Ù.");
+            DevLog.Log($"[ì§„í™” A] ë¹ˆ ìƒì! 1í„´ê°„ íšŒí”¼ìœ¨ì´ {pathA_EvasionRates[index] * 100}% ìƒìŠ¹í•©ë‹ˆë‹¤.");
         }
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ B] °ø¹é°ú Ä«Å¸¸£½Ã½º: ´ÙÀ½ ÅÏ ÇÇÇØ ÁõÆø (DamageGivenAmp)
+        // [ì§„í™” B] ê³µë°±ê³¼ ì¹´íƒ€ë¥´ì‹œìŠ¤: ë‹¤ìŒ í„´ í”¼í•´ ì¦í­ (DamageGivenAmp)
         // ---------------------------------------------------------
-        // ¼öÁ¤µÊ: damageGivenAmpBuff¸¦ »ç¿ëÇÏµµ·Ï º¯°æ
+        // ìˆ˜ì •ë¨: damageGivenAmpBuffë¥¼ ì‚¬ìš©í•˜ë„ë¡ ë³€ê²½
         else if (skill.currentEvolution == SkillEvolution.PathB && damageGivenAmpBuff != null)
         {
             BuffManager.Instance.AddEffect(true, damageGivenAmpBuff, pathB_AmpRates[index], 1);
-            DevLog.Log($"[ÁøÈ­ B] ºó »óÀÚ! ´ÙÀ½ ÅÏ¿¡ °¡ÇÏ´Â ÇÇÇØ°¡ {pathB_AmpRates[index] * 100}% ÁõÆøµË´Ï´Ù.");
+            DevLog.Log($"[ì§„í™” B] ë¹ˆ ìƒì! ë‹¤ìŒ í„´ì— ê°€í•˜ëŠ” í”¼í•´ê°€ {pathB_AmpRates[index] * 100}% ì¦í­ë©ë‹ˆë‹¤.");
         }
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ C] ¿î¸íÀÇ ²É: 1ÅÏ °¡µå ºÎ¿© (ÇÇ°İ ½Ã ½ºÅ¸ÀÏ °¨¼Ò ¹æ¾î)
+        // [ì§„í™” C] ìš´ëª…ì˜ ê½ƒ: 1í„´ ê°€ë“œ ë¶€ì—¬ (í”¼ê²© ì‹œ ìŠ¤íƒ€ì¼ ê°ì†Œ ë°©ì–´)
         // ---------------------------------------------------------
         else if (skill.currentEvolution == SkillEvolution.PathC && guardBuff != null)
         {
-            // °¡µå ¹öÇÁ´Â ½Ã½ºÅÛÀûÀ¸·Î OnPlayerHit ½Ã ½ºÅ¸ÀÏ ·©Å© ÇÏ¶ôÀ» ¸·¾ÆÁİ´Ï´Ù.
+            // ê°€ë“œ ë²„í”„ëŠ” ì‹œìŠ¤í…œì ìœ¼ë¡œ OnPlayerHit ì‹œ ìŠ¤íƒ€ì¼ ë­í¬ í•˜ë½ì„ ë§‰ì•„ì¤ë‹ˆë‹¤.
             BuffManager.Instance.AddEffect(true, guardBuff, pathC_GuardRates[index], 1);
-            DevLog.Log($"[ÁøÈ­ C] ºó »óÀÚ! 1ÅÏ°£ °¡µå »óÅÂ°¡ µÇ¾î ÇÇÇØ¸¦ ÁÙÀÌ°í ½ºÅ¸ÀÏÀ» º¸È£ÇÕ´Ï´Ù.");
+            DevLog.Log($"[ì§„í™” C] ë¹ˆ ìƒì! 1í„´ê°„ ê°€ë“œ ìƒíƒœê°€ ë˜ì–´ í”¼í•´ë¥¼ ì¤„ì´ê³  ìŠ¤íƒ€ì¼ì„ ë³´í˜¸í•©ë‹ˆë‹¤.");
         }
 
-        // 2. Àû¿¡°Ô µğ¹öÇÁ(¹× ±¤ÆøÈ­ ¹öÇÁ) ºÎ¿© (Lv.2ºÎÅÍ ÀÛµ¿)
+        // 2. ì ì—ê²Œ ë””ë²„í”„(ë° ê´‘í­í™” ë²„í”„) ë¶€ì—¬ (Lv.2ë¶€í„° ì‘ë™)
         if (strBuffRates[index] > 0f && enemyStrBuff != null)
         {
             BuffManager.Instance.AddEffect(false, enemyStrBuff, strBuffRates[index], 3);
@@ -81,6 +81,6 @@ public class SkillLogic_EmptyBox : SkillLogicBase
             BuffManager.Instance.AddEffect(false, enemyDefDebuff, defDebuffRates[index], 3);
         }
 
-        DevLog.Log($"[½ºÅ³ È¿°ú] ºó »óÀÚ ¹ßµ¿! ½ºÅ¸ÀÏ ·©Å© »ó½Â ¹× ÁøÈ­ È¿°ú Àû¿ë.");
+        DevLog.Log($"[ìŠ¤í‚¬ íš¨ê³¼] ë¹ˆ ìƒì ë°œë™! ìŠ¤íƒ€ì¼ ë­í¬ ìƒìŠ¹ ë° ì§„í™” íš¨ê³¼ ì ìš©.");
     }
 }

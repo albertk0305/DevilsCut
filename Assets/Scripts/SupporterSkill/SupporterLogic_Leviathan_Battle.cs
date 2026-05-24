@@ -1,19 +1,19 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
 [CreateAssetMenu(fileName = "Leviathan_BattleSkill", menuName = "SupporterLogic/Leviathan/Battle Skill")]
 public class SupporterLogic_Leviathan_Battle : SupporterLogicBase
 {
-    [Header("´Ù´ÜÈ÷Æ® ¼³Á¤")]
+    [Header("ë‹¤ë‹¨íˆíŠ¸ ì„¤ì •")]
     public int hitCount = 5;
 
-    [Header("·¹º§º° µ¥¹ÌÁö/±×·Î±â/ÁõÆø ¼³Á¤")]
-    public float[] baseDamageValues = { 3f, 4f, 5f }; // Å¸´ç Èû °è¼ö
-    public float[] breakDamageValues = { 1.0f, 1.5f, 2.0f }; // Å¸´ç ±×·Î±â ¼öÄ¡
-    public float[] damageAmpPerTurnRemoved = { 0.15f, 0.20f, 0.30f }; // ±ğ¾Æ³½ ¹öÇÁ ÅÏ´ç µ¥¹ÌÁö ÁõÆø·ü
+    [Header("ë ˆë²¨ë³„ ë°ë¯¸ì§€/ê·¸ë¡œê¸°/ì¦í­ ì„¤ì •")]
+    public float[] baseDamageValues = { 3f, 4f, 5f }; // íƒ€ë‹¹ í˜ ê³„ìˆ˜
+    public float[] breakDamageValues = { 1.0f, 1.5f, 2.0f }; // íƒ€ë‹¹ ê·¸ë¡œê¸° ìˆ˜ì¹˜
+    public float[] damageAmpPerTurnRemoved = { 0.15f, 0.20f, 0.30f }; // ê¹ì•„ë‚¸ ë²„í”„ í„´ë‹¹ ë°ë¯¸ì§€ ì¦í­ë¥ 
 
-    // °è»ê ½Ã¹Ä·¹ÀÌ¼Ç Áß ±ğ¾Æ³½ ¹öÇÁ ÅÏÀÇ ÃÑÇÕÀ» ±â¾ïÇÕ´Ï´Ù.
+    // ê³„ì‚° ì‹œë®¬ë ˆì´ì…˜ ì¤‘ ê¹ì•„ë‚¸ ë²„í”„ í„´ì˜ ì´í•©ì„ ê¸°ì–µí•©ë‹ˆë‹¤.
     private int storedTotalReducedTurns = 0;
 
     public override List<int> CalculateMultiHitDamages(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
@@ -24,23 +24,23 @@ public class SupporterLogic_Leviathan_Battle : SupporterLogicBase
         int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
         float dr = CombatMath.GetDamageReduction(enemyDef);
 
-        // ÇöÀç Àû¿¡°Ô °É·ÁÀÖ´Â '¹öÇÁ(Buff)'µéÀÇ ³²Àº ÅÏ ¼ö ÃÑÇÕÀ» °¡Á®¿É´Ï´Ù.
+        // í˜„ì¬ ì ì—ê²Œ ê±¸ë ¤ìˆëŠ” 'ë²„í”„(Buff)'ë“¤ì˜ ë‚¨ì€ í„´ ìˆ˜ ì´í•©ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
         var enemyBuffs = BuffManager.Instance.GetEffects(false).Where(e => e.effectData.category == EffectCategory.Buff).ToList(); 
         int availableBuffTurns = enemyBuffs.Sum(e => e.turnsLeft);
 
         storedTotalReducedTurns = 0;
 
-        // 5¿¬Å¸ ½Ã¹Ä·¹ÀÌ¼Ç
+        // 5ì—°íƒ€ ì‹œë®¬ë ˆì´ì…˜
         for (int i = 0; i < hitCount; i++)
         {
-            // Àû¿¡°Ô ±ğÀ» ¹öÇÁ ÅÏÀÌ ³²¾ÆÀÖ´Ù¸é 1ÅÏÀ» ±ğ¾Æ³»°í ½º³ë¿ìº¼¸µÀ» ±¼¸³´Ï´Ù!
+            // ì ì—ê²Œ ê¹ì„ ë²„í”„ í„´ì´ ë‚¨ì•„ìˆë‹¤ë©´ 1í„´ì„ ê¹ì•„ë‚´ê³  ìŠ¤ë…¸ìš°ë³¼ë§ì„ êµ´ë¦½ë‹ˆë‹¤!
             if (availableBuffTurns > 0)
             {
                 availableBuffTurns--;
                 storedTotalReducedTurns++; 
             }
 
-            // ±ğ¾Æ³½ ÅÏ ¼ö¿¡ ºñ·ÊÇÏ¿© ±âÇÏ±Ş¼öÀûÀ¸·Î µ¥¹ÌÁö°¡ ÁõÆøµË´Ï´Ù.
+            // ê¹ì•„ë‚¸ í„´ ìˆ˜ì— ë¹„ë¡€í•˜ì—¬ ê¸°í•˜ê¸‰ìˆ˜ì ìœ¼ë¡œ ë°ë¯¸ì§€ê°€ ì¦í­ë©ë‹ˆë‹¤.
             float hitMultiplier = baseDamageValues[index] * (1f + (storedTotalReducedTurns * damageAmpPerTurnRemoved[index]));
             int hitDamage = Mathf.Max(1, Mathf.RoundToInt((pStats.strength * hitMultiplier) * (1f - dr)));
 
@@ -54,7 +54,7 @@ public class SupporterLogic_Leviathan_Battle : SupporterLogicBase
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, breakDamageValues.Length - 1);
 
-        // 1. ½Ã¹Ä·¹ÀÌ¼Ç¿¡¼­ ±ğ¾Æ³»±â·Î È®Á¤µÈ ÅÏ ¼ö(storedTotalReducedTurns)¸¸Å­ ½ÇÁ¦·Î ÀûÀÇ ¹öÇÁ¸¦ Áö¿ö¹ö¸³´Ï´Ù.
+        // 1. ì‹œë®¬ë ˆì´ì…˜ì—ì„œ ê¹ì•„ë‚´ê¸°ë¡œ í™•ì •ëœ í„´ ìˆ˜(storedTotalReducedTurns)ë§Œí¼ ì‹¤ì œë¡œ ì ì˜ ë²„í”„ë¥¼ ì§€ì›Œë²„ë¦½ë‹ˆë‹¤.
         if (storedTotalReducedTurns > 0)
         {
             var enemyBuffs = BuffManager.Instance.GetEffects(false).Where(e => e.effectData.category == EffectCategory.Buff).ToList();
@@ -62,14 +62,14 @@ public class SupporterLogic_Leviathan_Battle : SupporterLogicBase
 
             while (turnsToReduce > 0 && enemyBuffs.Count > 0)
             {
-                // ¹«ÀÛÀ§ ¹öÇÁ ÇÏ³ª¸¦ °ñ¶ó 1ÅÏÀ» ±ğ½À´Ï´Ù.
+                // ë¬´ì‘ìœ„ ë²„í”„ í•˜ë‚˜ë¥¼ ê³¨ë¼ 1í„´ì„ ê¹ìŠµë‹ˆë‹¤.
                 int randIdx = Random.Range(0, enemyBuffs.Count);
                 var targetBuff = enemyBuffs[randIdx];
 
                 targetBuff.turnsLeft--;
                 turnsToReduce--;
 
-                // ¹öÇÁ Áö¼Ó½Ã°£ÀÌ 0ÀÌ µÇ¸é Áï½Ã ÆÄ±âÇÕ´Ï´Ù.
+                // ë²„í”„ ì§€ì†ì‹œê°„ì´ 0ì´ ë˜ë©´ ì¦‰ì‹œ íŒŒê¸°í•©ë‹ˆë‹¤.
                 if (targetBuff.turnsLeft <= 0)
                 {
                     BuffManager.Instance.GetEffects(false).Remove(targetBuff);
@@ -77,11 +77,11 @@ public class SupporterLogic_Leviathan_Battle : SupporterLogicBase
                 }
             }
 
-            DevLog.Log($"[Sweet Hurt] Lv.{skillLevel} ¹ßµ¿! ÀûÀÇ ÀÌ·Î¿î ¹öÇÁ Áö¼Ó ½Ã°£À» ÃÑ {storedTotalReducedTurns}ÅÏ ±ğ¾Æ³»¸ç ³­µµÁúÇß½À´Ï´Ù!");
+            DevLog.Log($"[Sweet Hurt] Lv.{skillLevel} ë°œë™! ì ì˜ ì´ë¡œìš´ ë²„í”„ ì§€ì† ì‹œê°„ì„ ì´ {storedTotalReducedTurns}í„´ ê¹ì•„ë‚´ë©° ë‚œë„ì§ˆí–ˆìŠµë‹ˆë‹¤!");
             if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
         }
 
-        // 2. ±×·Î±â µ¥¹ÌÁö Àû¿ë
+        // 2. ê·¸ë¡œê¸° ë°ë¯¸ì§€ ì ìš©
         if (BreakManager.Instance != null && !BreakManager.Instance.IsBroken(false))
         {
             float totalBreak = breakDamageValues[index] * hitCount;

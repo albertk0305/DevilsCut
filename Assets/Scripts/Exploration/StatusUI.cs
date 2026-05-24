@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
-// Status UI Á¦¾î ÄÚµå
+// Status UI ì œì–´ ì½”ë“œ
 public class StatusUI : MonoBehaviour
 {
-    [Header("ÅØ½ºÆ® ¿¬°á")]
+    [Header("í…ìŠ¤íŠ¸ ì—°ê²°")]
     public TextMeshProUGUI lvText;
     public TextMeshProUGUI hpText;
-    public TextMeshProUGUI apText; // Çàµ¿·Â
+    public TextMeshProUGUI apText; // í–‰ë™ë ¥
     public TextMeshProUGUI breakResText;
     public TextMeshProUGUI strText;
     public TextMeshProUGUI defText;
@@ -37,10 +37,10 @@ public class StatusUI : MonoBehaviour
         PlayerStats baseStats = PlayerManager.Instance.stats;
         PlayerStats itemStats = PlayerManager.Instance.GetItemModifiedStats();
 
-        // ÀüÅõ ÁßÀÌ¶ó¸é ½º³À¼¦ ½ºÅÈÀ» °¡Á®¿À°í, ¾Æ´Ï¶ó¸é ÇöÀç ¾ÆÀÌÅÛ ½ºÅÈÀ» »ç¿ë
+        // ì „íˆ¬ ì¤‘ì´ë¼ë©´ ìŠ¤ëƒ…ìƒ· ìŠ¤íƒ¯ì„ ê°€ì ¸ì˜¤ê³ , ì•„ë‹ˆë¼ë©´ í˜„ì¬ ì•„ì´í…œ ìŠ¤íƒ¯ì„ ì‚¬ìš©
         PlayerStats displayStats = useCombatStats ? (CombatManager.Instance.GetCurrentPlayerStats() ?? itemStats) : itemStats;
 
-        // ÅëÇÕ ¹®ÀÚ¿­ »ı¼º±â·Î ¸ğµç ½ºÅÈÀ» ÇÑ ¹ø¿¡ Ã³¸®ÇÕ´Ï´Ù!
+        // í†µí•© ë¬¸ìì—´ ìƒì„±ê¸°ë¡œ ëª¨ë“  ìŠ¤íƒ¯ì„ í•œ ë²ˆì— ì²˜ë¦¬í•©ë‹ˆë‹¤!
         strText.text = GetComprehensiveStatString("Str", TargetStat.Strength, baseStats.strength, displayStats.strength, useCombatStats);
         defText.text = GetComprehensiveStatString("Def", TargetStat.Defense, baseStats.defense, displayStats.defense, useCombatStats);
         spdText.text = GetComprehensiveStatString("Spd", TargetStat.Speed, baseStats.speed, displayStats.speed, useCombatStats);
@@ -50,7 +50,7 @@ public class StatusUI : MonoBehaviour
 
         if (useCombatStats)
         {
-            // AP´Â ÀüÅõ Áß ½Ã½ºÅÛ ¼Ò¸ğ°¡ Å©¹Ç·Î °ıÈ£ ¾øÀÌ ¿øº»¸¸ Ç¥±â
+            // APëŠ” ì „íˆ¬ ì¤‘ ì‹œìŠ¤í…œ ì†Œëª¨ê°€ í¬ë¯€ë¡œ ê´„í˜¸ ì—†ì´ ì›ë³¸ë§Œ í‘œê¸°
             apText.text = $"{displayStats.ActionPoints}";
             int currentHp = Mathf.Clamp(displayStats.currentHp, 0, displayStats.maxHp);
             string hpDisplay = $"{currentHp} / {displayStats.maxHp}";
@@ -59,7 +59,7 @@ public class StatusUI : MonoBehaviour
         }
         else
         {
-            // Å½»ö ¾À¿¡¼­´Â APµµ ¾ÆÀÌÅÛ º¸Á¤ °ø½Ä Ãâ·Â
+            // íƒìƒ‰ ì”¬ì—ì„œëŠ” APë„ ì•„ì´í…œ ë³´ì • ê³µì‹ ì¶œë ¥
             apText.text = GetComprehensiveStatString("AP", TargetStat.Strength, baseStats.ActionPoints, itemStats.ActionPoints, false);
 
             int currentHp = Mathf.Clamp(baseStats.currentHp, 0, itemStats.maxHp);
@@ -73,12 +73,12 @@ public class StatusUI : MonoBehaviour
     }
 
     // =========================================================
-    //  ±Ã±ØÀÇ ½ºÅÈ ºĞÇØ±â (¾ÆÀÌÅÛ + ½Ã³ÊÁö + ÀüÅõ ¹öÇÁ ÅëÇÕ ¿¬»ê)
+    //  ê¶ê·¹ì˜ ìŠ¤íƒ¯ ë¶„í•´ê¸° (ì•„ì´í…œ + ì‹œë„ˆì§€ + ì „íˆ¬ ë²„í”„ í†µí•© ì—°ì‚°)
     // =========================================================
     private string GetComprehensiveStatString(string statType, TargetStat targetStat, int baseVal, int itemModifiedVal, bool isInCombat)
     {
         // -------------------------------------
-        // 1. ¾ÆÀÌÅÛ & ½Ã³ÊÁö ¿¬»ê (Å½»ö ¾À ±âÁØ)
+        // 1. ì•„ì´í…œ & ì‹œë„ˆì§€ ì—°ì‚° (íƒìƒ‰ ì”¬ ê¸°ì¤€)
         // -------------------------------------
         int flat = 0;
         float pct = 0f;
@@ -110,7 +110,7 @@ public class StatusUI : MonoBehaviour
         int calcVal = Mathf.Max(1, Mathf.RoundToInt((baseVal + flat) * (1f + pct)));
         int conversion = itemModifiedVal - calcVal;
 
-        // ¾ÆÀÌÅÛ¿ë Æ÷¸ËÆÃ (ÃÊ·Ï/ÁÖÈ²)
+        // ì•„ì´í…œìš© í¬ë§·íŒ… (ì´ˆë¡/ì£¼í™©)
         string flatText = flat > 0 ? $" <color=#00FF00>+ {flat}</color>" : (flat < 0 ? $" <color=#00FF00>- {Mathf.Abs(flat)}</color>" : "");
         string convText = conversion > 0 ? $" <color=#FFA500>+ {conversion}</color>" : "";
         float displayItemPct = (1f + pct);
@@ -118,7 +118,7 @@ public class StatusUI : MonoBehaviour
         bool hasItemMods = (flat != 0 || pct != 0f || conversion != 0);
 
         // -------------------------------------
-        // 2. ÀüÅõ Áß ¹öÇÁ ¿¬»ê (ÀüÅõ ¾À ±âÁØ)
+        // 2. ì „íˆ¬ ì¤‘ ë²„í”„ ì—°ì‚° (ì „íˆ¬ ì”¬ ê¸°ì¤€)
         // -------------------------------------
         int flatBuff = 0;
         float pctBuff = 0f;
@@ -139,39 +139,39 @@ public class StatusUI : MonoBehaviour
         bool hasCombatMods = (flatBuff != 0 || pctBuff != 0f);
 
         // -------------------------------------
-        // 3. ÃÖÁ¾ Ãâ·Â Á¶¸³ 
+        // 3. ìµœì¢… ì¶œë ¥ ì¡°ë¦½ 
         // -------------------------------------
         if (!isInCombat)
         {
-            // Å½»ö ¾À: ¾Æ¹« º¸Á¤ÀÌ ¾øÀ¸¸é ¿øº»¸¸, ÀÖÀ¸¸é [ (±âº» + ÃÊ·Ï) * ÃÊ·Ï + ÁÖÈ² ]
+            // íƒìƒ‰ ì”¬: ì•„ë¬´ ë³´ì •ì´ ì—†ìœ¼ë©´ ì›ë³¸ë§Œ, ìˆìœ¼ë©´ [ (ê¸°ë³¸ + ì´ˆë¡) * ì´ˆë¡ + ì£¼í™© ]
             if (!hasItemMods) return $"{itemModifiedVal}";
             return $"{itemModifiedVal} <size=70%><color=#AAAAAA>[({baseVal}{flatText}) * <color=#00FF00>{displayItemPct:F2}</color>{convText}]</color></size>";
         }
         else
         {
-            // ÀüÅõ ¾À: ¾ÆÀÌÅÛ ½ºÅÈ ±â¹İ¿¡ ÀüÅõ ¹öÇÁ µ¡¾º¿ì±â
+            // ì „íˆ¬ ì”¬: ì•„ì´í…œ ìŠ¤íƒ¯ ê¸°ë°˜ì— ì „íˆ¬ ë²„í”„ ë§ì”Œìš°ê¸°
             int finalCombatRaw = Mathf.Max(1, Mathf.RoundToInt((itemModifiedVal + flatBuff) * (1f + pctBuff)));
 
-            // º¸Á¤ÀÌ ¾Æ¿¹ ¾øÀ¸¸é ¿øº»¸¸!
+            // ë³´ì •ì´ ì•„ì˜ˆ ì—†ìœ¼ë©´ ì›ë³¸ë§Œ!
             if (!hasItemMods && !hasCombatMods) return $"{finalCombatRaw}";
 
             string buffFlatText = flatBuff > 0 ? $" <color=#FF4444>+ {flatBuff}</color>" : (flatBuff < 0 ? $" <color=#FF4444>- {Mathf.Abs(flatBuff)}</color>" : "");
             float displayBuffPct = (1f + pctBuff);
 
-            // Case A: ¾ÆÀÌÅÛ º¸Á¤Àº ¾ø°í ÀüÅõ ¹öÇÁ¸¸ °É·ÈÀ» ¶§
+            // Case A: ì•„ì´í…œ ë³´ì •ì€ ì—†ê³  ì „íˆ¬ ë²„í”„ë§Œ ê±¸ë ¸ì„ ë•Œ
             if (!hasItemMods)
             {
                 return $"{finalCombatRaw} <size=70%><color=#AAAAAA>[({baseVal}{buffFlatText}) * <color=#FF4444>{displayBuffPct:F2}</color>]</color></size>";
             }
 
-            // Case B: ÀüÅõ ¹öÇÁ´Â ¾ø°í ¾ÆÀÌÅÛ º¸Á¤¸¸ ÀÖÀ» ¶§
+            // Case B: ì „íˆ¬ ë²„í”„ëŠ” ì—†ê³  ì•„ì´í…œ ë³´ì •ë§Œ ìˆì„ ë•Œ
             if (!hasCombatMods)
             {
                 return $"{itemModifiedVal} <size=70%><color=#AAAAAA>[({baseVal}{flatText}) * <color=#00FF00>{displayItemPct:F2}</color>{convText}]</color></size>";
             }
 
-            // Case C: ¾ÆÀÌÅÛ º¸Á¤µµ ÀÖ°í ÀüÅõ ¹öÇÁµµ °É·ÁÀÖÀ» ¶§ (±Ã±ØÀÇ 2Áß °ıÈ£ Æ÷¸Ë)
-            // Æ÷¸Ë: ÃÖÁ¾°ª [ { (±âº» + ¾ÆÀÌÅÛÇÕ) * ¾ÆÀÌÅÛ°ö + ÀüÈ¯ } + ¹öÇÁÇÕ ] * ¹öÇÁ°ö
+            // Case C: ì•„ì´í…œ ë³´ì •ë„ ìˆê³  ì „íˆ¬ ë²„í”„ë„ ê±¸ë ¤ìˆì„ ë•Œ (ê¶ê·¹ì˜ 2ì¤‘ ê´„í˜¸ í¬ë§·)
+            // í¬ë§·: ìµœì¢…ê°’ [ { (ê¸°ë³¸ + ì•„ì´í…œí•©) * ì•„ì´í…œê³± + ì „í™˜ } + ë²„í”„í•© ] * ë²„í”„ê³±
             return $"{finalCombatRaw} <size=70%><color=#AAAAAA>[ {{({baseVal}{flatText}) * <color=#00FF00>{displayItemPct:F2}</color>{convText}}} {buffFlatText} ] * <color=#FF4444>{displayBuffPct:F2}</color></color></size>";
         }
     }

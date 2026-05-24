@@ -1,19 +1,19 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "KarinItem_GirlBat", menuName = "KarinItems/Girl Bat")]
 public class KarinItemLogic_GirlBat : KarinItemLogicBase
 {
-    [Header("µğ¹öÇÁ ¼³Á¤ (2Á¾)")]
-    public StatusEffectData strDebuffData;  // À§¿¡¼­ ¸¸µç Debuff_STR_Down ¿¬°á
-    public StatusEffectData luckDebuffData; // À§¿¡¼­ ¸¸µç Debuff_LUK_Down ¿¬°á
+    [Header("ë””ë²„í”„ ì„¤ì • (2ì¢…)")]
+    public StatusEffectData strDebuffData;  // ìœ„ì—ì„œ ë§Œë“  Debuff_STR_Down ì—°ê²°
+    public StatusEffectData luckDebuffData; // ìœ„ì—ì„œ ë§Œë“  Debuff_LUK_Down ì—°ê²°
 
-    [Header("¼öÄ¡ ¼³Á¤")]
-    public float debuffValue = -0.15f;      // 15% °¨¼Ò (À½¼ö°ª)
-    public int duration = 3;                // 3ÅÏ Áö¼Ó
+    [Header("ìˆ˜ì¹˜ ì„¤ì •")]
+    public float debuffValue = -0.15f;      // 15% ê°ì†Œ (ìŒìˆ˜ê°’)
+    public int duration = 3;                // 3í„´ ì§€ì†
 
     public override int CalculateDamage(PlayerStats pStats, EnemyData eData)
     {
-        // Á÷Á¢ÀûÀÎ µ¥¹ÌÁö´Â ÁÖÁö ¾Ê½À´Ï´Ù.
+        // ì§ì ‘ì ì¸ ë°ë¯¸ì§€ëŠ” ì£¼ì§€ ì•ŠìŠµë‹ˆë‹¤.
         return 0;
     }
 
@@ -23,15 +23,15 @@ public class KarinItemLogic_GirlBat : KarinItemLogicBase
 
         bool isApplied = false;
 
-        // 1. ÀûÀÇ Èû(STR) °¨¼Ò µğ¹öÇÁ ºÎ¿©
+        // 1. ì ì˜ í˜(STR) ê°ì†Œ ë””ë²„í”„ ë¶€ì—¬
         if (strDebuffData != null)
         {
-            // ´ë»ó(isPlayer=false)¿¡°Ô µğ¹öÇÁ¸¦ °Ì´Ï´Ù.
+            // ëŒ€ìƒ(isPlayer=false)ì—ê²Œ ë””ë²„í”„ë¥¼ ê²ë‹ˆë‹¤.
             BuffManager.Instance.AddEffect(false, strDebuffData, debuffValue, duration);
             isApplied = true;
         }
 
-        // 2. ÀûÀÇ ¿î(LUK) °¨¼Ò µğ¹öÇÁ ºÎ¿©
+        // 2. ì ì˜ ìš´(LUK) ê°ì†Œ ë””ë²„í”„ ë¶€ì—¬
         if (luckDebuffData != null)
         {
             BuffManager.Instance.AddEffect(false, luckDebuffData, debuffValue, duration);
@@ -40,9 +40,9 @@ public class KarinItemLogic_GirlBat : KarinItemLogicBase
 
         if (isApplied)
         {
-            DevLog.Log($"[¼Ò³à ¹èÆ®] ÀûÀÇ Èû°ú ¿îÀ» {Mathf.Abs(debuffValue) * 100}% °¨¼Ò½ÃÄ×½À´Ï´Ù.");
+            DevLog.Log($"[ì†Œë…€ ë°°íŠ¸] ì ì˜ í˜ê³¼ ìš´ì„ {Mathf.Abs(debuffValue) * 100}% ê°ì†Œì‹œì¼°ìŠµë‹ˆë‹¤.");
 
-            // UI °»½Å (ÀûÀÇ »óÅÂÃ¢¿¡ µğ¹öÇÁ ¾ÆÀÌÄÜµéÀÌ Ç¥½ÃµË´Ï´Ù)
+            // UI ê°±ì‹  (ì ì˜ ìƒíƒœì°½ì— ë””ë²„í”„ ì•„ì´ì½˜ë“¤ì´ í‘œì‹œë©ë‹ˆë‹¤)
             if (CombatUIManager.Instance != null)
             {
                 CombatUIManager.Instance.RefreshBuffUI();

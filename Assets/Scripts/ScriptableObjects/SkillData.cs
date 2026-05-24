@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public enum SkillCategory { Sword = 0, Gun = 1, Martial = 2, Magic = 3, Oni = 4, None = 5 }
 public enum SkillEvolution { None, PathA, PathB, PathC }
@@ -6,17 +6,17 @@ public enum SkillEvolution { None, PathA, PathB, PathC }
 [CreateAssetMenu(fileName = "NewSkill", menuName = "GameData/Skill")]
 public class SkillData : ScriptableObject
 {
-    [Header("ÀúÀå¿ë °íÀ¯ ID")]
+    [Header("ì €ìž¥ìš© ê³ ìœ  ID")]
     public string skillID;
 
-    [Header("½ºÅ³ °íÀ¯ ·ÎÁ÷ (ÁøÈ­ Æ÷ÇÔ)")]
+    [Header("ìŠ¤í‚¬ ê³ ìœ  ë¡œì§ (ì§„í™” í¬í•¨)")]
     public SkillLogicBase skillLogic;
 
-    [Header("´Ù±¹¾î ¹ø¿ª Å°")]
+    [Header("ë‹¤êµ­ì–´ ë²ˆì—­ í‚¤")]
     public string skillNameKey;
     public string skillDescKey;
 
-    [Header("½ºÅ³ ÁøÈ­ ´Ù±¹¾î Å°")]
+    [Header("ìŠ¤í‚¬ ì§„í™” ë‹¤êµ­ì–´ í‚¤")]
     public string evolutionANameKey;
     [TextArea] public string evolutionADescKey;
 
@@ -26,59 +26,59 @@ public class SkillData : ScriptableObject
     public string evolutionCNameKey;
     [TextArea] public string evolutionCDescKey;
 
-    [Header("½ºÅ³ ±âº» ¼³Á¤")]
+    [Header("ìŠ¤í‚¬ ê¸°ë³¸ ì„¤ì •")]
     public SkillCategory category;
-    public int skillLevel = 1; // ÇöÀç ½ºÅ³ ·¹º§ (±âº»°ª 1)
+    public int skillLevel = 1; // í˜„ìž¬ ìŠ¤í‚¬ ë ˆë²¨ (ê¸°ë³¸ê°’ 1)
 
-    [Header("½ºÅ³ ¿¬Ãâ")]
+    [Header("ìŠ¤í‚¬ ì—°ì¶œ")]
     public Sprite skillActionImage;
 
-    [Header("½ºÅ³ ·ÎÁ÷ µ¥ÀÌÅÍ (·¹º§º°)")]
-    [Tooltip("¼ø¼­´ë·Î Lv1, Lv2, Lv3... ÀÇ ÇÇÇØ °è¼öÀÔ´Ï´Ù.")]
+    [Header("ìŠ¤í‚¬ ë¡œì§ ë°ì´í„° (ë ˆë²¨ë³„)")]
+    [Tooltip("ìˆœì„œëŒ€ë¡œ Lv1, Lv2, Lv3... ì˜ í”¼í•´ ê³„ìˆ˜ìž…ë‹ˆë‹¤.")]
     public float[] damageMultipliers = { 1.0f };
 
-    [Tooltip("¼ø¼­´ë·Î Lv1, Lv2, Lv3... ÀÇ ºê·¹ÀÌÅ© ÇÇÇØ·®ÀÔ´Ï´Ù.")]
+    [Tooltip("ìˆœì„œëŒ€ë¡œ Lv1, Lv2, Lv3... ì˜ ë¸Œë ˆì´í¬ í”¼í•´ëŸ‰ìž…ë‹ˆë‹¤.")]
     public float[] breakPowers = { 20f };
 
-    [Header("Å©¸®Æ¼ÄÃ º¸Á¤ µ¥ÀÌÅÍ (·¹º§º°)")]
-    [Tooltip("¼ø¼­´ë·Î Lv1, Lv2, Lv3... ÀÇ Ãß°¡ Å©¸® È®·üÀÔ´Ï´Ù. (±âº» 0)")]
+    [Header("í¬ë¦¬í‹°ì»¬ ë³´ì • ë°ì´í„° (ë ˆë²¨ë³„)")]
+    [Tooltip("ìˆœì„œëŒ€ë¡œ Lv1, Lv2, Lv3... ì˜ ì¶”ê°€ í¬ë¦¬ í™•ë¥ ìž…ë‹ˆë‹¤. (ê¸°ë³¸ 0)")]
     public float[] bonusCritRates = { 0f };
 
-    [Header("¸íÁß º¸Á¤ µ¥ÀÌÅÍ (·¹º§º°)")]
-    [Tooltip("¼ø¼­´ë·Î Lv1, Lv2, Lv3... ÀÇ Ãß°¡ ¸íÁß·üÀÔ´Ï´Ù. (±âº» 0)")]
+    [Header("ëª…ì¤‘ ë³´ì • ë°ì´í„° (ë ˆë²¨ë³„)")]
+    [Tooltip("ìˆœì„œëŒ€ë¡œ Lv1, Lv2, Lv3... ì˜ ì¶”ê°€ ëª…ì¤‘ë¥ ìž…ë‹ˆë‹¤. (ê¸°ë³¸ 0)")]
     public float[] bonusAccuracyRates = { 0f };
 
     public float baseAccuracy = 80f;
 
-    [Header("½ºÅ³ À¯Çü")]
+    [Header("ìŠ¤í‚¬ ìœ í˜•")]
     public bool isUltimate = false;
 
-    [Tooltip("Ã¼Å© ½Ã µ¥¹ÌÁö°¡ 0ÀÌ¾îµµ ÀûÁßÇÏ¸é ÀûÀÌ ÇÇ°Ý(Hit) ¸ð¼ÇÀ» ÃëÇÕ´Ï´Ù. (¿¹: ÃâÇ÷ ºÎ¿©)")]
+    [Tooltip("ì²´í¬ ì‹œ ë°ë¯¸ì§€ê°€ 0ì´ì–´ë„ ì ì¤‘í•˜ë©´ ì ì´ í”¼ê²©(Hit) ëª¨ì…˜ì„ ì·¨í•©ë‹ˆë‹¤. (ì˜ˆ: ì¶œí˜ˆ ë¶€ì—¬)")]
     public bool forceHitReaction = false;
 
-    [Tooltip("¼ø¼­´ë·Î Lv1, Lv2, Lv3... ÀÇ Å¸°Ý È½¼öÀÔ´Ï´Ù.")]
+    [Tooltip("ìˆœì„œëŒ€ë¡œ Lv1, Lv2, Lv3... ì˜ íƒ€ê²© íšŸìˆ˜ìž…ë‹ˆë‹¤.")]
     public int[] hitCounts = { 1 };
 
-    [Header("½ºÅ³ ÁøÈ­ (·Î±×¶óÀÌÅ©)")]
-    public SkillEvolution currentEvolution = SkillEvolution.None; // ÇöÀç ¼±ÅÃµÈ ÁøÈ­ »óÅÂ
+    [Header("ìŠ¤í‚¬ ì§„í™” (ë¡œê·¸ë¼ì´í¬)")]
+    public SkillEvolution currentEvolution = SkillEvolution.None; // í˜„ìž¬ ì„ íƒëœ ì§„í™” ìƒíƒœ
 
-    [Tooltip("ÁøÈ­ 1(PathA - ÀÎ°úÀ² µî)ÀÇ ·¹º§º° °è¼ö")]
-    public float[] evolutionA_Multipliers = { 0.5f, 0.75f, 1.0f }; // ¹Ý»çÀ²: 50%, 75%, 100%
+    [Tooltip("ì§„í™” 1(PathA - ì¸ê³¼ìœ¨ ë“±)ì˜ ë ˆë²¨ë³„ ê³„ìˆ˜")]
+    public float[] evolutionA_Multipliers = { 0.5f, 0.75f, 1.0f }; // ë°˜ì‚¬ìœ¨: 50%, 75%, 100%
 
-    [Tooltip("ÁøÈ­ B (°íµå ÇÚµå) ·¹º§º° °è¼ö (ÇÇÇØ °¨¼ÒÀ²)")]
+    [Tooltip("ì§„í™” B (ê³ ë“œ í•¸ë“œ) ë ˆë²¨ë³„ ê³„ìˆ˜ (í”¼í•´ ê°ì†Œìœ¨)")]
     public float[] evolutionB_Multipliers = { 0.4f, 0.5f, 0.6f };
 
-    [Tooltip("ÁøÈ­ C (Á¦¹°ÀÇ ³«ÀÎ) ·¹º§º° µô °è¼ö")]
+    [Tooltip("ì§„í™” C (ì œë¬¼ì˜ ë‚™ì¸) ë ˆë²¨ë³„ ë”œ ê³„ìˆ˜")]
     public float[] evolutionC_DamageMultipliers = { 15.0f, 20.0f, 25.0f };
 
-    [Tooltip("ÁøÈ­ C (Á¦¹°ÀÇ ³«ÀÎ) ·¹º§º° ºê·¹ÀÌÅ© ¼öÄ¡")]
+    [Tooltip("ì§„í™” C (ì œë¬¼ì˜ ë‚™ì¸) ë ˆë²¨ë³„ ë¸Œë ˆì´í¬ ìˆ˜ì¹˜")]
     public float[] evolutionC_BreakPowers = { 25.0f, 30.0f, 35.0f };
 
     public float GetCurrentDamageMultiplier()
     {
         if (damageMultipliers == null || damageMultipliers.Length == 0) return 0f;
 
-        // ÀÎµ¦½º´Â 0ºÎÅÍ ½ÃÀÛÇÏ¹Ç·Î ·¹º§¿¡¼­ 1À» »®´Ï´Ù. (Lv 1 -> index 0)
+        // ì¸ë±ìŠ¤ëŠ” 0ë¶€í„° ì‹œìž‘í•˜ë¯€ë¡œ ë ˆë²¨ì—ì„œ 1ì„ ëºë‹ˆë‹¤. (Lv 1 -> index 0)
         int index = Mathf.Clamp(skillLevel - 1, 0, damageMultipliers.Length - 1);
         return damageMultipliers[index];
     }
@@ -102,7 +102,7 @@ public class SkillData : ScriptableObject
     {
         if (hitCounts == null || hitCounts.Length == 0) return 1;
         int index = Mathf.Clamp(skillLevel - 1, 0, hitCounts.Length - 1);
-        return Mathf.Max(1, hitCounts[index]); // ÃÖ¼Ò 1Å¸´Â º¸Àå
+        return Mathf.Max(1, hitCounts[index]); // ìµœì†Œ 1íƒ€ëŠ” ë³´ìž¥
     }
 
     public float GetCurrentBonusAccuracy()

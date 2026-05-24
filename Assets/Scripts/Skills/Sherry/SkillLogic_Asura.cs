@@ -1,30 +1,30 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Asura", menuName = "SkillLogic/Player/Asura")]
 public class SkillLogic_Asura : SkillLogicBase
 {
-    [Header("±âº»: ¹öÇÁ µ¥ÀÌÅÍ (°ø°İ·Â/¹æ¾î·Â)")]
+    [Header("ê¸°ë³¸: ë²„í”„ ë°ì´í„° (ê³µê²©ë ¥/ë°©ì–´ë ¥)")]
     public StatusEffectData strengthBuff;
     public StatusEffectData defenseBuff;
 
-    [Header("±âº»: ·¹º§º° °ø/¹æ Áõ°¡À² (%)")]
+    [Header("ê¸°ë³¸: ë ˆë²¨ë³„ ê³µ/ë°© ì¦ê°€ìœ¨ (%)")]
     // Lv.1: 25%, Lv.2: 40%, Lv.3: 60%
     public float[] buffRates = { 0.25f, 0.40f, 0.60f };
 
-    [Header("ÁøÈ­ A: AP(¼Óµµ) »ó½Â ¹öÇÁ")]
-    public StatusEffectData speedBuff; // ¼Óµµ(AP) Áõ°¡¿ë ¹öÇÁ
+    [Header("ì§„í™” A: AP(ì†ë„) ìƒìŠ¹ ë²„í”„")]
+    public StatusEffectData speedBuff; // ì†ë„(AP) ì¦ê°€ìš© ë²„í”„
     public float[] pathA_SpeedRates = { 0.15f, 0.20f, 0.25f }; // 15%, 20%, 25%
 
-    [Header("ÁøÈ­ B: ¹æ¾î·Â Èñ»ı -> Èû(Flat) ÇÕ»ê")]
-    public StatusEffectData defenseDebuff; // ¹æ¾î·Â °¨¼Ò µğ¹öÇÁ (Percentage)
-    public StatusEffectData flatStrengthBuff; // Èû Áõ°¡ ¹öÇÁ (Flat)
-    public float[] pathB_DefDebuffRates = { 0.30f, 0.40f, 0.50f }; // ¹æ¾î·Â 30%, 40%, 50% ±ğÀÓ
-    public float[] pathB_StrMultipliers = { 2.0f, 2.5f, 3.0f }; // ±ğÀÎ ¼öÄ¡ÀÇ 2¹è, 2.5¹è, 3¹è¸¦ ÈûÀ¸·Î ÀüÈ¯
+    [Header("ì§„í™” B: ë°©ì–´ë ¥ í¬ìƒ -> í˜(Flat) í•©ì‚°")]
+    public StatusEffectData defenseDebuff; // ë°©ì–´ë ¥ ê°ì†Œ ë””ë²„í”„ (Percentage)
+    public StatusEffectData flatStrengthBuff; // í˜ ì¦ê°€ ë²„í”„ (Flat)
+    public float[] pathB_DefDebuffRates = { 0.30f, 0.40f, 0.50f }; // ë°©ì–´ë ¥ 30%, 40%, 50% ê¹ì„
+    public float[] pathB_StrMultipliers = { 2.0f, 2.5f, 3.0f }; // ê¹ì¸ ìˆ˜ì¹˜ì˜ 2ë°°, 2.5ë°°, 3ë°°ë¥¼ í˜ìœ¼ë¡œ ì „í™˜
 
-    [Header("ÁøÈ­ C: ¹öÇÁ Æ÷±â -> µ¥¹ÌÁö ½ºÅ³È­")]
+    [Header("ì§„í™” C: ë²„í”„ í¬ê¸° -> ë°ë¯¸ì§€ ìŠ¤í‚¬í™”")]
     public float[] pathC_DamageMults = { 50.0f, 70.0f, 90.0f };
 
-    // ¿ä¼ú °è¿­ÀÌ¹Ç·Î ¹«Á¶°Ç ÀûÁßÇÕ´Ï´Ù.
+    // ìš”ìˆ  ê³„ì—´ì´ë¯€ë¡œ ë¬´ì¡°ê±´ ì ì¤‘í•©ë‹ˆë‹¤.
     public override bool AlwaysHits(SkillData skill) => true;
 
     public override int GetHitCount(SkillData skill)
@@ -33,7 +33,7 @@ public class SkillLogic_Asura : SkillLogicBase
         return base.GetHitCount(skill);
     }
 
-    // [ÁøÈ­ C] µ¥¹ÌÁö ½ºÅ³È­¸¦ À§ÇÑ µ¥¹ÌÁö °è¼ö ¿À¹ö¶óÀÌµå
+    // [ì§„í™” C] ë°ë¯¸ì§€ ìŠ¤í‚¬í™”ë¥¼ ìœ„í•œ ë°ë¯¸ì§€ ê³„ìˆ˜ ì˜¤ë²„ë¼ì´ë“œ
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
@@ -42,21 +42,21 @@ public class SkillLogic_Asura : SkillLogicBase
             float buffRate = buffRates[index];
             float cMult = pathC_DamageMults[index];
 
-            // 1. ¹öÇÁ·Î ¾ò¾úÀ» Èû°ú ¹æ¾î·Â »ó½Â ¿¹Á¤Ä¡¸¦ °è»ê
+            // 1. ë²„í”„ë¡œ ì–»ì—ˆì„ í˜ê³¼ ë°©ì–´ë ¥ ìƒìŠ¹ ì˜ˆì •ì¹˜ë¥¼ ê³„ì‚°
             float expectedStrIncrease = pStats.strength * buffRate;
             float expectedDefIncrease = pStats.defense * buffRate;
             float totalExpected = expectedStrIncrease + expectedDefIncrease;
 
-            // 2. BattleCalculator´Â (ÇöÀç Èû * °è¼ö)·Î µ¥¹ÌÁö¸¦ »êÃâÇÏ¹Ç·Î, 
-            // ½Ã½ºÅÛ¿¡ ¸Â°Ô (ÃÑ »ó½Â ¿¹Á¤Ä¡ * 3¹èÀ²) °á°ú°¡ ³ª¿Àµµ·Ï ¿ª»êÇÏ¿© °è¼ö¸¦ ´øÁ®Áİ´Ï´Ù.
+            // 2. BattleCalculatorëŠ” (í˜„ì¬ í˜ * ê³„ìˆ˜)ë¡œ ë°ë¯¸ì§€ë¥¼ ì‚°ì¶œí•˜ë¯€ë¡œ, 
+            // ì‹œìŠ¤í…œì— ë§ê²Œ (ì´ ìƒìŠ¹ ì˜ˆì •ì¹˜ * 3ë°°ìœ¨) ê²°ê³¼ê°€ ë‚˜ì˜¤ë„ë¡ ì—­ì‚°í•˜ì—¬ ê³„ìˆ˜ë¥¼ ë˜ì ¸ì¤ë‹ˆë‹¤.
             return (totalExpected * cMult) / Mathf.Max(1, pStats.strength);
         }
 
-        // ±âº», ÁøÈ­ A, B´Â ¼ø¼ö ¹öÇÁ ½ºÅ³ÀÌ¹Ç·Î µ¥¹ÌÁö 0 ¹İÈ¯
+        // ê¸°ë³¸, ì§„í™” A, BëŠ” ìˆœìˆ˜ ë²„í”„ ìŠ¤í‚¬ì´ë¯€ë¡œ ë°ë¯¸ì§€ 0 ë°˜í™˜
         return 0f;
     }
 
-    // ¹öÇÁ ¹× µğ¹öÇÁ Àû¿ë (ApplyEffect ´ë½Å ApplyEffectOnHit »ç¿ë)
+    // ë²„í”„ ë° ë””ë²„í”„ ì ìš© (ApplyEffect ëŒ€ì‹  ApplyEffectOnHit ì‚¬ìš©)
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
         if (!isHit || !isPlayerAttacking) return;
@@ -64,49 +64,49 @@ public class SkillLogic_Asura : SkillLogicBase
         int index = Mathf.Clamp(skill.skillLevel - 1, 0, buffRates.Length - 1);
         float baseBuffRate = buffRates[index];
 
-        // [ÁøÈ­ C]´Â À§¿¡¼­ µ¥¹ÌÁö¸¸ ÁÖ°í ¹öÇÁ´Â ÀÏÀı ºÎ¿©ÇÏÁö ¾Ê½À´Ï´Ù.
+        // [ì§„í™” C]ëŠ” ìœ„ì—ì„œ ë°ë¯¸ì§€ë§Œ ì£¼ê³  ë²„í”„ëŠ” ì¼ì ˆ ë¶€ì—¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
-            DevLog.Log($"[ÁøÈ­ C] ¾Æ¼ö¶ó ¹ßµ¿! °ø/¹æ ¹öÇÁ¸¦ Æø¹ß·ÂÀ¸·Î ÀüÈ¯ÇÏ¿© °­·ÂÇÑ ÇÇÇØ¸¦ ÀÔÇû½À´Ï´Ù.");
+            DevLog.Log($"[ì§„í™” C] ì•„ìˆ˜ë¼ ë°œë™! ê³µ/ë°© ë²„í”„ë¥¼ í­ë°œë ¥ìœ¼ë¡œ ì „í™˜í•˜ì—¬ ê°•ë ¥í•œ í”¼í•´ë¥¼ ì…í˜”ìŠµë‹ˆë‹¤.");
             return;
         }
 
-        // 1. ±âº» Èû(%) ¹öÇÁ´Â ÁøÈ­ A, B ¸ğµÎ °øÅë Àû¿ë
+        // 1. ê¸°ë³¸ í˜(%) ë²„í”„ëŠ” ì§„í™” A, B ëª¨ë‘ ê³µí†µ ì ìš©
         if (strengthBuff != null) BuffManager.Instance.AddEffect(isPlayerAttacking, strengthBuff, baseBuffRate, 3);
 
-        // 2. ÁøÈ­ ºĞ±â Ã³¸®
+        // 2. ì§„í™” ë¶„ê¸° ì²˜ë¦¬
         if (skill.currentEvolution == SkillEvolution.None || skill.currentEvolution == SkillEvolution.PathA)
         {
-            // ¹æ¾î·Â(%) ¹öÇÁ Àû¿ë
+            // ë°©ì–´ë ¥(%) ë²„í”„ ì ìš©
             if (defenseBuff != null) BuffManager.Instance.AddEffect(isPlayerAttacking, defenseBuff, baseBuffRate, 3);
 
-            // [ÁøÈ­ A] ¼Óµµ(AP) Áõ°¡ Ãß°¡ Àû¿ë
+            // [ì§„í™” A] ì†ë„(AP) ì¦ê°€ ì¶”ê°€ ì ìš©
             if (skill.currentEvolution == SkillEvolution.PathA && speedBuff != null)
             {
                 BuffManager.Instance.AddEffect(isPlayerAttacking, speedBuff, pathA_SpeedRates[index], 3);
-                DevLog.Log($"[ÁøÈ­ A] ¾Æ¼ö¶ó! 3ÅÏ°£ °ø/¹æ {baseBuffRate * 100}% ¹× AP(¼Óµµ) {pathA_SpeedRates[index] * 100}% »ó½Â.");
+                DevLog.Log($"[ì§„í™” A] ì•„ìˆ˜ë¼! 3í„´ê°„ ê³µ/ë°© {baseBuffRate * 100}% ë° AP(ì†ë„) {pathA_SpeedRates[index] * 100}% ìƒìŠ¹.");
             }
             else
             {
-                DevLog.Log($"[±âº»] ¾Æ¼ö¶ó! 3ÅÏ°£ °ø/¹æ {baseBuffRate * 100}% Áõ°¡.");
+                DevLog.Log($"[ê¸°ë³¸] ì•„ìˆ˜ë¼! 3í„´ê°„ ê³µ/ë°© {baseBuffRate * 100}% ì¦ê°€.");
             }
         }
         else if (skill.currentEvolution == SkillEvolution.PathB)
         {
-            // [ÁøÈ­ B] ¹æ¾î·ÂÀ» ±ğ°í ±× ¼öÄ¡¿¡ ºñ·ÊÇØ Èû(°íÁ¤Ä¡)À» Ãß°¡ È¹µæ!
+            // [ì§„í™” B] ë°©ì–´ë ¥ì„ ê¹ê³  ê·¸ ìˆ˜ì¹˜ì— ë¹„ë¡€í•´ í˜(ê³ ì •ì¹˜)ì„ ì¶”ê°€ íšë“!
             float defDropRate = pathB_DefDebuffRates[index];
             float strMult = pathB_StrMultipliers[index];
 
             int lostDef = Mathf.RoundToInt(pStats.defense * defDropRate);
             int bonusFlatStr = Mathf.RoundToInt(lostDef * strMult);
 
-            // ¹æ¾î·Â °¨¼Ò µğ¹öÇÁ ºÎ¿©
+            // ë°©ì–´ë ¥ ê°ì†Œ ë””ë²„í”„ ë¶€ì—¬
             if (defenseDebuff != null) BuffManager.Instance.AddEffect(isPlayerAttacking, defenseDebuff, -defDropRate, 3);
 
-            // Èû °íÁ¤Ä¡(Flat) Áõ°¡ ¹öÇÁ ºÎ¿©
+            // í˜ ê³ ì •ì¹˜(Flat) ì¦ê°€ ë²„í”„ ë¶€ì—¬
             if (flatStrengthBuff != null) BuffManager.Instance.AddEffect(isPlayerAttacking, flatStrengthBuff, bonusFlatStr, 3);
 
-            DevLog.Log($"[ÁøÈ­ B] ¾Æ¼ö¶ó! ¹æ¾î·ÂÀÌ {defDropRate * 100}%(-{lostDef}) ±ğÀÎ ´ë°¡·Î, ±âº» Èû »ó½Â¿¡ ´õÇØ {bonusFlatStr}ÀÇ °íÁ¤ ÈûÀ» Ãß°¡·Î ¾ò½À´Ï´Ù!");
+            DevLog.Log($"[ì§„í™” B] ì•„ìˆ˜ë¼! ë°©ì–´ë ¥ì´ {defDropRate * 100}%(-{lostDef}) ê¹ì¸ ëŒ€ê°€ë¡œ, ê¸°ë³¸ í˜ ìƒìŠ¹ì— ë”í•´ {bonusFlatStr}ì˜ ê³ ì • í˜ì„ ì¶”ê°€ë¡œ ì–»ìŠµë‹ˆë‹¤!");
         }
     }
 }

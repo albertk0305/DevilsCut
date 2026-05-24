@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-// ÀÌ Å¬·¡½º´Â ºÎ¸ğ ¿ªÇÒ¸¸ ÇÏ¹Ç·Î CreateAssetMenu ¼Ó¼ºÀ» ¾øÀ½
+// ì´ í´ë˜ìŠ¤ëŠ” ë¶€ëª¨ ì—­í• ë§Œ í•˜ë¯€ë¡œ CreateAssetMenu ì†ì„±ì„ ì—†ìŒ
 public class ExplorationNodeData : ScriptableObject
 {
-    [Header("±âº» ³ëµå Á¤º¸")]
-    public string nodeID;           // ¿¹: "shop", "event_01", "combat_goblin"
-    public Sprite nodeImage;        // Å½»ö ¾À¿¡¼­ º¸¿©Áú ¹öÆ° ÀÌ¹ÌÁö (½Ã¼³, ?Ç¥, Ä®¸ğ¾ç µî)
-    //public string nodeNameKey;      // ¹ø¿ª¿ë ÀÌ¸§ Å°
+    [Header("ê¸°ë³¸ ë…¸ë“œ ì •ë³´")]
+    public string nodeID;           // ì˜ˆ: "shop", "event_01", "combat_goblin"
+    public Sprite nodeImage;        // íƒìƒ‰ ì”¬ì—ì„œ ë³´ì—¬ì§ˆ ë²„íŠ¼ ì´ë¯¸ì§€ (ì‹œì„¤, ?í‘œ, ì¹¼ëª¨ì–‘ ë“±)
+    //public string nodeNameKey;      // ë²ˆì—­ìš© ì´ë¦„ í‚¤
 }

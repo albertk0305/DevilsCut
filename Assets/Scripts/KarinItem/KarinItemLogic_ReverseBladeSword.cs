@@ -1,38 +1,38 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "KarinItem_ReverseBladeSword", menuName = "KarinItems/Reverse Blade Sword")]
 public class KarinItemLogic_ReverseBladeSword : KarinItemLogicBase
 {
-    [Header("µ¥¹ÌÁö ¼³Á¤")]
-    public float strMultiplier = 1.0f; // ¼Î¸® Èû(STR)ÀÇ 1.0¹è (¸Å¿ì ³·À½)
+    [Header("ë°ë¯¸ì§€ ì„¤ì •")]
+    public float strMultiplier = 1.0f; // ì…°ë¦¬ í˜(STR)ì˜ 1.0ë°° (ë§¤ìš° ë‚®ìŒ)
 
-    [Header("±×·Î±â(Break) ¼³Á¤")]
-    public float breakDamage = 25.0f;  // ´ë·®ÀÇ ±×·Î±â µ¥¹ÌÁö (Æ¯È­)
+    [Header("ê·¸ë¡œê¸°(Break) ì„¤ì •")]
+    public float breakDamage = 25.0f;  // ëŒ€ëŸ‰ì˜ ê·¸ë¡œê¸° ë°ë¯¸ì§€ (íŠ¹í™”)
 
     public override int CalculateDamage(PlayerStats pStats, EnemyData eData)
     {
-        // 1. ½Ç½Ã°£ ¹öÇÁ/µğ¹öÇÁ°¡ ¹İ¿µµÈ ¼Î¸®ÀÇ 'Èû'°ú ÀûÀÇ '¹æ¾î·Â'À» °¡Á®¿É´Ï´Ù.
+        // 1. ì‹¤ì‹œê°„ ë²„í”„/ë””ë²„í”„ê°€ ë°˜ì˜ëœ ì…°ë¦¬ì˜ 'í˜'ê³¼ ì ì˜ 'ë°©ì–´ë ¥'ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
         int effectiveStr = StatManager.Instance.GetEffectiveStat(true, TargetStat.Strength);
         int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
 
-        // 2. µ¥¹ÌÁö °è»ê (Èû * 1.0¹è)
+        // 2. ë°ë¯¸ì§€ ê³„ì‚° (í˜ * 1.0ë°°)
         float dr = CombatMath.GetDamageReduction(enemyDef);
         float expectedDamage = (effectiveStr * strMultiplier) * (1f - dr);
 
-        // ¾Æ¹«¸® ¾àÇØµµ ÃÖ¼Ò 1ÀÇ µ¥¹ÌÁö´Â º¸Àå
+        // ì•„ë¬´ë¦¬ ì•½í•´ë„ ìµœì†Œ 1ì˜ ë°ë¯¸ì§€ëŠ” ë³´ì¥
         return Mathf.Max(1, Mathf.RoundToInt(expectedDamage));
     }
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData eData)
     {
-        // 3. ±×·Î±â(Break) µ¥¹ÌÁö ºÎ¿© ·ÎÁ÷
+        // 3. ê·¸ë¡œê¸°(Break) ë°ë¯¸ì§€ ë¶€ì—¬ ë¡œì§
         if (BreakManager.Instance != null && !BreakManager.Instance.IsBroken(false))
         {
-            // Àû¿¡°Ô ¹«·Á 25¶ó´Â ´ë·®ÀÇ ±×·Î±â µ¥¹ÌÁö¸¦ ÀÔÈü´Ï´Ù.
+            // ì ì—ê²Œ ë¬´ë ¤ 25ë¼ëŠ” ëŒ€ëŸ‰ì˜ ê·¸ë¡œê¸° ë°ë¯¸ì§€ë¥¼ ì…í™ë‹ˆë‹¤.
             bool isBrokenNow = BreakManager.Instance.AddBreakDamage(false, breakDamage);
-            DevLog.Log($"[¿ª³¯°Ë] Àû¿¡°Ô {breakDamage}ÀÇ ´ë·®ÀÇ ±×·Î±â µ¥¹ÌÁö¸¦ ÀÔÇû½À´Ï´Ù!");
+            DevLog.Log($"[ì—­ë‚ ê²€] ì ì—ê²Œ {breakDamage}ì˜ ëŒ€ëŸ‰ì˜ ê·¸ë¡œê¸° ë°ë¯¸ì§€ë¥¼ ì…í˜”ìŠµë‹ˆë‹¤!");
 
-            // ÀÌ °ø°İÀ¸·Î º¸½º°¡ ±×·Î±â »óÅÂ¿¡ ºüÁ³´Ù¸é Áï½Ã ÅÏ UI¸¦ °»½ÅÇÕ´Ï´Ù.
+            // ì´ ê³µê²©ìœ¼ë¡œ ë³´ìŠ¤ê°€ ê·¸ë¡œê¸° ìƒíƒœì— ë¹ ì¡Œë‹¤ë©´ ì¦‰ì‹œ í„´ UIë¥¼ ê°±ì‹ í•©ë‹ˆë‹¤.
             if (isBrokenNow && CombatUIManager.Instance != null && TurnManager.Instance != null)
             {
                 CombatUIManager.Instance.UpdateTurnOrderUI(TurnManager.Instance.GetFutureTurnIcons(5));

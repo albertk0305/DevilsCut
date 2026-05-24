@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
@@ -13,10 +13,10 @@ public class EntityStatusUI : MonoBehaviour
 
     private Sprite defaultSprite;
 
-    [Header("±×·Î±â °ÔÀÌÁö ¿¬Ãâ")]
-    public Image breakGaugeFill; // ÀÎ½ºÆåÅÍ¿¡¼­ ºê·¹ÀÌÅ© ½½¶óÀÌ´õÀÇ Fill ÀÌ¹ÌÁö ÇÒ´ç
-    public Sprite normalBreakSprite; // Æò¼Ò °ÔÀÌÁö ÀÌ¹ÌÁö (ex: ³ë¶õ»ö/ÇÏ¾á»ö ¹Ù)
-    public Sprite brokenGroggySprite; // ±×·Î±â ÅÍÁ³À» ¶§ Àü¿ë ÀÌ¹ÌÁö (°ø¿ë)
+    [Header("ê·¸ë¡œê¸° ê²Œì´ì§€ ì—°ì¶œ")]
+    public Image breakGaugeFill; // ì¸ìŠ¤í™í„°ì—ì„œ ë¸Œë ˆì´í¬ ìŠ¬ë¼ì´ë”ì˜ Fill ì´ë¯¸ì§€ í• ë‹¹
+    public Sprite normalBreakSprite; // í‰ì†Œ ê²Œì´ì§€ ì´ë¯¸ì§€ (ex: ë…¸ë€ìƒ‰/í•˜ì–€ìƒ‰ ë°”)
+    public Sprite brokenGroggySprite; // ê·¸ë¡œê¸° í„°ì¡Œì„ ë•Œ ì „ìš© ì´ë¯¸ì§€ (ê³µìš©)
 
     public void InitUI(int maxHp, int currentHp, Sprite sprite)
     {

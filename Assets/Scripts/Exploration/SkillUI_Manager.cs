@@ -1,17 +1,17 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class SkillUI_Manager : MonoBehaviour
 {
-    [Header("½ºÅ³ ½½·Ô ¸®½ºÆ® (¼ø¼­´ë·Î 20°³ ²ø¾î´Ù ³Ö±â)")]
-    // [0~3]: °Ë¼ú, [4~7]: ÃÑ, [8~11]: °İÅõ, [12~15]: ¸¶¹ı, [16~19]: ¿À´Ï
+    [Header("ìŠ¤í‚¬ ìŠ¬ë¡¯ ë¦¬ìŠ¤íŠ¸ (ìˆœì„œëŒ€ë¡œ 20ê°œ ëŒì–´ë‹¤ ë„£ê¸°)")]
+    // [0~3]: ê²€ìˆ , [4~7]: ì´, [8~11]: ê²©íˆ¬, [12~15]: ë§ˆë²•, [16~19]: ì˜¤ë‹ˆ
     public List<SkillUI_Slot> allSkillSlots;
 
-    [Header("ÇÏ´Ü ÅØ½ºÆ® UI")]
+    [Header("í•˜ë‹¨ í…ìŠ¤íŠ¸ UI")]
     public TextMeshProUGUI descriptionText;
 
-    // Ä«Å×°í¸® ¼ø¼­ °íÁ¤ (°Ë -> ÃÑ -> °İÅõ -> ¸¶¹ı -> ¿À´Ï)
+    // ì¹´í…Œê³ ë¦¬ ìˆœì„œ ê³ ì • (ê²€ -> ì´ -> ê²©íˆ¬ -> ë§ˆë²• -> ì˜¤ë‹ˆ)
     private readonly SkillCategory[] categoryOrder = new SkillCategory[]
     {
         SkillCategory.Sword,
@@ -21,7 +21,7 @@ public class SkillUI_Manager : MonoBehaviour
         SkillCategory.Oni
     };
 
-    // ÇÁ¸®ÆÕÀÌ ÄÑÁú ¶§¸¶´Ù ½ºÅ³ Á¤º¸¸¦ ÃÖ½ÅÈ­ÇÕ´Ï´Ù.
+    // í”„ë¦¬íŒ¹ì´ ì¼œì§ˆ ë•Œë§ˆë‹¤ ìŠ¤í‚¬ ì •ë³´ë¥¼ ìµœì‹ í™”í•©ë‹ˆë‹¤.
     private void OnEnable()
     {
         RefreshSkillCanvas();
@@ -33,7 +33,7 @@ public class SkillUI_Manager : MonoBehaviour
 
         int slotIndex = 0;
 
-        // Ä«Å×°í¸® ¼ø¼­´ë·Î ½ºÅ³À» 4°³¾¿ °¡Á®¿Í¼­ ½½·Ô¿¡ ³¢¿ö ³Ö½À´Ï´Ù.
+        // ì¹´í…Œê³ ë¦¬ ìˆœì„œëŒ€ë¡œ ìŠ¤í‚¬ì„ 4ê°œì”© ê°€ì ¸ì™€ì„œ ìŠ¬ë¡¯ì— ë¼ì›Œ ë„£ìŠµë‹ˆë‹¤.
         foreach (SkillCategory cat in categoryOrder)
         {
             List<SkillData> catSkills = PlayerManager.Instance.GetSkillsByCategory(cat);
@@ -43,34 +43,34 @@ public class SkillUI_Manager : MonoBehaviour
                 if (i < catSkills.Count)
                     allSkillSlots[slotIndex].InitSlot(catSkills[i], this);
                 else
-                    allSkillSlots[slotIndex].InitSlot(null, this); // µ¥ÀÌÅÍ°¡ ºÎÁ·ÇÏ¸é ºó ½½·Ô Ã³¸®
+                    allSkillSlots[slotIndex].InitSlot(null, this); // ë°ì´í„°ê°€ ë¶€ì¡±í•˜ë©´ ë¹ˆ ìŠ¬ë¡¯ ì²˜ë¦¬
 
                 slotIndex++;
             }
         }
 
-        // Ã¢À» Ã³À½ ¿­¾úÀ» ¶§´Â ¾È³» ¹®±¸ Ãâ·Â
-        descriptionText.text = "È®ÀÎÇÒ ½ºÅ³À» ¼±ÅÃÇØ ÁÖ¼¼¿ä.";
+        // ì°½ì„ ì²˜ìŒ ì—´ì—ˆì„ ë•ŒëŠ” ì•ˆë‚´ ë¬¸êµ¬ ì¶œë ¥
+        descriptionText.text = "í™•ì¸í•  ìŠ¤í‚¬ì„ ì„ íƒí•´ ì£¼ì„¸ìš”.";
     }
 
-    // ½½·Ô¿¡¼­ Å¬¸¯ ÀÌº¥Æ®°¡ µé¾î¿ÔÀ» ¶§ È£ÃâµÊ
+    // ìŠ¬ë¡¯ì—ì„œ í´ë¦­ ì´ë²¤íŠ¸ê°€ ë“¤ì–´ì™”ì„ ë•Œ í˜¸ì¶œë¨
     public void ShowSkillDescription(SkillData skill)
     {
         if (LocalizationManager.Instance == null) return;
 
-        // 1. [½ºÅ³¸í] [Lv.X]
+        // 1. [ìŠ¤í‚¬ëª…] [Lv.X]
         string skillName = LocalizationManager.Instance.GetText(skill.skillNameKey);
         string levelStr = $"[Lv.{skill.skillLevel}]";
 
-        // 2. ÁøÈ­¸í ¹× »ç¿ëÇÒ ¼³¸í Key ½ºÀ§Äª
+        // 2. ì§„í™”ëª… ë° ì‚¬ìš©í•  ì„¤ëª… Key ìŠ¤ìœ„ì¹­
         string evoStr = "";
-        string descKeyToUse = skill.skillDescKey; // ±âº» »óÅÂÀÏ ¶© ±âº» ¼³¸í Key »ç¿ë
+        string descKeyToUse = skill.skillDescKey; // ê¸°ë³¸ ìƒíƒœì¼ ë• ê¸°ë³¸ ì„¤ëª… Key ì‚¬ìš©
 
         if (skill.currentEvolution != SkillEvolution.None)
         {
             string evoNameKey = "";
 
-            // ÁøÈ­ »óÅÂ¿¡ µû¶ó »ç¿ëÇÒ ÀÌ¸§ Key¿Í ¼³¸í Key¸¦ µ¤¾î¾º¿ó´Ï´Ù.
+            // ì§„í™” ìƒíƒœì— ë”°ë¼ ì‚¬ìš©í•  ì´ë¦„ Keyì™€ ì„¤ëª… Keyë¥¼ ë®ì–´ì”Œì›ë‹ˆë‹¤.
             switch (skill.currentEvolution)
             {
                 case SkillEvolution.PathA:
@@ -87,18 +87,18 @@ public class SkillUI_Manager : MonoBehaviour
                     break;
             }
 
-            // [¼öÁ¤] ÄÃ·¯ ÅÂ±×(<color>)¸¦ Á¦°ÅÇÏ¿© ½ºÅ³ ÀÌ¸§/·¹º§°ú µ¿ÀÏÇÑ ±âº» »ö»óÀ¸·Î ÅëÀÏÇÕ´Ï´Ù.
+            // [ìˆ˜ì •] ì»¬ëŸ¬ íƒœê·¸(<color>)ë¥¼ ì œê±°í•˜ì—¬ ìŠ¤í‚¬ ì´ë¦„/ë ˆë²¨ê³¼ ë™ì¼í•œ ê¸°ë³¸ ìƒ‰ìƒìœ¼ë¡œ í†µì¼í•©ë‹ˆë‹¤.
             if (!string.IsNullOrEmpty(evoNameKey))
             {
                 evoStr = $" [{LocalizationManager.Instance.GetText(evoNameKey)}]";
             }
         }
 
-        // 3. °áÁ¤µÈ Key(±âº» or ÁøÈ­)¸¦ ¹ÙÅÁÀ¸·Î ½ºÅ³ ¼³¸í º»¹® ¹ø¿ª °¡Á®¿À±â
+        // 3. ê²°ì •ëœ Key(ê¸°ë³¸ or ì§„í™”)ë¥¼ ë°”íƒ•ìœ¼ë¡œ ìŠ¤í‚¬ ì„¤ëª… ë³¸ë¬¸ ë²ˆì—­ ê°€ì ¸ì˜¤ê¸°
         string desc = LocalizationManager.Instance.GetText(descKeyToUse);
 
-        // 4. Å¸ÀÌÇÎ È¿°ú ¾øÀÌ Áï½Ã ÅØ½ºÆ® Ãâ·Â!
-        // Çü½Ä: [½ºÅ³¸í] [Lv.X] [ÁøÈ­¸í] \n\n ½ºÅ³ ¼³¸í
+        // 4. íƒ€ì´í•‘ íš¨ê³¼ ì—†ì´ ì¦‰ì‹œ í…ìŠ¤íŠ¸ ì¶œë ¥!
+        // í˜•ì‹: [ìŠ¤í‚¬ëª…] [Lv.X] [ì§„í™”ëª…] \n\n ìŠ¤í‚¬ ì„¤ëª…
         descriptionText.text = $"<b>[{skillName}] {levelStr}{evoStr}</b>\n\n{desc}";
     }
 }

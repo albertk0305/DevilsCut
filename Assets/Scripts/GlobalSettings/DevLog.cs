@@ -1,13 +1,13 @@
-using UnityEngine;
-using System.Diagnostics; // [Conditional] ¼Ó¼ºÀ» ¾²±â À§ÇØ ¹Ýµå½Ã ÇÊ¿äÇØ!
+ï»¿using UnityEngine;
+using System.Diagnostics; // [Conditional] ì†ì„±ì„ ì“°ê¸° ìœ„í•´ ë°˜ë“œì‹œ í•„ìš”í•´!
 
-// MonoBehaviour¸¦ »ó¼Ó¹ÞÁö ¾Ê´Â ¼ø¼ö µµ¿ì¹Ì Å¬·¡½º¾ß
-//Debug ´ë½Å »ç¿ëÇÏ´Â ÇÔ¼ö. ºôµåÇÒ¶§ Æ÷ÇÔ ¾ÈµÊ. ÃÖÀûÈ­¿ë.
+// MonoBehaviourë¥¼ ìƒì†ë°›ì§€ ì•ŠëŠ” ìˆœìˆ˜ ë„ìš°ë¯¸ í´ëž˜ìŠ¤ì•¼
+//Debug ëŒ€ì‹  ì‚¬ìš©í•˜ëŠ” í•¨ìˆ˜. ë¹Œë“œí• ë•Œ í¬í•¨ ì•ˆë¨. ìµœì í™”ìš©.
 public static class DevLog
 {
-    // [Conditional]Àº "°ýÈ£ ¾ÈÀÇ Á¶°ÇÀÌ ¸ÂÀ» ¶§¸¸ ÀÌ ÇÔ¼ö¸¦ ºôµå¿¡ Æ÷ÇÔ½ÃÄÑ¶ó!"¶ó´Â ¶æÀÌ¾ß.
-    // UNITY_EDITOR: À¯´ÏÆ¼ ¿¡µðÅÍ ¾È¿¡¼­ ÇÃ·¹ÀÌÇÒ ¶§
-    // DEVELOPMENT_BUILD: ºôµå ¼¼ÆÃ¿¡¼­ 'Development Build'¸¦ Ã¼Å©ÇßÀ» ¶§
+    // [Conditional]ì€ "ê´„í˜¸ ì•ˆì˜ ì¡°ê±´ì´ ë§žì„ ë•Œë§Œ ì´ í•¨ìˆ˜ë¥¼ ë¹Œë“œì— í¬í•¨ì‹œì¼œë¼!"ë¼ëŠ” ëœ»ì´ì•¼.
+    // UNITY_EDITOR: ìœ ë‹ˆí‹° ì—ë””í„° ì•ˆì—ì„œ í”Œë ˆì´í•  ë•Œ
+    // DEVELOPMENT_BUILD: ë¹Œë“œ ì„¸íŒ…ì—ì„œ 'Development Build'ë¥¼ ì²´í¬í–ˆì„ ë•Œ
     [Conditional("UNITY_EDITOR")]
     [Conditional("DEVELOPMENT_BUILD")]
     public static void Log(object message)

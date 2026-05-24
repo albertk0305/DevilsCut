@@ -1,4 +1,4 @@
-using System.Collections; // ÄÚ·çÆ¾À» À§ÇØ ÇÊ¼ö!
+ï»¿using System.Collections; // ì½”ë£¨í‹´ì„ ìœ„í•´ í•„ìˆ˜!
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,23 +6,23 @@ using TMPro;
 
 public class KarinEquipmentUI : MonoBehaviour
 {
-    [Header("¸ŞÀÎ µğ½ºÇÃ·¹ÀÌ")]
+    [Header("ë©”ì¸ ë””ìŠ¤í”Œë ˆì´")]
     public Image mainItemImage;
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemDescText;
     public Image karinFaceImage;
     public TextMeshProUGUI karinDialogueText;
 
-    [Header("¿ìÃø ÀÎº¥Åä¸® ¸ñ·Ï")]
+    [Header("ìš°ì¸¡ ì¸ë²¤í† ë¦¬ ëª©ë¡")]
     public Button[] inventoryButtons;
     public Button upScrollButton;
     public Button downScrollButton;
 
-    [Header("ÀÎº¥Åä¸® »ö»ó ÇÇµå¹é")]
+    [Header("ì¸ë²¤í† ë¦¬ ìƒ‰ìƒ í”¼ë“œë°±")]
     public Color normalColor = Color.white;
     public Color equippedColor = new Color(0.4f, 0.4f, 0.4f);
 
-    [Header("¾×¼Ç ¹öÆ°")]
+    [Header("ì•¡ì…˜ ë²„íŠ¼")]
     public Button equipButton;
     public Button removeButton;
     public Button cancelButton;
@@ -48,7 +48,7 @@ public class KarinEquipmentUI : MonoBehaviour
             LocalizationManager.Instance.OnLanguageChanged += RefreshLanguage;
         }
 
-        // [ÇØ°á 1] UI ¸ÔÅëÀ» ¹æÁöÇÏ´Â 1ÇÁ·¹ÀÓ ´ë±â ÄÚ·çÆ¾ (´Ù½Ã Àû¿ëµÊ)
+        // [í•´ê²° 1] UI ë¨¹í†µì„ ë°©ì§€í•˜ëŠ” 1í”„ë ˆì„ ëŒ€ê¸° ì½”ë£¨í‹´ (ë‹¤ì‹œ ì ìš©ë¨)
         StartCoroutine(InitDelayedPreviewRoutine());
     }
 
@@ -58,7 +58,7 @@ public class KarinEquipmentUI : MonoBehaviour
             LocalizationManager.Instance.OnLanguageChanged -= RefreshLanguage;
     }
 
-    // 1ÇÁ·¹ÀÓ ´ë±â ÈÄ ÅØ½ºÆ®¸¦ ¾ÈÀüÇÏ°Ô ±ò¾ÆÁÖ´Â ÄÚ·çÆ¾
+    // 1í”„ë ˆì„ ëŒ€ê¸° í›„ í…ìŠ¤íŠ¸ë¥¼ ì•ˆì „í•˜ê²Œ ê¹”ì•„ì£¼ëŠ” ì½”ë£¨í‹´
     private IEnumerator InitDelayedPreviewRoutine()
     {
         yield return null;
@@ -77,19 +77,19 @@ public class KarinEquipmentUI : MonoBehaviour
     }
 
     // ==========================================================
-    // [ÇØ°á 2] ¹ø¿ª ½ÇÆĞ ½Ã ¹«Á¶°Ç ¿øº»ÀÌ¶óµµ ¶ç¿ì´Â °­Á¦ ¹æ¾î ÇÔ¼ö
+    // [í•´ê²° 2] ë²ˆì—­ ì‹¤íŒ¨ ì‹œ ë¬´ì¡°ê±´ ì›ë³¸ì´ë¼ë„ ë„ìš°ëŠ” ê°•ì œ ë°©ì–´ í•¨ìˆ˜
     // ==========================================================
     private string GetSafeText(string key)
     {
-        if (string.IsNullOrEmpty(key)) return ""; // Å°°ª ÀÚÃ¼°¡ ºóÄ­ÀÌ¸é ºóÄ­ ¸®ÅÏ
+        if (string.IsNullOrEmpty(key)) return ""; // í‚¤ê°’ ìì²´ê°€ ë¹ˆì¹¸ì´ë©´ ë¹ˆì¹¸ ë¦¬í„´
 
         if (LocalizationManager.Instance != null)
         {
             string translated = LocalizationManager.Instance.GetText(key);
-            // ¹ø¿ª ¸Å´ÏÀú°¡ ºóÄ­ÀÌ³ª nullÀ» ¹ñÀ¸¸é ¿ø·¡ Å°°ªÀ» ±×´ë·Î ³ëÃâ!
+            // ë²ˆì—­ ë§¤ë‹ˆì €ê°€ ë¹ˆì¹¸ì´ë‚˜ nullì„ ë±‰ìœ¼ë©´ ì›ë˜ í‚¤ê°’ì„ ê·¸ëŒ€ë¡œ ë…¸ì¶œ!
             return string.IsNullOrEmpty(translated) ? key : translated;
         }
-        return key; // ¸Å´ÏÀú°¡ ¾Æ¿¹ ¾ø¾îµµ Å°°ªÀ» ³ëÃâ
+        return key; // ë§¤ë‹ˆì €ê°€ ì•„ì˜ˆ ì—†ì–´ë„ í‚¤ê°’ì„ ë…¸ì¶œ
     }
 
     private void ShowPreview(KarinItemData data, bool isEquippedState)
@@ -116,7 +116,7 @@ public class KarinEquipmentUI : MonoBehaviour
             mainItemImage.gameObject.SetActive(true);
             mainItemImage.sprite = data.itemIcon;
 
-            // GetSafeText¸¦ »ç¿ëÇÏ¿© ¹ø¿ª ÆÄÀÏÀÌ ¾ø¾îµµ ÅØ½ºÆ® Áõ¹ßÀ» ¹æÁöÇÕ´Ï´Ù.
+            // GetSafeTextë¥¼ ì‚¬ìš©í•˜ì—¬ ë²ˆì—­ íŒŒì¼ì´ ì—†ì–´ë„ í…ìŠ¤íŠ¸ ì¦ë°œì„ ë°©ì§€í•©ë‹ˆë‹¤.
             itemNameText.text = GetSafeText(data.itemName);
             itemDescText.text = GetSafeText(data.itemDescription);
 

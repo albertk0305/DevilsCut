@@ -1,23 +1,23 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-//¸ŞÀÎ¸Ş´º Á¦¾î ÄÚµå
+//ë©”ì¸ë©”ë‰´ ì œì–´ ì½”ë“œ
 public class MainMenuManager : MonoBehaviour
 {
-    // Ãß°¡µÈ ºÎºĞ: ¼³Á¤ Ã¢ UI ÆĞ³ÎÀ» ¿¬°áÇÒ º¯¼ö
+    // ì¶”ê°€ëœ ë¶€ë¶„: ì„¤ì • ì°½ UI íŒ¨ë„ì„ ì—°ê²°í•  ë³€ìˆ˜
     public GameObject settingsPanel;
     public Button continueButton;
     public GameObject confirmNewGamePanel;
     public TextMeshProUGUI confirmNewGameText;
     public string explorationSceneName = "Exploration";
 
-    private const string NewGameOverwriteMessage = "ÀúÀåµÈ ÁøÇà »óÈ²ÀÌ ÀÖ½À´Ï´Ù.\n»õ °ÔÀÓÀ» ½ÃÀÛÇÏ¸é ±âÁ¸ ÀÌ¾îÇÏ±â µ¥ÀÌÅÍ°¡ »èÁ¦µË´Ï´Ù.\nÁ¤¸» »õ·Î ½ÃÀÛÇÏ½Ã°Ú½À´Ï±î?";
+    private const string NewGameOverwriteMessage = "ì €ì¥ëœ ì§„í–‰ ìƒí™©ì´ ìˆìŠµë‹ˆë‹¤.\nìƒˆ ê²Œì„ì„ ì‹œì‘í•˜ë©´ ê¸°ì¡´ ì´ì–´í•˜ê¸° ë°ì´í„°ê°€ ì‚­ì œë©ë‹ˆë‹¤.\nì •ë§ ìƒˆë¡œ ì‹œì‘í•˜ì‹œê² ìŠµë‹ˆê¹Œ?";
 
     void Start()
     {
-        // °ÔÀÓ ½ÃÀÛ ½Ã ¼³Á¤ Ã¢Àº ¼û°ÜµÒ
+        // ê²Œì„ ì‹œì‘ ì‹œ ì„¤ì • ì°½ì€ ìˆ¨ê²¨ë‘ 
         if (settingsPanel != null) settingsPanel.SetActive(false);
         if (confirmNewGamePanel != null) confirmNewGamePanel.SetActive(false);
         UpdateContinueButtonState();
@@ -36,12 +36,12 @@ public class MainMenuManager : MonoBehaviour
         continueButton.interactable = SaveManager.Instance != null && SaveManager.Instance.HasContinueSave();
     }
 
-    // '½ÃÀÛÇÏ±â' ¹öÆ°À» ´­·¶À» ¶§ ½ÇÇàµÉ ÇÔ¼ö
+    // 'ì‹œì‘í•˜ê¸°' ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ì‹¤í–‰ë  í•¨ìˆ˜
     public void OnClickStart()
     {
         if (SaveManager.Instance == null)
         {
-            DevLog.LogWarning("[Save] SaveManager°¡ ¾ø¾î ÀúÀå µ¥ÀÌÅÍ È®ÀÎ ¾øÀÌ »õ °ÔÀÓÀ» ½ÃÀÛÇÕ´Ï´Ù.");
+            DevLog.LogWarning("[Save] SaveManagerê°€ ì—†ì–´ ì €ì¥ ë°ì´í„° í™•ì¸ ì—†ì´ ìƒˆ ê²Œì„ì„ ì‹œì‘í•©ë‹ˆë‹¤.");
             StartNewGameInternal();
             return;
         }
@@ -87,13 +87,13 @@ public class MainMenuManager : MonoBehaviour
             return;
         }
 
-        DevLog.LogWarning("[Save] »õ °ÔÀÓ È®ÀÎ ÆË¾÷ÀÌ ¿¬°áµÇÁö ¾Ê¾Æ ¹Ù·Î »õ °ÔÀÓÀ» ½ÃÀÛÇÕ´Ï´Ù.");
+        DevLog.LogWarning("[Save] ìƒˆ ê²Œì„ í™•ì¸ íŒì—…ì´ ì—°ê²°ë˜ì§€ ì•Šì•„ ë°”ë¡œ ìƒˆ ê²Œì„ì„ ì‹œì‘í•©ë‹ˆë‹¤.");
         StartNewGameInternal();
     }
 
     private void StartNewGameInternal()
     {
-        DevLog.Log("»õ °ÔÀÓ ½ÃÀÛ!");
+        DevLog.Log("ìƒˆ ê²Œì„ ì‹œì‘!");
 
         if (SaveManager.Instance != null)
             SaveManager.Instance.CancelPendingContinueLoadRequest();
@@ -101,16 +101,16 @@ public class MainMenuManager : MonoBehaviour
         if (PlayerManager.Instance != null)
             PlayerManager.Instance.ResetForNewGame();
         else
-            DevLog.LogWarning("[NewGame] PlayerManager°¡ ¾ø¾î ÇÃ·¹ÀÌ¾î »óÅÂ ÃÊ±âÈ­¸¦ °Ç³Ê¶İ´Ï´Ù.");
+            DevLog.LogWarning("[NewGame] PlayerManagerê°€ ì—†ì–´ í”Œë ˆì´ì–´ ìƒíƒœ ì´ˆê¸°í™”ë¥¼ ê±´ë„ˆëœë‹ˆë‹¤.");
 
         SceneManager.LoadScene(explorationSceneName);
     }
-    // 'ÀÌ¾îÇÏ±â' ¹öÆ°À» ´­·¶À» ¶§ ½ÇÇàµÉ ÇÔ¼ö
+    // 'ì´ì–´í•˜ê¸°' ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ì‹¤í–‰ë  í•¨ìˆ˜
     public void OnClickContinue()
     {
         if (SaveManager.Instance == null)
         {
-            DevLog.LogWarning("[Save] ÀÌ¾îÇÏ±â ½ÇÆĞ: SaveManager°¡ ¾ø½À´Ï´Ù.");
+            DevLog.LogWarning("[Save] ì´ì–´í•˜ê¸° ì‹¤íŒ¨: SaveManagerê°€ ì—†ìŠµë‹ˆë‹¤.");
             UpdateContinueButtonState();
             return;
         }
@@ -121,28 +121,28 @@ public class MainMenuManager : MonoBehaviour
             return;
         }
 
-        DevLog.Log("ÀÌ¾îÇÏ±â µ¥ÀÌÅÍ ºÒ·¯¿À±â!");
+        DevLog.Log("ì´ì–´í•˜ê¸° ë°ì´í„° ë¶ˆëŸ¬ì˜¤ê¸°!");
         SceneManager.LoadScene(explorationSceneName);
     }
 
-    // 'µµ¿ò¸»' ¹öÆ°À» ´­·¶À» ¶§ ½ÇÇàµÉ ÇÔ¼ö
+    // 'ë„ì›€ë§' ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ì‹¤í–‰ë  í•¨ìˆ˜
     public void OnClickHelp()
     {
-        DevLog.Log("µµ¿ò¸» Ã¢ ¿­±â!");
+        DevLog.Log("ë„ì›€ë§ ì°½ ì—´ê¸°!");
     }
 
-    // '°³¹ßÁø' ¹öÆ°À» ´­·¶À» ¶§ ½ÇÇàµÉ ÇÔ¼ö
+    // 'ê°œë°œì§„' ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ì‹¤í–‰ë  í•¨ìˆ˜
     public void OnClickCredits()
     {
-        DevLog.Log("°³¹ßÁø ¼Ò°³ ¿­±â!");
+        DevLog.Log("ê°œë°œì§„ ì†Œê°œ ì—´ê¸°!");
     }
 
-    // '°ÔÀÓ Á¾·á' ¹öÆ°À» ´­·¶À» ¶§ ½ÇÇàµÉ ÇÔ¼ö
+    // 'ê²Œì„ ì¢…ë£Œ' ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ ì‹¤í–‰ë  í•¨ìˆ˜
     public void OnClickQuit()
     {
-        DevLog.Log("°ÔÀÓ Á¾·á!");
-        // Application.Quit()Àº À¯´ÏÆ¼ ¿¡µğÅÍ ³»¿¡¼­´Â ÀÛµ¿ÇÏÁö ¾Ê°í, 
-        // ³ªÁß¿¡ °ÔÀÓÀ» ½ÇÁ¦ ÆÄÀÏ(.exe, .apk µî)·Î ºôµåÇßÀ» ¶§¸¸ ÁøÂ¥·Î ²¨Á®!
+        DevLog.Log("ê²Œì„ ì¢…ë£Œ!");
+        // Application.Quit()ì€ ìœ ë‹ˆí‹° ì—ë””í„° ë‚´ì—ì„œëŠ” ì‘ë™í•˜ì§€ ì•Šê³ , 
+        // ë‚˜ì¤‘ì— ê²Œì„ì„ ì‹¤ì œ íŒŒì¼(.exe, .apk ë“±)ë¡œ ë¹Œë“œí–ˆì„ ë•Œë§Œ ì§„ì§œë¡œ êº¼ì ¸!
         Application.Quit();
     }
 }

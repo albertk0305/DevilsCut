@@ -1,19 +1,19 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Michael_ChainBury", menuName = "SkillLogic/Michael/ChainBury")]
 public class SkillLogic_Michael_ChainBury : SkillLogic_Michael_Base
 {
-    public StatusEffectData speedDebuff; // ÀÎ½ºÆåÅÍ¿¡¼­ ¼Óµµ °¨¼Ò ¿¡¼Â ¿¬°á
+    public StatusEffectData speedDebuff; // ì¸ìŠ¤í™í„°ì—ì„œ ì†ë„ ê°ì†Œ ì—ì…‹ ì—°ê²°
 
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
-        if (!isHit) return; // ºø³ª°¬À¸¸é È¿°ú ¾øÀ½
+        if (!isHit) return; // ë¹—ë‚˜ê°”ìœ¼ë©´ íš¨ê³¼ ì—†ìŒ
 
-        // ¸íÁß ½Ã ¼Óµµ °¨¼Ò µğ¹öÇÁ ºÎ¿© (¿¹: ¼öÄ¡ -0.25f, 3ÅÏ)
+        // ëª…ì¤‘ ì‹œ ì†ë„ ê°ì†Œ ë””ë²„í”„ ë¶€ì—¬ (ì˜ˆ: ìˆ˜ì¹˜ -0.25f, 3í„´)
         if (speedDebuff != null)
         {
             BuffManager.Instance.AddEffect(true, speedDebuff, -0.25f, 3);
-            DevLog.Log("[»ç½½ ¸ÅÀå] ¼Î¸®ÀÇ ¼Óµµ°¡ °¨¼ÒÇÕ´Ï´Ù!");
+            DevLog.Log("[ì‚¬ìŠ¬ ë§¤ì¥] ì…°ë¦¬ì˜ ì†ë„ê°€ ê°ì†Œí•©ë‹ˆë‹¤!");
         }
     }
 }

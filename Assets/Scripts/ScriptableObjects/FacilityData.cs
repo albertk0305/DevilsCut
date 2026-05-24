@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewFacility", menuName = "GameData/Node/Facility")]
-public class FacilityData : ExplorationNodeData // <- ¿©±â º¯°æ!
+public class FacilityData : ExplorationNodeData // <- ì—¬ê¸° ë³€ê²½!
 {
-    // ºÎ¸ð(ExplorationNodeData)°¡ ÀÌ¹Ì ID¿Í Image¸¦ °¡Áö°í ÀÖÀ¸¹Ç·Î ¿©±â¼± Áö¿ó´Ï´Ù!
+    // ë¶€ëª¨(ExplorationNodeData)ê°€ ì´ë¯¸ IDì™€ Imageë¥¼ ê°€ì§€ê³  ìžˆìœ¼ë¯€ë¡œ ì—¬ê¸°ì„  ì§€ì›ë‹ˆë‹¤!
 
-    [Header("½Ã¼³ Àü¿ë: Á¶·ÂÀÚ Á¤º¸")]
+    [Header("ì‹œì„¤ ì „ìš©: ì¡°ë ¥ìž ì •ë³´")]
     public string operatorName;
     public Sprite operatorImage;
     public Sprite operatorSmileImage;

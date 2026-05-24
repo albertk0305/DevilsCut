@@ -1,18 +1,18 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
-// [ºĞ¸®] ¹öÇÁ ¹× µğ¹öÇÁÀÇ ÀúÀå, °»½Å, UI Àü´ŞÀ» Àü´ãÇÏ´Â ¸Å´ÏÀúÀÔ´Ï´Ù.
+// [ë¶„ë¦¬] ë²„í”„ ë° ë””ë²„í”„ì˜ ì €ì¥, ê°±ì‹ , UI ì „ë‹¬ì„ ì „ë‹´í•˜ëŠ” ë§¤ë‹ˆì €ì…ë‹ˆë‹¤.
 public class BuffManager : MonoBehaviour
 {
     public static BuffManager Instance;
 
-    // ÀüÅõ Áß ºÎ¿©µÇ´Â °³º° È¿°ú µ¥ÀÌÅÍ ±¸Á¶
+    // ì „íˆ¬ ì¤‘ ë¶€ì—¬ë˜ëŠ” ê°œë³„ íš¨ê³¼ ë°ì´í„° êµ¬ì¡°
     public class ActiveEffect
     {
         public StatusEffectData effectData;
         public float value;
         public int turnsLeft;
-        public bool isNewlyApplied; // ºÎ¿©µÈ ÅÏ¿¡ ¹Ù·Î °¨¼ÒÇÏ´Â °ÍÀ» ¸·´Â ÇÃ·¡±×
+        public bool isNewlyApplied; // ë¶€ì—¬ëœ í„´ì— ë°”ë¡œ ê°ì†Œí•˜ëŠ” ê²ƒì„ ë§‰ëŠ” í”Œë˜ê·¸
     }
 
     private List<ActiveEffect> playerEffects = new List<ActiveEffect>();
@@ -36,12 +36,12 @@ public class BuffManager : MonoBehaviour
 
     private Dictionary<StatusEffectData, float> cachedGroupedEffects = new Dictionary<StatusEffectData, float>();
 
-    // UI Ãâ·ÂÀ» À§ÇØ °°Àº Á¾·ùÀÇ ¹öÇÁ ¼öÄ¡¸¦ ÇÕÃÄÁÖ´Â ÇïÆÛ ÇÔ¼ö
+    // UI ì¶œë ¥ì„ ìœ„í•´ ê°™ì€ ì¢…ë¥˜ì˜ ë²„í”„ ìˆ˜ì¹˜ë¥¼ í•©ì³ì£¼ëŠ” í—¬í¼ í•¨ìˆ˜
     public Dictionary<StatusEffectData, float> GetGroupedEffects(bool isPlayer)
     {
         var list = isPlayer ? playerEffects : enemyEffects;
 
-        // [ÃÖÀûÈ­] ¸Å¹ø new Dictionary¸¦ ¸¸µéÁö ¾Ê°í, ±âÁ¸ °ÍÀ» ºñ¿ö¼­ Àç»ç¿ë (°¡ºñÁö ÄÃ·ºÅÍ ÃÖÀûÈ­)
+        // [ìµœì í™”] ë§¤ë²ˆ new Dictionaryë¥¼ ë§Œë“¤ì§€ ì•Šê³ , ê¸°ì¡´ ê²ƒì„ ë¹„ì›Œì„œ ì¬ì‚¬ìš© (ê°€ë¹„ì§€ ì»¬ë ‰í„° ìµœì í™”)
         cachedGroupedEffects.Clear();
 
         foreach (var effect in list)
@@ -54,22 +54,22 @@ public class BuffManager : MonoBehaviour
         return cachedGroupedEffects;
     }
 
-    // [½Å±Ô Ãß°¡] ½Ç½Ã°£ Æ¯¼ö ½ºÅÈ º¯µ¿À» ±Í¼Ó ÆĞ½Ãºê ¾ÆÀÌÄÜÀ¸·Î UI¿¡ ¹İ¿µÇÏ´Â ÇÙ½É ÇÔ¼ö!
-    // °ªÀÌ Á¸ÀçÇÏ¸é 999ÅÏ ±Í¼Ó ¹öÇÁ·Î ¶ç¿ì°í, º¯µ¿µÇ¸é ¼öÄ¡ °»½Å, 0(¶Ç´Â ±âº»°ª)ÀÌ µÇ¸é ¹öÇÁÃ¢¿¡¼­ Á¦°ÅÇÕ´Ï´Ù.
+    // [ì‹ ê·œ ì¶”ê°€] ì‹¤ì‹œê°„ íŠ¹ìˆ˜ ìŠ¤íƒ¯ ë³€ë™ì„ ê·€ì† íŒ¨ì‹œë¸Œ ì•„ì´ì½˜ìœ¼ë¡œ UIì— ë°˜ì˜í•˜ëŠ” í•µì‹¬ í•¨ìˆ˜!
+    // ê°’ì´ ì¡´ì¬í•˜ë©´ 999í„´ ê·€ì† ë²„í”„ë¡œ ë„ìš°ê³ , ë³€ë™ë˜ë©´ ìˆ˜ì¹˜ ê°±ì‹ , 0(ë˜ëŠ” ê¸°ë³¸ê°’)ì´ ë˜ë©´ ë²„í”„ì°½ì—ì„œ ì œê±°í•©ë‹ˆë‹¤.
     public void UpdatePermanentPassive(bool isPlayer, StatusEffectData data, float currentValue, float defaultValue = 0f)
     {
         if (data == null) return;
-        data.isPermanentPassive = true; // °­Á¦ ±Í¼Ó ÇÃ·¡±× ¼¼ÆÃ
+        data.isPermanentPassive = true; // ê°•ì œ ê·€ì† í”Œë˜ê·¸ ì„¸íŒ…
 
         var list = isPlayer ? playerEffects : enemyEffects;
         var existing = list.Find(e => e.effectData == data);
 
-        // ±âº»°ª°ú ´Ù¸£´Ù¸é (Áï, È¿°ú°¡ È°¼ºÈ­µÇ¾î ÀÖ´Ù¸é) ¹öÇÁÃ¢¿¡ À¯Áö/°»½Å
+        // ê¸°ë³¸ê°’ê³¼ ë‹¤ë¥´ë‹¤ë©´ (ì¦‰, íš¨ê³¼ê°€ í™œì„±í™”ë˜ì–´ ìˆë‹¤ë©´) ë²„í”„ì°½ì— ìœ ì§€/ê°±ì‹ 
         if (Mathf.Abs(currentValue - defaultValue) > 0.001f)
         {
             if (existing != null)
             {
-                existing.value = currentValue - defaultValue; // º¯µ¿µÈ ¼ø¼ö º¸³Ê½º ¼öÄ¡ ¹İ¿µ
+                existing.value = currentValue - defaultValue; // ë³€ë™ëœ ìˆœìˆ˜ ë³´ë„ˆìŠ¤ ìˆ˜ì¹˜ ë°˜ì˜
             }
             else
             {
@@ -77,21 +77,21 @@ public class BuffManager : MonoBehaviour
                 {
                     effectData = data,
                     value = currentValue - defaultValue,
-                    turnsLeft = 999, // ¿µ±¸ À¯Áö
+                    turnsLeft = 999, // ì˜êµ¬ ìœ ì§€
                     isNewlyApplied = false
                 });
             }
         }
         else
         {
-            // ¼öÄ¡°¡ ±âº»°ªÀ¸·Î µ¹¾Æ¿Ô´Ù¸é ¹öÇÁ ¾ÆÀÌÄÜ Á¦°Å
+            // ìˆ˜ì¹˜ê°€ ê¸°ë³¸ê°’ìœ¼ë¡œ ëŒì•„ì™”ë‹¤ë©´ ë²„í”„ ì•„ì´ì½˜ ì œê±°
             if (existing != null) list.Remove(existing);
         }
 
         if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
     }
 
-    // ¹öÇÁ/µğ¹öÇÁ ºÎ¿© ·ÎÁ÷
+    // ë²„í”„/ë””ë²„í”„ ë¶€ì—¬ ë¡œì§
     public void AddEffect(bool isPlayerTarget, StatusEffectData data, float val, int duration)
     {
         if (data == null) return;
@@ -102,8 +102,8 @@ public class BuffManager : MonoBehaviour
         {
             effectData = data,
             value = val,
-            turnsLeft = data.isPermanentPassive ? 999 : duration, // ±Í¼Ó ÆĞ½Ãºê´Â ¹«Á¶°Ç 999ÅÏ °íÁ¤
-            isNewlyApplied = !data.isPermanentPassive // ÆĞ½Ãºê´Â »õ ¹öÇÁ º¸È£ ÇÃ·¡±× Á¦¿Ü
+            turnsLeft = data.isPermanentPassive ? 999 : duration, // ê·€ì† íŒ¨ì‹œë¸ŒëŠ” ë¬´ì¡°ê±´ 999í„´ ê³ ì •
+            isNewlyApplied = !data.isPermanentPassive // íŒ¨ì‹œë¸ŒëŠ” ìƒˆ ë²„í”„ ë³´í˜¸ í”Œë˜ê·¸ ì œì™¸
         });
 
         if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
@@ -117,7 +117,7 @@ public class BuffManager : MonoBehaviour
 
         for (int i = list.Count - 1; i >= 0; i--)
         {
-            // [¼öÁ¤] ±Í¼Ó ÆĞ½Ãºê Á¾·ù´Â ÅÏ °¨¼Ò ·ÎÁ÷À» ¿Ïº®ÇÏ°Ô ÆĞ½ºÇÕ´Ï´Ù! (¿µ¿øÈ÷ 999ÅÏ À¯Áö)
+            // [ìˆ˜ì •] ê·€ì† íŒ¨ì‹œë¸Œ ì¢…ë¥˜ëŠ” í„´ ê°ì†Œ ë¡œì§ì„ ì™„ë²½í•˜ê²Œ íŒ¨ìŠ¤í•©ë‹ˆë‹¤! (ì˜ì›íˆ 999í„´ ìœ ì§€)
             if (list[i].effectData.isPermanentPassive) continue;
 
             if (list[i].isNewlyApplied)
@@ -159,12 +159,12 @@ public class BuffManager : MonoBehaviour
 
         if (targetGuard != null)
         {
-            // ÆĞ½Ãºê °¡µå°¡ ¾Æ´Ï¶ó¸é ¼Ò¸ğ Ã³¸®
+            // íŒ¨ì‹œë¸Œ ê°€ë“œê°€ ì•„ë‹ˆë¼ë©´ ì†Œëª¨ ì²˜ë¦¬
             if (!targetGuard.effectData.isPermanentPassive)
             {
                 list.Remove(targetGuard);
                 if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
-                DevLog.Log($"[BuffManager] {(isPlayerTarget ? "¾Æ±º" : "Àû±º")}ÀÇ °¡µå ¹öÇÁ 1½ºÅÃÀÌ ¼Ò¸ğµÇ¾ú½À´Ï´Ù.");
+                DevLog.Log($"[BuffManager] {(isPlayerTarget ? "ì•„êµ°" : "ì êµ°")}ì˜ ê°€ë“œ ë²„í”„ 1ìŠ¤íƒì´ ì†Œëª¨ë˜ì—ˆìŠµë‹ˆë‹¤.");
             }
         }
     }

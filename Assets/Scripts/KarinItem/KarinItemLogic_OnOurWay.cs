@@ -1,38 +1,38 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "KarinItem_OnOurWay", menuName = "KarinItems/On Our Way")]
 public class KarinItemLogic_OnOurWay : KarinItemLogicBase
 {
-    [Header("µ¥¹ÌÁö ¼³Á¤")]
-    public float speedMultiplier = 30.0f; // ¼Î¸® À¯È¿ ¼ÓµµÀÇ 30¹è
+    [Header("ë°ë¯¸ì§€ ì„¤ì •")]
+    public float speedMultiplier = 30.0f; // ì…°ë¦¬ ìœ íš¨ ì†ë„ì˜ 30ë°°
 
-    [Header("±×·Î±â(Break) ¼³Á¤")]
-    public float breakDamage = 5.0f;      // ¼Ò·®ÀÇ ±×·Î±â µ¥¹ÌÁö
+    [Header("ê·¸ë¡œê¸°(Break) ì„¤ì •")]
+    public float breakDamage = 5.0f;      // ì†ŒëŸ‰ì˜ ê·¸ë¡œê¸° ë°ë¯¸ì§€
 
     public override int CalculateDamage(PlayerStats pStats, EnemyData eData)
     {
-        // 1. ½Ç½Ã°£ ¹öÇÁ/µğ¹öÇÁ°¡ ¹İ¿µµÈ ¼Î¸®ÀÇ '¼Óµµ'¿Í ÀûÀÇ '¹æ¾î·Â'À» °¡Á®¿É´Ï´Ù.
+        // 1. ì‹¤ì‹œê°„ ë²„í”„/ë””ë²„í”„ê°€ ë°˜ì˜ëœ ì…°ë¦¬ì˜ 'ì†ë„'ì™€ ì ì˜ 'ë°©ì–´ë ¥'ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
         int rawSpeed = StatManager.Instance.GetEffectiveStat(true, TargetStat.Speed);
         int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
 
-        // 2. ¼Î¸®ÀÇ ½ºÅÈ ¼Óµµ¸¦ 'À¯È¿ ¼Óµµ(Effective Speed)'·Î º¯È¯ÇÕ´Ï´Ù!
+        // 2. ì…°ë¦¬ì˜ ìŠ¤íƒ¯ ì†ë„ë¥¼ 'ìœ íš¨ ì†ë„(Effective Speed)'ë¡œ ë³€í™˜í•©ë‹ˆë‹¤!
         float effectiveSpeed = CombatMath.GetEffectiveSpeed(rawSpeed);
 
-        // 3. µ¥¹ÌÁö °è»ê (À¯È¿ ¼Óµµ * 30¹è)
+        // 3. ë°ë¯¸ì§€ ê³„ì‚° (ìœ íš¨ ì†ë„ * 30ë°°)
         float dr = CombatMath.GetDamageReduction(enemyDef);
         float expectedDamage = (effectiveSpeed * speedMultiplier) * (1f - dr);
 
-        // ÃÖ¼Ò 1ÀÇ µ¥¹ÌÁö´Â º¸Àå
+        // ìµœì†Œ 1ì˜ ë°ë¯¸ì§€ëŠ” ë³´ì¥
         return Mathf.Max(1, Mathf.RoundToInt(expectedDamage));
     }
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData eData)
     {
-        // ±×·Î±â µ¥¹ÌÁö ºÎ¿© ·ÎÁ÷
+        // ê·¸ë¡œê¸° ë°ë¯¸ì§€ ë¶€ì—¬ ë¡œì§
         if (BreakManager.Instance != null && !BreakManager.Instance.IsBroken(false))
         {
             bool isBrokenNow = BreakManager.Instance.AddBreakDamage(false, breakDamage);
-            DevLog.Log($"[On our Way] Àû¿¡°Ô {breakDamage}ÀÇ ±×·Î±â µ¥¹ÌÁö¸¦ ÀÔÇû½À´Ï´Ù. (±â¹İ À¯È¿ ¼Óµµ ¿¬»ê)");
+            DevLog.Log($"[On our Way] ì ì—ê²Œ {breakDamage}ì˜ ê·¸ë¡œê¸° ë°ë¯¸ì§€ë¥¼ ì…í˜”ìŠµë‹ˆë‹¤. (ê¸°ë°˜ ìœ íš¨ ì†ë„ ì—°ì‚°)");
 
             if (isBrokenNow && CombatUIManager.Instance != null && TurnManager.Instance != null)
             {

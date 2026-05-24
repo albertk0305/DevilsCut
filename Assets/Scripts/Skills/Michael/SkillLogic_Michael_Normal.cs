@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Michael_Normal", menuName = "SkillLogic/Michael/Normal")]
 public class SkillLogic_Michael_Normal : SkillLogic_Michael_Base
 {
-    // ¾Æ¹« ³»¿ëÀ» ÀûÁö ¾Ê¾Æµµ, ºÎ¸ğ(SkillLogic_Michael_Base)¿¡ ÀÖ´Â 
-    // 'ÀÒÀº Ã¼·Â ºñ·Ê µ¥¹ÌÁö ÁõÆø' ÆĞ½Ãºê°¡ ¾Ë¾Æ¼­ 100% ÀÚµ¿ Àû¿ëµË´Ï´Ù!
+    // ì•„ë¬´ ë‚´ìš©ì„ ì ì§€ ì•Šì•„ë„, ë¶€ëª¨(SkillLogic_Michael_Base)ì— ìˆëŠ” 
+    // 'ìƒì€ ì²´ë ¥ ë¹„ë¡€ ë°ë¯¸ì§€ ì¦í­' íŒ¨ì‹œë¸Œê°€ ì•Œì•„ì„œ 100% ìë™ ì ìš©ë©ë‹ˆë‹¤!
 }

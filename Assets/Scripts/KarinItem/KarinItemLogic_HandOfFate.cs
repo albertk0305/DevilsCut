@@ -1,35 +1,35 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "KarinItem_HandOfFate", menuName = "KarinItems/Hand Of Fate")]
 public class KarinItemLogic_HandOfFate : KarinItemLogicBase
 {
-    [Header("µ¥¹ÌÁö ¼³Á¤")]
-    public float defMultiplier = 30.0f; // ¼Î¸® ¹æ¾î·ÂÀÇ 30¹è
+    [Header("ë°ë¯¸ì§€ ì„¤ì •")]
+    public float defMultiplier = 30.0f; // ì…°ë¦¬ ë°©ì–´ë ¥ì˜ 30ë°°
 
-    [Header("±×·Î±â(Break) ¼³Á¤")]
-    public float breakDamage = 5.0f;    // ¼Ò·®ÀÇ ±×·Î±â µ¥¹ÌÁö (ÀÛÀº ¸ğÇè°¡¿Í µ¿ÀÏÇÏ°Ô 5.0 À¯Áö)
+    [Header("ê·¸ë¡œê¸°(Break) ì„¤ì •")]
+    public float breakDamage = 5.0f;    // ì†ŒëŸ‰ì˜ ê·¸ë¡œê¸° ë°ë¯¸ì§€ (ì‘ì€ ëª¨í—˜ê°€ì™€ ë™ì¼í•˜ê²Œ 5.0 ìœ ì§€)
 
     public override int CalculateDamage(PlayerStats pStats, EnemyData eData)
     {
-        // 1. ½Ç½Ã°£ ¹öÇÁ/µğ¹öÇÁ°¡ ¹İ¿µµÈ ¼Î¸®ÀÇ '¹æ¾î·Â'°ú ÀûÀÇ '¹æ¾î·Â'À» °¡Á®¿É´Ï´Ù.
+        // 1. ì‹¤ì‹œê°„ ë²„í”„/ë””ë²„í”„ê°€ ë°˜ì˜ëœ ì…°ë¦¬ì˜ 'ë°©ì–´ë ¥'ê³¼ ì ì˜ 'ë°©ì–´ë ¥'ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
         int effectiveDef = StatManager.Instance.GetEffectiveStat(true, TargetStat.Defense);
         int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
 
-        // 2. µ¥¹ÌÁö °è»ê (¼Î¸®ÀÇ ¹æ¾î·Â * 30¹è)
+        // 2. ë°ë¯¸ì§€ ê³„ì‚° (ì…°ë¦¬ì˜ ë°©ì–´ë ¥ * 30ë°°)
         float dr = CombatMath.GetDamageReduction(enemyDef);
         float expectedDamage = (effectiveDef * defMultiplier) * (1f - dr);
 
-        // ÃÖ¼Ò 1ÀÇ µ¥¹ÌÁö´Â º¸Àå
+        // ìµœì†Œ 1ì˜ ë°ë¯¸ì§€ëŠ” ë³´ì¥
         return Mathf.Max(1, Mathf.RoundToInt(expectedDamage));
     }
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData eData)
     {
-        // ±×·Î±â µ¥¹ÌÁö ºÎ¿© ·ÎÁ÷ (ÀÛÀº ¸ğÇè°¡¿Í µ¿ÀÏ)
+        // ê·¸ë¡œê¸° ë°ë¯¸ì§€ ë¶€ì—¬ ë¡œì§ (ì‘ì€ ëª¨í—˜ê°€ì™€ ë™ì¼)
         if (BreakManager.Instance != null && !BreakManager.Instance.IsBroken(false))
         {
             bool isBrokenNow = BreakManager.Instance.AddBreakDamage(false, breakDamage);
-            DevLog.Log($"[Hand of Fate] Àû¿¡°Ô {breakDamage}ÀÇ ±×·Î±â µ¥¹ÌÁö¸¦ ÀÔÇû½À´Ï´Ù.");
+            DevLog.Log($"[Hand of Fate] ì ì—ê²Œ {breakDamage}ì˜ ê·¸ë¡œê¸° ë°ë¯¸ì§€ë¥¼ ì…í˜”ìŠµë‹ˆë‹¤.");
 
             if (isBrokenNow && CombatUIManager.Instance != null && TurnManager.Instance != null)
             {

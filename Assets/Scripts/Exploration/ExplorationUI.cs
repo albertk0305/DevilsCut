@@ -1,62 +1,62 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-//Å½»ö ¾À UI Á¦¾î ÄÚµå
+//íƒìƒ‰ ì”¬ UI ì œì–´ ì½”ë“œ
 public class ExplorationUI : MonoBehaviour
 {
-    [Header("Ä³¸¯ÅÍ & »óÅÂ UI")]
-    public Sprite playerNormal;       // ±âº» Ç¥Á¤
-    public Sprite playerReady;        // ¼±ÅÃ ½Ã ÁØºñ Ç¥Á¤
-    public Sprite playerWorried;      // Ã¼·Â ÀúÇÏ ½Ã °ÆÁ¤ Ç¥Á¤
-    public Slider hpSlider;           // Ä³¸¯ÅÍ ¸Ó¸® À§ Ã¼·Â¹Ù
+    [Header("ìºë¦­í„° & ìƒíƒœ UI")]
+    public Sprite playerNormal;       // ê¸°ë³¸ í‘œì •
+    public Sprite playerReady;        // ì„ íƒ ì‹œ ì¤€ë¹„ í‘œì •
+    public Sprite playerWorried;      // ì²´ë ¥ ì €í•˜ ì‹œ ê±±ì • í‘œì •
+    public Slider hpSlider;           // ìºë¦­í„° ë¨¸ë¦¬ ìœ„ ì²´ë ¥ë°”
     public TextMeshProUGUI karinDialogueText;
-    public Sprite karinNormal;       // Ä«¸° ±âº» Ç¥Á¤
-    public Sprite karinReady;        // Ä«¸° ÁØºñ Ç¥Á¤
+    public Sprite karinNormal;       // ì¹´ë¦° ê¸°ë³¸ í‘œì •
+    public Sprite karinReady;        // ì¹´ë¦° ì¤€ë¹„ í‘œì •
     public Sprite karinWorried;
     public Image karinImage;
 
-    [Header("ÁÂÃø & ÇÏ´Ü (°íÁ¤ ¹× ´ÜÀÏ ½½·Ô)")]
-    public Image playerImage;         // ÁÖÀÎ°ø
-    public Image companionImage;      // µ¿Çà Á¶·ÂÀÚ
-    public Image guideImage;          // ³»ºñ °¡ÀÌµå
-    public Image lastFacilityImage;   // ¸¶Áö¸· ¹æ¹® ½Ã¼³
+    [Header("ì¢Œì¸¡ & í•˜ë‹¨ (ê³ ì • ë° ë‹¨ì¼ ìŠ¬ë¡¯)")]
+    public Image playerImage;         // ì£¼ì¸ê³µ
+    public Image companionImage;      // ë™í–‰ ì¡°ë ¥ì
+    public Image guideImage;          // ë‚´ë¹„ ê°€ì´ë“œ
+    public Image lastFacilityImage;   // ë§ˆì§€ë§‰ ë°©ë¬¸ ì‹œì„¤
 
-    [Header("¿ìÃø (·£´ı ½Ã¼³ 3°³ ½½·Ô)")]
-    // [½Å±Ô Ãß°¡] ¸í½ÃÀûÀ¸·Î ²ô°í ÄÓ ½½·ÔÀÇ ÃÖ»óÀ§ ºÎ¸ğ ¿ÀºêÁ§Æ®
+    [Header("ìš°ì¸¡ (ëœë¤ ì‹œì„¤ 3ê°œ ìŠ¬ë¡¯)")]
+    // [ì‹ ê·œ ì¶”ê°€] ëª…ì‹œì ìœ¼ë¡œ ë„ê³  ì¼¤ ìŠ¬ë¡¯ì˜ ìµœìƒìœ„ ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸
     public GameObject[] randomSlotRoots;
 
-    [Header("¿ìÃø (·£´ı ½Ã¼³ 3°³ ½½·Ô)")]
+    [Header("ìš°ì¸¡ (ëœë¤ ì‹œì„¤ 3ê°œ ìŠ¬ë¡¯)")]
     public Image[] randomFacilityImages;
     public Image[] randomOperatorImages;
     public TextMeshProUGUI[] randomRankTexts;
 
-    [Header("±âº» ¿î¿µÀÚ (Baito)")]
-    public Sprite baitoNormal; // Baito ±âº» Ç¥Á¤
-    public Sprite baitoSmile;  // Baito ¿ô´Â Ç¥Á¤
+    [Header("ê¸°ë³¸ ìš´ì˜ì (Baito)")]
+    public Sprite baitoNormal; // Baito ê¸°ë³¸ í‘œì •
+    public Sprite baitoSmile;  // Baito ì›ƒëŠ” í‘œì •
 
-    [Header("¼±ÅÃ ÆË¾÷ UI")]
-    public GameObject confirmPopup; // È­¸é Áß¾ÓÀÇ ¿¹/¾Æ´Ï¿À ÆË¾÷Ã¢ ¹­À½
+    [Header("ì„ íƒ íŒì—… UI")]
+    public GameObject confirmPopup; // í™”ë©´ ì¤‘ì•™ì˜ ì˜ˆ/ì•„ë‹ˆì˜¤ íŒì—…ì°½ ë¬¶ìŒ
 
-    [Header("»ó´Ü ÀçÈ­ UI")]
+    [Header("ìƒë‹¨ ì¬í™” UI")]
     public TextMeshProUGUI goldText;
 
-    [Header("ÁøÃ´µµ ¹× ¿­¼è UI")]
-    public TextMeshProUGUI keyCountText; // ¿­¼è °³¼ö (X0)
+    [Header("ì§„ì²™ë„ ë° ì—´ì‡  UI")]
+    public TextMeshProUGUI keyCountText; // ì—´ì‡  ê°œìˆ˜ (X0)
 
-    public GameObject explorationProgressParent; // Å½»ö ÁøÇàµµ ºÎ¸ğ °´Ã¼
-    public GameObject[] explorationProgressIcons; // 7°³ÀÇ Å½»ö ÁøÇà ¾ÆÀÌÄÜ (¼ø¼­´ë·Î ³ÖÀ¸¼¼¿ä)
+    public GameObject explorationProgressParent; // íƒìƒ‰ ì§„í–‰ë„ ë¶€ëª¨ ê°ì²´
+    public GameObject[] explorationProgressIcons; // 7ê°œì˜ íƒìƒ‰ ì§„í–‰ ì•„ì´ì½˜ (ìˆœì„œëŒ€ë¡œ ë„£ìœ¼ì„¸ìš”)
 
-    public GameObject battleProgressParent; // ÀüÅõ ÁøÇàµµ ºÎ¸ğ °´Ã¼
-    public GameObject[] battleProgressIcons; // 4°³ÀÇ ÀüÅõ ÁøÇà ¾ÆÀÌÄÜ (¼ø¼­´ë·Î ³ÖÀ¸¼¼¿ä)
+    public GameObject battleProgressParent; // ì „íˆ¬ ì§„í–‰ë„ ë¶€ëª¨ ê°ì²´
+    public GameObject[] battleProgressIcons; // 4ê°œì˜ ì „íˆ¬ ì§„í–‰ ì•„ì´ì½˜ (ìˆœì„œëŒ€ë¡œ ë„£ìœ¼ì„¸ìš”)
 
     public GameObject statusCanvas;
     public GameObject settingsCanvas;
 
-    private List<ExplorationNodeData> currentOptions = new List<ExplorationNodeData>(); // ÇöÀç ¼±ÅÃÁöµé
-    private int selectedIndex = -1; // ÇöÀç Å¬¸¯µÈ ½Ã¼³ÀÇ ¹øÈ£ (0, 1, 2)
+    private List<ExplorationNodeData> currentOptions = new List<ExplorationNodeData>(); // í˜„ì¬ ì„ íƒì§€ë“¤
+    private int selectedIndex = -1; // í˜„ì¬ í´ë¦­ëœ ì‹œì„¤ì˜ ë²ˆí˜¸ (0, 1, 2)
 
     [SerializeField] private CombatEncounterBuilder encounterBuilder;
 
@@ -75,26 +75,26 @@ public class ExplorationUI : MonoBehaviour
 
     public void InitializeSceneUI()
     {
-        // [Ãß°¡µÊ] ¾ğ¾î º¯°æ ÀÌº¥Æ®(¹æ¼Û) ±¸µ¶ ½ÃÀÛ!
+        // [ì¶”ê°€ë¨] ì–¸ì–´ ë³€ê²½ ì´ë²¤íŠ¸(ë°©ì†¡) êµ¬ë… ì‹œì‘!
         if (LocalizationManager.Instance != null)
         {
             LocalizationManager.Instance.OnLanguageChanged += UpdateKarinDialogue;
         }
 
-        // [Ãß°¡µÊ] ¾ÀÀÌ ½ÃÀÛµÉ ¶§ ¸Ş´ºÃ¢(StatusCanvas)À» È®½ÇÇÏ°Ô ²¨µÓ´Ï´Ù.
+        // [ì¶”ê°€ë¨] ì”¬ì´ ì‹œì‘ë  ë•Œ ë©”ë‰´ì°½(StatusCanvas)ì„ í™•ì‹¤í•˜ê²Œ êº¼ë‘¡ë‹ˆë‹¤.
         if (statusCanvas != null) statusCanvas.SetActive(false);
         if (settingsCanvas != null) settingsCanvas.SetActive(false);
 
-        // ½ÃÀÛ/ÃÊ±âÈ­ÇÒ ¶§ ÆË¾÷À» È®½ÇÇÏ°Ô ºñÈ°¼ºÈ­ (¹æ¾î ÄÚµå)
+        // ì‹œì‘/ì´ˆê¸°í™”í•  ë•Œ íŒì—…ì„ í™•ì‹¤í•˜ê²Œ ë¹„í™œì„±í™” (ë°©ì–´ ì½”ë“œ)
         if (confirmPopup != null) confirmPopup.SetActive(false);
-        selectedIndex = -1; // ¼±ÅÃ »óÅÂµµ ÃÊ±âÈ­
+        selectedIndex = -1; // ì„ íƒ ìƒíƒœë„ ì´ˆê¸°í™”
 
-        // 2. Ã¼·Â¹Ù ¼³Á¤ ¹× Ä³¸¯ÅÍ ÀÌ¹ÌÁö ¾÷µ¥ÀÌÆ®
+        // 2. ì²´ë ¥ë°” ì„¤ì • ë° ìºë¦­í„° ì´ë¯¸ì§€ ì—…ë°ì´íŠ¸
         UpdateHPBar();
         UpdateCharacterStates();
         UpdateGoldUI();
 
-        // 3. ÀÌÀü ½Ã¼³ ¹× ·£´ı ³ëµå ¼³Á¤ ·ÎÁ÷ (±âÁ¸°ú µ¿ÀÏ)
+        // 3. ì´ì „ ì‹œì„¤ ë° ëœë¤ ë…¸ë“œ ì„¤ì • ë¡œì§ (ê¸°ì¡´ê³¼ ë™ì¼)
         SetupNodes();
     }
 
@@ -112,14 +112,14 @@ public class ExplorationUI : MonoBehaviour
             lastFacilityImage.gameObject.SetActive(false);
         }
 
-        // ExplorationManager°¡ È®Á¤ÇØ µĞ ÇöÀç ¼±ÅÃÁö¸¦ È­¸é¿¡ Àû¿ëÇÕ´Ï´Ù.
+        // ExplorationManagerê°€ í™•ì •í•´ ë‘” í˜„ì¬ ì„ íƒì§€ë¥¼ í™”ë©´ì— ì ìš©í•©ë‹ˆë‹¤.
         currentOptions = new List<ExplorationNodeData>(ExplorationManager.Instance.CurrentOptions);
 
         for (int i = 0; i < 3; i++)
         {
             ExplorationNodeData data = currentOptions[i];
 
-            // 1. µ¥ÀÌÅÍ°¡ nullÀÌ¸é ±× ½½·Ô(¹öÆ°) ÀüÃ¼¸¦ ²¨¹ö¸³´Ï´Ù. (´ëÄª¿ë)
+            // 1. ë°ì´í„°ê°€ nullì´ë©´ ê·¸ ìŠ¬ë¡¯(ë²„íŠ¼) ì „ì²´ë¥¼ êº¼ë²„ë¦½ë‹ˆë‹¤. (ëŒ€ì¹­ìš©)
             if (data == null)
             {
                 if (randomSlotRoots != null && randomSlotRoots.Length > i && randomSlotRoots[i] != null)
@@ -129,7 +129,7 @@ public class ExplorationUI : MonoBehaviour
                 continue;
             }
 
-            // ½½·Ô È°¼ºÈ­
+            // ìŠ¬ë¡¯ í™œì„±í™”
             if (randomSlotRoots != null && randomSlotRoots.Length > i && randomSlotRoots[i] != null)
             {
                 randomSlotRoots[i].SetActive(true);
@@ -140,7 +140,7 @@ public class ExplorationUI : MonoBehaviour
                 randomFacilityImages[i].sprite = data.nodeImage;
             }
 
-            // 2. °¢ ³ëµå Å¸ÀÔº° UI ¼¼ÆÃ ºĞ±â
+            // 2. ê° ë…¸ë“œ íƒ€ì…ë³„ UI ì„¸íŒ… ë¶„ê¸°
             if (data is FacilityData facilityData)
             {
                 int currentRank = ExplorationManager.Instance.GetFacilityRank(facilityData.nodeID);
@@ -153,7 +153,7 @@ public class ExplorationUI : MonoBehaviour
             }
             else if (data is BossSelectionNodeData bossData)
             {
-                // º¸½º ¼±ÅÃÃ¢: ·©Å© ²ô°í, ¿î¿µÀÚ ÀÚ¸®¿¡ º¸½º ±âº» SD¸¦ ¶ç¿ó´Ï´Ù!
+                // ë³´ìŠ¤ ì„ íƒì°½: ë­í¬ ë„ê³ , ìš´ì˜ì ìë¦¬ì— ë³´ìŠ¤ ê¸°ë³¸ SDë¥¼ ë„ì›ë‹ˆë‹¤!
                 if (randomRankTexts[i] != null) randomRankTexts[i].gameObject.SetActive(false);
                 if (randomOperatorImages[i] != null)
                 {
@@ -163,7 +163,7 @@ public class ExplorationUI : MonoBehaviour
             }
             else if (data is PhaseBattleNodeData battleData)
             {
-                // ÀüÅõ: ·©Å© ²ô°í, º¸½ºÀüÀÏ ¶§¸¸ ¿î¿µÀÚ(Á¶·ÂÀÚ À§Ä¡)¿¡ º¸½º SD¸¦ ¶ç¿ó´Ï´Ù!
+                // ì „íˆ¬: ë­í¬ ë„ê³ , ë³´ìŠ¤ì „ì¼ ë•Œë§Œ ìš´ì˜ì(ì¡°ë ¥ì ìœ„ì¹˜)ì— ë³´ìŠ¤ SDë¥¼ ë„ì›ë‹ˆë‹¤!
                 if (randomRankTexts[i] != null) randomRankTexts[i].gameObject.SetActive(false);
                 if (randomOperatorImages[i] != null)
                 {
@@ -171,7 +171,7 @@ public class ExplorationUI : MonoBehaviour
                     if (battleData.isBossBattle) randomOperatorImages[i].sprite = battleData.bossData.defaultSD;
                 }
             }
-            else // ÀÏ¹İ À§Çè/ÀÌº¥Æ® ³ëµå
+            else // ì¼ë°˜ ìœ„í—˜/ì´ë²¤íŠ¸ ë…¸ë“œ
             {
                 if (randomRankTexts[i] != null) randomRankTexts[i].gameObject.SetActive(false);
                 if (randomOperatorImages[i] != null) randomOperatorImages[i].gameObject.SetActive(false);
@@ -180,7 +180,7 @@ public class ExplorationUI : MonoBehaviour
         UpdateProgressUI();
     }
 
-    // ½Ã¼³ ¼±ÅÃ UI ¹öÆ°¿¡¼­ OnClick()À¸·Î ¿¬°áÇÒ ÇÔ¼ö (ÀÎÀÚ°ªÀ¸·Î 0, 1, 2¸¦ ³Ñ°ÜÁÙ °Å¿¡¿ä)
+    // ì‹œì„¤ ì„ íƒ UI ë²„íŠ¼ì—ì„œ OnClick()ìœ¼ë¡œ ì—°ê²°í•  í•¨ìˆ˜ (ì¸ìê°’ìœ¼ë¡œ 0, 1, 2ë¥¼ ë„˜ê²¨ì¤„ ê±°ì—ìš”)
     public void OnClickFacilitySlot(int slotIndex)
     {
         if (slotIndex >= currentOptions.Count || currentOptions[slotIndex] == null) return;
@@ -190,7 +190,7 @@ public class ExplorationUI : MonoBehaviour
         selectedIndex = slotIndex;
         ExplorationNodeData selectedData = currentOptions[slotIndex];
 
-        // Å¬¸¯ ½Ã Ç¥Á¤À» Âô±×¸®°Å³ª/ÁØºñ ÀÚ¼¼·Î ¹Ù²Ù´Â ·ÎÁ÷
+        // í´ë¦­ ì‹œ í‘œì •ì„ ì°¡ê·¸ë¦¬ê±°ë‚˜/ì¤€ë¹„ ìì„¸ë¡œ ë°”ê¾¸ëŠ” ë¡œì§
         if (selectedData is FacilityData facilityData)
         {
             int currentRank = ExplorationManager.Instance.GetFacilityRank(facilityData.nodeID);
@@ -198,18 +198,18 @@ public class ExplorationUI : MonoBehaviour
         }
         else if (selectedData is BossSelectionNodeData bossSelData)
         {
-            randomOperatorImages[slotIndex].sprite = bossSelData.bossData.readySD; // º¸½º ¼±ÅÃ ½Ã Ready SD!
+            randomOperatorImages[slotIndex].sprite = bossSelData.bossData.readySD; // ë³´ìŠ¤ ì„ íƒ ì‹œ Ready SD!
         }
         else if (selectedData is PhaseBattleNodeData battleData && battleData.isBossBattle)
         {
-            randomOperatorImages[slotIndex].sprite = battleData.bossData.readySD; // º¸½ºÀü µ¹ÀÔ Àü Ready SD!
+            randomOperatorImages[slotIndex].sprite = battleData.bossData.readySD; // ë³´ìŠ¤ì „ ëŒì… ì „ Ready SD!
         }
 
         confirmPopup.SetActive(true);
         UpdateCharacterStates();
     }
 
-    // Å¬¸¯Çß´ø ½Ã¼³ÀÇ ¿î¿µÀÚÀÇ Ç¥Á¤À» ±âº» »óÅÂ·Î µÇµ¹¸®´Â ÇÔ¼ö
+    // í´ë¦­í–ˆë˜ ì‹œì„¤ì˜ ìš´ì˜ìì˜ í‘œì •ì„ ê¸°ë³¸ ìƒíƒœë¡œ ë˜ëŒë¦¬ëŠ” í•¨ìˆ˜
     private void ResetSelectedOperatorFace()
     {
         if (selectedIndex == -1 || currentOptions[selectedIndex] == null) return;
@@ -223,7 +223,7 @@ public class ExplorationUI : MonoBehaviour
         }
         else if (prevData is BossSelectionNodeData bossSelData)
         {
-            randomOperatorImages[selectedIndex].sprite = bossSelData.bossData.defaultSD; // º¸½º ±âº» SD ¿ø»óº¹±¸
+            randomOperatorImages[selectedIndex].sprite = bossSelData.bossData.defaultSD; // ë³´ìŠ¤ ê¸°ë³¸ SD ì›ìƒë³µêµ¬
         }
         else if (prevData is PhaseBattleNodeData battleData && battleData.isBossBattle)
         {
@@ -231,11 +231,11 @@ public class ExplorationUI : MonoBehaviour
         }
     }
 
-    // ÆË¾÷¿¡¼­ 'Cancel(Ãë¼Ò)' ¹öÆ°À» ´­·¶À» ¶§
+    // íŒì—…ì—ì„œ 'Cancel(ì·¨ì†Œ)' ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ
     public void OnClickCancel()
     {
-        confirmPopup.SetActive(false); // ÆË¾÷ ´İ±â
-        ResetSelectedOperatorFace();       // ¿ô´Â Ç¥Á¤ ¿ø»óº¹±¸
+        confirmPopup.SetActive(false); // íŒì—… ë‹«ê¸°
+        ResetSelectedOperatorFace();       // ì›ƒëŠ” í‘œì • ì›ìƒë³µêµ¬
         selectedIndex = -1;
         UpdateCharacterStates();
     }
@@ -248,11 +248,11 @@ public class ExplorationUI : MonoBehaviour
         bool isLowHP = hpPercent <= 0.3f;
         bool isConfirming = selectedIndex != -1;
 
-        // 1. ÀÌ¹ÌÁö ±³Ã¼ (¿ì¼±¼øÀ§: °ÆÁ¤ > ÁØºñ > ÀÏ¹İ)
+        // 1. ì´ë¯¸ì§€ êµì²´ (ìš°ì„ ìˆœìœ„: ê±±ì • > ì¤€ë¹„ > ì¼ë°˜)
         if (isLowHP)
         {
             playerImage.sprite = playerWorried;
-            // Ä«¸° °ÆÁ¤ ÀÌ¹ÌÁö°¡ ÀÖ´Ù¸é ¶ç¿ì°í, ¾È ³Ö¾úÀ¸¸é ±âº» Ç¥Á¤À¸·Î ¹æ¾î!
+            // ì¹´ë¦° ê±±ì • ì´ë¯¸ì§€ê°€ ìˆë‹¤ë©´ ë„ìš°ê³ , ì•ˆ ë„£ì—ˆìœ¼ë©´ ê¸°ë³¸ í‘œì •ìœ¼ë¡œ ë°©ì–´!
             karinImage.sprite = karinWorried;
         }
         else if (isConfirming)
@@ -275,7 +275,7 @@ public class ExplorationUI : MonoBehaviour
         }
         else companionImage.gameObject.SetActive(false);
 
-        // 2. [ÇÙ½É] Ä«¸° ´ë»ç ¾÷µ¥ÀÌÆ®
+        // 2. [í•µì‹¬] ì¹´ë¦° ëŒ€ì‚¬ ì—…ë°ì´íŠ¸
         UpdateKarinDialogue();
     }
 
@@ -283,7 +283,7 @@ public class ExplorationUI : MonoBehaviour
     {
         if (selectedIndex == -1)
         {
-            // ¾Æ¹«°Íµµ ¼±ÅÃÇÏÁö ¾Ê¾ÒÀ» ¶§ ´ë»ç
+            // ì•„ë¬´ê²ƒë„ ì„ íƒí•˜ì§€ ì•Šì•˜ì„ ë•Œ ëŒ€ì‚¬
             karinDialogueText.text = LocalizationManager.Instance.GetText("msg_karin_exploration_idle");
         }
         else
@@ -296,39 +296,39 @@ public class ExplorationUI : MonoBehaviour
 
                 if (rank > 0)
                 {
-                    // ¿î¿µÀÚ°¡ ÇØ±İµÈ °æ¿ì: "±× ½Ã¼³Àº {0}°¡ ¿î¿µ ÁßÀÌ°í ½Ã¼³ ·©Å©´Â {1}³×¿ä."
+                    // ìš´ì˜ìê°€ í•´ê¸ˆëœ ê²½ìš°: "ê·¸ ì‹œì„¤ì€ {0}ê°€ ìš´ì˜ ì¤‘ì´ê³  ì‹œì„¤ ë­í¬ëŠ” {1}ë„¤ìš”."
                     string fmt = LocalizationManager.Instance.GetText("msg_facility_info_format");
-                    string opName = LocalizationManager.Instance.GetText(facility.operatorName); // ¿î¿µÀÚ ÀÌ¸§ Key ¹ø¿ª
+                    string opName = LocalizationManager.Instance.GetText(facility.operatorName); // ìš´ì˜ì ì´ë¦„ Key ë²ˆì—­
                     karinDialogueText.text = string.Format(fmt, opName, rank);
                 }
                 else
                 {
-                    // ¿î¿µÀÚ°¡ ÇØ±İµÇÁö ¾ÊÀº °æ¿ì
+                    // ìš´ì˜ìê°€ í•´ê¸ˆë˜ì§€ ì•Šì€ ê²½ìš°
                     karinDialogueText.text = LocalizationManager.Instance.GetText("msg_operator_not_unlocked");
                 }
             }
             else if (data is BossSelectionNodeData)
             {
-                // ¿¹: "ÀÌ ³à¼®À» ´ÙÀ½ Å¸°ÙÀ¸·Î Á¤ÇÑ °Å±º¿ä."
+                // ì˜ˆ: "ì´ ë…€ì„ì„ ë‹¤ìŒ íƒ€ê²Ÿìœ¼ë¡œ ì •í•œ ê±°êµ°ìš”."
                 karinDialogueText.text = LocalizationManager.Instance.GetText("msg_boss_selected");
             }
             else if (data is PhaseBattleNodeData pBattle)
             {
                 if (pBattle.isBossBattle)
                 {
-                    // ¿¹: "µåµğ¾î º¸½ºÀüÀÌ¿¡¿ä. ÁØºñ ´Ü´ÜÈ÷ ÇÏ¼¼¿ä!"
+                    // ì˜ˆ: "ë“œë””ì–´ ë³´ìŠ¤ì „ì´ì—ìš”. ì¤€ë¹„ ë‹¨ë‹¨íˆ í•˜ì„¸ìš”!"
                     karinDialogueText.text = LocalizationManager.Instance.GetText("msg_boss_battle_ready");
                 }
                 else
                 {
-                    // ¿¹: "ÀüÅõ°¡ °ğ ½ÃÀÛµÅ¿ä. Á¶½ÉÇÏ¼¼¿ä."
+                    // ì˜ˆ: "ì „íˆ¬ê°€ ê³§ ì‹œì‘ë¼ìš”. ì¡°ì‹¬í•˜ì„¸ìš”."
                     karinDialogueText.text = LocalizationManager.Instance.GetText("msg_general_battle_ready");
                 }
             }
         }
     }
 
-    // ÆË¾÷¿¡¼­ 'Confirm(È®ÀÎ)' ¹öÆ°À» ´­·¶À» ¶§
+    // íŒì—…ì—ì„œ 'Confirm(í™•ì¸)' ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ
     public void OnClickConfirm()
     {
         if (selectedIndex == -1) return;
@@ -337,20 +337,20 @@ public class ExplorationUI : MonoBehaviour
 
         if (targetData is BossSelectionNodeData bossSelect)
         {
-            // º¸½º ÇÈ! ÅÏÀ» ÁøÇàÇÏ°í ´Ù½Ã È­¸éÀ» »õ·Î°íÄ§ÇÕ´Ï´Ù.
+            // ë³´ìŠ¤ í”½! í„´ì„ ì§„í–‰í•˜ê³  ë‹¤ì‹œ í™”ë©´ì„ ìƒˆë¡œê³ ì¹¨í•©ë‹ˆë‹¤.
             ExplorationManager.Instance.SelectTargetBoss(bossSelect.bossData);
             ExplorationManager.Instance.lastVisitedNodeImage = bossSelect.nodeImage;
             ExplorationManager.Instance.SaveStateToPlayerManager();
             selectedIndex = -1;
             SetupNodes();
             UpdateCharacterStates();
-            return; // ¾À ÀüÈ¯ ¾È ÇÔ
+            return; // ì”¬ ì „í™˜ ì•ˆ í•¨
         }
         else if (targetData is FacilityData facility)
         {
             ExplorationManager.Instance.lastVisitedFacility = facility;
             ExplorationManager.Instance.lastVisitedNodeImage = facility.nodeImage;
-            ExplorationManager.Instance.AdvanceExplorationTurn(); // ½Ã¼³ Å½»ö 1ÅÏ ¼Ò¸ğ!
+            ExplorationManager.Instance.AdvanceExplorationTurn(); // ì‹œì„¤ íƒìƒ‰ 1í„´ ì†Œëª¨!
             selectedIndex = -1;
             SetupNodes();
             UpdateCharacterStates();
@@ -363,7 +363,7 @@ public class ExplorationUI : MonoBehaviour
 
             if (encounterBuilder == null)
             {
-                Debug.LogError("ExplorationUI: CombatEncounterBuilder°¡ ¿¬°áµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+                Debug.LogError("ExplorationUI: CombatEncounterBuilderê°€ ì—°ê²°ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
                 return;
             }
 
@@ -376,7 +376,7 @@ public class ExplorationUI : MonoBehaviour
         }
     }
 
-    // Ã¼·Â¹Ù ¾÷µ¥ÀÌÆ® ÇÔ¼ö
+    // ì²´ë ¥ë°” ì—…ë°ì´íŠ¸ í•¨ìˆ˜
     private void UpdateHPBar()
     {
         if (hpSlider != null && PlayerManager.Instance != null)
@@ -384,7 +384,7 @@ public class ExplorationUI : MonoBehaviour
             float currentHp = PlayerManager.Instance.stats.currentHp;
             float maxHp = PlayerManager.Instance.stats.maxHp;
 
-            // ½½¶óÀÌ´õÀÇ °¡Ä¡¸¦ 0~1 »çÀÌ·Î ¸ÂÃã
+            // ìŠ¬ë¼ì´ë”ì˜ ê°€ì¹˜ë¥¼ 0~1 ì‚¬ì´ë¡œ ë§ì¶¤
             hpSlider.value = currentHp / maxHp;
         }
     }
@@ -400,16 +400,16 @@ public class ExplorationUI : MonoBehaviour
     }
     public void RefreshUI()
     {
-        UpdateHPBar();           // Àåºñ ±³Ã¼·Î Ã¼·ÂÀÌ º¯°æµÇ¾úÀ» ¼ö ÀÖÀ¸´Ï °»½Å!
-        UpdateCharacterStates(); // ¼­Æ÷ÅÍ ±³Ã¼°¡ ÀÖ¾úÀ» ¼ö ÀÖÀ¸´Ï ÀÌ¹ÌÁö °»½Å!
+        UpdateHPBar();           // ì¥ë¹„ êµì²´ë¡œ ì²´ë ¥ì´ ë³€ê²½ë˜ì—ˆì„ ìˆ˜ ìˆìœ¼ë‹ˆ ê°±ì‹ !
+        UpdateCharacterStates(); // ì„œí¬í„° êµì²´ê°€ ìˆì—ˆì„ ìˆ˜ ìˆìœ¼ë‹ˆ ì´ë¯¸ì§€ ê°±ì‹ !
         UpdateGoldUI();
     }
     private void UpdateGoldUI()
     {
-        // ÅØ½ºÆ® ÄÄÆ÷³ÍÆ®°¡ ¿¬°áµÇ¾î ÀÖ°í PlayerManager°¡ »ì¾ÆÀÖ´Ù¸é
+        // í…ìŠ¤íŠ¸ ì»´í¬ë„ŒíŠ¸ê°€ ì—°ê²°ë˜ì–´ ìˆê³  PlayerManagerê°€ ì‚´ì•„ìˆë‹¤ë©´
         if (goldText != null && PlayerManager.Instance != null)
         {
-            // "N0" Æ÷¸ËÀº 1000 -> 1,000 Ã³·³ Ãµ ´ÜÀ§ ÄŞ¸¶¸¦ Âï¾îÁİ´Ï´Ù.
+            // "N0" í¬ë§·ì€ 1000 -> 1,000 ì²˜ëŸ¼ ì²œ ë‹¨ìœ„ ì½¤ë§ˆë¥¼ ì°ì–´ì¤ë‹ˆë‹¤.
             goldText.text = PlayerManager.Instance.stats.currentGold.ToString("N0");
         }
     }
@@ -418,18 +418,18 @@ public class ExplorationUI : MonoBehaviour
     {
         if (ExplorationManager.Instance == null) return;
 
-        // 1. ¿­¼è ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
+        // 1. ì—´ì‡  í…ìŠ¤íŠ¸ ì—…ë°ì´íŠ¸
         if (keyCountText != null)
             keyCountText.text = $"X{ExplorationManager.Instance.currentKeys}";
 
         GamePhase phase = ExplorationManager.Instance.currentPhase;
         int turn = ExplorationManager.Instance.currentTurnInPhase;
 
-        // 2. Å½»ö ÆäÀÌÁî (º¸½º ¼±ÅÃ ~ 6ÅÏ ½Ã¼³ ÀÌ¿ë)
+        // 2. íƒìƒ‰ í˜ì´ì¦ˆ (ë³´ìŠ¤ ì„ íƒ ~ 6í„´ ì‹œì„¤ ì´ìš©)
         if (phase == GamePhase.BossSelection || phase == GamePhase.Exploration)
         {
             if (explorationProgressParent != null) explorationProgressParent.SetActive(true);
-            if (battleProgressParent != null) battleProgressParent.SetActive(false); // Å½»ö Áß¿£ ÀüÅõ ÁøÇàµµ ¼û±è
+            if (battleProgressParent != null) battleProgressParent.SetActive(false); // íƒìƒ‰ ì¤‘ì—” ì „íˆ¬ ì§„í–‰ë„ ìˆ¨ê¹€
 
             int activeCount = (phase == GamePhase.BossSelection) ? 1 : (2 + turn);
 
@@ -442,14 +442,14 @@ public class ExplorationUI : MonoBehaviour
                 }
             }
         }
-        // 3. ÀüÅõ ÆäÀÌÁî (ÀÏ¹İ ÀüÅõ 3¹ø ~ º¸½ºÀü)
+        // 3. ì „íˆ¬ í˜ì´ì¦ˆ (ì¼ë°˜ ì „íˆ¬ 3ë²ˆ ~ ë³´ìŠ¤ì „)
         else if (phase == GamePhase.GeneralBattle || phase == GamePhase.BossBattle)
         {
-            //  [¼öÁ¤] ÀüÅõ Áß¿¡µµ Å½»ö UI ºÎ¸ğ¸¦ ²ôÁö ¾Ê°í À¯ÁöÇÕ´Ï´Ù!
+            //  [ìˆ˜ì •] ì „íˆ¬ ì¤‘ì—ë„ íƒìƒ‰ UI ë¶€ëª¨ë¥¼ ë„ì§€ ì•Šê³  ìœ ì§€í•©ë‹ˆë‹¤!
             if (explorationProgressParent != null) explorationProgressParent.SetActive(true);
             if (battleProgressParent != null) battleProgressParent.SetActive(true);
 
-            //  [Ãß°¡] Å½»ö UIÀÇ 7°³ ¾ÆÀÌÄÜÀº ²Ë Ã¤¿öÁø(¸ğµÎ true) »óÅÂ·Î µÓ´Ï´Ù.
+            //  [ì¶”ê°€] íƒìƒ‰ UIì˜ 7ê°œ ì•„ì´ì½˜ì€ ê½‰ ì±„ì›Œì§„(ëª¨ë‘ true) ìƒíƒœë¡œ ë‘¡ë‹ˆë‹¤.
             if (explorationProgressIcons != null)
             {
                 for (int i = 0; i < explorationProgressIcons.Length; i++)
@@ -459,8 +459,8 @@ public class ExplorationUI : MonoBehaviour
                 }
             }
 
-            // ÀÏ¹İ ÀüÅõ ÁßÀÌ¸é (ÅÏ ¼ö + 1)°³ Á¡µî, º¸½ºÀüÀÌ¸é 4°³ ¸ğµÎ Á¡µî
-            // ¿¹: Ã¹ ¹øÂ° ÀÏ¹İÀüÅõ(Turn 0) -> 1°³ / ¸¶Áö¸· ÀÏ¹İÀüÅõ(Turn 2) -> 3°³
+            // ì¼ë°˜ ì „íˆ¬ ì¤‘ì´ë©´ (í„´ ìˆ˜ + 1)ê°œ ì ë“±, ë³´ìŠ¤ì „ì´ë©´ 4ê°œ ëª¨ë‘ ì ë“±
+            // ì˜ˆ: ì²« ë²ˆì§¸ ì¼ë°˜ì „íˆ¬(Turn 0) -> 1ê°œ / ë§ˆì§€ë§‰ ì¼ë°˜ì „íˆ¬(Turn 2) -> 3ê°œ
             int activeCount = (phase == GamePhase.BossBattle) ? 4 : (1 + turn);
 
             if (battleProgressIcons != null)

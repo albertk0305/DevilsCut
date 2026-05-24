@@ -1,13 +1,13 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
 // =========================================================
-// [Ãß°¡] °ÔÀÓÀÇ ÇöÀç Èå¸§ »óÅÂ¸¦ Á¤ÀÇÇÕ´Ï´Ù.
+// [ì¶”ê°€] ê²Œì„ì˜ í˜„ì¬ íë¦„ ìƒíƒœë¥¼ ì •ì˜í•©ë‹ˆë‹¤.
 // =========================================================
 public enum GamePhase { BossSelection, Exploration, GeneralBattle, BossBattle, GameClear }
 
-// UI ½½·Ô°ú ÀÚ¿¬½º·´°Ô ¿¬µ¿ÇÏ±â À§ÇÑ ´õ¹Ì ³ëµå µ¥ÀÌÅÍ
+// UI ìŠ¬ë¡¯ê³¼ ìì—°ìŠ¤ëŸ½ê²Œ ì—°ë™í•˜ê¸° ìœ„í•œ ë”ë¯¸ ë…¸ë“œ ë°ì´í„°
 public class BossSelectionNodeData : ExplorationNodeData { public BossEncounterData bossData; }
 public class PhaseBattleNodeData : DangerNodeData { public BossEncounterData bossData; public bool isBossBattle; }
 
@@ -15,33 +15,33 @@ public class ExplorationManager : MonoBehaviour
 {
     public static ExplorationManager Instance;
 
-    [Header("¸ğµç ½Ã¼³ µ¥ÀÌÅÍ Ã¢°í")]
+    [Header("ëª¨ë“  ì‹œì„¤ ë°ì´í„° ì°½ê³ ")]
     public List<ExplorationNodeData> allNodes;
 
-    [Header("µ¿Àû µ¥ÀÌÅÍ (ÀúÀåµÉ ³»¿ëµé)")]
+    [Header("ë™ì  ë°ì´í„° (ì €ì¥ë  ë‚´ìš©ë“¤)")]
     public Dictionary<string, int> facilityRanks = new Dictionary<string, int>();
     public FacilityData lastVisitedFacility;
     public Sprite lastVisitedNodeImage;
 
     // =========================================================
-    // [Ãß°¡] °ÔÀÓ ÁøÇà (ÆäÀÌÁî ¹× ÅÏ) Æ®·¡Å· º¯¼öµé
+    // [ì¶”ê°€] ê²Œì„ ì§„í–‰ (í˜ì´ì¦ˆ ë° í„´) íŠ¸ë˜í‚¹ ë³€ìˆ˜ë“¤
     // =========================================================
-    [Header("°ÔÀÓ Èå¸§ Á¦¾î (Phase & Turn)")]
+    [Header("ê²Œì„ íë¦„ ì œì–´ (Phase & Turn)")]
     public GamePhase currentPhase = GamePhase.BossSelection;
-    public int currentCycle = 1; // 1~7: Áß°£º¸½º, 8: ÃÖÁ¾º¸½º, 9: ÁøÃÖÁ¾º¸½º
-    public int currentTurnInPhase = 0; // Å½»ö(0~5), ÀÏ¹İÀüÅõ(0~2) ÁøÇàµµ
+    public int currentCycle = 1; // 1~7: ì¤‘ê°„ë³´ìŠ¤, 8: ìµœì¢…ë³´ìŠ¤, 9: ì§„ìµœì¢…ë³´ìŠ¤
+    public int currentTurnInPhase = 0; // íƒìƒ‰(0~5), ì¼ë°˜ì „íˆ¬(0~2) ì§„í–‰ë„
 
-    [Header("ÀçÈ­ ¹× ÁøÇàµµ")]
+    [Header("ì¬í™” ë° ì§„í–‰ë„")]
     public int currentKeys = 0;
 
-    [Header("UI ¾ÆÀÌÄÜ ¼¼ÆÃ")]
+    [Header("UI ì•„ì´ì½˜ ì„¸íŒ…")]
     public Sprite bossSelectionEventIcon;
 
-    [Header("º¸½º µ¥ÀÌÅÍ ¼¼ÆÃ")]
-    public List<BossEncounterData> remainingMidBosses; // 7¸íÀÇ Áß°£º¸½º ¸®½ºÆ®
+    [Header("ë³´ìŠ¤ ë°ì´í„° ì„¸íŒ…")]
+    public List<BossEncounterData> remainingMidBosses; // 7ëª…ì˜ ì¤‘ê°„ë³´ìŠ¤ ë¦¬ìŠ¤íŠ¸
     public BossEncounterData finalBoss;
     public BossEncounterData trueFinalBoss;
-    public BossEncounterData currentTargetBoss; // À¯Àú°¡ ÀÌ¹ø ÆäÀÌÁî¿¡ ÇÈÇÑ º¸½º
+    public BossEncounterData currentTargetBoss; // ìœ ì €ê°€ ì´ë²ˆ í˜ì´ì¦ˆì— í”½í•œ ë³´ìŠ¤
 
     private readonly List<ExplorationNodeData> currentOptions = new List<ExplorationNodeData>();
     public IReadOnlyList<ExplorationNodeData> CurrentOptions
@@ -82,8 +82,8 @@ public class ExplorationManager : MonoBehaviour
     }
 
     // =========================================================
-    // [ÇÙ½É] ÇöÀç »óÅÂ¿¡ ¸ÂÃç È­¸é¿¡ »Ñ·ÁÁÙ 3°³ÀÇ ½½·Ô µ¥ÀÌÅÍ¸¦ ¸¸µì´Ï´Ù.
-    // ºó ½½·ÔÀº nullÀ» ³Ö¾î UI°¡ À§Ä¡¸¦(´ëÄªÀ») ÀâÀ» ¼ö ÀÖ°Ô ÇÕ´Ï´Ù.
+    // [í•µì‹¬] í˜„ì¬ ìƒíƒœì— ë§ì¶° í™”ë©´ì— ë¿Œë ¤ì¤„ 3ê°œì˜ ìŠ¬ë¡¯ ë°ì´í„°ë¥¼ ë§Œë“­ë‹ˆë‹¤.
+    // ë¹ˆ ìŠ¬ë¡¯ì€ nullì„ ë„£ì–´ UIê°€ ìœ„ì¹˜ë¥¼(ëŒ€ì¹­ì„) ì¡ì„ ìˆ˜ ìˆê²Œ í•©ë‹ˆë‹¤.
     // =========================================================
     public IReadOnlyList<ExplorationNodeData> GenerateCurrentOptions()
     {
@@ -109,7 +109,7 @@ public class ExplorationManager : MonoBehaviour
         currentOptions.Add(null);
     }
 
-    // ±âÁ¸ È£ÃâºÎ È£È¯¿ë. ÀÌ¹Ì È®Á¤µÈ ¼±ÅÃÁö°¡ ÀÖÀ¸¸é »õ·Î ·£´ıÀ» µ¹¸®Áö ¾Ê½À´Ï´Ù.
+    // ê¸°ì¡´ í˜¸ì¶œë¶€ í˜¸í™˜ìš©. ì´ë¯¸ í™•ì •ëœ ì„ íƒì§€ê°€ ìˆìœ¼ë©´ ìƒˆë¡œ ëœë¤ì„ ëŒë¦¬ì§€ ì•ŠìŠµë‹ˆë‹¤.
     public List<ExplorationNodeData> GetCurrentOptions()
     {
         EnsureCurrentOptions();
@@ -125,7 +125,7 @@ public class ExplorationManager : MonoBehaviour
             case GamePhase.BossSelection:
                 List<BossEncounterData> candidates = GetBossCandidates();
 
-                // ´ëÄª ¹èÄ¡ ·ÎÁ÷
+                // ëŒ€ì¹­ ë°°ì¹˜ ë¡œì§
                 if (candidates.Count >= 3)
                 {
                     options[0] = CreateBossNode(candidates[0]);
@@ -134,17 +134,17 @@ public class ExplorationManager : MonoBehaviour
                 }
                 else if (candidates.Count == 2)
                 {
-                    options[0] = CreateBossNode(candidates[0]); // ¿ŞÂÊ
-                    options[2] = CreateBossNode(candidates[1]); // ¿À¸¥ÂÊ
+                    options[0] = CreateBossNode(candidates[0]); // ì™¼ìª½
+                    options[2] = CreateBossNode(candidates[1]); // ì˜¤ë¥¸ìª½
                 }
                 else if (candidates.Count == 1)
                 {
-                    options[1] = CreateBossNode(candidates[0]); // °¡¿îµ¥
+                    options[1] = CreateBossNode(candidates[0]); // ê°€ìš´ë°
                 }
                 break;
 
             case GamePhase.Exploration:
-                // ±âÁ¸ Å½»ö: ·£´ı 3°³
+                // ê¸°ì¡´ íƒìƒ‰: ëœë¤ 3ê°œ
                 var randoms = allNodes.OrderBy(x => Random.value).Take(3).ToList();
                 for (int i = 0; i < randoms.Count; i++) options[i] = randoms[i];
                 break;
@@ -152,10 +152,10 @@ public class ExplorationManager : MonoBehaviour
             case GamePhase.GeneralBattle:
                 if (currentTargetBoss == null)
                 {
-                    DevLog.LogWarning("[°æ°í] GeneralBattle ÁøÀÔÇßÀ¸³ª currentTargetBoss°¡ nullÀÔ´Ï´Ù!");
+                    DevLog.LogWarning("[ê²½ê³ ] GeneralBattle ì§„ì…í–ˆìœ¼ë‚˜ currentTargetBossê°€ nullì…ë‹ˆë‹¤!");
                     break;
                 }
-                // ÀÏ¹İ ÀüÅõ: °¡¿îµ¥(1¹ø)¿¡¸¸ ºÎÇÏ ¸ó½ºÅÍ ³ëµå ¹èÄ¡
+                // ì¼ë°˜ ì „íˆ¬: ê°€ìš´ë°(1ë²ˆ)ì—ë§Œ ë¶€í•˜ ëª¬ìŠ¤í„° ë…¸ë“œ ë°°ì¹˜
                 var minionNode = ScriptableObject.CreateInstance<PhaseBattleNodeData>();
                 minionNode.bossData = currentTargetBoss;
                 minionNode.isBossBattle = false;
@@ -167,10 +167,10 @@ public class ExplorationManager : MonoBehaviour
             case GamePhase.BossBattle:
                 if (currentTargetBoss == null)
                 {
-                    DevLog.LogWarning("[°æ°í] BossBattle ÁøÀÔÇßÀ¸³ª currentTargetBoss°¡ nullÀÔ´Ï´Ù!");
+                    DevLog.LogWarning("[ê²½ê³ ] BossBattle ì§„ì…í–ˆìœ¼ë‚˜ currentTargetBossê°€ nullì…ë‹ˆë‹¤!");
                     break;
                 }
-                // º¸½º ÀüÅõ: °¡¿îµ¥(1¹ø)¿¡¸¸ º¸½º ³ëµå ¹èÄ¡
+                // ë³´ìŠ¤ ì „íˆ¬: ê°€ìš´ë°(1ë²ˆ)ì—ë§Œ ë³´ìŠ¤ ë…¸ë“œ ë°°ì¹˜
                 var bossNode = ScriptableObject.CreateInstance<PhaseBattleNodeData>();
                 bossNode.bossData = currentTargetBoss;
                 bossNode.isBossBattle = true;
@@ -195,10 +195,10 @@ public class ExplorationManager : MonoBehaviour
 
     private BossSelectionNodeData CreateBossNode(BossEncounterData data)
     {
-        // ¹æ¾î ÄÚµå: µ¥ÀÌÅÍ°¡ ºñ¾îÀÖÀ¸¸é ³ëµåµµ ¸¸µéÁö ¾Ê°í null ¹İÈ¯ (°ËÀº È­¸é ¹æÁö!)
+        // ë°©ì–´ ì½”ë“œ: ë°ì´í„°ê°€ ë¹„ì–´ìˆìœ¼ë©´ ë…¸ë“œë„ ë§Œë“¤ì§€ ì•Šê³  null ë°˜í™˜ (ê²€ì€ í™”ë©´ ë°©ì§€!)
         if (data == null)
         {
-            DevLog.LogWarning($"[°æ°í] º¸½º µ¥ÀÌÅÍ°¡ ºñ¾îÀÖ½À´Ï´Ù! ÀÎ½ºÆåÅÍ¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
+            DevLog.LogWarning($"[ê²½ê³ ] ë³´ìŠ¤ ë°ì´í„°ê°€ ë¹„ì–´ìˆìŠµë‹ˆë‹¤! ì¸ìŠ¤í™í„°ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
             return null;
         }
 
@@ -209,25 +209,25 @@ public class ExplorationManager : MonoBehaviour
     }
 
     // =========================================================
-    // [ÇÙ½É] À¯Àú°¡ ¹öÆ°À» ´­·¯ ´ÙÀ½ ´Ü°è·Î ³Ñ¾î°¥ ¶§ ÅÏÀ» ÁøÇà½ÃÅµ´Ï´Ù.
+    // [í•µì‹¬] ìœ ì €ê°€ ë²„íŠ¼ì„ ëˆŒëŸ¬ ë‹¤ìŒ ë‹¨ê³„ë¡œ ë„˜ì–´ê°ˆ ë•Œ í„´ì„ ì§„í–‰ì‹œí‚µë‹ˆë‹¤.
     // =========================================================
     public void SelectTargetBoss(BossEncounterData selected)
     {
         currentTargetBoss = selected;
         currentPhase = GamePhase.Exploration;
         currentTurnInPhase = 0;
-        DevLog.Log($"[»çÀÌÅ¬ {currentCycle}] ¸ñÇ¥ º¸½º '{selected.bossName}' ¼±ÅÃ ¿Ï·á. Å½»ö ÆäÀÌÁî µ¹ÀÔ!");
+        DevLog.Log($"[ì‚¬ì´í´ {currentCycle}] ëª©í‘œ ë³´ìŠ¤ '{selected.bossName}' ì„ íƒ ì™„ë£Œ. íƒìƒ‰ í˜ì´ì¦ˆ ëŒì…!");
         GenerateCurrentOptions();
     }
 
     public void AdvanceExplorationTurn()
     {
         currentTurnInPhase++;
-        if (currentTurnInPhase >= 6) // 6ÅÏ ²Ë Ã¤¿üÀ¸¸é
+        if (currentTurnInPhase >= 6) // 6í„´ ê½‰ ì±„ì› ìœ¼ë©´
         {
             currentPhase = GamePhase.GeneralBattle;
             currentTurnInPhase = 0;
-            DevLog.Log("Å½»ö 6ÅÏ Á¾·á. ÀÏ¹İ ÀüÅõ ÆäÀÌÁî µ¹ÀÔ!");
+            DevLog.Log("íƒìƒ‰ 6í„´ ì¢…ë£Œ. ì¼ë°˜ ì „íˆ¬ í˜ì´ì¦ˆ ëŒì…!");
         }
         GenerateCurrentOptions();
         ExplorationManager.Instance.SaveStateToPlayerManager();
@@ -243,7 +243,7 @@ public class ExplorationManager : MonoBehaviour
             {
                 currentPhase = GamePhase.BossBattle;
                 currentTurnInPhase = 0;
-                DevLog.Log("ÀÏ¹İ ÀüÅõ 3È¸ ¿Ï·á. º¸½º ÀüÅõ µ¹ÀÔ!");
+                DevLog.Log("ì¼ë°˜ ì „íˆ¬ 3íšŒ ì™„ë£Œ. ë³´ìŠ¤ ì „íˆ¬ ëŒì…!");
             }
         }
         else
@@ -251,10 +251,10 @@ public class ExplorationManager : MonoBehaviour
             if (IsCurrentBattleMidBoss())
             {
                 currentKeys++;
-                DevLog.Log($"[Áß°£º¸½º º¸»ó] Key +1, ÇöÀç Key: {currentKeys}");
+                DevLog.Log($"[ì¤‘ê°„ë³´ìŠ¤ ë³´ìƒ] Key +1, í˜„ì¬ Key: {currentKeys}");
             }
 
-            // [¼öÁ¤] 7»çÀÌÅ¬±îÁö¸¸ Áß°£º¸½º ¸®½ºÆ® Â÷°¨
+            // [ìˆ˜ì •] 7ì‚¬ì´í´ê¹Œì§€ë§Œ ì¤‘ê°„ë³´ìŠ¤ ë¦¬ìŠ¤íŠ¸ ì°¨ê°
             if (currentCycle <= 7 && remainingMidBosses != null)
             {
                 if (currentTargetBoss != null && !string.IsNullOrEmpty(currentTargetBoss.bossID))
@@ -267,7 +267,7 @@ public class ExplorationManager : MonoBehaviour
             currentTargetBoss = null;
             currentPhase = GamePhase.BossSelection;
             currentTurnInPhase = 0;
-            DevLog.Log($"º¸½º Ã³Ä¡! ´ÙÀ½ »çÀÌÅ¬({currentCycle})·Î ³Ñ¾î°©´Ï´Ù.");
+            DevLog.Log($"ë³´ìŠ¤ ì²˜ì¹˜! ë‹¤ìŒ ì‚¬ì´í´({currentCycle})ë¡œ ë„˜ì–´ê°‘ë‹ˆë‹¤.");
         }
 
         GenerateCurrentOptions();
@@ -317,7 +317,7 @@ public class ExplorationManager : MonoBehaviour
     {
         if (savedOptions == null || savedOptions.Count != 3)
         {
-            DevLog.LogWarning("[Save] currentOptions º¹¿ø ½ÇÆĞ: ÀúÀåµÈ ¼±ÅÃÁö°¡ 3°³°¡ ¾Æ´Õ´Ï´Ù.");
+            DevLog.LogWarning("[Save] currentOptions ë³µì› ì‹¤íŒ¨: ì €ì¥ëœ ì„ íƒì§€ê°€ 3ê°œê°€ ì•„ë‹™ë‹ˆë‹¤.");
             return false;
         }
 
@@ -328,27 +328,27 @@ public class ExplorationManager : MonoBehaviour
         {
             if (savedOption == null)
             {
-                DevLog.LogWarning("[Save] currentOptions º¹¿ø ½ÇÆĞ: ºñ¾îÀÖ´Â ¼±ÅÃÁö µ¥ÀÌÅÍ°¡ ÀÖ½À´Ï´Ù.");
+                DevLog.LogWarning("[Save] currentOptions ë³µì› ì‹¤íŒ¨: ë¹„ì–´ìˆëŠ” ì„ íƒì§€ ë°ì´í„°ê°€ ìˆìŠµë‹ˆë‹¤.");
                 return false;
             }
 
             int slotIndex = savedOption.slotIndex;
             if (slotIndex < 0 || slotIndex >= 3)
             {
-                DevLog.LogWarning($"[Save] currentOptions º¹¿ø ½ÇÆĞ: Àß¸øµÈ ½½·Ô ÀÎµ¦½º {slotIndex}.");
+                DevLog.LogWarning($"[Save] currentOptions ë³µì› ì‹¤íŒ¨: ì˜ëª»ëœ ìŠ¬ë¡¯ ì¸ë±ìŠ¤ {slotIndex}.");
                 return false;
             }
 
             if (restoredSlots[slotIndex])
             {
-                DevLog.LogWarning($"[Save] currentOptions º¹¿ø ½ÇÆĞ: Áßº¹ ½½·Ô ÀÎµ¦½º {slotIndex}.");
+                DevLog.LogWarning($"[Save] currentOptions ë³µì› ì‹¤íŒ¨: ì¤‘ë³µ ìŠ¬ë¡¯ ì¸ë±ìŠ¤ {slotIndex}.");
                 return false;
             }
 
             ExplorationNodeData restoredNode = CreateOptionFromSave(savedOption, bossDatabase, nodeDatabase);
             if (savedOption.optionType != "None" && restoredNode == null)
             {
-                DevLog.LogWarning($"[Save] currentOptions º¹¿ø ½ÇÆĞ: {savedOption.optionType} ½½·Ô {slotIndex} º¹¿ø ºÒ°¡.");
+                DevLog.LogWarning($"[Save] currentOptions ë³µì› ì‹¤íŒ¨: {savedOption.optionType} ìŠ¬ë¡¯ {slotIndex} ë³µì› ë¶ˆê°€.");
                 return false;
             }
 
@@ -360,7 +360,7 @@ public class ExplorationManager : MonoBehaviour
         {
             if (!restoredSlots[i])
             {
-                DevLog.LogWarning($"[Save] currentOptions º¹¿ø ½ÇÆĞ: ½½·Ô {i} µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.");
+                DevLog.LogWarning($"[Save] currentOptions ë³µì› ì‹¤íŒ¨: ìŠ¬ë¡¯ {i} ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤.");
                 return false;
             }
         }
@@ -380,7 +380,7 @@ public class ExplorationManager : MonoBehaviour
             case "Facility":
                 if (nodeDatabase == null)
                 {
-                    DevLog.LogWarning("[Save] Facility ¼±ÅÃÁö º¹¿ø ½ÇÆĞ: ExplorationNodeDatabase°¡ ¾ø½À´Ï´Ù.");
+                    DevLog.LogWarning("[Save] Facility ì„ íƒì§€ ë³µì› ì‹¤íŒ¨: ExplorationNodeDatabaseê°€ ì—†ìŠµë‹ˆë‹¤.");
                     return null;
                 }
                 return nodeDatabase.GetByID(savedOption.nodeID);
@@ -411,7 +411,7 @@ public class ExplorationManager : MonoBehaviour
             }
 
             default:
-                DevLog.LogWarning($"[Save] ¾Ë ¼ö ¾ø´Â ¼±ÅÃÁö Å¸ÀÔ: {savedOption.optionType}");
+                DevLog.LogWarning($"[Save] ì•Œ ìˆ˜ ì—†ëŠ” ì„ íƒì§€ íƒ€ì…: {savedOption.optionType}");
                 return null;
         }
     }
@@ -420,7 +420,7 @@ public class ExplorationManager : MonoBehaviour
     {
         if (bossDatabase == null)
         {
-            DevLog.LogWarning("[Save] º¸½º º¹¿ø ½ÇÆĞ: BossDatabase°¡ ¾ø½À´Ï´Ù.");
+            DevLog.LogWarning("[Save] ë³´ìŠ¤ ë³µì› ì‹¤íŒ¨: BossDatabaseê°€ ì—†ìŠµë‹ˆë‹¤.");
             return null;
         }
 
@@ -452,7 +452,7 @@ public class ExplorationManager : MonoBehaviour
     {
         if (bossDatabase == null)
         {
-            DevLog.LogWarning("[Save] º¸½º ÁøÇàµµ º¹¿ø ½ÇÆĞ: BossDatabase°¡ ¾ø½À´Ï´Ù.");
+            DevLog.LogWarning("[Save] ë³´ìŠ¤ ì§„í–‰ë„ ë³µì› ì‹¤íŒ¨: BossDatabaseê°€ ì—†ìŠµë‹ˆë‹¤.");
             return false;
         }
 
@@ -462,7 +462,7 @@ public class ExplorationManager : MonoBehaviour
             restoredTargetBoss = bossDatabase.GetByID(currentTargetBossID);
             if (restoredTargetBoss == null)
             {
-                DevLog.LogWarning($"[Save] currentTargetBoss º¹¿ø ½ÇÆĞ: {currentTargetBossID}");
+                DevLog.LogWarning($"[Save] currentTargetBoss ë³µì› ì‹¤íŒ¨: {currentTargetBossID}");
                 return false;
             }
         }
@@ -475,7 +475,7 @@ public class ExplorationManager : MonoBehaviour
                 BossEncounterData boss = bossDatabase.GetByID(bossID);
                 if (boss == null)
                 {
-                    DevLog.LogWarning($"[Save] remainingMidBoss º¹¿ø ½ÇÆĞ: {bossID}");
+                    DevLog.LogWarning($"[Save] remainingMidBoss ë³µì› ì‹¤íŒ¨: {bossID}");
                     return false;
                 }
 

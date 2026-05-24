@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-// [ºĞ¸®] Ä³¸¯ÅÍÀÇ ½ºÅÈ ¿øº»À» º¸°üÇÏ°í, ¹öÇÁ°¡ Àû¿ëµÈ ÃÖÁ¾ ½Ç½Ã°£ ½ºÅÈ ¿¬»êÀ» Àü´ãÇÕ´Ï´Ù.
+// [ë¶„ë¦¬] ìºë¦­í„°ì˜ ìŠ¤íƒ¯ ì›ë³¸ì„ ë³´ê´€í•˜ê³ , ë²„í”„ê°€ ì ìš©ëœ ìµœì¢… ì‹¤ì‹œê°„ ìŠ¤íƒ¯ ì—°ì‚°ì„ ì „ë‹´í•©ë‹ˆë‹¤.
 public class StatManager : MonoBehaviour
 {
     public static StatManager Instance;
 
-    // ÀüÅõ¿¡ Âü¿©ÇÏ´Â ¾çÃøÀÇ ½ºÅÈ ¿øº» µ¥ÀÌÅÍ
+    // ì „íˆ¬ì— ì°¸ì—¬í•˜ëŠ” ì–‘ì¸¡ì˜ ìŠ¤íƒ¯ ì›ë³¸ ë°ì´í„°
     private PlayerStats playerStats;
     private EnemyData enemyData;
 
@@ -14,22 +14,22 @@ public class StatManager : MonoBehaviour
         if (Instance == null) Instance = this;
     }
 
-    // ÀüÅõ ½ÃÀÛ ½Ã CombatManager°¡ ½ºÅÈ º¹Á¦º»/¿øº»À» ³Ñ°ÜÁÖ¾î ÃÊ±âÈ­ÇÕ´Ï´Ù.
+    // ì „íˆ¬ ì‹œì‘ ì‹œ CombatManagerê°€ ìŠ¤íƒ¯ ë³µì œë³¸/ì›ë³¸ì„ ë„˜ê²¨ì£¼ì–´ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
     public void InitStats(PlayerStats pStats, EnemyData eData)
     {
         playerStats = pStats;
         enemyData = eData;
-        DevLog.Log("[StatManager] ÀüÅõ ½ºÅÈ µ¥ÀÌÅÍ ÃÊ±âÈ­ ¿Ï·á");
+        DevLog.Log("[StatManager] ì „íˆ¬ ìŠ¤íƒ¯ ë°ì´í„° ì´ˆê¸°í™” ì™„ë£Œ");
     }
 
-    // ¹öÇÁ/µğ¹öÇÁ°¡ Àû¿ëµÈ ÃÖÁ¾ ½Ç½Ã°£ ½ºÅÈ °è»ê
+    // ë²„í”„/ë””ë²„í”„ê°€ ì ìš©ëœ ìµœì¢… ì‹¤ì‹œê°„ ìŠ¤íƒ¯ ê³„ì‚°
     public int GetEffectiveStat(bool isPlayer, TargetStat stat)
     {
         int baseStat = GetBaseStat(isPlayer, stat);
         float multiplier = 0f;
         float flatBonus = 0f;
 
-        // BuffManager¿¡°Ô ÇöÀç °É¸° È¿°úµéÀ» ¹°¾îº¾´Ï´Ù.
+        // BuffManagerì—ê²Œ í˜„ì¬ ê±¸ë¦° íš¨ê³¼ë“¤ì„ ë¬¼ì–´ë´…ë‹ˆë‹¤.
         var effects = BuffManager.Instance.GetEffects(isPlayer);
         foreach (var effect in effects)
         {
@@ -42,10 +42,10 @@ public class StatManager : MonoBehaviour
             }
         }
 
-        // [½Å±Ô] ¹ö¼­Ä¿ ¿¡ÇÈ: ÀÒÀº Ã¼·Â ºñ·Ê ½Ç½Ã°£ ½ºÅÈ ÁõÆø!
+        // [ì‹ ê·œ] ë²„ì„œì»¤ ì—í”½: ìƒì€ ì²´ë ¥ ë¹„ë¡€ ì‹¤ì‹œê°„ ìŠ¤íƒ¯ ì¦í­!
         if (isPlayer && PlayerManager.Instance != null)
         {
-            // ´ë»ó ½ºÅÈÀÌ 4´ë ÇÙ½É ½ºÅÈÀÏ °æ¿ì¿¡¸¸ ÀÛµ¿
+            // ëŒ€ìƒ ìŠ¤íƒ¯ì´ 4ëŒ€ í•µì‹¬ ìŠ¤íƒ¯ì¼ ê²½ìš°ì—ë§Œ ì‘ë™
             if (stat == TargetStat.Strength || stat == TargetStat.Defense || stat == TargetStat.Speed || stat == TargetStat.Luck)
             {
                 var inventory = PlayerManager.Instance.inventory;
@@ -59,21 +59,21 @@ public class StatManager : MonoBehaviour
 
                 if (epicMaxBonus > 0f)
                 {
-                    // ½Ç½Ã°£À¸·Î º¯ÇÏ´Â ÇöÀç Ã¼·ÂÀ» ±â¹İÀ¸·Î ¹èÀ²À» ´õÇØÁİ´Ï´Ù!
+                    // ì‹¤ì‹œê°„ìœ¼ë¡œ ë³€í•˜ëŠ” í˜„ì¬ ì²´ë ¥ì„ ê¸°ë°˜ìœ¼ë¡œ ë°°ìœ¨ì„ ë”í•´ì¤ë‹ˆë‹¤!
                     multiplier += (CombatMath.GetMissingHPMultiplier(playerStats.maxHp, playerStats.currentHp, epicMaxBonus) - 1.0f);
                 }
             }
         }
 
-        // ½ºÅÈ Ä¸(Á¦ÇÑ) Àû¿ë µğ¹öÇÁ´Â ÃÖ´ë -90ÆÛ±îÁö Àû¿ë(½ºÅÈ À½¼ö ¹æÁö)
+        // ìŠ¤íƒ¯ ìº¡(ì œí•œ) ì ìš© ë””ë²„í”„ëŠ” ìµœëŒ€ -90í¼ê¹Œì§€ ì ìš©(ìŠ¤íƒ¯ ìŒìˆ˜ ë°©ì§€)
         multiplier = Mathf.Max(-0.9f, multiplier);
 
-        // °ø½Ä: (±âº» ½ºÅÈ + °íÁ¤Ä¡ ÇÕ) * (1 + ÆÛ¼¾Æ® ÇÕ)
+        // ê³µì‹: (ê¸°ë³¸ ìŠ¤íƒ¯ + ê³ ì •ì¹˜ í•©) * (1 + í¼ì„¼íŠ¸ í•©)
         int finalStat = Mathf.RoundToInt((baseStat + flatBonus) * (1f + multiplier));
-        return Mathf.Max(1, finalStat); // ½ºÅÈÀÌ 1 ¹Ì¸¸À¸·Î ¶³¾îÁöÁö ¾Ê°Ô º¸È£
+        return Mathf.Max(1, finalStat); // ìŠ¤íƒ¯ì´ 1 ë¯¸ë§Œìœ¼ë¡œ ë–¨ì–´ì§€ì§€ ì•Šê²Œ ë³´í˜¸
     }
 
-    // [ÃÖÀûÈ­] ¿øº» ½ºÅÈÀ» °¡Á®¿À´Â Switch¹®À» ÇïÆÛ ÇÔ¼ö·Î ºĞ¸®ÇÏ¿© °¡µ¶¼º Çâ»ó
+    // [ìµœì í™”] ì›ë³¸ ìŠ¤íƒ¯ì„ ê°€ì ¸ì˜¤ëŠ” Switchë¬¸ì„ í—¬í¼ í•¨ìˆ˜ë¡œ ë¶„ë¦¬í•˜ì—¬ ê°€ë…ì„± í–¥ìƒ
     private int GetBaseStat(bool isPlayer, TargetStat stat)
     {
         if (isPlayer)

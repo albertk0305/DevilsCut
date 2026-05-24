@@ -1,40 +1,40 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-// [ÆĞ½Ãºê ½ºÅ³ °ø°£]
-// TODO: Å½»ö ¾À ±¸Çö ½Ã, ¾Æ½º¸ğµ¥¿ì½º ÆĞ½Ãºê 'Ç® ÂøÀå ¹öÇÁ' ·ÎÁ÷ Ãß°¡ ¿¹Á¤
-// (¾ÆÀÌÅÛ ¼¼Æ® È¿°ú °¹¼ö¿¡ ºñ·ÊÇÑ ½ºÅÈ º¸³Ê½º Á¦°ø)
+// [íŒ¨ì‹œë¸Œ ìŠ¤í‚¬ ê³µê°„]
+// TODO: íƒìƒ‰ ì”¬ êµ¬í˜„ ì‹œ, ì•„ìŠ¤ëª¨ë°ìš°ìŠ¤ íŒ¨ì‹œë¸Œ 'í’€ ì°©ì¥ ë²„í”„' ë¡œì§ ì¶”ê°€ ì˜ˆì •
+// (ì•„ì´í…œ ì„¸íŠ¸ íš¨ê³¼ ê°¯ìˆ˜ì— ë¹„ë¡€í•œ ìŠ¤íƒ¯ ë³´ë„ˆìŠ¤ ì œê³µ)
 
 [CreateAssetMenu(fileName = "Asmodeus_StartSkill", menuName = "SupporterLogic/Asmodeus/Start Skill")]
 public class SupporterLogic_Asmodeus_Start : SupporterLogicBase
 {
-    [Header("µğ¹öÇÁ ¼³Á¤ (¸ÅÈ¤)")]
-    public StatusEffectData charmDebuff; // '°ø°İ·Â(STR) °¨¼Ò' µğ¹öÇÁ ¿¡¼Â ¿¬°á
-    public int duration = 3;             // 3ÅÏ Áö¼Ó
+    [Header("ë””ë²„í”„ ì„¤ì • (ë§¤í˜¹)")]
+    public StatusEffectData charmDebuff; // 'ê³µê²©ë ¥(STR) ê°ì†Œ' ë””ë²„í”„ ì—ì…‹ ì—°ê²°
+    public int duration = 3;             // 3í„´ ì§€ì†
 
-    [Header("·¹º§º° ¼öÄ¡ ¼³Á¤")]
-    public float[] debuffValues = { -0.10f, -0.15f, -0.20f }; // Àû °ø°İ·Â °¨¼ÒÀ²
-    public int[] rankUpValues = { 1, 1, 2 };                  // ¼Î¸® ·©Å©¾÷ ¼öÄ¡
+    [Header("ë ˆë²¨ë³„ ìˆ˜ì¹˜ ì„¤ì •")]
+    public float[] debuffValues = { -0.10f, -0.15f, -0.20f }; // ì  ê³µê²©ë ¥ ê°ì†Œìœ¨
+    public int[] rankUpValues = { 1, 1, 2 };                  // ì…°ë¦¬ ë­í¬ì—… ìˆ˜ì¹˜
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
-        // ·¹º§¿¡ ¸Â´Â ÀÎµ¦½º(0, 1, 2)¸¦ ¾ÈÀüÇÏ°Ô °¡Á®¿É´Ï´Ù.
+        // ë ˆë²¨ì— ë§ëŠ” ì¸ë±ìŠ¤(0, 1, 2)ë¥¼ ì•ˆì „í•˜ê²Œ ê°€ì ¸ì˜µë‹ˆë‹¤.
         int index = Mathf.Clamp(skillLevel - 1, 0, debuffValues.Length - 1);
 
-        // 1. Àû¿¡°Ô ¸ÅÈ¤ µğ¹öÇÁ ºÎ¿©
+        // 1. ì ì—ê²Œ ë§¤í˜¹ ë””ë²„í”„ ë¶€ì—¬
         if (charmDebuff != null)
         {
             BuffManager.Instance.AddEffect(false, charmDebuff, debuffValues[index], duration);
-            DevLog.Log($"[¾Æ½º¸ğµ¥¿ì½º °³Àü] Lv.{skillLevel} ¹ßµ¿! Àû °ø°İ·Â {Mathf.Abs(debuffValues[index]) * 100}% °¨¼Ò.");
+            DevLog.Log($"[ì•„ìŠ¤ëª¨ë°ìš°ìŠ¤ ê°œì „] Lv.{skillLevel} ë°œë™! ì  ê³µê²©ë ¥ {Mathf.Abs(debuffValues[index]) * 100}% ê°ì†Œ.");
 
             if (CombatUIManager.Instance != null)
                 CombatUIManager.Instance.RefreshBuffUI();
         }
 
-        // 2. ÁÖÀÎ°øÀÇ ½ºÅ¸ÀÏ ·©Å© »ó½Â
+        // 2. ì£¼ì¸ê³µì˜ ìŠ¤íƒ€ì¼ ë­í¬ ìƒìŠ¹
         if (StyleRankManager.Instance != null)
         {
             StyleRankManager.Instance.IncreaseRank(rankUpValues[index]);
-            DevLog.Log($"[¾Æ½º¸ğµ¥¿ì½º °³Àü] ¼Î¸®ÀÇ ½ºÅ¸ÀÏ ·©Å©°¡ {rankUpValues[index]}´Ü°è »ó½ÂÇß½À´Ï´Ù!");
+            DevLog.Log($"[ì•„ìŠ¤ëª¨ë°ìš°ìŠ¤ ê°œì „] ì…°ë¦¬ì˜ ìŠ¤íƒ€ì¼ ë­í¬ê°€ {rankUpValues[index]}ë‹¨ê³„ ìƒìŠ¹í–ˆìŠµë‹ˆë‹¤!");
         }
     }
 }

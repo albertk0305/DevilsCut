@@ -1,38 +1,38 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
 [CreateAssetMenu(fileName = "ItemDatabase", menuName = "GameData/ItemDatabase")]
 public class ItemDatabase : ScriptableObject
 {
-    [Header("°ÔÀÓ ³» ¸ğµç Àåºñ ¾ÆÀÌÅÛ ¸®½ºÆ®")]
+    [Header("ê²Œì„ ë‚´ ëª¨ë“  ì¥ë¹„ ì•„ì´í…œ ë¦¬ìŠ¤íŠ¸")]
     public List<EquipmentItemData> allItems = new List<EquipmentItemData>();
 
     // =========================================
-    // »óÁ¡ & Àü¸®Ç°(·Î±×¶óÀÌÅ©) ½Ã½ºÅÛÀ» À§ÇÑ ÇïÆÛ ÇÔ¼öµé
+    // ìƒì  & ì „ë¦¬í’ˆ(ë¡œê·¸ë¼ì´í¬) ì‹œìŠ¤í…œì„ ìœ„í•œ í—¬í¼ í•¨ìˆ˜ë“¤
     // =========================================
 
-    // Æ¯Á¤ µî±ŞÀÇ ¾ÆÀÌÅÛµé¸¸ »Ì¾Æ¿À±â (¿¹: »óÁ¡¿¡¼­ ¿¡ÇÈ¸¸ È®·üÀûÀ¸·Î ¶ç¿ï ¶§)
+    // íŠ¹ì • ë“±ê¸‰ì˜ ì•„ì´í…œë“¤ë§Œ ë½‘ì•„ì˜¤ê¸° (ì˜ˆ: ìƒì ì—ì„œ ì—í”½ë§Œ í™•ë¥ ì ìœ¼ë¡œ ë„ìš¸ ë•Œ)
     public List<EquipmentItemData> GetItemsByGrade(ItemGrade grade)
     {
         return allItems.FindAll(item => item.grade == grade);
     }
 
-    // 3¼ºÀ» ´Ş¼ºÇÏ¿© ´õ ÀÌ»ó µîÀåÇÏ¸é ¾È µÇ´Â ¾ÆÀÌÅÛÀ» ÇÊÅÍ¸µÇØ¼­ »Ì¾Æ¿À±â
+    // 3ì„±ì„ ë‹¬ì„±í•˜ì—¬ ë” ì´ìƒ ë“±ì¥í•˜ë©´ ì•ˆ ë˜ëŠ” ì•„ì´í…œì„ í•„í„°ë§í•´ì„œ ë½‘ì•„ì˜¤ê¸°
     public List<EquipmentItemData> GetAvailableItemsForDrop(ItemGrade grade)
     {
-        // 1. ÇØ´ç µî±ŞÀÇ ¸ğµç ¾ÆÀÌÅÛÀ» °¡Á®¿É´Ï´Ù.
+        // 1. í•´ë‹¹ ë“±ê¸‰ì˜ ëª¨ë“  ì•„ì´í…œì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
         var pool = GetItemsByGrade(grade);
 
         if (PlayerManager.Instance == null) return pool;
 
-        // 2. ÇÃ·¹ÀÌ¾î ÀÎº¥Åä¸®¸¦ È®ÀÎÇÏ¿©, ÀÌ¹Ì 3¼º(ÃÖÁ¾)À» ´Ş¼ºÇß°Å³ª Àü¼³(À¯ÀÏ)ÀÎ ¾ÆÀÌÅÛÀº Ç®¿¡¼­ Á¦¿ÜÇÕ´Ï´Ù.
+        // 2. í”Œë ˆì´ì–´ ì¸ë²¤í† ë¦¬ë¥¼ í™•ì¸í•˜ì—¬, ì´ë¯¸ 3ì„±(ìµœì¢…)ì„ ë‹¬ì„±í–ˆê±°ë‚˜ ì „ì„¤(ìœ ì¼)ì¸ ì•„ì´í…œì€ í’€ì—ì„œ ì œì™¸í•©ë‹ˆë‹¤.
         var myInventory = PlayerManager.Instance.inventory;
 
         List<EquipmentItemData> filteredPool = new List<EquipmentItemData>();
         foreach (var item in pool)
         {
-            // ÀÎº¥Åä¸®¿¡ ÀÌ ¾ÆÀÌÅÛÀÌ 3¼ºÀ¸·Î Á¸ÀçÇÏ´Â°¡? ¶Ç´Â (Àü¼³ÀÎµ¥ ÀÌ¹Ì Á¸ÀçÇÏ´Â°¡?)
+            // ì¸ë²¤í† ë¦¬ì— ì´ ì•„ì´í…œì´ 3ì„±ìœ¼ë¡œ ì¡´ì¬í•˜ëŠ”ê°€? ë˜ëŠ” (ì „ì„¤ì¸ë° ì´ë¯¸ ì¡´ì¬í•˜ëŠ”ê°€?)
             bool isMaxedOut = myInventory.Exists(x => x.data.itemID == item.itemID && x.starLevel >= 3);
             bool isAlreadyOwnedLegendary = (item.grade == ItemGrade.Legendary) && myInventory.Exists(x => x.data.itemID == item.itemID);
 
@@ -45,11 +45,11 @@ public class ItemDatabase : ScriptableObject
         return filteredPool;
     }
 
-    // ¹«ÀÛÀ§ ¾ÆÀÌÅÛ »Ì±â (°¡Ã­¿ë)
+    // ë¬´ì‘ìœ„ ì•„ì´í…œ ë½‘ê¸° (ê°€ì± ìš©)
     public EquipmentItemData GetRandomItem(ItemGrade grade)
     {
         var pool = GetAvailableItemsForDrop(grade);
-        if (pool.Count == 0) return null; // »ÌÀ» ¼ö ÀÖ´Â ¾ÆÀÌÅÛÀÌ °í°¥µÊ
+        if (pool.Count == 0) return null; // ë½‘ì„ ìˆ˜ ìˆëŠ” ì•„ì´í…œì´ ê³ ê°ˆë¨
 
         return pool[Random.Range(0, pool.Count)];
     }

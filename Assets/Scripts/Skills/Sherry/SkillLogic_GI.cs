@@ -1,19 +1,19 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Gi", menuName = "SkillLogic/Player/Gi")]
 public class SkillLogic_Gi : SkillLogicBase, IChargeSkillLogic
 {
-    [Header("±âº»/ÁøÈ­ °ø¿ë: ±×·Î±â ÁõÆø·ü")]
+    [Header("ê¸°ë³¸/ì§„í™” ê³µìš©: ê·¸ë¡œê¸° ì¦í­ë¥ ")]
     public float[] bonusDamageRatesOnBreak = { 0.30f, 0.45f, 0.60f };
 
-    [Header("ÁøÈ­ A (Special Beam Cannon) - º¸³Ê½º ÅÏ")]
+    [Header("ì§„í™” A (Special Beam Cannon) - ë³´ë„ˆìŠ¤ í„´")]
     public float pathA_ActionGaugeBonus = 100f;
 
-    [Header("ÁøÈ­ B (Tri Beam) - Ã¼·Â ÄÚ½ºÆ®")]
+    [Header("ì§„í™” B (Tri Beam) - ì²´ë ¥ ì½”ìŠ¤íŠ¸")]
     public float pathB_HpCostRatio = 0.2f;
     public float[] pathB_DamageBonus = { 0.4f, 0.6f, 0.8f };
 
-    [Header("ÁøÈ­ C (Spirit Bomb) - 1ÅÏ Â÷Áö")]
+    [Header("ì§„í™” C (Spirit Bomb) - 1í„´ ì°¨ì§€")]
     public float[] pathC_ChargeDamageMult = { 2.5f, 3.0f, 3.5f };
 
     public bool ShouldBeginCharge(
@@ -28,7 +28,7 @@ public class SkillLogic_Gi : SkillLogicBase, IChargeSkillLogic
             !isUnleashingCharge;
     }
 
-    // 1. [ÁøÈ­ B] ½ºÅ³ ÄÚ½ºÆ® ÁöºÒ (Ã¼·Â ¼Ò¸ğ)
+    // 1. [ì§„í™” B] ìŠ¤í‚¬ ì½”ìŠ¤íŠ¸ ì§€ë¶ˆ (ì²´ë ¥ ì†Œëª¨)
     public override void PaySkillCost(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (isPlayerAttacking && skill.currentEvolution == SkillEvolution.PathB)
@@ -36,7 +36,7 @@ public class SkillLogic_Gi : SkillLogicBase, IChargeSkillLogic
             int hpCost = Mathf.Max(1, Mathf.RoundToInt(pStats.currentHp * pathB_HpCostRatio));
             pStats.currentHp -= hpCost;
 
-            DevLog.Log($"[ÁøÈ­ B] ±â°øÆ÷! Ã¼·Â 20%({hpCost})¸¦ ¼Ò¸ğÇÕ´Ï´Ù.");
+            DevLog.Log($"[ì§„í™” B] ê¸°ê³µí¬! ì²´ë ¥ 20%({hpCost})ë¥¼ ì†Œëª¨í•©ë‹ˆë‹¤.");
             BattleEventSystem.CallHpChanged(true, pStats.currentHp, pStats.maxHp);
 
             if (CombatUIManager.Instance != null)
@@ -46,24 +46,24 @@ public class SkillLogic_Gi : SkillLogicBase, IChargeSkillLogic
         }
     }
 
-    // 2. µ¥¹ÌÁö ¹èÀ² °áÁ¤ (±×·Î±â ÁõÆø + ÁøÈ­ º¸³Ê½º)
+    // 2. ë°ë¯¸ì§€ ë°°ìœ¨ ê²°ì • (ê·¸ë¡œê¸° ì¦í­ + ì§„í™” ë³´ë„ˆìŠ¤)
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         float multiplier = 1.0f;
         int levelIdx = Mathf.Clamp(skill.skillLevel - 1, 0, 2);
 
-        // [±âº» È¿°ú] Å¸°ÙÀÌ ±×·Î±â »óÅÂ¸é ÁõÆø
+        // [ê¸°ë³¸ íš¨ê³¼] íƒ€ê²Ÿì´ ê·¸ë¡œê¸° ìƒíƒœë©´ ì¦í­
         if (BreakManager.Instance.IsBroken(!isPlayerAttacking))
         {
             multiplier += bonusDamageRatesOnBreak[levelIdx];
         }
 
-        // [ÁøÈ­ B] »ó½Ã µ¥¹ÌÁö Ãß°¡ º¸³Ê½º
+        // [ì§„í™” B] ìƒì‹œ ë°ë¯¸ì§€ ì¶”ê°€ ë³´ë„ˆìŠ¤
         if (skill.currentEvolution == SkillEvolution.PathB)
         {
             multiplier += pathB_DamageBonus[levelIdx];
         }
-        // [ÁøÈ­ C] Â÷Áö ÇØ¹æ ½Ã Æø¹ßÀû µ¥¹ÌÁö (±âº» 1.0 ¹«½ÃÇÏ°í Àü¿ë °è¼ö »ç¿ë)
+        // [ì§„í™” C] ì°¨ì§€ í•´ë°© ì‹œ í­ë°œì  ë°ë¯¸ì§€ (ê¸°ë³¸ 1.0 ë¬´ì‹œí•˜ê³  ì „ìš© ê³„ìˆ˜ ì‚¬ìš©)
         else if (skill.currentEvolution == SkillEvolution.PathC && CombatManager.Instance.currentState.isUnleashingCharge)
         {
             return pathC_ChargeDamageMult[levelIdx];
@@ -72,12 +72,12 @@ public class SkillLogic_Gi : SkillLogicBase, IChargeSkillLogic
         return multiplier;
     }
 
-    // 3. ¸íÁß ½Ã Æ¯¼ö È¿°ú (ÁøÈ­ A & C)
+    // 3. ëª…ì¤‘ ì‹œ íŠ¹ìˆ˜ íš¨ê³¼ (ì§„í™” A & C)
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
         if (!isHit || !isPlayerAttacking) return;
 
-        // [ÁøÈ­ A] º¸³Ê½º ÅÏ È¹µæ
+        // [ì§„í™” A] ë³´ë„ˆìŠ¤ í„´ íšë“
         if (skill.currentEvolution == SkillEvolution.PathA)
         {
             if (CombatManager.Instance.currentState.wasEnemyBrokenAtSkillStart && BreakManager.Instance.IsBroken(false) && !CombatManager.Instance.currentState.hasUsedKiExtraTurn)
@@ -87,14 +87,14 @@ public class SkillLogic_Gi : SkillLogicBase, IChargeSkillLogic
                 if (playerEntity != null)
                 {
                     playerEntity.actionGauge += pathA_ActionGaugeBonus;
-                    DevLog.Log("[ÁøÈ­ A] ¸¶°ü±¤»ìÆ÷! º¸³Ê½º ÅÏÀ» È¹µæÇÕ´Ï´Ù.");
+                    DevLog.Log("[ì§„í™” A] ë§ˆê´€ê´‘ì‚´í¬! ë³´ë„ˆìŠ¤ í„´ì„ íšë“í•©ë‹ˆë‹¤.");
                 }
             }
         }
-        // [ÁøÈ­ C] ½ºÅ¸ÀÏ ·©Å©¾÷ º¸³Ê½º
+        // [ì§„í™” C] ìŠ¤íƒ€ì¼ ë­í¬ì—… ë³´ë„ˆìŠ¤
         else if (skill.currentEvolution == SkillEvolution.PathC && CombatManager.Instance.currentState.isUnleashingCharge)
         {
-            StyleRankManager.Instance.OnCriticalHit(); // º¸³Ê½º·Î ·©Å© ÇÑ ´Ü°è ´õ »ó½Â
+            StyleRankManager.Instance.OnCriticalHit(); // ë³´ë„ˆìŠ¤ë¡œ ë­í¬ í•œ ë‹¨ê³„ ë” ìƒìŠ¹
         }
     }
 }

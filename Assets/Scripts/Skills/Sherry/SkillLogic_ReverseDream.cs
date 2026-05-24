@@ -1,25 +1,25 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_ReverseDream", menuName = "SkillLogic/Player/ReverseDream")]
 public class SkillLogic_ReverseDream : SkillLogicBase
 {
-    [Header("±âº»: ÃÖ´ë µ¥¹ÌÁö ÁõÆøÄ¡ (º°°ú ´ç½Åº¸´Ù ³ôÀº 2.0)")]
-    public float maxDamageBonus = 2.0f; // ÃÖ´ë 3¹è ÁõÆø
+    [Header("ê¸°ë³¸: ìµœëŒ€ ë°ë¯¸ì§€ ì¦í­ì¹˜ (ë³„ê³¼ ë‹¹ì‹ ë³´ë‹¤ ë†’ì€ 2.0)")]
+    public float maxDamageBonus = 2.0f; // ìµœëŒ€ 3ë°° ì¦í­
 
-    [Header("ÁøÈ­ A: ºñºñµå ¹ÙÀÌ½º (ÈíÇ÷·ü ´ëÆø »ó½Â ¹× ÇÇÇØ°¨¼Ò)")]
-    public float[] pathA_LifestealRates = { 0.50f, 0.75f, 1.00f }; // 50~100% ÈíÇ÷
+    [Header("ì§„í™” A: ë¹„ë¹„ë“œ ë°”ì´ìŠ¤ (í¡í˜ˆë¥  ëŒ€í­ ìƒìŠ¹ ë° í”¼í•´ê°ì†Œ)")]
+    public float[] pathA_LifestealRates = { 0.50f, 0.75f, 1.00f }; // 50~100% í¡í˜ˆ
     public StatusEffectData pathA_DamageReductionBuff;
 
-    [Header("ÁøÈ­ B: µ¹·ÁÁà (¹öÇÁ °­Å»)")]
-    // ¹öÇÁ °­Å»Àº º°µµÀÇ µ¥ÀÌÅÍ ¾øÀÌ ÄÚµå ·ÎÁ÷À¸·Î Ã³¸®ÇÕ´Ï´Ù.
+    [Header("ì§„í™” B: ëŒë ¤ì¤˜ (ë²„í”„ ê°•íƒˆ)")]
+    // ë²„í”„ ê°•íƒˆì€ ë³„ë„ì˜ ë°ì´í„° ì—†ì´ ì½”ë“œ ë¡œì§ìœ¼ë¡œ ì²˜ë¦¬í•©ë‹ˆë‹¤.
     public float[] baseLifestealRates = { 0.20f, 0.30f, 0.40f };
 
-    [Header("ÁøÈ­ C: ¸»º¸´Ù ´õ (´Ù´Ü È÷Æ® & ½É¿¬ÀÇ ÃâÇ÷)")]
-    public int[] pathC_HitCounts = { 8, 10, 12 }; // ·¹º§º° Å¸¼ö
+    [Header("ì§„í™” C: ë§ë³´ë‹¤ ë” (ë‹¤ë‹¨ íˆíŠ¸ & ì‹¬ì—°ì˜ ì¶œí˜ˆ)")]
+    public int[] pathC_HitCounts = { 8, 10, 12 }; // ë ˆë²¨ë³„ íƒ€ìˆ˜
     public StatusEffectData pathC_BleedDebuff;
-    public float pathC_BleedRatePerStack = 1f; // 1½ºÅÃ´ç ÈûÀÇ 100%
+    public float pathC_BleedRatePerStack = 1f; // 1ìŠ¤íƒë‹¹ í˜ì˜ 100%
 
-    // [ÁøÈ­ C] ´Ù´Ü È÷Æ® Å¸¼ö ¹İÈ¯
+    // [ì§„í™” C] ë‹¤ë‹¨ íˆíŠ¸ íƒ€ìˆ˜ ë°˜í™˜
     public override int GetHitCount(SkillData skill)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
@@ -30,7 +30,7 @@ public class SkillLogic_ReverseDream : SkillLogicBase
         return base.GetHitCount(skill);
     }
 
-    // [ÁøÈ­ C] ´Ù´Ü È÷Æ® ½Ã µ¥¹ÌÁö ºĞÇÒ
+    // [ì§„í™” C] ë‹¤ë‹¨ íˆíŠ¸ ì‹œ ë°ë¯¸ì§€ ë¶„í• 
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (!isPlayerAttacking) return 1.0f;
@@ -40,22 +40,22 @@ public class SkillLogic_ReverseDream : SkillLogicBase
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
             int index = Mathf.Clamp(skill.skillLevel - 1, 0, pathC_HitCounts.Length - 1);
-            return bonus / pathC_HitCounts[index]; // Å¸¼ö¸¸Å­ °è¼ö¸¦ ³ª´©¾î ÃÑÇÕ µ¥¹ÌÁö¸¦ º¸Á¸ÇÕ´Ï´Ù!
+            return bonus / pathC_HitCounts[index]; // íƒ€ìˆ˜ë§Œí¼ ê³„ìˆ˜ë¥¼ ë‚˜ëˆ„ì–´ ì´í•© ë°ë¯¸ì§€ë¥¼ ë³´ì¡´í•©ë‹ˆë‹¤!
         }
         return bonus;
     }
 
-    // [ÁøÈ­ C] ´Ù´Ü È÷Æ® ½Ã ºê·¹ÀÌÅ©(±×·Î±â) ¼öÄ¡ ºĞÇÒ
+    // [ì§„í™” C] ë‹¤ë‹¨ íˆíŠ¸ ì‹œ ë¸Œë ˆì´í¬(ê·¸ë¡œê¸°) ìˆ˜ì¹˜ ë¶„í• 
     public override float GetBreakMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
             int index = Mathf.Clamp(skill.skillLevel - 1, 0, pathC_HitCounts.Length - 1);
-            // ÀüÃ¼ ºê·¹ÀÌÅ© ¼öÄ¡(1.0f)¸¦ Å¸¼ö¸¸Å­ ¶È°°ÀÌ ³ª´©¾îÁİ´Ï´Ù!
+            // ì „ì²´ ë¸Œë ˆì´í¬ ìˆ˜ì¹˜(1.0f)ë¥¼ íƒ€ìˆ˜ë§Œí¼ ë˜‘ê°™ì´ ë‚˜ëˆ„ì–´ì¤ë‹ˆë‹¤!
             return 1.0f / pathC_HitCounts[index];
         }
 
-        // ±âº» ¹× ÁøÈ­ A, B´Â ¿ø·¡ ºê·¹ÀÌÅ© ¼öÄ¡(1.0¹è)¸¦ ±×´ë·Î Àû¿ë
+        // ê¸°ë³¸ ë° ì§„í™” A, BëŠ” ì›ë˜ ë¸Œë ˆì´í¬ ìˆ˜ì¹˜(1.0ë°°)ë¥¼ ê·¸ëŒ€ë¡œ ì ìš©
         return 1.0f;
     }
 
@@ -71,7 +71,7 @@ public class SkillLogic_ReverseDream : SkillLogicBase
 
         int executionCount = (skill.currentEvolution == SkillEvolution.PathC) ? CombatManager.Instance.currentState.lastSuccessfulHits : 1;
 
-        // [ÁøÈ­ C] Å¸°İ¸¶´Ù ÃâÇ÷ µğ¹öÇÁ ÁßÃ¸! (Å¸¼ö¸¸Å­ ¹İº¹)
+        // [ì§„í™” C] íƒ€ê²©ë§ˆë‹¤ ì¶œí˜ˆ ë””ë²„í”„ ì¤‘ì²©! (íƒ€ìˆ˜ë§Œí¼ ë°˜ë³µ)
         for (int i = 0; i < executionCount; i++)
         {
             if (skill.currentEvolution == SkillEvolution.PathC && pathC_BleedDebuff != null)
@@ -80,7 +80,7 @@ public class SkillLogic_ReverseDream : SkillLogicBase
             }
         }
 
-        // [ÁøÈ­ A] ºñºñµå ¹ÙÀÌ½º Àü¿ë - CombatManager°¡ ´©ÀûÇØµĞ ÃÊ°ú È¸º¹·® »ç¿ë!
+        // [ì§„í™” A] ë¹„ë¹„ë“œ ë°”ì´ìŠ¤ ì „ìš© - CombatManagerê°€ ëˆ„ì í•´ë‘” ì´ˆê³¼ íšŒë³µëŸ‰ ì‚¬ìš©!
         if (skill.currentEvolution == SkillEvolution.PathA && pathA_DamageReductionBuff != null)
         {
             int totalExcessHeal = CombatManager.Instance.currentState.totalExcessHealThisSkill;
@@ -88,11 +88,11 @@ public class SkillLogic_ReverseDream : SkillLogicBase
             {
                 float reductionValue = Mathf.Clamp((float)totalExcessHeal / pStats.maxHp, 0.05f, 0.50f);
                 BuffManager.Instance.AddEffect(true, pathA_DamageReductionBuff, reductionValue, 3);
-                DevLog.Log($"[ºñºñµå ¹ÙÀÌ½º] ÃÊ°ú È¸º¹·® {totalExcessHeal} ´Ş¼º -> ÇÇÇØ °¨¼Ò {reductionValue * 100}% ¹öÇÁ È¹µæ!");
+                DevLog.Log($"[ë¹„ë¹„ë“œ ë°”ì´ìŠ¤] ì´ˆê³¼ íšŒë³µëŸ‰ {totalExcessHeal} ë‹¬ì„± -> í”¼í•´ ê°ì†Œ {reductionValue * 100}% ë²„í”„ íšë“!");
             }
         }
 
-        // [ÁøÈ­ B] ¹öÇÁ °­Å» (´Ü 1È¸ ¼öÇà)
+        // [ì§„í™” B] ë²„í”„ ê°•íƒˆ (ë‹¨ 1íšŒ ìˆ˜í–‰)
         if (skill.currentEvolution == SkillEvolution.PathB)
         {
             var enemyEffects = BuffManager.Instance.GetEffects(false);
@@ -103,7 +103,7 @@ public class SkillLogic_ReverseDream : SkillLogicBase
                 BuffManager.Instance.AddEffect(true, targetBuff.effectData, targetBuff.value, targetBuff.turnsLeft);
                 enemyEffects.Remove(targetBuff);
                 if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
-                DevLog.Log($"[ÁøÈ­ B] °Å²Ù·Î µÈ ²Ş! ÀûÀÇ ¹öÇÁ¸¦ ÈÉÃÆ½À´Ï´Ù.");
+                DevLog.Log($"[ì§„í™” B] ê±°ê¾¸ë¡œ ëœ ê¿ˆ! ì ì˜ ë²„í”„ë¥¼ í›”ì³¤ìŠµë‹ˆë‹¤.");
             }
         }
     }

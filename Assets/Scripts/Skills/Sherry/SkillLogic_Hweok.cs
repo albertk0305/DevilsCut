@@ -1,37 +1,37 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Hweok", menuName = "SkillLogic/Player/Hweok")]
 public class SkillLogic_Hweok : SkillLogicBase
 {
-    [Header("±âº»: ¹öÇÁ µ¥ÀÌÅÍ (Àü ½ºÅÈ)")]
+    [Header("ê¸°ë³¸: ë²„í”„ ë°ì´í„° (ì „ ìŠ¤íƒ¯)")]
     public StatusEffectData strengthBuff;
     public StatusEffectData defenseBuff;
     public StatusEffectData speedBuff;
     public StatusEffectData luckBuff;
 
-    [Header("±âº»: ·¹º§º° ¹öÇÁ ¼öÄ¡ (%)")]
+    [Header("ê¸°ë³¸: ë ˆë²¨ë³„ ë²„í”„ ìˆ˜ì¹˜ (%)")]
     public float[] statBuffRates = { 0.40f, 0.60f, 0.80f };
 
-    [Header("±âº»: ·¹º§º° Ã¼·Â È¸º¹·ü (%)")]
+    [Header("ê¸°ë³¸: ë ˆë²¨ë³„ ì²´ë ¥ íšŒë³µë¥  (%)")]
     public float[] healRates = { 0.50f, 0.75f, 1.0f };
 
-    [Header("±âº»: ·¹º§º° ¹ö½ºÆ®(±×·Î±â) °¨¼Ò·®")]
+    [Header("ê¸°ë³¸: ë ˆë²¨ë³„ ë²„ìŠ¤íŠ¸(ê·¸ë¡œê¸°) ê°ì†ŒëŸ‰")]
     public float[] breakRecoveryAmounts = { 50f, 80f, 100f };
 
-    [Header("ÁøÈ­ A: ¹İÀü¼ú½Ä (ÀÒÀº Ã¼·Â/±×·Î±â ºñ·Ê Èû Áõ°¡)")]
-    public StatusEffectData pathA_StrengthFlatBuff; // Èû °íÁ¤Ä¡(Flat) ¹öÇÁ
-    public float[] pathA_HpToStrengthRates = { 0.05f, 0.10f, 0.15f }; // Ã¼·Â 100 ÀÒ¾úÀ» ¶§ * 0.1 = Èû 10 Áõ°¡
-    public float[] pathA_BreakToStrengthRates = { 0.3f, 0.5f, 0.8f }; // ±×·Î±â 50 ½×¿´À» ¶§ * 0.5 = Èû 25 Áõ°¡
+    [Header("ì§„í™” A: ë°˜ì „ìˆ ì‹ (ìƒì€ ì²´ë ¥/ê·¸ë¡œê¸° ë¹„ë¡€ í˜ ì¦ê°€)")]
+    public StatusEffectData pathA_StrengthFlatBuff; // í˜ ê³ ì •ì¹˜(Flat) ë²„í”„
+    public float[] pathA_HpToStrengthRates = { 0.05f, 0.10f, 0.15f }; // ì²´ë ¥ 100 ìƒì—ˆì„ ë•Œ * 0.1 = í˜ 10 ì¦ê°€
+    public float[] pathA_BreakToStrengthRates = { 0.3f, 0.5f, 0.8f }; // ê·¸ë¡œê¸° 50 ìŒ“ì˜€ì„ ë•Œ * 0.5 = í˜ 25 ì¦ê°€
 
-    [Header("ÁøÈ­ B: ¹«ÇÏÇÑ (¹«Àû)")]
+    [Header("ì§„í™” B: ë¬´í•˜í•œ (ë¬´ì )")]
     public StatusEffectData pathB_InvincibleBuff;
 
-    [Header("ÁøÈ­ C: ¹«·®°øÃ³ (½ºÅÏ)")]
+    [Header("ì§„í™” C: ë¬´ëŸ‰ê³µì²˜ (ìŠ¤í„´)")]
     public StatusEffectData pathC_StunDebuff;
 
     public override bool AlwaysHits(SkillData skill) => true;
 
-    // ApplyEffectOnHit ´ë½Å ±âÁ¸Ã³·³ Áï¹ß Àû¿ëÀÎ ApplyEffect »ç¿ë (ÇÊ»ì±â ¹× »ıÁ¸±â)
+    // ApplyEffectOnHit ëŒ€ì‹  ê¸°ì¡´ì²˜ëŸ¼ ì¦‰ë°œ ì ìš©ì¸ ApplyEffect ì‚¬ìš© (í•„ì‚´ê¸° ë° ìƒì¡´ê¸°)
     public override void ApplyEffect(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (!isPlayerAttacking) return;
@@ -40,7 +40,7 @@ public class SkillLogic_Hweok : SkillLogicBase
         float buffValue = statBuffRates[index];
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ A] ¹İÀü¼ú½Ä: È¸º¹ 'Àü'ÀÇ ÀÒÀº Ã¼·Â°ú ±×·Î±â ¼öÄ¡¸¦ ¹Ì¸® ½º³À¼¦!
+        // [ì§„í™” A] ë°˜ì „ìˆ ì‹: íšŒë³µ 'ì „'ì˜ ìƒì€ ì²´ë ¥ê³¼ ê·¸ë¡œê¸° ìˆ˜ì¹˜ë¥¼ ë¯¸ë¦¬ ìŠ¤ëƒ…ìƒ·!
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.PathA)
         {
@@ -55,19 +55,19 @@ public class SkillLogic_Hweok : SkillLogicBase
             if (pathA_StrengthFlatBuff != null && bonusStr > 0)
             {
                 BuffManager.Instance.AddEffect(true, pathA_StrengthFlatBuff, bonusStr, 3);
-                DevLog.Log($"[ÁøÈ­ A] ¹İÀü¼ú½Ä! ÀÒÀº Ã¼·Â({missingHp})°ú ¹ö½ºÆ®({currentBreak:F1})¸¦ ±ØÇÑÀÇ È­·ÂÀ¸·Î Ä¡È¯ÇÏ¿© ÈûÀÌ {bonusStr} Áõ°¡Çß½À´Ï´Ù.");
+                DevLog.Log($"[ì§„í™” A] ë°˜ì „ìˆ ì‹! ìƒì€ ì²´ë ¥({missingHp})ê³¼ ë²„ìŠ¤íŠ¸({currentBreak:F1})ë¥¼ ê·¹í•œì˜ í™”ë ¥ìœ¼ë¡œ ì¹˜í™˜í•˜ì—¬ í˜ì´ {bonusStr} ì¦ê°€í–ˆìŠµë‹ˆë‹¤.");
             }
         }
 
-        // 1. Àü ½ºÅÈ(°ø/¹æ/¼Ó/¿î) 3ÅÏ ¹öÇÁ ºÎ¿©
+        // 1. ì „ ìŠ¤íƒ¯(ê³µ/ë°©/ì†/ìš´) 3í„´ ë²„í”„ ë¶€ì—¬
         if (strengthBuff != null) BuffManager.Instance.AddEffect(true, strengthBuff, buffValue, 3);
         if (defenseBuff != null) BuffManager.Instance.AddEffect(true, defenseBuff, buffValue, 3);
         if (speedBuff != null) BuffManager.Instance.AddEffect(true, speedBuff, buffValue, 3);
         if (luckBuff != null) BuffManager.Instance.AddEffect(true, luckBuff, buffValue, 3);
 
-        // 2. Ã¼·Â È¸º¹ ¿¬»ê ¹× UI ¾÷µ¥ÀÌÆ®
+        // 2. ì²´ë ¥ íšŒë³µ ì—°ì‚° ë° UI ì—…ë°ì´íŠ¸
         float baseHeal = pStats.maxHp * healRates[index];
-        // [Ãß°¡] µ¥¸ó ½Ã³ÊÁö È¸º¹·® ÁõÆø
+        // [ì¶”ê°€] ë°ëª¬ ì‹œë„ˆì§€ íšŒë³µëŸ‰ ì¦í­
         int healAmount = Mathf.RoundToInt(baseHeal * (1f + pStats.healingReceivedAmp));
 
         int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
@@ -82,28 +82,28 @@ public class SkillLogic_Hweok : SkillLogicBase
         if (excessHeal > 0 && CombatManager.Instance != null)
             CombatManager.Instance.ApplyOverhealBuff(excessHeal);
 
-        // 3. ¹ö½ºÆ®(±×·Î±â) °ÔÀÌÁö °¨¼Ò ¿¬»ê
+        // 3. ë²„ìŠ¤íŠ¸(ê·¸ë¡œê¸°) ê²Œì´ì§€ ê°ì†Œ ì—°ì‚°
         float breakRecover = breakRecoveryAmounts[index];
         if (BreakManager.Instance != null) BreakManager.Instance.RecoverBreakInstantly(true, breakRecover);
 
-        DevLog.Log($"[½ºÅ³ È¿°ú] È¸¿Á ¹ßµ¿! Àü ½ºÅÈ {buffValue * 100}% Áõ°¡, Ã¼·Â {healAmount} È¸º¹, ¹ö½ºÆ® {breakRecover} °¨¼Ò.");
+        DevLog.Log($"[ìŠ¤í‚¬ íš¨ê³¼] íšŒì˜¥ ë°œë™! ì „ ìŠ¤íƒ¯ {buffValue * 100}% ì¦ê°€, ì²´ë ¥ {healAmount} íšŒë³µ, ë²„ìŠ¤íŠ¸ {breakRecover} ê°ì†Œ.");
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ B] ¹«ÇÏÇÑ: 999ÅÏÂ¥¸® ¹«Àû ¹öÇÁ ºÎ¿©
+        // [ì§„í™” B] ë¬´í•˜í•œ: 999í„´ì§œë¦¬ ë¬´ì  ë²„í”„ ë¶€ì—¬
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.PathB && pathB_InvincibleBuff != null)
         {
             BuffManager.Instance.AddEffect(true, pathB_InvincibleBuff, 0, 999);
-            DevLog.Log("[ÁøÈ­ B] ¹«ÇÏÇÑ Àü°³! ÀûÀÇ ´ÙÀ½ ÅÏ °ø°İÀ» ¿Ïº®ÇÏ°Ô ¹«È¿È­ÇÕ´Ï´Ù.");
+            DevLog.Log("[ì§„í™” B] ë¬´í•˜í•œ ì „ê°œ! ì ì˜ ë‹¤ìŒ í„´ ê³µê²©ì„ ì™„ë²½í•˜ê²Œ ë¬´íš¨í™”í•©ë‹ˆë‹¤.");
         }
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ C] ¹«·®°øÃ³: Àû¿¡°Ô ½ºÅÏ ºÎ¿©
+        // [ì§„í™” C] ë¬´ëŸ‰ê³µì²˜: ì ì—ê²Œ ìŠ¤í„´ ë¶€ì—¬
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.PathC && pathC_StunDebuff != null)
         {
             BuffManager.Instance.AddEffect(false, pathC_StunDebuff, 0, 1);
-            DevLog.Log("[ÁøÈ­ C] ¹«·®°øÃ³ Àü°³! ³¡¾ø´Â Á¤º¸·Î ÀûÀÇ Á¤½ÅÀ» ºØ±«½ÃÄÑ ´ÙÀ½ Çàµ¿À» ¸¶ºñ½ÃÅµ´Ï´Ù.");
+            DevLog.Log("[ì§„í™” C] ë¬´ëŸ‰ê³µì²˜ ì „ê°œ! ëì—†ëŠ” ì •ë³´ë¡œ ì ì˜ ì •ì‹ ì„ ë¶•ê´´ì‹œì¼œ ë‹¤ìŒ í–‰ë™ì„ ë§ˆë¹„ì‹œí‚µë‹ˆë‹¤.");
         }
     }
 }

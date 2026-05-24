@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-// ÇÃ·¹ÀÌ¾îÀÇ ½ºÅÈÀ» ¹­¾îµÎ´Â Å¬·¡½º (Inspector¿¡¼­ º¸±â ÁÁ°Ô Á÷·ÄÈ­)
+// í”Œë ˆì´ì–´ì˜ ìŠ¤íƒ¯ì„ ë¬¶ì–´ë‘ëŠ” í´ë˜ìŠ¤ (Inspectorì—ì„œ ë³´ê¸° ì¢‹ê²Œ ì§ë ¬í™”)
 [System.Serializable]
-//ÇÃ·¹ÀÌ¾î Á¤º¸ ÀúÀå ÄÚµå
+//í”Œë ˆì´ì–´ ì •ë³´ ì €ì¥ ì½”ë“œ
 public class PlayerStats
 {
     public int level = 1;
@@ -15,35 +15,35 @@ public class PlayerStats
 
     public int ActionPoints = 5;
 
-    // ÁÖÀÎ°ø 3¹ø Ä¥ ¶§ 1¹ø Ä§
+    // ì£¼ì¸ê³µ 3ë²ˆ ì¹  ë•Œ 1ë²ˆ ì¹¨
     public int KarinAP => Mathf.Max(1, Mathf.RoundToInt(ActionPoints * 0.20f));
-    // ÁÖÀÎ°ø 5¹ø Ä¥ ¶§ 1¹ø Ä§
+    // ì£¼ì¸ê³µ 5ë²ˆ ì¹  ë•Œ 1ë²ˆ ì¹¨
     public int SupporterAP => Mathf.Max(1, Mathf.RoundToInt(ActionPoints * 0.11f));
 
-    public int breakResistance = 50; // ±×·Î±â ÀúÇ×
-    public float maxBreakGauge = 100f; // ÃÖ´ë ºê·¹ÀÌÅ© ¼öÄ¡
-    public int strength = 10;        // Èû
-    public int defense = 10;         // ¹æ¾î
-    public int speed = 10;           // ¼Óµµ
-    public int luck = 5;             // ¿î
+    public int breakResistance = 50; // ê·¸ë¡œê¸° ì €í•­
+    public float maxBreakGauge = 100f; // ìµœëŒ€ ë¸Œë ˆì´í¬ ìˆ˜ì¹˜
+    public int strength = 10;        // í˜
+    public int defense = 10;         // ë°©ì–´
+    public int speed = 10;           // ì†ë„
+    public int luck = 5;             // ìš´
 
     public int currentGold = 0;
 
-    // [Ãß°¡] Á¶·ÂÀÚ ¿µÀÔÀ» °ÅÀıÇÑ È½¼ö (ÃÖ´ë 7)
+    // [ì¶”ê°€] ì¡°ë ¥ì ì˜ì…ì„ ê±°ì ˆí•œ íšŸìˆ˜ (ìµœëŒ€ 7)
     public int rejectedSupporterCount = 0;
 
-    [Header("ÀüÅõ ÆÄ»ı ½ºÅÈ (¾ÆÀÌÅÛ/½Ã³ÊÁö Àü¿ë)")]
-    public float finalDamageAmp = 0f;        // ÃÖÁ¾ ÇÇÇØ ÁõÆø (%)
-    public float finalDamageReduction = 0f;  // ¹Ş´Â ÇÇÇØ °¨¼Ò (%)
-    public float critRate = 0f;              // Å©¸®Æ¼ÄÃ È®·ü (%)
-    public float critDamage = 1.5f;          // Å©¸®Æ¼ÄÃ ÇÇÇØ·® (±âº» 150%)
-    public float lifeSteal = 0f;             // ÈíÇ÷·ü (%)
-    public float trueDamageConversion = 0f;  // ¹æ¾î ¹«½Ã °íÁ¤ÇÇÇØ ÀüÈ¯À² (%)
+    [Header("ì „íˆ¬ íŒŒìƒ ìŠ¤íƒ¯ (ì•„ì´í…œ/ì‹œë„ˆì§€ ì „ìš©)")]
+    public float finalDamageAmp = 0f;        // ìµœì¢… í”¼í•´ ì¦í­ (%)
+    public float finalDamageReduction = 0f;  // ë°›ëŠ” í”¼í•´ ê°ì†Œ (%)
+    public float critRate = 0f;              // í¬ë¦¬í‹°ì»¬ í™•ë¥  (%)
+    public float critDamage = 1.5f;          // í¬ë¦¬í‹°ì»¬ í”¼í•´ëŸ‰ (ê¸°ë³¸ 150%)
+    public float lifeSteal = 0f;             // í¡í˜ˆë¥  (%)
+    public float trueDamageConversion = 0f;  // ë°©ì–´ ë¬´ì‹œ ê³ ì •í”¼í•´ ì „í™˜ìœ¨ (%)
     public float bonusAccuracy = 0f;
     public float bonusEvasion = 0f;
     public float healingReceivedAmp = 0f;
 
-    // ÀüÅõ¿ë ÀÓ½Ã º¹»çº»À» ¸¸µé¾îÁÖ´Â ÇÔ¼ö!
+    // ì „íˆ¬ìš© ì„ì‹œ ë³µì‚¬ë³¸ì„ ë§Œë“¤ì–´ì£¼ëŠ” í•¨ìˆ˜!
     public PlayerStats Clone()
     {
         return (PlayerStats)this.MemberwiseClone();
@@ -53,8 +53,8 @@ public class PlayerStats
 [System.Serializable]
 public class OwnedItem
 {
-    public EquipmentItemData data; // ¾ÆÀÌÅÛÀÇ ¿øº» µ¥ÀÌÅÍ (ÀÌ¸§, ½ºÅÈ ¹è¿­ µî)
-    [Range(1, 3)] public int starLevel = 1; // ³» ÀÎº¥Åä¸®¿¡¼­ ÀÌ ¾ÆÀÌÅÛÀÇ ÇöÀç ¼º±Ş
+    public EquipmentItemData data; // ì•„ì´í…œì˜ ì›ë³¸ ë°ì´í„° (ì´ë¦„, ìŠ¤íƒ¯ ë°°ì—´ ë“±)
+    [Range(1, 3)] public int starLevel = 1; // ë‚´ ì¸ë²¤í† ë¦¬ì—ì„œ ì´ ì•„ì´í…œì˜ í˜„ì¬ ì„±ê¸‰
 
     public OwnedItem(EquipmentItemData data, int starLevel)
     {
@@ -78,25 +78,25 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
 
-    [Header("ÇÃ·¹ÀÌ¾î ½ºÅÈ")]
+    [Header("í”Œë ˆì´ì–´ ìŠ¤íƒ¯")]
     public PlayerStats stats = new PlayerStats();
 
-    [Header("Á¶·ÂÀÚ ÆÄÆ¼ °ü¸®")]
-    // °ÔÀÓ ÁøÇà Áß ÇØ±İµÈ ¸ğµç Á¶·ÂÀÚ¸¦ ´ã´Â ¸®½ºÆ®
+    [Header("ì¡°ë ¥ì íŒŒí‹° ê´€ë¦¬")]
+    // ê²Œì„ ì§„í–‰ ì¤‘ í•´ê¸ˆëœ ëª¨ë“  ì¡°ë ¥ìë¥¼ ë‹´ëŠ” ë¦¬ìŠ¤íŠ¸
     public List<SupporterData> unlockedSupporters = new List<SupporterData>();
 
-    // ÇöÀç ÆÄÆ¼¿¡ 'ÇÕ·ù'ÇØ ÀÖ´Â Á¶·ÂÀÚ (nullÀÌ¸é ¾Æ¹«µµ ¾ø´Â »óÅÂ)
+    // í˜„ì¬ íŒŒí‹°ì— 'í•©ë¥˜'í•´ ìˆëŠ” ì¡°ë ¥ì (nullì´ë©´ ì•„ë¬´ë„ ì—†ëŠ” ìƒíƒœ)
     public SupporterData activeSupporter = null;
 
-    [Header("Ä«¸° Àåºñ °ü¸®")]
-    public List<KarinItemData> ownedKarinItems = new List<KarinItemData>(); // ¼ÒÁöÇÑ ¾ÆÀÌÅÛ ¸ñ·Ï
-    public KarinItemData equippedKarinItem = null; // ÇöÀç Âø¿ë ÁßÀÎ ¾ÆÀÌÅÛ
+    [Header("ì¹´ë¦° ì¥ë¹„ ê´€ë¦¬")]
+    public List<KarinItemData> ownedKarinItems = new List<KarinItemData>(); // ì†Œì§€í•œ ì•„ì´í…œ ëª©ë¡
+    public KarinItemData equippedKarinItem = null; // í˜„ì¬ ì°©ìš© ì¤‘ì¸ ì•„ì´í…œ
 
-    [Header("ÀÏ¹İ Àåºñ ÀÎº¥Åä¸®")]
+    [Header("ì¼ë°˜ ì¥ë¹„ ì¸ë²¤í† ë¦¬")]
     public List<OwnedItem> inventory = new List<OwnedItem>();
 
-    [Header("ÀüÅõ ÁøÀÔ µ¥ÀÌÅÍ (ÀÓ½Ã ÀúÀå¼Ò)")]
-    public EnemyData currentEnemyToFight; // Å½»ö ¾À¿¡¼­ ³Ñ°ÜÁØ Àû µ¥ÀÌÅÍ¸¦ ÀüÅõ ¾À±îÁö ¹è´ŞÇØ ÁÙ º¯¼ö
+    [Header("ì „íˆ¬ ì§„ì… ë°ì´í„° (ì„ì‹œ ì €ì¥ì†Œ)")]
+    public EnemyData currentEnemyToFight; // íƒìƒ‰ ì”¬ì—ì„œ ë„˜ê²¨ì¤€ ì  ë°ì´í„°ë¥¼ ì „íˆ¬ ì”¬ê¹Œì§€ ë°°ë‹¬í•´ ì¤„ ë³€ìˆ˜
 
     [Header("Current Battle Context")]
     public BattleReward currentBattleReward;
@@ -108,10 +108,10 @@ public class PlayerManager : MonoBehaviour
     public BattleType pendingBattleType;
     public int pendingBattlePhase;
 
-    [Header("ÇÃ·¹ÀÌ¾î ÇØ±İ ½ºÅ³")]
+    [Header("í”Œë ˆì´ì–´ í•´ê¸ˆ ìŠ¤í‚¬")]
     public List<SkillData> unlockedSkills = new List<SkillData>();
 
-    [Header("»õ °ÔÀÓ ±âº» Áö±Ş")]
+    [Header("ìƒˆ ê²Œì„ ê¸°ë³¸ ì§€ê¸‰")]
     public List<SkillData> defaultSkills = new List<SkillData>();
     public List<KarinItemData> defaultKarinItems = new List<KarinItemData>();
     public KarinItemData defaultEquippedKarinItem;
@@ -126,7 +126,7 @@ public class PlayerManager : MonoBehaviour
     public Sprite savedLastVisitedNodeImage;
     public FacilityData savedLastVisitedFacility;
 
-    // Æ¯Á¤ Ä«Å×°í¸®ÀÇ ½ºÅ³¸¸ ½ï½ï »Ì¾ÆÁÖ´Â ÇïÆÛ ÇÔ¼ö
+    // íŠ¹ì • ì¹´í…Œê³ ë¦¬ì˜ ìŠ¤í‚¬ë§Œ ì™ì™ ë½‘ì•„ì£¼ëŠ” í—¬í¼ í•¨ìˆ˜
     public List<SkillData> GetSkillsByCategory(SkillCategory category)
     {
         return unlockedSkills.FindAll(s => s.category == category);
@@ -134,15 +134,15 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        // ½Ì±ÛÅæ & ¾ÀÀÌ ³Ñ¾î°¡µµ ÆÄ±«µÇÁö ¾Êµµ·Ï ¼³Á¤ (¸Å¿ì Áß¿ä!)
+        // ì‹±ê¸€í†¤ & ì”¬ì´ ë„˜ì–´ê°€ë„ íŒŒê´´ë˜ì§€ ì•Šë„ë¡ ì„¤ì • (ë§¤ìš° ì¤‘ìš”!)
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // ¾ÀÀÌ ¹Ù²î¾îµµ »ì¾Æ³²¾Æ¶ó!
+            DontDestroyOnLoad(gameObject); // ì”¬ì´ ë°”ë€Œì–´ë„ ì‚´ì•„ë‚¨ì•„ë¼!
         }
         else
         {
-            Destroy(gameObject); // ÀÌ¹Ì ¸Å´ÏÀú°¡ ÀÖ´Ù¸é »õ·Î »ı±ä Â¦ÅüÀº ÆÄ±«
+            Destroy(gameObject); // ì´ë¯¸ ë§¤ë‹ˆì €ê°€ ìˆë‹¤ë©´ ìƒˆë¡œ ìƒê¸´ ì§í‰ì€ íŒŒê´´
         }
     }
 
@@ -230,27 +230,27 @@ public class PlayerManager : MonoBehaviour
         savedLastVisitedNodeImage = null;
         savedLastVisitedFacility = null;
 
-        DevLog.Log("[PlayerManager] »õ °ÔÀÓ »óÅÂ·Î ÃÊ±âÈ­Çß½À´Ï´Ù.");
+        DevLog.Log("[PlayerManager] ìƒˆ ê²Œì„ ìƒíƒœë¡œ ì´ˆê¸°í™”í–ˆìŠµë‹ˆë‹¤.");
     }
-    // µ¥¹ÌÁö¸¦ ÀÔ¾úÀ» ¶§ È£ÃâÇÒ ÇÔ¼ö ¿¹½Ã
+    // ë°ë¯¸ì§€ë¥¼ ì…ì—ˆì„ ë•Œ í˜¸ì¶œí•  í•¨ìˆ˜ ì˜ˆì‹œ
     public void TakeDamage(int damage)
     {
         stats.currentHp -= damage;
         if (stats.currentHp < 0) stats.currentHp = 0;
 
-        DevLog.Log($"ÇÃ·¹ÀÌ¾î°¡ {damage}ÀÇ ÇÇÇØ¸¦ ÀÔ¾ú½À´Ï´Ù. ³²Àº Ã¼·Â: {stats.currentHp}");
+        DevLog.Log($"í”Œë ˆì´ì–´ê°€ {damage}ì˜ í”¼í•´ë¥¼ ì…ì—ˆìŠµë‹ˆë‹¤. ë‚¨ì€ ì²´ë ¥: {stats.currentHp}");
     }
 
     public float GetReflectRatio()
     {
-        var courageSkill = unlockedSkills.Find(s => s.skillNameKey == "skill_name_sword1"); // ÇÏµåÄÚµùÀº µ¥ÀÌÅÍÀÇ ÁÖÀÎÀÎ ¿©±â¼­¸¸ °ü¸®!
+        var courageSkill = unlockedSkills.Find(s => s.skillNameKey == "skill_name_sword1"); // í•˜ë“œì½”ë”©ì€ ë°ì´í„°ì˜ ì£¼ì¸ì¸ ì—¬ê¸°ì„œë§Œ ê´€ë¦¬!
         if (courageSkill != null && courageSkill.currentEvolution == SkillEvolution.PathA)
             return courageSkill.evolutionA_Multipliers[Mathf.Clamp(courageSkill.skillLevel - 1, 0, 2)];
         return 0f;
     }
 
     // =========================================================
-    // [ÇÙ½É 1] ¾ÆÀÌÅÛ È¹µæ ¹× Ã¼·Â Áõ°¡ º¸Á¤ ·ÎÁ÷
+    // [í•µì‹¬ 1] ì•„ì´í…œ íšë“ ë° ì²´ë ¥ ì¦ê°€ ë³´ì • ë¡œì§
     // =========================================================
     public void AcquireItem(EquipmentItemData newItemData)
     {
@@ -325,7 +325,7 @@ public class PlayerManager : MonoBehaviour
 
             if (string.IsNullOrEmpty(itemId))
             {
-                DevLog.LogWarning($"[½Ã³ÊÁö °è»ê] itemID°¡ ºñ¾îÀÖ´Â ¾ÆÀÌÅÛÀÌ ÀÖ½À´Ï´Ù: {item.data.name}");
+                DevLog.LogWarning($"[ì‹œë„ˆì§€ ê³„ì‚°] itemIDê°€ ë¹„ì–´ìˆëŠ” ì•„ì´í…œì´ ìˆìŠµë‹ˆë‹¤: {item.data.name}");
                 continue;
             }
 
@@ -361,7 +361,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     // =========================================================
-    // [ÇÙ½É 4] ¾ÆÀÌÅÛ ¹× ½Ã³ÊÁö°¡ ¸ğµÎ ¹İ¿µµÈ ÀüÅõ ½º³À¼¦ »ı¼º
+    // [í•µì‹¬ 4] ì•„ì´í…œ ë° ì‹œë„ˆì§€ê°€ ëª¨ë‘ ë°˜ì˜ëœ ì „íˆ¬ ìŠ¤ëƒ…ìƒ· ìƒì„±
     // =========================================================
     public PlayerStats GetItemModifiedStats()
     {
@@ -370,7 +370,7 @@ public class PlayerManager : MonoBehaviour
         int flatStr = 0, flatDef = 0, flatSpd = 0, flatLuck = 0, flatMaxHp = 0, flatAP = 0, flatBR = 0;
         float pctStr = 0f, pctDef = 0f, pctSpd = 0f, pctLuck = 0f, pctMaxHp = 0f, pctAP = 0f, pctBR = 0f;
 
-        // 1. ÀÎº¥Åä¸® ¼øÈ¸: °³º° ¾ÆÀÌÅÛÀÇ ÇÕ(Flat), °ö(Pct), ÀüÅõ ½ºÅÈ ´©Àû
+        // 1. ì¸ë²¤í† ë¦¬ ìˆœíšŒ: ê°œë³„ ì•„ì´í…œì˜ í•©(Flat), ê³±(Pct), ì „íˆ¬ ìŠ¤íƒ¯ ëˆ„ì 
         foreach (var item in inventory)
         {
             int sl = item.starLevel;
@@ -396,40 +396,40 @@ public class PlayerManager : MonoBehaviour
             modified.lifeSteal += item.data.GetLifeStealRate(sl);
         }
 
-        // 2. ½Ã³ÊÁö Á¡¼ö °¡Á®¿À±â
+        // 2. ì‹œë„ˆì§€ ì ìˆ˜ ê°€ì ¸ì˜¤ê¸°
         var syn = GetCurrentSynergies();
 
-        // 3. ±âÈ¹¼­ ±â¹İ ½Ã³ÊÁö ÆĞ½Ãºê Àû¿ë (1´Ü°è~2´Ü°è)
-        // [¼¼ÀÌ¹ö] 2Á¡: Èû 15% / 4Á¡: ÃÖÁ¾ ÇÇÇØ 30%
+        // 3. ê¸°íšì„œ ê¸°ë°˜ ì‹œë„ˆì§€ íŒ¨ì‹œë¸Œ ì ìš© (1ë‹¨ê³„~2ë‹¨ê³„)
+        // [ì„¸ì´ë²„] 2ì : í˜ 15% / 4ì : ìµœì¢… í”¼í•´ 30%
         if (syn.GetValueOrDefault(ItemClass.Saber) >= 2) pctStr += 0.15f;
         if (syn.GetValueOrDefault(ItemClass.Saber) >= 4) modified.finalDamageAmp += 0.30f;
 
-        // [½Ç´õ] 2Á¡: ¹æ¾î·Â 20% / 4Á¡: ¹Ş´Â ÇÇÇØ 20% °¨¼Ò
+        // [ì‹¤ë”] 2ì : ë°©ì–´ë ¥ 20% / 4ì : ë°›ëŠ” í”¼í•´ 20% ê°ì†Œ
         if (syn.GetValueOrDefault(ItemClass.Shielder) >= 2) pctDef += 0.20f;
         if (syn.GetValueOrDefault(ItemClass.Shielder) >= 4) modified.finalDamageReduction += 0.20f;
 
-        // [°Å³Ê] 2Á¡: ¿î 15% / 4Á¡: Å©¸®Æ¼ÄÃ 15%
+        // [ê±°ë„ˆ] 2ì : ìš´ 15% / 4ì : í¬ë¦¬í‹°ì»¬ 15%
         if (syn.GetValueOrDefault(ItemClass.Gunner) >= 2) pctLuck += 0.15f;
         if (syn.GetValueOrDefault(ItemClass.Gunner) >= 4) modified.critRate += 0.15f;
 
-        // [¾î»õ½Å] 2Á¡: AP 15% (¡Ø 4Á¡ ±â½ÀÀÇ ±âÈ¸´Â CombatManager¿¡¼­ ¿¬»ê)
+        // [ì–´ìƒˆì‹ ] 2ì : AP 15% (â€» 4ì  ê¸°ìŠµì˜ ê¸°íšŒëŠ” CombatManagerì—ì„œ ì—°ì‚°)
         if (syn.GetValueOrDefault(ItemClass.Assassin) >= 2) pctAP += 0.15f;
 
-        // [º¹¼­] 2Á¡: ¼Óµµ 20%
+        // [ë³µì„œ] 2ì : ì†ë„ 20%
         if (syn.GetValueOrDefault(ItemClass.Boxer) >= 2) pctSpd += 0.20f;
 
-        // [º¹¼­] 4Á¡: ¸íÁß·ü ¹× È¸ÇÇÀ² 20% Ãß°¡ »ó½Â
+        // [ë³µì„œ] 4ì : ëª…ì¤‘ë¥  ë° íšŒí”¼ìœ¨ 20% ì¶”ê°€ ìƒìŠ¹
         if (syn.GetValueOrDefault(ItemClass.Boxer) >= 4)
         {
             modified.bonusAccuracy += 20f;
             modified.bonusEvasion += 20f;
         }
 
-        // [ºñ½ºÆ®] 2Á¡: Ã¼·Â 15% / 4Á¡: BR 20%
+        // [ë¹„ìŠ¤íŠ¸] 2ì : ì²´ë ¥ 15% / 4ì : BR 20%
         if (syn.GetValueOrDefault(ItemClass.Beast) >= 2) pctMaxHp += 0.15f;
         if (syn.GetValueOrDefault(ItemClass.Beast) >= 4) pctBR += 0.20f;
 
-        // [Ä³½ºÅÍ/Æ®¸¯½ºÅÍ/¹ö¼­Ä¿/µ¥¸ó] 2Á¡ ½Ã³ÊÁö
+        // [ìºìŠ¤í„°/íŠ¸ë¦­ìŠ¤í„°/ë²„ì„œì»¤/ë°ëª¬] 2ì  ì‹œë„ˆì§€
         if (syn.GetValueOrDefault(ItemClass.Caster) >= 2) modified.finalDamageAmp += 0.05f;
         if (syn.GetValueOrDefault(ItemClass.Trickster) >= 2) modified.finalDamageAmp += 0.05f;
         if (syn.GetValueOrDefault(ItemClass.Berserker) >= 2) modified.finalDamageReduction += 0.10f;
@@ -441,18 +441,18 @@ public class PlayerManager : MonoBehaviour
         {
             if (dEpic.starLevel == 1) modified.healingReceivedAmp += 0.07f;
             else if (dEpic.starLevel == 2) modified.healingReceivedAmp += 0.27f;
-            else if (dEpic.starLevel >= 3) modified.healingReceivedAmp += 1.00f; // 100% Áõ°¡!
+            else if (dEpic.starLevel >= 3) modified.healingReceivedAmp += 1.00f; // 100% ì¦ê°€!
         }
 
-        // [Ãß°¡] 11¹øÂ° Å¬·¡½º 'ÀÎ°£ °­µµ(¼Ö·Î ÇÃ·¹ÀÌ)' ½Ã³ÊÁö Àû¿ë!
-        // ±âÈ¹µÈ Áö¼öÀû º¸Á¤ ¼öÄ¡ ¹è¿­ (0¸í ~ 7¸í)
+        // [ì¶”ê°€] 11ë²ˆì§¸ í´ë˜ìŠ¤ 'ì¸ê°„ ê°•ë„(ì†”ë¡œ í”Œë ˆì´)' ì‹œë„ˆì§€ ì ìš©!
+        // ê¸°íšëœ ì§€ìˆ˜ì  ë³´ì • ìˆ˜ì¹˜ ë°°ì—´ (0ëª… ~ 7ëª…)
         float[] loneWolfAmps = { 0f, 0.05f, 0.10f, 0.20f, 0.40f, 0.75f, 1.30f, 2.00f };
         int rejectCount = Mathf.Clamp(stats.rejectedSupporterCount, 0, 7);
         float loneWolfBuff = loneWolfAmps[rejectCount];
 
         if (loneWolfBuff > 0f)
         {
-            // Àü ½ºÅÈ(7Á¾)¿¡ º¸Á¤Ä¡ 100% µ¿ÀÏ Àû¿ë
+            // ì „ ìŠ¤íƒ¯(7ì¢…)ì— ë³´ì •ì¹˜ 100% ë™ì¼ ì ìš©
             pctStr += loneWolfBuff;
             pctDef += loneWolfBuff;
             pctSpd += loneWolfBuff;
@@ -461,10 +461,10 @@ public class PlayerManager : MonoBehaviour
             pctAP += loneWolfBuff;
             pctBR += loneWolfBuff;
 
-            DevLog.Log($"[ÀÎ°£ °­µµ] ¿µÀÔ °ÅÀı {rejectCount}È¸! Àü ½ºÅÈÀÌ {loneWolfBuff * 100}% ÁõÆøµË´Ï´Ù.");
+            DevLog.Log($"[ì¸ê°„ ê°•ë„] ì˜ì… ê±°ì ˆ {rejectCount}íšŒ! ì „ ìŠ¤íƒ¯ì´ {loneWolfBuff * 100}% ì¦í­ë©ë‹ˆë‹¤.");
         }
 
-        // 4. (±âº» + ÇÕ»ê) * (1 + °ö»ê) ¸ŞÀÎ ½ºÅÈ ¿¬»ê
+        // 4. (ê¸°ë³¸ + í•©ì‚°) * (1 + ê³±ì‚°) ë©”ì¸ ìŠ¤íƒ¯ ì—°ì‚°
         modified.strength = Mathf.Max(1, Mathf.RoundToInt((stats.strength + flatStr) * (1f + pctStr)));
         modified.defense = Mathf.Max(1, Mathf.RoundToInt((stats.defense + flatDef) * (1f + pctDef)));
         modified.speed = Mathf.Max(1, Mathf.RoundToInt((stats.speed + flatSpd) * (1f + pctSpd)));
@@ -474,41 +474,41 @@ public class PlayerManager : MonoBehaviour
         modified.breakResistance = Mathf.Max(1, Mathf.RoundToInt((stats.breakResistance + flatBR) * (1f + pctBR)));
 
 
-        // 5. 6½Ã³ÊÁö ¹× Àü¼³ ¾ÆÀÌÅÛÀÇ ÇÏÀÌ¿£µå '½ºÅÈ ÀüÈ¯(Conversion)' Àû¿ë
-        // ÀÌ ÀüÈ¯Àº ÀÌ¹Ì °ö¿¬»ê±îÁö ³¡³­ ¿Ï¼ºµÈ ½ºÅÈÀ» ²ø¾î¿Í¼­ ´Ù¸¥ ½ºÅÈ¿¡ ´õÇØÁİ´Ï´Ù.
+        // 5. 6ì‹œë„ˆì§€ ë° ì „ì„¤ ì•„ì´í…œì˜ í•˜ì´ì—”ë“œ 'ìŠ¤íƒ¯ ì „í™˜(Conversion)' ì ìš©
+        // ì´ ì „í™˜ì€ ì´ë¯¸ ê³±ì—°ì‚°ê¹Œì§€ ëë‚œ ì™„ì„±ëœ ìŠ¤íƒ¯ì„ ëŒì–´ì™€ì„œ ë‹¤ë¥¸ ìŠ¤íƒ¯ì— ë”í•´ì¤ë‹ˆë‹¤.
 
-        // [¼¼ÀÌ¹ö] 6Á¡: °íÁ¤ÇÇÇØ 20% + Àü¼³ 10%
+        // [ì„¸ì´ë²„] 6ì : ê³ ì •í”¼í•´ 20% + ì „ì„¤ 10%
         if (syn.GetValueOrDefault(ItemClass.Saber) >= 6) modified.trueDamageConversion += 0.20f;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Saber && x.data.grade == ItemGrade.Legendary))
             modified.trueDamageConversion += 0.10f;
 
-        // [½Ç´õ] 6Á¡: DEF 100% -> STR + Àü¼³ 50%
+        // [ì‹¤ë”] 6ì : DEF 100% -> STR + ì „ì„¤ 50%
         float defToStrRatio = 0f;
         if (syn.GetValueOrDefault(ItemClass.Shielder) >= 6) defToStrRatio += 1.0f;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Shielder && x.data.grade == ItemGrade.Legendary))
             defToStrRatio += 0.5f;
         modified.strength += Mathf.RoundToInt(modified.defense * defToStrRatio);
 
-        // [°Å³Ê] 6Á¡: LUCK 100% -> CritDMG + Àü¼³ 50%
+        // [ê±°ë„ˆ] 6ì : LUCK 100% -> CritDMG + ì „ì„¤ 50%
         float luckToCritDmg = 0f;
         if (syn.GetValueOrDefault(ItemClass.Gunner) >= 6) luckToCritDmg += 1.0f;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Gunner && x.data.grade == ItemGrade.Legendary))
             luckToCritDmg += 0.5f;
         modified.critDamage += modified.luck * luckToCritDmg;
 
-        // [¾î»õ½Å] 6Á¡: AP 100% -> CritDMG + Àü¼³(È®·üÀüÈ¯ 25%)
+        // [ì–´ìƒˆì‹ ] 6ì : AP 100% -> CritDMG + ì „ì„¤(í™•ë¥ ì „í™˜ 25%)
         if (syn.GetValueOrDefault(ItemClass.Assassin) >= 6) modified.critDamage += modified.ActionPoints * 1.0f;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Assassin && x.data.grade == ItemGrade.Legendary))
             modified.critRate += modified.ActionPoints * 0.25f;
 
-        // [º¹¼­] 6Á¡: SPD 100% -> STR + Àü¼³ 50%
+        // [ë³µì„œ] 6ì : SPD 100% -> STR + ì „ì„¤ 50%
         float spdToStrRatio = 0f;
         if (syn.GetValueOrDefault(ItemClass.Boxer) >= 6) spdToStrRatio += 1.0f;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Boxer && x.data.grade == ItemGrade.Legendary))
             spdToStrRatio += 0.5f;
         modified.strength += Mathf.RoundToInt(modified.speed * spdToStrRatio);
 
-        // [ºñ½ºÆ®] 6Á¡: MaxHP 10% -> STR + Àü¼³ 5%
+        // [ë¹„ìŠ¤íŠ¸] 6ì : MaxHP 10% -> STR + ì „ì„¤ 5%
         float hpToStrRatio = 0f;
         if (syn.GetValueOrDefault(ItemClass.Beast) >= 6) hpToStrRatio += 0.10f;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Beast && x.data.grade == ItemGrade.Legendary))
@@ -516,7 +516,7 @@ public class PlayerManager : MonoBehaviour
         modified.strength += Mathf.RoundToInt(modified.maxHp * hpToStrRatio);
 
 
-        // 6. Ã¼·Â Å¬·¥ÇÎ ¸¶¹«¸®
+        // 6. ì²´ë ¥ í´ë¨í•‘ ë§ˆë¬´ë¦¬
         modified.currentHp = Mathf.Clamp(stats.currentHp, 0, modified.maxHp);
 
         return modified;

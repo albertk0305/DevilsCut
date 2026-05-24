@@ -1,21 +1,21 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_DemonSlaughter", menuName = "SkillLogic/Player/DemonSlaughter")]
 public class SkillLogic_DemonSlaughter : SkillLogicBase
 {
-    [Header("±âº»: ·¹º§º° ¹æ¾î ¹«½Ã ºñÀ²")]
+    [Header("ê¸°ë³¸: ë ˆë²¨ë³„ ë°©ì–´ ë¬´ì‹œ ë¹„ìœ¨")]
     public float[] armorPenetrationRates = { 0.15f, 0.20f, 0.25f };
 
-    [Header("ÁøÈ­ A (Transparent World)")]
-    [Tooltip("Àû ÃÖ´ë Ã¼·Â ºñ·Ê Ãß°¡ ÇÇÇØ·® (3%, 4%, 5%)")]
+    [Header("ì§„í™” A (Transparent World)")]
+    [Tooltip("ì  ìµœëŒ€ ì²´ë ¥ ë¹„ë¡€ ì¶”ê°€ í”¼í•´ëŸ‰ (3%, 4%, 5%)")]
     public float[] pathA_MaxHpRates = { 0.03f, 0.04f, 0.05f };
 
-    [Header("ÁøÈ­ B (Become a Demon)")]
-    [Tooltip("ÀÔÈù ÇÇÇØ ºñ·Ê ÈíÇ÷·ü (10%, 15%, 20%)")]
+    [Header("ì§„í™” B (Become a Demon)")]
+    [Tooltip("ì…íŒ í”¼í•´ ë¹„ë¡€ í¡í˜ˆë¥  (10%, 15%, 20%)")]
     public float[] pathB_LifestealRates = { 0.10f, 0.15f, 0.20f };
 
-    [Header("ÁøÈ­ C (Opening Thread)")]
-    [Tooltip("Àû¿¡°Ô °É¸° µğ¹öÇÁ 1°³´ç ÇÇÇØ ÁõÆø·ü (10%, 15%, 20%)")]
+    [Header("ì§„í™” C (Opening Thread)")]
+    [Tooltip("ì ì—ê²Œ ê±¸ë¦° ë””ë²„í”„ 1ê°œë‹¹ í”¼í•´ ì¦í­ë¥  (10%, 15%, 20%)")]
     public float[] pathC_BonusPerDebuff = { 0.10f, 0.15f, 0.20f };
 
     public override float GetArmorPenetrationRatio(SkillData skill, int skillLevel)
@@ -31,9 +31,9 @@ public class SkillLogic_DemonSlaughter : SkillLogicBase
 
         if (skill.currentEvolution == SkillEvolution.PathA && isPlayerAttacking)
         {
-            // [ÁøÈ­ A] °íÁ¤ µ¥¹ÌÁö Ä¡È¯ Æ®¸¯
-            // CombatManagerÀÇ private HP¸¦ Á÷Á¢ °Çµå¸®Áö ¾Ê°í, ÀûÀÇ ÃÖ´ë Ã¼·Â¿¡ ºñ·ÊÇÑ '°íÁ¤ ¼öÄ¡'¸¦ 
-            // ³» ±øµô¿¡ ´ëºñÇÑ '¹èÀ²(Multiplier)'·Î È¯»êÇÏ¿© ¾ñ¾îÁİ´Ï´Ù! (¹æ¾î¹«½Ã È¿°úµµ ÀÚµ¿À¸·Î ¹ŞÀ½)
+            // [ì§„í™” A] ê³ ì • ë°ë¯¸ì§€ ì¹˜í™˜ íŠ¸ë¦­
+            // CombatManagerì˜ private HPë¥¼ ì§ì ‘ ê±´ë“œë¦¬ì§€ ì•Šê³ , ì ì˜ ìµœëŒ€ ì²´ë ¥ì— ë¹„ë¡€í•œ 'ê³ ì • ìˆ˜ì¹˜'ë¥¼ 
+            // ë‚´ ê¹¡ë”œì— ëŒ€ë¹„í•œ 'ë°°ìœ¨(Multiplier)'ë¡œ í™˜ì‚°í•˜ì—¬ ì–¹ì–´ì¤ë‹ˆë‹¤! (ë°©ì–´ë¬´ì‹œ íš¨ê³¼ë„ ìë™ìœ¼ë¡œ ë°›ìŒ)
             float maxHpDamage = enemy.maxHp * pathA_MaxHpRates[index];
             float myBaseDamage = pStats.strength * skill.GetCurrentDamageMultiplier();
 
@@ -44,10 +44,10 @@ public class SkillLogic_DemonSlaughter : SkillLogicBase
         }
         else if (skill.currentEvolution == SkillEvolution.PathC && isPlayerAttacking)
         {
-            // [ÁøÈ­ C] Àû¿¡°Ô °É¸° µğ¹öÇÁ °³¼ö Ä«¿îÆ®
+            // [ì§„í™” C] ì ì—ê²Œ ê±¸ë¦° ë””ë²„í”„ ê°œìˆ˜ ì¹´ìš´íŠ¸
             int debuffCount = 0;
 
-            // BuffManager¿¡¼­ Àû±º(false)ÀÇ »óÅÂ ÀÌ»ó ¸®½ºÆ®¸¦ °¡Á®¿Í¼­ 'Debuff' Ä«Å×°í¸®¸¸ ¼Á´Ï´Ù.
+            // BuffManagerì—ì„œ ì êµ°(false)ì˜ ìƒíƒœ ì´ìƒ ë¦¬ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì™€ì„œ 'Debuff' ì¹´í…Œê³ ë¦¬ë§Œ ì…‰ë‹ˆë‹¤.
             var enemyEffects = BuffManager.Instance.GetEffects(false);
             foreach (var eff in enemyEffects)
             {
@@ -58,7 +58,7 @@ public class SkillLogic_DemonSlaughter : SkillLogicBase
             multiplier += (debuffCount * pathC_BonusPerDebuff[index]);
 
             if (debuffCount > 0)
-                DevLog.Log($"[ÁøÈ­ C] ºóÆ´ÀÇ ½Ç: µğ¹öÇÁ {debuffCount}°³ °¨Áö! µ¥¹ÌÁö {debuffCount * pathC_BonusPerDebuff[index] * 100}% ÁõÆø!");
+                DevLog.Log($"[ì§„í™” C] ë¹ˆí‹ˆì˜ ì‹¤: ë””ë²„í”„ {debuffCount}ê°œ ê°ì§€! ë°ë¯¸ì§€ {debuffCount * pathC_BonusPerDebuff[index] * 100}% ì¦í­!");
         }
 
         return multiplier;
@@ -66,37 +66,37 @@ public class SkillLogic_DemonSlaughter : SkillLogicBase
 
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
-        // Å¸°İÀÌ ÀûÁßÇßÀ» ¶§¸¸ ÈíÇ÷ ¹ßµ¿
+        // íƒ€ê²©ì´ ì ì¤‘í–ˆì„ ë•Œë§Œ í¡í˜ˆ ë°œë™
         if (!isHit) return;
 
-        // [ÁøÈ­ B] À¯Áö·Â °­È­ (ÈíÇ÷)
+        // [ì§„í™” B] ìœ ì§€ë ¥ ê°•í™” (í¡í˜ˆ)
         if (skill.currentEvolution == SkillEvolution.PathB && isPlayerAttacking)
         {
             int index = Mathf.Clamp(skill.skillLevel - 1, 0, pathB_LifestealRates.Length - 1);
             float lifestealRate = pathB_LifestealRates[index];
 
-            // 1. ¿ª¸ù¿¡¼­ ½è´ø '¿¹»ó µ¥¹ÌÁö ¿ª»ê' °ø½ÄÀ» »ç¿ëÇØ ¹æ¾î ¹«½Ã°¡ Àû¿ëµÈ Âğ µ¥¹ÌÁö¸¦ ±¸ÇÕ´Ï´Ù.
+            // 1. ì—­ëª½ì—ì„œ ì¼ë˜ 'ì˜ˆìƒ ë°ë¯¸ì§€ ì—­ì‚°' ê³µì‹ì„ ì‚¬ìš©í•´ ë°©ì–´ ë¬´ì‹œê°€ ì ìš©ëœ ì° ë°ë¯¸ì§€ë¥¼ êµ¬í•©ë‹ˆë‹¤.
             float skillMult = skill.GetCurrentDamageMultiplier() * GetDamageMultiplier(skill, pStats, enemy, isPlayerAttacking);
             int defenderDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
 
             float penRatio = GetArmorPenetrationRatio(skill, skill.skillLevel);
-            // ¹æ¾î ¹«½Ã°¡ Àû¿ëµÈ ½ÇÁ¦ ÇÇÇØ °¨¼ÒÀ² °è»ê
+            // ë°©ì–´ ë¬´ì‹œê°€ ì ìš©ëœ ì‹¤ì œ í”¼í•´ ê°ì†Œìœ¨ ê³„ì‚°
             float drPercent = CombatMath.GetDamageReduction(defenderDef) * (1f - penRatio);
 
             float expectedDamage = (pStats.strength * skillMult) * (1f - drPercent);
 
-            // 2. Ã¼·Â Èí¼ö ¿¬»ê
+            // 2. ì²´ë ¥ í¡ìˆ˜ ì—°ì‚°
             int healAmount = Mathf.RoundToInt(expectedDamage * lifestealRate);
             pStats.currentHp = Mathf.Clamp(pStats.currentHp + healAmount, 0, pStats.maxHp);
 
-            // 3. UI ¿¬Ãâ
+            // 3. UI ì—°ì¶œ
             if (CombatUIManager.Instance != null)
             {
                 CombatUIManager.Instance.playerStatusUI.UpdateHP(pStats.currentHp, pStats.maxHp);
                 CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
             }
 
-            DevLog.Log($"[ÁøÈ­ B] ¿À´Ï°¡ µÇ¾î¶ó ¹ßµ¿! {healAmount} Ã¼·Â Èí¼ö ¿Ï·á.");
+            DevLog.Log($"[ì§„í™” B] ì˜¤ë‹ˆê°€ ë˜ì–´ë¼ ë°œë™! {healAmount} ì²´ë ¥ í¡ìˆ˜ ì™„ë£Œ.");
         }
     }
 }

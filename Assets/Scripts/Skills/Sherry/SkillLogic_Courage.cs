@@ -1,13 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Courage", menuName = "SkillLogic/Player/Courage")]
 public class SkillLogic_Courage : SkillLogicBase
 {
-    [Header("°¡µå ¹öÇÁ µ¥ÀÌÅÍ")]
+    [Header("ê°€ë“œ ë²„í”„ ë°ì´í„°")]
     public StatusEffectData guardBuffData;
     public StatusEffectData godHandBuffData;
 
-    [Header("·¹º§º° ÇÇÇØ °¨¼ÒÀ²")]
+    [Header("ë ˆë²¨ë³„ í”¼í•´ ê°ì†Œìœ¨")]
     public float[] damageReductionRates = { 0.3f, 0.4f, 0.5f };
 
     public override bool TryOverrideBaseHitCalculation(
@@ -34,17 +34,17 @@ public class SkillLogic_Courage : SkillLogicBase
         return true;
     }
 
-    //  ¸Å°³º¯¼ö·Î ³Ñ¾î¿Â skillÀ» ±×´ë·Î ¾¹´Ï´Ù!
+    //  ë§¤ê°œë³€ìˆ˜ë¡œ ë„˜ì–´ì˜¨ skillì„ ê·¸ëŒ€ë¡œ ì”ë‹ˆë‹¤!
     public override void ApplyEffect(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (isPlayerAttacking && guardBuffData != null)
         {
-            // PlayerManager °Ë»ö ·ÎÁ÷ ÅëÂ°·Î »èÁ¦! 
-            // skill.skillLevel °ú skill.currentEvolution À» ¹Ù·Î ¾¹´Ï´Ù.
+            // PlayerManager ê²€ìƒ‰ ë¡œì§ í†µì§¸ë¡œ ì‚­ì œ! 
+            // skill.skillLevel ê³¼ skill.currentEvolution ì„ ë°”ë¡œ ì”ë‹ˆë‹¤.
 
             if (skill.currentEvolution == SkillEvolution.PathC)
             {
-                DevLog.Log("[½ºÅ³ È¿°ú] Á¦¹°ÀÇ ³«ÀÎ ¹ßµ¿! °¡µå¸¦ Æ÷±âÇÏ°í °ø°İ¿¡ ÁıÁßÇÕ´Ï´Ù.");
+                DevLog.Log("[ìŠ¤í‚¬ íš¨ê³¼] ì œë¬¼ì˜ ë‚™ì¸ ë°œë™! ê°€ë“œë¥¼ í¬ê¸°í•˜ê³  ê³µê²©ì— ì§‘ì¤‘í•©ë‹ˆë‹¤.");
                 return;
             }
 
@@ -61,7 +61,7 @@ public class SkillLogic_Courage : SkillLogicBase
             }
 
             BuffManager.Instance.AddEffect(true, guardBuffData, reductionRate, 3);
-            DevLog.Log($"[½ºÅ³ È¿°ú] ¼Î¸®°¡ °¡µå ÀÚ¼¼¸¦ ÃëÇÕ´Ï´Ù. (ÇÇÇØ °¨¼ÒÀ²: {reductionRate * 100}%)");
+            DevLog.Log($"[ìŠ¤í‚¬ íš¨ê³¼] ì…°ë¦¬ê°€ ê°€ë“œ ìì„¸ë¥¼ ì·¨í•©ë‹ˆë‹¤. (í”¼í•´ ê°ì†Œìœ¨: {reductionRate * 100}%)");
         }
     }
 }

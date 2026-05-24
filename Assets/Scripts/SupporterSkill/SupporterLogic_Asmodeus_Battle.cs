@@ -1,27 +1,27 @@
-using UnityEngine;
-using System.Linq; // RemoveAll µî¿¡ »ç¿ë
+ï»¿using UnityEngine;
+using System.Linq; // RemoveAll ë“±ì— ì‚¬ìš©
 
 [CreateAssetMenu(fileName = "Asmodeus_BattleSkill", menuName = "SupporterLogic/Asmodeus/Battle Skill")]
 public class SupporterLogic_Asmodeus_Battle : SupporterLogicBase
 {
-    [Header("¹öÇÁ ¼³Á¤ (Àü ½ºÅÈ Áõ°¡)")]
+    [Header("ë²„í”„ ì„¤ì • (ì „ ìŠ¤íƒ¯ ì¦ê°€)")]
     public StatusEffectData strBuff;
     public StatusEffectData defBuff;
     public StatusEffectData spdBuff;
     public StatusEffectData lukBuff;
     public int duration = 3;
 
-    [Header("·¹º§º° ¼öÄ¡ ¼³Á¤")]
-    public float[] healRates = { 0.15f, 0.20f, 0.30f }; // Ã¼·Â È¸º¹·ü
-    public float[] buffValues = { 0.15f, 0.20f, 0.25f }; // Àü ½ºÅÈ »ó½Â·ü
+    [Header("ë ˆë²¨ë³„ ìˆ˜ì¹˜ ì„¤ì •")]
+    public float[] healRates = { 0.15f, 0.20f, 0.30f }; // ì²´ë ¥ íšŒë³µë¥ 
+    public float[] buffValues = { 0.15f, 0.20f, 0.25f }; // ì „ ìŠ¤íƒ¯ ìƒìŠ¹ë¥ 
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, healRates.Length - 1);
 
-        // 1. Ã¼·Â È¸º¹
+        // 1. ì²´ë ¥ íšŒë³µ
         float baseHeal = pStats.maxHp * healRates[index];
-        // [Ãß°¡] µ¥¸ó ½Ã³ÊÁö È¸º¹·® ÁõÆø
+        // [ì¶”ê°€] ë°ëª¬ ì‹œë„ˆì§€ íšŒë³µëŸ‰ ì¦í­
         int healAmount = Mathf.RoundToInt(baseHeal * (1f + pStats.healingReceivedAmp));
 
         int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
@@ -34,21 +34,21 @@ public class SupporterLogic_Asmodeus_Battle : SupporterLogicBase
             CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
         }
 
-        // [Ãß°¡] µ¥¸ó ½Ã³ÊÁö ÃÊ°ú È¸º¹ ¹öÇÁ ¿¬µ¿
+        // [ì¶”ê°€] ë°ëª¬ ì‹œë„ˆì§€ ì´ˆê³¼ íšŒë³µ ë²„í”„ ì—°ë™
         if (excessHeal > 0 && CombatManager.Instance != null)
             CombatManager.Instance.ApplyOverhealBuff(excessHeal);
 
-        // 2. µğ¹öÇÁ ÀüÃ¼ Á¤È­ (·¹º§ ¹«°ü °øÅë È¿°ú)
+        // 2. ë””ë²„í”„ ì „ì²´ ì •í™” (ë ˆë²¨ ë¬´ê´€ ê³µí†µ íš¨ê³¼)
         if (BuffManager.Instance != null)
         {
             var playerEffects = BuffManager.Instance.GetEffects(true);
             int removedCount = playerEffects.RemoveAll(e => e.effectData != null && e.effectData.category == EffectCategory.Debuff);
 
             if (removedCount > 0)
-                DevLog.Log($"[¾Æ½º¸ğµ¥¿ì½º ¹èÆ²] ºÎÁ¤ÀûÀÎ È¿°ú {removedCount}°³¸¦ Á¤È­Çß½À´Ï´Ù!");
+                DevLog.Log($"[ì•„ìŠ¤ëª¨ë°ìš°ìŠ¤ ë°°í‹€] ë¶€ì •ì ì¸ íš¨ê³¼ {removedCount}ê°œë¥¼ ì •í™”í–ˆìŠµë‹ˆë‹¤!");
         }
 
-        // 3. Àü ½ºÅÈ »ó½Â ¹öÇÁ ºÎ¿©
+        // 3. ì „ ìŠ¤íƒ¯ ìƒìŠ¹ ë²„í”„ ë¶€ì—¬
         float currentBuffValue = buffValues[index];
         if (BuffManager.Instance != null)
         {
@@ -61,6 +61,6 @@ public class SupporterLogic_Asmodeus_Battle : SupporterLogicBase
                 CombatUIManager.Instance.RefreshBuffUI();
         }
 
-        DevLog.Log($"[¾Æ½º¸ğµ¥¿ì½º ¹èÆ²] Lv.{skillLevel} ¹ßµ¿! Ã¼·Â {healRates[index] * 100}% È¸º¹ ¹× ½ºÅÈ {currentBuffValue * 100}% »ó½Â ¿Ï·á!");
+        DevLog.Log($"[ì•„ìŠ¤ëª¨ë°ìš°ìŠ¤ ë°°í‹€] Lv.{skillLevel} ë°œë™! ì²´ë ¥ {healRates[index] * 100}% íšŒë³µ ë° ìŠ¤íƒ¯ {currentBuffValue * 100}% ìƒìŠ¹ ì™„ë£Œ!");
     }
 }

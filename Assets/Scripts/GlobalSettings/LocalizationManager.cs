@@ -1,13 +1,13 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-//±Û·Î¹ú ¸Å´ÏÀú¿¡ ºÙ¾î¼­ ¾ğ¾î ÆĞÄ¡ÇØÁÖ´Â ÄÚµå
+//ê¸€ë¡œë²Œ ë§¤ë‹ˆì €ì— ë¶™ì–´ì„œ ì–¸ì–´ íŒ¨ì¹˜í•´ì£¼ëŠ” ì½”ë“œ
 public class LocalizationManager : MonoBehaviour
 {
     public static LocalizationManager Instance;
 
-    [Header("´Ù±¹¾î CSV ÆÄÀÏµé")]
+    [Header("ë‹¤êµ­ì–´ CSV íŒŒì¼ë“¤")]
     public TextAsset[] localizationCSVs;
 
     public enum Language { Korean, English }
@@ -18,12 +18,12 @@ public class LocalizationManager : MonoBehaviour
 
     private void Awake()
     {
-        // ½Ì±ÛÅæ ¹× DontDestroyOnLoad ¼³Á¤
+        // ì‹±ê¸€í†¤ ë° DontDestroyOnLoad ì„¤ì •
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            LoadSettings(); // °ÔÀÓ ½ÃÀÛ ½Ã ÀúÀåµÈ ¼³Á¤ ºÒ·¯¿À±â
+            LoadSettings(); // ê²Œì„ ì‹œì‘ ì‹œ ì €ì¥ëœ ì„¤ì • ë¶ˆëŸ¬ì˜¤ê¸°
             LoadCSV();
         }
         else
@@ -37,13 +37,13 @@ public class LocalizationManager : MonoBehaviour
     {
         dictionary.Clear();
 
-        // ¹è¿­¿¡ ÆÄÀÏÀÌ ÇÏ³ªµµ ¾øÀ¸¸é Áß´Ü
+        // ë°°ì—´ì— íŒŒì¼ì´ í•˜ë‚˜ë„ ì—†ìœ¼ë©´ ì¤‘ë‹¨
         if (localizationCSVs == null || localizationCSVs.Length == 0) return;
 
-        // ¹è¿­¿¡ µé¾îÀÖ´Â ¸ğµç CSV ÆÄÀÏÀ» ÇÏ³ª¾¿ ²¨³»¼­ ÀĞ½À´Ï´Ù.
+        // ë°°ì—´ì— ë“¤ì–´ìˆëŠ” ëª¨ë“  CSV íŒŒì¼ì„ í•˜ë‚˜ì”© êº¼ë‚´ì„œ ì½ìŠµë‹ˆë‹¤.
         foreach (TextAsset csvFile in localizationCSVs)
         {
-            if (csvFile == null) continue; // ºó Ä­Àº ¹«½Ã
+            if (csvFile == null) continue; // ë¹ˆ ì¹¸ì€ ë¬´ì‹œ
 
             string[] rows = csvFile.text.Split('\n');
             for (int i = 1; i < rows.Length; i++)
@@ -52,22 +52,22 @@ public class LocalizationManager : MonoBehaviour
                 string row = rows[i].TrimEnd('\r', '\n');
                 string[] columns = row.Split(',');
 
-                // A¿­(0)ÀÌ Key, B¿­(1)ÀÌ ÇÑ±¹¾î, C¿­(2)ÀÌ ¿µ¾î
+                // Aì—´(0)ì´ Key, Bì—´(1)ì´ í•œêµ­ì–´, Cì—´(2)ì´ ì˜ì–´
                 if (columns.Length >= 3)
                 {
-                    // Dictionary´Â ÇÏ³ª¸¸ ¾²±â ¶§¹®¿¡, ¿©·¯ ÆÄÀÏ¿¡¼­ ÀĞ¾î¿Íµµ 
-                    // ÇÏ³ªÀÇ °Å´ëÇÑ »çÀü(Dictionary)¿¡ ¸ğµÎ ÅëÇÕµÇ¾î µé¾î°©´Ï´Ù!
+                    // DictionaryëŠ” í•˜ë‚˜ë§Œ ì“°ê¸° ë•Œë¬¸ì—, ì—¬ëŸ¬ íŒŒì¼ì—ì„œ ì½ì–´ì™€ë„ 
+                    // í•˜ë‚˜ì˜ ê±°ëŒ€í•œ ì‚¬ì „(Dictionary)ì— ëª¨ë‘ í†µí•©ë˜ì–´ ë“¤ì–´ê°‘ë‹ˆë‹¤!
                     dictionary[columns[0]] = new string[] { columns[1], columns[2] };
                 }
             }
         }
-        DevLog.Log($"´Ù±¹¾î µ¥ÀÌÅÍ ·Îµå ¿Ï·á! (ÃÑ {localizationCSVs.Length}°³ ÆÄÀÏ ÅëÇÕ)");
+        DevLog.Log($"ë‹¤êµ­ì–´ ë°ì´í„° ë¡œë“œ ì™„ë£Œ! (ì´ {localizationCSVs.Length}ê°œ íŒŒì¼ í†µí•©)");
     }
 
-    // --- ÀúÀå ¹× ºÒ·¯¿À±â ÇÙ½É ·ÎÁ÷ ---
+    // --- ì €ì¥ ë° ë¶ˆëŸ¬ì˜¤ê¸° í•µì‹¬ ë¡œì§ ---
     private void LoadSettings()
     {
-        // "SelectedLanguage"¶ó´Â Å°·Î ÀúÀåµÈ °ªÀ» °¡Á®¿È (¾øÀ¸¸é 1:¿µ¾î)
+        // "SelectedLanguage"ë¼ëŠ” í‚¤ë¡œ ì €ì¥ëœ ê°’ì„ ê°€ì ¸ì˜´ (ì—†ìœ¼ë©´ 1:ì˜ì–´)
         int savedLang = PlayerPrefs.GetInt("SelectedLanguage", 1);
         currentLanguage = (Language)savedLang;
     }
@@ -75,15 +75,15 @@ public class LocalizationManager : MonoBehaviour
     public void SetKorean()
     {
         currentLanguage = Language.Korean;
-        PlayerPrefs.SetInt("SelectedLanguage", 0); // 0À» ÀúÀå
-        PlayerPrefs.Save(); // ¹°¸®Àû ÀúÀå ÀåÄ¡¿¡ ±â·Ï
+        PlayerPrefs.SetInt("SelectedLanguage", 0); // 0ì„ ì €ì¥
+        PlayerPrefs.Save(); // ë¬¼ë¦¬ì  ì €ì¥ ì¥ì¹˜ì— ê¸°ë¡
         OnLanguageChanged?.Invoke();
     }
 
     public void SetEnglish()
     {
         currentLanguage = Language.English;
-        PlayerPrefs.SetInt("SelectedLanguage", 1); // 1À» ÀúÀå
+        PlayerPrefs.SetInt("SelectedLanguage", 1); // 1ì„ ì €ì¥
         PlayerPrefs.Save();
         OnLanguageChanged?.Invoke();
     }

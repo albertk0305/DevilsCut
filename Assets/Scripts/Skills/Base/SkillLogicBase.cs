@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-// ¸ğµç ½ºÅ³ ·ÎÁ÷ ½ºÅ©¸³Æ®µéÀÇ 'ºÎ¸ğ'°¡ µÉ Å¬·¡½ºÀÔ´Ï´Ù.
+// ëª¨ë“  ìŠ¤í‚¬ ë¡œì§ ìŠ¤í¬ë¦½íŠ¸ë“¤ì˜ 'ë¶€ëª¨'ê°€ ë  í´ë˜ìŠ¤ì…ë‹ˆë‹¤.
 public class SkillLogicBase : ScriptableObject
 {
-    // 1. ºê·¹ÀÌÅ© ¹èÀ² (±âº»°ª 1.0¹è)
-    // virtual·Î ¼±¾ğÇßÀ¸¹Ç·Î, ÇÊ¿äÇÑ ½ºÅ³¸¸ overrideÇØ¼­ »ç¿ëÇÏ¸é µË´Ï´Ù.
+    // 1. ë¸Œë ˆì´í¬ ë°°ìœ¨ (ê¸°ë³¸ê°’ 1.0ë°°)
+    // virtualë¡œ ì„ ì–¸í–ˆìœ¼ë¯€ë¡œ, í•„ìš”í•œ ìŠ¤í‚¬ë§Œ overrideí•´ì„œ ì‚¬ìš©í•˜ë©´ ë©ë‹ˆë‹¤.
     public virtual float GetBreakMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         return 1.0f;
@@ -33,7 +33,7 @@ public class SkillLogicBase : ScriptableObject
 
     public virtual void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
-        // ÇÏÀ§ È£È¯¼ºÀ» À§ÇØ ±âº»ÀûÀ¸·Î ±âÁ¸ ApplyEffect¸¦ È£ÃâÇÕ´Ï´Ù.
+        // í•˜ìœ„ í˜¸í™˜ì„±ì„ ìœ„í•´ ê¸°ë³¸ì ìœ¼ë¡œ ê¸°ì¡´ ApplyEffectë¥¼ í˜¸ì¶œí•©ë‹ˆë‹¤.
         ApplyEffect(skill, pStats, enemy, isPlayerAttacking);
     }
 
@@ -49,12 +49,12 @@ public class SkillLogicBase : ScriptableObject
 
     public virtual bool AlwaysHits()
     {
-        return false; // ±âº»ÀûÀ¸·Î´Â ¸íÁß·üÀ» °è»êÇÕ´Ï´Ù.
+        return false; // ê¸°ë³¸ì ìœ¼ë¡œëŠ” ëª…ì¤‘ë¥ ì„ ê³„ì‚°í•©ë‹ˆë‹¤.
     }
 
     public virtual bool AlwaysHits(SkillData skill)
     {
-        return AlwaysHits(); // ±âº»ÀûÀ¸·Î´Â ±âÁ¸ ÇÔ¼ö¸¦ È£Ãâ (ÇÏÀ§ È£È¯¼º À¯Áö)
+        return AlwaysHits(); // ê¸°ë³¸ì ìœ¼ë¡œëŠ” ê¸°ì¡´ í•¨ìˆ˜ë¥¼ í˜¸ì¶œ (í•˜ìœ„ í˜¸í™˜ì„± ìœ ì§€)
     }
 
     public virtual void PaySkillCost(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
@@ -73,7 +73,7 @@ public class SkillLogicBase : ScriptableObject
 
     public virtual float GetBaseAccuracy(SkillData skill)
     {
-        return skill.baseAccuracy; // ±âº»ÀûÀ¸·Î´Â SkillData ÀÎ½ºÆåÅÍ¿¡ ÀûÈù °ªÀ» ±×´ë·Î ¾¹´Ï´Ù.
+        return skill.baseAccuracy; // ê¸°ë³¸ì ìœ¼ë¡œëŠ” SkillData ì¸ìŠ¤í™í„°ì— ì íŒ ê°’ì„ ê·¸ëŒ€ë¡œ ì”ë‹ˆë‹¤.
     }
 
     public virtual float GetDynamicDamageMultiplier(SkillData skill, int consecutiveHits)
@@ -88,7 +88,7 @@ public class SkillLogicBase : ScriptableObject
 
     public virtual Sprite GetCounterActionImage(SkillData skill)
     {
-        // ±âº»ÀûÀ¸·Î´Â ½ºÅ³ÀÇ ÀÏ¹İ ¾×¼Ç ÀÌ¹ÌÁö¸¦ ¹İÈ¯ÇÏ¿© ÇÏÀ§ È£È¯¼ºÀ» À¯ÁöÇÕ´Ï´Ù.
+        // ê¸°ë³¸ì ìœ¼ë¡œëŠ” ìŠ¤í‚¬ì˜ ì¼ë°˜ ì•¡ì…˜ ì´ë¯¸ì§€ë¥¼ ë°˜í™˜í•˜ì—¬ í•˜ìœ„ í˜¸í™˜ì„±ì„ ìœ ì§€í•©ë‹ˆë‹¤.
         return skill.skillActionImage;
     }
 
@@ -105,6 +105,6 @@ public class SkillLogicBase : ScriptableObject
 
     public virtual int TryProcessHitEffect(EnemyData enemy)
     {
-        return 0; // ¾Æ¹« È¿°úµµ ¾ø´Â ½ºÅ³Àº 0À» ¹İÈ¯
+        return 0; // ì•„ë¬´ íš¨ê³¼ë„ ì—†ëŠ” ìŠ¤í‚¬ì€ 0ì„ ë°˜í™˜
     }
 }

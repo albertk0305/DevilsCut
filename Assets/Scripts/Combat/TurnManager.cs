@@ -1,8 +1,8 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 
 public enum EntityType { Player, Enemy, Karin, Supporter }
-// [ºĞ¸®] CombatManager¿¡ ÀÖ´ø Å¬·¡½º¸¦ ÀÌÂÊÀ¸·Î ÀÌ»çÇß½À´Ï´Ù.
+// [ë¶„ë¦¬] CombatManagerì— ìˆë˜ í´ë˜ìŠ¤ë¥¼ ì´ìª½ìœ¼ë¡œ ì´ì‚¬í–ˆìŠµë‹ˆë‹¤.
 [System.Serializable]
 public class TurnEntity
 {
@@ -27,13 +27,13 @@ public class TurnManager : MonoBehaviour
         if (Instance == null) Instance = this;
     }
 
-    // 1. ´ë±â¿­ ÃÊ±âÈ­
+    // 1. ëŒ€ê¸°ì—´ ì´ˆê¸°í™”
     public void ClearQueue()
     {
         turnQueue.Clear();
     }
 
-    // 2. ´ë±â¿­¿¡ Ä³¸¯ÅÍ Ãß°¡
+    // 2. ëŒ€ê¸°ì—´ì— ìºë¦­í„° ì¶”ê°€
     public void AddEntity(EntityType type, int ap, bool isPlayer, float speedMult, Sprite icon)
     {
         turnQueue.Add(new TurnEntity
@@ -47,7 +47,7 @@ public class TurnManager : MonoBehaviour
         });
     }
 
-    // 3. ³»ºÎ ¼öÇĞ °ø½Ä
+    // 3. ë‚´ë¶€ ìˆ˜í•™ ê³µì‹
     private float GetGaugeFillAmount(int ap)
     {
         return 20f * (ap / (ap + 100f));
@@ -62,7 +62,7 @@ public class TurnManager : MonoBehaviour
         return (100f - entity.actionGauge) / fillPerTick;
     }
 
-    // 4. ´ÙÀ½ ÅÏ °è»ê ¹× °á°ú ¹İÈ¯
+    // 4. ë‹¤ìŒ í„´ ê³„ì‚° ë° ê²°ê³¼ ë°˜í™˜
     public TurnEntity CalculateAndGetNextTurn()
     {
         turnQueue.Sort((a, b) =>
@@ -87,10 +87,10 @@ public class TurnManager : MonoBehaviour
         }
 
         nextTurnEntity.actionGauge -= 100f;
-        return nextTurnEntity; // ÅÏÀ» È¹µæÇÑ Ä³¸¯ÅÍ¸¦ CombatManager¿¡°Ô º¸°íÇÕ´Ï´Ù!
+        return nextTurnEntity; // í„´ì„ íšë“í•œ ìºë¦­í„°ë¥¼ CombatManagerì—ê²Œ ë³´ê³ í•©ë‹ˆë‹¤!
     }
 
-    // 5. ¹Ì·¡ ¿¹Ãø UI¿ë ÀÌ¹ÌÁö ¸®½ºÆ® ¹İÈ¯
+    // 5. ë¯¸ë˜ ì˜ˆì¸¡ UIìš© ì´ë¯¸ì§€ ë¦¬ìŠ¤íŠ¸ ë°˜í™˜
     public List<Sprite> GetFutureTurnIcons(int count)
     {
         futureTurnIcons.Clear();
@@ -130,17 +130,17 @@ public class TurnManager : MonoBehaviour
             nextSimEntity.actionGauge -= 100f;
         }
 
-        return futureTurnIcons; // ¿¹ÃøµÈ ÃÊ»óÈ­ ¸®½ºÆ®¸¸ CombatManager¿¡°Ô Àü´ŞÇÕ´Ï´Ù!
+        return futureTurnIcons; // ì˜ˆì¸¡ëœ ì´ˆìƒí™” ë¦¬ìŠ¤íŠ¸ë§Œ CombatManagerì—ê²Œ ì „ë‹¬í•©ë‹ˆë‹¤!
     }
 
     public void ResetGauge(EntityType targetType)
     {
         foreach (var entity in turnQueue)
         {
-            if (entity.type == targetType) // ¹®ÀÚ¿­ ´ë½Å EnumÀ¸·Î ºñ±³!
+            if (entity.type == targetType) // ë¬¸ìì—´ ëŒ€ì‹  Enumìœ¼ë¡œ ë¹„êµ!
             {
                 entity.actionGauge = -100f;
-                DevLog.Log($"[{targetType}]ÀÇ Çàµ¿ °ÔÀÌÁö°¡ -100À¸·Î °­Á¦ ÃÊ±âÈ­µÇ¾ú½À´Ï´Ù!");
+                DevLog.Log($"[{targetType}]ì˜ í–‰ë™ ê²Œì´ì§€ê°€ -100ìœ¼ë¡œ ê°•ì œ ì´ˆê¸°í™”ë˜ì—ˆìŠµë‹ˆë‹¤!");
                 break;
             }
         }
@@ -150,11 +150,11 @@ public class TurnManager : MonoBehaviour
     {
         if (StatManager.Instance != null)
         {
-            // ÁÖÀÎ°ø°ú ÀûÀº ¹öÇÁ/µğ¹öÇÁ°¡ Àû¿ëµÈ ½Ç½Ã°£ AP¸¦ °¡Á®¿È
+            // ì£¼ì¸ê³µê³¼ ì ì€ ë²„í”„/ë””ë²„í”„ê°€ ì ìš©ëœ ì‹¤ì‹œê°„ APë¥¼ ê°€ì ¸ì˜´
             if (entity.type == EntityType.Player) return StatManager.Instance.GetEffectiveStat(true, TargetStat.AP);
             if (entity.type == EntityType.Enemy) return StatManager.Instance.GetEffectiveStat(false, TargetStat.AP);
         }
-        // Ä«¸°ÀÌ³ª ¼­Æ÷ÅÍ´Â ¹öÇÁ¸¦ ¹ŞÁö ¾ÊÀ¸¹Ç·Î ¿ø·¡ AP À¯Áö
+        // ì¹´ë¦°ì´ë‚˜ ì„œí¬í„°ëŠ” ë²„í”„ë¥¼ ë°›ì§€ ì•Šìœ¼ë¯€ë¡œ ì›ë˜ AP ìœ ì§€
         return entity.ap;
     }
 }

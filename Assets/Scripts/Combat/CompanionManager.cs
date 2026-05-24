@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-// [ºĞ¸®] ÀüÅõ Áß ¼Î¸®¸¦ µ½´Â ¿ìÈ£Àû NPC(Ä«¸°, Á¶·ÂÀÚ)ÀÇ ÅÏ ¿¬Ãâ°ú ·ÎÁ÷, Ç¥Á¤ º¯È­¸¦ Àü´ãÇÕ´Ï´Ù.
+// [ë¶„ë¦¬] ì „íˆ¬ ì¤‘ ì…°ë¦¬ë¥¼ ë•ëŠ” ìš°í˜¸ì  NPC(ì¹´ë¦°, ì¡°ë ¥ì)ì˜ í„´ ì—°ì¶œê³¼ ë¡œì§, í‘œì • ë³€í™”ë¥¼ ì „ë‹´í•©ë‹ˆë‹¤.
 public class CompanionManager : MonoBehaviour
 {
     public static CompanionManager Instance;
 
-    [Header("Ä«¸° µ¥ÀÌÅÍ")]
-    public KarinData karinData; // CombatManager¿¡¼­ ÀÌÂÊÀ¸·Î ÀÌ»ç ¿Ô½À´Ï´Ù!
+    [Header("ì¹´ë¦° ë°ì´í„°")]
+    public KarinData karinData; // CombatManagerì—ì„œ ì´ìª½ìœ¼ë¡œ ì´ì‚¬ ì™”ìŠµë‹ˆë‹¤!
 
     public enum Emotion { Normal, Happy, Worried }
 
@@ -18,7 +18,7 @@ public class CompanionManager : MonoBehaviour
     }
 
     // ==========================================
-    // 1. Ç¥Á¤(°¨Á¤) ¾÷µ¥ÀÌÆ® ±â´É
+    // 1. í‘œì •(ê°ì •) ì—…ë°ì´íŠ¸ ê¸°ëŠ¥
     // ==========================================
     public void UpdateEmotion(Emotion emotion)
     {
@@ -50,17 +50,17 @@ public class CompanionManager : MonoBehaviour
     }
 
     // ==========================================
-    // 2. Ä«¸°(¾ÆÀÌÅÛ) ÅÏ Ã³¸®
+    // 2. ì¹´ë¦°(ì•„ì´í…œ) í„´ ì²˜ë¦¬
     // ==========================================
     public IEnumerator ExecuteKarinTurn()
     {
-        DevLog.Log("Ä«¸°ÀÇ ÅÏÀÔ´Ï´Ù!");
+        DevLog.Log("ì¹´ë¦°ì˜ í„´ì…ë‹ˆë‹¤!");
         yield return new WaitForSeconds(1.0f);
 
         KarinItemData equippedItem = PlayerManager.Instance.equippedKarinItem;
         if (equippedItem == null)
         {
-            yield return StartCoroutine(CombatUIManager.Instance.TypeCommentary("Ä«¸°: \"¾î¶ó? ¾µ ¼ö ÀÖ´Â ¹°°ÇÀÌ ¾ø³×!\""));
+            yield return StartCoroutine(CombatUIManager.Instance.TypeCommentary("ì¹´ë¦°: \"ì–´ë¼? ì“¸ ìˆ˜ ìˆëŠ” ë¬¼ê±´ì´ ì—†ë„¤!\""));
             CombatManager.Instance.ResolveTurnEnd();
             yield break;
         }
@@ -72,14 +72,14 @@ public class CompanionManager : MonoBehaviour
     {
         if (karinData != null && karinData.CutIn != null)
         {
-            CombatUIManager.Instance.InterruptAndTypeCommentary("Ä«¸°ÀÇ Â÷·ÊÀÔ´Ï´Ù!");
+            CombatUIManager.Instance.InterruptAndTypeCommentary("ì¹´ë¦°ì˜ ì°¨ë¡€ì…ë‹ˆë‹¤!");
             yield return StartCoroutine(CombatUIManager.Instance.ShowCutIn(karinData.CutIn));
         }
         if (karinData != null && karinData.battle != null)
             CombatUIManager.Instance.SetCasterImage(true, karinData.battle);
 
         string itemName = GetTranslatedText(item.itemName);
-        Coroutine textCoroutine = StartCoroutine(CombatUIManager.Instance.TypeCommentary($"Ä«¸°ÀÌ {itemName}À»(¸¦) »ç¿ëÇß½À´Ï´Ù!"));
+        Coroutine textCoroutine = StartCoroutine(CombatUIManager.Instance.TypeCommentary($"ì¹´ë¦°ì´ {itemName}ì„(ë¥¼) ì‚¬ìš©í–ˆìŠµë‹ˆë‹¤!"));
 
         int damage = 0;
         PlayerStats pStats = CombatManager.Instance.GetCurrentPlayerStats();
@@ -102,12 +102,12 @@ public class CompanionManager : MonoBehaviour
             CombatUIManager.Instance.SetDefenderImage(isPlayerDefending, defenderHitSprite);
             CombatUIManager.Instance.SpawnDamageText(damage.ToString(), false, isPlayerDefending);
 
-            // [ÇÙ½É] ¿©±â¼­ Áï½Ã µ¥¹ÌÁö Àû¿ë ¹× Ã¼·Â¹Ù ¾÷µ¥ÀÌÆ®
+            // [í•µì‹¬] ì—¬ê¸°ì„œ ì¦‰ì‹œ ë°ë¯¸ì§€ ì ìš© ë° ì²´ë ¥ë°” ì—…ë°ì´íŠ¸
             bool isDead = CombatManager.Instance.ApplyDamageToEnemy(damage);
 
             if (isDead)
             {
-                // ¿¬Å¸ µµÁß ÀûÀÌ Á×¾úÀ¸¸é Áï½Ã ½Â¸® Ã³¸® ÈÄ ÄÚ·çÆ¾ Á¾·á!
+                // ì—°íƒ€ ë„ì¤‘ ì ì´ ì£½ì—ˆìœ¼ë©´ ì¦‰ì‹œ ìŠ¹ë¦¬ ì²˜ë¦¬ í›„ ì½”ë£¨í‹´ ì¢…ë£Œ!
                 yield return new WaitForSeconds(1.0f);
                 CombatUIManager.Instance.ClearCombatEffects();
                 CombatManager.Instance.RestorePlayerSideImage();
@@ -129,7 +129,7 @@ public class CompanionManager : MonoBehaviour
     }
 
     // ==========================================
-    // 3. Á¶·ÂÀÚ(¼­Æ÷ÅÍ) ÅÏ Ã³¸®
+    // 3. ì¡°ë ¥ì(ì„œí¬í„°) í„´ ì²˜ë¦¬
     // ==========================================
     public IEnumerator ExecuteSupporterTurn(SupporterData supporter, bool isStartSkill)
     {
@@ -137,7 +137,7 @@ public class CompanionManager : MonoBehaviour
         Sprite cutIn = (isStartSkill && supporter.startSkillCutIn != null) ? supporter.startSkillCutIn : supporter.CutIn;
         if (cutIn != null)
         {
-            string turnText = isStartSkill ? $"{supName}ÀÇ °³Àü Áö¿ø!" : $"{supName}ÀÇ Â÷·ÊÀÔ´Ï´Ù!";
+            string turnText = isStartSkill ? $"{supName}ì˜ ê°œì „ ì§€ì›!" : $"{supName}ì˜ ì°¨ë¡€ì…ë‹ˆë‹¤!";
             CombatUIManager.Instance.InterruptAndTypeCommentary(turnText);
             yield return StartCoroutine(CombatUIManager.Instance.ShowCutIn(cutIn));
         }
@@ -145,8 +145,8 @@ public class CompanionManager : MonoBehaviour
         Sprite actionImage = isStartSkill ? supporter.startSkillImage : supporter.battleSkillImage;
         if (actionImage != null) CombatUIManager.Instance.SetCasterImage(true, actionImage);
 
-        string skillType = isStartSkill ? "°³Àü ½ºÅ³" : "ÀüÅõ ½ºÅ³";
-        Coroutine textCoroutine = StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{supName}ÀÇ {skillType} ¹ßµ¿!"));
+        string skillType = isStartSkill ? "ê°œì „ ìŠ¤í‚¬" : "ì „íˆ¬ ìŠ¤í‚¬";
+        Coroutine textCoroutine = StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{supName}ì˜ {skillType} ë°œë™!"));
 
         SupporterLogicBase logic = isStartSkill ? supporter.startSkillLogic : supporter.battleSkillLogic;
         int currentLevel = isStartSkill ? supporter.startSkillLevel : supporter.battleSkillLevel;
@@ -157,7 +157,7 @@ public class CompanionManager : MonoBehaviour
 
         if (logic != null)
         {
-            // 1. ´Ù´ÜÈ÷Æ®ÀÎÁö ´ÜÀÏ Å¸°İÀÎÁö È®ÀÎÇÏ¿© ¸®½ºÆ®¸¦ Ã¤¿ó´Ï´Ù.
+            // 1. ë‹¤ë‹¨íˆíŠ¸ì¸ì§€ ë‹¨ì¼ íƒ€ê²©ì¸ì§€ í™•ì¸í•˜ì—¬ ë¦¬ìŠ¤íŠ¸ë¥¼ ì±„ì›ë‹ˆë‹¤.
             List<int> multiDamages = logic.CalculateMultiHitDamages(pStats, eData, currentLevel);
             if (multiDamages != null && multiDamages.Count > 0)
             {
@@ -169,7 +169,7 @@ public class CompanionManager : MonoBehaviour
                 if (singleDamage > 0) hitDamages.Add(singleDamage);
             }
 
-            // 2. Æ¯¼ö È¿°ú(¹öÇÁ, µğ¹öÇÁ µî) ¿ì¼± Àû¿ë
+            // 2. íŠ¹ìˆ˜ íš¨ê³¼(ë²„í”„, ë””ë²„í”„ ë“±) ìš°ì„  ì ìš©
             logic.ApplyEffect(pStats, eData, currentLevel);
         }
 
@@ -188,12 +188,12 @@ public class CompanionManager : MonoBehaviour
                 CombatUIManager.Instance.SetDefenderImage(isPlayerDefending, defenderHitSprite);
                 CombatUIManager.Instance.SpawnDamageText(currentDamage.ToString(), false, isPlayerDefending);
 
-                // Å¸°İ¸¶´Ù Áï½Ã Àû Ã¼·Â Â÷°¨
+                // íƒ€ê²©ë§ˆë‹¤ ì¦‰ì‹œ ì  ì²´ë ¥ ì°¨ê°
                 bool isDead = CombatManager.Instance.ApplyDamageToEnemy(currentDamage);
 
                 if (isDead)
                 {
-                    // ¿¬Å¸ µµÁß ÀûÀÌ Á×¾úÀ¸¸é Áï½Ã ½Â¸® Ã³¸® ÈÄ ÄÚ·çÆ¾ Á¾·á!
+                    // ì—°íƒ€ ë„ì¤‘ ì ì´ ì£½ì—ˆìœ¼ë©´ ì¦‰ì‹œ ìŠ¹ë¦¬ ì²˜ë¦¬ í›„ ì½”ë£¨í‹´ ì¢…ë£Œ!
                     yield return new WaitForSeconds(1.0f);
                     CombatUIManager.Instance.ClearCombatEffects();
                     CombatManager.Instance.RestorePlayerSideImage();
@@ -201,7 +201,7 @@ public class CompanionManager : MonoBehaviour
                     yield break;
                 }
 
-                // Å¸°İ °£°İ ´ë±â (¸¶Áö¸· Å¸°İÀÌ ¾Æ´Ò ¶§¸¸ 0.15ÃÊ ´ë±â)
+                // íƒ€ê²© ê°„ê²© ëŒ€ê¸° (ë§ˆì§€ë§‰ íƒ€ê²©ì´ ì•„ë‹ ë•Œë§Œ 0.15ì´ˆ ëŒ€ê¸°)
                 if (i < hitDamages.Count - 1)
                 {
                     yield return new WaitForSeconds(0.15f);

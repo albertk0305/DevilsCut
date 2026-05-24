@@ -1,29 +1,29 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Linq;
 
 [CreateAssetMenu(fileName = "Belphegor_BattleSkill", menuName = "SupporterLogic/Belphegor/Battle Skill")]
 public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
 {
-    [Header("È¿°ú Àü¿ë ¹öÇÁ/µğ¹öÇÁ")]
+    [Header("íš¨ê³¼ ì „ìš© ë²„í”„/ë””ë²„í”„")]
     public StatusEffectData damageGivenAmpBuff;
     public StatusEffectData damageAmpDebuff;
 
-    [Header("·¹º§º° ÁÖ»çÀ§ º¸»ó °è¼ö")]
-    public float[] lowBetMultipliers = { 5.0f, 10.0f, 15.0f };       // ´«±İ 2 (Èû °è¼ö)
-    public float[] raiseStakesAmps = { 0.30f, 0.50f, 0.80f };        // ´«±İ 3 (ÁÖ´Â ÇÇÇØ Áõ°¡·®)
-    public float[] doubleDownAmps = { 0.70f, 1.00f, 1.50f };         // ´«±İ 4 (´ÙÀ½ Å¸°İ ÁõÆø·®)
-    public float[] fullHouseHeals = { 0.20f, 0.30f, 0.50f };         // ´«±İ 5 (Ã¼·Â È¸º¹·®)
-    public int[] jackpotMultipliers = { 30, 50, 100 };               // ´«±İ 6 (¿î °è¼ö)
+    [Header("ë ˆë²¨ë³„ ì£¼ì‚¬ìœ„ ë³´ìƒ ê³„ìˆ˜")]
+    public float[] lowBetMultipliers = { 5.0f, 10.0f, 15.0f };       // ëˆˆê¸ˆ 2 (í˜ ê³„ìˆ˜)
+    public float[] raiseStakesAmps = { 0.30f, 0.50f, 0.80f };        // ëˆˆê¸ˆ 3 (ì£¼ëŠ” í”¼í•´ ì¦ê°€ëŸ‰)
+    public float[] doubleDownAmps = { 0.70f, 1.00f, 1.50f };         // ëˆˆê¸ˆ 4 (ë‹¤ìŒ íƒ€ê²© ì¦í­ëŸ‰)
+    public float[] fullHouseHeals = { 0.20f, 0.30f, 0.50f };         // ëˆˆê¸ˆ 5 (ì²´ë ¥ íšŒë³µëŸ‰)
+    public int[] jackpotMultipliers = { 30, 50, 100 };               // ëˆˆê¸ˆ 6 (ìš´ ê³„ìˆ˜)
 
-    [Header("·¹º§º° ±×·Î±â ¼öÄ¡")]
-    public float[] smallBlindBreak = { 5f, 10f, 15f };   // ´«±İ 2
-    public float[] jackpotBreak = { 30f, 40f, 50f };    // ´«±İ 6
+    [Header("ë ˆë²¨ë³„ ê·¸ë¡œê¸° ìˆ˜ì¹˜")]
+    public float[] smallBlindBreak = { 5f, 10f, 15f };   // ëˆˆê¸ˆ 2
+    public float[] jackpotBreak = { 30f, 40f, 50f };    // ëˆˆê¸ˆ 6
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
         int playerLuck = StatManager.Instance.GetEffectiveStat(true, TargetStat.Luck);
 
-        // 1. °¡ÁßÄ¡ °è»ê (¿î ½ºÅÈ ±â¹İ È®·ü º¯µ¿Àº ±×´ë·Î À¯Áö) [cite: 47]
+        // 1. ê°€ì¤‘ì¹˜ ê³„ì‚° (ìš´ ìŠ¤íƒ¯ ê¸°ë°˜ í™•ë¥  ë³€ë™ì€ ê·¸ëŒ€ë¡œ ìœ ì§€) [cite: 47]
         float[] weights = new float[6];
         weights[0] = Mathf.Max(10f, 100f - (playerLuck * 1.5f));
         weights[1] = Mathf.Max(20f, 100f - (playerLuck * 1.0f));
@@ -83,7 +83,7 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
                 if (damageGivenAmpBuff != null)
                     BuffManager.Instance.AddEffect(true, damageGivenAmpBuff, raiseStakesAmps[index], 3);
                 if (damageAmpDebuff != null)
-                    BuffManager.Instance.AddEffect(true, damageAmpDebuff, 0.30f, 3); // ¹Ş´Â ÇÇÇØ Æä³ÎÆ¼´Â 30% °íÁ¤ [cite: 50]
+                    BuffManager.Instance.AddEffect(true, damageAmpDebuff, 0.30f, 3); // ë°›ëŠ” í”¼í•´ í˜ë„í‹°ëŠ” 30% ê³ ì • [cite: 50]
                 break;
 
             case 4: // Double Down
@@ -96,7 +96,7 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
                 textToDisplay = "REBUY";
 
                 float baseHeal = pStats.maxHp * fullHouseHeals[index];
-                // [Ãß°¡] µ¥¸ó ½Ã³ÊÁö È¸º¹·® ÁõÆø
+                // [ì¶”ê°€] ë°ëª¬ ì‹œë„ˆì§€ íšŒë³µëŸ‰ ì¦í­
                 int healAmount = Mathf.RoundToInt(baseHeal * (1f + pStats.healingReceivedAmp));
                 int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
 
@@ -104,7 +104,7 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
                 CombatUIManager.Instance.playerStatusUI.UpdateHP(pStats.currentHp, pStats.maxHp);
                 BuffManager.Instance.GetEffects(true).RemoveAll(e => e.effectData.category == EffectCategory.Debuff);
 
-                // [Ãß°¡] µ¥¸ó ½Ã³ÊÁö ÃÊ°ú È¸º¹ ¹öÇÁ ¿¬µ¿
+                // [ì¶”ê°€] ë°ëª¬ ì‹œë„ˆì§€ ì´ˆê³¼ íšŒë³µ ë²„í”„ ì—°ë™
                 if (excessHeal > 0 && CombatManager.Instance != null)
                     CombatManager.Instance.ApplyOverhealBuff(excessHeal);
                 break;
@@ -116,7 +116,7 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
                 CombatManager.Instance.ApplyDamageToEntity(false, jackpotDmg);
                 CombatUIManager.Instance.SpawnDamageText(jackpotDmg.ToString(), true, false);
                 isBrokenNow = BreakManager.Instance.AddBreakDamage(false, jackpotBreak[index]);
-                StyleRankManager.Instance.IncreaseRank(7); // Áï½Ã SSS ·©Å© [cite: 53]
+                StyleRankManager.Instance.IncreaseRank(7); // ì¦‰ì‹œ SSS ë­í¬ [cite: 53]
                 break;
         }
 
@@ -125,8 +125,8 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
             CombatUIManager.Instance.UpdateTurnOrderUI(TurnManager.Instance.GetFutureTurnIcons(5));
         }
 
-        DevLog.Log($"[º§Æä°í¸£ ¹èÆ²] Lv.{skillLevel} µ¥½º ·Î¿ï: ÁÖ»çÀ§ {dice} ({textToDisplay})");
-        CombatUIManager.Instance.SpawnDamageText($"¡Ú{textToDisplay}", false, true);
+        DevLog.Log($"[ë²¨í˜ê³ ë¥´ ë°°í‹€] Lv.{skillLevel} ë°ìŠ¤ ë¡œìš¸: ì£¼ì‚¬ìœ„ {dice} ({textToDisplay})");
+        CombatUIManager.Instance.SpawnDamageText($"â˜…{textToDisplay}", false, true);
         CombatUIManager.Instance.RefreshBuffUI();
         CombatUIManager.Instance.UpdateTurnOrderUI(TurnManager.Instance.GetFutureTurnIcons(5));
     }

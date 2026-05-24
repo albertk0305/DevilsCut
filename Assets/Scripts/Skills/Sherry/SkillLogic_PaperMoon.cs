@@ -1,31 +1,31 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_PaperMoon", menuName = "SkillLogic/Player/PaperMoon")]
 public class SkillLogic_PaperMoon : SkillLogicBase
 {
-    // ½ºÅ³ »ç¿ë ½Ã ¼Ò¸ğÇÑ Ã¼·ÂÀ» ÀÓ½Ã ÀúÀåÇÏ¿© ÁøÈ­ B¿¡¼­ ÆäÀÌ¹éÇÒ ¶§ »ç¿ëÇÕ´Ï´Ù.
+    // ìŠ¤í‚¬ ì‚¬ìš© ì‹œ ì†Œëª¨í•œ ì²´ë ¥ì„ ì„ì‹œ ì €ì¥í•˜ì—¬ ì§„í™” Bì—ì„œ í˜ì´ë°±í•  ë•Œ ì‚¬ìš©í•©ë‹ˆë‹¤.
     [System.NonSerialized] private int lastHpCost = 0;
 
-    [Header("ÁøÈ­ C: Àû Çàµ¿ °ÔÀÌÁö(AP) °¨¼Ò·®")]
-    // °ÔÀÌÁö 100 ±âÁØ 20, 30, 40À» ±ğ¾Æ ÅÏÀ» °­Á¦·Î µÚ·Î ¹Ğ¾î³À´Ï´Ù.
+    [Header("ì§„í™” C: ì  í–‰ë™ ê²Œì´ì§€(AP) ê°ì†ŒëŸ‰")]
+    // ê²Œì´ì§€ 100 ê¸°ì¤€ 20, 30, 40ì„ ê¹ì•„ í„´ì„ ê°•ì œë¡œ ë’¤ë¡œ ë°€ì–´ëƒ…ë‹ˆë‹¤.
     public float[] pathC_ApReductions = { 20f, 30f, 40f };
 
-    // 1. [±âº» / ÁøÈ­ A] ±×·Î±â ¼öÄ¡ ÁõÆø 
+    // 1. [ê¸°ë³¸ / ì§„í™” A] ê·¸ë¡œê¸° ìˆ˜ì¹˜ ì¦í­ 
     public override float GetBreakMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (isPlayerAttacking)
         {
-            // ±âº»: ÀÒÀº Ã¼·Â¿¡ ºñ·ÊÇÏ¿© ºê·¹ÀÌÅ© ¼öÄ¡¸¦ ÃÖ´ë 2¹è(Bonus 1.0)±îÁö ÁõÆøÇÕ´Ï´Ù.
+            // ê¸°ë³¸: ìƒì€ ì²´ë ¥ì— ë¹„ë¡€í•˜ì—¬ ë¸Œë ˆì´í¬ ìˆ˜ì¹˜ë¥¼ ìµœëŒ€ 2ë°°(Bonus 1.0)ê¹Œì§€ ì¦í­í•©ë‹ˆë‹¤.
             float breakMult = CombatMath.GetMissingHPMultiplier(pStats.maxHp, pStats.currentHp, 1.0f);
 
-            // [ÁøÈ­ A] °ø¸í: ÇöÀç Ã¼·ÂÀÌ 30% ÀÌÇÏ¶ó¸é ±×·Î±â ÇÇÇØ 2¹è Ãß°¡ ÁõÆø!
+            // [ì§„í™” A] ê³µëª…: í˜„ì¬ ì²´ë ¥ì´ 30% ì´í•˜ë¼ë©´ ê·¸ë¡œê¸° í”¼í•´ 2ë°° ì¶”ê°€ ì¦í­!
             if (skill.currentEvolution == SkillEvolution.PathA)
             {
                 float hpRatio = (float)pStats.currentHp / pStats.maxHp;
                 if (hpRatio <= 0.3f)
                 {
                     breakMult *= 2.0f;
-                    DevLog.Log($"[ÁøÈ­ A] °ø¸í! Ã¼·ÂÀÌ 30% ÀÌÇÏÀÌ¹Ç·Î ±×·Î±â ÇÇÇØ°¡ 2¹è·Î ÁõÆøµË´Ï´Ù.");
+                    DevLog.Log($"[ì§„í™” A] ê³µëª…! ì²´ë ¥ì´ 30% ì´í•˜ì´ë¯€ë¡œ ê·¸ë¡œê¸° í”¼í•´ê°€ 2ë°°ë¡œ ì¦í­ë©ë‹ˆë‹¤.");
                 }
             }
             return breakMult;
@@ -33,23 +33,23 @@ public class SkillLogic_PaperMoon : SkillLogicBase
         return 1.0f;
     }
 
-    // 2. ½ºÅ³ ÄÚ½ºÆ® ÁöºÒ ·ÎÁ÷
+    // 2. ìŠ¤í‚¬ ì½”ìŠ¤íŠ¸ ì§€ë¶ˆ ë¡œì§
     public override void PaySkillCost(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (isPlayerAttacking)
         {
-            // [ÁøÈ­ A] Ã¼·Â ¼Ò¸ğ·® ¾à°£ Áõ°¡ (10% -> 15%)
+            // [ì§„í™” A] ì²´ë ¥ ì†Œëª¨ëŸ‰ ì•½ê°„ ì¦ê°€ (10% -> 15%)
             float costRatio = (skill.currentEvolution == SkillEvolution.PathA) ? 0.15f : 0.10f;
 
             lastHpCost = Mathf.Max(1, Mathf.RoundToInt(pStats.currentHp * costRatio));
             pStats.currentHp -= lastHpCost;
 
-            DevLog.Log($"[ÆäÀÌÆÛ ¹®] Ã¼·ÂÀÇ {costRatio * 100}%({lastHpCost})¸¦ ÄÚ½ºÆ®·Î ÁöºÒÇß½À´Ï´Ù.");
+            DevLog.Log($"[í˜ì´í¼ ë¬¸] ì²´ë ¥ì˜ {costRatio * 100}%({lastHpCost})ë¥¼ ì½”ìŠ¤íŠ¸ë¡œ ì§€ë¶ˆí–ˆìŠµë‹ˆë‹¤.");
 
-            // ±Û·Î¹ú ¹æ¼Û±¹À» ÅëÇÑ ¾ÈÀüÇÑ UI ¾÷µ¥ÀÌÆ®
+            // ê¸€ë¡œë²Œ ë°©ì†¡êµ­ì„ í†µí•œ ì•ˆì „í•œ UI ì—…ë°ì´íŠ¸
             BattleEventSystem.CallHpChanged(true, pStats.currentHp, pStats.maxHp);
 
-            // Ã¼·Â ¼Ò¸ğ ½Ã°¢Àû ÅØ½ºÆ® ¿¬Ãâ (»¡°£»ö ÅØ½ºÆ®)
+            // ì²´ë ¥ ì†Œëª¨ ì‹œê°ì  í…ìŠ¤íŠ¸ ì—°ì¶œ (ë¹¨ê°„ìƒ‰ í…ìŠ¤íŠ¸)
             if (CombatUIManager.Instance != null)
             {
                 CombatUIManager.Instance.SpawnDamageText($"-{lastHpCost}", false, true);
@@ -57,7 +57,7 @@ public class SkillLogic_PaperMoon : SkillLogicBase
         }
     }
 
-    // 3. [ÁøÈ­ B, C] ÀûÁß ÈÄ Ã³¸® ·ÎÁ÷
+    // 3. [ì§„í™” B, C] ì ì¤‘ í›„ ì²˜ë¦¬ ë¡œì§
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
         if (!isHit || !isPlayerAttacking) return;
@@ -65,17 +65,17 @@ public class SkillLogic_PaperMoon : SkillLogicBase
         int index = Mathf.Clamp(skill.skillLevel - 1, 0, pathC_ApReductions.Length - 1);
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ B] ¾ÆÀÌ ¿ö³Ê ºñ: ÀÌ ½ºÅ³·Î ÀûÀ» ±×·Î±â ½ÃÅ°¸é ¼Ò¸ğÇÑ Ã¼·Â 100% Áï½Ã ÆäÀÌ¹é
+        // [ì§„í™” B] ì•„ì´ ì›Œë„ˆ ë¹„: ì´ ìŠ¤í‚¬ë¡œ ì ì„ ê·¸ë¡œê¸° ì‹œí‚¤ë©´ ì†Œëª¨í•œ ì²´ë ¥ 100% ì¦‰ì‹œ í˜ì´ë°±
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.PathB)
         {
             bool wasBroken = CombatManager.Instance.currentState.wasEnemyBrokenAtSkillStart;
             bool isBrokenNow = BreakManager.Instance.IsBroken(false);
 
-            // ½ºÅ³ ½ÃÀü Àü¿¡´Â ±×·Î±â°¡ ¾Æ´Ï¾ú´Âµ¥, Áö±İ ±×·Î±â°¡ µÇ¾ú´Ù¸é (³»°¡ ¹æ±İ ÅÍ¶ß·È´Ù¸é)
+            // ìŠ¤í‚¬ ì‹œì „ ì „ì—ëŠ” ê·¸ë¡œê¸°ê°€ ì•„ë‹ˆì—ˆëŠ”ë°, ì§€ê¸ˆ ê·¸ë¡œê¸°ê°€ ë˜ì—ˆë‹¤ë©´ (ë‚´ê°€ ë°©ê¸ˆ í„°ëœ¨ë ¸ë‹¤ë©´)
             if (!wasBroken && isBrokenNow && lastHpCost > 0)
             {
-                // [Ãß°¡] ÆäÀÌ¹é(È¸º¹)¿¡µµ µ¥¸ó ½Ã³ÊÁö È¸º¹·® ÁõÆø Àû¿ë!
+                // [ì¶”ê°€] í˜ì´ë°±(íšŒë³µ)ì—ë„ ë°ëª¬ ì‹œë„ˆì§€ íšŒë³µëŸ‰ ì¦í­ ì ìš©!
                 int healAmount = Mathf.RoundToInt(lastHpCost * (1f + pStats.healingReceivedAmp));
                 int excessHeal = (pStats.currentHp + healAmount) - pStats.maxHp;
 
@@ -87,31 +87,31 @@ public class SkillLogic_PaperMoon : SkillLogicBase
                     CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, true);
                 }
 
-                // [Ãß°¡] µ¥¸ó ½Ã³ÊÁö ÃÊ°ú È¸º¹ ¹öÇÁ ¿¬µ¿
+                // [ì¶”ê°€] ë°ëª¬ ì‹œë„ˆì§€ ì´ˆê³¼ íšŒë³µ ë²„í”„ ì—°ë™
                 if (excessHeal > 0 && CombatManager.Instance != null)
                     CombatManager.Instance.ApplyOverhealBuff(excessHeal);
 
-                DevLog.Log($"[ÁøÈ­ B] ¾ÆÀÌ ¿ö³Ê ºñ ¹ßµ¿! ÀûÀ» ±×·Î±â »óÅÂ·Î ¸¸µé¾î ¼Ò¸ğÇÑ Ã¼·ÂÀ» È¸º¹ÇÕ´Ï´Ù. (ÃÖÁ¾ È¸º¹·®: {healAmount})");
+                DevLog.Log($"[ì§„í™” B] ì•„ì´ ì›Œë„ˆ ë¹„ ë°œë™! ì ì„ ê·¸ë¡œê¸° ìƒíƒœë¡œ ë§Œë“¤ì–´ ì†Œëª¨í•œ ì²´ë ¥ì„ íšŒë³µí•©ë‹ˆë‹¤. (ìµœì¢… íšŒë³µëŸ‰: {healAmount})");
 
-                lastHpCost = 0; // Áßº¹ È¸º¹ ¹æÁö
+                lastHpCost = 0; // ì¤‘ë³µ íšŒë³µ ë°©ì§€
             }
         }
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ C] ½ºÅ¸ÀÏ: ÀûÁß ½Ã ÀûÀÇ AP(Çàµ¿ °ÔÀÌÁö) °¨¼Ò½ÃÄÑ ÅÏ ¹Ğ¾î³»±â
+        // [ì§„í™” C] ìŠ¤íƒ€ì¼: ì ì¤‘ ì‹œ ì ì˜ AP(í–‰ë™ ê²Œì´ì§€) ê°ì†Œì‹œì¼œ í„´ ë°€ì–´ë‚´ê¸°
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
             if (TurnManager.Instance != null)
             {
-                // ÅÏ Å¥¿¡¼­ Àû(Enemy) ¿£Æ¼Æ¼¸¦ Ã£½À´Ï´Ù.
+                // í„´ íì—ì„œ ì (Enemy) ì—”í‹°í‹°ë¥¼ ì°¾ìŠµë‹ˆë‹¤.
                 var enemyEntity = TurnManager.Instance.turnQueue.Find(e => !e.isPlayer && e.type == EntityType.Enemy);
                 if (enemyEntity != null)
                 {
                     float reduction = pathC_ApReductions[index];
                     enemyEntity.actionGauge -= reduction;
 
-                    DevLog.Log($"[ÁøÈ­ C] ½ºÅ¸ÀÏ ¹ßµ¿! ÀûÀÇ Çàµ¿ °ÔÀÌÁö¸¦ {reduction}¸¸Å­ °¨¼Ò½ÃÄÑ ÅÏÀ» µÚ·Î ¹Ğ¾î³Â½À´Ï´Ù.");
+                    DevLog.Log($"[ì§„í™” C] ìŠ¤íƒ€ì¼ ë°œë™! ì ì˜ í–‰ë™ ê²Œì´ì§€ë¥¼ {reduction}ë§Œí¼ ê°ì†Œì‹œì¼œ í„´ì„ ë’¤ë¡œ ë°€ì–´ëƒˆìŠµë‹ˆë‹¤.");
                 }
             }
         }

@@ -1,39 +1,39 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "KarinItem_P38", menuName = "KarinItems/P38")]
 public class KarinItemLogic_P38 : KarinItemLogicBase
 {
-    [Header("µ¥¹ÌÁö ¼³Á¤")]
-    public float luckMultiplier = 30.0f; // ¼Î¸® ¿î(Luck)ÀÇ 30¹è [cite: 4]
+    [Header("ë°ë¯¸ì§€ ì„¤ì •")]
+    public float luckMultiplier = 30.0f; // ì…°ë¦¬ ìš´(Luck)ì˜ 30ë°° [cite: 4]
 
-    [Header("±×·Î±â(Break) ¼³Á¤")]
-    public float breakDamage = 5.0f;    // ´Ù¸¥ ¹«±âµé°ú µ¿ÀÏÇÑ ¼Ò·®ÀÇ ±×·Î±â µ¥¹ÌÁö
+    [Header("ê·¸ë¡œê¸°(Break) ì„¤ì •")]
+    public float breakDamage = 5.0f;    // ë‹¤ë¥¸ ë¬´ê¸°ë“¤ê³¼ ë™ì¼í•œ ì†ŒëŸ‰ì˜ ê·¸ë¡œê¸° ë°ë¯¸ì§€
 
     public override int CalculateDamage(PlayerStats pStats, EnemyData eData)
     {
-        // 1. ½Ç½Ã°£ ¹öÇÁ/µğ¹öÇÁ°¡ ¹İ¿µµÈ ¼Î¸®ÀÇ '¿î'°ú ÀûÀÇ '¹æ¾î·Â'À» °¡Á®¿É´Ï´Ù.
+        // 1. ì‹¤ì‹œê°„ ë²„í”„/ë””ë²„í”„ê°€ ë°˜ì˜ëœ ì…°ë¦¬ì˜ 'ìš´'ê³¼ ì ì˜ 'ë°©ì–´ë ¥'ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
         int effectiveLuck = StatManager.Instance.GetEffectiveStat(true, TargetStat.Luck);
         int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
 
-        // 2. µ¥¹ÌÁö °è»ê (¿î ½ºÅÈ * 30¹è) [cite: 4]
-        // ÀûÀÇ ¹æ¾î·Â¿¡ µû¸¥ µ¥¹ÌÁö °¨¼ÒÀ²À» Àû¿ëÇÕ´Ï´Ù.
+        // 2. ë°ë¯¸ì§€ ê³„ì‚° (ìš´ ìŠ¤íƒ¯ * 30ë°°) [cite: 4]
+        // ì ì˜ ë°©ì–´ë ¥ì— ë”°ë¥¸ ë°ë¯¸ì§€ ê°ì†Œìœ¨ì„ ì ìš©í•©ë‹ˆë‹¤.
         float dr = CombatMath.GetDamageReduction(enemyDef);
         float expectedDamage = (effectiveLuck * luckMultiplier) * (1f - dr);
 
-        // ÃÖ¼Ò 1ÀÇ µ¥¹ÌÁö´Â º¸ÀåÇÕ´Ï´Ù.
+        // ìµœì†Œ 1ì˜ ë°ë¯¸ì§€ëŠ” ë³´ì¥í•©ë‹ˆë‹¤.
         return Mathf.Max(1, Mathf.RoundToInt(expectedDamage));
     }
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData eData)
     {
-        // 3. ±×·Î±â(Break) µ¥¹ÌÁö ºÎ¿© ·ÎÁ÷
+        // 3. ê·¸ë¡œê¸°(Break) ë°ë¯¸ì§€ ë¶€ì—¬ ë¡œì§
         if (BreakManager.Instance != null && !BreakManager.Instance.IsBroken(false))
         {
-            // Àû¿¡°Ô °íÁ¤µÈ ±×·Î±â µ¥¹ÌÁö¸¦ ÀÔÈü´Ï´Ù.
+            // ì ì—ê²Œ ê³ ì •ëœ ê·¸ë¡œê¸° ë°ë¯¸ì§€ë¥¼ ì…í™ë‹ˆë‹¤.
             bool isBrokenNow = BreakManager.Instance.AddBreakDamage(false, breakDamage);
-            DevLog.Log($"[P38] Àû¿¡°Ô {breakDamage}ÀÇ ±×·Î±â µ¥¹ÌÁö¸¦ ÀÔÇû½À´Ï´Ù.");
+            DevLog.Log($"[P38] ì ì—ê²Œ {breakDamage}ì˜ ê·¸ë¡œê¸° ë°ë¯¸ì§€ë¥¼ ì…í˜”ìŠµë‹ˆë‹¤.");
 
-            // Ä«¸°ÀÇ °ø°İÀ¸·Î ±×·Î±â°¡ ¹ßµ¿Çß´Ù¸é ÅÏ UI¸¦ Áï½Ã °»½ÅÇÕ´Ï´Ù.
+            // ì¹´ë¦°ì˜ ê³µê²©ìœ¼ë¡œ ê·¸ë¡œê¸°ê°€ ë°œë™í–ˆë‹¤ë©´ í„´ UIë¥¼ ì¦‰ì‹œ ê°±ì‹ í•©ë‹ˆë‹¤.
             if (isBrokenNow && CombatUIManager.Instance != null && TurnManager.Instance != null)
             {
                 CombatUIManager.Instance.UpdateTurnOrderUI(TurnManager.Instance.GetFutureTurnIcons(5));

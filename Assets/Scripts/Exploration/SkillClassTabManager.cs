@@ -1,60 +1,60 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 public class SkillClassTabManager : MonoBehaviour
 {
-    [Header("ÆĞ³Î ¿¬°á")]
-    public GameObject skillPanel;  // ½ºÅ³ Á¶È¸ ÆĞ³Î
-    public GameObject classPanel;  // Å¬·¡½º ½Ã³ÊÁö Á¶È¸ ÆĞ³Î
+    [Header("íŒ¨ë„ ì—°ê²°")]
+    public GameObject skillPanel;  // ìŠ¤í‚¬ ì¡°íšŒ íŒ¨ë„
+    public GameObject classPanel;  // í´ë˜ìŠ¤ ì‹œë„ˆì§€ ì¡°íšŒ íŒ¨ë„
 
-    [Header("¹öÆ° ÄÄÆ÷³ÍÆ® ¿¬°á")]
+    [Header("ë²„íŠ¼ ì»´í¬ë„ŒíŠ¸ ì—°ê²°")]
     public Button showSkillButton;
     public Button showClassButton;
 
-    [Header("¹öÆ° ¹è°æ ÀÌ¹ÌÁö ¿¬°á (»ö»ó º¯°æ¿ë)")]
+    [Header("ë²„íŠ¼ ë°°ê²½ ì´ë¯¸ì§€ ì—°ê²° (ìƒ‰ìƒ ë³€ê²½ìš©)")]
     public Image showSkillImage;
     public Image showClassImage;
 
-    [Header("¹öÆ° »ö»ó ¼³Á¤")]
+    [Header("ë²„íŠ¼ ìƒ‰ìƒ ì„¤ì •")]
     public Color normalColor = Color.white;
     public Color activeColor = new Color(0.6f, 0.6f, 0.6f);
 
-    // µ¹¾Æ°¥ ¿ø·¡ ¼Óµµ¸¦ ±â¾ïÇÒ º¯¼ö
+    // ëŒì•„ê°ˆ ì›ë˜ ì†ë„ë¥¼ ê¸°ì–µí•  ë³€ìˆ˜
     private float timeScaleBeforePause = 1f;
 
     private void OnEnable()
     {
-        // ÅÇÀÌ ¿­¸± ¶§ °­Á¦·Î ½ºÅ³ ÆĞ³ÎÀ» ¸ÕÀú ¶ç¿ì±â À§ÇØ ÃÊ±âÈ­ÇÕ´Ï´Ù.
+        // íƒ­ì´ ì—´ë¦´ ë•Œ ê°•ì œë¡œ ìŠ¤í‚¬ íŒ¨ë„ì„ ë¨¼ì € ë„ìš°ê¸° ìœ„í•´ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
         if (skillPanel != null) skillPanel.SetActive(false);
         OnClickShowSkill();
     }
 
     // =========================================================
-    // [½Å±Ô Ãß°¡] Äµ¹ö½º¸¦ ¿­ ¶§ È£ÃâÇÒ ÇÔ¼ö (½Ã°£ Á¤Áö)
+    // [ì‹ ê·œ ì¶”ê°€] ìº”ë²„ìŠ¤ë¥¼ ì—´ ë•Œ í˜¸ì¶œí•  í•¨ìˆ˜ (ì‹œê°„ ì •ì§€)
     // =========================================================
     public void OpenCanvas()
     {
         timeScaleBeforePause = Time.timeScale;
-        if (timeScaleBeforePause <= 0) timeScaleBeforePause = 1f; // ¹æ¾î ÄÚµå
+        if (timeScaleBeforePause <= 0) timeScaleBeforePause = 1f; // ë°©ì–´ ì½”ë“œ
 
         Time.timeScale = 0f;
-        DevLog.Log($"[¸Ş´º] ½ºÅ³/½Ã³ÊÁö Ã¢ ¿­±â: ½Ã°£ Á¤Áö (º¹±¸ ¼Óµµ: {timeScaleBeforePause})");
+        DevLog.Log($"[ë©”ë‰´] ìŠ¤í‚¬/ì‹œë„ˆì§€ ì°½ ì—´ê¸°: ì‹œê°„ ì •ì§€ (ë³µêµ¬ ì†ë„: {timeScaleBeforePause})");
 
         gameObject.SetActive(true);
     }
 
     // =========================================================
-    // [¼öÁ¤] Äµ¹ö½º¸¦ ´İÀ» ¶§ ½Ã°£ º¹±¸ ·ÎÁ÷ Ãß°¡
+    // [ìˆ˜ì •] ìº”ë²„ìŠ¤ë¥¼ ë‹«ì„ ë•Œ ì‹œê°„ ë³µêµ¬ ë¡œì§ ì¶”ê°€
     // =========================================================
     public void CloseCanvas()
     {
         Time.timeScale = timeScaleBeforePause;
-        DevLog.Log("[¸Ş´º] ½ºÅ³/½Ã³ÊÁö Ã¢ ´İ±â: ½Ã°£ º¹±¸");
+        DevLog.Log("[ë©”ë‰´] ìŠ¤í‚¬/ì‹œë„ˆì§€ ì°½ ë‹«ê¸°: ì‹œê°„ ë³µêµ¬");
 
         gameObject.SetActive(false);
     }
 
-    // [ShowSkill] ¹öÆ°À» ´­·¶À» ¶§ È£Ãâ
+    // [ShowSkill] ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ í˜¸ì¶œ
     public void OnClickShowSkill()
     {
         if (skillPanel != null && skillPanel.activeSelf) return;
@@ -66,7 +66,7 @@ public class SkillClassTabManager : MonoBehaviour
         if (showClassImage != null) showClassImage.color = normalColor;
     }
 
-    // [ShowClass] ¹öÆ°À» ´­·¶À» ¶§ È£Ãâ
+    // [ShowClass] ë²„íŠ¼ì„ ëˆŒë €ì„ ë•Œ í˜¸ì¶œ
     public void OnClickShowClass()
     {
         if (classPanel != null && classPanel.activeSelf) return;

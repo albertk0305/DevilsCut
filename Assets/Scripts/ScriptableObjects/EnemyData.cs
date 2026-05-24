@@ -1,26 +1,26 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewEnemy", menuName = "GameData/Enemy")]
 public class EnemyData : ScriptableObject
 {
-    [Header("±âº» Á¤º¸")]
-    public string enemyNameKey; // ´Ù±¹¾î ¹ø¿ªÀ» À§ÇÑ Key
-    public Sprite enemyImage;   // ÀüÅõ ¾À¿¡ ¶ç¿ï ÀÌ¹ÌÁö
+    [Header("ê¸°ë³¸ ì •ë³´")]
+    public string enemyNameKey; // ë‹¤êµ­ì–´ ë²ˆì—­ì„ ìœ„í•œ Key
+    public Sprite enemyImage;   // ì „íˆ¬ ì”¬ì— ë„ìš¸ ì´ë¯¸ì§€
     public Sprite CutIn;
 
-    [Header("¸®¾×¼Ç ÀÌ¹ÌÁö")]
+    [Header("ë¦¬ì•¡ì…˜ ì´ë¯¸ì§€")]
     public Sprite hit;
     public Sprite evade;
     public Sprite breakImage;
     public Sprite guardImage;
 
-    [Header("Àû AI ¼³Á¤")]
+    [Header("ì  AI ì„¤ì •")]
     public EnemyAIBase aiBrain;
 
-    [Header("½ºÅÈ º¸Á¤Ä¡")]
+    [Header("ìŠ¤íƒ¯ ë³´ì •ì¹˜")]
     public EnemyStatModifier statModifier;
 
-    [Header("ÀüÅõ ½ºÅÈ")]
+    [Header("ì „íˆ¬ ìŠ¤íƒ¯")]
     public int level;
     public int maxHp;
 
@@ -28,21 +28,21 @@ public class EnemyData : ScriptableObject
 
     public int currentHp;
 
-    public int breakResistance; // ±×·Î±â ÀúÇ×
-    public float maxBreakGauge = 100f; // ÃÖ´ë ºê·¹ÀÌÅ© ¼öÄ¡
-    public int strength;        // Èû
-    public int defense;         // ¹æ¾î
-    public int speed;           // ¼Óµµ
-    public int luck;             // ¿î
+    public int breakResistance; // ê·¸ë¡œê¸° ì €í•­
+    public float maxBreakGauge = 100f; // ìµœëŒ€ ë¸Œë ˆì´í¬ ìˆ˜ì¹˜
+    public int strength;        // í˜
+    public int defense;         // ë°©ì–´
+    public int speed;           // ì†ë„
+    public int luck;             // ìš´
 
-    [Header("Æ¯¼ö ÀüÅõ ½ºÅÈ (ÀüÅõ Áß ½Ç½Ã°£ º¯µ¿)")]
-    public float damageGivenAmp = 0f;       // °¡ÇÏ´Â ÇÇÇØ ÁõÆø (%)
-    public float damageReduction = 0f;      // ¹Ş´Â ÇÇÇØ °¨¼Ò (%)
-    public float critRate = 0f;              // Å©¸®Æ¼ÄÃ È®·ü (%)
-    public float critDamage = 1.5f;          // Å©¸®Æ¼ÄÃ ÇÇÇØ·® (±âº» 1.5f = 150%)
-    public float lifeSteal = 0f;            // ±Û·Î¹ú ÈíÇ÷·ü (%)
-    public float trueDamageConversion = 0f;  // ¹æ¾î ¹«½Ã °íÁ¤ÇÇÇØ ÀüÈ¯À² (%)
-    public float bonusAccuracy = 0f;         // º¸³Ê½º ¸íÁß·ü (%)
-    public float bonusEvasion = 0f;          // º¸³Ê½º È¸ÇÇÀ² (%)
-    public float healingReceivedAmp = 0f;   // ¹Ş´Â È¸º¹·® ÁõÆø (%)
+    [Header("íŠ¹ìˆ˜ ì „íˆ¬ ìŠ¤íƒ¯ (ì „íˆ¬ ì¤‘ ì‹¤ì‹œê°„ ë³€ë™)")]
+    public float damageGivenAmp = 0f;       // ê°€í•˜ëŠ” í”¼í•´ ì¦í­ (%)
+    public float damageReduction = 0f;      // ë°›ëŠ” í”¼í•´ ê°ì†Œ (%)
+    public float critRate = 0f;              // í¬ë¦¬í‹°ì»¬ í™•ë¥  (%)
+    public float critDamage = 1.5f;          // í¬ë¦¬í‹°ì»¬ í”¼í•´ëŸ‰ (ê¸°ë³¸ 1.5f = 150%)
+    public float lifeSteal = 0f;            // ê¸€ë¡œë²Œ í¡í˜ˆë¥  (%)
+    public float trueDamageConversion = 0f;  // ë°©ì–´ ë¬´ì‹œ ê³ ì •í”¼í•´ ì „í™˜ìœ¨ (%)
+    public float bonusAccuracy = 0f;         // ë³´ë„ˆìŠ¤ ëª…ì¤‘ë¥  (%)
+    public float bonusEvasion = 0f;          // ë³´ë„ˆìŠ¤ íšŒí”¼ìœ¨ (%)
+    public float healingReceivedAmp = 0f;   // ë°›ëŠ” íšŒë³µëŸ‰ ì¦í­ (%)
 }

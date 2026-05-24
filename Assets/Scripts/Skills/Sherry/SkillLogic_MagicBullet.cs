@@ -1,40 +1,40 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_MagicBullet", menuName = "SkillLogic/Player/MagicBullet")]
 public class SkillLogic_MagicBullet : SkillLogicBase
 {
-    [Header("ÁøÈ­ A (Tiro Duet)")]
-    [Tooltip("¿¬¼Ó ÀûÁß 1½ºÅÃ´ç ¿À¸£´Â µ¥¹ÌÁö ¹èÀ² (0.15 = 15%)")]
+    [Header("ì§„í™” A (Tiro Duet)")]
+    [Tooltip("ì—°ì† ì ì¤‘ 1ìŠ¤íƒë‹¹ ì˜¤ë¥´ëŠ” ë°ë¯¸ì§€ ë°°ìœ¨ (0.15 = 15%)")]
     public float pathA_DamageBonusPerHit = 0.15f;
-    [Tooltip("¿¬¼Ó ÀûÁß 1½ºÅÃ´ç ¿À¸£´Â Å©¸®Æ¼ÄÃ È®·ü (15 = 15%)")]
+    [Tooltip("ì—°ì† ì ì¤‘ 1ìŠ¤íƒë‹¹ ì˜¤ë¥´ëŠ” í¬ë¦¬í‹°ì»¬ í™•ë¥  (15 = 15%)")]
     public float pathA_CritBonusPerHit = 15f;
 
-    [Header("ÁøÈ­ B (Magia)")]
-    public StatusEffectData speedDownDebuff; // ¼Óµµ °¨¼Ò µğ¹öÇÁ ¿¬°á
-    [Tooltip("·¹º§º° ¼Óµµ °¨¼ÒÀ² (Á¦¾È: 20%, 25%, 30%)")]
+    [Header("ì§„í™” B (Magia)")]
+    public StatusEffectData speedDownDebuff; // ì†ë„ ê°ì†Œ ë””ë²„í”„ ì—°ê²°
+    [Tooltip("ë ˆë²¨ë³„ ì†ë„ ê°ì†Œìœ¨ (ì œì•ˆ: 20%, 25%, 30%)")]
     public float[] pathB_SpeedDownRates = { -0.20f, -0.25f, -0.30f };
 
-    [Header("ÁøÈ­ C (Tiro Finale)")]
-    [Tooltip("´ÜÅ¸ ¾ĞÃà ½Ã Á¦°øµÇ´Â ¹æ¾î ¹«½Ã ºñÀ²")]
-    public float pathC_ArmorPenetration = 0.30f; // 30% ¹æ°ü
+    [Header("ì§„í™” C (Tiro Finale)")]
+    [Tooltip("ë‹¨íƒ€ ì••ì¶• ì‹œ ì œê³µë˜ëŠ” ë°©ì–´ ë¬´ì‹œ ë¹„ìœ¨")]
+    public float pathC_ArmorPenetration = 0.30f; // 30% ë°©ê´€
 
     // ==========================================
-    // Å¸¼ö & ¸íÁß·ü Á¶ÀÛ (ÁøÈ­ C)
+    // íƒ€ìˆ˜ & ëª…ì¤‘ë¥  ì¡°ì‘ (ì§„í™” C)
     // ==========================================
     public override int GetHitCount(SkillData skill)
     {
-        if (skill.currentEvolution == SkillEvolution.PathC) return 1; // ´ÜÅ¸ ¾ĞÃà!
+        if (skill.currentEvolution == SkillEvolution.PathC) return 1; // ë‹¨íƒ€ ì••ì¶•!
         return base.GetHitCount(skill);
     }
 
     public override float GetBaseAccuracy(SkillData skill)
     {
-        if (skill.currentEvolution == SkillEvolution.PathC) return 90f; // ´ÜÅ¸´Â 90%·Î º¹±¸
-        return 80f; // ´Ù´ÜÈ÷Æ®´Â 80% Æä³ÎÆ¼ À¯Áö
+        if (skill.currentEvolution == SkillEvolution.PathC) return 90f; // ë‹¨íƒ€ëŠ” 90%ë¡œ ë³µêµ¬
+        return 80f; // ë‹¤ë‹¨íˆíŠ¸ëŠ” 80% í˜ë„í‹° ìœ ì§€
     }
 
     // ==========================================
-    // ½Ç½Ã°£ ´ÙÀÌ³»¹Í º¸Á¤ (ÁøÈ­ A)
+    // ì‹¤ì‹œê°„ ë‹¤ì´ë‚´ë¯¹ ë³´ì • (ì§„í™” A)
     // ==========================================
     public override float GetDynamicDamageMultiplier(SkillData skill, int consecutiveHits)
     {
@@ -55,19 +55,19 @@ public class SkillLogic_MagicBullet : SkillLogicBase
     }
 
     // ==========================================
-    // ¾ĞÃà µ¥¹ÌÁö ¹× ¹æ¾î ¹«½Ã (ÁøÈ­ C)
+    // ì••ì¶• ë°ë¯¸ì§€ ë° ë°©ì–´ ë¬´ì‹œ (ì§„í™” C)
     // ==========================================
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
-            return skill.GetCurrentHitCount(); // ¿ø·¡ Å¸¼ö(4,6,8)¸¸Å­ µ¥¹ÌÁö »½Æ¢±â!
+            return skill.GetCurrentHitCount(); // ì›ë˜ íƒ€ìˆ˜(4,6,8)ë§Œí¼ ë°ë¯¸ì§€ ë»¥íŠ€ê¸°!
         return 1.0f;
     }
 
     public override float GetBreakMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
-            return skill.GetCurrentHitCount(); // ºê·¹ÀÌÅ© ¼öÄ¡µµ Å¸¼ö¸¸Å­ »½Æ¢±â!
+            return skill.GetCurrentHitCount(); // ë¸Œë ˆì´í¬ ìˆ˜ì¹˜ë„ íƒ€ìˆ˜ë§Œí¼ ë»¥íŠ€ê¸°!
         return 1.0f;
     }
 
@@ -78,11 +78,11 @@ public class SkillLogic_MagicBullet : SkillLogicBase
     }
 
     // ==========================================
-    // µğ¹öÇÁ ºÎ¿© (ÁøÈ­ B)
+    // ë””ë²„í”„ ë¶€ì—¬ (ì§„í™” B)
     // ==========================================
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
-        if (!isHit) return; // ºø³ª°¡¸é ¼Óµµ °¨¼Ò ºÎ¿© ¾È ÇÔ!
+        if (!isHit) return; // ë¹—ë‚˜ê°€ë©´ ì†ë„ ê°ì†Œ ë¶€ì—¬ ì•ˆ í•¨!
 
         if (skill.currentEvolution == SkillEvolution.PathB && isPlayerAttacking && speedDownDebuff != null)
         {
@@ -90,7 +90,7 @@ public class SkillLogic_MagicBullet : SkillLogicBase
             float rate = pathB_SpeedDownRates[index];
 
             BuffManager.Instance.AddEffect(false, speedDownDebuff, rate, 3);
-            DevLog.Log($"[ÁøÈ­ B] ¸¶±â¾Æ ¹ßµ¿! ÀûÀÇ ¼Óµµ°¡ 3ÅÏ°£ {Mathf.Abs(rate * 100)}% °¨¼ÒÇÕ´Ï´Ù.");
+            DevLog.Log($"[ì§„í™” B] ë§ˆê¸°ì•„ ë°œë™! ì ì˜ ì†ë„ê°€ 3í„´ê°„ {Mathf.Abs(rate * 100)}% ê°ì†Œí•©ë‹ˆë‹¤.");
         }
     }
 }

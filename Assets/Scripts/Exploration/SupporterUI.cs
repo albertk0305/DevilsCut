@@ -1,13 +1,13 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 
-//¼­Æ÷ÅÍ ¼±ÅÃ UI Á¦¾î ÄÚµå
+//ì„œí¬í„° ì„ íƒ UI ì œì–´ ì½”ë“œ
 public class SupporterUI : MonoBehaviour
 {
-    [Header("¸ŞÀÎ µğ½ºÇÃ·¹ÀÌ")]
+    [Header("ë©”ì¸ ë””ìŠ¤í”Œë ˆì´")]
     public Image mainImage;
     public TextMeshProUGUI passiveText;
     public TextMeshProUGUI startText;
@@ -15,18 +15,18 @@ public class SupporterUI : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI supporterNameText;
 
-    [Header("ÇÏ´Ü ´ë±â¿­ ¸ñ·Ï")]
+    [Header("í•˜ë‹¨ ëŒ€ê¸°ì—´ ëª©ë¡")]
     public Button[] rosterButtons;
     public GameObject[] rosterBackgrounds;
     public GameObject leftArrow;
     public GameObject rightArrow;
 
-    [Header("¹öÆ°")]
+    [Header("ë²„íŠ¼")]
     public Button joinButton;
     public Button leaveButton;
     public Button cancelButton;
 
-    // ³»ºÎ »óÅÂ °ü¸®
+    // ë‚´ë¶€ ìƒíƒœ ê´€ë¦¬
     private SupporterData currentPreview;
     private List<SupporterData> displayList = new List<SupporterData>();
     private int currentPage = 0;
@@ -42,20 +42,20 @@ public class SupporterUI : MonoBehaviour
 
     private void OnDisable()
     {
-        // [Ãß°¡] Ã¢ÀÌ ²¨Áú ¶§´Â ¿¡·¯ ¹æÁö¸¦ À§ÇØ ±¸µ¶ Ãë¼Ò
+        // [ì¶”ê°€] ì°½ì´ êº¼ì§ˆ ë•ŒëŠ” ì—ëŸ¬ ë°©ì§€ë¥¼ ìœ„í•´ êµ¬ë… ì·¨ì†Œ
         if (LocalizationManager.Instance != null)
             LocalizationManager.Instance.OnLanguageChanged -= RefreshLanguage;
     }
 
     private void RefreshLanguage()
     {
-        // ÇöÀç ¶ç¿öÁø Á¶·ÂÀÚ »óÅÂ ±×´ë·Î ÅØ½ºÆ®¸¸ ´Ù½Ã ºÒ·¯¿É´Ï´Ù.
+        // í˜„ì¬ ë„ì›Œì§„ ì¡°ë ¥ì ìƒíƒœ ê·¸ëŒ€ë¡œ í…ìŠ¤íŠ¸ë§Œ ë‹¤ì‹œ ë¶ˆëŸ¬ì˜µë‹ˆë‹¤.
         bool isJoined = (currentPreview != null && currentPreview == PlayerManager.Instance.activeSupporter);
         ShowPreview(currentPreview, isJoined);
     }
 
 
-    // ¸ŞÀÎ È­¸é ¾÷µ¥ÀÌÆ®
+    // ë©”ì¸ í™”ë©´ ì—…ë°ì´íŠ¸
     private void ShowPreview(SupporterData data, bool isJoinedState)
     {
         currentPreview = data;
@@ -95,7 +95,7 @@ public class SupporterUI : MonoBehaviour
         }
     }
 
-    // ÇÏ´Ü ¸ñ·Ï ¾÷µ¥ÀÌÆ®
+    // í•˜ë‹¨ ëª©ë¡ ì—…ë°ì´íŠ¸
     private void RefreshRosterList()
     {
         displayList = PlayerManager.Instance.unlockedSupporters
@@ -105,27 +105,27 @@ public class SupporterUI : MonoBehaviour
         int totalPages = GetTotalPages();
         if (currentPage >= totalPages && currentPage > 0) currentPage = totalPages - 1;
 
-        // [¼öÁ¤µÊ] rosterIcons.Length ´ë½Å rosterButtons.Length »ç¿ë
+        // [ìˆ˜ì •ë¨] rosterIcons.Length ëŒ€ì‹  rosterButtons.Length ì‚¬ìš©
         int startIndex = currentPage * rosterButtons.Length;
 
         for (int i = 0; i < rosterButtons.Length; i++)
         {
             int dataIndex = startIndex + i;
 
-            // 1. ÇöÀç ½½·Ô¿¡ µé¾î°¥ µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏ´ÂÁö ¿©ºÎ¸¦ bool·Î ÆÇº°
+            // 1. í˜„ì¬ ìŠ¬ë¡¯ì— ë“¤ì–´ê°ˆ ë°ì´í„°ê°€ ì¡´ì¬í•˜ëŠ”ì§€ ì—¬ë¶€ë¥¼ boolë¡œ íŒë³„
             bool hasData = dataIndex < displayList.Count;
 
-            // 2. µ¥ÀÌÅÍ À¯¹«¿¡ µû¶ó ¹öÆ° ÄÑ±â/²ô±â, Å¬¸¯ È°¼ºÈ­/ºñÈ°¼ºÈ­¸¦ ÇÑ ¹ø¿¡ Ã³¸®!
+            // 2. ë°ì´í„° ìœ ë¬´ì— ë”°ë¼ ë²„íŠ¼ ì¼œê¸°/ë„ê¸°, í´ë¦­ í™œì„±í™”/ë¹„í™œì„±í™”ë¥¼ í•œ ë²ˆì— ì²˜ë¦¬!
             rosterButtons[i].gameObject.SetActive(hasData);
             rosterButtons[i].interactable = hasData;
 
-            // 3. µ¥ÀÌÅÍ°¡ ÀÖÀ» ¶§¸¸ ÀÌ¹ÌÁö ±³Ã¼
+            // 3. ë°ì´í„°ê°€ ìˆì„ ë•Œë§Œ ì´ë¯¸ì§€ êµì²´
             if (hasData)
             {
                 rosterButtons[i].image.sprite = displayList[dataIndex].iconImage;
             }
 
-            // 4. ¹è°æ ÀÌ¹ÌÁö ÄÑ±â/²ô±âµµ if/else ¾øÀÌ ÇÑ ÁÙ·Î ¾ĞÃà!
+            // 4. ë°°ê²½ ì´ë¯¸ì§€ ì¼œê¸°/ë„ê¸°ë„ if/else ì—†ì´ í•œ ì¤„ë¡œ ì••ì¶•!
             if (rosterBackgrounds.Length > i && rosterBackgrounds[i] != null)
             {
                 rosterBackgrounds[i].SetActive(hasData);
@@ -139,7 +139,7 @@ public class SupporterUI : MonoBehaviour
 
     public void OnClickRosterIcon(int slotIndex)
     {
-        // [¼öÁ¤µÊ] rosterButtons.Length »ç¿ë
+        // [ìˆ˜ì •ë¨] rosterButtons.Length ì‚¬ìš©
         int dataIndex = (currentPage * rosterButtons.Length) + slotIndex;
         if (dataIndex < displayList.Count)
         {
@@ -183,13 +183,13 @@ public class SupporterUI : MonoBehaviour
 
     public void OnClickCancel()
     {
-        // ¿ø·¡ ³» ÆÄÆ¼¿¡ ÀÖ´ø ÁøÂ¥ Á¶·ÂÀÚ(¾Æ¹«µµ ¾ø¾ú´Ù¸é null)¸¦ ´Ù½Ã È­¸é¿¡ ¶ç¿öÁİ´Ï´Ù!
+        // ì›ë˜ ë‚´ íŒŒí‹°ì— ìˆë˜ ì§„ì§œ ì¡°ë ¥ì(ì•„ë¬´ë„ ì—†ì—ˆë‹¤ë©´ null)ë¥¼ ë‹¤ì‹œ í™”ë©´ì— ë„ì›Œì¤ë‹ˆë‹¤!
         ShowPreview(PlayerManager.Instance.activeSupporter, isJoinedState: true);
     }
 
     private int GetTotalPages()
     {
-        // [¼öÁ¤µÊ] rosterButtons.Length »ç¿ë
+        // [ìˆ˜ì •ë¨] rosterButtons.Length ì‚¬ìš©
         return Mathf.Max(1, Mathf.CeilToInt((float)displayList.Count / rosterButtons.Length));
     }
 }

@@ -1,54 +1,54 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using TMPro; 
 
 [RequireComponent(typeof(Slider))]
-//¼³Á¤ UI¿¡¼­ ½½¶óÀÌµå¹Ù·Î ¼Ò¸® Á¶ÀıÇÏ°Ô ÇØÁÖ´Â ÄÚµå
+//ì„¤ì • UIì—ì„œ ìŠ¬ë¼ì´ë“œë°”ë¡œ ì†Œë¦¬ ì¡°ì ˆí•˜ê²Œ í•´ì£¼ëŠ” ì½”ë“œ
 public class VolumeUI : MonoBehaviour
 {
     private Slider volumeSlider;
 
-    [Header("UI ¿¬°á")]
-    public TextMeshProUGUI volumeText; // ÀÎ½ºÆåÅÍ¿¡¼­ º¼·ı ¼ıÀÚ¸¦ ¶ç¿ï ÅØ½ºÆ®¸¦ ¿¬°áÇÒ Ä­
+    [Header("UI ì—°ê²°")]
+    public TextMeshProUGUI volumeText; // ì¸ìŠ¤í™í„°ì—ì„œ ë³¼ë¥¨ ìˆ«ìë¥¼ ë„ìš¸ í…ìŠ¤íŠ¸ë¥¼ ì—°ê²°í•  ì¹¸
 
     void Start()
     {
         volumeSlider = GetComponent<Slider>();
 
-        // 1. ¼³Á¤Ã¢ÀÌ ¿­¸± ¶§, ½½¶óÀÌ´õÀÇ ¼ÕÀâÀÌ À§Ä¡¸¦ ÇöÀç ÀúÀåµÈ º¼·ı¿¡ ¸ÂÃã
+        // 1. ì„¤ì •ì°½ì´ ì—´ë¦´ ë•Œ, ìŠ¬ë¼ì´ë”ì˜ ì†ì¡ì´ ìœ„ì¹˜ë¥¼ í˜„ì¬ ì €ì¥ëœ ë³¼ë¥¨ì— ë§ì¶¤
         if (SoundManager.Instance != null)
         {
             volumeSlider.value = SoundManager.Instance.masterVolume;
         }
 
-        // 2. ½ÃÀÛÇÒ ¶§ ÅØ½ºÆ®µµ ÇöÀç º¼·ı¿¡ ¸Â°Ô ÇÑ ¹ø ¾÷µ¥ÀÌÆ® ÇØÁÜ
+        // 2. ì‹œì‘í•  ë•Œ í…ìŠ¤íŠ¸ë„ í˜„ì¬ ë³¼ë¥¨ì— ë§ê²Œ í•œ ë²ˆ ì—…ë°ì´íŠ¸ í•´ì¤Œ
         UpdateVolumeText(volumeSlider.value);
 
-        // 3. ½½¶óÀÌ´õ¸¦ ¿òÁ÷ÀÏ ¶§¸¶´Ù 'OnSliderValueChanged' ÇÔ¼ö°¡ ÀÚµ¿À¸·Î ½ÇÇàµÇµµ·Ï ±¸µ¶
+        // 3. ìŠ¬ë¼ì´ë”ë¥¼ ì›€ì§ì¼ ë•Œë§ˆë‹¤ 'OnSliderValueChanged' í•¨ìˆ˜ê°€ ìë™ìœ¼ë¡œ ì‹¤í–‰ë˜ë„ë¡ êµ¬ë…
         volumeSlider.onValueChanged.AddListener(OnSliderValueChanged);
     }
 
-    // ½½¶óÀÌ´õ °ªÀÌ º¯ÇÒ ¶§¸¶´Ù ½ÇÇàµÉ ÇÔ¼ö
+    // ìŠ¬ë¼ì´ë” ê°’ì´ ë³€í•  ë•Œë§ˆë‹¤ ì‹¤í–‰ë  í•¨ìˆ˜
     private void OnSliderValueChanged(float value)
     {
         if (SoundManager.Instance != null)
         {
-            SoundManager.Instance.SetVolume(value); // ¸Å´ÏÀú¿¡ º¼·ı °ª Àü´Ş
+            SoundManager.Instance.SetVolume(value); // ë§¤ë‹ˆì €ì— ë³¼ë¥¨ ê°’ ì „ë‹¬
         }
 
-        // ÅØ½ºÆ®µµ ½Ç½Ã°£À¸·Î º¯°æÇØ ÁÜ
+        // í…ìŠ¤íŠ¸ë„ ì‹¤ì‹œê°„ìœ¼ë¡œ ë³€ê²½í•´ ì¤Œ
         UpdateVolumeText(value);
     }
 
-    // ½½¶óÀÌ´õÀÇ 0.0 ~ 1.0 °ªÀ» 0 ~ 100 »çÀÌÀÇ Á¤¼ö·Î ¹Ù²ã¼­ ÅØ½ºÆ®¿¡ ¶ç¿ì´Â ÇÔ¼ö
+    // ìŠ¬ë¼ì´ë”ì˜ 0.0 ~ 1.0 ê°’ì„ 0 ~ 100 ì‚¬ì´ì˜ ì •ìˆ˜ë¡œ ë°”ê¿”ì„œ í…ìŠ¤íŠ¸ì— ë„ìš°ëŠ” í•¨ìˆ˜
     private void UpdateVolumeText(float value)
     {
         if (volumeText != null)
         {
-            // value(¿¹: 0.553)¿¡ 100À» °öÇÑ µÚ(55.3), Mathf.RoundToInt·Î ¹İ¿Ã¸²ÇØ¼­ Á¤¼ö(55)·Î ¸¸µê!
+            // value(ì˜ˆ: 0.553)ì— 100ì„ ê³±í•œ ë’¤(55.3), Mathf.RoundToIntë¡œ ë°˜ì˜¬ë¦¼í•´ì„œ ì •ìˆ˜(55)ë¡œ ë§Œë“¦!
             int volumePercent = Mathf.RoundToInt(value * 100f);
 
-            // Á¤¼ö¸¦ ¹®ÀÚ·Î ¹Ù²ã¼­ ÅØ½ºÆ®¿¡ Àû¿ë
+            // ì •ìˆ˜ë¥¼ ë¬¸ìë¡œ ë°”ê¿”ì„œ í…ìŠ¤íŠ¸ì— ì ìš©
             volumeText.text = volumePercent.ToString();
         }
     }

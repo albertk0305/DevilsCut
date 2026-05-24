@@ -1,24 +1,24 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Crusader", menuName = "SkillLogic/Player/Crusader")]
 public class SkillLogic_Crusader : SkillLogicBase
 {
-    [Header("±âº»: ·¹º§º° ±×·Î±â Ãß°¡ µ¥¹ÌÁö ÁõÆø·ü")]
+    [Header("ê¸°ë³¸: ë ˆë²¨ë³„ ê·¸ë¡œê¸° ì¶”ê°€ ë°ë¯¸ì§€ ì¦í­ë¥ ")]
     public float[] bonusDamageRatesOnBreak = { 0.50f, 0.75f, 1.0f };
 
-    [Header("ÁøÈ­ A (Bloody Stream)")]
+    [Header("ì§„í™” A (Bloody Stream)")]
     public StatusEffectData defDownEffect;
     public StatusEffectData brDownEffect;
-    //  [¼öÁ¤µÊ] ·¹º§º° 1Å¸´ç °¨¼ÒÀ² (2%, 3%, 4%)
+    //  [ìˆ˜ì •ë¨] ë ˆë²¨ë³„ 1íƒ€ë‹¹ ê°ì†Œìœ¨ (2%, 3%, 4%)
     public float[] pathA_DebuffPerHitRates = { 0.02f, 0.03f, 0.04f };
 
-    [Header("ÁøÈ­ B (Stand Proud)")]
-    //  [½Å±Ô Ãß°¡] ·¹º§º° º¹¸® ÁõÆø ¹èÀ² (1.10¹è, 1.15¹è, 1.20¹è)
+    [Header("ì§„í™” B (Stand Proud)")]
+    //  [ì‹ ê·œ ì¶”ê°€] ë ˆë²¨ë³„ ë³µë¦¬ ì¦í­ ë°°ìœ¨ (1.10ë°°, 1.15ë°°, 1.20ë°°)
     public float[] pathB_CompoundRates = { 1.10f, 1.15f, 1.20f };
 
-    [Header("ÁøÈ­ C (Last Train Home)")]
+    [Header("ì§„í™” C (Last Train Home)")]
     public StatusEffectData timeBombEffect;
-    //  [½Å±Ô Ãß°¡] ·¹º§º° ½ÃÇÑÆøÅº ½º³À¼¦ ÁõÆø ¹èÀ² (2.0¹è, 2.5¹è, 3.0¹è)
+    //  [ì‹ ê·œ ì¶”ê°€] ë ˆë²¨ë³„ ì‹œí•œí­íƒ„ ìŠ¤ëƒ…ìƒ· ì¦í­ ë°°ìœ¨ (2.0ë°°, 2.5ë°°, 3.0ë°°)
     public float[] pathC_DamageMults = { 2.0f, 2.5f, 3.0f };
 
 
@@ -28,10 +28,10 @@ public class SkillLogic_Crusader : SkillLogicBase
         return base.AlwaysHits(skill);
     }
 
-    // 1. ±âº» µ¥¹ÌÁö & ÁøÈ­ C ´ÜÅ¸(1µ¥¹ÌÁö) Ã³¸®
+    // 1. ê¸°ë³¸ ë°ë¯¸ì§€ & ì§„í™” C ë‹¨íƒ€(1ë°ë¯¸ì§€) ì²˜ë¦¬
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
-        // [ÁøÈ­ C] ½ÃÇÑÆøÅº ¼³Ä¡¸¦ À§ÇØ µ¥¹ÌÁö ¹èÀ²À» 0À¸·Î ¸¸µì´Ï´Ù.
+        // [ì§„í™” C] ì‹œí•œí­íƒ„ ì„¤ì¹˜ë¥¼ ìœ„í•´ ë°ë¯¸ì§€ ë°°ìœ¨ì„ 0ìœ¼ë¡œ ë§Œë“­ë‹ˆë‹¤.
         if (skill.currentEvolution == SkillEvolution.PathC) return 0f;
 
         bool isTargetBroken = BreakManager.Instance.IsBroken(!isPlayerAttacking);
@@ -43,12 +43,12 @@ public class SkillLogic_Crusader : SkillLogicBase
         return 1.0f;
     }
 
-    // 2. [ÁøÈ­ B] ½ºÅÄµå ÇÁ¶ó¿ìµå (º¹¸® Áõ°¡)
+    // 2. [ì§„í™” B] ìŠ¤íƒ ë“œ í”„ë¼ìš°ë“œ (ë³µë¦¬ ì¦ê°€)
     public override float GetDynamicDamageMultiplier(SkillData skill, int consecutiveHits)
     {
         if (skill.currentEvolution == SkillEvolution.PathB)
         {
-            //  [¼öÁ¤µÊ] ½ºÅ³ ·¹º§¿¡ µû¶ó º¹¸® ¹èÀ² Àû¿ë!
+            //  [ìˆ˜ì •ë¨] ìŠ¤í‚¬ ë ˆë²¨ì— ë”°ë¼ ë³µë¦¬ ë°°ìœ¨ ì ìš©!
             int index = Mathf.Clamp(skill.skillLevel - 1, 0, pathB_CompoundRates.Length - 1);
             float compoundRate = pathB_CompoundRates[index];
 
@@ -57,12 +57,12 @@ public class SkillLogic_Crusader : SkillLogicBase
         return 1.0f;
     }
 
-    // 3. [ÁøÈ­ C] ¶ó½ºÆ® Æ®·¹ÀÎ È¨ (½ÃÇÑÆøÅº ½º³À¼¦ ÀåÀü)
+    // 3. [ì§„í™” C] ë¼ìŠ¤íŠ¸ íŠ¸ë ˆì¸ í™ˆ (ì‹œí•œí­íƒ„ ìŠ¤ëƒ…ìƒ· ì¥ì „)
     public override void PaySkillCost(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC && isPlayerAttacking)
         {
-            //  [¼öÁ¤µÊ] ½ºÅ³ ·¹º§¿¡ µû¶ó ½º³À¼¦ µ¥¹ÌÁö Æø¹ß ¹èÀ² Àû¿ë!
+            //  [ìˆ˜ì •ë¨] ìŠ¤í‚¬ ë ˆë²¨ì— ë”°ë¼ ìŠ¤ëƒ…ìƒ· ë°ë¯¸ì§€ í­ë°œ ë°°ìœ¨ ì ìš©!
             int index = Mathf.Clamp(skill.skillLevel - 1, 0, pathC_DamageMults.Length - 1);
             float snapshotMult = pathC_DamageMults[index];
 
@@ -74,7 +74,7 @@ public class SkillLogic_Crusader : SkillLogicBase
             float dr = CombatMath.GetDamageReduction(def);
 
             float rawDmg = (pStats.strength * skillMult) * (1f - dr);
-            int totalDmg = Mathf.RoundToInt(rawDmg * hits * snapshotMult); // <- ¹èÀ² °ö»ê
+            int totalDmg = Mathf.RoundToInt(rawDmg * hits * snapshotMult); // <- ë°°ìœ¨ ê³±ì‚°
 
             CombatManager.Instance.currentState.savedBombDamage = totalDmg;
             CombatManager.Instance.currentState.isBombActive = true;
@@ -84,25 +84,25 @@ public class SkillLogic_Crusader : SkillLogicBase
                 BuffManager.Instance.AddEffect(false, timeBombEffect, totalDmg, 1);
             }
 
-            DevLog.Log($"[ÁøÈ­ C] ¶ó½ºÆ® Æ®·¹ÀÎ È¨(Lv.{skill.skillLevel}) ÀåÀü! ¹èÀ² {snapshotMult}x -> {totalDmg} ÇÇÇØ ´ë±â Áß.");
+            DevLog.Log($"[ì§„í™” C] ë¼ìŠ¤íŠ¸ íŠ¸ë ˆì¸ í™ˆ(Lv.{skill.skillLevel}) ì¥ì „! ë°°ìœ¨ {snapshotMult}x -> {totalDmg} í”¼í•´ ëŒ€ê¸° ì¤‘.");
         }
     }
 
-    // 4. [ÁøÈ­ C] Å¸¼ö º¯È¯ (´ÜÅ¸·Î)
+    // 4. [ì§„í™” C] íƒ€ìˆ˜ ë³€í™˜ (ë‹¨íƒ€ë¡œ)
     public override int GetHitCount(SkillData skill)
     {
         if (skill.currentEvolution == SkillEvolution.PathC) return 1;
         return base.GetHitCount(skill);
     }
 
-    // 5. [ÁøÈ­ A] ºí·¯µğ ½ºÆ®¸² (Å¸¼ö ºñ·Ê µğ¹öÇÁ Àû¿ë)
+    // 5. [ì§„í™” A] ë¸”ëŸ¬ë”” ìŠ¤íŠ¸ë¦¼ (íƒ€ìˆ˜ ë¹„ë¡€ ë””ë²„í”„ ì ìš©)
     public override void ApplyEffectOnHit(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking, bool isHit)
     {
         if (!isHit || !isPlayerAttacking) return;
 
         if (skill.currentEvolution == SkillEvolution.PathA)
         {
-            //  [¼öÁ¤µÊ] ½ºÅ³ ·¹º§¿¡ µû¶ó 1Å¸´ç µğ¹öÇÁ ¼öÄ¡ Àû¿ë!
+            //  [ìˆ˜ì •ë¨] ìŠ¤í‚¬ ë ˆë²¨ì— ë”°ë¼ 1íƒ€ë‹¹ ë””ë²„í”„ ìˆ˜ì¹˜ ì ìš©!
             int index = Mathf.Clamp(skill.skillLevel - 1, 0, pathA_DebuffPerHitRates.Length - 1);
             float debuffPerHit = pathA_DebuffPerHitRates[index];
 
@@ -112,7 +112,7 @@ public class SkillLogic_Crusader : SkillLogicBase
             if (defDownEffect != null) BuffManager.Instance.AddEffect(false, defDownEffect, totalDebuff, 3);
             if (brDownEffect != null) BuffManager.Instance.AddEffect(false, brDownEffect, totalDebuff, 3);
 
-            DevLog.Log($"[ÁøÈ­ A] ºí·¯µğ ½ºÆ®¸²(Lv.{skill.skillLevel})! {hitCount}Å¸ ÀûÁß. ¹æ¾î·Â/BRÀ» {Mathf.Abs(totalDebuff) * 100}% °¨¼Ò½ÃÅµ´Ï´Ù.");
+            DevLog.Log($"[ì§„í™” A] ë¸”ëŸ¬ë”” ìŠ¤íŠ¸ë¦¼(Lv.{skill.skillLevel})! {hitCount}íƒ€ ì ì¤‘. ë°©ì–´ë ¥/BRì„ {Mathf.Abs(totalDebuff) * 100}% ê°ì†Œì‹œí‚µë‹ˆë‹¤.");
         }
     }
 }

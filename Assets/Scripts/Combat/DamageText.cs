@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using TMPro;
 
 public class DamageText : MonoBehaviour
@@ -7,7 +7,7 @@ public class DamageText : MonoBehaviour
     public float moveSpeed = 2f;
     public float lifetime = 3.0f;
 
-    private float defaultFontSize; // Àç»ç¿ëÀ» À§ÇÑ ±âº» ÆùÆ® Å©±â ±â¾ï
+    private float defaultFontSize; // ì¬ì‚¬ìš©ì„ ìœ„í•œ ê¸°ë³¸ í°íŠ¸ í¬ê¸° ê¸°ì–µ
 
     private void Awake()
     {
@@ -17,32 +17,32 @@ public class DamageText : MonoBehaviour
 
     private void OnEnable()
     {
-        // [ÃÖÀûÈ­ 2] ÄÑÁú ¶§¸¶´Ù lifetime ÃÊ µÚ¿¡ ÀÚ½ÅÀ» ²ôµµ·Ï ¿¹¾à (Destroy ¿ÏÀü ´ëÃ¼)
+        // [ìµœì í™” 2] ì¼œì§ˆ ë•Œë§ˆë‹¤ lifetime ì´ˆ ë’¤ì— ìì‹ ì„ ë„ë„ë¡ ì˜ˆì•½ (Destroy ì™„ì „ ëŒ€ì²´)
         Invoke("Deactivate", lifetime);
     }
 
     private void OnDisable()
     {
-        // µµÁß¿¡ °­Á¦·Î ²¨Áö¸é ¿¹¾à Ãë¼Ò (¸Ş¸ğ¸® ²¿ÀÓ ¹æÁö)
+        // ë„ì¤‘ì— ê°•ì œë¡œ êº¼ì§€ë©´ ì˜ˆì•½ ì·¨ì†Œ (ë©”ëª¨ë¦¬ ê¼¬ì„ ë°©ì§€)
         CancelInvoke();
     }
 
     private void Deactivate()
     {
-        gameObject.SetActive(false); // ¼ö¸íÀÌ ´ÙÇÏ¸é ½º½º·Î ²¨Áı´Ï´Ù.
+        gameObject.SetActive(false); // ìˆ˜ëª…ì´ ë‹¤í•˜ë©´ ìŠ¤ìŠ¤ë¡œ êº¼ì§‘ë‹ˆë‹¤.
     }
 
     public void Setup(string text, bool isCrit)
     {
         if (textMesh == null) return;
 
-        textMesh.fontSize = defaultFontSize; // Àç»ç¿ë ½Ã ÆùÆ® Å©±â ÃÊ±âÈ­
+        textMesh.fontSize = defaultFontSize; // ì¬ì‚¬ìš© ì‹œ í°íŠ¸ í¬ê¸° ì´ˆê¸°í™”
 
-        // 1. ±ÛÀÚ ¸öÅë »ö»óÀº ¹«Á¶°Ç ±ò²ûÇÑ Èò»ö °íÁ¤!
+        // 1. ê¸€ì ëª¸í†µ ìƒ‰ìƒì€ ë¬´ì¡°ê±´ ê¹”ë”í•œ í°ìƒ‰ ê³ ì •!
         textMesh.color = Color.white;
 
-        // 2. ÅØ½ºÆ® Á¾·ù¿¡ µû¶ó Å×µÎ¸®(Outline) »ö»ó °áÁ¤
-        Color outlineCol = Color.red; // ±âº» Å×µÎ¸®: ºÓÀº»ö (ÀÏ¹İ Å¸°İ)
+        // 2. í…ìŠ¤íŠ¸ ì¢…ë¥˜ì— ë”°ë¼ í…Œë‘ë¦¬(Outline) ìƒ‰ìƒ ê²°ì •
+        Color outlineCol = Color.red; // ê¸°ë³¸ í…Œë‘ë¦¬: ë¶‰ì€ìƒ‰ (ì¼ë°˜ íƒ€ê²©)
 
         if (text == "Miss")
         {
@@ -50,40 +50,40 @@ public class DamageText : MonoBehaviour
         }
         else if (text.StartsWith("+"))
         {
-            outlineCol = Color.green; // Ã¼·Â È¸º¹
+            outlineCol = Color.green; // ì²´ë ¥ íšŒë³µ
         }
         else if (text.StartsWith("-"))
         {
-            outlineCol = Color.red; // ÄÚ½ºÆ® ÁöºÒ
+            outlineCol = Color.red; // ì½”ìŠ¤íŠ¸ ì§€ë¶ˆ
         }
-        else if (text.StartsWith("¡Ú"))
+        else if (text.StartsWith("â˜…"))
         {
-            // º§Æä°í¸£ Àü¿ë º¸¶ó»ö Å×µÎ¸® ¿¬Ãâ
-            text = text.Replace("¡Ú", "");
+            // ë²¨í˜ê³ ë¥´ ì „ìš© ë³´ë¼ìƒ‰ í…Œë‘ë¦¬ ì—°ì¶œ
+            text = text.Replace("â˜…", "");
             outlineCol = new Color(0.6f, 0.1f, 0.9f);
 
-            // [½Å±Ô] ÀèÆÌ Æ¯¼ö ¿¬Ãâ: ¹®±¸°¡ ÃÖ°­ÀÇ ÆĞ¶ó¸é ÆùÆ® Å©±â¸¦ ´ëÆø Å°¿ó´Ï´Ù.
+            // [ì‹ ê·œ] ì­íŒŸ íŠ¹ìˆ˜ ì—°ì¶œ: ë¬¸êµ¬ê°€ ìµœê°•ì˜ íŒ¨ë¼ë©´ í°íŠ¸ í¬ê¸°ë¥¼ ëŒ€í­ í‚¤ì›ë‹ˆë‹¤.
             if (text == "THE DEVIL'S HAND")
             {
-                textMesh.fontSize += 40; // Å©¸®Æ¼ÄÃ(+20)º¸´Ù µÎ ¹è ´õ Å« ¾Ğ¹Ú°¨!
+                textMesh.fontSize += 40; // í¬ë¦¬í‹°ì»¬(+20)ë³´ë‹¤ ë‘ ë°° ë” í° ì••ë°•ê°!
             }
         }
-        else if (text.StartsWith("¢À"))
+        else if (text.StartsWith("â™£"))
         {
-            text = text.Replace("¢À", "");
-            outlineCol = new Color(0.2f, 0.8f, 0.2f); // ÁøÇÑ ÃÊ·Ï»ö (¼÷Ãë µî »óÅÂÀÌ»ó ¿¬Ãâ¿ë)
+            text = text.Replace("â™£", "");
+            outlineCol = new Color(0.2f, 0.8f, 0.2f); // ì§„í•œ ì´ˆë¡ìƒ‰ (ìˆ™ì·¨ ë“± ìƒíƒœì´ìƒ ì—°ì¶œìš©)
         }
         else if (isCrit)
         {
-            text += "!"; // ´À³¦Ç¥ Ãß°¡
-            outlineCol = Color.yellow; // Å©¸®Æ¼ÄÃ
-            textMesh.fontSize += 20; // Å©¸®Æ¼ÄÃÀÏ ¶§¸¸ ÆùÆ® Å°¿ò
+            text += "!"; // ëŠë‚Œí‘œ ì¶”ê°€
+            outlineCol = Color.yellow; // í¬ë¦¬í‹°ì»¬
+            textMesh.fontSize += 20; // í¬ë¦¬í‹°ì»¬ì¼ ë•Œë§Œ í°íŠ¸ í‚¤ì›€
         }
 
         textMesh.text = text;
 
-        // 3. TextMeshPro Å×µÎ¸® Àû¿ë
-        // µÎ²²°¡ ³Ê¹« µÎ²®°Å³ª ¾ãÀ¸¸é 0.2f ¼ıÀÚ¸¦ ÀÔ¸À¿¡ ¸Â°Ô Á¶ÀıÇÏ¼¼¿ä! (º¸Åë 0.1f ~ 0.3f »çÀÌ)
+        // 3. TextMeshPro í…Œë‘ë¦¬ ì ìš©
+        // ë‘ê»˜ê°€ ë„ˆë¬´ ë‘ê»ê±°ë‚˜ ì–‡ìœ¼ë©´ 0.2f ìˆ«ìë¥¼ ì…ë§›ì— ë§ê²Œ ì¡°ì ˆí•˜ì„¸ìš”! (ë³´í†µ 0.1f ~ 0.3f ì‚¬ì´)
         textMesh.outlineWidth = 0.2f;
         textMesh.outlineColor = outlineCol;
     }

@@ -1,10 +1,10 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewEvent", menuName = "GameData/Node/Event")]
 public class EventNodeData : ExplorationNodeData
 {
-    [Header("ÀÌº¥Æ® Àü¿ë Á¤º¸")]
+    [Header("ì´ë²¤íŠ¸ ì „ìš© ì •ë³´")]
     [TextArea]
-    public string eventDescription; // ÀÌº¥Æ® ³»¿ë ÅØ½ºÆ®
-    // ³ªÁß¿¡ º¸»ó µ¥ÀÌÅÍ³ª ¼±ÅÃÁö µ¥ÀÌÅÍ¸¦ ¿©±â¿¡ Ãß°¡ÇÏ¸é µË´Ï´Ù!
+    public string eventDescription; // ì´ë²¤íŠ¸ ë‚´ìš© í…ìŠ¤íŠ¸
+    // ë‚˜ì¤‘ì— ë³´ìƒ ë°ì´í„°ë‚˜ ì„ íƒì§€ ë°ì´í„°ë¥¼ ì—¬ê¸°ì— ì¶”ê°€í•˜ë©´ ë©ë‹ˆë‹¤!
 }

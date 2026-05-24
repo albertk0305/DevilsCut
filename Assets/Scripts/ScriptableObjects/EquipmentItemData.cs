@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public enum ItemGrade { Common, Rare, Epic, Legendary }
 public enum ItemClass
@@ -10,35 +10,35 @@ public enum ItemClass
 [CreateAssetMenu(fileName = "NewEquipment", menuName = "GameData/EquipmentItem")]
 public class EquipmentItemData : ScriptableObject
 {
-    [Header("±âº» Á¤º¸")]
+    [Header("ê¸°ë³¸ ì •ë³´")]
     public string itemID;
-    public string itemNameKey; // ´Ù±¹¾î Key
+    public string itemNameKey; // ë‹¤êµ­ì–´ Key
     public Sprite itemIcon;
-    [TextArea] public string itemDescKey; // ´Ù±¹¾î Key
-    [Header("Àåºñ ½ºÅÈ È¿°ú")]
-    public string itemBonusKey; // ´Ù±¹¾î Key
+    [TextArea] public string itemDescKey; // ë‹¤êµ­ì–´ Key
+    [Header("ìž¥ë¹„ ìŠ¤íƒ¯ íš¨ê³¼")]
+    public string itemBonusKey; // ë‹¤êµ­ì–´ Key
 
-    [Header("µî±Þ ¹× ½Ã³ÊÁö")]
+    [Header("ë“±ê¸‰ ë° ì‹œë„ˆì§€")]
     public ItemGrade grade;
-    public ItemClass itemClass; // ¾î¶² ½Ã³ÊÁö¿¡ ¼ÓÇÏ´Â°¡?
+    public ItemClass itemClass; // ì–´ë–¤ ì‹œë„ˆì§€ì— ì†í•˜ëŠ”ê°€?
 
-    // ÇöÀç ¾ÆÀÌÅÛÀÇ ¼º±Þ (ÀÎ°ÔÀÓ¿¡¼­ µ¿ÀÏ ¾ÆÀÌÅÛ È¹µæ ½Ã 1 -> 2 -> 3À¸·Î Áõ°¡)
-    // ScriptableObject ¿øº»ÀÌ ¿À¿°µÇÁö ¾Êµµ·Ï ÀÎº¥Åä¸® ÀúÀå¿ë Å¬·¡½º¿¡¼­ µû·Î ·¡ÇÎÇØ¼­ ¾²´Â °ÍÀ» ±ÇÀåÇÕ´Ï´Ù.
+    // í˜„ìž¬ ì•„ì´í…œì˜ ì„±ê¸‰ (ì¸ê²Œìž„ì—ì„œ ë™ì¼ ì•„ì´í…œ íšë“ ì‹œ 1 -> 2 -> 3ìœ¼ë¡œ ì¦ê°€)
+    // ScriptableObject ì›ë³¸ì´ ì˜¤ì—¼ë˜ì§€ ì•Šë„ë¡ ì¸ë²¤í† ë¦¬ ì €ìž¥ìš© í´ëž˜ìŠ¤ì—ì„œ ë”°ë¡œ ëž˜í•‘í•´ì„œ ì“°ëŠ” ê²ƒì„ ê¶Œìž¥í•©ë‹ˆë‹¤.
     [Range(1, 3)]
     public int currentStarLevel = 1;
 
-    // ÇöÀç ¾ÆÀÌÅÛÀÌ Á¦°øÇÏ´Â ½Ã³ÊÁö Á¡¼ö °è»ê ÇÔ¼ö
+    // í˜„ìž¬ ì•„ì´í…œì´ ì œê³µí•˜ëŠ” ì‹œë„ˆì§€ ì ìˆ˜ ê³„ì‚° í•¨ìˆ˜
     public int GetSynergyPoints()
     {
-        // Àü¼³ µî±ÞÀº ÇÕ¼ºÀÌ ºÒ°¡´ÉÇÏ°í ±âº»ÀûÀ¸·Î 2Á¡ÀÇ ½Ã³ÊÁö °¡Ä¡¸¦ Áö´Õ´Ï´Ù.
+        // ì „ì„¤ ë“±ê¸‰ì€ í•©ì„±ì´ ë¶ˆê°€ëŠ¥í•˜ê³  ê¸°ë³¸ì ìœ¼ë¡œ 2ì ì˜ ì‹œë„ˆì§€ ê°€ì¹˜ë¥¼ ì§€ë‹™ë‹ˆë‹¤.
         if (grade == ItemGrade.Legendary) return 2;
 
-        // ÀÏ¹Ý, Èñ±Í, ¿¡ÇÈÀº ÀÚ½ÅÀÇ ¼º±Þ(1~3)¸¸Å­ Á¡¼ö¸¦ Á¦°øÇÕ´Ï´Ù.
+        // ì¼ë°˜, í¬ê·€, ì—í”½ì€ ìžì‹ ì˜ ì„±ê¸‰(1~3)ë§Œí¼ ì ìˆ˜ë¥¼ ì œê³µí•©ë‹ˆë‹¤.
         return currentStarLevel;
     }
 
-    [Header("1´Ü°è ÇÕ ¿¬»ê ½ºÅÈ º¸³Ê½º (1¼º/2¼º/3¼º)")]
-    // ¹è¿­ Å©±â´Â Ç×»ó 3 (1¼º, 2¼º, 3¼º ¼öÄ¡)
+    [Header("1ë‹¨ê³„ í•© ì—°ì‚° ìŠ¤íƒ¯ ë³´ë„ˆìŠ¤ (1ì„±/2ì„±/3ì„±)")]
+    // ë°°ì—´ í¬ê¸°ëŠ” í•­ìƒ 3 (1ì„±, 2ì„±, 3ì„± ìˆ˜ì¹˜)
     public int[] flatStrength = new int[3];
     public int[] flatDefense = new int[3];
     public int[] flatSpeed = new int[3];
@@ -47,8 +47,8 @@ public class EquipmentItemData : ScriptableObject
     public int[] flatAP = new int[3];
     public int[] flatBreakResistance = new int[3];
 
-    [Header("2´Ü°è °ö ¿¬»ê ½ºÅÈ º¸³Ê½º (1¼º/2¼º/3¼º)")]
-    // ¿¹: 0.15f = 15% Áõ°¡
+    [Header("2ë‹¨ê³„ ê³± ì—°ì‚° ìŠ¤íƒ¯ ë³´ë„ˆìŠ¤ (1ì„±/2ì„±/3ì„±)")]
+    // ì˜ˆ: 0.15f = 15% ì¦ê°€
     public float[] pctStrength = new float[3];
     public float[] pctDefense = new float[3];
     public float[] pctSpeed = new float[3];
@@ -56,26 +56,26 @@ public class EquipmentItemData : ScriptableObject
     public float[] pctMaxHp = new float[3];
     public float[] pctAP = new float[3];
 
-    [Header("Æ¯¼ö ÀüÅõ º¸³Ê½º (1¼º/2¼º/3¼º)")]
-    public float[] finalDamageAmp = new float[3]; // ÃÖÁ¾ ÇÇÇØ ÁõÆø (%)
-    public float[] finalDamageReduction = new float[3]; // ¹Þ´Â ÃÖÁ¾ ÇÇÇØ °¨¼Ò (%)
-    public float[] critRateBonus = new float[3];  // Å©¸®Æ¼ÄÃ È®·ü ÇÕ»ê (%)
-    public float[] critDamageBonus = new float[3]; // Å©¸®Æ¼ÄÃ ÇÇÇØ·® ÇÕ»ê (%)
-    public float[] lifeStealRate = new float[3];  // ÈíÇ÷·ü (%)
+    [Header("íŠ¹ìˆ˜ ì „íˆ¬ ë³´ë„ˆìŠ¤ (1ì„±/2ì„±/3ì„±)")]
+    public float[] finalDamageAmp = new float[3]; // ìµœì¢… í”¼í•´ ì¦í­ (%)
+    public float[] finalDamageReduction = new float[3]; // ë°›ëŠ” ìµœì¢… í”¼í•´ ê°ì†Œ (%)
+    public float[] critRateBonus = new float[3];  // í¬ë¦¬í‹°ì»¬ í™•ë¥  í•©ì‚° (%)
+    public float[] critDamageBonus = new float[3]; // í¬ë¦¬í‹°ì»¬ í”¼í•´ëŸ‰ í•©ì‚° (%)
+    public float[] lifeStealRate = new float[3];  // í¡í˜ˆë¥  (%)
 
     // ==========================================
-    // µ¥ÀÌÅÍ °Ù(Get) ÇïÆÛ ÇÔ¼öµé
+    // ë°ì´í„° ê²Ÿ(Get) í—¬í¼ í•¨ìˆ˜ë“¤
     // ==========================================
     private int GetIndex(int starLevel) => Mathf.Clamp(starLevel - 1, 0, 2);
 
-    // ½Ã³ÊÁö Á¡¼ö °è»ê±â
+    // ì‹œë„ˆì§€ ì ìˆ˜ ê³„ì‚°ê¸°
     public int GetSynergyPoints(int starLevel)
     {
-        if (grade == ItemGrade.Legendary) return 2; // Àü¼³Àº 2Á¡
-        return starLevel; // ³ª¸ÓÁö´Â ¼º±Þ(1~3)¸¸Å­
+        if (grade == ItemGrade.Legendary) return 2; // ì „ì„¤ì€ 2ì 
+        return starLevel; // ë‚˜ë¨¸ì§€ëŠ” ì„±ê¸‰(1~3)ë§Œí¼
     }
 
-    // ½ºÅÈ ¼öÄ¡ ¹ÝÈ¯±â
+    // ìŠ¤íƒ¯ ìˆ˜ì¹˜ ë°˜í™˜ê¸°
     public int GetFlatStr(int starLevel) => flatStrength.Length > 0 ? flatStrength[GetIndex(starLevel)] : 0;
     public int GetFlatDef(int starLevel) => flatDefense.Length > 0 ? flatDefense[GetIndex(starLevel)] : 0;
     public int GetFlatSpd(int starLevel) => flatSpeed.Length > 0 ? flatSpeed[GetIndex(starLevel)] : 0;

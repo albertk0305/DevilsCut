@@ -1,17 +1,17 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-//¼³Á¤ UI Á¦¾î ÄÚµå
+//ì„¤ì • UI ì œì–´ ì½”ë“œ
 public class SettingsUI : MonoBehaviour
 {
-    [Header("UI ¿¬°á")]
-    public GameObject goToMainButton;    // ¸ŞÀÎÀ¸·Î °¡±â ¹öÆ°
-    public GameObject confirmationPopup; // ¿¹/¾Æ´Ï¿À È®ÀÎ ÆË¾÷
-    public Toggle fastCombatToggle;      // ÀüÅõ 2¹è¼Ó Ã¼Å©¹Ú½º
-    public GameObject restartBattleButton; // ÀüÅõ Àç½ÃÀÛ ¹öÆ°
+    [Header("UI ì—°ê²°")]
+    public GameObject goToMainButton;    // ë©”ì¸ìœ¼ë¡œ ê°€ê¸° ë²„íŠ¼
+    public GameObject confirmationPopup; // ì˜ˆ/ì•„ë‹ˆì˜¤ í™•ì¸ íŒì—…
+    public Toggle fastCombatToggle;      // ì „íˆ¬ 2ë°°ì† ì²´í¬ë°•ìŠ¤
+    public GameObject restartBattleButton; // ì „íˆ¬ ì¬ì‹œì‘ ë²„íŠ¼
 
-    [Header("¾À ÀÌ¸§ ¼³Á¤")]
+    [Header("ì”¬ ì´ë¦„ ì„¤ì •")]
     public string mainMenuSceneName = "MainMenu";
     public string battleSceneName = "Battle";
 
@@ -20,7 +20,7 @@ public class SettingsUI : MonoBehaviour
     private void OnEnable()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
-        // 1. ÇöÀç ¾À ÀÌ¸§ÀÌ ¸ŞÀÎ ¸Ş´º¶ó¸é?
+        // 1. í˜„ì¬ ì”¬ ì´ë¦„ì´ ë©”ì¸ ë©”ë‰´ë¼ë©´?
         if (currentSceneName == mainMenuSceneName)
         {
             if (goToMainButton != null) goToMainButton.SetActive(false);
@@ -30,22 +30,22 @@ public class SettingsUI : MonoBehaviour
             if (goToMainButton != null) goToMainButton.SetActive(true);
         }
 
-        // 1-2. ÀüÅõ Àç½ÃÀÛ ¹öÆ°Àº Battle ¾À¿¡¼­¸¸ Ç¥½Ã
+        // 1-2. ì „íˆ¬ ì¬ì‹œì‘ ë²„íŠ¼ì€ Battle ì”¬ì—ì„œë§Œ í‘œì‹œ
         bool isBattleScene = currentSceneName == battleSceneName && CombatManager.Instance != null;
 
         if (restartBattleButton != null)
             restartBattleButton.SetActive(isBattleScene);
 
-        // 2. ÆË¾÷Àº ÃÊ±âÈ­
+        // 2. íŒì—…ì€ ì´ˆê¸°í™”
         if (confirmationPopup != null) confirmationPopup.SetActive(false);
 
-        // 3. ¼³Á¤Ã¢ ÄÑÁú ¶§, ÀúÀåµÈ 2¹è¼Ó ¼³Á¤À» Ã¼Å©¹Ú½º¿¡ ¹İ¿µ
+        // 3. ì„¤ì •ì°½ ì¼œì§ˆ ë•Œ, ì €ì¥ëœ 2ë°°ì† ì„¤ì •ì„ ì²´í¬ë°•ìŠ¤ì— ë°˜ì˜
         if (fastCombatToggle != null)
         {
             bool isFast = PlayerPrefs.GetInt("FastCombat", 0) == 1;
 
             fastCombatToggle.onValueChanged.RemoveAllListeners();
-            fastCombatToggle.isOn = isFast; // UI ¾÷µ¥ÀÌÆ®
+            fastCombatToggle.isOn = isFast; // UI ì—…ë°ì´íŠ¸
             fastCombatToggle.onValueChanged.AddListener(OnFastCombatToggleChanged);
         }
     }
@@ -56,14 +56,14 @@ public class SettingsUI : MonoBehaviour
         if (timeScaleBeforePause <= 0) timeScaleBeforePause = 1f;
 
         Time.timeScale = 0f;
-        DevLog.Log($"¼³Á¤ Ã¢ ¿­±â: ½Ã°£ Á¤Áö (º¹±¸¿ë ¼Óµµ: {timeScaleBeforePause})");
+        DevLog.Log($"ì„¤ì • ì°½ ì—´ê¸°: ì‹œê°„ ì •ì§€ (ë³µêµ¬ìš© ì†ë„: {timeScaleBeforePause})");
         gameObject.SetActive(true);
     }
 
     public void CloseSettings()
     {
         Time.timeScale = timeScaleBeforePause;
-        DevLog.Log("¼³Á¤Ã¢ ´İ±â");
+        DevLog.Log("ì„¤ì •ì°½ ë‹«ê¸°");
         gameObject.SetActive(false);
     }
 
@@ -72,34 +72,34 @@ public class SettingsUI : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        DevLog.Log("¸ŞÀÎ ¸Ş´º·Î µ¹¾Æ°©´Ï´Ù.");
+        DevLog.Log("ë©”ì¸ ë©”ë‰´ë¡œ ëŒì•„ê°‘ë‹ˆë‹¤.");
         confirmationPopup.SetActive(false);
         gameObject.SetActive(false);
-        Time.timeScale = 1f; // ¸ŞÀÎÈ­¸é °¥ ¶§´Â ½Ã°£ ¿ø»óº¹±¸
+        Time.timeScale = 1f; // ë©”ì¸í™”ë©´ ê°ˆ ë•ŒëŠ” ì‹œê°„ ì›ìƒë³µêµ¬
         SceneManager.LoadScene(mainMenuSceneName);
     }
 
     // =========================================================
-    // [ÇÙ½É] Ã¼Å©¹Ú½º¸¦ ´©¸¦ ¶§¸¶´Ù ½ÇÇàµÇ´Â ÇÔ¼ö
+    // [í•µì‹¬] ì²´í¬ë°•ìŠ¤ë¥¼ ëˆ„ë¥¼ ë•Œë§ˆë‹¤ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜
     // =========================================================
     public void OnFastCombatToggleChanged(bool isOn)
     {
         float targetSpeed = isOn ? 2.0f : 1.0f;
 
-        // 1. µğ¹ÙÀÌ½º¿¡ ¼³Á¤°ª ÀúÀå (Å½»ö¾ÀÀÌµç ÀüÅõ¾ÀÀÌµç ¹«Á¶°Ç ÀúÀå)
+        // 1. ë””ë°”ì´ìŠ¤ì— ì„¤ì •ê°’ ì €ì¥ (íƒìƒ‰ì”¬ì´ë“  ì „íˆ¬ì”¬ì´ë“  ë¬´ì¡°ê±´ ì €ì¥)
         PlayerPrefs.SetInt("FastCombat", isOn ? 1 : 0);
         PlayerPrefs.Save();
 
-        // 2. ÇöÀç ¾À¿¡ CombatManager°¡ Á¸ÀçÇÑ´Ù¸é (ÀüÅõ ¾ÀÀÌ¶ó¸é)
+        // 2. í˜„ì¬ ì”¬ì— CombatManagerê°€ ì¡´ì¬í•œë‹¤ë©´ (ì „íˆ¬ ì”¬ì´ë¼ë©´)
         if (CombatManager.Instance != null)
         {
             if (Time.timeScale == 0f)
             {
-                timeScaleBeforePause = targetSpeed; // ´İÀ» ¶§ Àû¿ëµÉ ¼Óµµ ¿¹¾à
+                timeScaleBeforePause = targetSpeed; // ë‹«ì„ ë•Œ ì ìš©ë  ì†ë„ ì˜ˆì•½
             }
             else
             {
-                Time.timeScale = targetSpeed; // Áï½Ã Àû¿ë
+                Time.timeScale = targetSpeed; // ì¦‰ì‹œ ì ìš©
             }
 
             if (CombatUIManager.Instance != null)
@@ -107,8 +107,8 @@ public class SettingsUI : MonoBehaviour
         }
         else
         {
-            // ÀüÅõ ¾ÀÀÌ ¾Æ´Ï¶ó¸é (Å½»ö ¾À µî), ´İÀ» ¶§ µ¹¾Æ°¥ ¼Óµµ´Â ¹«Á¶°Ç 1¹è¼ÓÀ¸·Î °íÁ¤!
-            // (Å½»ö ¾À¿¡¼­ Ä³¸¯ÅÍ°¡ 2¹è »¡¸® °É¾î ´Ù´Ï´Â °ÍÀ» ¹æÁö)
+            // ì „íˆ¬ ì”¬ì´ ì•„ë‹ˆë¼ë©´ (íƒìƒ‰ ì”¬ ë“±), ë‹«ì„ ë•Œ ëŒì•„ê°ˆ ì†ë„ëŠ” ë¬´ì¡°ê±´ 1ë°°ì†ìœ¼ë¡œ ê³ ì •!
+            // (íƒìƒ‰ ì”¬ì—ì„œ ìºë¦­í„°ê°€ 2ë°° ë¹¨ë¦¬ ê±¸ì–´ ë‹¤ë‹ˆëŠ” ê²ƒì„ ë°©ì§€)
             timeScaleBeforePause = 1.0f;
         }
     }
@@ -117,11 +117,11 @@ public class SettingsUI : MonoBehaviour
     {
         if (CombatManager.Instance == null)
         {
-            DevLog.LogWarning("ÀüÅõ Àç½ÃÀÛ ½ÇÆĞ: CombatManager°¡ ¾ø½À´Ï´Ù.");
+            DevLog.LogWarning("ì „íˆ¬ ì¬ì‹œì‘ ì‹¤íŒ¨: CombatManagerê°€ ì—†ìŠµë‹ˆë‹¤.");
             return;
         }
 
-        DevLog.Log("ÀüÅõ¸¦ Àç½ÃÀÛÇÕ´Ï´Ù.");
+        DevLog.Log("ì „íˆ¬ë¥¼ ì¬ì‹œì‘í•©ë‹ˆë‹¤.");
 
         if (confirmationPopup != null)
             confirmationPopup.SetActive(false);

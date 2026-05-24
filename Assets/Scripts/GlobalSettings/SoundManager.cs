@@ -1,6 +1,6 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-//Global Manager¿¡¼­ ¼Ò¸® Á¶ÀıÇØÁÖ´Â ÇÔ¼ö
+//Global Managerì—ì„œ ì†Œë¦¬ ì¡°ì ˆí•´ì£¼ëŠ” í•¨ìˆ˜
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
@@ -22,7 +22,7 @@ public class SoundManager : MonoBehaviour
     public void SetVolume(float volume)
     {
         masterVolume = volume;
-        // ¿Àµğ¿À ¼Ò½ºµéÀÇ º¼·ıÀ» Á¶ÀıÇÏ´Â ·ÎÁ÷ÀÌ ¿©±â¿¡ µé¾î°¨
+        // ì˜¤ë””ì˜¤ ì†ŒìŠ¤ë“¤ì˜ ë³¼ë¥¨ì„ ì¡°ì ˆí•˜ëŠ” ë¡œì§ì´ ì—¬ê¸°ì— ë“¤ì–´ê°
         AudioListener.volume = masterVolume;
 
         PlayerPrefs.SetFloat("MasterVolume", masterVolume);

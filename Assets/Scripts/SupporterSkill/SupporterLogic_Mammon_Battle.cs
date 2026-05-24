@@ -1,42 +1,42 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "Mammon_BattleSkill", menuName = "SupporterLogic/Mammon/Battle Skill")]
 public class SupporterLogic_Mammon_Battle : SupporterLogicBase
 {
-    [Header("1. °ø°İÇü ¾ÆÀÌÅÛ ¼³Á¤")]
-    public float[] dmgIncendiary = { 4.0f, 5.0f, 7.0f };   // 0: ¼¼°ü ¾Ğ¼öÇ°: ºñ°ú¼¼ Æø¾à
-    public float[] dmgKnife = { 4.0f, 5.0f, 7.0f };        // 1: ½ÅÃ¼Æ÷±â°¢¼­¿ë ¿ø±İ Á¤»êµµ
-    public float[] dmgAtm = { 8.0f, 10.0f, 14.0f };        // 2: °­Á¦ Ãâ±İµÈ ºÎµµ ±İ°í
-    public float[] dmgHolyWater = { 6.0f, 8.0f, 11.0f };   // 5: ¿ø»êÁö À§Á¶: Å¸¶ôÇÑ ¼º¼ö
+    [Header("1. ê³µê²©í˜• ì•„ì´í…œ ì„¤ì •")]
+    public float[] dmgIncendiary = { 4.0f, 5.0f, 7.0f };   // 0: ì„¸ê´€ ì••ìˆ˜í’ˆ: ë¹„ê³¼ì„¸ í­ì•½
+    public float[] dmgKnife = { 4.0f, 5.0f, 7.0f };        // 1: ì‹ ì²´í¬ê¸°ê°ì„œìš© ì›ê¸ˆ ì •ì‚°ë„
+    public float[] dmgAtm = { 8.0f, 10.0f, 14.0f };        // 2: ê°•ì œ ì¶œê¸ˆëœ ë¶€ë„ ê¸ˆê³ 
+    public float[] dmgHolyWater = { 6.0f, 8.0f, 11.0f };   // 5: ì›ì‚°ì§€ ìœ„ì¡°: íƒ€ë½í•œ ì„±ìˆ˜
 
-    [Header("·¹º§º° ±×·Î±â ¼öÄ¡")]
+    [Header("ë ˆë²¨ë³„ ê·¸ë¡œê¸° ìˆ˜ì¹˜")]
     public float[] breakDamageValues = { 3f, 5f, 7f };
 
     public StatusEffectData burnDebuff;
-    public float[] burnRates = { 0.02f, 0.03f, 0.05f };    // È­»ó (ÃÖ´ëÃ¼·Âºñ·Ê)
+    public float[] burnRates = { 0.02f, 0.03f, 0.05f };    // í™”ìƒ (ìµœëŒ€ì²´ë ¥ë¹„ë¡€)
     public StatusEffectData bleedDebuff;
-    public float[] bleedRates = { 0.30f, 0.50f, 0.80f };   // ÃâÇ÷ (Èû ºñ·Ê)
+    public float[] bleedRates = { 0.30f, 0.50f, 0.80f };   // ì¶œí˜ˆ (í˜ ë¹„ë¡€)
 
-    [Header("2. µğ¹öÇÁÇü ¾ÆÀÌÅÛ ¼³Á¤")]
-    // [3¹ø ¾ÆÀÌÅÛ ¼öÁ¤] ½Å¿ë µî±Ş ÇÏ¶ô ÅëÁö¼­¿ë Áï½Ã Â÷°¨Ä¡ ¹× AP ÆÛ¼¾Æ® µğ¹öÇÁ
+    [Header("2. ë””ë²„í”„í˜• ì•„ì´í…œ ì„¤ì •")]
+    // [3ë²ˆ ì•„ì´í…œ ìˆ˜ì •] ì‹ ìš© ë“±ê¸‰ í•˜ë½ í†µì§€ì„œìš© ì¦‰ì‹œ ì°¨ê°ì¹˜ ë° AP í¼ì„¼íŠ¸ ë””ë²„í”„
     public StatusEffectData item3ApDebuff;                  // TargetStat = AP, ModifierType = Percentage
-    public float[] apDrops = { 20f, 30f, 45f };            // Áï½Ã Çàµ¿¼öÄ¡ »ó¼ö Â÷°¨·®
-    public float[] item3ApDebuffRates = { 0.20f, 0.30f, 0.40f }; // 2ÅÏ°£ AP ÃæÀüÀ² 20% / 30% / 40% °¨¼Ò
+    public float[] apDrops = { 20f, 30f, 45f };            // ì¦‰ì‹œ í–‰ë™ìˆ˜ì¹˜ ìƒìˆ˜ ì°¨ê°ëŸ‰
+    public float[] item3ApDebuffRates = { 0.20f, 0.30f, 0.40f }; // 2í„´ê°„ AP ì¶©ì „ìœ¨ 20% / 30% / 40% ê°ì†Œ
 
-    // [4¹ø ¾ÆÀÌÅÛ ¼öÁ¤] ¸íÁß/È¸ÇÇ ´ë½Å ¼Óµµ µğ¹öÇÁ·Î ´ëÅëÇÕ
+    // [4ë²ˆ ì•„ì´í…œ ìˆ˜ì •] ëª…ì¤‘/íšŒí”¼ ëŒ€ì‹  ì†ë„ ë””ë²„í”„ë¡œ ëŒ€í†µí•©
     public StatusEffectData item4SpeedDebuff;               // TargetStat = Speed, ModifierType = Percentage
-    public float[] item4SpeedDrops = { 0.20f, 0.30f, 0.40f }; // 2ÅÏ°£ ¼Óµµ 20% / 30% / 40% °¨¼Ò
+    public float[] item4SpeedDrops = { 0.20f, 0.30f, 0.40f }; // 2í„´ê°„ ì†ë„ 20% / 30% / 40% ê°ì†Œ
 
-    public StatusEffectData dmgAmpDebuff;                  // 6: ´ãº¸ °¡Ä¡ Á¦·ÎÀÇ ÀÚ±İ³­ ÀÚ·ç (¹Ş´Â ÇÇÇØ ÁõÆø)
+    public StatusEffectData dmgAmpDebuff;                  // 6: ë‹´ë³´ ê°€ì¹˜ ì œë¡œì˜ ìê¸ˆë‚œ ìë£¨ (ë°›ëŠ” í”¼í•´ ì¦í­)
     public float[] dmgAmpRates = { 0.15f, 0.20f, 0.30f };
 
-    [Header("3. À¯Æ¿¸®Æ¼ ¾ÆÀÌÅÛ ¼³Á¤")]
+    [Header("3. ìœ í‹¸ë¦¬í‹° ì•„ì´í…œ ì„¤ì •")]
     public StatusEffectData strDebuff;
     public StatusEffectData luckDebuff;
-    public float[] strLuckDrops = { 0.10f, 0.15f, 0.25f }; // 7: È¯ºÒ ºÒ°¡: °æ¸Å À¯Âû ÀÎÇü
+    public float[] strLuckDrops = { 0.10f, 0.15f, 0.25f }; // 7: í™˜ë¶ˆ ë¶ˆê°€: ê²½ë§¤ ìœ ì°° ì¸í˜•
 
-    public StatusEffectData playerDmgGivenAmpBuff;         // 8: ¸¶Áø 200% ¹Ğ¼ö °¢¼ºÁ¦ (ÁÖ´Â ÇÇÇØ ÁõÆø)
+    public StatusEffectData playerDmgGivenAmpBuff;         // 8: ë§ˆì§„ 200% ë°€ìˆ˜ ê°ì„±ì œ (ì£¼ëŠ” í”¼í•´ ì¦í­)
     public float[] playerAmpRates = { 0.15f, 0.20f, 0.30f };
 
     private List<int> selectedItems = new List<int>();
@@ -48,7 +48,7 @@ public class SupporterLogic_Mammon_Battle : SupporterLogicBase
 
         List<int> pool = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
 
-        // ¸®½ºÆ® ¹«ÀÛÀ§ ¼ÅÇÃ ÈÄ 3°³ ÃßÃâ (Áßº¹ Á¦°Å)
+        // ë¦¬ìŠ¤íŠ¸ ë¬´ì‘ìœ„ ì…”í”Œ í›„ 3ê°œ ì¶”ì¶œ (ì¤‘ë³µ ì œê±°)
         for (int i = 0; i < pool.Count; i++)
         {
             int temp = pool[i];
@@ -84,7 +84,7 @@ public class SupporterLogic_Mammon_Battle : SupporterLogicBase
             }
         }
 
-        DevLog.Log($"[Layer Cake] ÁÖ»çÀ§ Àç°í ¸Å¹°: {selectedItems[0]}, {selectedItems[1]}, {selectedItems[2]}");
+        DevLog.Log($"[Layer Cake] ì£¼ì‚¬ìœ„ ì¬ê³  ë§¤ë¬¼: {selectedItems[0]}, {selectedItems[1]}, {selectedItems[2]}");
         return damages;
     }
 
@@ -97,46 +97,46 @@ public class SupporterLogic_Mammon_Battle : SupporterLogicBase
         {
             switch (itemCode)
             {
-                case 0: // ¼ÒÀÌÅº (È­»ó)
+                case 0: // ì†Œì´íƒ„ (í™”ìƒ)
                     if (burnDebuff != null) BuffManager.Instance.AddEffect(false, burnDebuff, burnRates[index], 2);
                     totalBreakDamage += breakDamageValues[index];
                     break;
-                case 1: // ½ÄÄ® (ÃâÇ÷)
+                case 1: // ì‹ì¹¼ (ì¶œí˜ˆ)
                     if (bleedDebuff != null) BuffManager.Instance.AddEffect(false, bleedDebuff, bleedRates[index], 2);
                     totalBreakDamage += breakDamageValues[index];
                     break;
-                case 2: // ºÎµµ ±İ°í (±×·Î±â)
+                case 2: // ë¶€ë„ ê¸ˆê³  (ê·¸ë¡œê¸°)
                     totalBreakDamage += breakDamageValues[index];
                     break;
-                case 3: // [¼öÁ¤] ½Å¿ë µî±Ş ÇÏ¶ô ÅëÁö¼­ (Çàµ¿¼öÄ¡ Áï½Ã »ó¼ö °¨¼Ò + AP ÆÛ¼¾Æ® µğ¹öÇÁ)
+                case 3: // [ìˆ˜ì •] ì‹ ìš© ë“±ê¸‰ í•˜ë½ í†µì§€ì„œ (í–‰ë™ìˆ˜ì¹˜ ì¦‰ì‹œ ìƒìˆ˜ ê°ì†Œ + AP í¼ì„¼íŠ¸ ë””ë²„í”„)
                     var enemyEntity = TurnManager.Instance.turnQueue.Find(e => e.type == EntityType.Enemy);
                     if (enemyEntity != null)
                     {
-                        enemyEntity.actionGauge -= apDrops[index]; // ½ÇÁ¦·Î ÅÏ Å¥¿¡¼­ »ó¼ö¸¸Å­ ±ğÀ½
+                        enemyEntity.actionGauge -= apDrops[index]; // ì‹¤ì œë¡œ í„´ íì—ì„œ ìƒìˆ˜ë§Œí¼ ê¹ìŒ
                     }
                     if (item3ApDebuff != null)
                     {
-                        // µğ¹öÇÁÀÌ¹Ç·Î ¼öÄ¡ ¾Õ¿¡ ¸¶ÀÌ³Ê½º(-)¸¦ ºÙ¿© ÆÛ¼¾Å×Áö µğ¹öÇÁ·Î ºÎ¿©ÇÕ´Ï´Ù.
+                        // ë””ë²„í”„ì´ë¯€ë¡œ ìˆ˜ì¹˜ ì•ì— ë§ˆì´ë„ˆìŠ¤(-)ë¥¼ ë¶™ì—¬ í¼ì„¼í…Œì§€ ë””ë²„í”„ë¡œ ë¶€ì—¬í•©ë‹ˆë‹¤.
                         BuffManager.Instance.AddEffect(false, item3ApDebuff, -item3ApDebuffRates[index], 2);
                     }
                     break;
-                case 4: // [¼öÁ¤] ´«ÀÌ ¸Ö¾î¹ö¸®´Â S±Ş ¸ğÁ¶Ç° ¹é (±âÁ¸ ¸íÁß/È¸ÇÇ »èÁ¦ -> ¼Óµµ ÆÛ¼¾Æ® µğ¹öÇÁ ÅëÇÕ)
+                case 4: // [ìˆ˜ì •] ëˆˆì´ ë©€ì–´ë²„ë¦¬ëŠ” Sê¸‰ ëª¨ì¡°í’ˆ ë°± (ê¸°ì¡´ ëª…ì¤‘/íšŒí”¼ ì‚­ì œ -> ì†ë„ í¼ì„¼íŠ¸ ë””ë²„í”„ í†µí•©)
                     if (item4SpeedDebuff != null)
                     {
                         BuffManager.Instance.AddEffect(false, item4SpeedDebuff, -item4SpeedDrops[index], 2);
                     }
                     break;
-                case 5: // Å¸¶ôÇÑ ¼º¼ö (±×·Î±â)
+                case 5: // íƒ€ë½í•œ ì„±ìˆ˜ (ê·¸ë¡œê¸°)
                     totalBreakDamage += breakDamageValues[index];
                     break;
-                case 6: // ÅÖ ºó µ·°¡¹æ (¹Ş´Â ÇÇÇØ ÁõÆø)
+                case 6: // í…… ë¹ˆ ëˆê°€ë°© (ë°›ëŠ” í”¼í•´ ì¦í­)
                     if (dmgAmpDebuff != null) BuffManager.Instance.AddEffect(false, dmgAmpDebuff, dmgAmpRates[index], 2);
                     break;
-                case 7: // À¯Âû ÀÎÇü (°ø/¿î °¨¼Ò)
+                case 7: // ìœ ì°° ì¸í˜• (ê³µ/ìš´ ê°ì†Œ)
                     if (strDebuff != null) BuffManager.Instance.AddEffect(false, strDebuff, -strLuckDrops[index], 2);
                     if (luckDebuff != null) BuffManager.Instance.AddEffect(false, luckDebuff, -strLuckDrops[index], 2);
                     break;
-                case 8: // ¹Ğ¼ö °¢¼ºÁ¦ (ÁÖÀÎ°ø ÁÖ´Â ÇÇÇØ ÁõÆø)
+                case 8: // ë°€ìˆ˜ ê°ì„±ì œ (ì£¼ì¸ê³µ ì£¼ëŠ” í”¼í•´ ì¦í­)
                     if (playerDmgGivenAmpBuff != null) BuffManager.Instance.AddEffect(true, playerDmgGivenAmpBuff, playerAmpRates[index], 2);
                     break;
             }
@@ -151,7 +151,7 @@ public class SupporterLogic_Mammon_Battle : SupporterLogicBase
             }
         }
 
-        // Çàµ¿ °ÔÀÌÁö(3¹ø °íÁö¼­) º¯µ¿ÀÌ Æ÷ÇÔµÇ¾î ÀÖ´Ù¸é Áï½Ã ÅÏ UI ¸®ÇÁ·¹½Ã
+        // í–‰ë™ ê²Œì´ì§€(3ë²ˆ ê³ ì§€ì„œ) ë³€ë™ì´ í¬í•¨ë˜ì–´ ìˆë‹¤ë©´ ì¦‰ì‹œ í„´ UI ë¦¬í”„ë ˆì‹œ
         if (selectedItems.Contains(3) && CombatUIManager.Instance != null && TurnManager.Instance != null)
         {
             CombatUIManager.Instance.UpdateTurnOrderUI(TurnManager.Instance.GetFutureTurnIcons(5));

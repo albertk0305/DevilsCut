@@ -1,34 +1,34 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-// [ÆĞ½Ãºê ½ºÅ³ °ø°£]
-// TODO: Å½»ö ¾À ±¸Çö ½Ã, ¹Ù¾ËÁ¦ºÖ ÆĞ½Ãºê 'Shiny Days' ·ÎÁ÷ Ãß°¡ ¿¹Á¤
-// (ÀüÅõ Á¾·á ÈÄ Ã¼·Â 5% / 10% / 20% È¸º¹)
+// [íŒ¨ì‹œë¸Œ ìŠ¤í‚¬ ê³µê°„]
+// TODO: íƒìƒ‰ ì”¬ êµ¬í˜„ ì‹œ, ë°”ì•Œì œë¶‘ íŒ¨ì‹œë¸Œ 'Shiny Days' ë¡œì§ ì¶”ê°€ ì˜ˆì •
+// (ì „íˆ¬ ì¢…ë£Œ í›„ ì²´ë ¥ 5% / 10% / 20% íšŒë³µ)
 
 [CreateAssetMenu(fileName = "Beelzebub_StartSkill", menuName = "SupporterLogic/Beelzebub/Start Skill")]
 public class SupporterLogic_Beelzebub_Start : SupporterLogicBase
 {
-    [Header("µğ¹öÇÁ ¿¡¼Â")]
+    [Header("ë””ë²„í”„ ì—ì…‹")]
     public StatusEffectData defDownDebuff;
     public StatusEffectData burnDebuff;
     public int duration = 3;
 
-    [Header("·¹º§º° ¼öÄ¡ ¼³Á¤")]
-    public float[] defDownValues = { -0.07f, -0.10f, -0.15f }; // ¹æ¾î·Â °¨¼ÒÀ²
-    public float[] burnValues = { 0.02f, 0.03f, 0.05f };       // È­»ó µ¥¹ÌÁö(ÃÖ´ëÃ¼·Â ºñÀ²)
+    [Header("ë ˆë²¨ë³„ ìˆ˜ì¹˜ ì„¤ì •")]
+    public float[] defDownValues = { -0.07f, -0.10f, -0.15f }; // ë°©ì–´ë ¥ ê°ì†Œìœ¨
+    public float[] burnValues = { 0.02f, 0.03f, 0.05f };       // í™”ìƒ ë°ë¯¸ì§€(ìµœëŒ€ì²´ë ¥ ë¹„ìœ¨)
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, defDownValues.Length - 1);
         bool applied = false;
 
-        // 1. ¹æ¾î·Â °¨¼Ò Àû¿ë
+        // 1. ë°©ì–´ë ¥ ê°ì†Œ ì ìš©
         if (defDownDebuff != null)
         {
             BuffManager.Instance.AddEffect(false, defDownDebuff, defDownValues[index], duration);
             applied = true;
         }
 
-        // 2. È­»ó(Burn) µğ¹öÇÁ Àû¿ë
+        // 2. í™”ìƒ(Burn) ë””ë²„í”„ ì ìš©
         if (burnDebuff != null)
         {
             BuffManager.Instance.AddEffect(false, burnDebuff, burnValues[index], duration);
@@ -37,7 +37,7 @@ public class SupporterLogic_Beelzebub_Start : SupporterLogicBase
 
         if (applied)
         {
-            DevLog.Log($"[¹Ù¾ËÁ¦ºÖ °³Àü] Lv.{skillLevel} ¹ßµ¿! ¹æ±ï {Mathf.Abs(defDownValues[index]) * 100}%, È­»ó {burnValues[index] * 100}% ºÎ¿©.");
+            DevLog.Log($"[ë°”ì•Œì œë¶‘ ê°œì „] Lv.{skillLevel} ë°œë™! ë°©ê¹ {Mathf.Abs(defDownValues[index]) * 100}%, í™”ìƒ {burnValues[index] * 100}% ë¶€ì—¬.");
             if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
         }
     }

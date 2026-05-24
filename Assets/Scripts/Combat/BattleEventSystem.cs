@@ -1,22 +1,22 @@
-using System;
+ï»¿using System;
 
-// [ºĞ¸®] °ÔÀÓ ³» ¸ğµç ÀüÅõ ÀÌº¥Æ®¸¦ Áß°èÇÏ´Â ±Û·Î¹ú ¹æ¼Û±¹ÀÔ´Ï´Ù.
-// ´©±¸³ª ¹æ¼ÛÀ» ÄÓ ¼ö ÀÖ°í(Call), ´©±¸³ª ¹æ¼ÛÀ» ±¸µ¶(+=)ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+// [ë¶„ë¦¬] ê²Œì„ ë‚´ ëª¨ë“  ì „íˆ¬ ì´ë²¤íŠ¸ë¥¼ ì¤‘ê³„í•˜ëŠ” ê¸€ë¡œë²Œ ë°©ì†¡êµ­ì…ë‹ˆë‹¤.
+// ëˆ„êµ¬ë‚˜ ë°©ì†¡ì„ ì¼¤ ìˆ˜ ìˆê³ (Call), ëˆ„êµ¬ë‚˜ ë°©ì†¡ì„ êµ¬ë…(+=)í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 public static class BattleEventSystem
 {
-    // 1. Ã¼·Â º¯°æ ÀÌº¥Æ® (isPlayer, currentHp, maxHp)
+    // 1. ì²´ë ¥ ë³€ê²½ ì´ë²¤íŠ¸ (isPlayer, currentHp, maxHp)
     public static event Action<bool, int, int> OnHpChanged;
     public static void CallHpChanged(bool isPlayer, int currentHp, int maxHp) => OnHpChanged?.Invoke(isPlayer, currentHp, maxHp);
 
-    // 2. µ¥¹ÌÁö ÅØ½ºÆ® ¹ß»ı ÀÌº¥Æ® (isPlayerTarget, damage, isCrit)
+    // 2. ë°ë¯¸ì§€ í…ìŠ¤íŠ¸ ë°œìƒ ì´ë²¤íŠ¸ (isPlayerTarget, damage, isCrit)
     public static event Action<bool, int, bool> OnDamageTaken;
     public static void CallDamageTaken(bool isPlayerTarget, int damage, bool isCrit) => OnDamageTaken?.Invoke(isPlayerTarget, damage, isCrit);
 
-    // 3. È¸ÇÇ(Miss) ¹ß»ı ÀÌº¥Æ® (isPlayerTarget)
+    // 3. íšŒí”¼(Miss) ë°œìƒ ì´ë²¤íŠ¸ (isPlayerTarget)
     public static event Action<bool> OnEvaded;
     public static void CallEvaded(bool isPlayerTarget) => OnEvaded?.Invoke(isPlayerTarget);
 
-    // 4. ½ºÅ³ »ç¿ë ÀÌº¥Æ® (isPlayer, skillName) - ÃßÈÄ ÆĞ½Ãºê ¿¬µ¿¿ëÀ¸·Î ¶Õ¾îµÓ´Ï´Ù.
+    // 4. ìŠ¤í‚¬ ì‚¬ìš© ì´ë²¤íŠ¸ (isPlayer, skillName) - ì¶”í›„ íŒ¨ì‹œë¸Œ ì—°ë™ìš©ìœ¼ë¡œ ëš«ì–´ë‘¡ë‹ˆë‹¤.
     public static event Action<bool, string> OnSkillUsed;
     public static void CallSkillUsed(bool isPlayer, string skillName) => OnSkillUsed?.Invoke(isPlayer, skillName);
 }

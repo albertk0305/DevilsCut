@@ -1,31 +1,31 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class EquipmentUI : MonoBehaviour
 {
-    [Header("¸ŞÀÎ µğ½ºÇÃ·¹ÀÌ (ÁÂ»ó´Ü & ¿ì»ó´Ü)")]
+    [Header("ë©”ì¸ ë””ìŠ¤í”Œë ˆì´ (ì¢Œìƒë‹¨ & ìš°ìƒë‹¨)")]
     public Image mainItemImage;
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemDescText;
     public TextMeshProUGUI itemStatsText;
     public TextMeshProUGUI itemClassText;
 
-    [Header("¹Ì¸®º¸±â º° UI")]
-    public GameObject[] previewStars; // 3°³ÀÇ º° ¿ÀºêÁ§Æ®¸¦ ¼ø¼­´ë·Î ³ÖÀ¸¼¼¿ä.
+    [Header("ë¯¸ë¦¬ë³´ê¸° ë³„ UI")]
+    public GameObject[] previewStars; // 3ê°œì˜ ë³„ ì˜¤ë¸Œì íŠ¸ë¥¼ ìˆœì„œëŒ€ë¡œ ë„£ìœ¼ì„¸ìš”.
 
-    [Header("ÇÏ´Ü Àåºñ ¸ñ·Ï")]
+    [Header("í•˜ë‹¨ ì¥ë¹„ ëª©ë¡")]
     public Button[] inventoryButtons;
     public Button upScrollButton;
     public Button downScrollButton;
 
-    // [¼öÁ¤µÈ ºÎºĞ] »ö»ó ´ë½Å Sprite(ÀÌ¹ÌÁö ¿øº»)¸¦ ¹Ş½À´Ï´Ù.
-    [Header("ÀÎº¥Åä¸® ½½·Ô Å×µÎ¸® (¼º±Şº° ÀÌ¹ÌÁö)")]
-    public Image[] inventoryBorders; // 30°³ÀÇ Å×µÎ¸®(¹è°æ) ÀÌ¹ÌÁö¸¦ ³ÖÀ¸¼¼¿ä.
-    public Sprite border1Star; // 1¼º Àü¿ë Å×µÎ¸® ÀÌ¹ÌÁö
-    public Sprite border2Star; // 2¼º Àü¿ë Å×µÎ¸® ÀÌ¹ÌÁö
-    public Sprite border3Star; // 3¼º Àü¿ë Å×µÎ¸® ÀÌ¹ÌÁö
+    // [ìˆ˜ì •ëœ ë¶€ë¶„] ìƒ‰ìƒ ëŒ€ì‹  Sprite(ì´ë¯¸ì§€ ì›ë³¸)ë¥¼ ë°›ìŠµë‹ˆë‹¤.
+    [Header("ì¸ë²¤í† ë¦¬ ìŠ¬ë¡¯ í…Œë‘ë¦¬ (ì„±ê¸‰ë³„ ì´ë¯¸ì§€)")]
+    public Image[] inventoryBorders; // 30ê°œì˜ í…Œë‘ë¦¬(ë°°ê²½) ì´ë¯¸ì§€ë¥¼ ë„£ìœ¼ì„¸ìš”.
+    public Sprite border1Star; // 1ì„± ì „ìš© í…Œë‘ë¦¬ ì´ë¯¸ì§€
+    public Sprite border2Star; // 2ì„± ì „ìš© í…Œë‘ë¦¬ ì´ë¯¸ì§€
+    public Sprite border3Star; // 3ì„± ì „ìš© í…Œë‘ë¦¬ ì´ë¯¸ì§€
 
     private OwnedItem currentPreviewItem;
     private int currentRow = 0;
@@ -75,10 +75,10 @@ public class EquipmentUI : MonoBehaviour
             itemNameText.text = LocalizationManager.Instance.GetText(item.data.itemNameKey);
             if (itemClassText != null)
             {
-                // ±ò²ûÇÏ°Ô º¸ÀÌ±â À§ÇØ ¾ç¿·¿¡ °ıÈ£¸¦ Ä¡°í ³ë¶õ»öÀ¸·Î Æ÷¸ËÆÃÇß½À´Ï´Ù.
+                // ê¹”ë”í•˜ê²Œ ë³´ì´ê¸° ìœ„í•´ ì–‘ì˜†ì— ê´„í˜¸ë¥¼ ì¹˜ê³  ë…¸ë€ìƒ‰ìœ¼ë¡œ í¬ë§·íŒ…í–ˆìŠµë‹ˆë‹¤.
                 itemClassText.text = $"<color=#FFD700>[ {item.data.itemClass.ToString()} ]</color>";
 
-                // ¡Ø ¸¸¾à ´Ù±¹¾î ¹ø¿ªÀÌ ÇÊ¿äÇÏ½Ã´Ù¸é ¾Æ·¡Ã³·³ »ç¿ëÇÒ ¼öµµ ÀÖ½À´Ï´Ù.
+                // â€» ë§Œì•½ ë‹¤êµ­ì–´ ë²ˆì—­ì´ í•„ìš”í•˜ì‹œë‹¤ë©´ ì•„ë˜ì²˜ëŸ¼ ì‚¬ìš©í•  ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.
                 // itemClassText.text = LocalizationManager.Instance.GetText("class_" + item.data.itemClass.ToString().ToLower());
             }
             itemDescText.text = LocalizationManager.Instance.GetText(item.data.itemDescKey);
@@ -113,12 +113,12 @@ public class EquipmentUI : MonoBehaviour
             {
                 inventoryButtons[i].image.sprite = ownedList[dataIndex].data.itemIcon;
 
-                // [ÇÙ½É ¼öÁ¤] ¼º±Ş¿¡ µû¶ó ½ºÇÁ¶óÀÌÆ® ¿øº»À» ±³Ã¼ÇÕ´Ï´Ù.
+                // [í•µì‹¬ ìˆ˜ì •] ì„±ê¸‰ì— ë”°ë¼ ìŠ¤í”„ë¼ì´íŠ¸ ì›ë³¸ì„ êµì²´í•©ë‹ˆë‹¤.
                 if (inventoryBorders.Length > i && inventoryBorders[i] != null)
                 {
                     int star = ownedList[dataIndex].starLevel;
 
-                    // ¸¸¾à ÀÌÀü¿¡ »ö»óÀ» °Çµå·ÈÀ» °æ¿ì¸¦ ´ëºñÇØ Èò»ö(¿ø·¡ »ö)À¸·Î ÃÊ±âÈ­
+                    // ë§Œì•½ ì´ì „ì— ìƒ‰ìƒì„ ê±´ë“œë ¸ì„ ê²½ìš°ë¥¼ ëŒ€ë¹„í•´ í°ìƒ‰(ì›ë˜ ìƒ‰)ìœ¼ë¡œ ì´ˆê¸°í™”
                     inventoryBorders[i].color = Color.white;
 
                     if (star == 1) inventoryBorders[i].sprite = border1Star;

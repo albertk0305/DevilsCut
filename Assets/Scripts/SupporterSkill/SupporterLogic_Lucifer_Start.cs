@@ -1,38 +1,38 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-// [ÆĞ½Ãºê ½ºÅ³ °ø°£]
-// TODO: Å½»ö ¾À ±¸Çö ½Ã, ·ç½ÃÆÛ ÆĞ½Ãºê '³ª¸¸ À¯·ÉÀÌ¾ß' ·ÎÁ÷ Ãß°¡ ¿¹Á¤
-// (ÀüÅõ ½Â¸® ½Ã 10/15/25% È®·ü·Î µ¥ºô½º ÄÆ È¹µæ -> ¿µ±¸ ½ºÅÈ Áõ°¡)
+// [íŒ¨ì‹œë¸Œ ìŠ¤í‚¬ ê³µê°„]
+// TODO: íƒìƒ‰ ì”¬ êµ¬í˜„ ì‹œ, ë£¨ì‹œí¼ íŒ¨ì‹œë¸Œ 'ë‚˜ë§Œ ìœ ë ¹ì´ì•¼' ë¡œì§ ì¶”ê°€ ì˜ˆì •
+// (ì „íˆ¬ ìŠ¹ë¦¬ ì‹œ 10/15/25% í™•ë¥ ë¡œ ë°ë¹ŒìŠ¤ ì»· íšë“ -> ì˜êµ¬ ìŠ¤íƒ¯ ì¦ê°€)
 
 [CreateAssetMenu(fileName = "Lucifer_StartSkill", menuName = "SupporterLogic/Lucifer/Start Skill")]
 public class SupporterLogic_Lucifer_Start : SupporterLogicBase
 {
-    [Header("¹öÇÁ ¼³Á¤")]
-    public StatusEffectData luckBuff; // ¿î »ó½Â ¹öÇÁ (TargetStat = Luck)
+    [Header("ë²„í”„ ì„¤ì •")]
+    public StatusEffectData luckBuff; // ìš´ ìƒìŠ¹ ë²„í”„ (TargetStat = Luck)
     public int duration = 3;
 
-    [Header("·¹º§º° ¼öÄ¡ ¼³Á¤")]
-    public float[] luckBuffRates = { 0.15f, 0.20f, 0.30f }; // ¿î »ó½Â·ü
-    public float[] apRecoveries = { 30f, 50f, 70f };        // Ã¹ ÅÏ º¸Á¶¿ë AP Áï½Ã È¸º¹·®
+    [Header("ë ˆë²¨ë³„ ìˆ˜ì¹˜ ì„¤ì •")]
+    public float[] luckBuffRates = { 0.15f, 0.20f, 0.30f }; // ìš´ ìƒìŠ¹ë¥ 
+    public float[] apRecoveries = { 30f, 50f, 70f };        // ì²« í„´ ë³´ì¡°ìš© AP ì¦‰ì‹œ íšŒë³µëŸ‰
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, luckBuffRates.Length - 1);
 
-        // 1. ¿î Áõ°¡ ¹öÇÁ ºÎ¿© ('¸íÁß·ü°ú ¿î Áõ°¡' ÄÜ¼ÁÆ®)
+        // 1. ìš´ ì¦ê°€ ë²„í”„ ë¶€ì—¬ ('ëª…ì¤‘ë¥ ê³¼ ìš´ ì¦ê°€' ì½˜ì…‰íŠ¸)
         if (luckBuff != null)
         {
             BuffManager.Instance.AddEffect(true, luckBuff, luckBuffRates[index], duration);
         }
 
-        // 2. AP Áï½Ã ÃæÀü ('Ã¹ ÅÏ AP ¼Ò¸ğ·® Àı¹İ °¨¼Ò'¸¦ ¼±ÃæÀü ¹æ½ÄÀ¸·Î ±¸Çö)
+        // 2. AP ì¦‰ì‹œ ì¶©ì „ ('ì²« í„´ AP ì†Œëª¨ëŸ‰ ì ˆë°˜ ê°ì†Œ'ë¥¼ ì„ ì¶©ì „ ë°©ì‹ìœ¼ë¡œ êµ¬í˜„)
         var playerEntity = TurnManager.Instance.turnQueue.Find(e => e.type == EntityType.Player);
         if (playerEntity != null)
         {
             playerEntity.actionGauge += apRecoveries[index];
         }
 
-        DevLog.Log($"[Neat3] Lv.{skillLevel} ¹ßµ¿! ¿î {luckBuffRates[index] * 100}% Áõ°¡ ¹× AP {apRecoveries[index]} Áï½Ã ÃæÀü.");
+        DevLog.Log($"[Neat3] Lv.{skillLevel} ë°œë™! ìš´ {luckBuffRates[index] * 100}% ì¦ê°€ ë° AP {apRecoveries[index]} ì¦‰ì‹œ ì¶©ì „.");
         if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
     }
 }

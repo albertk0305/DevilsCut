@@ -1,47 +1,47 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "KarinItem_Model19", menuName = "KarinItems/Model 19")]
 public class KarinItemLogic_Model19 : KarinItemLogicBase
 {
-    [Header("µ¥¹ÌÁö ¼³Á¤")]
-    public float statMultiplier = 5.0f; // °¢ ½ºÅÈ(STR, DEF, SPD, LUK)ÀÇ 5¹è
+    [Header("ë°ë¯¸ì§€ ì„¤ì •")]
+    public float statMultiplier = 5.0f; // ê° ìŠ¤íƒ¯(STR, DEF, SPD, LUK)ì˜ 5ë°°
 
-    [Header("±×·Î±â(Break) ¼³Á¤")]
-    public float breakDamage = 5.0f;    // ±âº» °ø°İÀÌ¹Ç·Î ¼Ò·®ÀÇ ±×·Î±â µ¥¹ÌÁö ºÎ¿©
+    [Header("ê·¸ë¡œê¸°(Break) ì„¤ì •")]
+    public float breakDamage = 5.0f;    // ê¸°ë³¸ ê³µê²©ì´ë¯€ë¡œ ì†ŒëŸ‰ì˜ ê·¸ë¡œê¸° ë°ë¯¸ì§€ ë¶€ì—¬
 
     public override int CalculateDamage(PlayerStats pStats, EnemyData eData)
     {
-        // 1. ½Ç½Ã°£ ¹öÇÁ/µğ¹öÇÁ°¡ ¹İ¿µµÈ ¼Î¸®ÀÇ 4°¡Áö ½ºÅÈÀ» ¸ğµÎ °¡Á®¿É´Ï´Ù.
+        // 1. ì‹¤ì‹œê°„ ë²„í”„/ë””ë²„í”„ê°€ ë°˜ì˜ëœ ì…°ë¦¬ì˜ 4ê°€ì§€ ìŠ¤íƒ¯ì„ ëª¨ë‘ ê°€ì ¸ì˜µë‹ˆë‹¤.
         int effectiveStr = StatManager.Instance.GetEffectiveStat(true, TargetStat.Strength);
         int effectiveDef = StatManager.Instance.GetEffectiveStat(true, TargetStat.Defense);
         int rawSpeed = StatManager.Instance.GetEffectiveStat(true, TargetStat.Speed);
         int effectiveLuck = StatManager.Instance.GetEffectiveStat(true, TargetStat.Luck);
 
-        // ¼ÓµµÀÇ °æ¿ì Á¡°¨ °ø½ÄÀÌ Àû¿ëµÈ 'À¯È¿ ¼Óµµ'·Î º¯È¯ÇØ Áİ´Ï´Ù.
+        // ì†ë„ì˜ ê²½ìš° ì ê° ê³µì‹ì´ ì ìš©ëœ 'ìœ íš¨ ì†ë„'ë¡œ ë³€í™˜í•´ ì¤ë‹ˆë‹¤.
         float effectiveSpeed = CombatMath.GetEffectiveSpeed(rawSpeed);
 
-        // ÀûÀÇ ¹æ¾î·Â °¡Á®¿À±â
+        // ì ì˜ ë°©ì–´ë ¥ ê°€ì ¸ì˜¤ê¸°
         int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
 
-        // 2. µ¥¹ÌÁö ÇÕ»ê °è»ê: (Èû + ¹æ¾î + À¯È¿¼Óµµ + ¿î) * 5¹è
+        // 2. ë°ë¯¸ì§€ í•©ì‚° ê³„ì‚°: (í˜ + ë°©ì–´ + ìœ íš¨ì†ë„ + ìš´) * 5ë°°
         float totalStatSum = effectiveStr + effectiveDef + effectiveSpeed + effectiveLuck;
         float baseDamage = totalStatSum * statMultiplier;
 
-        // 3. ¹æ¾î·Â °¨¼âÀ² Àû¿ë
+        // 3. ë°©ì–´ë ¥ ê°ì‡„ìœ¨ ì ìš©
         float dr = CombatMath.GetDamageReduction(enemyDef);
         float expectedDamage = baseDamage * (1f - dr);
 
-        // ÃÖ¼Ò 1ÀÇ µ¥¹ÌÁö´Â º¸Àå
+        // ìµœì†Œ 1ì˜ ë°ë¯¸ì§€ëŠ” ë³´ì¥
         return Mathf.Max(1, Mathf.RoundToInt(expectedDamage));
     }
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData eData)
     {
-        // ´Ù¸¥ ±âº» °ø°İÇü Ä«¸° ¹«±âµé°ú µ¿ÀÏÇÏ°Ô ¼Ò·®ÀÇ ±×·Î±â µ¥¹ÌÁö¸¦ ÀÔÈü´Ï´Ù.
+        // ë‹¤ë¥¸ ê¸°ë³¸ ê³µê²©í˜• ì¹´ë¦° ë¬´ê¸°ë“¤ê³¼ ë™ì¼í•˜ê²Œ ì†ŒëŸ‰ì˜ ê·¸ë¡œê¸° ë°ë¯¸ì§€ë¥¼ ì…í™ë‹ˆë‹¤.
         if (BreakManager.Instance != null && !BreakManager.Instance.IsBroken(false))
         {
             bool isBrokenNow = BreakManager.Instance.AddBreakDamage(false, breakDamage);
-            DevLog.Log($"[Model 19] ¼Î¸®ÀÇ ¸ğµç ½ºÅÈÀ» À¶ÇÕÇÏ¿© °ø°İ! Àû¿¡°Ô {breakDamage}ÀÇ ±×·Î±â µ¥¹ÌÁö¸¦ ÀÔÇû½À´Ï´Ù.");
+            DevLog.Log($"[Model 19] ì…°ë¦¬ì˜ ëª¨ë“  ìŠ¤íƒ¯ì„ ìœµí•©í•˜ì—¬ ê³µê²©! ì ì—ê²Œ {breakDamage}ì˜ ê·¸ë¡œê¸° ë°ë¯¸ì§€ë¥¼ ì…í˜”ìŠµë‹ˆë‹¤.");
 
             if (isBrokenNow && CombatUIManager.Instance != null && TurnManager.Instance != null)
             {

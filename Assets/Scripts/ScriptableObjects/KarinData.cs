@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "KarinData", menuName = "GameData/Karin")]
 public class KarinData : ScriptableObject
 {
     public string charNameKey; // "Karin"
 
-    [Header("Ç¥Á¤ ÀÌ¹ÌÁöµé")]
+    [Header("í‘œì • ì´ë¯¸ì§€ë“¤")]
     public Sprite normal;
     public Sprite worried;
     public Sprite happy;
@@ -13,5 +13,5 @@ public class KarinData : ScriptableObject
     public Sprite CutIn;
     public Sprite UsingItem;
     public Sprite battle;
-    // Ãß°¡ÇÏ°í ½ÍÀº Ç¥Á¤ÀÌ ÀÖ´Ù¸é ¿©±â¿¡ °è¼Ó ´Ã·ÁÁÖ¸é µË´Ï´Ù!
+    // ì¶”ê°€í•˜ê³  ì‹¶ì€ í‘œì •ì´ ìˆë‹¤ë©´ ì—¬ê¸°ì— ê³„ì† ëŠ˜ë ¤ì£¼ë©´ ë©ë‹ˆë‹¤!
 }

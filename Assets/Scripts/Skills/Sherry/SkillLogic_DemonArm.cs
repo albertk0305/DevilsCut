@@ -1,79 +1,79 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_DemonArm", menuName = "SkillLogic/Player/DemonArm")]
 public class SkillLogic_DemonArm : SkillLogicBase
 {
-    [Header("ÁøÈ­ A (Come the Light)")]
-    public float pathA_CritMultiplier = 2.5f; // ±âº» 1.5¹è -> 2.5¹è·Î Æø¹ßÀû »ó½Â
+    [Header("ì§„í™” A (Come the Light)")]
+    public float pathA_CritMultiplier = 2.5f; // ê¸°ë³¸ 1.5ë°° -> 2.5ë°°ë¡œ í­ë°œì  ìƒìŠ¹
 
-    [Header("ÁøÈ­ B (Stars)")]
-    [Tooltip("Å©¸® 100% ÃÊ°úºĞ 1%´ç »ó½ÂÇÒ Ãß°¡ µ¥¹ÌÁö ºñÀ² (1.0 = 1%)")]
-    public float pathB_OverflowConversionRate = 1.0f; // ¹ë·±½Ì¿¡ µû¶ó Á¶Àı
+    [Header("ì§„í™” B (Stars)")]
+    [Tooltip("í¬ë¦¬ 100% ì´ˆê³¼ë¶„ 1%ë‹¹ ìƒìŠ¹í•  ì¶”ê°€ ë°ë¯¸ì§€ ë¹„ìœ¨ (1.0 = 1%)")]
+    public float pathB_OverflowConversionRate = 1.0f; // ë°¸ëŸ°ì‹±ì— ë”°ë¼ ì¡°ì ˆ
 
-    // ÁøÈ­ C Àü¿ë ³»ºÎ »óÅÂ°ª (0~5 »çÀÌÀÇ ºó Ã¨¹ö ÀÎµ¦½º)
+    // ì§„í™” C ì „ìš© ë‚´ë¶€ ìƒíƒœê°’ (0~5 ì‚¬ì´ì˜ ë¹ˆ ì±”ë²„ ì¸ë±ìŠ¤)
     private int currentEmptyChamberIndex = -1;
 
-    // [ÁøÈ­ C] Å¸¼ö º¯È¯ (1Å¸ -> ·¯½Ã¾È ·ê·¿ Å¸¼ö)
+    // [ì§„í™” C] íƒ€ìˆ˜ ë³€í™˜ (1íƒ€ -> ëŸ¬ì‹œì•ˆ ë£°ë › íƒ€ìˆ˜)
     public override int GetHitCount(SkillData skill)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
-            // ºó Ã¨¹ö(ºÒ¹ßÅº)°¡ ÅÍÁö¸é ±× Áï½Ã ½î±â¸¦ ¸ØÃç¾ß ÇÕ´Ï´Ù.
-            // ¿¹: ºó Ã¨¹ö°¡ 2¹ø ÀÎµ¦½º(3¹øÂ° ¹ß)¶ó¸é, 0, 1, 2±îÁö ½î°í ¸ØÃß¹Ç·Î ÃÑ 3Å¸¸¦ ¶§¸³´Ï´Ù.
+            // ë¹ˆ ì±”ë²„(ë¶ˆë°œíƒ„)ê°€ í„°ì§€ë©´ ê·¸ ì¦‰ì‹œ ì˜ê¸°ë¥¼ ë©ˆì¶°ì•¼ í•©ë‹ˆë‹¤.
+            // ì˜ˆ: ë¹ˆ ì±”ë²„ê°€ 2ë²ˆ ì¸ë±ìŠ¤(3ë²ˆì§¸ ë°œ)ë¼ë©´, 0, 1, 2ê¹Œì§€ ì˜ê³  ë©ˆì¶”ë¯€ë¡œ ì´ 3íƒ€ë¥¼ ë•Œë¦½ë‹ˆë‹¤.
             return currentEmptyChamberIndex + 1;
         }
         return base.GetHitCount(skill);
     }
 
-    // [ÁøÈ­ C] ºó Ã¨¹ö ±¼¸®±â
+    // [ì§„í™” C] ë¹ˆ ì±”ë²„ êµ´ë¦¬ê¸°
     public override void PaySkillCost(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC && isPlayerAttacking)
         {
-            // ½ºÅ³ ½ÃÀü ½Ã 6¹ß Áß 1¹ßÀÇ ºó Ã¨¹ö(ºÒ¹ßÅº)¸¦ ÀåÀüÇÕ´Ï´Ù. (0 ~ 5)
+            // ìŠ¤í‚¬ ì‹œì „ ì‹œ 6ë°œ ì¤‘ 1ë°œì˜ ë¹ˆ ì±”ë²„(ë¶ˆë°œíƒ„)ë¥¼ ì¥ì „í•©ë‹ˆë‹¤. (0 ~ 5)
             currentEmptyChamberIndex = Random.Range(0, 6);
-            DevLog.Log($"[·¯½Ã¾È ·ê·¿] Ã¶ÄÀ! {currentEmptyChamberIndex + 1}¹øÂ° ÃÑ¾ËÀÌ ºñ¾îÀÖ½À´Ï´Ù...");
+            DevLog.Log($"[ëŸ¬ì‹œì•ˆ ë£°ë ›] ì² ì»¥! {currentEmptyChamberIndex + 1}ë²ˆì§¸ ì´ì•Œì´ ë¹„ì–´ìˆìŠµë‹ˆë‹¤...");
         }
     }
 
-    // [ÁøÈ­ C] °­Á¦ ºÒ¹ßÅº ÆÇÁ¤
+    // [ì§„í™” C] ê°•ì œ ë¶ˆë°œíƒ„ íŒì •
     public override bool AlwaysMisses(SkillData skill, int hitIndex)
     {
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
-            // Áö±İ ½î´Â ÃÑ¾Ë(hitIndex)ÀÌ ºó Ã¨¹ö¶ó¸é ¹«Á¶°Ç ºø³ª°¨(ºÒ¹ß) Ã³¸®!
+            // ì§€ê¸ˆ ì˜ëŠ” ì´ì•Œ(hitIndex)ì´ ë¹ˆ ì±”ë²„ë¼ë©´ ë¬´ì¡°ê±´ ë¹—ë‚˜ê°(ë¶ˆë°œ) ì²˜ë¦¬!
             return hitIndex == currentEmptyChamberIndex;
         }
         return false;
     }
 
-    // [ÁøÈ­ A] Å©¸®Æ¼ÄÃ µ¥¹ÌÁö »½Æ¢±â
+    // [ì§„í™” A] í¬ë¦¬í‹°ì»¬ ë°ë¯¸ì§€ ë»¥íŠ€ê¸°
     public override float GetCritDamageMultiplier(SkillData skill)
     {
         if (skill.currentEvolution == SkillEvolution.PathA) return pathA_CritMultiplier;
         return base.GetCritDamageMultiplier(skill);
     }
 
-    // [ÁøÈ­ B, C] µ¥¹ÌÁö °è¼ö º¸Á¤
+    // [ì§„í™” B, C] ë°ë¯¸ì§€ ê³„ìˆ˜ ë³´ì •
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         float multiplier = 1.0f;
 
         if (skill.currentEvolution == SkillEvolution.PathB && isPlayerAttacking)
         {
-            // [ÁøÈ­ B] Å©¸®Æ¼ÄÃ ¿À¹öÇÃ·Î¿ì ¿¬»ê
+            // [ì§„í™” B] í¬ë¦¬í‹°ì»¬ ì˜¤ë²„í”Œë¡œìš° ì—°ì‚°
             float finalCritRate = CombatMath.GetFinalCritRate(skill.GetCurrentBonusCritRate(), pStats.luck);
             if (finalCritRate > 100f)
             {
                 float overflow = finalCritRate - 100f;
                 float bonus = (overflow * pathB_OverflowConversionRate) / 100f;
                 multiplier += bonus;
-                DevLog.Log($"[º° ºÎ½º·¯±â] Å©¸® È®·ü {overflow:F1}% ÃÊ°ú! µ¥¹ÌÁö°¡ {bonus * 100:F1}% ÁõÆøµË´Ï´Ù!");
+                DevLog.Log($"[ë³„ ë¶€ìŠ¤ëŸ¬ê¸°] í¬ë¦¬ í™•ë¥  {overflow:F1}% ì´ˆê³¼! ë°ë¯¸ì§€ê°€ {bonus * 100:F1}% ì¦í­ë©ë‹ˆë‹¤!");
             }
         }
         else if (skill.currentEvolution == SkillEvolution.PathC)
         {
-            // [ÁøÈ­ C] 6¿¬¹ß ½ºÅ³ÀÌ¹Ç·Î ±âº» µ¥¹ÌÁö¸¦ 6µîºĞ ÇÕ´Ï´Ù.
+            // [ì§„í™” C] 6ì—°ë°œ ìŠ¤í‚¬ì´ë¯€ë¡œ ê¸°ë³¸ ë°ë¯¸ì§€ë¥¼ 6ë“±ë¶„ í•©ë‹ˆë‹¤.
             multiplier = 1.0f / 6.0f;
         }
 

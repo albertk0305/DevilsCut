@@ -1,23 +1,23 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 
-// [ÆĞ½Ãºê ½ºÅ³ °ø°£]
-// TODO: Å½»ö ¾À ±¸Çö ½Ã, º§Æä°í¸£ ÆĞ½Ãºê 'There is a Reason' ·ÎÁ÷ Ãß°¡ ¿¹Á¤
-// (º¸»ó ¼±ÅÃ ½Ã ¸®·ÑÇÏ¸é 10% / 20% / 35% È®·ü·Î µî±Ş »ó½Â)
+// [íŒ¨ì‹œë¸Œ ìŠ¤í‚¬ ê³µê°„]
+// TODO: íƒìƒ‰ ì”¬ êµ¬í˜„ ì‹œ, ë²¨í˜ê³ ë¥´ íŒ¨ì‹œë¸Œ 'There is a Reason' ë¡œì§ ì¶”ê°€ ì˜ˆì •
+// (ë³´ìƒ ì„ íƒ ì‹œ ë¦¬ë¡¤í•˜ë©´ 10% / 20% / 35% í™•ë¥ ë¡œ ë“±ê¸‰ ìƒìŠ¹)
 
 [CreateAssetMenu(fileName = "Belphegor_StartSkill", menuName = "SupporterLogic/Belphegor/Start Skill")]
 public class SupporterLogic_Belphegor_Start : SupporterLogicBase
 {
-    [Header("¹öÇÁ ÈÄº¸ (4Á¾ µî·Ï)")]
+    [Header("ë²„í”„ í›„ë³´ (4ì¢… ë“±ë¡)")]
     public StatusEffectData strBuff;
     public StatusEffectData defBuff;
     public StatusEffectData spdBuff;
     public StatusEffectData lukBuff;
     public int duration = 3;
 
-    [Header("·¹º§º° ¹«ÀÛÀ§ ¹öÇÁ ¹üÀ§")]
-    public float[] minBuffValues = { 0.05f, 0.10f, 0.20f }; // ÃÖ¼Ò 5% / 10% / 20%
-    public float[] maxBuffValues = { 0.30f, 0.50f, 0.80f }; // ÃÖ´ë 30% / 50% / 80%
+    [Header("ë ˆë²¨ë³„ ë¬´ì‘ìœ„ ë²„í”„ ë²”ìœ„")]
+    public float[] minBuffValues = { 0.05f, 0.10f, 0.20f }; // ìµœì†Œ 5% / 10% / 20%
+    public float[] maxBuffValues = { 0.30f, 0.50f, 0.80f }; // ìµœëŒ€ 30% / 50% / 80%
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
@@ -26,7 +26,7 @@ public class SupporterLogic_Belphegor_Start : SupporterLogicBase
         List<StatusEffectData> candidates = new List<StatusEffectData> { strBuff, defBuff, spdBuff, lukBuff };
         candidates.RemoveAll(x => x == null);
 
-        // ¸®½ºÆ® ¼ÅÇÃ
+        // ë¦¬ìŠ¤íŠ¸ ì…”í”Œ
         for (int i = 0; i < candidates.Count; i++)
         {
             StatusEffectData temp = candidates[i];
@@ -38,11 +38,11 @@ public class SupporterLogic_Belphegor_Start : SupporterLogicBase
         int buffCount = Mathf.Min(2, candidates.Count);
         for (int i = 0; i < buffCount; i++)
         {
-            // ·¹º§¿¡ ¸Â´Â ÃÖ¼Ò~ÃÖ´ëÄ¡ »çÀÌ¿¡¼­ ·ê·¿À» µ¹¸³´Ï´Ù!
+            // ë ˆë²¨ì— ë§ëŠ” ìµœì†Œ~ìµœëŒ€ì¹˜ ì‚¬ì´ì—ì„œ ë£°ë ›ì„ ëŒë¦½ë‹ˆë‹¤!
             float randomValue = Random.Range(minBuffValues[levelIndex], maxBuffValues[levelIndex]);
 
             BuffManager.Instance.AddEffect(true, candidates[i], randomValue, duration);
-            DevLog.Log($"[º§Æä°í¸£ °³Àü: This Game] Lv.{skillLevel} ¹ßµ¿! ¼Î¸®¿¡°Ô {candidates[i].targetStat} {randomValue * 100:F1}% Áõ°¡ ¹öÇÁ ºÎ¿©!");
+            DevLog.Log($"[ë²¨í˜ê³ ë¥´ ê°œì „: This Game] Lv.{skillLevel} ë°œë™! ì…°ë¦¬ì—ê²Œ {candidates[i].targetStat} {randomValue * 100:F1}% ì¦ê°€ ë²„í”„ ë¶€ì—¬!");
         }
 
         if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();

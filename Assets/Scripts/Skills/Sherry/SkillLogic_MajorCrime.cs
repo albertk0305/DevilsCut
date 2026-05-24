@@ -1,23 +1,23 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_MajorCrime", menuName = "SkillLogic/Player/MajorCrime")]
 public class SkillLogic_MajorCrime : SkillLogicBase
 {
-    [Header("±âº»: ¹öÇÁ µ¥ÀÌÅÍ (¼Óµµ/¿î)")]
+    [Header("ê¸°ë³¸: ë²„í”„ ë°ì´í„° (ì†ë„/ìš´)")]
     public StatusEffectData baseSpeedBuff;
     public StatusEffectData baseLuckBuff;
     public float[] baseBuffRates = { 0.30f, 0.45f, 0.60f }; // 30%, 45%, 60%
 
-    [Header("°ø¿ë µ¥ÀÌÅÍ")]
-    public StatusEffectData overheatDebuff;      // ÁøÈ­ A¿ë °ú¿­ ¾ÆÀÌÄÜ
-    public StatusEffectData damageAccBuff;       // ÁøÈ­ B¿ë ±â·Ï±â ¾ÆÀÌÄÜ
+    [Header("ê³µìš© ë°ì´í„°")]
+    public StatusEffectData overheatDebuff;      // ì§„í™” Aìš© ê³¼ì—´ ì•„ì´ì½˜
+    public StatusEffectData damageAccBuff;       // ì§„í™” Bìš© ê¸°ë¡ê¸° ì•„ì´ì½˜
 
-    [Header("ÁøÈ­ A: µğ½º ÆÄÀÌ¾î (¼Óµµ/¿î ´ëÆø »ó½Â)")]
+    [Header("ì§„í™” A: ë””ìŠ¤ íŒŒì´ì–´ (ì†ë„/ìš´ ëŒ€í­ ìƒìŠ¹)")]
     public StatusEffectData pathA_Speed;
     public StatusEffectData pathA_Luck;
-    public float[] pathA_Rates = { 0.6f, 0.8f, 1.0f }; // 60%, 80%, 100% »ó½Â
+    public float[] pathA_Rates = { 0.6f, 0.8f, 1.0f }; // 60%, 80%, 100% ìƒìŠ¹
 
-    [Header("ÁøÈ­ C: »çÀÌ¹ö »çÀÌÄÚ (·£´ı º¸Á¤)")]
+    [Header("ì§„í™” C: ì‚¬ì´ë²„ ì‚¬ì´ì½” (ëœë¤ ë³´ì •)")]
     public StatusEffectData strengthMod;
     public StatusEffectData defenseMod;
     public StatusEffectData speedMod;
@@ -33,7 +33,7 @@ public class SkillLogic_MajorCrime : SkillLogicBase
         float baseRate = baseBuffRates[levelIdx];
 
         // ---------------------------------------------------------
-        // [±âº» ½ºÅ³] ¹× [ÁøÈ­ B (°­È­)] : ±âº» ¼Óµµ/¿î ¹öÇÁ Àû¿ë
+        // [ê¸°ë³¸ ìŠ¤í‚¬] ë° [ì§„í™” B (ê°•í™”)] : ê¸°ë³¸ ì†ë„/ìš´ ë²„í”„ ì ìš©
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.None || skill.currentEvolution == SkillEvolution.PathB)
         {
@@ -42,55 +42,55 @@ public class SkillLogic_MajorCrime : SkillLogicBase
 
             if (skill.currentEvolution == SkillEvolution.None)
             {
-                DevLog.Log($"[¸ŞÀÌÀú Å©¶óÀÓ] ±âº» ¹ßµ¿! 3ÅÏ°£ ¼Óµµ¿Í ¿îÀÌ {baseRate * 100}% Áõ°¡ÇÕ´Ï´Ù.");
+                DevLog.Log($"[ë©”ì´ì € í¬ë¼ì„] ê¸°ë³¸ ë°œë™! 3í„´ê°„ ì†ë„ì™€ ìš´ì´ {baseRate * 100}% ì¦ê°€í•©ë‹ˆë‹¤.");
             }
         }
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ A] µğ½º ÆÄÀÌ¾î: ¹ÌÄ£ ½ºÅÈ »ó½Â + 3ÅÏ µÚ 40% ÀÚÆø
+        // [ì§„í™” A] ë””ìŠ¤ íŒŒì´ì–´: ë¯¸ì¹œ ìŠ¤íƒ¯ ìƒìŠ¹ + 3í„´ ë’¤ 40% ìí­
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.PathA)
         {
             bool isAlreadyOverheated = BuffManager.Instance.GetEffects(true).Exists(e => e.effectData == overheatDebuff);
             BuffManager.Instance.AddEffect(true, pathA_Speed, pathA_Rates[levelIdx], 3);
             BuffManager.Instance.AddEffect(true, pathA_Luck, pathA_Rates[levelIdx], 3);
-            BuffManager.Instance.AddEffect(true, overheatDebuff, 0, 3); // 0Àº µ¥¹ÌÁö °è»ê¿ëÀÌ ¾Æ´ÔÀ» ÀÇ¹Ì
+            BuffManager.Instance.AddEffect(true, overheatDebuff, 0, 3); // 0ì€ ë°ë¯¸ì§€ ê³„ì‚°ìš©ì´ ì•„ë‹˜ì„ ì˜ë¯¸
 
             if (isAlreadyOverheated)
             {
-                // ÀüÅõ ¿¬Ãâ ´ëº» ¸Ç ³¡(È­¸é ¸®¼Â Á÷ÈÄ)¿¡ ±âÆø ¿¬ÃâÀ» Ãß°¡ÇÕ´Ï´Ù.
+                // ì „íˆ¬ ì—°ì¶œ ëŒ€ë³¸ ë§¨ ë(í™”ë©´ ë¦¬ì…‹ ì§í›„)ì— ê¸°í­ ì—°ì¶œì„ ì¶”ê°€í•©ë‹ˆë‹¤.
                 BattleVisualizer.Instance.EnqueueAction(() =>
                 {
-                    CombatUIManager.Instance.InterruptAndTypeCommentary("¿£Áø °ú¿­! ¹«¸®ÇÑ °»½ÅÀ¸·Î Æä³ÎÆ¼ ¹ßµ¿!!");
+                    CombatUIManager.Instance.InterruptAndTypeCommentary("ì—”ì§„ ê³¼ì—´! ë¬´ë¦¬í•œ ê°±ì‹ ìœ¼ë¡œ í˜ë„í‹° ë°œë™!!");
 
                     int selfDamage = Mathf.RoundToInt(pStats.currentHp * 0.4f);
                     pStats.currentHp = Mathf.Max(0, pStats.currentHp - selfDamage);
 
-                    // ÁÖÀÎ°ø ÇÇ°İ ¿¬Ãâ (½ºÅ³ ½ÃÀüÀÚÀÌ¹Ç·Î Caster ÀÌ¹ÌÁö¸¦ ¹Ù²ß´Ï´Ù)
+                    // ì£¼ì¸ê³µ í”¼ê²© ì—°ì¶œ (ìŠ¤í‚¬ ì‹œì „ìì´ë¯€ë¡œ Caster ì´ë¯¸ì§€ë¥¼ ë°”ê¿‰ë‹ˆë‹¤)
                     CombatUIManager.Instance.SetCasterImage(true, CombatManager.Instance.playerData.hit);
                     CombatUIManager.Instance.SpawnDamageText(selfDamage.ToString(), false, true);
                     BattleEventSystem.CallHpChanged(true, pStats.currentHp, pStats.maxHp);
                 });
 
-                // ¾ÆÆÄÇÏ´Â ¿¬ÃâÀ» 1ÃÊ°£ °¨»ó
+                // ì•„íŒŒí•˜ëŠ” ì—°ì¶œì„ 1ì´ˆê°„ ê°ìƒ
                 BattleVisualizer.Instance.EnqueueDelay(1.0f);
 
-                // ´Ù½Ã ¿ø·¡ ¾ó±¼·Î º¹±¸
+                // ë‹¤ì‹œ ì›ë˜ ì–¼êµ´ë¡œ ë³µêµ¬
                 BattleVisualizer.Instance.EnqueueAction(() =>
                 {
                     CombatUIManager.Instance.ResetCasterImage(true);
                 });
 
-                DevLog.Log("[ÁøÈ­ A] ²Ä¼ö ¹æÁö! °ú¿­ »óÅÂ¿¡¼­ ¹«¸®ÇÏ°Ô °»½ÅÇÏ¿© Áï½Ã ÇÇÇØ¸¦ ÀÔ½À´Ï´Ù.");
+                DevLog.Log("[ì§„í™” A] ê¼¼ìˆ˜ ë°©ì§€! ê³¼ì—´ ìƒíƒœì—ì„œ ë¬´ë¦¬í•˜ê²Œ ê°±ì‹ í•˜ì—¬ ì¦‰ì‹œ í”¼í•´ë¥¼ ì…ìŠµë‹ˆë‹¤.");
             }
             else
             {
-                DevLog.Log("[ÁøÈ­ A] µğ½º ÆÄÀÌ¾î! 3ÅÏ°£ ½ÅÀÇ ¼Óµµ¸¦ ¾òÁö¸¸ ³¡¿¡ ´ë°¡°¡ µû¸¨´Ï´Ù.");
+                DevLog.Log("[ì§„í™” A] ë””ìŠ¤ íŒŒì´ì–´! 3í„´ê°„ ì‹ ì˜ ì†ë„ë¥¼ ì–»ì§€ë§Œ ëì— ëŒ€ê°€ê°€ ë”°ë¦…ë‹ˆë‹¤.");
             }
         }
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ B] ·¿ À¯ ´Ù¿î: ÇÇÇØ ±â·Ï ½ÃÀÛ (+ ±âº» ½ºÅÈ¹öÇÁ)
+        // [ì§„í™” B] ë › ìœ  ë‹¤ìš´: í”¼í•´ ê¸°ë¡ ì‹œì‘ (+ ê¸°ë³¸ ìŠ¤íƒ¯ë²„í”„)
         // ---------------------------------------------------------
         else if (skill.currentEvolution == SkillEvolution.PathB)
         {
@@ -98,24 +98,24 @@ public class SkillLogic_MajorCrime : SkillLogicBase
 
             if (!isAlreadyActive)
             {
-                // ¹öÇÁ°¡ ¾øÀ» ¶§(Ã³À½ ¾µ ¶§)¸¸ µ¥¹ÌÁö¸¦ ÃÊ±âÈ­ÇÕ´Ï´Ù!
+                // ë²„í”„ê°€ ì—†ì„ ë•Œ(ì²˜ìŒ ì“¸ ë•Œ)ë§Œ ë°ë¯¸ì§€ë¥¼ ì´ˆê¸°í™”í•©ë‹ˆë‹¤!
                 CombatManager.Instance.currentState.accumulatedDamage = 0;
             }
             else
             {
-                DevLog.Log("[ÁøÈ­ B] ·¿ À¯ ´Ù¿î Áö¼Ó½Ã°£ ¿¬Àå! ±âÁ¸ ´©Àû µ¥¹ÌÁö´Â À¯ÁöµË´Ï´Ù.");
+                DevLog.Log("[ì§„í™” B] ë › ìœ  ë‹¤ìš´ ì§€ì†ì‹œê°„ ì—°ì¥! ê¸°ì¡´ ëˆ„ì  ë°ë¯¸ì§€ëŠ” ìœ ì§€ë©ë‹ˆë‹¤.");
             }
 
-            BuffManager.Instance.AddEffect(true, damageAccBuff, 0, 3); // ÅÏ¼ö °»½Å
-            DevLog.Log("[ÁøÈ­ B] ·¿ À¯ ´Ù¿î! 3ÅÏ°£ ÀÔÈù ÇÇÇØ¸¦ ±â·ÏÇÏ¿© ¸¶Áö¸·¿¡ ÅÍ¶ß¸³´Ï´Ù.");
+            BuffManager.Instance.AddEffect(true, damageAccBuff, 0, 3); // í„´ìˆ˜ ê°±ì‹ 
+            DevLog.Log("[ì§„í™” B] ë › ìœ  ë‹¤ìš´! 3í„´ê°„ ì…íŒ í”¼í•´ë¥¼ ê¸°ë¡í•˜ì—¬ ë§ˆì§€ë§‰ì— í„°ëœ¨ë¦½ë‹ˆë‹¤.");
         }
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ C] »çÀÌ¹ö »çÀÌÄÚ: ½ºÅÂÆ½ ÁÖ»çÀ§ ±¼¸®±â (±âº» ¹öÇÁ ¹«½Ã)
+        // [ì§„í™” C] ì‚¬ì´ë²„ ì‚¬ì´ì½”: ìŠ¤íƒœí‹± ì£¼ì‚¬ìœ„ êµ´ë¦¬ê¸° (ê¸°ë³¸ ë²„í”„ ë¬´ì‹œ)
         // ---------------------------------------------------------
         else if (skill.currentEvolution == SkillEvolution.PathC)
         {
-            // ·¹º§¿¡ µû¶ó ¸®½ºÅ© °¨¼Ò ¹× ¸®ÅÏ Áõ°¡
+            // ë ˆë²¨ì— ë”°ë¼ ë¦¬ìŠ¤í¬ ê°ì†Œ ë° ë¦¬í„´ ì¦ê°€
             // Lv1: -30% ~ +60% / Lv2: -20% ~ +80% / Lv3: -10% ~ +100%
             float min = -0.3f + (levelIdx * 0.1f);
             float max = 0.6f + (levelIdx * 0.2f);
@@ -124,7 +124,7 @@ public class SkillLogic_MajorCrime : SkillLogicBase
             ApplyRandomStat(defenseMod, min, max);
             ApplyRandomStat(speedMod, min, max);
             ApplyRandomStat(luckMod, min, max);
-            DevLog.Log($"[ÁøÈ­ C] »çÀÌ¹ö »çÀÌÄÚ!! ¹üÀ§({min * 100}% ~ {max * 100}%) ³»¿¡¼­ ¿î¸íÀÌ °áÁ¤µÇ¾ú½À´Ï´Ù.");
+            DevLog.Log($"[ì§„í™” C] ì‚¬ì´ë²„ ì‚¬ì´ì½”!! ë²”ìœ„({min * 100}% ~ {max * 100}%) ë‚´ì—ì„œ ìš´ëª…ì´ ê²°ì •ë˜ì—ˆìŠµë‹ˆë‹¤.");
         }
     }
 

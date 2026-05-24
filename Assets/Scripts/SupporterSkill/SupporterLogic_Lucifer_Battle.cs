@@ -1,17 +1,17 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Lucifer_BattleSkill", menuName = "SupporterLogic/Lucifer/Battle Skill")]
 public class SupporterLogic_Lucifer_Battle : SupporterLogicBase
 {
-    [Header("·¹º§º° µ¥¹ÌÁö ¹× ¹æ¾î±¸ °üÅë ¼³Á¤")]
-    public float[] damageMultipliers = { 20.0f, 30.0f, 40.0f }; // ¼¦°Ç °è¼ö
-    public float[] armorPenetrations = { 0.20f, 0.30f, 0.40f }; // ¹æ¾î·Â ¹«½Ã ºñÀ²
+    [Header("ë ˆë²¨ë³„ ë°ë¯¸ì§€ ë° ë°©ì–´êµ¬ ê´€í†µ ì„¤ì •")]
+    public float[] damageMultipliers = { 20.0f, 30.0f, 40.0f }; // ìƒ·ê±´ ê³„ìˆ˜
+    public float[] armorPenetrations = { 0.20f, 0.30f, 0.40f }; // ë°©ì–´ë ¥ ë¬´ì‹œ ë¹„ìœ¨
 
-    [Header("¼÷Ãë(Æä³ÎÆ¼) ¼³Á¤")]
-    public float[] hangoverChances = { 0.40f, 0.35f, 0.20f }; // ¼÷Ãë ¹ßµ¿ È®·ü
-    public float hangoverApPenalty = 50f; // ·ç½ÃÆÛ AP °¨¼Ò·®
+    [Header("ìˆ™ì·¨(í˜ë„í‹°) ì„¤ì •")]
+    public float[] hangoverChances = { 0.40f, 0.35f, 0.20f }; // ìˆ™ì·¨ ë°œë™ í™•ë¥ 
+    public float hangoverApPenalty = 50f; // ë£¨ì‹œí¼ AP ê°ì†ŒëŸ‰
 
-    [Header("·¹º§º° ±×·Î±â ¼öÄ¡")]
+    [Header("ë ˆë²¨ë³„ ê·¸ë¡œê¸° ìˆ˜ì¹˜")]
     public float[] breakDamageValues = { 20f, 30f, 40f };
 
     public override int CalculateDamage(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
@@ -20,11 +20,11 @@ public class SupporterLogic_Lucifer_Battle : SupporterLogicBase
 
         float baseDamage = pStats.strength * damageMultipliers[index];
 
-        // ÀûÀÇ ¹æ¾î·Â ¹× ±âº» ¹æ¾î °¨¼ÒÀ²(dr) °¡Á®¿À±â
+        // ì ì˜ ë°©ì–´ë ¥ ë° ê¸°ë³¸ ë°©ì–´ ê°ì†Œìœ¨(dr) ê°€ì ¸ì˜¤ê¸°
         int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
         float dr = CombatMath.GetDamageReduction(enemyDef);
 
-        // ÇÙ½É: ¹æ¾î·Â ¹«½Ã(°üÅë) ºñÀ²¸¸Å­ °¨¼âÀ²(dr)À» ±ğ¾Æ³À´Ï´Ù!
+        // í•µì‹¬: ë°©ì–´ë ¥ ë¬´ì‹œ(ê´€í†µ) ë¹„ìœ¨ë§Œí¼ ê°ì‡„ìœ¨(dr)ì„ ê¹ì•„ëƒ…ë‹ˆë‹¤!
         float effectiveDr = dr * (1f - armorPenetrations[index]);
 
         float finalDamage = baseDamage * (1f - effectiveDr);
@@ -36,37 +36,37 @@ public class SupporterLogic_Lucifer_Battle : SupporterLogicBase
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, hangoverChances.Length - 1);
 
-        // ±×·Î±â µ¥¹ÌÁö Àû¿ë
+        // ê·¸ë¡œê¸° ë°ë¯¸ì§€ ì ìš©
         if (BreakManager.Instance != null && !BreakManager.Instance.IsBroken(false))
         {
             float breakDmg = breakDamageValues[index];
             bool isBrokenNow = BreakManager.Instance.AddBreakDamage(false, breakDmg);
 
-            // ±×·Î±â ¹ßµ¿ ½Ã ÅÏ ¼ø¼­ UI Áï½Ã °»½Å
+            // ê·¸ë¡œê¸° ë°œë™ ì‹œ í„´ ìˆœì„œ UI ì¦‰ì‹œ ê°±ì‹ 
             if (isBrokenNow && CombatUIManager.Instance != null && TurnManager.Instance != null)
             {
                 CombatUIManager.Instance.UpdateTurnOrderUI(TurnManager.Instance.GetFutureTurnIcons(5));
             }
         }
 
-        // ÇÏÀÌ¸®½ºÅ©: ¼÷Ãë ¹ßµ¿ ÆÇÁ¤
+        // í•˜ì´ë¦¬ìŠ¤í¬: ìˆ™ì·¨ ë°œë™ íŒì •
         if (Random.value <= hangoverChances[index])
         {
             var supEntity = TurnManager.Instance.turnQueue.Find(e => e.type == EntityType.Supporter);
             if (supEntity != null)
             {
-                // ·ç½ÃÆÛÀÇ ÅÏÀ» µÚ·Î Å©°Ô ¹Ğ¾î¹ö¸³´Ï´Ù.
+                // ë£¨ì‹œí¼ì˜ í„´ì„ ë’¤ë¡œ í¬ê²Œ ë°€ì–´ë²„ë¦½ë‹ˆë‹¤.
                 supEntity.actionGauge -= hangoverApPenalty;
             }
 
-            DevLog.Log($"[ÇØÇÇ ½ºÆÄÀÌ·²] ¾Ñ! ·ç½ÃÆÛ¿¡°Ô ¼÷Ãë°¡ Ã£¾Æ¿Í AP°¡ {hangoverApPenalty} °¨¼ÒÇß½À´Ï´Ù.");
+            DevLog.Log($"[í•´í”¼ ìŠ¤íŒŒì´ëŸ´] ì•—! ë£¨ì‹œí¼ì—ê²Œ ìˆ™ì·¨ê°€ ì°¾ì•„ì™€ APê°€ {hangoverApPenalty} ê°ì†Œí–ˆìŠµë‹ˆë‹¤.");
 
-            // ¹æ±İ Ãß°¡ÇÑ ¢À ±âÈ£¸¦ ºÙ¿© ÃÊ·Ï»ö ÅØ½ºÆ® ÆË¾÷ ¿¬Ãâ!
+            // ë°©ê¸ˆ ì¶”ê°€í•œ â™£ ê¸°í˜¸ë¥¼ ë¶™ì—¬ ì´ˆë¡ìƒ‰ í…ìŠ¤íŠ¸ íŒì—… ì—°ì¶œ!
             if (CombatUIManager.Instance != null)
             {
-                CombatUIManager.Instance.SpawnDamageText("¢Àhangover...", false, true);
+                CombatUIManager.Instance.SpawnDamageText("â™£hangover...", false, true);
 
-                // AP°¡ º¯°æµÇ¾úÀ¸¹Ç·Î ÅÏ Å¥ UI¸¦ Áï½Ã °»½ÅÇÕ´Ï´Ù.
+                // APê°€ ë³€ê²½ë˜ì—ˆìœ¼ë¯€ë¡œ í„´ í UIë¥¼ ì¦‰ì‹œ ê°±ì‹ í•©ë‹ˆë‹¤.
                 if (TurnManager.Instance != null)
                     CombatUIManager.Instance.UpdateTurnOrderUI(TurnManager.Instance.GetFutureTurnIcons(5));
             }

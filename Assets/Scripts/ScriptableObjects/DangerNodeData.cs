@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewDanger", menuName = "GameData/Node/Danger")]
 public class DangerNodeData : ExplorationNodeData
 {
-    [Header("À§Çè Àü¿ë Á¤º¸")]
-    public int enemyLevel;          // µîÀåÇÒ ÀûÀÇ ·¹º§
-    public EnemyData enemyToSpawn; // [Ãß°¡] ÀÌ Ä­À» ¹âÀ¸¸é µîÀåÇÒ ÀûÀÇ µ¥ÀÌÅÍ
+    [Header("ìœ„í—˜ ì „ìš© ì •ë³´")]
+    public int enemyLevel;          // ë“±ì¥í•  ì ì˜ ë ˆë²¨
+    public EnemyData enemyToSpawn; // [ì¶”ê°€] ì´ ì¹¸ì„ ë°Ÿìœ¼ë©´ ë“±ì¥í•  ì ì˜ ë°ì´í„°
 }

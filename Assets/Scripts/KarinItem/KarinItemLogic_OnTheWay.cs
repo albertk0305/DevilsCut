@@ -1,19 +1,19 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "KarinItem_OnTheWayDebuff", menuName = "KarinItems/On The Way (Debuff)")]
 public class KarinItemLogic_OnTheWayDebuff : KarinItemLogicBase
 {
-    [Header("µğ¹öÇÁ ¼³Á¤ (2Á¾)")]
-    public StatusEffectData defDebuffData;   // À§¿¡¼­ ¸¸µç Debuff_DEF_Down ¿¬°á
-    public StatusEffectData speedDebuffData; // À§¿¡¼­ ¸¸µç Debuff_SPD_Down ¿¬°á
+    [Header("ë””ë²„í”„ ì„¤ì • (2ì¢…)")]
+    public StatusEffectData defDebuffData;   // ìœ„ì—ì„œ ë§Œë“  Debuff_DEF_Down ì—°ê²°
+    public StatusEffectData speedDebuffData; // ìœ„ì—ì„œ ë§Œë“  Debuff_SPD_Down ì—°ê²°
 
-    [Header("¼öÄ¡ ¼³Á¤")]
-    public float debuffValue = -0.15f;      // 15% °¨¼Ò (À½¼ö°ª »ç¿ë)
-    public int duration = 3;                // 3ÅÏ Áö¼Ó
+    [Header("ìˆ˜ì¹˜ ì„¤ì •")]
+    public float debuffValue = -0.15f;      // 15% ê°ì†Œ (ìŒìˆ˜ê°’ ì‚¬ìš©)
+    public int duration = 3;                // 3í„´ ì§€ì†
 
     public override int CalculateDamage(PlayerStats pStats, EnemyData eData)
     {
-        // ¾àÈ­ ¹«±âÀÌ¹Ç·Î Á÷Á¢ÀûÀÎ µ¥¹ÌÁö´Â 0ÀÔ´Ï´Ù.
+        // ì•½í™” ë¬´ê¸°ì´ë¯€ë¡œ ì§ì ‘ì ì¸ ë°ë¯¸ì§€ëŠ” 0ì…ë‹ˆë‹¤.
         return 0;
     }
 
@@ -23,15 +23,15 @@ public class KarinItemLogic_OnTheWayDebuff : KarinItemLogicBase
 
         bool isApplied = false;
 
-        // 1. ÀûÀÇ ¹æ¾î·Â(DEF) °¨¼Ò µğ¹öÇÁ ºÎ¿©
+        // 1. ì ì˜ ë°©ì–´ë ¥(DEF) ê°ì†Œ ë””ë²„í”„ ë¶€ì—¬
         if (defDebuffData != null)
         {
-            // ´ë»ó(isPlayer=false)¿¡°Ô µğ¹öÇÁ¸¦ °Ì´Ï´Ù.
+            // ëŒ€ìƒ(isPlayer=false)ì—ê²Œ ë””ë²„í”„ë¥¼ ê²ë‹ˆë‹¤.
             BuffManager.Instance.AddEffect(false, defDebuffData, debuffValue, duration);
             isApplied = true;
         }
 
-        // 2. ÀûÀÇ ¼Óµµ(S) °¨¼Ò µğ¹öÇÁ ºÎ¿©
+        // 2. ì ì˜ ì†ë„(S) ê°ì†Œ ë””ë²„í”„ ë¶€ì—¬
         if (speedDebuffData != null)
         {
             BuffManager.Instance.AddEffect(false, speedDebuffData, debuffValue, duration);
@@ -40,9 +40,9 @@ public class KarinItemLogic_OnTheWayDebuff : KarinItemLogicBase
 
         if (isApplied)
         {
-            DevLog.Log($"[On the way] ÀûÀÇ ¹æ¾î·Â°ú ¼Óµµ¸¦ {Mathf.Abs(debuffValue) * 100}% °¨¼Ò½ÃÄ×½À´Ï´Ù.");
+            DevLog.Log($"[On the way] ì ì˜ ë°©ì–´ë ¥ê³¼ ì†ë„ë¥¼ {Mathf.Abs(debuffValue) * 100}% ê°ì†Œì‹œì¼°ìŠµë‹ˆë‹¤.");
 
-            // UI °»½Å (Àû »óÅÂÃ¢¿¡ µğ¹öÇÁ ¾ÆÀÌÄÜ Ç¥½Ã)
+            // UI ê°±ì‹  (ì  ìƒíƒœì°½ì— ë””ë²„í”„ ì•„ì´ì½˜ í‘œì‹œ)
             if (CombatUIManager.Instance != null)
             {
                 CombatUIManager.Instance.RefreshBuffUI();

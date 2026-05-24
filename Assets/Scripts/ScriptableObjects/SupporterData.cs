@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewSupporter", menuName = "GameData/Supporter")]
 public class SupporterData : ScriptableObject
@@ -6,34 +6,34 @@ public class SupporterData : ScriptableObject
     public string supporterID;
     public string supporterName;
 
-    [Header("ÀÌ¹ÌÁö")]
-    public Sprite mainImage; // ¸ŞÀÎ È­¸é¿¡ ¶ã Å« ÀÌ¹ÌÁö
-    public Sprite iconImage; // ÇÏ´Ü ¸ñ·Ï¿¡ ¶ã ÀÛÀº ¾ÆÀÌÄÜ
+    [Header("ì´ë¯¸ì§€")]
+    public Sprite mainImage; // ë©”ì¸ í™”ë©´ì— ëœ° í° ì´ë¯¸ì§€
+    public Sprite iconImage; // í•˜ë‹¨ ëª©ë¡ì— ëœ° ì‘ì€ ì•„ì´ì½˜
     public Sprite worriedSDImage;
     public Sprite readySDImage;
     public Sprite sdImage;
     public Sprite CutIn;
-    public Sprite startSkillCutIn; // °³Àü ½ºÅ³ Àü¿ë ÄÆÀÎ (ºñ¾îÀÖÀ¸¸é ±âº» CutInÀ» »ç¿ëÇÕ´Ï´Ù)
+    public Sprite startSkillCutIn; // ê°œì „ ìŠ¤í‚¬ ì „ìš© ì»·ì¸ (ë¹„ì–´ìˆìœ¼ë©´ ê¸°ë³¸ CutInì„ ì‚¬ìš©í•©ë‹ˆë‹¤)
     public Sprite startSkillImage;
     public Sprite battleSkillImage;
     public Sprite worried;
     public Sprite happy;
 
-    [Header("½ºÅ³ ¼³¸í")]
+    [Header("ìŠ¤í‚¬ ì„¤ëª…")]
     [TextArea] public string passiveSkillDesc;
     [TextArea] public string startSkillDesc;
     [TextArea] public string battleSkillDesc;
 
-    [Header("´ë»ç")]
-    public string selectMessage; // ¸ñ·Ï¿¡¼­ Å¬¸¯ÇßÀ» ¶§ ³ª¿À´Â ´ë»ç
-    public string joinMessage;   // Join ´­·¶À» ¶§ ³ª¿À´Â ´ë»ç
+    [Header("ëŒ€ì‚¬")]
+    public string selectMessage; // ëª©ë¡ì—ì„œ í´ë¦­í–ˆì„ ë•Œ ë‚˜ì˜¤ëŠ” ëŒ€ì‚¬
+    public string joinMessage;   // Join ëˆŒë €ì„ ë•Œ ë‚˜ì˜¤ëŠ” ëŒ€ì‚¬
 
-    [Header("½ºÅ³ ·¹º§ (°³º° ¼³Á¤)")]
-    [Range(1, 3)] public int passiveLevel = 1;     // ÆĞ½Ãºê ·¹º§
-    [Range(1, 3)] public int startSkillLevel = 1;   // °³Àü ½ºÅ³ ·¹º§
-    [Range(1, 3)] public int battleSkillLevel = 1;  // ¹èÆ² ½ºÅ³ ·¹º§
+    [Header("ìŠ¤í‚¬ ë ˆë²¨ (ê°œë³„ ì„¤ì •)")]
+    [Range(1, 3)] public int passiveLevel = 1;     // íŒ¨ì‹œë¸Œ ë ˆë²¨
+    [Range(1, 3)] public int startSkillLevel = 1;   // ê°œì „ ìŠ¤í‚¬ ë ˆë²¨
+    [Range(1, 3)] public int battleSkillLevel = 1;  // ë°°í‹€ ìŠ¤í‚¬ ë ˆë²¨
 
-    [Header("½ºÅ³ ·ÎÁ÷")]
+    [Header("ìŠ¤í‚¬ ë¡œì§")]
     public SupporterLogicBase startSkillLogic;
     public SupporterLogicBase battleSkillLogic;
 }

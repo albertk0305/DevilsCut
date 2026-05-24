@@ -1,26 +1,26 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_StarAndYou", menuName = "SkillLogic/Player/StarAndYou")]
 public class SkillLogic_StarAndYou : SkillLogicBase
 {
-    [Header("±âº»: ÃÖ´ë µ¥¹ÌÁö ÁõÆøÄ¡")]
-    public float baseMaxDamageBonus = 1.5f; // ±âº»ÀûÀ¸·Î ÀÒÀº Ã¼·Â ºñ·Ê ÃÖ´ë 2.5¹è (1 + 1.5)
+    [Header("ê¸°ë³¸: ìµœëŒ€ ë°ë¯¸ì§€ ì¦í­ì¹˜")]
+    public float baseMaxDamageBonus = 1.5f; // ê¸°ë³¸ì ìœ¼ë¡œ ìƒì€ ì²´ë ¥ ë¹„ë¡€ ìµœëŒ€ 2.5ë°° (1 + 1.5)
 
-    [Header("ÁøÈ­ A: ³×°¡ ¸ğ¸£´Â ÀÌ¾ß±â")]
-    public float pathA_MaxBonusMult = 3.0f; // ±âº» ÀÒÀº Ã¼·Â ºñ·Ê¸¦ ´õ ³ô°Ô (ÃÖ´ë 4¹è)
-    public float pathA_CriticalSpikeMult = 3.0f; // Ã¼·Â 10% ÀÌÇÏÀÏ ¶§ Ãß°¡ °ö¿¬»ê ¹èÀ²
+    [Header("ì§„í™” A: ë„¤ê°€ ëª¨ë¥´ëŠ” ì´ì•¼ê¸°")]
+    public float pathA_MaxBonusMult = 3.0f; // ê¸°ë³¸ ìƒì€ ì²´ë ¥ ë¹„ë¡€ë¥¼ ë” ë†’ê²Œ (ìµœëŒ€ 4ë°°)
+    public float pathA_CriticalSpikeMult = 3.0f; // ì²´ë ¥ 10% ì´í•˜ì¼ ë•Œ ì¶”ê°€ ê³±ì—°ì‚° ë°°ìœ¨
 
-    [Header("ÁøÈ­ B: ³» »ç¶û (ÀÒÀº Ã¼·Â ºñ·Ê Å©¸® »ó½Â)")]
-    // ÃÖ´ë Ä¡¸íÅ¸ È®·ü Áõ°¡·® (30%, 40%, 50%)
+    [Header("ì§„í™” B: ë‚´ ì‚¬ë‘ (ìƒì€ ì²´ë ¥ ë¹„ë¡€ í¬ë¦¬ ìƒìŠ¹)")]
+    // ìµœëŒ€ ì¹˜ëª…íƒ€ í™•ë¥  ì¦ê°€ëŸ‰ (30%, 40%, 50%)
     public float[] pathB_MaxCritRateBonus = { 0.3f, 0.4f, 0.5f };
-    // ÃÖ´ë Ä¡¸íÅ¸ ÇÇÇØ·® Áõ°¡·® (+0.5, +1.0, +1.5) -> ±âº» 1.5¹è¿Í ÇÕÃÄÁ® ÃÖ´ë 3¹è!
+    // ìµœëŒ€ ì¹˜ëª…íƒ€ í”¼í•´ëŸ‰ ì¦ê°€ëŸ‰ (+0.5, +1.0, +1.5) -> ê¸°ë³¸ 1.5ë°°ì™€ í•©ì³ì ¸ ìµœëŒ€ 3ë°°!
     public float[] pathB_MaxCritDmgBonus = { 0.5f, 1.0f, 1.5f };
 
-    [Header("ÁøÈ­ C: ¾ğµ¥µå (¼Ò¸ğ Ã¼·Â ºñÀ² ºñ·Ê Æøµô)")]
-    // Ç®ÇÇ(100%)¸¦ ¼Ò¸ğÇßÀ» ¶§ °öÇØÁö´Â ÃÖ´ë ¹èÀ² (10¹è, 15¹è, 20¹è)
+    [Header("ì§„í™” C: ì–¸ë°ë“œ (ì†Œëª¨ ì²´ë ¥ ë¹„ìœ¨ ë¹„ë¡€ í­ë”œ)")]
+    // í’€í”¼(100%)ë¥¼ ì†Œëª¨í–ˆì„ ë•Œ ê³±í•´ì§€ëŠ” ìµœëŒ€ ë°°ìœ¨ (10ë°°, 15ë°°, 20ë°°)
     public float[] pathC_ConsumedHpMults = { 10.0f, 15.0f, 20.0f };
 
-    // 1. µ¥¹ÌÁö ¹èÀ² °è»ê
+    // 1. ë°ë¯¸ì§€ ë°°ìœ¨ ê³„ì‚°
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (!isPlayerAttacking) return 1.0f;
@@ -29,7 +29,7 @@ public class SkillLogic_StarAndYou : SkillLogicBase
         float missingRatio = 1.0f - hpRatio;
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ A] ³×°¡ ¸ğ¸£´Â ÀÌ¾ß±â: 10% ÀÌÇÏ ±Ø´ÜÀû µô ÁõÆø
+        // [ì§„í™” A] ë„¤ê°€ ëª¨ë¥´ëŠ” ì´ì•¼ê¸°: 10% ì´í•˜ ê·¹ë‹¨ì  ë”œ ì¦í­
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.PathA)
         {
@@ -37,32 +37,32 @@ public class SkillLogic_StarAndYou : SkillLogicBase
             if (hpRatio <= 0.1f)
             {
                 baseMult *= pathA_CriticalSpikeMult;
-                DevLog.Log($"[ÁøÈ­ A] ºó»ç »óÅÂ ´Ş¼º! º°°ú ´ç½ÅÀÇ ÇÇÇØ·®ÀÌ {baseMult:F1}¹è·Î ÆøÁõÇÕ´Ï´Ù!");
+                DevLog.Log($"[ì§„í™” A] ë¹ˆì‚¬ ìƒíƒœ ë‹¬ì„±! ë³„ê³¼ ë‹¹ì‹ ì˜ í”¼í•´ëŸ‰ì´ {baseMult:F1}ë°°ë¡œ í­ì¦í•©ë‹ˆë‹¤!");
             }
             return baseMult;
         }
 
         // ---------------------------------------------------------
-        // [ÁøÈ­ C] ¾ğµ¥µå: ¼Ò¸ğÇÏ°Ô µÉ 'Ã¼·Â ºñÀ²'¿¡ ºñ·ÊÇÏ¿© ¾ĞµµÀûÀÎ °è¼ö »êÃâ
+        // [ì§„í™” C] ì–¸ë°ë“œ: ì†Œëª¨í•˜ê²Œ ë  'ì²´ë ¥ ë¹„ìœ¨'ì— ë¹„ë¡€í•˜ì—¬ ì••ë„ì ì¸ ê³„ìˆ˜ ì‚°ì¶œ
         // ---------------------------------------------------------
         if (skill.currentEvolution == SkillEvolution.PathC)
         {
-            // ½ºÅ³ ÄÚ½ºÆ®¸¦ ÁöºÒÇÏ±â ÀüÀÌ¹Ç·Î, ¿©±â¼­ ¹Ì¸® ¾ó¸¶°¡ ±ğÀÏÁö(ºñÀ²) °è»êÇÕ´Ï´Ù.
+            // ìŠ¤í‚¬ ì½”ìŠ¤íŠ¸ë¥¼ ì§€ë¶ˆí•˜ê¸° ì „ì´ë¯€ë¡œ, ì—¬ê¸°ì„œ ë¯¸ë¦¬ ì–¼ë§ˆê°€ ê¹ì¼ì§€(ë¹„ìœ¨) ê³„ì‚°í•©ë‹ˆë‹¤.
             float consumedRatio = (float)(Mathf.Max(0, pStats.currentHp - 1)) / pStats.maxHp;
             int levelIdx = Mathf.Clamp(skill.skillLevel - 1, 0, 2);
 
             float undeadMult = 1.0f + (consumedRatio * pathC_ConsumedHpMults[levelIdx]);
-            DevLog.Log($"[ÁøÈ­ C] ¾ğµ¥µå µô »êÃâ! Ã¼·Â {consumedRatio * 100:F1}% ¼Ò¸ğ ¿¹Á¤ -> µ¥¹ÌÁö {undeadMult:F1}¹è ÆøÁõ!");
+            DevLog.Log($"[ì§„í™” C] ì–¸ë°ë“œ ë”œ ì‚°ì¶œ! ì²´ë ¥ {consumedRatio * 100:F1}% ì†Œëª¨ ì˜ˆì • -> ë°ë¯¸ì§€ {undeadMult:F1}ë°° í­ì¦!");
             return undeadMult;
         }
 
         // ---------------------------------------------------------
-        // [±âº» / ÁøÈ­ B] ±âº» ÀÒÀº Ã¼·Â ºñ·Ê °ø½Ä Àû¿ë
+        // [ê¸°ë³¸ / ì§„í™” B] ê¸°ë³¸ ìƒì€ ì²´ë ¥ ë¹„ë¡€ ê³µì‹ ì ìš©
         // ---------------------------------------------------------
         return 1.0f + (missingRatio * baseMaxDamageBonus);
     }
 
-    // 2. [ÁøÈ­ B] Å©¸®Æ¼ÄÃ È®·ü º¸Á¤
+    // 2. [ì§„í™” B] í¬ë¦¬í‹°ì»¬ í™•ë¥  ë³´ì •
     public override float GetDynamicCritRateBonus(SkillData skill, int consecutiveHits)
     {
         if (skill.currentEvolution == SkillEvolution.PathB && CombatManager.Instance != null)
@@ -76,7 +76,7 @@ public class SkillLogic_StarAndYou : SkillLogicBase
         return 0f;
     }
 
-    // 3. [ÁøÈ­ B] Å©¸®Æ¼ÄÃ ÇÇÇØ·® º¸Á¤
+    // 3. [ì§„í™” B] í¬ë¦¬í‹°ì»¬ í”¼í•´ëŸ‰ ë³´ì •
     public override float GetCritDamageMultiplier(SkillData skill)
     {
         if (skill.currentEvolution == SkillEvolution.PathB && CombatManager.Instance != null)
@@ -85,13 +85,13 @@ public class SkillLogic_StarAndYou : SkillLogicBase
             float missingRatio = 1.0f - ((float)pStats.currentHp / pStats.maxHp);
             int levelIdx = Mathf.Clamp(skill.skillLevel - 1, 0, 2);
 
-            // ±âº» Å©¸® µ¥¹ÌÁö(1.5f)¿¡ º¸³Ê½º ¼öÄ¡¸¦ ÇÕ»ê
+            // ê¸°ë³¸ í¬ë¦¬ ë°ë¯¸ì§€(1.5f)ì— ë³´ë„ˆìŠ¤ ìˆ˜ì¹˜ë¥¼ í•©ì‚°
             return 1.5f + (missingRatio * pathB_MaxCritDmgBonus[levelIdx]);
         }
         return 1.5f;
     }
 
-    // 4. ½ºÅ³ ÄÚ½ºÆ® ÁöºÒ ·ÎÁ÷
+    // 4. ìŠ¤í‚¬ ì½”ìŠ¤íŠ¸ ì§€ë¶ˆ ë¡œì§
     public override void PaySkillCost(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (isPlayerAttacking)
@@ -99,27 +99,27 @@ public class SkillLogic_StarAndYou : SkillLogicBase
             int hpCost = 0;
 
             // ---------------------------------------------------------
-            // [ÁøÈ­ C] ¾ğµ¥µå: ÇöÀç Ã¼·ÂÀ» ¸ğÁ¶¸® ³¯·Á¹ö¸®°í 1¸¸ ³²±è
+            // [ì§„í™” C] ì–¸ë°ë“œ: í˜„ì¬ ì²´ë ¥ì„ ëª¨ì¡°ë¦¬ ë‚ ë ¤ë²„ë¦¬ê³  1ë§Œ ë‚¨ê¹€
             // ---------------------------------------------------------
             if (skill.currentEvolution == SkillEvolution.PathC)
             {
                 hpCost = pStats.currentHp - 1;
                 if (hpCost < 0) hpCost = 0;
 
-                pStats.currentHp = 1; // Ã¼·Â 1 °íÁ¤
-                DevLog.Log($"[ÁøÈ­ C] ¾ğµ¥µå ¹ßµ¿! »ı¸í·ÂÀ» ´ë°¡·Î È­·ÂÀ» ¾ò½À´Ï´Ù. (¼Ò¸ğ Ã¼·Â: {hpCost})");
+                pStats.currentHp = 1; // ì²´ë ¥ 1 ê³ ì •
+                DevLog.Log($"[ì§„í™” C] ì–¸ë°ë“œ ë°œë™! ìƒëª…ë ¥ì„ ëŒ€ê°€ë¡œ í™”ë ¥ì„ ì–»ìŠµë‹ˆë‹¤. (ì†Œëª¨ ì²´ë ¥: {hpCost})");
             }
             // ---------------------------------------------------------
-            // [±âº» / ÁøÈ­ A / ÁøÈ­ B] ÇöÀç Ã¼·ÂÀÇ 20% ¼Ò¸ğ
+            // [ê¸°ë³¸ / ì§„í™” A / ì§„í™” B] í˜„ì¬ ì²´ë ¥ì˜ 20% ì†Œëª¨
             // ---------------------------------------------------------
             else
             {
                 hpCost = Mathf.Max(1, Mathf.RoundToInt(pStats.currentHp * 0.2f));
                 pStats.currentHp -= hpCost;
-                DevLog.Log($"[º°°ú ´ç½Å] Ã¼·ÂÀÇ 20%({hpCost})¸¦ ÄÚ½ºÆ®·Î ÁöºÒÇß½À´Ï´Ù.");
+                DevLog.Log($"[ë³„ê³¼ ë‹¹ì‹ ] ì²´ë ¥ì˜ 20%({hpCost})ë¥¼ ì½”ìŠ¤íŠ¸ë¡œ ì§€ë¶ˆí–ˆìŠµë‹ˆë‹¤.");
             }
 
-            // ±Û·Î¹ú ¹æ¼Û±¹ ¹× UI ¾÷µ¥ÀÌÆ®
+            // ê¸€ë¡œë²Œ ë°©ì†¡êµ­ ë° UI ì—…ë°ì´íŠ¸
             BattleEventSystem.CallHpChanged(true, pStats.currentHp, pStats.maxHp);
             if (CombatUIManager.Instance != null)
             {

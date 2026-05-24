@@ -1,27 +1,27 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_MorningStar", menuName = "SkillLogic/Player/MorningStar")]
 public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySkillLogic, IPerfectEvadeCounterSkillLogic
 {
-    [Header("È¸ÇÇ Áõ°¡ ¹öÇÁ µ¥ÀÌÅÍ")]
+    [Header("íšŒí”¼ ì¦ê°€ ë²„í”„ ë°ì´í„°")]
     public StatusEffectData evasionBuffData;
 
-    [Header("·¹º§º° Ãß°¡ È¸ÇÇÀ² (%)")]
+    [Header("ë ˆë²¨ë³„ ì¶”ê°€ íšŒí”¼ìœ¨ (%)")]
     public float[] evasionBonusRates = { 20f, 30f, 40f };
 
-    [Header("ÁøÈ­ A (Annihilation) - ¸ê½Ä")]
-    [Tooltip("¹İ°İ ½Ã ¼Î¸®ÀÇ Èû(STR) ½ºÅÈ¿¡ °öÇØÁú °è¼ö")]
-    public float[] pathA_CounterRates = { 0.5f, 0.8f, 1.2f }; // 1.2¹è¸é ²Ï ¾ÆÇÂ Ä«¿îÅÍ!
+    [Header("ì§„í™” A (Annihilation) - ë©¸ì‹")]
+    [Tooltip("ë°˜ê²© ì‹œ ì…°ë¦¬ì˜ í˜(STR) ìŠ¤íƒ¯ì— ê³±í•´ì§ˆ ê³„ìˆ˜")]
+    public float[] pathA_CounterRates = { 0.5f, 0.8f, 1.2f }; // 1.2ë°°ë©´ ê½¤ ì•„í”ˆ ì¹´ìš´í„°!
 
-    [Tooltip("¸ê½Ä Ä«¿îÅÍ ¹ßµ¿ ½Ã »ç¿ëÇÒ Àü¿ë ÀÌ¹ÌÁö (IconÀÌ ¾Æ´Ñ Action ÀÌ¹ÌÁö)")]
+    [Tooltip("ë©¸ì‹ ì¹´ìš´í„° ë°œë™ ì‹œ ì‚¬ìš©í•  ì „ìš© ì´ë¯¸ì§€ (Iconì´ ì•„ë‹Œ Action ì´ë¯¸ì§€)")]
     public Sprite counterActionImage;
 
-    [Header("ÁøÈ­ B (Disorder) - ³­½Ä")]
-    [Tooltip("È¸ÇÇ ½Ã ´ç°Ü¿Ã Çàµ¿ °ÔÀÌÁö(AP) ¼öÄ¡")]
+    [Header("ì§„í™” B (Disorder) - ë‚œì‹")]
+    [Tooltip("íšŒí”¼ ì‹œ ë‹¹ê²¨ì˜¬ í–‰ë™ ê²Œì´ì§€(AP) ìˆ˜ì¹˜")]
     public float pathB_ApRecovery = 15f;
 
-    [Header("ÁøÈ­ C (Final Form) - Á¾½Ä")]
-    [Tooltip("ÃÖÁ¾ È¸ÇÇÀ² 1%´ç »ó½ÂÇÒ µ¥¹ÌÁö ¹èÀ²")]
+    [Header("ì§„í™” C (Final Form) - ì¢…ì‹")]
+    [Tooltip("ìµœì¢… íšŒí”¼ìœ¨ 1%ë‹¹ ìƒìŠ¹í•  ë°ë¯¸ì§€ ë°°ìœ¨")]
     public float pathC_ConversionRate = 0.03f;
 
     public bool TryGetPerfectEvadeApRecovery(
@@ -70,16 +70,16 @@ public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySki
         return true;
     }
 
-    // [ÁøÈ­ C] È¸ÇÇÀ²À» µ¥¹ÌÁö ¹èÀ²·Î Ä¡È¯
+    // [ì§„í™” C] íšŒí”¼ìœ¨ì„ ë°ë¯¸ì§€ ë°°ìœ¨ë¡œ ì¹˜í™˜
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         if (skill.currentEvolution == SkillEvolution.PathC && isPlayerAttacking)
         {
-            // 1. ¿ø·¡ ½ºÅ³ÀÌ ºÎ¿©Çß¾î¾ß ÇÒ ±âº» È¸ÇÇÀ²
+            // 1. ì›ë˜ ìŠ¤í‚¬ì´ ë¶€ì—¬í–ˆì–´ì•¼ í•  ê¸°ë³¸ íšŒí”¼ìœ¨
             int index = Mathf.Clamp(skill.skillLevel - 1, 0, evasionBonusRates.Length - 1);
             float baseEvasion = evasionBonusRates[index];
 
-            // 2. ÇöÀç ¼Î¸®¿¡°Ô °É·ÁÀÖ´Â ´Ù¸¥ 'È¸ÇÇÀ² ¹öÇÁ'µé ÇÕ»ê (Á¶·ÂÀÚ ¹öÇÁ µî)
+            // 2. í˜„ì¬ ì…°ë¦¬ì—ê²Œ ê±¸ë ¤ìˆëŠ” ë‹¤ë¥¸ 'íšŒí”¼ìœ¨ ë²„í”„'ë“¤ í•©ì‚° (ì¡°ë ¥ì ë²„í”„ ë“±)
             float extraEvasion = 0f;
             var buffs = BuffManager.Instance.GetEffects(true);
             foreach (var eff in buffs)
@@ -88,11 +88,11 @@ public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySki
                     extraEvasion += eff.value;
             }
 
-            // 3. ÃÖÁ¾ µ¥¹ÌÁö »½Æ¢±â ¿¬»ê
+            // 3. ìµœì¢… ë°ë¯¸ì§€ ë»¥íŠ€ê¸° ì—°ì‚°
             float totalEvasion = baseEvasion + extraEvasion;
             float bonusMult = totalEvasion * pathC_ConversionRate;
 
-            DevLog.Log($"[Á¾½Ä] È¸ÇÇÀ²({totalEvasion}%)ÀÌ µô·Î ÀüÈ¯! µ¥¹ÌÁö °è¼ö +{bonusMult}");
+            DevLog.Log($"[ì¢…ì‹] íšŒí”¼ìœ¨({totalEvasion}%)ì´ ë”œë¡œ ì „í™˜! ë°ë¯¸ì§€ ê³„ìˆ˜ +{bonusMult}");
             return 1.0f + bonusMult;
         }
         return 1.0f;
@@ -100,7 +100,7 @@ public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySki
 
     public override void ApplyEffect(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
-        // [ÁøÈ­ C] ¿¡¼± È¸ÇÇÀ² ¹öÇÁ¸¦ ºÎ¿©ÇÏÁö ¾Ê°í µô·Î ÅÂ¿ö¹ö¸²!
+        // [ì§„í™” C] ì—ì„  íšŒí”¼ìœ¨ ë²„í”„ë¥¼ ë¶€ì—¬í•˜ì§€ ì•Šê³  ë”œë¡œ íƒœì›Œë²„ë¦¼!
         if (skill.currentEvolution == SkillEvolution.PathC) return;
 
         if (evasionBuffData != null)
@@ -109,18 +109,18 @@ public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySki
             float rate = evasionBonusRates[index];
 
             BuffManager.Instance.AddEffect(isPlayerAttacking, evasionBuffData, rate, 3);
-            DevLog.Log($"[½ºÅ³ È¿°ú] »õº®º° ¹ßµ¿! 3ÅÏ°£ È¸ÇÇÀ²ÀÌ {rate}% Áõ°¡ÇÕ´Ï´Ù.");
+            DevLog.Log($"[ìŠ¤í‚¬ íš¨ê³¼] ìƒˆë²½ë³„ ë°œë™! 3í„´ê°„ íšŒí”¼ìœ¨ì´ {rate}% ì¦ê°€í•©ë‹ˆë‹¤.");
         }
     }
 
     public override Sprite GetCounterActionImage(SkillData skill)
     {
-        // ÀÌ¹ÌÁö ½½·ÔÀÌ ºñ¾îÀÖÁö ¾Ê´Ù¸é Àü¿ë ÀÌ¹ÌÁö¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+        // ì´ë¯¸ì§€ ìŠ¬ë¡¯ì´ ë¹„ì–´ìˆì§€ ì•Šë‹¤ë©´ ì „ìš© ì´ë¯¸ì§€ë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
         if (skill.currentEvolution == SkillEvolution.PathA && counterActionImage != null)
         {
             return counterActionImage;
         }
-        // ºñ¾îÀÖ°Å³ª ÁøÈ­A°¡ ¾Æ´Ï¶ó¸é ±âº» ÀÌ¹ÌÁö¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+        // ë¹„ì–´ìˆê±°ë‚˜ ì§„í™”Aê°€ ì•„ë‹ˆë¼ë©´ ê¸°ë³¸ ì´ë¯¸ì§€ë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
         return base.GetCounterActionImage(skill);
     }
 }

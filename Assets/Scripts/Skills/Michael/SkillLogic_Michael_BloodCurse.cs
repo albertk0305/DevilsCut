@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Michael_BloodCurse", menuName = "SkillLogic/Michael/BloodCurse")]
 public class SkillLogic_Michael_BloodCurse : SkillLogic_Michael_Base
@@ -11,7 +11,7 @@ public class SkillLogic_Michael_BloodCurse : SkillLogic_Michael_Base
 
         if (bloodCurseDebuff != null)
         {
-            // [ÇÙ½É] ÀÌ¹ø ½ºÅ³¿¡¼­ ÃÑ ¸î Å¸°¡ ÀûÁßÇß´ÂÁö °¡Á®¿É´Ï´Ù.
+            // [í•µì‹¬] ì´ë²ˆ ìŠ¤í‚¬ì—ì„œ ì´ ëª‡ íƒ€ê°€ ì ì¤‘í–ˆëŠ”ì§€ ê°€ì ¸ì˜µë‹ˆë‹¤.
             int hitCount = 1;
             if (CombatManager.Instance != null)
             {
@@ -22,21 +22,21 @@ public class SkillLogic_Michael_BloodCurse : SkillLogic_Michael_Base
 
             var pEffects = BuffManager.Instance.GetEffects(true);
 
-            // 1. ±âÁ¸¿¡ °É·ÁÀÖ´ø Ç÷¾× ÀúÁÖµéÀÇ Áö¼Ó½Ã°£À» ¸ğµÎ 3ÅÏÀ¸·Î ¸®ÇÊ!
+            // 1. ê¸°ì¡´ì— ê±¸ë ¤ìˆë˜ í˜ˆì•¡ ì €ì£¼ë“¤ì˜ ì§€ì†ì‹œê°„ì„ ëª¨ë‘ 3í„´ìœ¼ë¡œ ë¦¬í•„!
             var existingStacks = pEffects.FindAll(e => e.effectData == bloodCurseDebuff);
             foreach (var stack in existingStacks)
             {
                 stack.turnsLeft = 3;
             }
 
-            // 2. ÀûÁßÇÑ È½¼ö¸¸Å­ »õ·Î¿î ½ºÅÃ(°¢°¢ -5%)À» °³º°ÀûÀ¸·Î Ãß°¡!
-            // BuffManager.GetGroupedEffects°¡ UI¿¡ ¶ç¿ï ¶§ ÀÌ ¼öÄ¡µéÀ» ¾Ë¾Æ¼­ ÇÕ»êÇØ Áİ´Ï´Ù.
+            // 2. ì ì¤‘í•œ íšŸìˆ˜ë§Œí¼ ìƒˆë¡œìš´ ìŠ¤íƒ(ê°ê° -5%)ì„ ê°œë³„ì ìœ¼ë¡œ ì¶”ê°€!
+            // BuffManager.GetGroupedEffectsê°€ UIì— ë„ìš¸ ë•Œ ì´ ìˆ˜ì¹˜ë“¤ì„ ì•Œì•„ì„œ í•©ì‚°í•´ ì¤ë‹ˆë‹¤.
             for (int i = 0; i < hitCount; i++)
             {
                 BuffManager.Instance.AddEffect(true, bloodCurseDebuff, -0.05f, 3);
             }
 
-            DevLog.Log($"[Ç÷¾× ÀúÁÖ] {hitCount}¿¬Å¸ ÀûÁß! ±âÁ¸ ½ºÅÃ °»½Å ¹× ¼Î¸®ÀÇ ¼Óµµ°¡ {5 * hitCount}% Ãß°¡ °¨¼ÒÇÕ´Ï´Ù!");
+            DevLog.Log($"[í˜ˆì•¡ ì €ì£¼] {hitCount}ì—°íƒ€ ì ì¤‘! ê¸°ì¡´ ìŠ¤íƒ ê°±ì‹  ë° ì…°ë¦¬ì˜ ì†ë„ê°€ {5 * hitCount}% ì¶”ê°€ ê°ì†Œí•©ë‹ˆë‹¤!");
         }
     }
 }

@@ -1,19 +1,19 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
 [CreateAssetMenu(fileName = "Satan_BattleSkill", menuName = "SupporterLogic/Satan/Battle Skill")]
 public class SupporterLogic_Satan_Battle : SupporterLogicBase
 {
-    [Header("´Ù´ÜÈ÷Æ® ¼³Á¤")]
-    public int hitCount = 5; // 5¿¬Å¸
+    [Header("ë‹¤ë‹¨íˆíŠ¸ ì„¤ì •")]
+    public int hitCount = 5; // 5ì—°íƒ€
 
-    [Header("·¹º§º° µ¥¹ÌÁö/±×·Î±â ¼³Á¤")]
-    public float[] baseDamageValues = { 3.0f, 4f, 5f }; // Å¸´ç Èû °è¼ö
-    public float[] breakDamageValues = { 1.5f, 2.0f, 3.0f }; // Å¸´ç ±×·Î±â ¼öÄ¡
+    [Header("ë ˆë²¨ë³„ ë°ë¯¸ì§€/ê·¸ë¡œê¸° ì„¤ì •")]
+    public float[] baseDamageValues = { 3.0f, 4f, 5f }; // íƒ€ë‹¹ í˜ ê³„ìˆ˜
+    public float[] breakDamageValues = { 1.5f, 2.0f, 3.0f }; // íƒ€ë‹¹ ê·¸ë¡œê¸° ìˆ˜ì¹˜
 
-    [Header("µğ¹öÇÁ ¿¬Àå ¼³Á¤")]
-    public float[] extensionChances = { 0.15f, 0.20f, 0.30f }; // Å¸´ç ¿¬Àå È®·ü
+    [Header("ë””ë²„í”„ ì—°ì¥ ì„¤ì •")]
+    public float[] extensionChances = { 0.15f, 0.20f, 0.30f }; // íƒ€ë‹¹ ì—°ì¥ í™•ë¥ 
 
     public override List<int> CalculateMultiHitDamages(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
@@ -23,7 +23,7 @@ public class SupporterLogic_Satan_Battle : SupporterLogicBase
         int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
         float dr = CombatMath.GetDamageReduction(enemyDef);
 
-        // ¼ø¼ö ¹°¸® 5¿¬Å¸ ½Ã¹Ä·¹ÀÌ¼Ç
+        // ìˆœìˆ˜ ë¬¼ë¦¬ 5ì—°íƒ€ ì‹œë®¬ë ˆì´ì…˜
         for (int i = 0; i < hitCount; i++)
         {
             int hitDamage = Mathf.Max(1, Mathf.RoundToInt((pStats.strength * baseDamageValues[index]) * (1f - dr)));
@@ -38,17 +38,17 @@ public class SupporterLogic_Satan_Battle : SupporterLogicBase
         int index = Mathf.Clamp(skillLevel - 1, 0, extensionChances.Length - 1);
         int extendedCount = 0;
 
-        // [ÇÙ½É ·ÎÁ÷] 5¹ø Å¸°İ¸¶´Ù µ¶¸³ÀûÀ¸·Î È®·üÀ» ±¼·Á µğ¹öÇÁ Áö¼Ó½Ã°£À» ¿¬Àå½ÃÅµ´Ï´Ù!
+        // [í•µì‹¬ ë¡œì§] 5ë²ˆ íƒ€ê²©ë§ˆë‹¤ ë…ë¦½ì ìœ¼ë¡œ í™•ë¥ ì„ êµ´ë ¤ ë””ë²„í”„ ì§€ì†ì‹œê°„ì„ ì—°ì¥ì‹œí‚µë‹ˆë‹¤!
         for (int i = 0; i < hitCount; i++)
         {
             if (Random.value <= extensionChances[index])
             {
-                // Àû¿¡°Ô °É·ÁÀÖ´Â È¿°ú Áß 'µğ¹öÇÁ' Ä«Å×°í¸®¸¸ ½ï °ñ¶ó³À´Ï´Ù.
+                // ì ì—ê²Œ ê±¸ë ¤ìˆëŠ” íš¨ê³¼ ì¤‘ 'ë””ë²„í”„' ì¹´í…Œê³ ë¦¬ë§Œ ì™ ê³¨ë¼ëƒ…ë‹ˆë‹¤.
                 var enemyDebuffs = BuffManager.Instance.GetEffects(false)
                     .Where(e => e.effectData != null && e.effectData.category == EffectCategory.Debuff)
                     .ToList();
 
-                // °É·ÁÀÖ´Â µğ¹öÇÁ°¡ ÀÖ´Ù¸é ±× Áß ¹«ÀÛÀ§ ÇÏ³ª¸¦ °ñ¶ó 1ÅÏ ¿¬Àå!
+                // ê±¸ë ¤ìˆëŠ” ë””ë²„í”„ê°€ ìˆë‹¤ë©´ ê·¸ ì¤‘ ë¬´ì‘ìœ„ í•˜ë‚˜ë¥¼ ê³¨ë¼ 1í„´ ì—°ì¥!
                 if (enemyDebuffs.Count > 0)
                 {
                     int randIdx = Random.Range(0, enemyDebuffs.Count);
@@ -60,11 +60,11 @@ public class SupporterLogic_Satan_Battle : SupporterLogicBase
 
         if (extendedCount > 0)
         {
-            DevLog.Log($"[¸»°ı·®ÀÌ·Î ¸¸µéÁö ¸¶] Lv.{skillLevel} ¹ßµ¿! ÀûÀÇ µğ¹öÇÁ Áö¼Ó ½Ã°£À» ÃÑ {extendedCount}ÅÏ ¿¬Àå½ÃÄ×½À´Ï´Ù!");
+            DevLog.Log($"[ë§ê´„ëŸ‰ì´ë¡œ ë§Œë“¤ì§€ ë§ˆ] Lv.{skillLevel} ë°œë™! ì ì˜ ë””ë²„í”„ ì§€ì† ì‹œê°„ì„ ì´ {extendedCount}í„´ ì—°ì¥ì‹œì¼°ìŠµë‹ˆë‹¤!");
             if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
         }
 
-        // 2. ±×·Î±â µ¥¹ÌÁö Àû¿ë
+        // 2. ê·¸ë¡œê¸° ë°ë¯¸ì§€ ì ìš©
         if (BreakManager.Instance != null && !BreakManager.Instance.IsBroken(false))
         {
             float totalBreak = breakDamageValues[index] * hitCount;

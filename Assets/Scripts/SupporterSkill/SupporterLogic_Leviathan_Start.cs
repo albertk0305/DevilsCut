@@ -1,38 +1,38 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-// [ÆĞ½Ãºê ½ºÅ³ °ø°£]
-// TODO: Å½»ö ¾À ±¸Çö ½Ã, ·¹ºñ¾ÆÅº ÆĞ½Ãºê 'º°ÀÚ¸®°¡ µÉ ¼ö ÀÖ´Ù¸é' ·ÎÁ÷ Ãß°¡ ¿¹Á¤
-// (º¸»ó È­¸é¿¡¼­ 10% / 20% / 35% È®·ü·Î ·¹ºñ¾ÆÅºÀÇ Á¤¼º ¾î¸° ¼±¹° Ãß°¡)
+// [íŒ¨ì‹œë¸Œ ìŠ¤í‚¬ ê³µê°„]
+// TODO: íƒìƒ‰ ì”¬ êµ¬í˜„ ì‹œ, ë ˆë¹„ì•„íƒ„ íŒ¨ì‹œë¸Œ 'ë³„ìë¦¬ê°€ ë  ìˆ˜ ìˆë‹¤ë©´' ë¡œì§ ì¶”ê°€ ì˜ˆì •
+// (ë³´ìƒ í™”ë©´ì—ì„œ 10% / 20% / 35% í™•ë¥ ë¡œ ë ˆë¹„ì•„íƒ„ì˜ ì •ì„± ì–´ë¦° ì„ ë¬¼ ì¶”ê°€)
 
 [CreateAssetMenu(fileName = "Leviathan_StartSkill", menuName = "SupporterLogic/Leviathan/Start Skill")]
 public class SupporterLogic_Leviathan_Start : SupporterLogicBase
 {
-    [Header("¹öÇÁ/µğ¹öÇÁ ¿¡¼Â ¼³Á¤")]
-    public StatusEffectData playerApBuff;   // ¼Î¸® AP Áõ°¡ ¹öÇÁ (TargetStat = AP, Category = Buff)
-    public StatusEffectData enemyApDebuff;  // Àû AP °¨¼Ò µğ¹öÇÁ (TargetStat = AP, Category = Debuff)
-    public int duration = 3;                // 3ÅÏ Áö¼Ó °íÁ¤
+    [Header("ë²„í”„/ë””ë²„í”„ ì—ì…‹ ì„¤ì •")]
+    public StatusEffectData playerApBuff;   // ì…°ë¦¬ AP ì¦ê°€ ë²„í”„ (TargetStat = AP, Category = Buff)
+    public StatusEffectData enemyApDebuff;  // ì  AP ê°ì†Œ ë””ë²„í”„ (TargetStat = AP, Category = Debuff)
+    public int duration = 3;                // 3í„´ ì§€ì† ê³ ì •
 
-    [Header("·¹º§º° AP(Çàµ¿ °ÔÀÌÁö) Áõ°¨·ü (%)")]
-    // [¼öÁ¤] Flat ´ë½Å 0.15f = 15% ÇüÅÂÀÇ ºñÀ² µ¥ÀÌÅÍ·Î º¯°æÇß½À´Ï´Ù.
-    public float[] playerApPercentages = { 0.15f, 0.25f, 0.40f };  // ¼Î¸® AP Áõ°¡À²
-    public float[] enemyApPercentages = { -0.10f, -0.20f, -0.30f }; // Àû AP °¨¼ÒÀ² (À½¼ö)
+    [Header("ë ˆë²¨ë³„ AP(í–‰ë™ ê²Œì´ì§€) ì¦ê°ë¥  (%)")]
+    // [ìˆ˜ì •] Flat ëŒ€ì‹  0.15f = 15% í˜•íƒœì˜ ë¹„ìœ¨ ë°ì´í„°ë¡œ ë³€ê²½í–ˆìŠµë‹ˆë‹¤.
+    public float[] playerApPercentages = { 0.15f, 0.25f, 0.40f };  // ì…°ë¦¬ AP ì¦ê°€ìœ¨
+    public float[] enemyApPercentages = { -0.10f, -0.20f, -0.30f }; // ì  AP ê°ì†Œìœ¨ (ìŒìˆ˜)
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, playerApPercentages.Length - 1);
 
-        // 1. ÁÖÀÎ°ø(¼Î¸®)¿¡°Ô 3ÅÏ°£ AP Áõ°¡ ¹öÇÁ ºÎ¿© (UI ¾ÆÀÌÄÜ Ç¥½ÃµÊ)
+        // 1. ì£¼ì¸ê³µ(ì…°ë¦¬)ì—ê²Œ 3í„´ê°„ AP ì¦ê°€ ë²„í”„ ë¶€ì—¬ (UI ì•„ì´ì½˜ í‘œì‹œë¨)
         if (playerApBuff != null)
         {
             BuffManager.Instance.AddEffect(true, playerApBuff, playerApPercentages[index], duration);
         }
 
-        // 2. Àû¿¡°Ô 3ÅÏ°£ AP °¨¼Ò µğ¹öÇÁ ºÎ¿© (UI ¾ÆÀÌÄÜ Ç¥½ÃµÊ)
+        // 2. ì ì—ê²Œ 3í„´ê°„ AP ê°ì†Œ ë””ë²„í”„ ë¶€ì—¬ (UI ì•„ì´ì½˜ í‘œì‹œë¨)
         if (enemyApDebuff != null)
         {
             BuffManager.Instance.AddEffect(false, enemyApDebuff, enemyApPercentages[index], duration);
         }
 
-        DevLog.Log($"[µ¶Á¡ ½ºÆ÷Æ®¶óÀÌÆ®] Lv.{skillLevel} ¹ßµ¿! ¼Î¸® AP ¹öÇÁ (+{playerApPercentages[index] * 100}%), Àû AP µğ¹öÇÁ ({enemyApPercentages[index] * 100}%) 3ÅÏ°£ Áö¼Ó ºÎ¿© ¿Ï·á.");
+        DevLog.Log($"[ë…ì  ìŠ¤í¬íŠ¸ë¼ì´íŠ¸] Lv.{skillLevel} ë°œë™! ì…°ë¦¬ AP ë²„í”„ (+{playerApPercentages[index] * 100}%), ì  AP ë””ë²„í”„ ({enemyApPercentages[index] * 100}%) 3í„´ê°„ ì§€ì† ë¶€ì—¬ ì™„ë£Œ.");
     }
 }

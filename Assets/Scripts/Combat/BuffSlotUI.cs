@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using System.Text;
 
@@ -28,7 +28,7 @@ public class BuffSlotUI : MonoBehaviour
         var myStacks = allEffects.FindAll(e => e.effectData == data);
         int stackCount = myStacks.Count;
 
-        // 1. ±âº» ÀÌ¸§ ¹× ¼³¸í Ãâ·Â
+        // 1. ê¸°ë³¸ ì´ë¦„ ë° ì„¤ëª… ì¶œë ¥
         StringBuilder sb = new StringBuilder();
         sb.Append($"<b>{data.effectName}</b> : {data.baseDescription}");
 
@@ -54,27 +54,27 @@ public class BuffSlotUI : MonoBehaviour
 
             if (!string.IsNullOrEmpty(data.valueFormat))
             {
-                // ÀÎ½ºÆåÅÍ¿¡ Æ÷¸ËÀ» Àû¾îµ×´Ù¸é (¿¹: "(ÃÑ {0})") ±× Æ÷¸ËÀ» µû¸§
+                // ì¸ìŠ¤í™í„°ì— í¬ë§·ì„ ì ì–´ë’€ë‹¤ë©´ (ì˜ˆ: "(ì´ {0})") ê·¸ í¬ë§·ì„ ë”°ë¦„
                 sb.Append(" ").Append(string.Format(data.valueFormat, $"{sign}{finalPrintValue:F0}{unit}"));
             }
             else
             {
-                // ÀÎ½ºÆåÅÍ¿¡ Æ÷¸ËÀ» ¾È Àû¾îµ×´õ¶óµµ ±âº» ÇüÅÂ·Î °­Á¦ Ãâ·Â!
-                sb.Append($" (ÇöÀç Àû¿ë ¼öÄ¡: {sign}{finalPrintValue:F0}{unit})");
+                // ì¸ìŠ¤í™í„°ì— í¬ë§·ì„ ì•ˆ ì ì–´ë’€ë”ë¼ë„ ê¸°ë³¸ í˜•íƒœë¡œ ê°•ì œ ì¶œë ¥!
+                sb.Append($" (í˜„ì¬ ì ìš© ìˆ˜ì¹˜: {sign}{finalPrintValue:F0}{unit})");
             }
         }
 
-        // [¼öÁ¤] 1. ¿µ±¸ ÆĞ½ÃºêÀÏ °æ¿ì ±ò²ûÇÏ°Ô °íÀ¯ ¹®±¸ Ãâ·Â ÈÄ Á¾·á
+        // [ìˆ˜ì •] 1. ì˜êµ¬ íŒ¨ì‹œë¸Œì¼ ê²½ìš° ê¹”ë”í•˜ê²Œ ê³ ìœ  ë¬¸êµ¬ ì¶œë ¥ í›„ ì¢…ë£Œ
         if (data.isPermanentPassive)
         {
-            sb.Append("\n\n<color=#FFD700>[ ¿µ±¸ ±Í¼Ó ½ºÅÈ ]</color>");
-            //sb.Append("\n<color=#DDDDDD><size=80%>* Àåºñ, ½Ã³ÊÁö, °íÀ¯ Æ¯¼ºÀÌ ¹İ¿µµÈ Ä³¸¯ÅÍÀÇ ±âº» ½ºÅÈÀÔ´Ï´Ù.</size></color>");
-            //sb.Append("\n<color=#DDDDDD><size=80%>* ÀüÅõ Áß ½ºÅ³·Î ¹ß»ıÇÑ ÀÏ½ÃÀû ¹öÇÁ´Â º°µµ·Î ÇÕ»êµË´Ï´Ù.</size></color>");
+            sb.Append("\n\n<color=#FFD700>[ ì˜êµ¬ ê·€ì† ìŠ¤íƒ¯ ]</color>");
+            //sb.Append("\n<color=#DDDDDD><size=80%>* ì¥ë¹„, ì‹œë„ˆì§€, ê³ ìœ  íŠ¹ì„±ì´ ë°˜ì˜ëœ ìºë¦­í„°ì˜ ê¸°ë³¸ ìŠ¤íƒ¯ì…ë‹ˆë‹¤.</size></color>");
+            //sb.Append("\n<color=#DDDDDD><size=80%>* ì „íˆ¬ ì¤‘ ìŠ¤í‚¬ë¡œ ë°œìƒí•œ ì¼ì‹œì  ë²„í”„ëŠ” ë³„ë„ë¡œ í•©ì‚°ë©ë‹ˆë‹¤.</size></color>");
         }
-        // [¼öÁ¤] 2. ½ºÅÃ ÃßÀûÀÌ ÄÑÁø ¹öÇÁ/µğ¹öÇÁ(¿¹: Ç÷¾× ÀúÁÖ)¸¸ ³¹°³ ¸®½ºÆ®¸¦ Ãâ·ÂÇÏµµ·Ï Á¦ÇÑ!
+        // [ìˆ˜ì •] 2. ìŠ¤íƒ ì¶”ì ì´ ì¼œì§„ ë²„í”„/ë””ë²„í”„(ì˜ˆ: í˜ˆì•¡ ì €ì£¼)ë§Œ ë‚±ê°œ ë¦¬ìŠ¤íŠ¸ë¥¼ ì¶œë ¥í•˜ë„ë¡ ì œí•œ!
         else if (stackCount > 0 && data.showStackDetails)
         {
-            sb.Append($"\n[Àû¿ë ÁßÀÎ ÁßÃ¸: {stackCount}°³]");
+            sb.Append($"\n[ì ìš© ì¤‘ì¸ ì¤‘ì²©: {stackCount}ê°œ]");
             for (int i = 0; i < myStacks.Count; i++)
             {
                 sb.Append("\n - ");
@@ -85,17 +85,17 @@ public class BuffSlotUI : MonoBehaviour
                     string sign = displayVal > 0 ? "+" : "";
                     string unit = data.modifierType == ModifierType.Percentage ? "%" : "";
 
-                    sb.Append($"¼öÄ¡: {sign}{displayVal:F0}{unit} | ");
+                    sb.Append($"ìˆ˜ì¹˜: {sign}{displayVal:F0}{unit} | ");
                 }
-                sb.Append($"³²Àº ½Ã°£: {myStacks[i].turnsLeft}ÅÏ");
+                sb.Append($"ë‚¨ì€ ì‹œê°„: {myStacks[i].turnsLeft}í„´");
             }
         }
         else
         {
-            // ½ºÅÃ ÃßÀûÀÌ ÇÊ¿ä ¾ø´Â ÀÏ¹İ Áö¼Ó½Ã°£Á¦ ¹öÇÁ´Â °¡Àå ÂªÀº ³²Àº ÅÏ¼ö ÇÏ³ª¸¸ ½ÉÇÃÇÏ°Ô º¸¿©Áİ´Ï´Ù.
+            // ìŠ¤íƒ ì¶”ì ì´ í•„ìš” ì—†ëŠ” ì¼ë°˜ ì§€ì†ì‹œê°„ì œ ë²„í”„ëŠ” ê°€ì¥ ì§§ì€ ë‚¨ì€ í„´ìˆ˜ í•˜ë‚˜ë§Œ ì‹¬í”Œí•˜ê²Œ ë³´ì—¬ì¤ë‹ˆë‹¤.
             int minTurn = int.MaxValue;
             foreach (var stack in myStacks) if (stack.turnsLeft < minTurn) minTurn = stack.turnsLeft;
-            if (minTurn != int.MaxValue) sb.Append($"\n(Áö¼Ó ½Ã°£: {minTurn}ÅÏ ³²À½)");
+            if (minTurn != int.MaxValue) sb.Append($"\n(ì§€ì† ì‹œê°„: {minTurn}í„´ ë‚¨ìŒ)");
         }
 
         clickMessage = sb.ToString();
@@ -103,10 +103,10 @@ public class BuffSlotUI : MonoBehaviour
 
     public void OnSlotClicked()
     {
-        // 1. ÇöÀç ÅÏ ÁÖÀÎÀÌ ÇÃ·¹ÀÌ¾î(true)°¡ ¾Æ´Ï¸é Å¬¸¯À» ¹«½ÃÇÕ´Ï´Ù.
+        // 1. í˜„ì¬ í„´ ì£¼ì¸ì´ í”Œë ˆì´ì–´(true)ê°€ ì•„ë‹ˆë©´ í´ë¦­ì„ ë¬´ì‹œí•©ë‹ˆë‹¤.
         if (CombatManager.Instance != null && !CombatManager.Instance.IsCurrentTurnOwner(true)) return;
 
-        // 2. ÀüÅõ ÄÚ¸àÅÍ¸® ÅØ½ºÆ®(Ä«¸° ´ë»ç ¿ªÇÒ)·Î »ó¼¼ Á¤º¸¸¦ ¶ç¿öÁİ´Ï´Ù.
+        // 2. ì „íˆ¬ ì½”ë©˜í„°ë¦¬ í…ìŠ¤íŠ¸(ì¹´ë¦° ëŒ€ì‚¬ ì—­í• )ë¡œ ìƒì„¸ ì •ë³´ë¥¼ ë„ì›Œì¤ë‹ˆë‹¤.
         if (CombatUIManager.Instance != null)
         {
             CombatUIManager.Instance.InterruptAndTypeCommentary(clickMessage);

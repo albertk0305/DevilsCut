@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
@@ -20,7 +20,7 @@ public class CombatVisualUI : MonoBehaviour
     private Coroutine currentCommentaryCoroutine;
     private Coroutine innerTypingCoroutine;
 
-    [Header("ÆÇÅ¸½ºÆ½ µå¸®¸Ó ¿¬Ãâ ÇÁ¸®ÆÕ")]
+    [Header("íŒíƒ€ìŠ¤í‹± ë“œë¦¬ë¨¸ ì—°ì¶œ í”„ë¦¬íŒ¹")]
     public FantasticDreamerDiceUI diceVisualPrefab;
 
     private FantasticDreamerDiceUI currentDiceInstance;
@@ -105,39 +105,39 @@ public class CombatVisualUI : MonoBehaviour
     {
         if (diceVisualPrefab == null) return;
 
-        // 1. ¿¬Ãâ ´ë»ó Ä³½ºÆÃ panel Ã£±â (¸Ó¸® À§ À§Ä¡ Àâ±â¿ë)
-        // ±âÁ¸ UIManager ºĞÇÒ ½Ã EntityStatusUI°¡ µé¾îÀÖ´Â Panel RectTransformÀ» Ã£½À´Ï´Ù.
+        // 1. ì—°ì¶œ ëŒ€ìƒ ìºìŠ¤íŒ… panel ì°¾ê¸° (ë¨¸ë¦¬ ìœ„ ìœ„ì¹˜ ì¡ê¸°ìš©)
+        // ê¸°ì¡´ UIManager ë¶„í•  ì‹œ EntityStatusUIê°€ ë“¤ì–´ìˆëŠ” Panel RectTransformì„ ì°¾ìŠµë‹ˆë‹¤.
         EntityStatusUI casterUI = isPlayerCaster ? CombatUIManager.Instance.playerStatusUI : CombatUIManager.Instance.enemyStatusUI;
 
         if (casterUI == null) return;
 
-        // 2. ÇÁ¸®ÆÕ »ı¼º (ºÎ¸ğ¸¦ CasterUIÀÇ ºÎ¸ğÀÎ Canvas·Î ¼³Á¤ÇØ¾ß UI ¿ì¼±¼øÀ§°¡ ÀâÈü´Ï´Ù.)
+        // 2. í”„ë¦¬íŒ¹ ìƒì„± (ë¶€ëª¨ë¥¼ CasterUIì˜ ë¶€ëª¨ì¸ Canvasë¡œ ì„¤ì •í•´ì•¼ UI ìš°ì„ ìˆœìœ„ê°€ ì¡í™ë‹ˆë‹¤.)
         currentDiceInstance = Instantiate(diceVisualPrefab, casterUI.transform.parent);
 
-        // 3. À§Ä¡ Àâ±â
+        // 3. ìœ„ì¹˜ ì¡ê¸°
         RectTransform rt = currentDiceInstance.GetComponent<RectTransform>();
 
-        // ±âÁØ: 1920x1080 Äµ¹ö½º Á¤Áß¾Ó(0,0) ¾ŞÄ¿
-        // ÇÃ·¹ÀÌ¾î´Â ¿ŞÂÊ(-350), ÀûÀº ¿À¸¥ÂÊ(+350)¿¡ ¶ç¿ó´Ï´Ù. ³ôÀÌ´Â 420À¸·Î °íÁ¤!
+        // ê¸°ì¤€: 1920x1080 ìº”ë²„ìŠ¤ ì •ì¤‘ì•™(0,0) ì•µì»¤
+        // í”Œë ˆì´ì–´ëŠ” ì™¼ìª½(-350), ì ì€ ì˜¤ë¥¸ìª½(+350)ì— ë„ì›ë‹ˆë‹¤. ë†’ì´ëŠ” 420ìœ¼ë¡œ ê³ ì •!
         float targetX = isPlayerCaster ? -350f : 350f;
         float targetY = 420f;
 
         rt.anchoredPosition = new Vector2(targetX, targetY);
 
         bool isJackpot = (count == 6);
-        int displayCount = isJackpot ? 5 : count; // 6´Ü°è¿©µµ ÁÖ»çÀ§´Â 5°³¸¸ ¼ÒÈ¯
+        int displayCount = isJackpot ? 5 : count; // 6ë‹¨ê³„ì—¬ë„ ì£¼ì‚¬ìœ„ëŠ” 5ê°œë§Œ ì†Œí™˜
 
         currentDiceInstance.Setup(displayCount);
 
         if (isJackpot)
         {
-            Color goldenDiceColor = new Color(1f, 0.85f, 0f); // ¿µ·ÕÇÑ È²±İ»ö
+            Color goldenDiceColor = new Color(1f, 0.85f, 0f); // ì˜ë¡±í•œ í™©ê¸ˆìƒ‰
             currentDiceInstance.SetDiceColor(goldenDiceColor);
 
-            DevLog.Log("[¿¬Ãâ] ÀÍ½ºÇÃ·ÎÀü ¹ßµ¿! È²±İ ÁÖ»çÀ§°¡ ¼ÒÈ¯µÇ¾ú½À´Ï´Ù!");
+            DevLog.Log("[ì—°ì¶œ] ìµìŠ¤í”Œë¡œì „ ë°œë™! í™©ê¸ˆ ì£¼ì‚¬ìœ„ê°€ ì†Œí™˜ë˜ì—ˆìŠµë‹ˆë‹¤!");
         }
 
-        DevLog.Log($"[¿¬Ãâ] ÁÖ»çÀ§ {count}°³ ¸Ó¸® À§¿¡ Ç¥Ãâ");
+        DevLog.Log($"[ì—°ì¶œ] ì£¼ì‚¬ìœ„ {count}ê°œ ë¨¸ë¦¬ ìœ„ì— í‘œì¶œ");
     }
 
     public void ClearDiceVisual()

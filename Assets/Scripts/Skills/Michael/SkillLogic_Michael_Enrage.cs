@@ -1,17 +1,17 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Michael_Enrage", menuName = "SkillLogic/Michael/Enrage")]
 public class SkillLogic_Michael_Enrage : SkillLogic_Michael_Base
 {
-    [Header("±¤ÆøÈ­ ½Ã ºÎ¿©ÇÒ ½ºÅÈ ¹öÇÁµé")]
-    public StatusEffectData strBuff;    // Èû Áõ°¡ (+25%)
-    public StatusEffectData defBuff;    // ¹æ¾î Áõ°¡ (+25%)
-    public StatusEffectData lukDebuff;  // ¿î °¨¼Ò (-100%)
+    [Header("ê´‘í­í™” ì‹œ ë¶€ì—¬í•  ìŠ¤íƒ¯ ë²„í”„ë“¤")]
+    public StatusEffectData strBuff;    // í˜ ì¦ê°€ (+25%)
+    public StatusEffectData defBuff;    // ë°©ì–´ ì¦ê°€ (+25%)
+    public StatusEffectData lukDebuff;  // ìš´ ê°ì†Œ (-100%)
 
-    // [ÇÙ½É] ¿ä¼ú »ıÁ¸±âÃ³·³ ºø³ª°¡Áö ¾Ê°Ô °­Á¦ÇÕ´Ï´Ù.
+    // [í•µì‹¬] ìš”ìˆ  ìƒì¡´ê¸°ì²˜ëŸ¼ ë¹—ë‚˜ê°€ì§€ ì•Šê²Œ ê°•ì œí•©ë‹ˆë‹¤.
     public override bool AlwaysHits(SkillData skill) => true;
 
-    // [ÇÙ½É] ÇÇÇØ °è¼ö¸¦ 0À¸·Î ¹İÈ¯ÇÏ¿© CombatManager°¡ 'À¯Æ¿¸®Æ¼ ½ºÅ³'·Î ÀÎ½ÄÇÏ°Ô ÇÕ´Ï´Ù.
+    // [í•µì‹¬] í”¼í•´ ê³„ìˆ˜ë¥¼ 0ìœ¼ë¡œ ë°˜í™˜í•˜ì—¬ CombatManagerê°€ 'ìœ í‹¸ë¦¬í‹° ìŠ¤í‚¬'ë¡œ ì¸ì‹í•˜ê²Œ í•©ë‹ˆë‹¤.
     public override float GetDamageMultiplier(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
         return 0f;
@@ -19,23 +19,23 @@ public class SkillLogic_Michael_Enrage : SkillLogic_Michael_Base
 
     public override void ApplyEffect(SkillData skill, PlayerStats pStats, EnemyData enemy, bool isPlayerAttacking)
     {
-        // 1. Ã¼·Â È¸º¹ (ÃÖ´ë Ã¼·ÂÀÇ 50%)
+        // 1. ì²´ë ¥ íšŒë³µ (ìµœëŒ€ ì²´ë ¥ì˜ 50%)
         int healAmount = Mathf.RoundToInt(enemy.maxHp * 0.5f);
         if (CombatManager.Instance != null)
         {
-            // HealEntity¸¦ È£ÃâÇÏ¸é Ã¼·Â ¾÷µ¥ÀÌÆ®, UI °»½Å, ÆĞ½Ãºê °»½Å±îÁö ÇÑ ¹ø¿¡ Ã³¸®µË´Ï´Ù.
+            // HealEntityë¥¼ í˜¸ì¶œí•˜ë©´ ì²´ë ¥ ì—…ë°ì´íŠ¸, UI ê°±ì‹ , íŒ¨ì‹œë¸Œ ê°±ì‹ ê¹Œì§€ í•œ ë²ˆì— ì²˜ë¦¬ë©ë‹ˆë‹¤.
             CombatManager.Instance.HealEntity(false, healAmount);
 
-            // ÅØ½ºÆ® Ãâ·Â
+            // í…ìŠ¤íŠ¸ ì¶œë ¥
             if (CombatUIManager.Instance != null)
                 CombatUIManager.Instance.SpawnDamageText($"<color=#00FF00>+{healAmount}</color>", false, false);
         }
 
-        // 2. ½ºÅÈ ¹öÇÁ ºÎ¿©
+        // 2. ìŠ¤íƒ¯ ë²„í”„ ë¶€ì—¬
         if (strBuff != null) BuffManager.Instance.AddEffect(false, strBuff, 0.25f, 999);
         if (defBuff != null) BuffManager.Instance.AddEffect(false, defBuff, 0.25f, 999);
         if (lukDebuff != null) BuffManager.Instance.AddEffect(false, lukDebuff, -1.0f, 999);
 
-        DevLog.Log("[¹ÌÄ«¿¤] ±¤ÆøÈ­ ½ºÅ³ ¹ßµ¿! 50% Ã¼·Â È¸º¹ ¹× ¹öÇÁ Àû¿ë.");
+        DevLog.Log("[ë¯¸ì¹´ì—˜] ê´‘í­í™” ìŠ¤í‚¬ ë°œë™! 50% ì²´ë ¥ íšŒë³µ ë° ë²„í”„ ì ìš©.");
     }
 }

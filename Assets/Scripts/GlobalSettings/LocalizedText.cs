@@ -1,53 +1,53 @@
-using UnityEngine;
-using TMPro; // TextMeshPro¸¦ »ç¿ëÇÏ±â À§ÇØ ÇÊ¿äÇØ¿ä
+ï»¿using UnityEngine;
+using TMPro; // TextMeshProë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ í•„ìš”í•´ìš”
 
-// ÀÌ ½ºÅ©¸³Æ®¸¦ ³ÖÀ¸¸é TextMeshPro ÄÄÆ÷³ÍÆ®°¡ ÀÚµ¿À¸·Î ÇÊ¼ö·Î ºÙ¾î¿ä
+// ì´ ìŠ¤í¬ë¦½íŠ¸ë¥¼ ë„£ìœ¼ë©´ TextMeshPro ì»´í¬ë„ŒíŠ¸ê°€ ìžë™ìœ¼ë¡œ í•„ìˆ˜ë¡œ ë¶™ì–´ìš”
 [RequireComponent(typeof(TextMeshProUGUI))]
-//¾ð¾î ÆÐÄ¡ Àû¿ëÇÒ ÅØ½ºÆ®¿¡ ºÙÀÌ´Â ÄÚµå
+//ì–¸ì–´ íŒ¨ì¹˜ ì ìš©í•  í…ìŠ¤íŠ¸ì— ë¶™ì´ëŠ” ì½”ë“œ
 public class LocalizedText : MonoBehaviour
 {
-    public string textKey; // Inspector¿¡¼­ "btn_start" µîÀ» Àû¾îÁÙ °÷
+    public string textKey; // Inspectorì—ì„œ "btn_start" ë“±ì„ ì ì–´ì¤„ ê³³
     private TextMeshProUGUI textComponent;
 
     void Start()
     {
         textComponent = GetComponent<TextMeshProUGUI>();
-        UpdateText(); // Ã³À½ ½ÃÀÛÇÒ ¶§ ÇÑ ¹ø ±ÛÀÚ¸¦ ¸ÂÃçÁÜ
+        UpdateText(); // ì²˜ìŒ ì‹œìž‘í•  ë•Œ í•œ ë²ˆ ê¸€ìžë¥¼ ë§žì¶°ì¤Œ
 
-        // ¸Å´ÏÀúÀÇ ¹æ¼Û ¸¶ÀÌÅ©¿¡ ÀÌ 'UpdateText' ÇÔ¼ö¸¦ ±Í±â¿ïÀÌ°Ô ¿¬°á(±¸µ¶)ÇÔ
+        // ë§¤ë‹ˆì €ì˜ ë°©ì†¡ ë§ˆì´í¬ì— ì´ 'UpdateText' í•¨ìˆ˜ë¥¼ ê·€ê¸°ìš¸ì´ê²Œ ì—°ê²°(êµ¬ë…)í•¨
         LocalizationManager.Instance.OnLanguageChanged += UpdateText;
     }
 
     void OnDestroy()
     {
-        // ¾ÀÀÌ ¹Ù²î°Å³ª ¹öÆ°ÀÌ ÆÄ±«µÉ ¶§ ¹æ¼Û µè±â¸¦ Ãë¼ÒÇÔ (¿¡·¯ ¹æÁö)
+        // ì”¬ì´ ë°”ë€Œê±°ë‚˜ ë²„íŠ¼ì´ íŒŒê´´ë  ë•Œ ë°©ì†¡ ë“£ê¸°ë¥¼ ì·¨ì†Œí•¨ (ì—ëŸ¬ ë°©ì§€)
         if (LocalizationManager.Instance != null)
             LocalizationManager.Instance.OnLanguageChanged -= UpdateText;
     }
 
     void UpdateText()
     {
-        // 1. ¹æ¾î ÄÚµå: ÅØ½ºÆ® ÄÄÆ÷³ÍÆ®¸¦ ¾ÆÁ÷ ¸ø Ã£¾Ò´Ù¸é, Áö±Ý ´çÀå Ã£¾Æ¼­ ¿¬°áÇÕ´Ï´Ù!
+        // 1. ë°©ì–´ ì½”ë“œ: í…ìŠ¤íŠ¸ ì»´í¬ë„ŒíŠ¸ë¥¼ ì•„ì§ ëª» ì°¾ì•˜ë‹¤ë©´, ì§€ê¸ˆ ë‹¹ìž¥ ì°¾ì•„ì„œ ì—°ê²°í•©ë‹ˆë‹¤!
         if (textComponent == null)
         {
             textComponent = GetComponent<TextMeshProUGUI>();
         }
 
-        // ±×·¡µµ ÄÄÆ÷³ÍÆ®°¡ ¾ø´Ù¸é ¿¡·¯¸¦ ¸·±â À§ÇØ ÇÔ¼ö¸¦ Á¾·áÇÕ´Ï´Ù.
+        // ê·¸ëž˜ë„ ì»´í¬ë„ŒíŠ¸ê°€ ì—†ë‹¤ë©´ ì—ëŸ¬ë¥¼ ë§‰ê¸° ìœ„í•´ í•¨ìˆ˜ë¥¼ ì¢…ë£Œí•©ë‹ˆë‹¤.
         if (textComponent == null) return;
 
-        // 2. ¹æ¾î ÄÚµå: ´Ù±¹¾î ¸Å´ÏÀú°¡ ¾ÆÁ÷ ¾È ¸¸µé¾îÁ³´Ù¸é ¿¡·¯¸¦ ³»Áö ¾Ê°í Á¾·áÇÕ´Ï´Ù.
-        // (Á¶±Ý µÚ¿¡ ¸Å´ÏÀú°¡ ÄÑÁö¸é¼­ ¾Ë¾Æ¼­ ´Ù½Ã ±ÛÀÚ¸¦ ¹Ù²ãÁÙ °ÍÀÔ´Ï´Ù.)
+        // 2. ë°©ì–´ ì½”ë“œ: ë‹¤êµ­ì–´ ë§¤ë‹ˆì €ê°€ ì•„ì§ ì•ˆ ë§Œë“¤ì–´ì¡Œë‹¤ë©´ ì—ëŸ¬ë¥¼ ë‚´ì§€ ì•Šê³  ì¢…ë£Œí•©ë‹ˆë‹¤.
+        // (ì¡°ê¸ˆ ë’¤ì— ë§¤ë‹ˆì €ê°€ ì¼œì§€ë©´ì„œ ì•Œì•„ì„œ ë‹¤ì‹œ ê¸€ìžë¥¼ ë°”ê¿”ì¤„ ê²ƒìž…ë‹ˆë‹¤.)
         if (LocalizationManager.Instance == null) return;
 
-        // 3. ¸ðµç ÁØºñ°¡ ³¡³µÀ» ¶§¸¸ ¾ÈÀüÇÏ°Ô ±ÛÀÚ¸¦ ¹Ù²ß´Ï´Ù.
-        // (±âÁ¸¿¡ ÀÛ¼ºÇÏ¼Ì´ø ´Ù±¹¾î ¸Å´ÏÀú È£Ãâ ÇÔ¼ö ÀÌ¸§À» »ç¿ëÇÏ½Ã¸é µË´Ï´Ù. GetText ¶Ç´Â GetValue µî)
+        // 3. ëª¨ë“  ì¤€ë¹„ê°€ ëë‚¬ì„ ë•Œë§Œ ì•ˆì „í•˜ê²Œ ê¸€ìžë¥¼ ë°”ê¿‰ë‹ˆë‹¤.
+        // (ê¸°ì¡´ì— ìž‘ì„±í•˜ì…¨ë˜ ë‹¤êµ­ì–´ ë§¤ë‹ˆì € í˜¸ì¶œ í•¨ìˆ˜ ì´ë¦„ì„ ì‚¬ìš©í•˜ì‹œë©´ ë©ë‹ˆë‹¤. GetText ë˜ëŠ” GetValue ë“±)
         textComponent.text = LocalizationManager.Instance.GetText(textKey);
     }
 
     public void SetKey(string newKey)
     {
         textKey = newKey;
-        UpdateText(); // Å°¸¦ ¹Ù²ÙÀÚ¸¶ÀÚ Áï½Ã ÅØ½ºÆ® °»½Å!
+        UpdateText(); // í‚¤ë¥¼ ë°”ê¾¸ìžë§ˆìž ì¦‰ì‹œ í…ìŠ¤íŠ¸ ê°±ì‹ !
     }
 }

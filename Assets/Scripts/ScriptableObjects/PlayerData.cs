@@ -1,16 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewPlayerData", menuName = "GameData/Player")]
 public class PlayerData : ScriptableObject
 {
-    [Header("ÇÃ·¹ÀÌ¾î ±âº» Á¤º¸")]
+    [Header("í”Œë ˆì´ì–´ ê¸°ë³¸ ì •ë³´")]
     public string playerNamekey; 
 
-    [Header("ÇÃ·¹ÀÌ¾î ½ºÇÁ¶óÀÌÆ® ¼³Á¤")]
-    public Sprite normal; // ±âº» UI ¹× ½ºÅÄµù ¾ó±¼
-    public Sprite cutIn;  // ÅÏ ´ë±â¿­¿ë ÀÛÀº ¾ó±¼
-    public Sprite hit;    // ÇÇ°İ ½Ã ¾ó±¼
-    public Sprite evade;  // È¸ÇÇ ½Ã ¾ó±¼
+    [Header("í”Œë ˆì´ì–´ ìŠ¤í”„ë¼ì´íŠ¸ ì„¤ì •")]
+    public Sprite normal; // ê¸°ë³¸ UI ë° ìŠ¤íƒ ë”© ì–¼êµ´
+    public Sprite cutIn;  // í„´ ëŒ€ê¸°ì—´ìš© ì‘ì€ ì–¼êµ´
+    public Sprite hit;    // í”¼ê²© ì‹œ ì–¼êµ´
+    public Sprite evade;  // íšŒí”¼ ì‹œ ì–¼êµ´
     public Sprite breakImage;
     public Sprite guardImage;
     public Sprite reflectImage;

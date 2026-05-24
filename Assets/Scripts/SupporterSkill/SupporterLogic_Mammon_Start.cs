@@ -1,18 +1,18 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
-// [ÆĞ½Ãºê ½ºÅ³ °ø°£]
-// TODO: Å½»ö ¾À ±¸Çö ½Ã, ¸¶¸ó ÆĞ½Ãºê 'ºñ¹Ù ³ª¹Ì´Ù' ·ÎÁ÷ Ãß°¡ ¿¹Á¤
-// (ÀüÅõ Á¾·á ½Ã È¹µæ °ñµå 10% / 20% / 35% Áõ°¡)
+// [íŒ¨ì‹œë¸Œ ìŠ¤í‚¬ ê³µê°„]
+// TODO: íƒìƒ‰ ì”¬ êµ¬í˜„ ì‹œ, ë§ˆëª¬ íŒ¨ì‹œë¸Œ 'ë¹„ë°” ë‚˜ë¯¸ë‹¤' ë¡œì§ ì¶”ê°€ ì˜ˆì •
+// (ì „íˆ¬ ì¢…ë£Œ ì‹œ íšë“ ê³¨ë“œ 10% / 20% / 35% ì¦ê°€)
 
 [CreateAssetMenu(fileName = "Mammon_StartSkill", menuName = "SupporterLogic/Mammon/Start Skill")]
 public class SupporterLogic_Mammon_Start : SupporterLogicBase
 {
-    [Header("µğ¹öÇÁ ¿¡¼Â ¼³Á¤")]
-    public StatusEffectData speedDebuff;    // [¼öÁ¤] ¸íÁß·ü ´ë½Å '¼Óµµ(Speed) °¨¼Ò' µğ¹öÇÁ ¿¡¼Â ¿¬°á
-    public StatusEffectData defenseDebuff;  // ¹æ¾î·Â °¨¼Ò
+    [Header("ë””ë²„í”„ ì—ì…‹ ì„¤ì •")]
+    public StatusEffectData speedDebuff;    // [ìˆ˜ì •] ëª…ì¤‘ë¥  ëŒ€ì‹  'ì†ë„(Speed) ê°ì†Œ' ë””ë²„í”„ ì—ì…‹ ì—°ê²°
+    public StatusEffectData defenseDebuff;  // ë°©ì–´ë ¥ ê°ì†Œ
     public int duration = 3;
 
-    [Header("·¹º§º° µğ¹öÇÁ ¼öÄ¡")]
+    [Header("ë ˆë²¨ë³„ ë””ë²„í”„ ìˆ˜ì¹˜")]
     public float[] speedDrops = { -0.15f, -0.20f, -0.30f };
     public float[] defenseDrops = { -0.10f, -0.15f, -0.25f };
 
@@ -20,15 +20,15 @@ public class SupporterLogic_Mammon_Start : SupporterLogicBase
     {
         int index = Mathf.Clamp(skillLevel - 1, 0, speedDrops.Length - 1);
 
-        // 1. Àû ÀüÃ¼¿¡°Ô ¼Óµµ °¨¼Ò µğ¹öÇÁ ºÎ¿©
+        // 1. ì  ì „ì²´ì—ê²Œ ì†ë„ ê°ì†Œ ë””ë²„í”„ ë¶€ì—¬
         if (speedDebuff != null)
             BuffManager.Instance.AddEffect(false, speedDebuff, speedDrops[index], duration);
 
-        // 2. Àû ÀüÃ¼¿¡°Ô ¹æ¾î·Â °¨¼Ò µğ¹öÇÁ ºÎ¿©
+        // 2. ì  ì „ì²´ì—ê²Œ ë°©ì–´ë ¥ ê°ì†Œ ë””ë²„í”„ ë¶€ì—¬
         if (defenseDebuff != null)
             BuffManager.Instance.AddEffect(false, defenseDebuff, defenseDrops[index], duration);
 
-        DevLog.Log($"[Freek'n You] Lv.{skillLevel} ¹ßµ¿! Àû ¼Óµµ {Mathf.Abs(speedDrops[index]) * 100}%, ¹æ¾î·Â {Mathf.Abs(defenseDrops[index]) * 100}% °¨¼Ò.");
+        DevLog.Log($"[Freek'n You] Lv.{skillLevel} ë°œë™! ì  ì†ë„ {Mathf.Abs(speedDrops[index]) * 100}%, ë°©ì–´ë ¥ {Mathf.Abs(defenseDrops[index]) * 100}% ê°ì†Œ.");
 
         if (CombatUIManager.Instance != null)
             CombatUIManager.Instance.RefreshBuffUI();

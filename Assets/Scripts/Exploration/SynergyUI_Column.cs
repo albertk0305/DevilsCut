@@ -1,20 +1,20 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
 public class SynergyUI_Column : MonoBehaviour
 {
-    public ItemClass myClass; // ÀÌ ¼¼·ÎÁÙÀÌ ´ã´çÇÏ´Â Å¬·¡½º (11¹øÂ°´Â µû·Î enum Ãß°¡ ÇÊ¿ä)
-    public TextMeshProUGUI currentPointsText; // ¾ÆÀÌÄÜ À§ º° x3 ÅØ½ºÆ®
-    public List<SynergyUI_Button> myButtons;  // ¾Æ·¡¿¡ ´Ş¸° 2,4,6Á¡ ¹öÆ°µé
+    public ItemClass myClass; // ì´ ì„¸ë¡œì¤„ì´ ë‹´ë‹¹í•˜ëŠ” í´ë˜ìŠ¤ (11ë²ˆì§¸ëŠ” ë”°ë¡œ enum ì¶”ê°€ í•„ìš”)
+    public TextMeshProUGUI currentPointsText; // ì•„ì´ì½˜ ìœ„ ë³„ x3 í…ìŠ¤íŠ¸
+    public List<SynergyUI_Button> myButtons;  // ì•„ë˜ì— ë‹¬ë¦° 2,4,6ì  ë²„íŠ¼ë“¤
 
-    // ¸Å´ÏÀú°¡ ÀÌ ÇÔ¼ö¸¦ ºÎ¸£¸é ÀÚ±â ÁÙÀ» ÂÓ ¼¼ÆÃÇÔ
+    // ë§¤ë‹ˆì €ê°€ ì´ í•¨ìˆ˜ë¥¼ ë¶€ë¥´ë©´ ìê¸° ì¤„ì„ ì«™ ì„¸íŒ…í•¨
     public void UpdateColumn(int currentPoints, SynergyUI_Manager mgr)
     {
-        // ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
+        // í…ìŠ¤íŠ¸ ì—…ë°ì´íŠ¸
         currentPointsText.text = $"X{currentPoints}";
 
-        // ³» ÀÚ½Ä ¹öÆ°µé¿¡°Ô "Áö±İ ¸î Á¡ÀÌ´Ï±î Å×µÎ¸® ÄÓÁö ÆÇ´ÜÇØ!" ¶ó°í Áö½Ã
+        // ë‚´ ìì‹ ë²„íŠ¼ë“¤ì—ê²Œ "ì§€ê¸ˆ ëª‡ ì ì´ë‹ˆê¹Œ í…Œë‘ë¦¬ ì¼¤ì§€ íŒë‹¨í•´!" ë¼ê³  ì§€ì‹œ
         foreach (var btn in myButtons)
         {
             btn.InitButton(currentPoints, mgr);
