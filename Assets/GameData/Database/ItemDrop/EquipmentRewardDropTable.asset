@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6e42bba07f4c2c8df03e7d6ab8cb9d, type: 3}
+  m_Name: EquipmentRewardDropTable
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentRewardDropTable
+  rules:
+  - battleType: 0
+    phase: 1
+    commonWeight: 90
+    rareWeight: 10
+    epicWeight: 0
+    legendaryWeight: 0
+  - battleType: 0
+    phase: 2
+    commonWeight: 80
+    rareWeight: 15
+    epicWeight: 5
+    legendaryWeight: 0
+  - battleType: 0
+    phase: 3
+    commonWeight: 70
+    rareWeight: 20
+    epicWeight: 10
+    legendaryWeight: 0
+  - battleType: 0
+    phase: 4
+    commonWeight: 55
+    rareWeight: 30
+    epicWeight: 15
+    legendaryWeight: 0
+  - battleType: 0
+    phase: 5
+    commonWeight: 40
+    rareWeight: 40
+    epicWeight: 20
+    legendaryWeight: 0
+  - battleType: 0
+    phase: 6
+    commonWeight: 25
+    rareWeight: 45
+    epicWeight: 25
+    legendaryWeight: 5
+  - battleType: 0
+    phase: 7
+    commonWeight: 15
+    rareWeight: 40
+    epicWeight: 35
+    legendaryWeight: 10
+  - battleType: 0
+    phase: 8
+    commonWeight: 5
+    rareWeight: 30
+    epicWeight: 50
+    legendaryWeight: 15
+  - battleType: 0
+    phase: 9
+    commonWeight: 1
+    rareWeight: 15
+    epicWeight: 65
+    legendaryWeight: 19
+  - battleType: 1
+    phase: 1
+    commonWeight: 40
+    rareWeight: 50
+    epicWeight: 10
+    legendaryWeight: 0
+  - battleType: 1
+    phase: 2
+    commonWeight: 25
+    rareWeight: 55
+    epicWeight: 20
+    legendaryWeight: 0
+  - battleType: 1
+    phase: 3
+    commonWeight: 10
+    rareWeight: 50
+    epicWeight: 35
+    legendaryWeight: 5
+  - battleType: 1
+    phase: 4
+    commonWeight: 5
+    rareWeight: 40
+    epicWeight: 45
+    legendaryWeight: 10
+  - battleType: 1
+    phase: 5
+    commonWeight: 0
+    rareWeight: 30
+    epicWeight: 55
+    legendaryWeight: 15
+  - battleType: 1
+    phase: 6
+    commonWeight: 0
+    rareWeight: 15
+    epicWeight: 60
+    legendaryWeight: 25
+  - battleType: 1
+    phase: 7
+    commonWeight: 0
+    rareWeight: 5
+    epicWeight: 55
+    legendaryWeight: 40
+  - battleType: 1
+    phase: 8
+    commonWeight: 0
+    rareWeight: 0
+    epicWeight: 40
+    legendaryWeight: 60
+  - battleType: 1
+    phase: 9
+    commonWeight: 0
+    rareWeight: 0
+    epicWeight: 10
+    legendaryWeight: 90

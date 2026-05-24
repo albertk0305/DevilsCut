@@ -17,6 +17,11 @@ public class StatusUI : MonoBehaviour
 
     private void OnEnable()
     {
+        Refresh();
+    }
+
+    public void Refresh()
+    {
         UpdateStatsUI();
     }
 
@@ -24,36 +29,41 @@ public class StatusUI : MonoBehaviour
     {
         if (PlayerManager.Instance == null) return;
 
-        bool isInCombat = (CombatManager.Instance != null);
+        bool isVictoryResult = CombatVictoryUIController.IsVictoryUIActive;
+        bool useCombatStats = CombatManager.Instance != null && !isVictoryResult;
 
         PlayerStats baseStats = PlayerManager.Instance.stats;
         PlayerStats itemStats = PlayerManager.Instance.GetItemModifiedStats();
 
         // 전투 중이라면 스냅샷 스탯을 가져오고, 아니라면 현재 아이템 스탯을 사용
-        PlayerStats combatBase = isInCombat ? (CombatManager.Instance.GetCurrentPlayerStats() ?? itemStats) : itemStats;
+        PlayerStats displayStats = useCombatStats ? (CombatManager.Instance.GetCurrentPlayerStats() ?? itemStats) : itemStats;
 
         // 통합 문자열 생성기로 모든 스탯을 한 번에 처리합니다!
-        strText.text = GetComprehensiveStatString("Str", TargetStat.Strength, baseStats.strength, combatBase.strength, isInCombat);
-        defText.text = GetComprehensiveStatString("Def", TargetStat.Defense, baseStats.defense, combatBase.defense, isInCombat);
-        spdText.text = GetComprehensiveStatString("Spd", TargetStat.Speed, baseStats.speed, combatBase.speed, isInCombat);
-        lukText.text = GetComprehensiveStatString("Luk", TargetStat.Luck, baseStats.luck, combatBase.luck, isInCombat);
-        breakResText.text = GetComprehensiveStatString("BR", TargetStat.BreakResistance, baseStats.breakResistance, combatBase.breakResistance, isInCombat);
+        strText.text = GetComprehensiveStatString("Str", TargetStat.Strength, baseStats.strength, displayStats.strength, useCombatStats);
+        defText.text = GetComprehensiveStatString("Def", TargetStat.Defense, baseStats.defense, displayStats.defense, useCombatStats);
+        spdText.text = GetComprehensiveStatString("Spd", TargetStat.Speed, baseStats.speed, displayStats.speed, useCombatStats);
+        lukText.text = GetComprehensiveStatString("Luk", TargetStat.Luck, baseStats.luck, displayStats.luck, useCombatStats);
+        breakResText.text = GetComprehensiveStatString("BR", TargetStat.BreakResistance, baseStats.breakResistance, displayStats.breakResistance, useCombatStats);
 
-        if (isInCombat)
+        if (useCombatStats)
         {
             // AP는 전투 중 시스템 소모가 크므로 괄호 없이 원본만 표기
-            apText.text = $"{combatBase.ActionPoints}";
-            hpText.text = $"{combatBase.currentHp} / {combatBase.maxHp}";
-            lvText.text = $"{combatBase.level} ({combatBase.currentExp} / {combatBase.maxExp})";
+            apText.text = $"{displayStats.ActionPoints}";
+            int currentHp = Mathf.Clamp(displayStats.currentHp, 0, displayStats.maxHp);
+            string hpDisplay = $"{currentHp} / {displayStats.maxHp}";
+            hpText.text = hpDisplay;
+            lvText.text = $"{displayStats.level} ({displayStats.currentExp} / {displayStats.maxExp})";
         }
         else
         {
             // 탐색 씬에서는 AP도 아이템 보정 공식 출력
             apText.text = GetComprehensiveStatString("AP", TargetStat.Strength, baseStats.ActionPoints, itemStats.ActionPoints, false);
 
+            int currentHp = Mathf.Clamp(baseStats.currentHp, 0, itemStats.maxHp);
             int bonusHp = itemStats.maxHp - baseStats.maxHp;
             string hpCalc = bonusHp > 0 ? $" <size=70%><color=#AAAAAA>[{baseStats.maxHp} <color=#00FF00>+ {bonusHp}</color>]</color></size>" : "";
-            hpText.text = $"{itemStats.currentHp} / {itemStats.maxHp}{hpCalc}";
+            string hpDisplay = $"{currentHp} / {itemStats.maxHp}{hpCalc}";
+            hpText.text = hpDisplay;
 
             lvText.text = $"{baseStats.level} ({baseStats.currentExp} / {baseStats.maxExp})";
         }

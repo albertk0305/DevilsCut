@@ -1,18 +1,19 @@
 using UnityEngine;
-using UnityEngine.UI; // Image 컴포넌트를 제어하기 위해 꼭 필요합니다!
+using UnityEngine.UI; // Image ????????? ??????? ???? ?? ???????!
 
 public class MenuTabManager : MonoBehaviour
 {
-    [Header("탭 내용 패널들 (순서대로 넣으세요)")]
+    [Header("?? ???? ?гε? (??????? ????????)")]
     // 0: Status, 1: Supporter, 2: Karin, 3: Equipment
     public GameObject[] tabPanels;
+    [SerializeField] private StatusUI statusUI;
 
-    [Header("탭 상단 버튼 이미지들 (순서대로 넣으세요)")]
-    public Image[] tabButtonImages; // 버튼의 배경 이미지를 제어할 배열
+    [Header("?? ??? ??? ??????? (??????? ????????)")]
+    public Image[] tabButtonImages; // ????? ??? ??????? ?????? ?迭
 
-    [Header("버튼 색상 설정")]
-    public Color normalColor = Color.white; // 기본 색상 (원래 색)
-    public Color activeColor = new Color(0.6f, 0.6f, 0.6f); // 눌렸을 때 색상 (회색빛으로 어두워짐)
+    [Header("??? ???? ????")]
+    public Color normalColor = Color.white; // ?? ???? (???? ??)
+    public Color activeColor = new Color(0.6f, 0.6f, 0.6f); // ?????? ?? ???? (????????? ??ο???)
     
     private float timeScaleBeforePause = 1f;
 
@@ -24,10 +25,10 @@ public class MenuTabManager : MonoBehaviour
     public void OpenMenu()
     {
         timeScaleBeforePause = Time.timeScale;
-        if (timeScaleBeforePause <= 0) timeScaleBeforePause = 1f; // 방어 코드
+        if (timeScaleBeforePause <= 0) timeScaleBeforePause = 1f; // ??? ???
 
         Time.timeScale = 0f;
-        DevLog.Log($"[메뉴] 스탯창 열기: 시간 정지 (복구 속도: {timeScaleBeforePause})");
+        DevLog.Log($"[???] ????? ????: ?ð? ???? (???? ???: {timeScaleBeforePause})");
 
         gameObject.SetActive(true);
     }
@@ -35,26 +36,38 @@ public class MenuTabManager : MonoBehaviour
     public void CloseMenu()
     {
         Time.timeScale = timeScaleBeforePause;
-        DevLog.Log("[메뉴] 스탯창 닫기: 시간 복구");
+        DevLog.Log("[???] ????? ???: ?ð? ????");
 
         gameObject.SetActive(false);
     }
 
-    // 탭 전환 함수
+    // ?? ??? ???
     public void SwitchTab(int tabIndex)
     {
         for (int i = 0; i < tabPanels.Length; i++)
         {
-            // 1. 패널 끄고 켜기
+            // 1. ?г? ???? ???
             bool isActive = (i == tabIndex);
             tabPanels[i].SetActive(isActive);
 
-            // 2. 버튼 색상 바꾸기 (배열에 이미지가 제대로 들어있는지 확인하는 방어 코드 포함)
+            // 2. ??? ???? ???? (?迭?? ??????? ????? ???????? ?????? ??? ??? ????)
             if (i < tabButtonImages.Length && tabButtonImages[i] != null)
             {
-                // 선택된 탭이면 어두운 색(activeColor), 아니면 원래 색(normalColor) 적용!
+                // ????? ????? ??ο? ??(activeColor), ???? ???? ??(normalColor) ????!
                 tabButtonImages[i].color = isActive ? activeColor : normalColor;
             }
         }
+
+        if (tabIndex == 0)
+            RefreshStatusTab();
+    }
+
+    private void RefreshStatusTab()
+    {
+        if (statusUI == null && tabPanels != null && tabPanels.Length > 0 && tabPanels[0] != null)
+            statusUI = tabPanels[0].GetComponentInChildren<StatusUI>(true);
+
+        if (statusUI != null)
+            statusUI.Refresh();
     }
 }

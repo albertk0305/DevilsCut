@@ -2,23 +2,65 @@ using UnityEngine;
 
 public static class BattleRewardService
 {
-    public static void GrantReward(PlayerManager playerManager, BattleReward reward)
+    public static VictoryRewardGrantResult GrantReward(PlayerManager playerManager, BattleReward reward)
     {
+        VictoryRewardGrantResult result = new VictoryRewardGrantResult();
+
         if (playerManager == null)
         {
-            Debug.LogError("BattleRewardService: PlayerManager가 null입니다.");
-            return;
+            Debug.LogError("BattleRewardService: PlayerManager is null.");
+            return result;
         }
 
         if (reward == null)
         {
-            Debug.LogWarning("BattleRewardService: 지급할 보상이 없습니다.");
-            return;
+            Debug.LogWarning("BattleRewardService: reward is null.");
+            result.levelUpResult = LevelUpService.ProcessLevelUps(playerManager.stats);
+            return result;
         }
 
-        playerManager.stats.currentExp += reward.exp;
-        playerManager.stats.currentGold += reward.gold;
+        BattleReward modifiedReward = ApplyVictoryRewardModifiers(playerManager, reward);
 
-        // TODO: keys, item reward, level up 처리 연결
+        result.expGranted = modifiedReward != null ? modifiedReward.exp : 0;
+        result.goldGranted = modifiedReward != null ? modifiedReward.gold : 0;
+        result.keysGranted = 0;
+
+        int beforeLevel = playerManager.stats.level;
+        int beforeMaxHp = playerManager.stats.maxHp;
+        int beforeCurrentHp = playerManager.stats.currentHp;
+        int beforeStrength = playerManager.stats.strength;
+
+        playerManager.stats.currentExp += result.expGranted;
+        playerManager.stats.currentGold += result.goldGranted;
+        result.levelUpResult = LevelUpService.ProcessLevelUps(playerManager.stats);
+
+        if (result.levelUpResult != null && result.levelUpResult.HasLevelUp)
+        {
+            DevLog.Log($"[VictoryReward] LevelUp applied to PlayerManager.stats: Lv.{beforeLevel} -> {playerManager.stats.level}, maxHp {beforeMaxHp} -> {playerManager.stats.maxHp}, currentHp {beforeCurrentHp} -> {playerManager.stats.currentHp}, strength {beforeStrength} -> {playerManager.stats.strength}");
+        }
+
+        // Key reward is still handled by ExplorationManager battle progress.
+        return result;
     }
+
+    public static BattleReward ApplyVictoryRewardModifiers(PlayerManager playerManager, BattleReward reward)
+    {
+        if (reward == null)
+            return new BattleReward();
+
+        return new BattleReward
+        {
+            exp = reward.exp,
+            gold = reward.gold,
+            keys = reward.keys
+        };
+    }
+}
+
+public class VictoryRewardGrantResult
+{
+    public int expGranted;
+    public int goldGranted;
+    public int keysGranted;
+    public LevelUpResult levelUpResult;
 }

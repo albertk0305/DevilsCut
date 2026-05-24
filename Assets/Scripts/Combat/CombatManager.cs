@@ -52,6 +52,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private TurnEffectResolverConfig turnEffectConfig;
 
     [SerializeField] private CombatDefeatUIController defeatUIController;
+    [SerializeField] private CombatVictoryUIController victoryUIController;
 
     private PlayerStats currentPlayerStats;
     public PlayerStats GetCurrentPlayerStats() => currentPlayerStats;
@@ -1423,6 +1424,8 @@ public class CombatManager : MonoBehaviour
 
         if (isWin)
         {
+            VictoryRewardGrantResult rewardResult = null;
+
             if (playerManager != null && currentPlayerStats != null)
             {
                 playerManager.stats.currentHp = currentPlayerStats.currentHp;
@@ -1430,7 +1433,7 @@ public class CombatManager : MonoBehaviour
 
             if (playerManager != null)
             {
-                BattleRewardService.GrantReward(
+                rewardResult = BattleRewardService.GrantReward(
                     playerManager,
                     playerManager.currentBattleReward
                 );
@@ -1439,7 +1442,20 @@ public class CombatManager : MonoBehaviour
                 playerManager.pendingBattleType = playerManager.currentBattleType;
                 playerManager.pendingBattlePhase = playerManager.currentBattlePhase;
             }
+            else
+            {
+                DevLog.LogWarning("CombatManager: PlayerManager.Instance is missing during victory reward processing.");
+            }
 
+            if (victoryUIController != null)
+            {
+                string enemyName = currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "Enemy";
+                Time.timeScale = 0f;
+                victoryUIController.ShowVictory(enemyName, rewardResult);
+                return;
+            }
+
+            DevLog.LogWarning("CombatManager: CombatVictoryUIController is not assigned. Returning to Exploration immediately.");
             Time.timeScale = 1f;
             SceneManager.LoadScene("Exploration");
             return;
@@ -1447,7 +1463,6 @@ public class CombatManager : MonoBehaviour
 
         ShowDefeatUI();
     }
-
     public void ResolveTurnEnd()
     {
         StartCoroutine(ResolveTurnEndRoutine());

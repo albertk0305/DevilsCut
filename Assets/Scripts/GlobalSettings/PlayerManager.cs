@@ -63,6 +63,17 @@ public class OwnedItem
     }
 }
 
+public class ItemMergeResult
+{
+    public EquipmentItemData itemData;
+    public int resultStarLevel;
+
+    public ItemMergeResult(EquipmentItemData itemData, int resultStarLevel)
+    {
+        this.itemData = itemData;
+        this.resultStarLevel = resultStarLevel;
+    }
+}
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
@@ -243,62 +254,64 @@ public class PlayerManager : MonoBehaviour
     // =========================================================
     public void AcquireItem(EquipmentItemData newItemData)
     {
-        // 1. 아이템을 먹기 전의 '아이템이 적용된 최대 체력' 스냅샷을 찍습니다.
+        AcquireItemAndGetMergeResults(newItemData);
+    }
+
+    public List<ItemMergeResult> AcquireItemAndGetMergeResults(EquipmentItemData newItemData)
+    {
+        List<ItemMergeResult> mergeResults = new List<ItemMergeResult>();
+
+        if (newItemData == null)
+            return mergeResults;
+
         int oldMaxHp = GetItemModifiedStats().maxHp;
 
-        // 2. 인벤토리에 아이템을 넣고 합성(Merge) 판정을 돌립니다.
-        AddItemAndMerge(newItemData, 1);
+        AddItemAndMerge(newItemData, 1, mergeResults);
 
-        // 3. 아이템을 먹고(혹은 합성되고) 난 후의 최대 체력 스냅샷을 찍습니다.
         int newMaxHp = GetItemModifiedStats().maxHp;
-
-        // 4. 아이템으로 인해 최대 체력이 늘어났다면, 그만큼 현재 체력도 공짜로 채워줍니다!
         int hpIncrease = newMaxHp - oldMaxHp;
         if (hpIncrease > 0)
         {
             stats.currentHp += hpIncrease;
-            DevLog.Log($"[아이템 획득] 최대 체력이 {hpIncrease} 증가하여 현재 체력도 함께 차올랐습니다!");
+            DevLog.Log($"[Item Acquire] Max HP increased by {hpIncrease}; current HP increased as well.");
         }
+
+        return mergeResults;
     }
 
-    // =========================================================
-    // [핵심 2] 오토 체스식 3성 연쇄 합성(Merge) 로직
-    // =========================================================
     private void AddItemAndMerge(EquipmentItemData itemData, int targetStarLevel)
     {
-        // 전설(Legendary) 등급이거나, 이미 3성(Max)이라면 합성하지 않고 바로 인벤토리에 넣습니다.
+        AddItemAndMerge(itemData, targetStarLevel, null);
+    }
+
+    private void AddItemAndMerge(EquipmentItemData itemData, int targetStarLevel, List<ItemMergeResult> mergeResults)
+    {
+        if (itemData == null)
+            return;
+
         if (itemData.grade == ItemGrade.Legendary || targetStarLevel >= 3)
         {
             inventory.Add(new OwnedItem(itemData, targetStarLevel));
             return;
         }
 
-        // 일단 인벤토리에 해당 성급으로 아이템을 추가합니다.
         inventory.Add(new OwnedItem(itemData, targetStarLevel));
 
-        // 내 인벤토리에서 '방금 추가한 아이템과 완전히 똑같은 아이템 & 같은 성급'인 것들을 전부 찾습니다.
         var identicalItems = inventory.FindAll(x => x.data.itemID == itemData.itemID && x.starLevel == targetStarLevel);
 
-        // 똑같은 게 3개가 모였다면? 합성 시작!
         if (identicalItems.Count >= 3)
         {
-            DevLog.Log($"[합성 연출] {itemData.itemID} {targetStarLevel}성 3개가 모여 빛을 발합니다!");
+            DevLog.Log($"[Item Merge] {itemData.itemID} star {targetStarLevel} x3 merged.");
+            mergeResults?.Add(new ItemMergeResult(itemData, targetStarLevel + 1));
 
-            // 1. 재료가 된 3개의 아이템을 인벤토리에서 삭제합니다.
             for (int i = 0; i < 3; i++)
             {
                 inventory.Remove(identicalItems[i]);
             }
 
-            // 2. 성급(Star Level)을 1 올려서 다시 AddItemAndMerge를 호출합니다. (재귀 함수)
-            // 이렇게 하면 1성 3개 -> 2성 1개가 되는데, 마침 2성이 3개째였다면 알아서 3성으로 연쇄 합성됩니다!
-            AddItemAndMerge(itemData, targetStarLevel + 1);
+            AddItemAndMerge(itemData, targetStarLevel + 1, mergeResults);
         }
     }
-
-    // =========================================================
-    // [핵심 3] 현재 보유 중인 클래스별 시너지 점수 계산기
-    // =========================================================
     public Dictionary<ItemClass, int> GetCurrentSynergies()
     {
         Dictionary<string, OwnedItem> bestItemById = new Dictionary<string, OwnedItem>();
