@@ -328,6 +328,19 @@ public class CombatVictoryUIController : MonoBehaviour
         SetBonusItemActive(false);
     }
 
+    private void PrepareVictoryUIForSceneTransition()
+    {
+        HideEquipmentRewardUI();
+        SetGroupActive(itemAddupGroup, false);
+        SetBonusItemActive(false);
+        SetConfirmButtonActive(false);
+        HideAllItemSelectionBackgrounds();
+        SetNextIndicatorActive(false);
+
+        if (continueButton != null)
+            continueButton.gameObject.SetActive(false);
+    }
+
     private void SetGroupActive(GameObject group, bool isActive)
     {
         if (group != null)
@@ -1794,6 +1807,14 @@ public class CombatVictoryUIController : MonoBehaviour
         mergeObjectsHidden = false;
     }
 
+    private void ClearMergeLockStateWithoutRestoringHiddenObjects()
+    {
+        mergeButtonLockStates.Clear();
+        mergeButtonsLocked = false;
+        mergeHiddenObjectStates.Clear();
+        mergeObjectsHidden = false;
+    }
+
     private void ReturnToExploration()
     {
         if (isContinuing)
@@ -1802,13 +1823,9 @@ public class CombatVictoryUIController : MonoBehaviour
         isContinuing = true;
         IsVictoryUIActive = false;
         StopMergeAnimation();
-        RestoreButtonsDisabledDuringMerge();
-        HideEquipmentRewardUI();
-        HideAllStageGroups();
+        ClearMergeLockStateWithoutRestoringHiddenObjects();
+        PrepareVictoryUIForSceneTransition();
         SetMergeStarsActive(0);
-
-        if (continueButton != null)
-            continueButton.gameObject.SetActive(false);
 
         Time.timeScale = 1f;
         SceneManager.LoadScene(explorationSceneName);
