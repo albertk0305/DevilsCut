@@ -37,6 +37,8 @@ public class CombatVictoryUIController : MonoBehaviour
         NoEquipmentReward
     }
 
+    private const string BelphegorSupporterId = "belphegor";
+
     public static bool IsVictoryUIActive { get; private set; }
 
     [Header("Root")]
@@ -642,9 +644,16 @@ public class CombatVictoryUIController : MonoBehaviour
         return result;
     }
 
-    private EquipmentItemData GenerateSingleEquipmentRewardCandidate(BattleType battleType, int phase, HashSet<string> excludedItemIds)
+    private EquipmentItemData GenerateSingleEquipmentRewardCandidate(BattleType battleType, int phase, HashSet<string> excludedItemIds, ItemGrade? forcedGrade = null)
     {
         List<EquipmentItemData> pool = BuildAvailableEquipmentRewardPool();
+
+        if (forcedGrade.HasValue)
+        {
+            EquipmentItemData forcedItem = SelectRandomAvailableItem(pool, excludedItemIds, forcedGrade.Value);
+            if (forcedItem != null)
+                return forcedItem;
+        }
 
         if (equipmentRewardDropTable == null)
             return SelectRandomAvailableItem(pool, excludedItemIds);
@@ -950,7 +959,11 @@ public class CombatVictoryUIController : MonoBehaviour
             return;
 
         HashSet<string> excludedItemIds = BuildRerollExcludedItemIds(slotIndex);
-        EquipmentItemData newItem = GenerateSingleEquipmentRewardCandidate(currentRewardBattleType, currentRewardPhase, excludedItemIds);
+        EquipmentItemData currentItem = equipmentCandidates[slotIndex];
+        bool belphegorApplied = TryGenerateBelphegorRerollUpgrade(currentItem, excludedItemIds, out EquipmentItemData newItem);
+
+        if (!belphegorApplied)
+            newItem = GenerateSingleEquipmentRewardCandidate(currentRewardBattleType, currentRewardPhase, excludedItemIds);
 
         ClearEquipmentSelectionState();
         equipmentRerollUsed[slotIndex] = true;
@@ -965,7 +978,71 @@ public class CombatVictoryUIController : MonoBehaviour
 
         equipmentCandidates[slotIndex] = newItem;
         SetupEquipmentRewardSlots();
-        StartSingleMessage(BuildEquipmentRerollMessage(newItem));
+        StartSingleMessage(belphegorApplied ? "\uBCA8\uD398\uACE0\uB974\uC758 \uD328\uC2DC\uBE0C \uBC1C\uB3D9!" : BuildEquipmentRerollMessage(newItem));
+    }
+
+    private bool TryGenerateBelphegorRerollUpgrade(EquipmentItemData currentItem, HashSet<string> excludedItemIds, out EquipmentItemData upgradedItem)
+    {
+        upgradedItem = null;
+
+        if (currentItem == null)
+            return false;
+
+        SupporterData belphegor = FindUnlockedSupporter(BelphegorSupporterId);
+        if (belphegor == null || belphegor.passiveLevel <= 0)
+            return false;
+
+        float triggerChance = GetBelphegorRerollUpgradeChance(belphegor.passiveLevel);
+        if (Random.value >= triggerChance)
+            return false;
+
+        ItemGrade targetGrade = GetBelphegorTargetGrade(currentItem.grade);
+        upgradedItem = SelectRandomAvailableItem(BuildAvailableEquipmentRewardPool(), excludedItemIds, targetGrade);
+
+        return upgradedItem != null;
+    }
+
+    private SupporterData FindUnlockedSupporter(string supporterId)
+    {
+        PlayerManager playerManager = PlayerManager.Instance;
+        if (playerManager == null || playerManager.unlockedSupporters == null || string.IsNullOrEmpty(supporterId))
+            return null;
+
+        foreach (SupporterData supporter in playerManager.unlockedSupporters)
+        {
+            if (supporter != null && supporter.supporterID == supporterId)
+                return supporter;
+        }
+
+        return null;
+    }
+
+    private float GetBelphegorRerollUpgradeChance(int passiveLevel)
+    {
+        switch (Mathf.Clamp(passiveLevel, 1, 3))
+        {
+            case 1:
+                return 0.10f;
+            case 2:
+                return 0.20f;
+            default:
+                return 0.35f;
+        }
+    }
+
+    private ItemGrade GetBelphegorTargetGrade(ItemGrade currentGrade)
+    {
+        switch (currentGrade)
+        {
+            case ItemGrade.Common:
+                return ItemGrade.Rare;
+            case ItemGrade.Rare:
+                return ItemGrade.Epic;
+            case ItemGrade.Epic:
+                return ItemGrade.Legendary;
+            default:
+                return ItemGrade.Legendary;
+        }
     }
 
     private HashSet<string> BuildRerollExcludedItemIds(int rerollSlotIndex)
