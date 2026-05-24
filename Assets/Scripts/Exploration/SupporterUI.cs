@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 
-//서포터 선택 UI 제어 코드
 public class SupporterUI : MonoBehaviour
 {
     [Header("메인 디스플레이")]
@@ -26,7 +25,6 @@ public class SupporterUI : MonoBehaviour
     public Button leaveButton;
     public Button cancelButton;
 
-    // 내부 상태 관리
     private SupporterData currentPreview;
     private List<SupporterData> displayList = new List<SupporterData>();
     private int currentPage = 0;
@@ -42,20 +40,17 @@ public class SupporterUI : MonoBehaviour
 
     private void OnDisable()
     {
-        // [추가] 창이 꺼질 때는 에러 방지를 위해 구독 취소
         if (LocalizationManager.Instance != null)
             LocalizationManager.Instance.OnLanguageChanged -= RefreshLanguage;
     }
 
     private void RefreshLanguage()
     {
-        // 현재 띄워진 조력자 상태 그대로 텍스트만 다시 불러옵니다.
         bool isJoined = (currentPreview != null && currentPreview == PlayerManager.Instance.activeSupporter);
         ShowPreview(currentPreview, isJoined);
     }
 
 
-    // 메인 화면 업데이트
     private void ShowPreview(SupporterData data, bool isJoinedState)
     {
         currentPreview = data;
@@ -95,7 +90,6 @@ public class SupporterUI : MonoBehaviour
         }
     }
 
-    // 하단 목록 업데이트
     private void RefreshRosterList()
     {
         displayList = PlayerManager.Instance.unlockedSupporters
@@ -105,27 +99,22 @@ public class SupporterUI : MonoBehaviour
         int totalPages = GetTotalPages();
         if (currentPage >= totalPages && currentPage > 0) currentPage = totalPages - 1;
 
-        // [수정됨] rosterIcons.Length 대신 rosterButtons.Length 사용
         int startIndex = currentPage * rosterButtons.Length;
 
         for (int i = 0; i < rosterButtons.Length; i++)
         {
             int dataIndex = startIndex + i;
 
-            // 1. 현재 슬롯에 들어갈 데이터가 존재하는지 여부를 bool로 판별
             bool hasData = dataIndex < displayList.Count;
 
-            // 2. 데이터 유무에 따라 버튼 켜기/끄기, 클릭 활성화/비활성화를 한 번에 처리!
             rosterButtons[i].gameObject.SetActive(hasData);
             rosterButtons[i].interactable = hasData;
 
-            // 3. 데이터가 있을 때만 이미지 교체
             if (hasData)
             {
                 rosterButtons[i].image.sprite = displayList[dataIndex].iconImage;
             }
 
-            // 4. 배경 이미지 켜기/끄기도 if/else 없이 한 줄로 압축!
             if (rosterBackgrounds.Length > i && rosterBackgrounds[i] != null)
             {
                 rosterBackgrounds[i].SetActive(hasData);
@@ -139,7 +128,6 @@ public class SupporterUI : MonoBehaviour
 
     public void OnClickRosterIcon(int slotIndex)
     {
-        // [수정됨] rosterButtons.Length 사용
         int dataIndex = (currentPage * rosterButtons.Length) + slotIndex;
         if (dataIndex < displayList.Count)
         {
@@ -183,13 +171,11 @@ public class SupporterUI : MonoBehaviour
 
     public void OnClickCancel()
     {
-        // 원래 내 파티에 있던 진짜 조력자(아무도 없었다면 null)를 다시 화면에 띄워줍니다!
         ShowPreview(PlayerManager.Instance.activeSupporter, isJoinedState: true);
     }
 
     private int GetTotalPages()
     {
-        // [수정됨] rosterButtons.Length 사용
         return Mathf.Max(1, Mathf.CeilToInt((float)displayList.Count / rosterButtons.Length));
     }
 }

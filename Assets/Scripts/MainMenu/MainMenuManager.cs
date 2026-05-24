@@ -3,10 +3,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-//메인메뉴 제어 코드
 public class MainMenuManager : MonoBehaviour
 {
-    // 추가된 부분: 설정 창 UI 패널을 연결할 변수
     public GameObject settingsPanel;
     public Button continueButton;
     public GameObject confirmNewGamePanel;
@@ -17,7 +15,6 @@ public class MainMenuManager : MonoBehaviour
 
     void Start()
     {
-        // 게임 시작 시 설정 창은 숨겨둠
         if (settingsPanel != null) settingsPanel.SetActive(false);
         if (confirmNewGamePanel != null) confirmNewGamePanel.SetActive(false);
         UpdateContinueButtonState();
@@ -36,12 +33,11 @@ public class MainMenuManager : MonoBehaviour
         continueButton.interactable = SaveManager.Instance != null && SaveManager.Instance.HasContinueSave();
     }
 
-    // '시작하기' 버튼을 눌렀을 때 실행될 함수
     public void OnClickStart()
     {
         if (SaveManager.Instance == null)
         {
-            DevLog.LogWarning("[Save] SaveManager가 없어 저장 데이터 확인 없이 새 게임을 시작합니다.");
+            DevLog.LogWarning("[Save] SaveManager missing; starting a new game without save-state check.");
             StartNewGameInternal();
             return;
         }
@@ -87,13 +83,13 @@ public class MainMenuManager : MonoBehaviour
             return;
         }
 
-        DevLog.LogWarning("[Save] 새 게임 확인 팝업이 연결되지 않아 바로 새 게임을 시작합니다.");
+        DevLog.LogWarning("[Save] New-game confirmation panel is not assigned; starting immediately.");
         StartNewGameInternal();
     }
 
     private void StartNewGameInternal()
     {
-        DevLog.Log("새 게임 시작!");
+        DevLog.Log("[MainMenu] Starting new game.");
 
         if (SaveManager.Instance != null)
             SaveManager.Instance.CancelPendingContinueLoadRequest();
@@ -101,16 +97,15 @@ public class MainMenuManager : MonoBehaviour
         if (PlayerManager.Instance != null)
             PlayerManager.Instance.ResetForNewGame();
         else
-            DevLog.LogWarning("[NewGame] PlayerManager가 없어 플레이어 상태 초기화를 건너뜁니다.");
+            DevLog.LogWarning("[NewGame] PlayerManager missing; skipping player reset.");
 
         SceneManager.LoadScene(explorationSceneName);
     }
-    // '이어하기' 버튼을 눌렀을 때 실행될 함수
     public void OnClickContinue()
     {
         if (SaveManager.Instance == null)
         {
-            DevLog.LogWarning("[Save] 이어하기 실패: SaveManager가 없습니다.");
+            DevLog.LogWarning("[Save] Continue failed: SaveManager missing.");
             UpdateContinueButtonState();
             return;
         }
@@ -121,28 +116,24 @@ public class MainMenuManager : MonoBehaviour
             return;
         }
 
-        DevLog.Log("이어하기 데이터 불러오기!");
+        DevLog.Log("[MainMenu] Loading continue data.");
         SceneManager.LoadScene(explorationSceneName);
     }
 
-    // '도움말' 버튼을 눌렀을 때 실행될 함수
     public void OnClickHelp()
     {
-        DevLog.Log("도움말 창 열기!");
+        DevLog.Log("[MainMenu] Help opened.");
     }
 
-    // '개발진' 버튼을 눌렀을 때 실행될 함수
     public void OnClickCredits()
     {
-        DevLog.Log("개발진 소개 열기!");
+        DevLog.Log("[MainMenu] Credits opened.");
     }
 
-    // '게임 종료' 버튼을 눌렀을 때 실행될 함수
     public void OnClickQuit()
     {
-        DevLog.Log("게임 종료!");
-        // Application.Quit()은 유니티 에디터 내에서는 작동하지 않고, 
-        // 나중에 게임을 실제 파일(.exe, .apk 등)로 빌드했을 때만 진짜로 꺼져!
+        DevLog.Log("[MainMenu] Quit requested.");
+        // Application.Quit only exits in player builds.
         Application.Quit();
     }
 }

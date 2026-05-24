@@ -1,4 +1,4 @@
-﻿using System.Collections; // 코루틴을 위해 필수!
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,7 +48,7 @@ public class KarinEquipmentUI : MonoBehaviour
             LocalizationManager.Instance.OnLanguageChanged += RefreshLanguage;
         }
 
-        // [해결 1] UI 먹통을 방지하는 1프레임 대기 코루틴 (다시 적용됨)
+        // Wait one frame so the UI is ready before applying the preview.
         StartCoroutine(InitDelayedPreviewRoutine());
     }
 
@@ -58,7 +58,7 @@ public class KarinEquipmentUI : MonoBehaviour
             LocalizationManager.Instance.OnLanguageChanged -= RefreshLanguage;
     }
 
-    // 1프레임 대기 후 텍스트를 안전하게 깔아주는 코루틴
+    // Applies the equipped preview after one frame.
     private IEnumerator InitDelayedPreviewRoutine()
     {
         yield return null;
@@ -76,20 +76,17 @@ public class KarinEquipmentUI : MonoBehaviour
         ShowPreview(currentPreview, isEquipped);
     }
 
-    // ==========================================================
-    // [해결 2] 번역 실패 시 무조건 원본이라도 띄우는 강제 방어 함수
-    // ==========================================================
+    // Falls back to the key when localization is missing.
     private string GetSafeText(string key)
     {
-        if (string.IsNullOrEmpty(key)) return ""; // 키값 자체가 빈칸이면 빈칸 리턴
+        if (string.IsNullOrEmpty(key)) return "";
 
         if (LocalizationManager.Instance != null)
         {
             string translated = LocalizationManager.Instance.GetText(key);
-            // 번역 매니저가 빈칸이나 null을 뱉으면 원래 키값을 그대로 노출!
             return string.IsNullOrEmpty(translated) ? key : translated;
         }
-        return key; // 매니저가 아예 없어도 키값을 노출
+        return key;
     }
 
     private void ShowPreview(KarinItemData data, bool isEquippedState)
@@ -116,7 +113,6 @@ public class KarinEquipmentUI : MonoBehaviour
             mainItemImage.gameObject.SetActive(true);
             mainItemImage.sprite = data.itemIcon;
 
-            // GetSafeText를 사용하여 번역 파일이 없어도 텍스트 증발을 방지합니다.
             itemNameText.text = GetSafeText(data.itemName);
             itemDescText.text = GetSafeText(data.itemDescription);
 
