@@ -30,7 +30,7 @@ MonoBehaviour:
   battleSkillDesc: dummy_BattleSkill
   selectMessage: dummy_SelectMessage
   joinMessage: dummy_JoinMessage
-  passiveLevel: 1
+  passiveLevel: 3
   startSkillLevel: 1
   battleSkillLevel: 1
   startSkillLogic: {fileID: 11400000, guid: 2baf3e26e48b3fa4ebb9f87971daf907, type: 2}

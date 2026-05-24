@@ -31,7 +31,9 @@ public class CombatVictoryUIController : MonoBehaviour
         ResultMessage,
         KarinItemSelection,
         EquipmentSelection,
+        LeviathanGiftResult,
         ItemMergeAnimation,
+        SupporterPassiveResult,
         NoEquipmentReward
     }
 
@@ -68,6 +70,7 @@ public class CombatVictoryUIController : MonoBehaviour
 
     [Header("Item Merge Animation")]
     [SerializeField] private GameObject itemAddupGroup;
+    [SerializeField] private Image bonusItemImage;
     [SerializeField] private Image mergeItemImageLeft;
     [SerializeField] private Image mergeItemImageCenter;
     [SerializeField] private Image mergeItemImageRight;
@@ -81,6 +84,8 @@ public class CombatVictoryUIController : MonoBehaviour
 
     private readonly Queue<string> messageQueue = new Queue<string>();
     private readonly Queue<ItemMergeResult> mergeResultQueue = new Queue<ItemMergeResult>();
+    private readonly Queue<SupporterPassiveRewardResult> supporterPassiveResultQueue = new Queue<SupporterPassiveRewardResult>();
+    private readonly List<ItemMergeResult> pendingMergeResults = new List<ItemMergeResult>();
     private readonly List<ButtonLockState> mergeButtonLockStates = new List<ButtonLockState>();
     private readonly List<GameObjectActiveState> mergeHiddenObjectStates = new List<GameObjectActiveState>();
     private Coroutine typingCoroutine;
@@ -91,6 +96,7 @@ public class CombatVictoryUIController : MonoBehaviour
     private readonly List<KarinItemData> karinItemCandidates = new List<KarinItemData>();
     private EquipmentItemData selectedItem;
     private KarinItemData selectedKarinItem;
+    private LeviathanGiftResult currentLeviathanGiftResult;
     private bool[] equipmentRerollUsed;
     private BattleType currentRewardBattleType;
     private int currentRewardPhase;
@@ -105,6 +111,8 @@ public class CombatVictoryUIController : MonoBehaviour
     private bool isMergeMoving;
     private bool skipMergeMoveRequested;
     private bool isWaitingForMergeAdvance;
+    private bool isWaitingForLeviathanGiftAdvance;
+    private bool isWaitingForSupporterPassiveAdvance;
     private bool mergeButtonsLocked;
     private bool mergeObjectsHidden;
 
@@ -224,6 +232,7 @@ public class CombatVictoryUIController : MonoBehaviour
         SetGroupActive(messageGroup, true);
         SetEquipmentRewardGroupActive(false);
         SetGroupActive(itemAddupGroup, false);
+        SetBonusItemActive(false);
         selectedItem = null;
         selectedKarinItem = null;
         SetConfirmButtonActive(false);
@@ -237,11 +246,26 @@ public class CombatVictoryUIController : MonoBehaviour
         SetGroupActive(messageGroup, true);
         SetEquipmentRewardGroupActive(true);
         SetGroupActive(itemAddupGroup, false);
+        SetBonusItemActive(false);
         selectedItem = null;
         selectedKarinItem = null;
         SetConfirmButtonActive(false);
         HideAllItemSelectionBackgrounds();
         RestoreButtonsDisabledDuringMerge();
+    }
+
+    private void ShowLeviathanGiftResultStage()
+    {
+        SetGroupActive(victoryResultGroup, false);
+        SetGroupActive(messageGroup, true);
+        SetEquipmentRewardGroupActive(false);
+        SetGroupActive(itemAddupGroup, false);
+        selectedItem = null;
+        selectedKarinItem = null;
+        SetConfirmButtonActive(false);
+        HideAllItemSelectionBackgrounds();
+        SetMergeStarsActive(0);
+        LockButtonsDuringMerge();
     }
 
     private void ShowItemMergeAnimationStage()
@@ -250,6 +274,22 @@ public class CombatVictoryUIController : MonoBehaviour
         SetGroupActive(messageGroup, true);
         SetEquipmentRewardGroupActive(false);
         SetGroupActive(itemAddupGroup, true);
+        SetBonusItemActive(false);
+        selectedItem = null;
+        selectedKarinItem = null;
+        SetConfirmButtonActive(false);
+        HideAllItemSelectionBackgrounds();
+        SetMergeStarsActive(0);
+        LockButtonsDuringMerge();
+    }
+
+    private void ShowSupporterPassiveResultStage()
+    {
+        SetGroupActive(victoryResultGroup, false);
+        SetGroupActive(messageGroup, true);
+        SetEquipmentRewardGroupActive(false);
+        SetGroupActive(itemAddupGroup, false);
+        SetBonusItemActive(false);
         selectedItem = null;
         selectedKarinItem = null;
         SetConfirmButtonActive(false);
@@ -264,6 +304,7 @@ public class CombatVictoryUIController : MonoBehaviour
         SetGroupActive(messageGroup, true);
         SetEquipmentRewardGroupActive(false);
         SetGroupActive(itemAddupGroup, false);
+        SetBonusItemActive(false);
         selectedItem = null;
         selectedKarinItem = null;
         SetConfirmButtonActive(false);
@@ -277,12 +318,19 @@ public class CombatVictoryUIController : MonoBehaviour
         SetGroupActive(messageGroup, false);
         SetEquipmentRewardGroupActive(false);
         SetGroupActive(itemAddupGroup, false);
+        SetBonusItemActive(false);
     }
 
     private void SetGroupActive(GameObject group, bool isActive)
     {
         if (group != null)
             group.SetActive(isActive);
+    }
+
+    private void SetBonusItemActive(bool isActive)
+    {
+        if (bonusItemImage != null)
+            bonusItemImage.gameObject.SetActive(isActive);
     }
 
     private void SetEquipmentRewardGroupActive(bool isActive)
@@ -392,9 +440,21 @@ public class CombatVictoryUIController : MonoBehaviour
             return;
         }
 
+        if (currentStep == VictoryStep.LeviathanGiftResult)
+        {
+            HandleLeviathanGiftMessageAdvance();
+            return;
+        }
+
         if (currentStep == VictoryStep.ItemMergeAnimation)
         {
             HandleMergeMessageAdvance();
+            return;
+        }
+
+        if (currentStep == VictoryStep.SupporterPassiveResult)
+        {
+            HandleSupporterPassiveMessageAdvance();
             return;
         }
 
@@ -960,6 +1020,16 @@ public class CombatVictoryUIController : MonoBehaviour
         return $"{itemName}\nItem changed.";
     }
 
+    private string BuildLeviathanGiftMessage(EquipmentItemData item)
+    {
+        string itemName = GetItemDisplayName(item);
+
+        if (string.IsNullOrEmpty(itemName))
+            itemName = "Item";
+
+        return $"\uB808\uBE44\uC544\uD0C4\uC758 \uD328\uC2DC\uBE0C \uBC1C\uB3D9!\n{itemName} \uD68D\uB4DD!";
+    }
+
     private string GetLocalizedOrFallback(string key, string fallback)
     {
         if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
@@ -1006,22 +1076,14 @@ public class CombatVictoryUIController : MonoBehaviour
             DevLog.LogWarning("[VictoryReward] PlayerManager.Instance is missing. Equipment reward skipped.");
             HideEquipmentRewardUI();
             HideAllStageGroups();
-            ReturnToExploration();
+            StartPostRewardPassivesOrReturn();
             return;
         }
 
         EquipmentItemData itemToAcquire = selectedItem;
         HideEquipmentRewardUI();
         List<ItemMergeResult> mergeResults = playerManager.AcquireItemAndGetMergeResults(itemToAcquire);
-
-        if (mergeResults != null && mergeResults.Count > 0)
-        {
-            StartItemMergeAnimations(mergeResults);
-            return;
-        }
-
-        HideAllStageGroups();
-        ReturnToExploration();
+        StartLeviathanGiftOrContinue(mergeResults);
     }
 
     private void OnClickConfirmKarinItemReward()
@@ -1043,6 +1105,82 @@ public class CombatVictoryUIController : MonoBehaviour
 
         ClearKarinItemSelectionState();
         StartEquipmentRewardSelection();
+    }
+
+    private void StartLeviathanGiftOrContinue(List<ItemMergeResult> baseMergeResults)
+    {
+        pendingMergeResults.Clear();
+
+        if (baseMergeResults != null && baseMergeResults.Count > 0)
+            pendingMergeResults.AddRange(baseMergeResults);
+
+        PlayerManager playerManager = PlayerManager.Instance;
+        currentLeviathanGiftResult = SupporterVictoryPassiveService.TryResolveLeviathanGift(playerManager, itemDatabase);
+
+        if (currentLeviathanGiftResult != null && currentLeviathanGiftResult.giftItem != null)
+        {
+            if (currentLeviathanGiftResult.mergeResults != null && currentLeviathanGiftResult.mergeResults.Count > 0)
+                pendingMergeResults.AddRange(currentLeviathanGiftResult.mergeResults);
+
+            StartLeviathanGiftResult(currentLeviathanGiftResult);
+            return;
+        }
+
+        ContinueAfterRewardItemAcquisition();
+    }
+
+    private void StartLeviathanGiftResult(LeviathanGiftResult giftResult)
+    {
+        currentStep = VictoryStep.LeviathanGiftResult;
+        ShowLeviathanGiftResultStage();
+
+        if (bonusItemImage != null)
+        {
+            bonusItemImage.sprite = giftResult.giftItem != null ? giftResult.giftItem.itemIcon : null;
+            bonusItemImage.gameObject.SetActive(giftResult.giftItem != null);
+        }
+
+        isWaitingForLeviathanGiftAdvance = false;
+        StartSingleMessage(BuildLeviathanGiftMessage(giftResult.giftItem));
+        StartCoroutine(WaitForLeviathanGiftMessageRoutine());
+    }
+
+    private IEnumerator WaitForLeviathanGiftMessageRoutine()
+    {
+        while (isTyping)
+            yield return null;
+
+        isWaitingForLeviathanGiftAdvance = true;
+        SetNextIndicatorActive(true);
+    }
+
+    private void HandleLeviathanGiftMessageAdvance()
+    {
+        if (isTyping)
+        {
+            CompleteCurrentMessage();
+            return;
+        }
+
+        if (isWaitingForLeviathanGiftAdvance)
+        {
+            isWaitingForLeviathanGiftAdvance = false;
+            SetBonusItemActive(false);
+            currentLeviathanGiftResult = null;
+            ContinueAfterRewardItemAcquisition();
+        }
+    }
+
+    private void ContinueAfterRewardItemAcquisition()
+    {
+        if (pendingMergeResults.Count > 0)
+        {
+            StartItemMergeAnimations(new List<ItemMergeResult>(pendingMergeResults));
+            return;
+        }
+
+        HideAllStageGroups();
+        StartPostRewardPassivesOrReturn();
     }
 
     private void HideEquipmentRewardUI()
@@ -1172,7 +1310,7 @@ public class CombatVictoryUIController : MonoBehaviour
         if (!CanPlayMergeAnimation())
         {
             DevLog.LogWarning("[VictoryReward] Item merge animation UI is not fully assigned. Skipping merge animation.");
-            ReturnToExploration();
+            StartPostRewardPassivesOrReturn();
             return;
         }
 
@@ -1187,13 +1325,82 @@ public class CombatVictoryUIController : MonoBehaviour
 
         if (mergeResultQueue.Count == 0)
         {
-            ReturnToExploration();
+            StartPostRewardPassivesOrReturn();
             return;
         }
 
         currentStep = VictoryStep.ItemMergeAnimation;
         ShowItemMergeAnimationStage();
         PlayNextMergeAnimationOrReturn();
+    }
+
+    private void StartPostRewardPassivesOrReturn()
+    {
+        if (PlayerManager.Instance == null)
+        {
+            ReturnToExploration();
+            return;
+        }
+
+        supporterPassiveResultQueue.Clear();
+        List<SupporterPassiveRewardResult> results = SupporterVictoryPassiveService.ResolvePostRewardPassives(PlayerManager.Instance);
+
+        if (results != null)
+        {
+            foreach (SupporterPassiveRewardResult result in results)
+            {
+                if (result != null && !string.IsNullOrEmpty(result.message))
+                    supporterPassiveResultQueue.Enqueue(result);
+            }
+        }
+
+        if (supporterPassiveResultQueue.Count == 0)
+        {
+            ReturnToExploration();
+            return;
+        }
+
+        currentStep = VictoryStep.SupporterPassiveResult;
+        ShowSupporterPassiveResultStage();
+        PlayNextSupporterPassiveMessageOrReturn();
+    }
+
+    private void PlayNextSupporterPassiveMessageOrReturn()
+    {
+        if (supporterPassiveResultQueue.Count == 0)
+        {
+            ReturnToExploration();
+            return;
+        }
+
+        isWaitingForSupporterPassiveAdvance = false;
+        SupporterPassiveRewardResult result = supporterPassiveResultQueue.Dequeue();
+        StartSingleMessage(result.message);
+        StartCoroutine(WaitForSupporterPassiveMessageRoutine());
+    }
+
+    private IEnumerator WaitForSupporterPassiveMessageRoutine()
+    {
+        while (isTyping)
+            yield return null;
+
+        isWaitingForSupporterPassiveAdvance = true;
+        SetNextIndicatorActive(true);
+    }
+
+    private void HandleSupporterPassiveMessageAdvance()
+    {
+        if (isTyping)
+        {
+            CompleteCurrentMessage();
+            return;
+        }
+
+        if (isWaitingForSupporterPassiveAdvance)
+        {
+            isWaitingForSupporterPassiveAdvance = false;
+            PlayNextSupporterPassiveMessageOrReturn();
+        }
     }
 
     private void StopMergeAnimation()
@@ -1207,7 +1414,12 @@ public class CombatVictoryUIController : MonoBehaviour
         isMergeMoving = false;
         skipMergeMoveRequested = false;
         isWaitingForMergeAdvance = false;
+        isWaitingForLeviathanGiftAdvance = false;
+        isWaitingForSupporterPassiveAdvance = false;
         mergeResultQueue.Clear();
+        pendingMergeResults.Clear();
+        supporterPassiveResultQueue.Clear();
+        currentLeviathanGiftResult = null;
     }
 
     private bool CanPlayMergeAnimation()
@@ -1225,7 +1437,7 @@ public class CombatVictoryUIController : MonoBehaviour
     {
         if (mergeResultQueue.Count == 0)
         {
-            ReturnToExploration();
+            StartPostRewardPassivesOrReturn();
             return;
         }
 
