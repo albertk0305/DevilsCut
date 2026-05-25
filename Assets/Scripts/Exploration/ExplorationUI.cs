@@ -225,7 +225,7 @@ public class ExplorationUI : MonoBehaviour
         if (PlayerManager.Instance == null)
             return false;
 
-        return PlayerManager.Instance.IsSupporterRecruited(facilityData.linkedSupporter);
+        return PlayerManager.Instance.IsSupporterChoiceResolved(facilityData.linkedSupporter);
     }
 
     public void OnClickCancel()

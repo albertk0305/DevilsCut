@@ -44,6 +44,14 @@ public class PlayerStats
     }
 }
 
+public enum PermanentStatType
+{
+    Strength,
+    Defense,
+    Speed,
+    Luck
+}
+
 [System.Serializable]
 public class OwnedItem
 {
@@ -144,6 +152,12 @@ public class PlayerManager : MonoBehaviour
     public Sprite savedLastVisitedNodeImage;
     public FacilityData savedLastVisitedFacility;
     public List<PlayerFacilityRankRecord> savedFacilityRanks = new List<PlayerFacilityRankRecord>();
+
+#if UNITY_EDITOR
+    [Header("Editor Debug")]
+    [SerializeField] private string debugFacilityID = "bar";
+    [SerializeField, Range(0, 3)] private int debugFacilityRank = 0;
+#endif
 
     public List<SkillData> GetSkillsByCategory(SkillCategory category)
     {
@@ -410,6 +424,35 @@ public class PlayerManager : MonoBehaviour
         return record != null ? Mathf.Clamp(record.rank, 0, 3) : 0;
     }
 
+#if UNITY_EDITOR
+    [ContextMenu("Debug/Set Facility Rank")]
+    private void DebugSetFacilityRank()
+    {
+        if (string.IsNullOrEmpty(debugFacilityID))
+            return;
+
+        int targetRank = Mathf.Clamp(debugFacilityRank, 0, 3);
+        PlayerFacilityRankRecord record = FindFacilityRankRecord(debugFacilityID);
+        if (record == null)
+        {
+            savedFacilityRanks.Add(new PlayerFacilityRankRecord
+            {
+                facilityID = debugFacilityID,
+                rank = targetRank
+            });
+        }
+        else
+        {
+            record.rank = targetRank;
+        }
+
+        if (ExplorationManager.Instance != null)
+            ExplorationManager.Instance.facilityRanks[debugFacilityID] = targetRank;
+
+        DevLog.Log($"[PlayerManager Debug] Facility rank set. facilityID={debugFacilityID}, rank={targetRank}");
+    }
+#endif
+
     public void SetCurrentFacilityVisit(string facilityID)
     {
         currentFacilityID = facilityID;
@@ -528,6 +571,32 @@ public class PlayerManager : MonoBehaviour
         if (stats.currentHp < 0) stats.currentHp = 0;
 
         DevLog.Log($"플레이어가 {damage}의 피해를 입었습니다. 남은 체력: {stats.currentHp}");
+    }
+
+    public void AddPermanentStat(PermanentStatType statType, int amount)
+    {
+        switch (statType)
+        {
+            case PermanentStatType.Strength:
+                stats.strength = Mathf.Max(1, stats.strength + amount);
+                break;
+            case PermanentStatType.Defense:
+                stats.defense = Mathf.Max(1, stats.defense + amount);
+                break;
+            case PermanentStatType.Speed:
+                stats.speed = Mathf.Max(1, stats.speed + amount);
+                break;
+            case PermanentStatType.Luck:
+                stats.luck = Mathf.Max(1, stats.luck + amount);
+                break;
+        }
+    }
+
+    public int RecoverCurrentHpToEffectiveMax()
+    {
+        int effectiveMaxHp = GetItemModifiedStats().maxHp;
+        stats.currentHp = Mathf.Max(1, effectiveMaxHp);
+        return stats.currentHp;
     }
 
     public float GetReflectRatio()
