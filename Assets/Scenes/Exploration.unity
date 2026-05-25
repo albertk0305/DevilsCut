@@ -2855,7 +2855,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0510bba5566c3e449988d77a65541805, type: 2}
   lastVisitedFacility: {fileID: 0}
   lastVisitedNodeImage: {fileID: 0}
-  currentPhase: 2
+  currentPhase: 3
   currentCycle: 1
   currentTurnInPhase: 0
   currentKeys: 0
@@ -4941,6 +4941,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 393f560ec2c52ed45bbb5f5324003c40, type: 2}
   - {fileID: 11400000, guid: 2953981cd2e43c94c915f020e05321a7, type: 2}
   - {fileID: 11400000, guid: af7d8462d6487cd42bee89ce9f4cb076, type: 2}
+  supporterChoiceRecords: []
   activeSupporter: {fileID: 11400000, guid: 393f560ec2c52ed45bbb5f5324003c40, type: 2}
   ownedKarinItems:
   - {fileID: 11400000, guid: 3af5d2d3d0ac65e4e81a7df77f56e141, type: 2}
@@ -4965,6 +4966,9 @@ MonoBehaviour:
   pendingAdvanceBattleTurn: 0
   pendingBattleType: 0
   pendingBattlePhase: 0
+  pendingDialogueData: {fileID: 0}
+  pendingSupporterChoice: {fileID: 0}
+  pendingDialogueReturnSceneName: 
   unlockedSkills: []
   defaultSkills: []
   defaultKarinItems: []

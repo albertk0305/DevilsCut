@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 [Serializable]
@@ -99,6 +99,7 @@ public class SavedSupporterState
     public string supporterID;
     public bool unlocked;
     public bool active;
+    public SupporterChoiceState choiceState;
     public int passiveLevel;
     public int startSkillLevel;
     public int battleSkillLevel;

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
@@ -83,6 +83,7 @@ public class CombatVictoryUIController : MonoBehaviour
 
     [Header("Scenes")]
     [SerializeField] private string explorationSceneName = "Exploration";
+    [SerializeField] private string dialogueSceneName = "DialogueScene";
 
     private readonly Queue<string> messageQueue = new Queue<string>();
     private readonly Queue<ItemMergeResult> mergeResultQueue = new Queue<ItemMergeResult>();
@@ -1820,6 +1821,7 @@ public class CombatVictoryUIController : MonoBehaviour
         if (isContinuing)
             return;
 
+        string nextSceneName = ResolvePostVictorySceneName();
         isContinuing = true;
         IsVictoryUIActive = false;
         StopMergeAnimation();
@@ -1828,6 +1830,48 @@ public class CombatVictoryUIController : MonoBehaviour
         SetMergeStarsActive(0);
 
         Time.timeScale = 1f;
-        SceneManager.LoadScene(explorationSceneName);
+        SceneManager.LoadScene(nextSceneName);
+    }
+
+    private string ResolvePostVictorySceneName()
+    {
+        if (TryPreparePostBossDialogue())
+            return dialogueSceneName;
+
+        return explorationSceneName;
+    }
+
+    private bool TryPreparePostBossDialogue()
+    {
+        PlayerManager playerManager = PlayerManager.Instance;
+        if (playerManager == null)
+            return false;
+
+        if (playerManager.currentBattleType != BattleType.Boss
+            || playerManager.currentBattlePhase < 1
+            || playerManager.currentBattlePhase > 7)
+        {
+            return false;
+        }
+
+        BossEncounterData bossEncounter = playerManager.savedCurrentTargetBoss;
+        if (bossEncounter == null)
+        {
+            DevLog.LogWarning("[VictoryReward] Post boss dialogue skipped: current boss encounter is missing.");
+            return false;
+        }
+
+        if (bossEncounter.postBossDialogue == null || bossEncounter.imprisonedSupporter == null)
+            return false;
+
+        if (playerManager.IsSupporterChoiceResolved(bossEncounter.imprisonedSupporter))
+            return false;
+
+        playerManager.SetPendingSupporterDialogue(
+            bossEncounter.postBossDialogue,
+            bossEncounter.imprisonedSupporter,
+            explorationSceneName);
+
+        return true;
     }
 }

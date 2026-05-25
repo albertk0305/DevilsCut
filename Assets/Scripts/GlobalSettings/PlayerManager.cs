@@ -68,6 +68,14 @@ public class ItemMergeResult
         this.resultStarLevel = resultStarLevel;
     }
 }
+
+[System.Serializable]
+public class SupporterChoiceRecord
+{
+    public string supporterID;
+    public SupporterChoiceState state;
+}
+
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
@@ -77,6 +85,7 @@ public class PlayerManager : MonoBehaviour
 
     [Header("조력자 파티 관리")]
     public List<SupporterData> unlockedSupporters = new List<SupporterData>();
+    public List<SupporterChoiceRecord> supporterChoiceRecords = new List<SupporterChoiceRecord>();
 
     public SupporterData activeSupporter = null;
 
@@ -99,6 +108,11 @@ public class PlayerManager : MonoBehaviour
     public bool pendingAdvanceBattleTurn;
     public BattleType pendingBattleType;
     public int pendingBattlePhase;
+
+    [Header("Pending Dialogue")]
+    public DialogueData pendingDialogueData;
+    public SupporterData pendingSupporterChoice;
+    public string pendingDialogueReturnSceneName;
 
     [Header("플레이어 해금 스킬")]
     public List<SkillData> unlockedSkills = new List<SkillData>();
@@ -180,6 +194,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         unlockedSupporters.Clear();
+        supporterChoiceRecords.Clear();
         activeSupporter = null;
 
         ownedKarinItems.Clear();
@@ -210,6 +225,7 @@ public class PlayerManager : MonoBehaviour
         pendingAdvanceBattleTurn = false;
         pendingBattleType = default;
         pendingBattlePhase = 0;
+        ClearPendingDialogue();
 
         hasSavedExplorationState = false;
         savedExplorationPhase = GamePhase.BossSelection;
@@ -221,6 +237,163 @@ public class PlayerManager : MonoBehaviour
         savedLastVisitedFacility = null;
 
         DevLog.Log("[PlayerManager] 새 게임 상태로 초기화했습니다.");
+    }
+
+    public SupporterChoiceState GetSupporterChoiceState(string supporterID)
+    {
+        if (string.IsNullOrEmpty(supporterID))
+            return SupporterChoiceState.Undecided;
+
+        SupporterChoiceRecord record = FindSupporterChoiceRecord(supporterID);
+        if (record != null)
+            return record.state;
+
+        if (IsSupporterUnlocked(supporterID))
+            return SupporterChoiceState.Recruited;
+
+        return SupporterChoiceState.Undecided;
+    }
+
+    public SupporterChoiceState GetSupporterChoiceState(SupporterData supporter)
+    {
+        return GetSupporterChoiceState(supporter != null ? supporter.supporterID : null);
+    }
+
+    public bool IsSupporterRecruited(string supporterID)
+    {
+        return GetSupporterChoiceState(supporterID) == SupporterChoiceState.Recruited;
+    }
+
+    public bool IsSupporterRecruited(SupporterData supporter)
+    {
+        return IsSupporterRecruited(supporter != null ? supporter.supporterID : null);
+    }
+
+    public bool IsSupporterRejected(string supporterID)
+    {
+        return GetSupporterChoiceState(supporterID) == SupporterChoiceState.Rejected;
+    }
+
+    public bool IsSupporterRejected(SupporterData supporter)
+    {
+        return IsSupporterRejected(supporter != null ? supporter.supporterID : null);
+    }
+
+    public bool IsSupporterChoiceResolved(string supporterID)
+    {
+        SupporterChoiceState state = GetSupporterChoiceState(supporterID);
+        return state == SupporterChoiceState.Recruited || state == SupporterChoiceState.Rejected;
+    }
+
+    public bool IsSupporterChoiceResolved(SupporterData supporter)
+    {
+        return IsSupporterChoiceResolved(supporter != null ? supporter.supporterID : null);
+    }
+
+    public bool RecruitSupporter(SupporterData supporter)
+    {
+        if (supporter == null || string.IsNullOrEmpty(supporter.supporterID))
+            return false;
+
+        SupporterChoiceState currentState = GetSupporterChoiceState(supporter.supporterID);
+        if (currentState == SupporterChoiceState.Recruited || currentState == SupporterChoiceState.Rejected)
+            return false;
+
+        SetSupporterChoiceState(supporter.supporterID, SupporterChoiceState.Recruited);
+
+        if (!IsSupporterUnlocked(supporter.supporterID))
+            unlockedSupporters.Add(supporter);
+
+        return true;
+    }
+
+    public bool RejectSupporter(SupporterData supporter)
+    {
+        if (supporter == null || string.IsNullOrEmpty(supporter.supporterID))
+            return false;
+
+        SupporterChoiceState currentState = GetSupporterChoiceState(supporter.supporterID);
+        if (currentState == SupporterChoiceState.Recruited || currentState == SupporterChoiceState.Rejected)
+            return false;
+
+        SetSupporterChoiceState(supporter.supporterID, SupporterChoiceState.Rejected);
+
+        if (activeSupporter != null && activeSupporter.supporterID == supporter.supporterID)
+            activeSupporter = null;
+
+        stats.rejectedSupporterCount += 1;
+        return true;
+    }
+
+    public void SetSupporterChoiceState(string supporterID, SupporterChoiceState state)
+    {
+        if (string.IsNullOrEmpty(supporterID))
+            return;
+
+        SupporterChoiceRecord record = FindSupporterChoiceRecord(supporterID);
+        if (record == null)
+        {
+            supporterChoiceRecords.Add(new SupporterChoiceRecord
+            {
+                supporterID = supporterID,
+                state = state
+            });
+            return;
+        }
+
+        record.state = state;
+    }
+
+    public void SetPendingSupporterDialogue(DialogueData dialogueData, SupporterData supporter, string returnSceneName)
+    {
+        pendingDialogueData = dialogueData;
+        pendingSupporterChoice = supporter;
+        pendingDialogueReturnSceneName = returnSceneName;
+    }
+
+    public void ClearPendingDialogue()
+    {
+        pendingDialogueData = null;
+        pendingSupporterChoice = null;
+        pendingDialogueReturnSceneName = "";
+    }
+
+    public bool HasPendingDialogue()
+    {
+        return pendingDialogueData != null;
+    }
+
+    public bool HasPendingSupporterChoice()
+    {
+        return pendingDialogueData != null && pendingSupporterChoice != null;
+    }
+
+    private SupporterChoiceRecord FindSupporterChoiceRecord(string supporterID)
+    {
+        if (supporterChoiceRecords == null || string.IsNullOrEmpty(supporterID))
+            return null;
+
+        foreach (SupporterChoiceRecord record in supporterChoiceRecords)
+        {
+            if (record != null && record.supporterID == supporterID)
+                return record;
+        }
+
+        return null;
+    }
+
+    private bool IsSupporterUnlocked(string supporterID)
+    {
+        if (unlockedSupporters == null || string.IsNullOrEmpty(supporterID))
+            return false;
+
+        foreach (SupporterData supporter in unlockedSupporters)
+        {
+            if (supporter != null && supporter.supporterID == supporterID)
+                return true;
+        }
+
+        return false;
     }
     public void TakeDamage(int damage)
     {

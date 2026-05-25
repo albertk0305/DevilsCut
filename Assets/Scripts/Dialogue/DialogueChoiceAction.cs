@@ -1,0 +1,7 @@
+﻿public enum DialogueChoiceAction
+{
+    None,
+    LoadNextScene,
+    RecruitPendingSupporter,
+    RejectPendingSupporter
+}

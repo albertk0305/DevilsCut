@@ -12552,6 +12552,7 @@ MonoBehaviour:
   - {fileID: 2034625057}
   - {fileID: 150014122}
   explorationSceneName: Exploration
+  dialogueSceneName: Story
 --- !u!1 &1024095176
 GameObject:
   m_ObjectHideFlags: 0

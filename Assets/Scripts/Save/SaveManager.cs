@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -434,19 +434,56 @@ public class SaveManager : MonoBehaviour
             });
         }
 
+        Dictionary<string, SavedSupporterState> savedSupportersById = new Dictionary<string, SavedSupporterState>();
+
         foreach (SupporterData supporter in playerManager.unlockedSupporters)
         {
             if (supporter == null)
                 continue;
 
-            data.supporters.Add(new SavedSupporterState
+            SavedSupporterState savedSupporter = new SavedSupporterState
             {
                 supporterID = supporter.supporterID,
                 unlocked = true,
                 active = supporter == playerManager.activeSupporter,
+                choiceState = SupporterChoiceState.Recruited,
                 passiveLevel = supporter.passiveLevel,
                 startSkillLevel = supporter.startSkillLevel,
                 battleSkillLevel = supporter.battleSkillLevel
+            };
+
+            data.supporters.Add(savedSupporter);
+            if (!string.IsNullOrEmpty(savedSupporter.supporterID))
+                savedSupportersById[savedSupporter.supporterID] = savedSupporter;
+        }
+
+        foreach (SupporterChoiceRecord record in playerManager.supporterChoiceRecords)
+        {
+            if (record == null || string.IsNullOrEmpty(record.supporterID))
+                continue;
+
+            if (record.state == SupporterChoiceState.Undecided)
+                continue;
+
+            if (savedSupportersById.TryGetValue(record.supporterID, out SavedSupporterState savedSupporter))
+            {
+                if (savedSupporter.unlocked)
+                    savedSupporter.choiceState = SupporterChoiceState.Recruited;
+                else
+                    savedSupporter.choiceState = record.state;
+
+                continue;
+            }
+
+            data.supporters.Add(new SavedSupporterState
+            {
+                supporterID = record.supporterID,
+                unlocked = false,
+                active = false,
+                choiceState = record.state,
+                passiveLevel = 1,
+                startSkillLevel = 1,
+                battleSkillLevel = 1
             });
         }
 
@@ -563,6 +600,7 @@ public class SaveManager : MonoBehaviour
         }
 
         playerManager.unlockedSupporters.Clear();
+        playerManager.supporterChoiceRecords.Clear();
         playerManager.activeSupporter = null;
         foreach (SavedSupporterState savedSupporter in data.supporters ?? new List<SavedSupporterState>())
         {
@@ -572,6 +610,15 @@ public class SaveManager : MonoBehaviour
                 DevLog.LogWarning($"[Save] Supporter not found: {savedSupporter.supporterID}");
                 continue;
             }
+
+            SupporterChoiceState choiceState = NormalizeSupporterChoiceState(savedSupporter);
+            playerManager.SetSupporterChoiceState(savedSupporter.supporterID, choiceState);
+
+            if (choiceState == SupporterChoiceState.Rejected)
+                continue;
+
+            if (choiceState != SupporterChoiceState.Recruited)
+                continue;
 
             SupporterData runtimeSupporter = Instantiate(supporter);
             runtimeSupporter.passiveLevel = Mathf.Clamp(savedSupporter.passiveLevel, 1, 3);
@@ -643,6 +690,17 @@ public class SaveManager : MonoBehaviour
         }
 
         return restored;
+    }
+
+    private SupporterChoiceState NormalizeSupporterChoiceState(SavedSupporterState savedSupporter)
+    {
+        if (savedSupporter == null)
+            return SupporterChoiceState.Undecided;
+
+        if (savedSupporter.choiceState == SupporterChoiceState.Undecided && savedSupporter.unlocked)
+            return SupporterChoiceState.Recruited;
+
+        return savedSupporter.choiceState;
     }
 
     private EquipmentItemData FindEquipmentItem(string itemID)

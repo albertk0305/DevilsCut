@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewBossEncounter", menuName = "GameData/BossEncounter")]
 public class BossEncounterData : ScriptableObject
@@ -10,4 +10,8 @@ public class BossEncounterData : ScriptableObject
     public Sprite nodeIcon;
     public Sprite defaultSD;
     public Sprite readySD;
+
+    [Header("Post Boss Dialogue")]
+    public SupporterData imprisonedSupporter;
+    public DialogueData postBossDialogue;
 }

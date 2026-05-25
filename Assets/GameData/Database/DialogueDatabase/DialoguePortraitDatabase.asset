@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e3a6e8686b48e4d8f00219f8e6c605, type: 3}
+  m_Name: DialoguePortraitDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::DialoguePortraitDatabase
+  speakers:
+  - speakerID: sherry
+    speakerNameKey: character.sherry.name
+  - speakerID: asmodeus
+    speakerNameKey: character.asmodeus.name
+  portraits:
+  - actorID: sherry
+    expressionID: normal
+    portraitSprite: {fileID: 21300000, guid: 80f59ac506b068846840d8caf06bf2fb, type: 3}
+  - actorID: sherry
+    expressionID: surprised
+    portraitSprite: {fileID: 21300000, guid: 357640688a1b61949be7fb0b44e3ef55, type: 3}
+  - actorID: sherry
+    expressionID: angry
+    portraitSprite: {fileID: 21300000, guid: 01f18b61a12ac114fa6291d31c7d1bed, type: 3}
+  - actorID: sherry
+    expressionID: happy
+    portraitSprite: {fileID: 21300000, guid: 9a63e8f983585bd498bc8b6c301fb8c9, type: 3}
+  - actorID: sherry
+    expressionID: smirk
+    portraitSprite: {fileID: 21300000, guid: 5218d133fe84dbe4690063df0b9547cc, type: 3}
+  - actorID: asmodeus
+    expressionID: happy
+    portraitSprite: {fileID: 21300000, guid: 476b6b5c4d8c26746bab3b3d24e793c8, type: 3}
+  - actorID: asmodeus
+    expressionID: smirk
+    portraitSprite: {fileID: 21300000, guid: 70b485d0a6158374ebcef76937f93bd4, type: 3}
+  - actorID: asmodeus
+    expressionID: serious
+    portraitSprite: {fileID: 21300000, guid: 99664e35c28095645bfa2045a317d26c, type: 3}
+  - actorID: asmodeus
+    expressionID: normal
+    portraitSprite: {fileID: 21300000, guid: 9310ea1addd46bf4686f793a13674af4, type: 3}
+  - actorID: asmodeus
+    expressionID: angry
+    portraitSprite: {fileID: 21300000, guid: d7e610e128ea5e642acd9e11d940c49e, type: 3}
+  - actorID: asmodeus
+    expressionID: surprised
+    portraitSprite: {fileID: 21300000, guid: fbd16a5e6bb7eec49aee26d47af9dcab, type: 3}
