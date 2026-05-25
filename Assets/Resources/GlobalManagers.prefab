@@ -105,11 +105,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9725619daf76abb45848508807a510f2, type: 2}
   - {fileID: 11400000, guid: 324e8b7827f679846a1984c00523c40e, type: 2}
   - {fileID: 11400000, guid: 393f560ec2c52ed45bbb5f5324003c40, type: 2}
-  - {fileID: 11400000, guid: 2953981cd2e43c94c915f020e05321a7, type: 2}
   - {fileID: 11400000, guid: bd08381fb5564414e8ed224539a6fe9c, type: 2}
   - {fileID: 11400000, guid: af7d8462d6487cd42bee89ce9f4cb076, type: 2}
   supporterChoiceRecords:
   - supporterID: asmodeus
+    state: 0
+  - supporterID: lucifer
     state: 0
   activeSupporter: {fileID: 11400000, guid: 324e8b7827f679846a1984c00523c40e, type: 2}
   ownedKarinItems:
@@ -226,6 +227,7 @@ MonoBehaviour:
   savedCurrentTargetBoss: {fileID: 0}
   savedLastVisitedNodeImage: {fileID: 0}
   savedLastVisitedFacility: {fileID: 0}
+  savedFacilityRanks: []
 --- !u!114 &4950642224689884447
 MonoBehaviour:
   m_ObjectHideFlags: 0
