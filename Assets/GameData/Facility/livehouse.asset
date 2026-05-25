@@ -17,3 +17,7 @@ MonoBehaviour:
   operatorName: leviathan
   operatorImage: {fileID: 21300000, guid: 1c9240fd690bcde4b86817c73c9502b7, type: 3}
   operatorSmileImage: {fileID: 21300000, guid: 1d4014b65dffe4441977e05b8a43e50b, type: 3}
+  linkedSupporter: {fileID: 11400000, guid: 393f560ec2c52ed45bbb5f5324003c40, type: 2}
+  rank0To1Dialogue: {fileID: 0}
+  rank1To2Dialogue: {fileID: 0}
+  rank2To3Dialogue: {fileID: 0}

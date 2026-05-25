@@ -379,6 +379,9 @@ public class DialogueController : MonoBehaviour
             case DialogueChoiceAction.RejectPendingSupporter:
                 ResolvePendingSupporterChoice(isRecruit: false);
                 return false;
+            case DialogueChoiceAction.UpgradePendingFacilityRank:
+                UpgradePendingFacilityRank();
+                return false;
             default:
                 return false;
         }
@@ -446,6 +449,27 @@ public class DialogueController : MonoBehaviour
             : playerManager.RejectSupporter(supporter);
 
         DevLog.Log($"[Dialogue] Pending supporter {(isRecruit ? "recruit" : "reject")} result: supporterID={supporter.supporterID}, success={success}");
+    }
+
+    private void UpgradePendingFacilityRank()
+    {
+        PlayerManager playerManager = PlayerManager.Instance;
+        if (playerManager == null)
+        {
+            DevLog.LogWarning("[Dialogue] PlayerManager.Instance is missing. Pending facility rank upgrade skipped.");
+            return;
+        }
+
+        if (!playerManager.HasPendingFacilityUpgrade())
+        {
+            DevLog.LogWarning("[Dialogue] Pending facility rank upgrade is missing or invalid.");
+            return;
+        }
+
+        string facilityID = playerManager.pendingFacilityID;
+        int targetRank = playerManager.pendingFacilityTargetRank;
+        playerManager.EnsureFacilityRankAtLeast(facilityID, targetRank);
+        DevLog.Log($"[Dialogue] Pending facility rank upgrade applied: facilityID={facilityID}, targetRank={targetRank}");
     }
 
     private void LoadSceneOrWarn(string sceneName)

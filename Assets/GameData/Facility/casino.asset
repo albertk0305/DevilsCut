@@ -17,3 +17,7 @@ MonoBehaviour:
   operatorName: belphegor
   operatorImage: {fileID: 21300000, guid: 154f4c0b671e36d46abac7c981cc928e, type: 3}
   operatorSmileImage: {fileID: 21300000, guid: d3750f8a2c810054497210cee59981f1, type: 3}
+  linkedSupporter: {fileID: 11400000, guid: 324e8b7827f679846a1984c00523c40e, type: 2}
+  rank0To1Dialogue: {fileID: 0}
+  rank1To2Dialogue: {fileID: 0}
+  rank2To3Dialogue: {fileID: 0}

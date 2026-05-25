@@ -2855,7 +2855,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0510bba5566c3e449988d77a65541805, type: 2}
   lastVisitedFacility: {fileID: 0}
   lastVisitedNodeImage: {fileID: 0}
-  currentPhase: 3
+  currentPhase: 1
   currentCycle: 1
   currentTurnInPhase: 0
   currentKeys: 0
@@ -3738,6 +3738,7 @@ MonoBehaviour:
   - {fileID: 714054176}
   statusCanvas: {fileID: 368076949}
   settingsCanvas: {fileID: 1369678688}
+  dialogueSceneName: Story
   encounterBuilder: {fileID: 1223019334}
 --- !u!1 &1610099446
 GameObject:
@@ -4883,119 +4884,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736599055}
   m_CullTransparentMesh: 1
---- !u!1 &1744572010
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1744572012}
-  - component: {fileID: 1744572011}
-  m_Layer: 0
-  m_Name: PlayerManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1744572011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744572010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c497f5ed35e69a4292f4ec94e2ce7f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
-  stats:
-    level: 4
-    maxExp: 100
-    currentExp: 0
-    maxHp: 100
-    currentHp: 100
-    ActionPoints: 5
-    breakResistance: 50
-    maxBreakGauge: 100
-    strength: 10
-    defense: 10
-    speed: 10
-    luck: 5
-    currentGold: 0
-    rejectedSupporterCount: 0
-    finalDamageAmp: 0
-    finalDamageReduction: 0
-    critRate: 0
-    critDamage: 1.5
-    lifeSteal: 0
-    trueDamageConversion: 0
-    bonusAccuracy: 0
-    bonusEvasion: 0
-    healingReceivedAmp: 0
-  unlockedSupporters:
-  - {fileID: 11400000, guid: 8f7a108444158544399cf83ab876c34c, type: 2}
-  - {fileID: 11400000, guid: 393f560ec2c52ed45bbb5f5324003c40, type: 2}
-  - {fileID: 11400000, guid: 2953981cd2e43c94c915f020e05321a7, type: 2}
-  - {fileID: 11400000, guid: af7d8462d6487cd42bee89ce9f4cb076, type: 2}
-  supporterChoiceRecords: []
-  activeSupporter: {fileID: 11400000, guid: 393f560ec2c52ed45bbb5f5324003c40, type: 2}
-  ownedKarinItems:
-  - {fileID: 11400000, guid: 3af5d2d3d0ac65e4e81a7df77f56e141, type: 2}
-  - {fileID: 11400000, guid: d405f17abc2742149b80600dc920f8c5, type: 2}
-  - {fileID: 11400000, guid: 9b7308b56b83bb8469dade9747e954b2, type: 2}
-  - {fileID: 11400000, guid: a4759aa82ffe2ae4bbcd1eafc2f5c708, type: 2}
-  - {fileID: 11400000, guid: ee08a3142e465344bb0b5ce2ecf26cea, type: 2}
-  - {fileID: 11400000, guid: f1679ae638bd6a94290335984c575777, type: 2}
-  - {fileID: 11400000, guid: 226ff48a23df1a04990fd302ff36e7da, type: 2}
-  - {fileID: 11400000, guid: 44ea8ddbf190c1b4aa60370fa23be87d, type: 2}
-  - {fileID: 11400000, guid: acd1785fe78e23e4cb3b5b30efb571bd, type: 2}
-  - {fileID: 11400000, guid: 56c51a8b624cf964a95c6d31b09b7ffe, type: 2}
-  equippedKarinItem: {fileID: 11400000, guid: 3af5d2d3d0ac65e4e81a7df77f56e141, type: 2}
-  inventory: []
-  currentEnemyToFight: {fileID: 0}
-  currentBattleReward:
-    exp: 0
-    gold: 0
-    keys: 0
-  currentBattleType: 0
-  currentBattlePhase: 0
-  pendingAdvanceBattleTurn: 0
-  pendingBattleType: 0
-  pendingBattlePhase: 0
-  pendingDialogueData: {fileID: 0}
-  pendingSupporterChoice: {fileID: 0}
-  pendingDialogueReturnSceneName: 
-  unlockedSkills: []
-  defaultSkills: []
-  defaultKarinItems: []
-  defaultEquippedKarinItem: {fileID: 0}
-  hasSavedExplorationState: 0
-  savedExplorationPhase: 0
-  savedExplorationCycle: 0
-  savedExplorationTurnInPhase: 0
-  savedExplorationKeys: 0
-  savedCurrentTargetBoss: {fileID: 0}
-  savedLastVisitedNodeImage: {fileID: 0}
-  savedLastVisitedFacility: {fileID: 0}
---- !u!4 &1744572012
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744572010}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 449.26013, y: 271.08026, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1804381207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5965,4 +5853,3 @@ SceneRoots:
   - {fileID: 1223019333}
   - {fileID: 831301483238521810}
   - {fileID: 6687079180986405092}
-  - {fileID: 1744572012}

@@ -3,5 +3,6 @@
     None,
     LoadNextScene,
     RecruitPendingSupporter,
-    RejectPendingSupporter
+    RejectPendingSupporter,
+    UpgradePendingFacilityRank
 }

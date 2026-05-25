@@ -1,7 +1,7 @@
 key	ko	en
-character.sherry.name	슈리	Sherry
+character.sherry.name	셰리	Sherry
 character.asmodeus.name	아스모데우스	Asmodeus
-character.unknown.name	???	???
+character.lucifer.name	루시퍼	Lucifer
 story.test.001.text	여기가... 데빌스 컷?	This is... Devil's Cut?
 story.test.002.text	누구야? 방금 목소리는 네가 낸 거야?	Who are you? Was that your voice just now?
 story.test.003.text	후후, 드디어 눈을 떴구나.	Hehe. You finally opened your eyes.
@@ -16,3 +16,7 @@ story.test.recruit.001.text	후후, 좋은 선택이야. 이제부터 네 곁에
 story.test.recruit.002.text	괜히 불안해지는 말투인데... 그래도 부탁할게.	That wording makes me nervous... but I’ll count on you.
 story.test.reject.001.text	...그래. 그것도 네 선택이겠지.	...I see. That is also your choice.
 story.test.reject.002.text	미안. 하지만 난 아직 널 믿을 수 없어.	Sorry. But I still cannot trust you.
+facility.bar.rank0.001.text	여기가 네가 말한 바야?	So this is the bar you mentioned?
+facility.bar.rank0.002.text	아직은 조용하지. 하지만 네가 오면 이야기가 달라져.	Quiet for now. But that changes when you arrive.
+facility.bar.rank0.levelup.text	루시퍼와의 유대가 더욱 깊어졌다! 바 시설 레벨이 1로 상승!	Your bond with Lucifer deepened! Bar facility level increased to 1!
+facility.bar.rank0.after.text	자, 그럼 한 잔 고를 시간이다.	Now then, time to choose a drink.

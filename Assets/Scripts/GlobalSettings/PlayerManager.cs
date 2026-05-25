@@ -119,6 +119,8 @@ public class PlayerManager : MonoBehaviour
     [Header("Pending Dialogue")]
     public DialogueData pendingDialogueData;
     public SupporterData pendingSupporterChoice;
+    public string pendingFacilityID;
+    public int pendingFacilityTargetRank;
     public string pendingDialogueReturnSceneName;
 
     [Header("플레이어 해금 스킬")]
@@ -234,6 +236,7 @@ public class PlayerManager : MonoBehaviour
         pendingBattleType = default;
         pendingBattlePhase = 0;
         ClearPendingDialogue();
+        ClearPendingFacilityUpgrade();
 
         hasSavedExplorationState = false;
         savedExplorationPhase = GamePhase.BossSelection;
@@ -312,9 +315,6 @@ public class PlayerManager : MonoBehaviour
 
         if (!IsSupporterUnlocked(supporter.supporterID))
             unlockedSupporters.Add(supporter);
-
-        if (!string.IsNullOrEmpty(supporter.linkedFacilityID))
-            EnsureFacilityRankAtLeast(supporter.linkedFacilityID, 1);
 
         return true;
     }
@@ -418,6 +418,16 @@ public class PlayerManager : MonoBehaviour
     {
         pendingDialogueData = dialogueData;
         pendingSupporterChoice = supporter;
+        ClearPendingFacilityUpgrade();
+        pendingDialogueReturnSceneName = returnSceneName;
+    }
+
+    public void SetPendingFacilityUpgradeDialogue(DialogueData dialogueData, string facilityID, int targetRank, string returnSceneName)
+    {
+        pendingDialogueData = dialogueData;
+        pendingSupporterChoice = null;
+        pendingFacilityID = facilityID;
+        pendingFacilityTargetRank = Mathf.Clamp(targetRank, 0, 3);
         pendingDialogueReturnSceneName = returnSceneName;
     }
 
@@ -425,6 +435,7 @@ public class PlayerManager : MonoBehaviour
     {
         pendingDialogueData = null;
         pendingSupporterChoice = null;
+        ClearPendingFacilityUpgrade();
         pendingDialogueReturnSceneName = "";
     }
 
@@ -436,6 +447,19 @@ public class PlayerManager : MonoBehaviour
     public bool HasPendingSupporterChoice()
     {
         return pendingDialogueData != null && pendingSupporterChoice != null;
+    }
+
+    public bool HasPendingFacilityUpgrade()
+    {
+        return pendingDialogueData != null
+            && !string.IsNullOrEmpty(pendingFacilityID)
+            && pendingFacilityTargetRank > 0;
+    }
+
+    public void ClearPendingFacilityUpgrade()
+    {
+        pendingFacilityID = "";
+        pendingFacilityTargetRank = 0;
     }
 
     private SupporterChoiceRecord FindSupporterChoiceRecord(string supporterID)

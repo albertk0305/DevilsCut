@@ -86,7 +86,7 @@ MonoBehaviour:
     ActionPoints: 10
     breakResistance: 50
     maxBreakGauge: 100
-    strength: 200
+    strength: 400
     defense: 20
     speed: 20
     luck: 20
@@ -101,18 +101,13 @@ MonoBehaviour:
     bonusAccuracy: 0
     bonusEvasion: 0
     healingReceivedAmp: 0
-  unlockedSupporters:
-  - {fileID: 11400000, guid: 9725619daf76abb45848508807a510f2, type: 2}
-  - {fileID: 11400000, guid: 324e8b7827f679846a1984c00523c40e, type: 2}
-  - {fileID: 11400000, guid: 393f560ec2c52ed45bbb5f5324003c40, type: 2}
-  - {fileID: 11400000, guid: bd08381fb5564414e8ed224539a6fe9c, type: 2}
-  - {fileID: 11400000, guid: af7d8462d6487cd42bee89ce9f4cb076, type: 2}
+  unlockedSupporters: []
   supporterChoiceRecords:
   - supporterID: asmodeus
     state: 0
   - supporterID: lucifer
-    state: 0
-  activeSupporter: {fileID: 11400000, guid: 324e8b7827f679846a1984c00523c40e, type: 2}
+    state: 1
+  activeSupporter: {fileID: 0}
   ownedKarinItems:
   - {fileID: 11400000, guid: 1f62c13dc91f5f34e8003534a0fe132f, type: 2}
   equippedKarinItem: {fileID: 11400000, guid: 1f62c13dc91f5f34e8003534a0fe132f, type: 2}
@@ -173,6 +168,8 @@ MonoBehaviour:
   pendingBattlePhase: 0
   pendingDialogueData: {fileID: 0}
   pendingSupporterChoice: {fileID: 0}
+  pendingFacilityID: 
+  pendingFacilityTargetRank: 0
   pendingDialogueReturnSceneName: 
   unlockedSkills:
   - {fileID: 11400000, guid: 6f76bd2b0cc4916469f2ca32aba944e9, type: 2}

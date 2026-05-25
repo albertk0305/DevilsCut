@@ -17,3 +17,7 @@ MonoBehaviour:
   operatorName: asmodeus
   operatorImage: {fileID: 21300000, guid: e591bdb9608cb634481a4bb2e950e547, type: 3}
   operatorSmileImage: {fileID: 21300000, guid: 1b77c03cdae53ab41bf54ffa8748f742, type: 3}
+  linkedSupporter: {fileID: 11400000, guid: 8f7a108444158544399cf83ab876c34c, type: 2}
+  rank0To1Dialogue: {fileID: 0}
+  rank1To2Dialogue: {fileID: 0}
+  rank2To3Dialogue: {fileID: 0}

@@ -53,6 +53,7 @@ public class ExplorationUI : MonoBehaviour
     public GameObject statusCanvas;
     public GameObject settingsCanvas;
 
+    [SerializeField] private string dialogueSceneName = "Story";
     private List<ExplorationNodeData> currentOptions = new List<ExplorationNodeData>();
     private int selectedIndex = -1;
 
@@ -137,7 +138,7 @@ public class ExplorationUI : MonoBehaviour
                 if (randomOperatorImages[i] != null)
                 {
                     randomOperatorImages[i].gameObject.SetActive(true);
-                    randomOperatorImages[i].sprite = (currentRank > 0 && facilityData.operatorImage != null) ? facilityData.operatorImage : baitoNormal;
+                    randomOperatorImages[i].sprite = (IsFacilityOperatorAvailable(facilityData) && facilityData.operatorImage != null) ? facilityData.operatorImage : baitoNormal;
                 }
             }
             else if (data is BossSelectionNodeData bossData)
@@ -178,8 +179,7 @@ public class ExplorationUI : MonoBehaviour
 
         if (selectedData is FacilityData facilityData)
         {
-            int currentRank = ExplorationManager.Instance.GetFacilityRank(facilityData.nodeID);
-            randomOperatorImages[slotIndex].sprite = (currentRank > 0 && facilityData.operatorSmileImage != null) ? facilityData.operatorSmileImage : baitoSmile;
+            randomOperatorImages[slotIndex].sprite = (IsFacilityOperatorAvailable(facilityData) && facilityData.operatorSmileImage != null) ? facilityData.operatorSmileImage : baitoSmile;
         }
         else if (selectedData is BossSelectionNodeData bossSelData)
         {
@@ -202,8 +202,7 @@ public class ExplorationUI : MonoBehaviour
 
         if (prevData is FacilityData facilityData)
         {
-            int prevRank = ExplorationManager.Instance.GetFacilityRank(facilityData.nodeID);
-            randomOperatorImages[selectedIndex].sprite = (prevRank > 0 && facilityData.operatorImage != null) ? facilityData.operatorImage : baitoNormal;
+            randomOperatorImages[selectedIndex].sprite = (IsFacilityOperatorAvailable(facilityData) && facilityData.operatorImage != null) ? facilityData.operatorImage : baitoNormal;
         }
         else if (prevData is BossSelectionNodeData bossSelData)
         {
@@ -213,6 +212,20 @@ public class ExplorationUI : MonoBehaviour
         {
             randomOperatorImages[selectedIndex].sprite = battleData.bossData.defaultSD;
         }
+    }
+
+    private bool IsFacilityOperatorAvailable(FacilityData facilityData)
+    {
+        if (facilityData == null)
+            return false;
+
+        if (facilityData.linkedSupporter == null)
+            return false;
+
+        if (PlayerManager.Instance == null)
+            return false;
+
+        return PlayerManager.Instance.IsSupporterRecruited(facilityData.linkedSupporter);
     }
 
     public void OnClickCancel()
@@ -320,13 +333,7 @@ public class ExplorationUI : MonoBehaviour
         }
         else if (targetData is FacilityData facility)
         {
-            ExplorationManager.Instance.lastVisitedFacility = facility;
-            ExplorationManager.Instance.lastVisitedNodeImage = facility.nodeImage;
-            ExplorationManager.Instance.AdvanceExplorationTurn();
-            selectedIndex = -1;
-            SetupNodes();
-            UpdateCharacterStates();
-            // SceneManager.LoadScene(facility.nodeID + "Scene"); 
+            ConfirmFacilitySelection(facility);
         }
         else if (targetData is PhaseBattleNodeData pBattle)
         {
@@ -345,6 +352,96 @@ public class ExplorationUI : MonoBehaviour
             ExplorationManager.Instance.lastVisitedNodeImage = pBattle.nodeImage;
             ExplorationManager.Instance.SaveStateToPlayerManager();
             SceneManager.LoadScene("Battle");
+        }
+    }
+
+    private void ConfirmFacilitySelection(FacilityData facility)
+    {
+        if (facility == null)
+            return;
+
+        string facilitySceneName = GetFacilitySceneName(facility);
+        if (string.IsNullOrEmpty(facilitySceneName))
+        {
+            DevLog.LogWarning($"[ExplorationUI] Facility scene name is empty. Staying in Exploration. nodeID={facility.nodeID}");
+            selectedIndex = -1;
+            SetupNodes();
+            UpdateCharacterStates();
+            return;
+        }
+
+        ExplorationManager.Instance.lastVisitedFacility = facility;
+        ExplorationManager.Instance.lastVisitedNodeImage = facility.nodeImage;
+
+        int currentRank = ExplorationManager.Instance.GetFacilityRank(facility.nodeID);
+        DialogueData rankUpDialogue = GetRankUpDialogue(facility, currentRank);
+        bool canRankUp = facility.linkedSupporter != null
+            && PlayerManager.Instance != null
+            && PlayerManager.Instance.IsSupporterRecruited(facility.linkedSupporter)
+            && currentRank < 3;
+
+        ExplorationManager.Instance.AdvanceExplorationTurn();
+        selectedIndex = -1;
+
+        if (canRankUp && rankUpDialogue != null)
+        {
+            PlayerManager.Instance.SetPendingFacilityUpgradeDialogue(rankUpDialogue, facility.nodeID, currentRank + 1, facilitySceneName);
+            SceneManager.LoadScene(dialogueSceneName);
+            return;
+        }
+
+        if (canRankUp && rankUpDialogue == null)
+            DevLog.LogWarning($"[ExplorationUI] Facility rank-up dialogue is missing. nodeID={facility.nodeID}, currentRank={currentRank}");
+
+        SceneManager.LoadScene(facilitySceneName);
+    }
+
+    private DialogueData GetRankUpDialogue(FacilityData facility, int currentRank)
+    {
+        if (facility == null)
+            return null;
+
+        switch (currentRank)
+        {
+            case 0:
+                return facility.rank0To1Dialogue;
+            case 1:
+                return facility.rank1To2Dialogue;
+            case 2:
+                return facility.rank2To3Dialogue;
+            default:
+                return null;
+        }
+    }
+
+    private string GetFacilitySceneName(FacilityData facility)
+    {
+        if (facility == null || string.IsNullOrEmpty(facility.nodeID))
+            return "";
+
+        switch (facility.nodeID)
+        {
+            case "bar":
+                return "Bar";
+            case "restaurant":
+                return "Restaurant";
+            case "maid_cafe":
+            case "maidcafe":
+                return "MaidCafe";
+            case "casino":
+                return "Casino";
+            case "underground_idol":
+            case "livehouse":
+                return "LiveHouse";
+            case "black_market":
+            case "blackmarket":
+                return "BlackMarket";
+            case "underground_arena":
+            case "fightclub":
+                return "FightClub";
+            default:
+                DevLog.LogWarning($"[ExplorationUI] Unknown facility nodeID for scene mapping: {facility.nodeID}");
+                return "";
         }
     }
 
