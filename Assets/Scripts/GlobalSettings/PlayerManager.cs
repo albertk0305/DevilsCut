@@ -76,6 +76,13 @@ public class SupporterChoiceRecord
     public SupporterChoiceState state;
 }
 
+[System.Serializable]
+public class PlayerFacilityRankRecord
+{
+    public string facilityID;
+    public int rank;
+}
+
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
@@ -131,6 +138,7 @@ public class PlayerManager : MonoBehaviour
     public BossEncounterData savedCurrentTargetBoss;
     public Sprite savedLastVisitedNodeImage;
     public FacilityData savedLastVisitedFacility;
+    public List<PlayerFacilityRankRecord> savedFacilityRanks = new List<PlayerFacilityRankRecord>();
 
     public List<SkillData> GetSkillsByCategory(SkillCategory category)
     {
@@ -235,6 +243,7 @@ public class PlayerManager : MonoBehaviour
         savedCurrentTargetBoss = null;
         savedLastVisitedNodeImage = null;
         savedLastVisitedFacility = null;
+        savedFacilityRanks.Clear();
 
         DevLog.Log("[PlayerManager] 새 게임 상태로 초기화했습니다.");
     }
@@ -304,6 +313,9 @@ public class PlayerManager : MonoBehaviour
         if (!IsSupporterUnlocked(supporter.supporterID))
             unlockedSupporters.Add(supporter);
 
+        if (!string.IsNullOrEmpty(supporter.linkedFacilityID))
+            EnsureFacilityRankAtLeast(supporter.linkedFacilityID, 1);
+
         return true;
     }
 
@@ -342,6 +354,64 @@ public class PlayerManager : MonoBehaviour
         }
 
         record.state = state;
+    }
+
+    public void EnsureFacilityRankAtLeast(string facilityID, int minimumRank)
+    {
+        if (string.IsNullOrEmpty(facilityID))
+            return;
+
+        int targetRank = Mathf.Clamp(minimumRank, 0, 3);
+        PlayerFacilityRankRecord record = FindFacilityRankRecord(facilityID);
+        if (record == null)
+        {
+            savedFacilityRanks.Add(new PlayerFacilityRankRecord
+            {
+                facilityID = facilityID,
+                rank = targetRank
+            });
+        }
+        else if (record.rank < targetRank)
+        {
+            record.rank = targetRank;
+        }
+
+        if (ExplorationManager.Instance != null)
+            ExplorationManager.Instance.EnsureFacilityRankAtLeast(facilityID, targetRank);
+    }
+
+    public void SetSavedFacilityRanks(Dictionary<string, int> facilityRanks)
+    {
+        savedFacilityRanks.Clear();
+
+        if (facilityRanks == null)
+            return;
+
+        foreach (KeyValuePair<string, int> rank in facilityRanks)
+        {
+            if (string.IsNullOrEmpty(rank.Key))
+                continue;
+
+            savedFacilityRanks.Add(new PlayerFacilityRankRecord
+            {
+                facilityID = rank.Key,
+                rank = Mathf.Clamp(rank.Value, 0, 3)
+            });
+        }
+    }
+
+    private PlayerFacilityRankRecord FindFacilityRankRecord(string facilityID)
+    {
+        if (savedFacilityRanks == null || string.IsNullOrEmpty(facilityID))
+            return null;
+
+        foreach (PlayerFacilityRankRecord record in savedFacilityRanks)
+        {
+            if (record != null && record.facilityID == facilityID)
+                return record;
+        }
+
+        return null;
     }
 
     public void SetPendingSupporterDialogue(DialogueData dialogueData, SupporterData supporter, string returnSceneName)

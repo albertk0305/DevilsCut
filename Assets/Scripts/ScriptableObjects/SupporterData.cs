@@ -28,6 +28,9 @@ public class SupporterData : ScriptableObject
     public string selectMessage;
     public string joinMessage;
 
+    [Header("Linked Facility")]
+    public string linkedFacilityID;
+
     [Header("스킬 레벨 (개별 설정)")]
     [Range(1, 3)] public int passiveLevel = 1;
     [Range(1, 3)] public int startSkillLevel = 1;

@@ -476,6 +476,19 @@ public class ExplorationManager : MonoBehaviour
         return 0;
     }
 
+    public void EnsureFacilityRankAtLeast(string id, int minimumRank)
+    {
+        if (string.IsNullOrEmpty(id))
+            return;
+
+        int targetRank = Mathf.Clamp(minimumRank, 0, 3);
+        int currentRank = GetFacilityRank(id);
+        if (currentRank >= targetRank)
+            return;
+
+        facilityRanks[id] = targetRank;
+    }
+
     private void ApplyPendingBattleProgressIfNeeded()
     {
         PlayerManager playerManager = PlayerManager.Instance;
@@ -510,6 +523,7 @@ public class ExplorationManager : MonoBehaviour
         playerManager.savedCurrentTargetBoss = currentTargetBoss;
         playerManager.savedLastVisitedNodeImage = lastVisitedNodeImage;
         playerManager.savedLastVisitedFacility = lastVisitedFacility;
+        playerManager.SetSavedFacilityRanks(facilityRanks);
     }
 
     private void RestoreStateFromPlayerManagerIfNeeded()
@@ -520,7 +534,10 @@ public class ExplorationManager : MonoBehaviour
             return;
 
         if (!playerManager.hasSavedExplorationState)
+        {
+            RestoreFacilityRanksFromPlayerManager(playerManager);
             return;
+        }
 
         currentPhase = playerManager.savedExplorationPhase;
         currentCycle = playerManager.savedExplorationCycle;
@@ -529,6 +546,23 @@ public class ExplorationManager : MonoBehaviour
         currentTargetBoss = playerManager.savedCurrentTargetBoss;
         lastVisitedNodeImage = playerManager.savedLastVisitedNodeImage;
         lastVisitedFacility = playerManager.savedLastVisitedFacility;
+        RestoreFacilityRanksFromPlayerManager(playerManager);
+    }
+
+    private void RestoreFacilityRanksFromPlayerManager(PlayerManager playerManager)
+    {
+        facilityRanks.Clear();
+
+        if (playerManager.savedFacilityRanks == null)
+            return;
+
+        foreach (PlayerFacilityRankRecord record in playerManager.savedFacilityRanks)
+        {
+            if (record == null || string.IsNullOrEmpty(record.facilityID))
+                continue;
+
+            facilityRanks[record.facilityID] = Mathf.Clamp(record.rank, 0, 3);
+        }
     }
 
     private bool IsSameBoss(BossEncounterData a, BossEncounterData b)
