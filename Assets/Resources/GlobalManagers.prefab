@@ -107,6 +107,16 @@ MonoBehaviour:
     state: 0
   - supporterID: lucifer
     state: 1
+  - supporterID: baalzebub
+    state: 0
+  - supporterID: belphegor
+    state: 0
+  - supporterID: mammon
+    state: 0
+  - supporterID: satan
+    state: 0
+  - supporterID: leviathan
+    state: 0
   activeSupporter: {fileID: 0}
   ownedKarinItems:
   - {fileID: 11400000, guid: 1f62c13dc91f5f34e8003534a0fe132f, type: 2}
@@ -171,6 +181,7 @@ MonoBehaviour:
   pendingFacilityID: 
   pendingFacilityTargetRank: 0
   pendingDialogueReturnSceneName: 
+  currentFacilityID: 
   unlockedSkills:
   - {fileID: 11400000, guid: 6f76bd2b0cc4916469f2ca32aba944e9, type: 2}
   - {fileID: 11400000, guid: 64802653b7803204a93d67678bd46cd7, type: 2}

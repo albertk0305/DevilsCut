@@ -364,6 +364,7 @@ public class ExplorationUI : MonoBehaviour
         if (string.IsNullOrEmpty(facilitySceneName))
         {
             DevLog.LogWarning($"[ExplorationUI] Facility scene name is empty. Staying in Exploration. nodeID={facility.nodeID}");
+            PlayerManager.Instance?.ClearCurrentFacilityVisit();
             selectedIndex = -1;
             SetupNodes();
             UpdateCharacterStates();
@@ -372,6 +373,7 @@ public class ExplorationUI : MonoBehaviour
 
         ExplorationManager.Instance.lastVisitedFacility = facility;
         ExplorationManager.Instance.lastVisitedNodeImage = facility.nodeImage;
+        PlayerManager.Instance?.SetCurrentFacilityVisit(facility.nodeID);
 
         int currentRank = ExplorationManager.Instance.GetFacilityRank(facility.nodeID);
         DialogueData rankUpDialogue = GetRankUpDialogue(facility, currentRank);

@@ -123,6 +123,9 @@ public class PlayerManager : MonoBehaviour
     public int pendingFacilityTargetRank;
     public string pendingDialogueReturnSceneName;
 
+    [Header("Current Facility Visit")]
+    public string currentFacilityID;
+
     [Header("플레이어 해금 스킬")]
     public List<SkillData> unlockedSkills = new List<SkillData>();
 
@@ -237,6 +240,7 @@ public class PlayerManager : MonoBehaviour
         pendingBattlePhase = 0;
         ClearPendingDialogue();
         ClearPendingFacilityUpgrade();
+        ClearCurrentFacilityVisit();
 
         hasSavedExplorationState = false;
         savedExplorationPhase = GamePhase.BossSelection;
@@ -398,6 +402,35 @@ public class PlayerManager : MonoBehaviour
                 rank = Mathf.Clamp(rank.Value, 0, 3)
             });
         }
+    }
+
+    public int GetSavedFacilityRank(string facilityID)
+    {
+        PlayerFacilityRankRecord record = FindFacilityRankRecord(facilityID);
+        return record != null ? Mathf.Clamp(record.rank, 0, 3) : 0;
+    }
+
+    public void SetCurrentFacilityVisit(string facilityID)
+    {
+        currentFacilityID = facilityID;
+    }
+
+    public void ClearCurrentFacilityVisit()
+    {
+        currentFacilityID = "";
+    }
+
+    public bool HasCurrentFacilityVisit()
+    {
+        return !string.IsNullOrEmpty(currentFacilityID);
+    }
+
+    public int GetCurrentFacilityRank()
+    {
+        if (!HasCurrentFacilityVisit())
+            return 0;
+
+        return GetSavedFacilityRank(currentFacilityID);
     }
 
     private PlayerFacilityRankRecord FindFacilityRankRecord(string facilityID)
