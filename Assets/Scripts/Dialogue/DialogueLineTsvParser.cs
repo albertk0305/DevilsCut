@@ -74,15 +74,22 @@ public static class DialogueLineTsvParser
             choiceID = GetColumn(columns, header, "choiceID")
         };
 
+        TryParseAction(GetColumn(columns, header, "lineEndAction"), rowNumber, line.lineID, "lineEndAction", out DialogueChoiceAction lineEndAction);
+        line.lineEndAction = lineEndAction;
+
         string yesTextKey = GetColumn(columns, header, "yesTextKey");
         string noTextKey = GetColumn(columns, header, "noTextKey");
         string yesActionText = GetColumn(columns, header, "yesAction");
         string noActionText = GetColumn(columns, header, "noAction");
+        string yesNextLineID = GetColumn(columns, header, "yesNextLineID");
+        string noNextLineID = GetColumn(columns, header, "noNextLineID");
         bool hasValidYesAction = TryParseAction(yesActionText, rowNumber, line.lineID, "yesAction", out DialogueChoiceAction yesAction);
         bool hasValidNoAction = TryParseAction(noActionText, rowNumber, line.lineID, "noAction", out DialogueChoiceAction noAction);
         bool hasChoice = !string.IsNullOrEmpty(line.choiceID)
             || !string.IsNullOrEmpty(yesTextKey)
             || !string.IsNullOrEmpty(noTextKey)
+            || !string.IsNullOrEmpty(yesNextLineID)
+            || !string.IsNullOrEmpty(noNextLineID)
             || hasValidYesAction
             || hasValidNoAction;
 
@@ -99,7 +106,9 @@ public static class DialogueLineTsvParser
                 yesTextKey = yesTextKey,
                 noTextKey = noTextKey,
                 yesAction = yesAction,
-                noAction = noAction
+                noAction = noAction,
+                yesNextLineID = yesNextLineID,
+                noNextLineID = noNextLineID
             };
         }
 
@@ -127,7 +136,7 @@ public static class DialogueLineTsvParser
         if (IsDialogueChoiceActionName(actionText) && Enum.TryParse(actionText, true, out action))
             return true;
 
-        DevLog.LogWarning($"[Dialogue] Invalid choice action ignored. row={rowNumber}, lineID={lineID}, column={columnName}, action={actionText}");
+        DevLog.LogWarning($"[Dialogue] Invalid DialogueChoiceAction ignored. row={rowNumber}, lineID={lineID}, column={columnName}, action={actionText}");
         action = DialogueChoiceAction.None;
         return false;
     }

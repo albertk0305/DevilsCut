@@ -1,0 +1,18 @@
+key	ko	en
+character.sherry.name	슈리	Sherry
+character.asmodeus.name	아스모데우스	Asmodeus
+character.unknown.name	???	???
+story.test.001.text	여기가... 데빌스 컷?	This is... Devil's Cut?
+story.test.002.text	누구야? 방금 목소리는 네가 낸 거야?	Who are you? Was that your voice just now?
+story.test.003.text	후후, 드디어 눈을 떴구나.	Hehe. You finally opened your eyes.
+story.test.004.text	장난칠 기분 아니야. 이름부터 말해.	I'm not in the mood for games. Start with your name.
+story.test.005.text	좋아. 나는 아스모데우스. 네 선택을 기다리고 있던 조력자야.	Fine. I am Asmodeus, the supporter who has been waiting for your choice.
+story.test.006.text	조력자라면... 날 도와주겠다는 뜻이야?	If you're a supporter... does that mean you'll help me?
+story.test.007.text	네가 원한다면. 하지만 거절해도 좋아. 악마는 계약을 강요하지 않거든.	If you want me to. But you may refuse. A devil does not force a contract.
+story.test.008.text	그럼 선택해. 나를 데려갈래?	Then choose. Will you take me with you?
+choice.recruit	영입한다	Recruit
+choice.reject	거절한다	Reject
+story.test.recruit.001.text	후후, 좋은 선택이야. 이제부터 네 곁에서 지켜봐 줄게.	Hehe. Good choice. From now on, I will watch over you.
+story.test.recruit.002.text	괜히 불안해지는 말투인데... 그래도 부탁할게.	That wording makes me nervous... but I’ll count on you.
+story.test.reject.001.text	...그래. 그것도 네 선택이겠지.	...I see. That is also your choice.
+story.test.reject.002.text	미안. 하지만 난 아직 널 믿을 수 없어.	Sorry. But I still cannot trust you.

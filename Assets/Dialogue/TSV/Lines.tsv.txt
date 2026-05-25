@@ -1,0 +1,13 @@
+lineID	speakerID	speakerNameKey	bodyTextKey	leftActorID	leftExpressionID	rightActorID	rightExpressionID	storyImageID	choiceID	yesTextKey	noTextKey	yesAction	noAction	yesNextLineID	noNextLineID	lineEndAction
+1	sherry		story.test.001.text	sherry	normal											
+2	sherry		story.test.002.text	sherry	surprised											
+3	asmodeus		story.test.003.text	sherry	surprised	asmodeus	happy	contract_paper								
+4	sherry		story.test.004.text	sherry	angry	asmodeus	happy									
+5	asmodeus		story.test.005.text	sherry	angry	asmodeus	smirk	devils_cut_bottle								
+6	sherry		story.test.006.text	sherry	normal	asmodeus	smirk									
+7	asmodeus		story.test.007.text	sherry	normal	asmodeus	serious									
+8	asmodeus		story.test.008.text	sherry	normal	asmodeus	serious		recruit_test	choice.recruit	choice.reject	RecruitPendingSupporter	RejectPendingSupporter	9R	9X	
+9R	asmodeus		story.test.recruit.001.text	sherry	normal	asmodeus	happy									
+10R	sherry		story.test.recruit.002.text	sherry	normal	asmodeus	happy									LoadNextScene
+9X	asmodeus		story.test.reject.001.text	sherry	normal	asmodeus	serious									
+10X	sherry		story.test.reject.002.text	sherry	angry	asmodeus	serious									LoadNextScene

@@ -13,6 +13,7 @@ public class DialogueLine
     public string rightExpressionID;
     public string speakerNameKey;
     public string bodyTextKey;
+    public DialogueChoiceAction lineEndAction;
     public Sprite leftCharacterImage;
     public Sprite rightCharacterImage;
     public string storyImageID;

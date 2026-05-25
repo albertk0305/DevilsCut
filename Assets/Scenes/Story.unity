@@ -1689,7 +1689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueLocalizationManager
   dialogueTSVs:
-  - {fileID: 4900000, guid: 91739d2391ce13d42acb4973b9636056, type: 3}
+  - {fileID: 4900000, guid: dcfa6cc644e677646babea762dd8b96b, type: 3}
 --- !u!4 &755815050
 Transform:
   m_ObjectHideFlags: 0

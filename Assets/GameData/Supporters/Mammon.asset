@@ -30,6 +30,7 @@ MonoBehaviour:
   battleSkillDesc: dummy_BattleSkill
   selectMessage: dummy_SelectMessage
   joinMessage: dummy_JoinMessage
+  linkedFacilityID: blackmarket
   passiveLevel: 3
   startSkillLevel: 1
   battleSkillLevel: 1

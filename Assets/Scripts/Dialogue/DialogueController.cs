@@ -40,6 +40,7 @@ public class DialogueController : MonoBehaviour
 
     private DialogueData currentDialogueData;
     private List<DialogueLine> currentLines = new List<DialogueLine>();
+    private readonly Dictionary<string, int> lineIndexByID = new Dictionary<string, int>();
     private Coroutine typingCoroutine;
     private Coroutine skipCoroutine;
     private string currentBodyText = "";
@@ -133,6 +134,7 @@ public class DialogueController : MonoBehaviour
 
         currentDialogueData = data;
         currentLines = ResolveLines(data);
+        BuildLineIDLookup();
         currentLineIndex = -1;
         isChoiceActive = false;
         SetChoicePanelActive(false);
@@ -178,6 +180,9 @@ public class DialogueController : MonoBehaviour
             return;
         }
 
+        if (TryHandleCurrentLineEndAction())
+            return;
+
         ShowNextLine();
     }
 
@@ -200,6 +205,8 @@ public class DialogueController : MonoBehaviour
             else if (isTyping)
                 CompleteCurrentLineText();
             else if (CurrentLineHasChoice())
+                break;
+            else if (TryHandleCurrentLineEndAction())
                 break;
             else
                 ShowNextLine(true);
@@ -325,32 +332,75 @@ public class DialogueController : MonoBehaviour
         DialogueLine line = GetCurrentLine();
         DialogueChoice choice = line != null ? line.choice : null;
         DialogueChoiceAction action = DialogueChoiceAction.None;
+        string nextLineID = "";
 
         if (choice != null)
+        {
             action = isYes ? choice.yesAction : choice.noAction;
+            nextLineID = isYes ? choice.yesNextLineID : choice.noNextLineID;
+        }
 
         isChoiceActive = false;
         SetChoicePanelActive(false);
-        HandleChoiceAction(action);
+        HandleChoiceSelection(action, nextLineID);
     }
 
-    private void HandleChoiceAction(DialogueChoiceAction action)
+    private void HandleChoiceSelection(DialogueChoiceAction action, string nextLineID)
+    {
+        bool endsDialogue = HandleChoiceAction(action);
+        if (endsDialogue)
+            return;
+
+        if (!string.IsNullOrEmpty(nextLineID))
+        {
+            JumpToLine(nextLineID);
+            return;
+        }
+
+        if (action == DialogueChoiceAction.RecruitPendingSupporter || action == DialogueChoiceAction.RejectPendingSupporter)
+        {
+            LoadNextSceneOrWarn();
+            return;
+        }
+
+        ShowNextLine();
+    }
+
+    private bool HandleChoiceAction(DialogueChoiceAction action)
     {
         switch (action)
         {
             case DialogueChoiceAction.LoadNextScene:
                 LoadNextSceneOrWarn();
-                break;
+                return true;
             case DialogueChoiceAction.RecruitPendingSupporter:
                 ResolvePendingSupporterChoice(isRecruit: true);
-                break;
+                return false;
             case DialogueChoiceAction.RejectPendingSupporter:
                 ResolvePendingSupporterChoice(isRecruit: false);
-                break;
+                return false;
             default:
-                ShowNextLine();
-                break;
+                return false;
         }
+    }
+
+    private bool TryHandleCurrentLineEndAction()
+    {
+        DialogueLine line = GetCurrentLine();
+        if (line == null || line.lineEndAction == DialogueChoiceAction.None)
+            return false;
+
+        bool endsDialogue = HandleChoiceAction(line.lineEndAction);
+        if (endsDialogue)
+            return true;
+
+        if (line.lineEndAction == DialogueChoiceAction.RecruitPendingSupporter || line.lineEndAction == DialogueChoiceAction.RejectPendingSupporter)
+        {
+            LoadNextSceneOrWarn();
+            return true;
+        }
+
+        return false;
     }
 
     private void FinishDialogue()
@@ -395,11 +445,7 @@ public class DialogueController : MonoBehaviour
             ? playerManager.RecruitSupporter(supporter)
             : playerManager.RejectSupporter(supporter);
 
-        string nextSceneName = GetNextSceneName();
         DevLog.Log($"[Dialogue] Pending supporter {(isRecruit ? "recruit" : "reject")} result: supporterID={supporter.supporterID}, success={success}");
-        playerManager.ClearPendingDialogue();
-        isPlayingPendingDialogue = false;
-        LoadSceneOrWarn(nextSceneName);
     }
 
     private void LoadSceneOrWarn(string sceneName)
@@ -420,6 +466,42 @@ public class DialogueController : MonoBehaviour
 
         PlayerManager.Instance.ClearPendingDialogue();
         isPlayingPendingDialogue = false;
+    }
+
+    private void BuildLineIDLookup()
+    {
+        lineIndexByID.Clear();
+
+        if (currentLines == null)
+            return;
+
+        for (int i = 0; i < currentLines.Count; i++)
+        {
+            DialogueLine line = currentLines[i];
+            if (line == null || string.IsNullOrEmpty(line.lineID))
+                continue;
+
+            if (lineIndexByID.ContainsKey(line.lineID))
+            {
+                DevLog.LogWarning($"[Dialogue] Duplicate lineID ignored: {line.lineID}");
+                continue;
+            }
+
+            lineIndexByID[line.lineID] = i;
+        }
+    }
+
+    private void JumpToLine(string lineID)
+    {
+        if (!lineIndexByID.TryGetValue(lineID, out int lineIndex))
+        {
+            DevLog.LogWarning($"[Dialogue] lineID not found: {lineID}");
+            ShowNextLine();
+            return;
+        }
+
+        currentLineIndex = lineIndex - 1;
+        ShowNextLine();
     }
 
     private void ApplyLineVisuals(DialogueLine line)

@@ -15,5 +15,5 @@ MonoBehaviour:
   dialogueID: story.test
   nextSceneName: Exploration
   useLineTSV: 1
-  lineTSV: {fileID: 4900000, guid: a86cc585ecdd1cb4dacd417aa4a95e19, type: 3}
+  lineTSV: {fileID: 4900000, guid: 3aaa11d436c470f4a8dcb17a3a8e8f0b, type: 3}
   lines: []
