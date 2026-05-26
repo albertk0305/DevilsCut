@@ -9,12 +9,10 @@ public class RankBonusView
     public GameObject root;
     public GameObject achievedBorder;
     public TMP_Text descriptionText;
-    public Image iconImage;
 }
 
 public class FacilityRankBonusPanelController : MonoBehaviour
 {
-    [SerializeField] private Image currentRankImage;
     [SerializeField] private RankBonusView[] rankBonusViews;
     [SerializeField] private Button returnButton;
 
@@ -58,16 +56,12 @@ public class FacilityRankBonusPanelController : MonoBehaviour
     private void Refresh(int currentRank, FacilityRankBonusInfo info)
     {
         int rankIndex = Mathf.Clamp(currentRank, 0, 3);
-        Sprite currentSprite = GetRankSprite(info, rankIndex);
-
-        if (currentRankImage != null)
-        {
-            currentRankImage.sprite = currentSprite;
-            currentRankImage.gameObject.SetActive(currentSprite != null);
-        }
 
         if (rankBonusViews == null)
+        {
+            DevLog.LogWarning("[FacilityRankBonusPanel] rankBonusViews is not assigned.");
             return;
+        }
 
         for (int i = 0; i < rankBonusViews.Length; i++)
         {
@@ -75,36 +69,32 @@ public class FacilityRankBonusPanelController : MonoBehaviour
             if (view == null)
                 continue;
 
+            int requiredRank = i + 1;
+
             if (view.root != null)
                 view.root.SetActive(true);
 
             if (view.achievedBorder != null)
-                view.achievedBorder.SetActive(i <= rankIndex);
+                view.achievedBorder.SetActive(rankIndex >= requiredRank);
 
             if (view.descriptionText != null)
-                view.descriptionText.text = GetRankDescription(info, i);
-
-            if (view.iconImage != null)
-            {
-                Sprite rankSprite = GetRankSprite(info, i);
-                view.iconImage.sprite = rankSprite;
-                view.iconImage.gameObject.SetActive(rankSprite != null);
-            }
+                view.descriptionText.text = GetRankDescription(info, requiredRank);
         }
-    }
-
-    private Sprite GetRankSprite(FacilityRankBonusInfo info, int rank)
-    {
-        if (info == null || info.rankSprites == null || rank < 0 || rank >= info.rankSprites.Length)
-            return null;
-
-        return info.rankSprites[rank];
     }
 
     private string GetRankDescription(FacilityRankBonusInfo info, int rank)
     {
-        if (info == null || info.rankDescriptions == null || rank < 0 || rank >= info.rankDescriptions.Length)
+        if (info == null)
+        {
+            DevLog.LogWarning("[FacilityRankBonusPanel] FacilityRankBonusInfo is not assigned.");
             return "";
+        }
+
+        if (info.rankDescriptions == null || rank < 0 || rank >= info.rankDescriptions.Length)
+        {
+            DevLog.LogWarning($"[FacilityRankBonusPanel] rankDescriptions is missing rank {rank}. facilityID={info.facilityID}");
+            return "";
+        }
 
         return info.rankDescriptions[rank] ?? "";
     }

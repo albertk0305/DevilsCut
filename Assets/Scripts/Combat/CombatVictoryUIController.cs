@@ -71,6 +71,7 @@ public class CombatVictoryUIController : MonoBehaviour
     [SerializeField] private ItemClassIconMapping[] classIconMappings;
 
     [Header("Item Merge Animation")]
+    [SerializeField] private ItemMergePresentationController itemMergePresentation;
     [SerializeField] private GameObject itemAddupGroup;
     [SerializeField] private Image bonusItemImage;
     [SerializeField] private Image mergeItemImageLeft;
@@ -86,13 +87,9 @@ public class CombatVictoryUIController : MonoBehaviour
     [SerializeField] private string dialogueSceneName = "DialogueScene";
 
     private readonly Queue<string> messageQueue = new Queue<string>();
-    private readonly Queue<ItemMergeResult> mergeResultQueue = new Queue<ItemMergeResult>();
     private readonly Queue<SupporterPassiveRewardResult> supporterPassiveResultQueue = new Queue<SupporterPassiveRewardResult>();
     private readonly List<ItemMergeResult> pendingMergeResults = new List<ItemMergeResult>();
-    private readonly List<ButtonLockState> mergeButtonLockStates = new List<ButtonLockState>();
-    private readonly List<GameObjectActiveState> mergeHiddenObjectStates = new List<GameObjectActiveState>();
     private Coroutine typingCoroutine;
-    private Coroutine mergeSequenceCoroutine;
     private string currentMessage = "";
     private VictoryStep currentStep;
     private readonly List<EquipmentItemData> equipmentCandidates = new List<EquipmentItemData>();
@@ -103,49 +100,14 @@ public class CombatVictoryUIController : MonoBehaviour
     private bool[] equipmentRerollUsed;
     private BattleType currentRewardBattleType;
     private int currentRewardPhase;
-    private RectTransform mergeItemLeftRect;
-    private RectTransform mergeItemCenterRect;
-    private RectTransform mergeItemRightRect;
-    private Vector2 mergeItemLeftStartPosition;
-    private Vector2 mergeItemCenterStartPosition;
-    private Vector2 mergeItemRightStartPosition;
     private bool isTyping;
     private bool isContinuing;
-    private bool isMergeMoving;
-    private bool skipMergeMoveRequested;
-    private bool isWaitingForMergeAdvance;
     private bool isWaitingForLeviathanGiftAdvance;
     private bool isWaitingForSupporterPassiveAdvance;
-    private bool mergeButtonsLocked;
-    private bool mergeObjectsHidden;
-
-    private struct ButtonLockState
-    {
-        public Button button;
-        public bool wasInteractable;
-
-        public ButtonLockState(Button button)
-        {
-            this.button = button;
-            wasInteractable = button != null && button.interactable;
-        }
-    }
-
-    private struct GameObjectActiveState
-    {
-        public GameObject target;
-        public bool wasActive;
-
-        public GameObjectActiveState(GameObject target)
-        {
-            this.target = target;
-            wasActive = target != null && target.activeSelf;
-        }
-    }
 
     private void Awake()
     {
-        CacheMergeImagePositions();
+        EnsureItemMergePresentation();
         Hide();
 
         if (continueButton != null)
@@ -174,7 +136,7 @@ public class CombatVictoryUIController : MonoBehaviour
         selectedKarinItem = null;
         SetConfirmButtonActive(false);
         HideAllItemSelectionBackgrounds();
-        RestoreButtonsDisabledDuringMerge();
+        RestoreMergePresentationControls();
     }
 
     public void ShowVictory(string enemyName, VictoryRewardGrantResult rewardResult)
@@ -218,11 +180,11 @@ public class CombatVictoryUIController : MonoBehaviour
         selectedItem = null;
         selectedKarinItem = null;
         StopMergeAnimation();
-        RestoreButtonsDisabledDuringMerge();
+        RestoreMergePresentationControls();
         HideAllStageGroups();
         SetConfirmButtonActive(false);
         HideAllItemSelectionBackgrounds();
-        SetMergeStarsActive(0);
+        ClearMergePresentationStars();
         SetNextIndicatorActive(false);
 
         if (continueButton != null)
@@ -239,13 +201,13 @@ public class CombatVictoryUIController : MonoBehaviour
         SetGroupActive(victoryResultGroup, true);
         SetGroupActive(messageGroup, true);
         SetEquipmentRewardGroupActive(false);
-        SetGroupActive(itemAddupGroup, false);
+        SetItemMergePresentationRootActive(false);
         SetBonusItemActive(false);
         selectedItem = null;
         selectedKarinItem = null;
         SetConfirmButtonActive(false);
         HideAllItemSelectionBackgrounds();
-        RestoreButtonsDisabledDuringMerge();
+        RestoreMergePresentationControls();
     }
 
     private void ShowEquipmentSelectionStage()
@@ -253,13 +215,13 @@ public class CombatVictoryUIController : MonoBehaviour
         SetGroupActive(victoryResultGroup, false);
         SetGroupActive(messageGroup, true);
         SetEquipmentRewardGroupActive(true);
-        SetGroupActive(itemAddupGroup, false);
+        SetItemMergePresentationRootActive(false);
         SetBonusItemActive(false);
         selectedItem = null;
         selectedKarinItem = null;
         SetConfirmButtonActive(false);
         HideAllItemSelectionBackgrounds();
-        RestoreButtonsDisabledDuringMerge();
+        RestoreMergePresentationControls();
     }
 
     private void ShowLeviathanGiftResultStage()
@@ -267,13 +229,13 @@ public class CombatVictoryUIController : MonoBehaviour
         SetGroupActive(victoryResultGroup, false);
         SetGroupActive(messageGroup, true);
         SetEquipmentRewardGroupActive(false);
-        SetGroupActive(itemAddupGroup, false);
+        SetItemMergePresentationRootActive(false);
         selectedItem = null;
         selectedKarinItem = null;
         SetConfirmButtonActive(false);
         HideAllItemSelectionBackgrounds();
-        SetMergeStarsActive(0);
-        LockButtonsDuringMerge();
+        ClearMergePresentationStars();
+        LockMergePresentationControls();
     }
 
     private void ShowItemMergeAnimationStage()
@@ -281,14 +243,14 @@ public class CombatVictoryUIController : MonoBehaviour
         SetGroupActive(victoryResultGroup, false);
         SetGroupActive(messageGroup, true);
         SetEquipmentRewardGroupActive(false);
-        SetGroupActive(itemAddupGroup, true);
+        SetItemMergePresentationRootActive(true);
         SetBonusItemActive(false);
         selectedItem = null;
         selectedKarinItem = null;
         SetConfirmButtonActive(false);
         HideAllItemSelectionBackgrounds();
-        SetMergeStarsActive(0);
-        LockButtonsDuringMerge();
+        ClearMergePresentationStars();
+        LockMergePresentationControls();
     }
 
     private void ShowSupporterPassiveResultStage()
@@ -296,14 +258,14 @@ public class CombatVictoryUIController : MonoBehaviour
         SetGroupActive(victoryResultGroup, false);
         SetGroupActive(messageGroup, true);
         SetEquipmentRewardGroupActive(false);
-        SetGroupActive(itemAddupGroup, false);
+        SetItemMergePresentationRootActive(false);
         SetBonusItemActive(false);
         selectedItem = null;
         selectedKarinItem = null;
         SetConfirmButtonActive(false);
         HideAllItemSelectionBackgrounds();
-        SetMergeStarsActive(0);
-        LockButtonsDuringMerge();
+        ClearMergePresentationStars();
+        LockMergePresentationControls();
     }
 
     private void ShowNoEquipmentRewardStage()
@@ -311,13 +273,13 @@ public class CombatVictoryUIController : MonoBehaviour
         SetGroupActive(victoryResultGroup, false);
         SetGroupActive(messageGroup, true);
         SetEquipmentRewardGroupActive(false);
-        SetGroupActive(itemAddupGroup, false);
+        SetItemMergePresentationRootActive(false);
         SetBonusItemActive(false);
         selectedItem = null;
         selectedKarinItem = null;
         SetConfirmButtonActive(false);
         HideAllItemSelectionBackgrounds();
-        RestoreButtonsDisabledDuringMerge();
+        RestoreMergePresentationControls();
     }
 
     private void HideAllStageGroups()
@@ -325,14 +287,14 @@ public class CombatVictoryUIController : MonoBehaviour
         SetGroupActive(victoryResultGroup, false);
         SetGroupActive(messageGroup, false);
         SetEquipmentRewardGroupActive(false);
-        SetGroupActive(itemAddupGroup, false);
+        SetItemMergePresentationRootActive(false);
         SetBonusItemActive(false);
     }
 
     private void PrepareVictoryUIForSceneTransition()
     {
         HideEquipmentRewardUI();
-        SetGroupActive(itemAddupGroup, false);
+        SetItemMergePresentationRootActive(false);
         SetBonusItemActive(false);
         SetConfirmButtonActive(false);
         HideAllItemSelectionBackgrounds();
@@ -1154,6 +1116,11 @@ public class CombatVictoryUIController : MonoBehaviour
         return $"\uB808\uBE44\uC544\uD0C4\uC758 \uD328\uC2DC\uBE0C \uBC1C\uB3D9!\n{itemName} \uD68D\uB4DD!";
     }
 
+    private string GetItemDisplayName(EquipmentItemData item)
+    {
+        return GetLocalizedOrFallback(item != null ? item.itemNameKey : null, item != null ? item.name : "Item");
+    }
+
     private string GetLocalizedOrFallback(string key, string fallback)
     {
         if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
@@ -1413,49 +1380,20 @@ public class CombatVictoryUIController : MonoBehaviour
             nextIndicator.SetActive(isActive);
     }
 
-    private void CacheMergeImagePositions()
-    {
-        mergeItemLeftRect = mergeItemImageLeft != null ? mergeItemImageLeft.rectTransform : null;
-        mergeItemCenterRect = mergeItemImageCenter != null ? mergeItemImageCenter.rectTransform : null;
-        mergeItemRightRect = mergeItemImageRight != null ? mergeItemImageRight.rectTransform : null;
-
-        if (mergeItemLeftRect != null)
-            mergeItemLeftStartPosition = mergeItemLeftRect.anchoredPosition;
-
-        if (mergeItemCenterRect != null)
-            mergeItemCenterStartPosition = mergeItemCenterRect.anchoredPosition;
-
-        if (mergeItemRightRect != null)
-            mergeItemRightStartPosition = mergeItemRightRect.anchoredPosition;
-    }
-
     private void StartItemMergeAnimations(List<ItemMergeResult> mergeResults)
     {
-        if (!CanPlayMergeAnimation())
-        {
-            DevLog.LogWarning("[VictoryReward] Item merge animation UI is not fully assigned. Skipping merge animation.");
-            StartPostRewardPassivesOrReturn();
-            return;
-        }
-
-        mergeResultQueue.Clear();
-        foreach (ItemMergeResult result in mergeResults)
-        {
-            if (result != null && result.itemData != null && result.itemData.itemIcon != null)
-                mergeResultQueue.Enqueue(result);
-            else
-                DevLog.LogWarning("[VictoryReward] Invalid item merge result. Skipping one merge animation.");
-        }
-
-        if (mergeResultQueue.Count == 0)
-        {
-            StartPostRewardPassivesOrReturn();
-            return;
-        }
-
         currentStep = VictoryStep.ItemMergeAnimation;
         ShowItemMergeAnimationStage();
-        PlayNextMergeAnimationOrReturn();
+        EnsureItemMergePresentation();
+
+        if (itemMergePresentation == null)
+        {
+            DevLog.LogWarning("[VictoryReward] ItemMergePresentationController is missing. Skipping merge animation.");
+            StartPostRewardPassivesOrReturn();
+            return;
+        }
+
+        itemMergePresentation.Play(mergeResults, StartPostRewardPassivesOrReturn);
     }
 
     private void StartPostRewardPassivesOrReturn()
@@ -1529,291 +1467,80 @@ public class CombatVictoryUIController : MonoBehaviour
 
     private void StopMergeAnimation()
     {
-        if (mergeSequenceCoroutine != null)
-        {
-            StopCoroutine(mergeSequenceCoroutine);
-            mergeSequenceCoroutine = null;
-        }
+        if (itemMergePresentation != null)
+            itemMergePresentation.StopPresentation(false);
 
-        isMergeMoving = false;
-        skipMergeMoveRequested = false;
-        isWaitingForMergeAdvance = false;
         isWaitingForLeviathanGiftAdvance = false;
         isWaitingForSupporterPassiveAdvance = false;
-        mergeResultQueue.Clear();
         pendingMergeResults.Clear();
         supporterPassiveResultQueue.Clear();
         currentLeviathanGiftResult = null;
     }
 
-    private bool CanPlayMergeAnimation()
-    {
-        return itemAddupGroup != null
-            && mergeItemImageLeft != null
-            && mergeItemImageCenter != null
-            && mergeItemImageRight != null
-            && mergeItemLeftRect != null
-            && mergeItemCenterRect != null
-            && mergeItemRightRect != null;
-    }
-
-    private void PlayNextMergeAnimationOrReturn()
-    {
-        if (mergeResultQueue.Count == 0)
-        {
-            StartPostRewardPassivesOrReturn();
-            return;
-        }
-
-        ItemMergeResult result = mergeResultQueue.Dequeue();
-
-        if (mergeSequenceCoroutine != null)
-            StopCoroutine(mergeSequenceCoroutine);
-
-        mergeSequenceCoroutine = StartCoroutine(PlayMergeAnimationRoutine(result));
-    }
-
-    private IEnumerator PlayMergeAnimationRoutine(ItemMergeResult result)
-    {
-        isWaitingForMergeAdvance = false;
-        skipMergeMoveRequested = false;
-        ShowItemMergeAnimationStage();
-        SetupMergeAnimationImages(result);
-
-        string itemName = GetItemDisplayName(result.itemData);
-        StartSingleMessage($"{itemName}\uC774 3\uAC1C \uBAA8\uC784!");
-
-        while (isTyping)
-            yield return null;
-
-        yield return MoveMergeItemsToCenterRoutine();
-
-        SetMergeStarsActive(result.resultStarLevel);
-        StartSingleMessage($"{itemName} {result.resultStarLevel}\uC131\uC73C\uB85C \uAC15\uD654!");
-
-        while (isTyping)
-            yield return null;
-
-        isWaitingForMergeAdvance = true;
-        SetNextIndicatorActive(true);
-        mergeSequenceCoroutine = null;
-    }
-
-    private void SetupMergeAnimationImages(ItemMergeResult result)
-    {
-        ResetMergeItemPositions();
-        SetMergeStarsActive(0);
-
-        Sprite icon = result != null && result.itemData != null ? result.itemData.itemIcon : null;
-        SetupMergeItemImage(mergeItemImageLeft, icon);
-        SetupMergeItemImage(mergeItemImageCenter, icon);
-        SetupMergeItemImage(mergeItemImageRight, icon);
-    }
-
-    private void SetupMergeItemImage(Image image, Sprite icon)
-    {
-        if (image == null)
-            return;
-
-        image.sprite = icon;
-        image.gameObject.SetActive(icon != null);
-    }
-
-    private void ResetMergeItemPositions()
-    {
-        if (mergeItemLeftRect != null)
-            mergeItemLeftRect.anchoredPosition = mergeItemLeftStartPosition;
-
-        if (mergeItemCenterRect != null)
-            mergeItemCenterRect.anchoredPosition = mergeItemCenterStartPosition;
-
-        if (mergeItemRightRect != null)
-            mergeItemRightRect.anchoredPosition = mergeItemRightStartPosition;
-    }
-
-    private IEnumerator MoveMergeItemsToCenterRoutine()
-    {
-        isMergeMoving = true;
-        skipMergeMoveRequested = false;
-        SetNextIndicatorActive(false);
-
-        Vector2 leftStart = mergeItemLeftRect.anchoredPosition;
-        Vector2 rightStart = mergeItemRightRect.anchoredPosition;
-        Vector2 target = mergeItemCenterStartPosition;
-        float elapsed = 0f;
-        float duration = Mathf.Max(0.01f, mergeMoveDuration);
-
-        while (elapsed < duration && !skipMergeMoveRequested)
-        {
-            elapsed += Time.unscaledDeltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            mergeItemLeftRect.anchoredPosition = Vector2.Lerp(leftStart, target, t);
-            mergeItemRightRect.anchoredPosition = Vector2.Lerp(rightStart, target, t);
-            yield return null;
-        }
-
-        CompleteMergeMove();
-    }
-
-    private void CompleteMergeMove()
-    {
-        if (mergeItemLeftRect != null)
-            mergeItemLeftRect.anchoredPosition = mergeItemCenterStartPosition;
-
-        if (mergeItemRightRect != null)
-            mergeItemRightRect.anchoredPosition = mergeItemCenterStartPosition;
-
-        isMergeMoving = false;
-        skipMergeMoveRequested = true;
-    }
-
-    private void SetMergeStarsActive(int resultStarLevel)
-    {
-        if (mergeStarImages == null)
-            return;
-
-        for (int i = 0; i < mergeStarImages.Length; i++)
-        {
-            if (mergeStarImages[i] != null)
-                mergeStarImages[i].gameObject.SetActive(false);
-        }
-
-        if (resultStarLevel == 2)
-        {
-            SetMergeStarActive(0, true);
-            SetMergeStarActive(2, true);
-        }
-        else if (resultStarLevel >= 3)
-        {
-            SetMergeStarActive(0, true);
-            SetMergeStarActive(1, true);
-            SetMergeStarActive(2, true);
-        }
-        else if (resultStarLevel > 0)
-        {
-            DevLog.LogWarning($"[VictoryReward] Unsupported merge result star level: {resultStarLevel}");
-        }
-    }
-
-    private void SetMergeStarActive(int index, bool isActive)
-    {
-        if (mergeStarImages == null || index < 0 || index >= mergeStarImages.Length)
-            return;
-
-        if (mergeStarImages[index] != null)
-            mergeStarImages[index].gameObject.SetActive(isActive);
-    }
-
     private void HandleMergeMessageAdvance()
     {
-        if (isMergeMoving)
-        {
-            CompleteMergeMove();
-            return;
-        }
-
-        if (isTyping)
-        {
-            CompleteCurrentMessage();
-            return;
-        }
-
-        if (isWaitingForMergeAdvance)
-        {
-            isWaitingForMergeAdvance = false;
-            PlayNextMergeAnimationOrReturn();
-        }
+        if (itemMergePresentation != null)
+            itemMergePresentation.HandleAdvance();
     }
 
-    private string GetItemDisplayName(EquipmentItemData item)
+    private void EnsureItemMergePresentation()
     {
-        return GetLocalizedOrFallback(item != null ? item.itemNameKey : null, item != null ? item.name : "Item");
+        if (itemMergePresentation == null)
+            itemMergePresentation = GetComponent<ItemMergePresentationController>();
+
+        if (itemMergePresentation == null)
+            itemMergePresentation = gameObject.AddComponent<ItemMergePresentationController>();
+
+        itemMergePresentation.Configure(
+            itemAddupGroup,
+            mergeItemImageLeft,
+            mergeItemImageCenter,
+            mergeItemImageRight,
+            mergeStarImages,
+            resultMessageText,
+            nextIndicator,
+            messageTypeInterval,
+            mergeMoveDuration,
+            buttonsDisabledDuringMerge,
+            objectsHiddenDuringMerge);
     }
 
-    private void LockButtonsDuringMerge()
+    private void SetItemMergePresentationRootActive(bool isActive)
     {
-        HideObjectsDuringMerge();
+        EnsureItemMergePresentation();
 
-        if (mergeButtonsLocked)
-            return;
-
-        mergeButtonLockStates.Clear();
-
-        if (buttonsDisabledDuringMerge != null)
-        {
-            foreach (Button button in buttonsDisabledDuringMerge)
-            {
-                if (button == null)
-                    continue;
-
-                mergeButtonLockStates.Add(new ButtonLockState(button));
-                button.interactable = false;
-            }
-        }
-
-        mergeButtonsLocked = true;
+        if (itemMergePresentation != null)
+            itemMergePresentation.SetRootActive(isActive);
+        else
+            SetGroupActive(itemAddupGroup, isActive);
     }
 
-    private void RestoreButtonsDisabledDuringMerge()
+    private void ClearMergePresentationStars()
     {
-        RestoreObjectsHiddenDuringMerge();
+        EnsureItemMergePresentation();
 
-        if (!mergeButtonsLocked)
-            return;
-
-        foreach (ButtonLockState state in mergeButtonLockStates)
-        {
-            if (state.button != null)
-                state.button.interactable = state.wasInteractable;
-        }
-
-        mergeButtonLockStates.Clear();
-        mergeButtonsLocked = false;
+        if (itemMergePresentation != null)
+            itemMergePresentation.ClearStars();
     }
 
-    private void HideObjectsDuringMerge()
+    private void LockMergePresentationControls()
     {
-        if (mergeObjectsHidden)
-            return;
+        EnsureItemMergePresentation();
 
-        mergeHiddenObjectStates.Clear();
-
-        if (objectsHiddenDuringMerge != null)
-        {
-            foreach (GameObject target in objectsHiddenDuringMerge)
-            {
-                if (target == null)
-                    continue;
-
-                mergeHiddenObjectStates.Add(new GameObjectActiveState(target));
-                target.SetActive(false);
-            }
-        }
-
-        mergeObjectsHidden = true;
+        if (itemMergePresentation != null)
+            itemMergePresentation.LockControls();
     }
 
-    private void RestoreObjectsHiddenDuringMerge()
+    private void RestoreMergePresentationControls()
     {
-        if (!mergeObjectsHidden)
-            return;
-
-        foreach (GameObjectActiveState state in mergeHiddenObjectStates)
-        {
-            if (state.target != null)
-                state.target.SetActive(state.wasActive);
-        }
-
-        mergeHiddenObjectStates.Clear();
-        mergeObjectsHidden = false;
+        if (itemMergePresentation != null)
+            itemMergePresentation.RestoreControls();
     }
 
-    private void ClearMergeLockStateWithoutRestoringHiddenObjects()
+    private void ClearMergePresentationControlStateWithoutRestoringHiddenObjects()
     {
-        mergeButtonLockStates.Clear();
-        mergeButtonsLocked = false;
-        mergeHiddenObjectStates.Clear();
-        mergeObjectsHidden = false;
+        if (itemMergePresentation != null)
+            itemMergePresentation.ClearControlStateWithoutRestoringHiddenObjects();
     }
 
     private void ReturnToExploration()
@@ -1825,9 +1552,9 @@ public class CombatVictoryUIController : MonoBehaviour
         isContinuing = true;
         IsVictoryUIActive = false;
         StopMergeAnimation();
-        ClearMergeLockStateWithoutRestoringHiddenObjects();
+        ClearMergePresentationControlStateWithoutRestoringHiddenObjects();
         PrepareVictoryUIForSceneTransition();
-        SetMergeStarsActive(0);
+        ClearMergePresentationStars();
 
         Time.timeScale = 1f;
         SceneManager.LoadScene(nextSceneName);

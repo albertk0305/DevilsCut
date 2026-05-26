@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,7 @@ public class DrinkView
     public GameObject selectedHighlight;
     public TMP_Text nameText;
     public TMP_Text statText;
+    [TextArea] public string monologueText;
 }
 
 public class BarFacilityController : FacilitySceneControllerBase
@@ -31,7 +33,8 @@ public class BarFacilityController : FacilitySceneControllerBase
         Welcome,
         ChooseIntro,
         SelectingDrink,
-        Result
+        Result,
+        Farewell
     }
 
     [Header("Data")]
@@ -66,6 +69,8 @@ public class BarFacilityController : FacilitySceneControllerBase
     [Header("Dialogue Text")]
     [SerializeField] private string welcomeText = "어서 오세요. 오늘은 어떤 한 잔으로 하시겠어요?";
     [SerializeField] private string chooseDrinkText = "마실 음료를 골라 주세요.";
+    [SerializeField] private string operatorFarewellText = "방문해주셔서 감사합니다!";
+    [SerializeField] private string baitoFarewellText = "매번 감사합니다!";
 
     [Header("Drink Names")]
     [SerializeField] private string strengthDrinkName = "STR 음료";
@@ -81,9 +86,11 @@ public class BarFacilityController : FacilitySceneControllerBase
     [SerializeField] private string luckStatName = "LUK";
 
     [Header("Result Text")]
-    [SerializeField] private string normalDrinkResultFormat = "{0}을 마셨다.\n{1}이 {2} 상승했다.\nHP가 최대치까지 회복되었다.";
-    [SerializeField] private string devilsCutResultFormat = "데빌스 컷을 마셨다.\n알 수 없는 열기가 몸을 타고 오른다.\n{0}이 {1} 상승했다.\nHP가 최대치까지 회복되었다.";
-    [SerializeField] private string lastOrderBonusFormat = "\n라스트 오더 보너스로 {0}이 2 상승했다.";
+    [SerializeField] private string normalDrinkMonologueFormat = "{0}을 마셨다.";
+    [SerializeField] private string devilsCutMonologueText = "데빌스 컷을 마셨다.\n알 수 없는 열기가 몸을 타고 오른다.";
+    [SerializeField] private string statGainResultFormat = "{0}이 {1} 상승했다.";
+    [SerializeField] private string hpRecoveryResultText = "HP가 최대치까지 회복되었다.";
+    [SerializeField] private string lastOrderBonusFormat = "라스트 오더 보너스로 {0}이 2 상승했다.";
     [SerializeField] private string drinkStatFormat = "{0} +{1}";
     [SerializeField] private string devilsCutStatFormat = "랜덤 +{0}";
 
@@ -98,6 +105,15 @@ public class BarFacilityController : FacilitySceneControllerBase
     private bool isTyping;
     private bool isTextComplete;
     private bool hasUsedBar;
+    private readonly List<string> resultLines = new List<string>();
+    private int resultLineIndex = -1;
+
+    private struct BarDrinkResult
+    {
+        public PermanentStatType primaryStat;
+        public int primaryAmount;
+        public PermanentStatType? lastOrderStat;
+    }
 
     protected override void Start()
     {
@@ -180,11 +196,7 @@ public class BarFacilityController : FacilitySceneControllerBase
 
     private void ApplyCharacterView(bool happy)
     {
-        bool useOperator = facilityData != null
-            && facilityData.linkedSupporter != null
-            && PlayerManager.Instance != null
-            && PlayerManager.Instance.IsSupporterChoiceResolved(facilityData.linkedSupporter);
-
+        bool useOperator = IsOperatorResolved();
         Sprite speakerSprite = useOperator
             ? (happy && operatorHappySprite != null ? operatorHappySprite : operatorDefaultSprite)
             : (happy && baitoHappySprite != null ? baitoHappySprite : baitoDefaultSprite);
@@ -197,17 +209,54 @@ public class BarFacilityController : FacilitySceneControllerBase
         }
 
         if (speakerNameText != null)
+        {
             speakerNameText.text = speakerName;
+            speakerNameText.gameObject.SetActive(true);
+        }
+    }
+
+    private bool IsOperatorResolved()
+    {
+        return facilityData != null
+            && facilityData.linkedSupporter != null
+            && PlayerManager.Instance != null
+            && PlayerManager.Instance.IsSupporterChoiceResolved(facilityData.linkedSupporter);
     }
 
     private void ApplyRankButtonSprite()
     {
-        if (rankButtonImage == null || rankBonusInfo == null || rankBonusInfo.rankSprites == null)
+        if (rankButtonImage == null)
+        {
+            DevLog.LogWarning("[BarFacility] rankButtonImage is not assigned.");
             return;
+        }
+
+        if (rankBonusInfo == null)
+        {
+            DevLog.LogWarning("[BarFacility] rankBonusInfo is not assigned.");
+            return;
+        }
+
+        if (rankBonusInfo.rankSprites == null)
+        {
+            DevLog.LogWarning($"[BarFacility] rankSprites is not assigned. facilityID={rankBonusInfo.facilityID}");
+            return;
+        }
 
         int rankIndex = Mathf.Clamp(CurrentRank, 0, 3);
-        if (rankBonusInfo.rankSprites.Length > rankIndex && rankBonusInfo.rankSprites[rankIndex] != null)
-            rankButtonImage.sprite = rankBonusInfo.rankSprites[rankIndex];
+        if (rankBonusInfo.rankSprites.Length <= rankIndex)
+        {
+            DevLog.LogWarning($"[BarFacility] rankSprites is missing rank {rankIndex}. facilityID={rankBonusInfo.facilityID}");
+            return;
+        }
+
+        if (rankBonusInfo.rankSprites[rankIndex] == null)
+        {
+            DevLog.LogWarning($"[BarFacility] rankSprites[{rankIndex}] is not assigned. facilityID={rankBonusInfo.facilityID}");
+            return;
+        }
+
+        rankButtonImage.sprite = rankBonusInfo.rankSprites[rankIndex];
     }
 
     private void RefreshDrinkViews()
@@ -339,6 +388,9 @@ public class BarFacilityController : FacilitySceneControllerBase
                 ShowDrinkSelection();
                 break;
             case BarState.Result:
+                ShowNextResultLineOrReturn();
+                break;
+            case BarState.Farewell:
                 ReturnToExploration();
                 break;
         }
@@ -390,7 +442,6 @@ public class BarFacilityController : FacilitySceneControllerBase
             return;
 
         hasUsedBar = true;
-        ApplyCharacterView(true);
 
         if (drinksRoot != null)
             drinksRoot.SetActive(false);
@@ -401,11 +452,12 @@ public class BarFacilityController : FacilitySceneControllerBase
             confirmButton.gameObject.SetActive(false);
         }
 
-        string resultText = ApplySelectedDrinkEffect();
-        ShowMessage(resultText, BarState.Result);
+        BarDrinkResult result = ApplySelectedDrinkEffect();
+        BuildResultLines(result);
+        BeginResultSequence();
     }
 
-    private string ApplySelectedDrinkEffect()
+    private BarDrinkResult ApplySelectedDrinkEffect()
     {
         PlayerManager playerManager = PlayerManager.Instance;
         PermanentStatType primaryStat = GetPermanentStatType(selectedDrink);
@@ -428,7 +480,12 @@ public class BarFacilityController : FacilitySceneControllerBase
             playerManager.RecoverCurrentHpToEffectiveMax();
         }
 
-        return BuildResultText(selectedDrink, primaryStat, primaryAmount, lastOrderStat);
+        return new BarDrinkResult
+        {
+            primaryStat = primaryStat,
+            primaryAmount = primaryAmount,
+            lastOrderStat = lastOrderStat
+        };
     }
 
     private int GetPrimaryDrinkAmount(BarDrinkType drinkType)
@@ -459,16 +516,88 @@ public class BarFacilityController : FacilitySceneControllerBase
         return (PermanentStatType)UnityEngine.Random.Range(0, 4);
     }
 
-    private string BuildResultText(BarDrinkType drinkType, PermanentStatType primaryStat, int primaryAmount, PermanentStatType? lastOrderStat)
+    private void BuildResultLines(BarDrinkResult result)
     {
-        string result = drinkType == BarDrinkType.DevilsCut
-            ? string.Format(devilsCutResultFormat, GetStatDisplayName(primaryStat), primaryAmount)
-            : string.Format(normalDrinkResultFormat, GetDrinkName(drinkType), GetStatDisplayName(primaryStat), primaryAmount);
+        resultLines.Clear();
+        resultLines.Add(BuildDrinkMonologueText(selectedDrink));
+        resultLines.Add(BuildStatGainText(result.primaryStat, result.primaryAmount));
+        resultLines.Add(BuildHpRecoveryText());
 
-        if (lastOrderStat.HasValue)
-            result += string.Format(lastOrderBonusFormat, GetStatDisplayName(lastOrderStat.Value));
+        if (result.lastOrderStat.HasValue)
+            resultLines.Add(BuildLastOrderBonusText(result.lastOrderStat.Value));
+    }
 
-        return result;
+    private void BeginResultSequence()
+    {
+        resultLineIndex = -1;
+
+        if (speakerNameText != null)
+        {
+            speakerNameText.text = "";
+            speakerNameText.gameObject.SetActive(false);
+        }
+
+        ShowNextResultLineOrReturn();
+    }
+
+    private void ShowNextResultLineOrReturn()
+    {
+        resultLineIndex++;
+
+        if (resultLineIndex >= resultLines.Count)
+        {
+            StartFarewellStep();
+            return;
+        }
+
+        ShowMessage(resultLines[resultLineIndex], BarState.Result);
+    }
+
+    private void StartFarewellStep()
+    {
+        ApplyCharacterView(true);
+        ShowMessage(IsOperatorResolved() ? operatorFarewellText : baitoFarewellText, BarState.Farewell);
+    }
+
+    private string BuildDrinkMonologueText(BarDrinkType drinkType)
+    {
+        DrinkView drinkView = GetDrinkView(drinkType);
+        if (drinkView != null && !string.IsNullOrEmpty(drinkView.monologueText))
+            return drinkView.monologueText;
+
+        if (drinkType == BarDrinkType.DevilsCut)
+            return devilsCutMonologueText;
+
+        return string.Format(normalDrinkMonologueFormat, GetDrinkName(drinkType));
+    }
+
+    private string BuildStatGainText(PermanentStatType statType, int amount)
+    {
+        return string.Format(statGainResultFormat, GetStatDisplayName(statType), amount);
+    }
+
+    private string BuildHpRecoveryText()
+    {
+        return hpRecoveryResultText;
+    }
+
+    private string BuildLastOrderBonusText(PermanentStatType statType)
+    {
+        return string.Format(lastOrderBonusFormat, GetStatDisplayName(statType));
+    }
+
+    private DrinkView GetDrinkView(BarDrinkType drinkType)
+    {
+        if (drinkViews == null)
+            return null;
+
+        foreach (DrinkView drinkView in drinkViews)
+        {
+            if (drinkView != null && drinkView.drinkType == drinkType)
+                return drinkView;
+        }
+
+        return null;
     }
 
     private string GetDrinkName(BarDrinkType drinkType)
@@ -517,6 +646,8 @@ public class BarFacilityController : FacilitySceneControllerBase
     {
         if (rankBonusPanel != null)
             rankBonusPanel.Open(CurrentRank, rankBonusInfo);
+        else
+            DevLog.LogWarning("[BarFacility] rankBonusPanel is not assigned.");
     }
 
     private bool IsRankBonusPanelOpen()

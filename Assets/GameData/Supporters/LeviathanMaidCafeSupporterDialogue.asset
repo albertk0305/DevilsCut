@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd75c15310f45c2a0f18c980709ed71, type: 3}
+  m_Name: LeviathanMaidCafeSupporterDialogue
+  m_EditorClassIdentifier: Assembly-CSharp::MaidCafeSupporterDialogueData
+  supporter: {fileID: 11400000, guid: 393f560ec2c52ed45bbb5f5324003c40, type: 2}
+  defaultSprite: {fileID: 21300000, guid: ef12907a59b06424b8bacdcbcd229534, type: 3}
+  happySprite: {fileID: 21300000, guid: 856ee14d7696f0846a2e0ba058841b34, type: 3}
+  embarrassedSprite: {fileID: 21300000, guid: bbc69a4dd2be85c488c2f72ebae1ead7, type: 3}
+  selectedText: levi select
+  giftText: levi gift
+  maxSkillGiftText: levi max
+  farewellText: levi farewell

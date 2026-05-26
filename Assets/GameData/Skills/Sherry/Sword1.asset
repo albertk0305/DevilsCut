@@ -16,11 +16,11 @@ MonoBehaviour:
   skillLogic: {fileID: 11400000, guid: 85367be98eb2e004687516471043ae43, type: 2}
   skillNameKey: skill_name_sword1
   skillDescKey: skill_desc_sword1
-  evolutionANameKey: a evol
+  evolutionANameKey: courage  a
   evolutionADescKey: a evol desc
-  evolutionBNameKey: b evol
+  evolutionBNameKey: courage  b
   evolutionBDescKey: b evol desc
-  evolutionCNameKey: c evol
+  evolutionCNameKey: courage  c
   evolutionCDescKey: c evol desc
   category: 0
   skillLevel: 1
@@ -41,7 +41,7 @@ MonoBehaviour:
   isUltimate: 0
   forceHitReaction: 0
   hitCounts: 01000000
-  currentEvolution: 0
+  currentEvolution: 1
   evolutionA_Multipliers:
   - 0.5
   - 0.75

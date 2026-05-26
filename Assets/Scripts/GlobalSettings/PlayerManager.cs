@@ -52,6 +52,13 @@ public enum PermanentStatType
     Luck
 }
 
+public enum SupporterSkillType
+{
+    Passive,
+    Start,
+    Battle
+}
+
 [System.Serializable]
 public class OwnedItem
 {
@@ -597,6 +604,106 @@ public class PlayerManager : MonoBehaviour
         int effectiveMaxHp = GetItemModifiedStats().maxHp;
         stats.currentHp = Mathf.Max(1, effectiveMaxHp);
         return stats.currentHp;
+    }
+
+    public bool TryApplySkillEvolution(SkillData skill, SkillEvolution evolution)
+    {
+        if (skill == null)
+            return false;
+
+        if (evolution == SkillEvolution.None)
+            return false;
+
+        if (skill.currentEvolution != SkillEvolution.None)
+            return false;
+
+        skill.currentEvolution = evolution;
+        return true;
+    }
+
+    public bool TryIncreaseSkillLevel(SkillData skill, out int oldLevel, out int newLevel)
+    {
+        oldLevel = 0;
+        newLevel = 0;
+
+        if (skill == null)
+            return false;
+
+        oldLevel = Mathf.Clamp(skill.skillLevel, 1, 3);
+        if (oldLevel >= 3)
+            return false;
+
+        skill.skillLevel = Mathf.Clamp(oldLevel + 1, 1, 3);
+        newLevel = skill.skillLevel;
+        return true;
+    }
+
+    public bool TryIncreaseSupporterSkillLevel(
+        SupporterData supporter,
+        SupporterSkillType skillType,
+        out int oldLevel,
+        out int newLevel)
+    {
+        oldLevel = 0;
+        newLevel = 0;
+
+        if (supporter == null)
+            return false;
+
+        switch (skillType)
+        {
+            case SupporterSkillType.Passive:
+                oldLevel = Mathf.Clamp(supporter.passiveLevel, 1, 3);
+                if (oldLevel >= 3)
+                    return false;
+
+                newLevel = Mathf.Clamp(oldLevel + 1, 1, 3);
+                supporter.passiveLevel = newLevel;
+                return true;
+            case SupporterSkillType.Start:
+                oldLevel = Mathf.Clamp(supporter.startSkillLevel, 1, 3);
+                if (oldLevel >= 3)
+                    return false;
+
+                newLevel = Mathf.Clamp(oldLevel + 1, 1, 3);
+                supporter.startSkillLevel = newLevel;
+                return true;
+            case SupporterSkillType.Battle:
+                oldLevel = Mathf.Clamp(supporter.battleSkillLevel, 1, 3);
+                if (oldLevel >= 3)
+                    return false;
+
+                newLevel = Mathf.Clamp(oldLevel + 1, 1, 3);
+                supporter.battleSkillLevel = newLevel;
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public void AddPermanentMaxHp(int amount, bool recoverCurrentByIncrease = true)
+    {
+        stats.maxHp = Mathf.Max(1, stats.maxHp + amount);
+
+        if (recoverCurrentByIncrease)
+            stats.currentHp += amount;
+
+        stats.currentHp = Mathf.Max(0, stats.currentHp);
+    }
+
+    public void AddPermanentBreakResistance(int amount)
+    {
+        stats.breakResistance = Mathf.Max(0, stats.breakResistance + amount);
+    }
+
+    public void AddPermanentActionPoints(int amount)
+    {
+        stats.ActionPoints = Mathf.Max(0, stats.ActionPoints + amount);
+    }
+
+    public void AddPermanentMaxBreakGauge(float amount)
+    {
+        stats.maxBreakGauge = Mathf.Max(0f, stats.maxBreakGauge + amount);
     }
 
     public float GetReflectRatio()
