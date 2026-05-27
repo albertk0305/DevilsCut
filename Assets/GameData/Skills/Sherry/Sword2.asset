@@ -23,7 +23,7 @@ MonoBehaviour:
   evolutionCNameKey: thanatos c
   evolutionCDescKey: c evol desc
   category: 0
-  skillLevel: 1
+  skillLevel: 3
   skillActionImage: {fileID: 21300000, guid: 8e5b0b2f3b6ca51468caaec7f0def813, type: 3}
   damageMultipliers:
   - 6

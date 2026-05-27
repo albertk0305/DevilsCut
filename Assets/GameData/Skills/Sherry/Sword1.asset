@@ -23,7 +23,7 @@ MonoBehaviour:
   evolutionCNameKey: courage  c
   evolutionCDescKey: c evol desc
   category: 0
-  skillLevel: 1
+  skillLevel: 3
   skillActionImage: {fileID: 21300000, guid: 29774a436b5400940af5cf16381dfe08, type: 3}
   damageMultipliers:
   - 8

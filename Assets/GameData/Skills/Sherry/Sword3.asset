@@ -23,7 +23,7 @@ MonoBehaviour:
   evolutionCNameKey: Demon c
   evolutionCDescKey: c evol desc
   category: 0
-  skillLevel: 1
+  skillLevel: 3
   skillActionImage: {fileID: 21300000, guid: 31b830bfa39494b4c94b5ad46e459658, type: 3}
   damageMultipliers:
   - 12
@@ -41,7 +41,7 @@ MonoBehaviour:
   isUltimate: 0
   forceHitReaction: 0
   hitCounts: 01000000
-  currentEvolution: 0
+  currentEvolution: 3
   evolutionA_Multipliers:
   - 0.5
   - 0.75
