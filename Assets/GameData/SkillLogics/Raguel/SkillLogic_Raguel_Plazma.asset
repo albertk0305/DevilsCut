@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8f71786d920014db185be4499ed109, type: 3}
+  m_Name: SkillLogic_Raguel_Plazma
+  m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Raguel_Plazma
+  oneTurnDamageReductionBuff: {fileID: 11400000, guid: 993018aa04a64294b811bba6a6962dd6, type: 2}
+  permanentDamageReductionBuff: {fileID: 11400000, guid: 00bfcc6ef4ef8004bbba93451b17fd71, type: 2}
+  permanentDamageGivenAmpBuff: {fileID: 11400000, guid: 305c07e1f57177540aff0a0e642dadc9, type: 2}

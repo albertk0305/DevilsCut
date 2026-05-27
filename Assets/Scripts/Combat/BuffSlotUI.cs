@@ -48,19 +48,17 @@ public class BuffSlotUI : MonoBehaviour
 
         if (Mathf.Abs(displayTotal) > 0.0001f)
         {
-            float finalPrintValue = data.modifierType == ModifierType.Percentage ? displayTotal * 100f : displayTotal;
-            string sign = finalPrintValue > 0 ? "+" : "";
-            string unit = data.modifierType == ModifierType.Percentage ? "%" : "";
+            string formattedValue = FormatEffectValue(data, displayTotal);
 
             if (!string.IsNullOrEmpty(data.valueFormat))
             {
                 // 인스펙터에 포맷을 적어뒀다면 (예: "(총 {0})") 그 포맷을 따름
-                sb.Append(" ").Append(string.Format(data.valueFormat, $"{sign}{finalPrintValue:F0}{unit}"));
+                sb.Append(" ").Append(string.Format(data.valueFormat, formattedValue));
             }
             else
             {
                 // 인스펙터에 포맷을 안 적어뒀더라도 기본 형태로 강제 출력!
-                sb.Append($" (현재 적용 수치: {sign}{finalPrintValue:F0}{unit})");
+                sb.Append($" (현재 적용 수치: {formattedValue})");
             }
         }
 
@@ -81,11 +79,7 @@ public class BuffSlotUI : MonoBehaviour
 
                 if (myStacks[i].value != 0f)
                 {
-                    float displayVal = data.modifierType == ModifierType.Percentage ? myStacks[i].value * 100f : myStacks[i].value;
-                    string sign = displayVal > 0 ? "+" : "";
-                    string unit = data.modifierType == ModifierType.Percentage ? "%" : "";
-
-                    sb.Append($"수치: {sign}{displayVal:F0}{unit} | ");
+                    sb.Append($"수치: {FormatEffectValue(data, myStacks[i].value)} | ");
                 }
                 sb.Append($"남은 시간: {myStacks[i].turnsLeft}턴");
             }
@@ -99,6 +93,37 @@ public class BuffSlotUI : MonoBehaviour
         }
 
         clickMessage = sb.ToString();
+    }
+
+    private string FormatEffectValue(StatusEffectData data, float value)
+    {
+        bool isPercentage = ShouldDisplayAsPercentage(data);
+        float displayValue = isPercentage ? value * 100f : value;
+        string sign = displayValue > 0f ? "+" : "";
+        string unit = isPercentage ? "%" : "";
+        string numberFormat = Mathf.Abs(displayValue - Mathf.Round(displayValue)) < 0.001f ? "F0" : "F1";
+
+        return $"{sign}{displayValue.ToString(numberFormat)}{unit}";
+    }
+
+    private bool ShouldDisplayAsPercentage(StatusEffectData data)
+    {
+        if (data == null) return false;
+        if (data.modifierType == ModifierType.Percentage) return true;
+
+        switch (data.specialType)
+        {
+            case SpecialEffectType.DamageAmp:
+            case SpecialEffectType.DamageReduction:
+            case SpecialEffectType.DamageGivenAmp:
+            case SpecialEffectType.CritRateUp:
+            case SpecialEffectType.CritDamageUp:
+            case SpecialEffectType.AccuracyUp:
+            case SpecialEffectType.EvasionUp:
+                return true;
+            default:
+                return false;
+        }
     }
 
     public void OnSlotClicked()

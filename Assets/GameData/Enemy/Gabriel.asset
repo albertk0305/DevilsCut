@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: Gabriel
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyNameKey: gabriel
-  enemyImage: {fileID: 0}
-  CutIn: {fileID: 0}
-  hit: {fileID: 0}
-  evade: {fileID: 0}
-  breakImage: {fileID: 0}
+  enemyImage: {fileID: 21300000, guid: 5f385cf31e777674c9d9309359a22bc1, type: 3}
+  CutIn: {fileID: 21300000, guid: a901db5dd98bafe4fadbee78b0c56419, type: 3}
+  hit: {fileID: 21300000, guid: eee8c041d7bee63448a852f46fc16ef2, type: 3}
+  evade: {fileID: 21300000, guid: 1815c26e8fe798b49b12ab390e27beaa, type: 3}
+  breakImage: {fileID: 21300000, guid: 6011ea14793f0244fbc15ec64f3e49c4, type: 3}
   guardImage: {fileID: 0}
-  aiBrain: {fileID: 0}
+  aiBrain: {fileID: 11400000, guid: b3fc5d810dadc8f4d9ac1ba1f95252f7, type: 2}
   statModifier:
     maxHpPercent: 0
     actionPointsPercent: 0
     breakResistancePercent: 0
     maxBreakGaugePercent: 0
     strengthPercent: 0
-    defensePercent: 0
-    speedPercent: 0
+    defensePercent: -0.25
+    speedPercent: 0.25
     luckPercent: 0
   level: 0
   maxHp: 0

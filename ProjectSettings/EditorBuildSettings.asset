@@ -29,6 +29,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Restaurant.unity
     guid: 40619af54bc27ce448b850654ed693bd
+  - enabled: 1
+    path: Assets/Scenes/BlackMarket.unity
+    guid: 5a4f5aec0ad56d64e927e1de8ff2c5f3
+  - enabled: 1
+    path: Assets/Scenes/Casino.unity
+    guid: 4afb442eb978ceb47980c8c504722154
+  - enabled: 1
+    path: Assets/Scenes/FightClub.unity
+    guid: e4d9aafa1453b264fafe44b85a889fb0
+  - enabled: 1
+    path: Assets/Scenes/MaidCafe.unity
+    guid: 773a612ca62985f4fae4ea531e12c860
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

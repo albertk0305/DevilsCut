@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58151b0bbcea20f46a5612d51894a2c8, type: 3}
+  m_Name: SkillLogic_Castus_Ambiguous
+  m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Castus_Ambiguous
+  breakResistanceDebuff: {fileID: 11400000, guid: 70de7c3ee9b08f440bfbf987941d11e6, type: 2}
+  breakResistanceDebuffValue: -0.05
+  breakResistanceDebuffTurns: 3
+  apDebuff: {fileID: 11400000, guid: cb6a84889cbb9cf44bd5c532b0703568, type: 2}
+  speedDebuff: {fileID: 11400000, guid: cd741ae22abc00846a358f00d5d4042e, type: 2}
+  apDebuffValue: -0.1
+  speedDebuffValue: -0.1
+  debuffTurns: 3

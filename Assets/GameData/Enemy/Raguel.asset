@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Raguel
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyNameKey: raguel
-  enemyImage: {fileID: 0}
-  CutIn: {fileID: 0}
-  hit: {fileID: 0}
-  evade: {fileID: 0}
-  breakImage: {fileID: 0}
+  enemyImage: {fileID: 21300000, guid: 8d086ba316c39774bb7e72a6eeab5044, type: 3}
+  CutIn: {fileID: 21300000, guid: 35f1ff1af325bbd4ebdfe8514bde1a29, type: 3}
+  hit: {fileID: 21300000, guid: 4c8875a44b5120a448b6ff741d8495d5, type: 3}
+  evade: {fileID: 21300000, guid: 9fb33763ff2970f4db86bcb24317be02, type: 3}
+  breakImage: {fileID: 21300000, guid: 112b2f5adf480ad499889f6cecc5976c, type: 3}
   guardImage: {fileID: 0}
-  aiBrain: {fileID: 0}
+  aiBrain: {fileID: 11400000, guid: 9b8254d0cd2ea6c468fbb21ff817b6a8, type: 2}
   statModifier:
     maxHpPercent: 0
     actionPointsPercent: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
   ActionPoints: 0
   currentHp: 0
   breakResistance: 0
-  maxBreakGauge: 100
+  maxBreakGauge: 0
   strength: 0
   defense: 0
   speed: 0

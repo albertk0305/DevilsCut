@@ -30,15 +30,15 @@ MonoBehaviour:
     speedPercent: -0.2
     luckPercent: -0.5
   level: 0
-  maxHp: 10000
-  ActionPoints: 10
-  currentHp: 10000
-  breakResistance: 50
-  maxBreakGauge: 100
-  strength: 20
-  defense: 20
-  speed: 20
-  luck: 20
+  maxHp: 0
+  ActionPoints: 0
+  currentHp: 0
+  breakResistance: 0
+  maxBreakGauge: 0
+  strength: 0
+  defense: 0
+  speed: 0
+  luck: 0
   damageGivenAmp: 0
   damageReduction: 0
   critRate: 0

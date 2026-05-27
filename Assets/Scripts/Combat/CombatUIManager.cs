@@ -151,6 +151,11 @@ public class CombatUIManager : MonoBehaviour
         else enemyStatusUI.SetProfileImage(reactionSprite);
     }
 
+    public void UpdateEnemyDefaultIdleSprite(Sprite sprite, bool refreshImmediately = false)
+    {
+        enemyStatusUI.SetDefaultSprite(sprite, refreshImmediately);
+    }
+
     public void ResetCasterImage(bool isPlayer)
     {
         if (isPlayer) playerStatusUI.ResetProfileImage();

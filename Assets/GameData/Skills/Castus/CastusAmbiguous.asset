@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
+  m_Name: CastusAmbiguous
+  m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillID: Ambiguous
+  skillLogic: {fileID: 11400000, guid: ef040c2912be9aa45b175a0ceb89a87c, type: 2}
+  skillNameKey: Ambiguous
+  skillDescKey: Ambiguous
+  evolutionANameKey: 
+  evolutionADescKey: 
+  evolutionBNameKey: 
+  evolutionBDescKey: 
+  evolutionCNameKey: 
+  evolutionCDescKey: 
+  category: 0
+  skillLevel: 1
+  skillActionImage: {fileID: 21300000, guid: 809fbcb7105a70c4195c3b31906da6fb, type: 3}
+  damageMultipliers:
+  - 10
+  breakPowers:
+  - 30
+  bonusCritRates:
+  - 0
+  bonusAccuracyRates:
+  - 0
+  baseAccuracy: 90
+  isUltimate: 0
+  forceHitReaction: 0
+  hitCounts: 01000000
+  currentEvolution: 0
+  evolutionA_Multipliers:
+  - 0.5
+  - 0.75
+  - 1
+  evolutionB_Multipliers:
+  - 0.4
+  - 0.5
+  - 0.6
+  evolutionC_DamageMultipliers:
+  - 15
+  - 20
+  - 25
+  evolutionC_BreakPowers:
+  - 25
+  - 30
+  - 35

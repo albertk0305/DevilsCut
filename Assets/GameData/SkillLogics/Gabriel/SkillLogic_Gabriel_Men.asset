@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9add71d62f1fcd74390809d4e65cd90e, type: 3}
+  m_Name: SkillLogic_Gabriel_Men
+  m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Gabriel_Men
+  breakResistanceDebuff: {fileID: 11400000, guid: dc6a2ad5e2f542243b0d442c42b3525c, type: 2}
+  breakResistanceDebuffValue: -0.05
+  breakResistanceDebuffTurns: 3
+  apDebuff: {fileID: 11400000, guid: f45b1b88331cc8e41a63b50382fefaa8, type: 2}
+  apDebuffValue: -0.2
+  apDebuffTurns: 3

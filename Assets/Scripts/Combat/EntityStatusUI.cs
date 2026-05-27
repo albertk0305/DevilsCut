@@ -43,6 +43,14 @@ public class EntityStatusUI : MonoBehaviour
         if (profileImage != null && sprite != null) profileImage.sprite = sprite;
     }
 
+    public void SetDefaultSprite(Sprite sprite, bool refreshImmediately = false)
+    {
+        if (sprite == null) return;
+
+        defaultSprite = sprite;
+        if (refreshImmediately) SetProfileImage(sprite);
+    }
+
     public void ResetProfileImage()
     {
         if (profileImage != null) profileImage.sprite = defaultSprite;

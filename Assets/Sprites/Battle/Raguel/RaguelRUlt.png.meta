@@ -1,40 +1,25 @@
 fileFormatVersion: 2
-guid: 075ef848b17e9f941aef4d80486fb963
+guid: d128008acc8ba9b458d036c85c620556
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3603831090663902057
-    second: Hibiki_0
+      213: -6533293471227882298
+    second: RaguelRUlt_0
   - first:
-      213: -8704236217184422918
-    second: Hibiki_1
+      213: 7527777023252399347
+    second: RaguelRUlt_1
   - first:
-      213: 7590409314054944570
-    second: Hibiki_2
+      213: 8075762590308475136
+    second: RaguelRUlt_2
   - first:
-      213: 2107654391745170637
-    second: Hibiki_3
+      213: 2672003628774591011
+    second: RaguelRUlt_3
   - first:
-      213: 423872752737336118
-    second: Hibiki_4
+      213: -1808439303542664884
+    second: RaguelRUlt_4
   - first:
-      213: 201432611129705147
-    second: Hibiki_5
-  - first:
-      213: 3550072385102869287
-    second: Hibiki_6
-  - first:
-      213: -8059736133101728629
-    second: Hibiki_7
-  - first:
-      213: 6432936892651342419
-    second: Hibiki_8
-  - first:
-      213: -6766662810782646456
-    second: Hibiki_9
-  - first:
-      213: 3406243268298640700
-    second: Hibiki_10
+      213: -9026823403915217574
+    second: RaguelRUlt_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -143,123 +128,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hibiki_0
-      rect:
-        serializedVersion: 2
-        x: 159
-        y: 495
-        width: 12
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 794387a87be9cfdc0800000000000000
-      internalID: -3603831090663902057
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hibiki_1
-      rect:
-        serializedVersion: 2
-        x: 296
-        y: 490
-        width: 14
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: af3f1a90747543780800000000000000
-      internalID: -8704236217184422918
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hibiki_2
-      rect:
-        serializedVersion: 2
-        x: 395
-        y: 473
-        width: 35
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a37bf003e0d865960800000000000000
-      internalID: 7590409314054944570
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hibiki_3
-      rect:
-        serializedVersion: 2
-        x: 877
-        y: 500
-        width: 11
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dcc4341a084ef3d10800000000000000
-      internalID: 2107654391745170637
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hibiki_4
-      rect:
-        serializedVersion: 2
-        x: 908
-        y: 504
-        width: 9
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 63b30e8d506e1e500800000000000000
-      internalID: 423872752737336118
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hibiki_5
+      name: RaguelRUlt_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 14
-        width: 1024
-        height: 489
+        y: 3
+        width: 1067
+        height: 1238
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,20 +143,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bb2c09084e1abc200800000000000000
-      internalID: 201432611129705147
+      spriteID: 6c4551ae3341555a0800000000000000
+      internalID: -6533293471227882298
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hibiki_6
+      name: RaguelRUlt_1
       rect:
         serializedVersion: 2
-        x: 252
-        y: 12
-        width: 12
-        height: 9
+        x: 37
+        y: 1174
+        width: 76
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -290,20 +165,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 723faf07604644130800000000000000
-      internalID: 3550072385102869287
+      spriteID: 3f48e4b9159087860800000000000000
+      internalID: 7527777023252399347
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hibiki_7
+      name: RaguelRUlt_2
       rect:
         serializedVersion: 2
-        x: 432
-        y: 0
-        width: 18
-        height: 21
+        x: 231
+        y: 1140
+        width: 82
+        height: 114
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -312,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b8c471370b0162090800000000000000
-      internalID: -8059736133101728629
+      spriteID: 001a9b5e94fd21070800000000000000
+      internalID: 8075762590308475136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hibiki_8
+      name: RaguelRUlt_3
       rect:
         serializedVersion: 2
-        x: 545
-        y: 11
-        width: 11
-        height: 8
+        x: 1071
+        y: 674
+        width: 21
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -334,41 +209,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 35a0dfc4502664950800000000000000
-      internalID: 6432936892651342419
+      spriteID: 32a0aabb42dd41520800000000000000
+      internalID: 2672003628774591011
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hibiki_9
+      name: RaguelRUlt_4
       rect:
         serializedVersion: 2
-        x: 582
-        y: 8
+        x: 1054
+        y: 644
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c411c72f80227e6e0800000000000000
+      internalID: -1808439303542664884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RaguelRUlt_5
+      rect:
+        serializedVersion: 2
+        x: 1069
+        y: 539
         width: 8
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 84f3470660cf712a0800000000000000
-      internalID: -6766662810782646456
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hibiki_10
-      rect:
-        serializedVersion: 2
-        x: 606
-        y: 4
-        width: 13
         height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -378,8 +253,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c3d81899438654f20800000000000000
-      internalID: 3406243268298640700
+      spriteID: a557377b0f74ab280800000000000000
+      internalID: -9026823403915217574
       vertices: []
       indices: 
       edges: []
@@ -398,17 +273,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hibiki_0: -3603831090663902057
-      Hibiki_1: -8704236217184422918
-      Hibiki_10: 3406243268298640700
-      Hibiki_2: 7590409314054944570
-      Hibiki_3: 2107654391745170637
-      Hibiki_4: 423872752737336118
-      Hibiki_5: 201432611129705147
-      Hibiki_6: 3550072385102869287
-      Hibiki_7: -8059736133101728629
-      Hibiki_8: 6432936892651342419
-      Hibiki_9: -6766662810782646456
+      RaguelRUlt_0: -6533293471227882298
+      RaguelRUlt_1: 7527777023252399347
+      RaguelRUlt_2: 8075762590308475136
+      RaguelRUlt_3: 2672003628774591011
+      RaguelRUlt_4: -1808439303542664884
+      RaguelRUlt_5: -9026823403915217574
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
