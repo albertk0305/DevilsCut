@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6371e9b53f4d3f548b6ff0972e24161e, type: 3}
+  m_Name: EnemyAI_Raphael
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI_Raphael
+  lie: {fileID: 11400000, guid: f299c241cefb8584da51313159b32e4c, type: 2}
+  goldenTimeRubber: {fileID: 11400000, guid: 4d4141345475d2f4980b49097291232a, type: 2}
+  period: {fileID: 11400000, guid: 4dabfa776afc1c64482b69190f7d7e12, type: 2}
+  letItOut: {fileID: 11400000, guid: 22364e79b8f28b9409545bed91bdd9d6, type: 2}
+  shunkanSentimental: {fileID: 11400000, guid: f54fab2f0db90f44387ef11d7b79c69b, type: 2}
+  againEvasionBuff: {fileID: 11400000, guid: 3f86c6010f4326d41b16db13bdb52404, type: 2}

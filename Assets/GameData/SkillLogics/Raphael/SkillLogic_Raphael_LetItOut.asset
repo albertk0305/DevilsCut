@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8505d9c0691844084eefbf460950fb, type: 3}
+  m_Name: SkillLogic_Raphael_LetItOut
+  m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Raphael_LetItOut
+  evasionBuff: {fileID: 11400000, guid: 06ef6ef054eeaee41a2bd8a09cb020e2, type: 2}
+  apBuff: {fileID: 11400000, guid: ba1906285767aa245b3fd87e2fcf0ee1, type: 2}
+  evasionBuffValue: 10
+  apBuffValue: 0.1
+  buffTurns: 3

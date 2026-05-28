@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d206b25a395a5e24aadc0128eb08d613, type: 3}
+  m_Name: SkillLogic_Raphael_Period
+  m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Raphael_Period
+  accuracyDebuff: {fileID: 11400000, guid: 0571cf96440fd76498d33d57fba41c84, type: 2}
+  accuracyDebuffValue: -0.05
+  accuracyDebuffTurns: 3

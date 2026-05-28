@@ -98,7 +98,7 @@ public class BuffSlotUI : MonoBehaviour
     private string FormatEffectValue(StatusEffectData data, float value)
     {
         bool isPercentage = ShouldDisplayAsPercentage(data);
-        float displayValue = isPercentage ? value * 100f : value;
+        float displayValue = ShouldScalePercentageValue(data) ? value * 100f : value;
         string sign = displayValue > 0f ? "+" : "";
         string unit = isPercentage ? "%" : "";
         string numberFormat = Mathf.Abs(displayValue - Mathf.Round(displayValue)) < 0.001f ? "F0" : "F1";
@@ -120,6 +120,29 @@ public class BuffSlotUI : MonoBehaviour
             case SpecialEffectType.CritDamageUp:
             case SpecialEffectType.AccuracyUp:
             case SpecialEffectType.EvasionUp:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private bool ShouldScalePercentageValue(StatusEffectData data)
+    {
+        if (data == null) return false;
+        if (data.specialType == SpecialEffectType.AccuracyUp ||
+        data.specialType == SpecialEffectType.EvasionUp)
+        {
+            return false;
+        }
+        if (data.modifierType == ModifierType.Percentage) return true;
+
+        switch (data.specialType)
+        {
+            case SpecialEffectType.DamageAmp:
+            case SpecialEffectType.DamageReduction:
+            case SpecialEffectType.DamageGivenAmp:
+            case SpecialEffectType.CritRateUp:
+            case SpecialEffectType.CritDamageUp:
                 return true;
             default:
                 return false;
