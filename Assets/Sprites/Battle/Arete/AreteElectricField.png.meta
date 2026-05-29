@@ -1,0 +1,702 @@
+fileFormatVersion: 2
+guid: 92420a7e5aeb111488218dcfc34d9ca4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5540169334710624257
+    second: AreteElectricField_0
+  - first:
+      213: -2197598364007718167
+    second: AreteElectricField_1
+  - first:
+      213: -2338598144428989838
+    second: AreteElectricField_2
+  - first:
+      213: 2175159412469753005
+    second: AreteElectricField_3
+  - first:
+      213: -2555039092517715779
+    second: AreteElectricField_4
+  - first:
+      213: -8207613292302861556
+    second: AreteElectricField_5
+  - first:
+      213: 1620276266510158419
+    second: AreteElectricField_6
+  - first:
+      213: 2786355810327546746
+    second: AreteElectricField_7
+  - first:
+      213: 1366324298214776243
+    second: AreteElectricField_8
+  - first:
+      213: -2024793276677232323
+    second: AreteElectricField_9
+  - first:
+      213: -6472803008739131353
+    second: AreteElectricField_10
+  - first:
+      213: -8301063793457368979
+    second: AreteElectricField_11
+  - first:
+      213: -7910924028088766701
+    second: AreteElectricField_12
+  - first:
+      213: 4802663110091259121
+    second: AreteElectricField_13
+  - first:
+      213: -3654070334575561458
+    second: AreteElectricField_14
+  - first:
+      213: -5892323735207927477
+    second: AreteElectricField_15
+  - first:
+      213: 8308536859957978939
+    second: AreteElectricField_16
+  - first:
+      213: 4341093416973720259
+    second: AreteElectricField_17
+  - first:
+      213: 8387086028559258282
+    second: AreteElectricField_18
+  - first:
+      213: -294771539533301653
+    second: AreteElectricField_19
+  - first:
+      213: 9212647285951359757
+    second: AreteElectricField_20
+  - first:
+      213: 1474736287595952896
+    second: AreteElectricField_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 100
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: AreteElectricField_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fff9f09d75d5d13b0800000000000000
+      internalID: -5540169334710624257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_1
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 850
+        width: 151
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e2275a6eef8081e0800000000000000
+      internalID: -2197598364007718167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_2
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 1008
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2722ce8c061ab8fd0800000000000000
+      internalID: -2338598144428989838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_3
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 988
+        width: 19
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da46b1e06f7bf2e10800000000000000
+      internalID: 2175159412469753005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_4
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 996
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db0ce378b7daa8cd0800000000000000
+      internalID: -2555039092517715779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_5
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 988
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0b738a4233b81e80800000000000000
+      internalID: -8207613292302861556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_6
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 986
+        width: 30
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35a85570ea06c7610800000000000000
+      internalID: 1620276266510158419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_7
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 962
+        width: 7
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7b4b64c8df1ba620800000000000000
+      internalID: 2786355810327546746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_8
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 966
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3bd931bc5b826f210800000000000000
+      internalID: 1366324298214776243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_9
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 979
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d39ed002e3d76e3e0800000000000000
+      internalID: -2024793276677232323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_10
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 981
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 720460b35fbfb26a0800000000000000
+      internalID: -6472803008739131353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_11
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 946
+        width: 7
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d60fd15f572bccc80800000000000000
+      internalID: -8301063793457368979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_12
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 969
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31faaa4a280c63290800000000000000
+      internalID: -7910924028088766701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_13
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 969
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fcbcdc27ac76a240800000000000000
+      internalID: 4802663110091259121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_14
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 964
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e05b45b04622a4dc0800000000000000
+      internalID: -3654070334575561458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_15
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 70
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b41245d18c24a3ea0800000000000000
+      internalID: -5892323735207927477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_16
+      rect:
+        serializedVersion: 2
+        x: 493
+        y: 76
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b37e80de04add4370800000000000000
+      internalID: 8308536859957978939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_17
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 55
+        width: 33
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ca518f6679ae3c30800000000000000
+      internalID: 4341093416973720259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_18
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 83
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa29ae86e4ae46470800000000000000
+      internalID: 8387086028559258282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_19
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 76
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b68f838b8d2c8ebf0800000000000000
+      internalID: -294771539533301653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_20
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 69
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0be81855e5e9df70800000000000000
+      internalID: 9212647285951359757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteElectricField_21
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 62
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00bf88f07d0577410800000000000000
+      internalID: 1474736287595952896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      AreteElectricField_0: -5540169334710624257
+      AreteElectricField_1: -2197598364007718167
+      AreteElectricField_10: -6472803008739131353
+      AreteElectricField_11: -8301063793457368979
+      AreteElectricField_12: -7910924028088766701
+      AreteElectricField_13: 4802663110091259121
+      AreteElectricField_14: -3654070334575561458
+      AreteElectricField_15: -5892323735207927477
+      AreteElectricField_16: 8308536859957978939
+      AreteElectricField_17: 4341093416973720259
+      AreteElectricField_18: 8387086028559258282
+      AreteElectricField_19: -294771539533301653
+      AreteElectricField_2: -2338598144428989838
+      AreteElectricField_20: 9212647285951359757
+      AreteElectricField_21: 1474736287595952896
+      AreteElectricField_3: 2175159412469753005
+      AreteElectricField_4: -2555039092517715779
+      AreteElectricField_5: -8207613292302861556
+      AreteElectricField_6: 1620276266510158419
+      AreteElectricField_7: 2786355810327546746
+      AreteElectricField_8: 1366324298214776243
+      AreteElectricField_9: -2024793276677232323
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

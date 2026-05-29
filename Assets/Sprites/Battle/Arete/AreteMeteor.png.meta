@@ -1,0 +1,1378 @@
+fileFormatVersion: 2
+guid: 20811071c2e73b1498f6e13d5def01f8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -461523754040682258
+    second: AreteMeteor_0
+  - first:
+      213: -3562539951496828445
+    second: AreteMeteor_1
+  - first:
+      213: 7681560596003903173
+    second: AreteMeteor_2
+  - first:
+      213: -2215199286558463191
+    second: AreteMeteor_3
+  - first:
+      213: -6737211607583672169
+    second: AreteMeteor_4
+  - first:
+      213: 2491918480175385407
+    second: AreteMeteor_5
+  - first:
+      213: -5384234850842182528
+    second: AreteMeteor_6
+  - first:
+      213: 7781097697498937848
+    second: AreteMeteor_7
+  - first:
+      213: -2171008642218247698
+    second: AreteMeteor_8
+  - first:
+      213: -3367537772149899869
+    second: AreteMeteor_9
+  - first:
+      213: 2983261130168861025
+    second: AreteMeteor_10
+  - first:
+      213: 2085589598960646025
+    second: AreteMeteor_11
+  - first:
+      213: 7017405987562925868
+    second: AreteMeteor_12
+  - first:
+      213: -4660333499051477701
+    second: AreteMeteor_13
+  - first:
+      213: -8754001326847321173
+    second: AreteMeteor_14
+  - first:
+      213: -9018742482556427988
+    second: AreteMeteor_15
+  - first:
+      213: -8380483485984712644
+    second: AreteMeteor_16
+  - first:
+      213: 2443114429372094903
+    second: AreteMeteor_17
+  - first:
+      213: 7801182172696158242
+    second: AreteMeteor_18
+  - first:
+      213: 2996593656753940267
+    second: AreteMeteor_19
+  - first:
+      213: 2920128041565181224
+    second: AreteMeteor_20
+  - first:
+      213: 5414757590396962071
+    second: AreteMeteor_21
+  - first:
+      213: 7177454107127951936
+    second: AreteMeteor_22
+  - first:
+      213: -4603046341075326560
+    second: AreteMeteor_23
+  - first:
+      213: -6593896383972992099
+    second: AreteMeteor_24
+  - first:
+      213: -5756078680598831648
+    second: AreteMeteor_25
+  - first:
+      213: 1742131070324007763
+    second: AreteMeteor_26
+  - first:
+      213: 4212422247620522617
+    second: AreteMeteor_27
+  - first:
+      213: 5145286699067652313
+    second: AreteMeteor_28
+  - first:
+      213: -4486094177091322975
+    second: AreteMeteor_29
+  - first:
+      213: -3764098049524583340
+    second: AreteMeteor_30
+  - first:
+      213: 406149059025003315
+    second: AreteMeteor_31
+  - first:
+      213: 8119384654079826024
+    second: AreteMeteor_32
+  - first:
+      213: -4380389367726668970
+    second: AreteMeteor_33
+  - first:
+      213: -7351711520798162188
+    second: AreteMeteor_34
+  - first:
+      213: -5619967140815528451
+    second: AreteMeteor_35
+  - first:
+      213: 4453463510251295409
+    second: AreteMeteor_36
+  - first:
+      213: 8136346521900509230
+    second: AreteMeteor_37
+  - first:
+      213: 8519413061679665548
+    second: AreteMeteor_38
+  - first:
+      213: 5753212494648866256
+    second: AreteMeteor_39
+  - first:
+      213: -1183641490819212607
+    second: AreteMeteor_40
+  - first:
+      213: 1451157785350110143
+    second: AreteMeteor_41
+  - first:
+      213: -6699703640474468224
+    second: AreteMeteor_42
+  - first:
+      213: -3425473049172238959
+    second: AreteMeteor_43
+  - first:
+      213: -2581589526958857738
+    second: AreteMeteor_44
+  - first:
+      213: 8265889319926349966
+    second: AreteMeteor_45
+  - first:
+      213: -1238975961631273309
+    second: AreteMeteor_46
+  - first:
+      213: -2524959259048069486
+    second: AreteMeteor_47
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 100
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: AreteMeteor_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee8100947965899f0800000000000000
+      internalID: -461523754040682258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_1
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 21
+        width: 105
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e9e4ec0ac05f8ec0800000000000000
+      internalID: -3562539951496828445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_2
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 67
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c65375d9a26a9a60800000000000000
+      internalID: 7681560596003903173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_3
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 57
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92bebf94cf70241e0800000000000000
+      internalID: -2215199286558463191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_4
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 25
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7983659fcbd9082a0800000000000000
+      internalID: -6737211607583672169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_5
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 14
+        width: 52
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3bc51ca7a2159220800000000000000
+      internalID: 2491918480175385407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_6
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 39
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08cf5481eea5745b0800000000000000
+      internalID: -5384234850842182528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_7
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 58
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f9b80e31230cfb60800000000000000
+      internalID: 7781097697498937848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_8
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 9
+        width: 14
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee9374474270fd1e0800000000000000
+      internalID: -2171008642218247698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_9
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 31
+        width: 38
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ad7b4bfc3a1441d0800000000000000
+      internalID: -3367537772149899869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_10
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 8
+        width: 22
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16102ff113ca66920800000000000000
+      internalID: 2983261130168861025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_11
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 68
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9877c49b0b081fc10800000000000000
+      internalID: 2085589598960646025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_12
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 64
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2f236dd095d26160800000000000000
+      internalID: 7017405987562925868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_13
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 16
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b35fe26cf5b235fb0800000000000000
+      internalID: -4660333499051477701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_14
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 49
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bab97f58c2a838680800000000000000
+      internalID: -8754001326847321173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_15
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 14
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c21ef76de7df6d280800000000000000
+      internalID: -9018742482556427988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_16
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 56
+        width: 23
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c389ad3dbaa82bb80800000000000000
+      internalID: -8380483485984712644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_17
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 69
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b9da5c11afa7e120800000000000000
+      internalID: 2443114429372094903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_18
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 20
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2202aa78add534c60800000000000000
+      internalID: 7801182172696158242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_19
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 43
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b27e10fdd0a069920800000000000000
+      internalID: 2996593656753940267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_20
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 36
+        width: 39
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82556287bf0668820800000000000000
+      internalID: 2920128041565181224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_21
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 10
+        width: 24
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71506700755152b40800000000000000
+      internalID: 5414757590396962071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_22
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 9
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 042b70f8b707b9360800000000000000
+      internalID: 7177454107127951936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_23
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 14
+        width: 27
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a92b83adb1be10c0800000000000000
+      internalID: -4603046341075326560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_24
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 58
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9b9e8bbc26cd74a0800000000000000
+      internalID: -6593896383972992099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_25
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 19
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ed15bfdfec4e10b0800000000000000
+      internalID: -5756078680598831648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_26
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 37
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35365de6afa4d2810800000000000000
+      internalID: 1742131070324007763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_27
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 50
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 972bf5147b7857a30800000000000000
+      internalID: 4212422247620522617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_28
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 7
+        width: 21
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d8387dedfab76740800000000000000
+      internalID: 5145286699067652313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_29
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 62
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1abf5814d113eb1c0800000000000000
+      internalID: -4486094177091322975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_30
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 69
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 454b85a54cc33cbc0800000000000000
+      internalID: -3764098049524583340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_31
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 49
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3336b05da6ee2a500800000000000000
+      internalID: 406149059025003315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_32
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 42
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8689f251359dda070800000000000000
+      internalID: 8119384654079826024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_33
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 58
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65301ce041bb533c0800000000000000
+      internalID: -4380389367726668970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_34
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 13
+        width: 40
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f2cda7a25979f990800000000000000
+      internalID: -7351711520798162188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_35
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 6
+        width: 19
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfd925a49add102b0800000000000000
+      internalID: -5619967140815528451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_36
+      rect:
+        serializedVersion: 2
+        x: 517
+        y: 51
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b251b49771edcd30800000000000000
+      internalID: 4453463510251295409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_37
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 9
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e286d5fad0c1ae070800000000000000
+      internalID: 8136346521900509230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_38
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 54
+        width: 34
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c815d34ba090b3670800000000000000
+      internalID: 8519413061679665548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_39
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 27
+        width: 20
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d572e4384487df40800000000000000
+      internalID: 5753212494648866256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_40
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 12
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ca9e46d55cd29fe0800000000000000
+      internalID: -1183641490819212607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_41
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 9
+        width: 53
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbbf5d4315c832410800000000000000
+      internalID: 1451157785350110143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_42
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 27
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 080c029190fd503a0800000000000000
+      internalID: -6699703640474468224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_43
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 31
+        width: 33
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19d1a6429664670d0800000000000000
+      internalID: -3425473049172238959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_44
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 42
+        width: 56
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f1afb9c00a5c2cd0800000000000000
+      internalID: -2581589526958857738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_45
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 62
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e80c7eaba8656b270800000000000000
+      internalID: 8265889319926349966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_46
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 54
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ae48b16de54ecee0800000000000000
+      internalID: -1238975961631273309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreteMeteor_47
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 66
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2963b148eea85fcd0800000000000000
+      internalID: -2524959259048069486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      AreteMeteor_0: -461523754040682258
+      AreteMeteor_1: -3562539951496828445
+      AreteMeteor_10: 2983261130168861025
+      AreteMeteor_11: 2085589598960646025
+      AreteMeteor_12: 7017405987562925868
+      AreteMeteor_13: -4660333499051477701
+      AreteMeteor_14: -8754001326847321173
+      AreteMeteor_15: -9018742482556427988
+      AreteMeteor_16: -8380483485984712644
+      AreteMeteor_17: 2443114429372094903
+      AreteMeteor_18: 7801182172696158242
+      AreteMeteor_19: 2996593656753940267
+      AreteMeteor_2: 7681560596003903173
+      AreteMeteor_20: 2920128041565181224
+      AreteMeteor_21: 5414757590396962071
+      AreteMeteor_22: 7177454107127951936
+      AreteMeteor_23: -4603046341075326560
+      AreteMeteor_24: -6593896383972992099
+      AreteMeteor_25: -5756078680598831648
+      AreteMeteor_26: 1742131070324007763
+      AreteMeteor_27: 4212422247620522617
+      AreteMeteor_28: 5145286699067652313
+      AreteMeteor_29: -4486094177091322975
+      AreteMeteor_3: -2215199286558463191
+      AreteMeteor_30: -3764098049524583340
+      AreteMeteor_31: 406149059025003315
+      AreteMeteor_32: 8119384654079826024
+      AreteMeteor_33: -4380389367726668970
+      AreteMeteor_34: -7351711520798162188
+      AreteMeteor_35: -5619967140815528451
+      AreteMeteor_36: 4453463510251295409
+      AreteMeteor_37: 8136346521900509230
+      AreteMeteor_38: 8519413061679665548
+      AreteMeteor_39: 5753212494648866256
+      AreteMeteor_4: -6737211607583672169
+      AreteMeteor_40: -1183641490819212607
+      AreteMeteor_41: 1451157785350110143
+      AreteMeteor_42: -6699703640474468224
+      AreteMeteor_43: -3425473049172238959
+      AreteMeteor_44: -2581589526958857738
+      AreteMeteor_45: 8265889319926349966
+      AreteMeteor_46: -1238975961631273309
+      AreteMeteor_47: -2524959259048069486
+      AreteMeteor_5: 2491918480175385407
+      AreteMeteor_6: -5384234850842182528
+      AreteMeteor_7: 7781097697498937848
+      AreteMeteor_8: -2171008642218247698
+      AreteMeteor_9: -3367537772149899869
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
