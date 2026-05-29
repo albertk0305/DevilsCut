@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: Uriel
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyNameKey: uriel
-  enemyImage: {fileID: 0}
-  CutIn: {fileID: 0}
-  hit: {fileID: 0}
-  evade: {fileID: 0}
-  breakImage: {fileID: 0}
+  enemyImage: {fileID: 21300000, guid: 12b4d9d5a0ed65542ae869324105b8ea, type: 3}
+  CutIn: {fileID: 21300000, guid: d7fb0d3eee2f7004dbf20f8a5dc24f85, type: 3}
+  hit: {fileID: 21300000, guid: 8e74ddad569723245a3b8f9860aeb854, type: 3}
+  evade: {fileID: 21300000, guid: 5fa01835f1ba61a4e89eec27b80d60b7, type: 3}
+  breakImage: {fileID: 21300000, guid: 8519449ccbc431541b79f4fb7be7d13f, type: 3}
   guardImage: {fileID: 0}
-  aiBrain: {fileID: 0}
+  aiBrain: {fileID: 11400000, guid: 8709780a1d9f1934eaa7f8625de318ef, type: 2}
   statModifier:
     maxHpPercent: 0
-    actionPointsPercent: 0
-    breakResistancePercent: 0
-    maxBreakGaugePercent: 0
+    actionPointsPercent: -0.4
+    breakResistancePercent: 0.2
+    maxBreakGaugePercent: 0.2
     strengthPercent: 0
-    defensePercent: 0
-    speedPercent: 0
+    defensePercent: 0.2
+    speedPercent: -0.2
     luckPercent: 0
   level: 0
   maxHp: 0

@@ -22,6 +22,7 @@ public class CombatState
 
     public bool hasRewardedCritThisSkill = false;
     public bool isMorningStarApRecoveredThisSkill = false;
+    public bool hasTriggeredEnemyCounterThisSkill = false;
     public int totalExcessHealThisSkill = 0;
 
     public bool hasResurrected = false;
@@ -650,6 +651,7 @@ public class CombatManager : MonoBehaviour
         currentState.wasEnemyBrokenAtSkillStart = BreakManager.Instance.IsBroken(false);
         currentState.hasRewardedCritThisSkill = false;
         currentState.isMorningStarApRecoveredThisSkill = false;
+        currentState.hasTriggeredEnemyCounterThisSkill = false;
         currentState.totalExcessHealThisSkill = 0;
     }
 
@@ -700,6 +702,9 @@ public class CombatManager : MonoBehaviour
 
         // On-hit skill effect
         EnqueueApplyEffectOnHit(context);
+
+        // Uriel counter
+        EnqueueUrielCounterIfNeeded(context);
 
         // Counter
         EnqueueMorningStarCounterIfNeeded(context);
@@ -978,6 +983,18 @@ public class CombatManager : MonoBehaviour
 
         if (!isCounterTriggered)
             BattleVisualizer.Instance.EnqueueDelay(2.0f);
+    }
+
+    private void EnqueueUrielCounterIfNeeded(SkillExecutionContext context)
+    {
+        if (!context.isPlayerAttacking) return;
+        if (!context.result.anyHit) return;
+        if (context.presentation.isPureUtility) return;
+        if (currentEnemyData == null) return;
+        if (!(currentEnemyData.aiBrain is EnemyAI_Uriel)) return;
+
+        BattleVisualizer.Instance.EnqueueDelay(2.0f);   // 히트 여운
+        BattleVisualizer.Instance.EnqueueAction(TryTriggerUrielCounterAfterEnemyTakesSkillDamage);
     }
 
     private void EnqueueGuardAndReflectIfNeeded(SkillExecutionContext context)
@@ -1321,12 +1338,12 @@ public class CombatManager : MonoBehaviour
 
         if (isReflect)
         {
-            BattleEventSystem.CallDamageTaken(false, damage, false);
+            CombatUIManager.Instance.SpawnDamageText("★" + damage.ToString(), false, false);
             CombatUIManager.Instance.InterruptAndTypeCommentary($"[인과율 발동!] 튕겨낸 힘으로 적에게 {damage}의 고정 피해를 반사합니다!");
         }
         else
         {
-            CombatUIManager.Instance.SpawnDamageText(damage.ToString(), false, false);
+            CombatUIManager.Instance.SpawnDamageText("★" + damage.ToString(), false, false);
             DevLog.Log($"[새벽별:멸식] 카운터 발동! {damage} 피해");
         }
     }
@@ -1394,6 +1411,40 @@ public class CombatManager : MonoBehaviour
     public bool ApplyDamageToEnemy(int damage)
     {
         return ApplyDamageToEntity(false, damage);
+    }
+
+    private void TryTriggerUrielCounterAfterEnemyTakesSkillDamage()
+    {
+        if (currentEnemyData == null) return;
+        if (!(currentEnemyData.aiBrain is EnemyAI_Uriel urielAI)) return;
+        if (currentState.hasTriggeredEnemyCounterThisSkill) return;
+        if (currentEnemyHp <= 0) return;
+
+        currentState.hasTriggeredEnemyCounterThisSkill = true;
+        urielAI.AddEnduranceStack(1);
+
+        int urielDef = currentEnemyData.defense;
+        if (StatManager.Instance != null)
+        {
+            urielDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
+        }
+
+        int counterDamage = Mathf.Max(1, urielDef * 10);
+
+        Sprite counterSprite = urielAI.GetCounterImage(currentEnemyData);
+        if (counterSprite != null) CombatUIManager.Instance.SetCasterImage(false, counterSprite);
+
+        CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
+        ApplyDamageToEntity(true, counterDamage);
+        CombatUIManager.Instance.SpawnDamageText("★" + counterDamage.ToString(), false, true);
+
+        if (BreakManager.Instance != null && !BreakManager.Instance.IsBroken(true))
+        {
+            if (BreakManager.Instance.AddBreakDamage(true, 10f)) UpdateTurnOrderUI();
+        }
+
+        CombatUIManager.Instance.InterruptAndTypeCommentary($"[Shutter] Uriel counters for {counterDamage} special damage.");
+        DevLog.Log($"[Uriel Shutter] Counter damage {counterDamage}.");
     }
 
     public bool ApplyDamageToEntity(bool isPlayerTarget, int damage)
