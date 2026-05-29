@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b116610f155f79540939c076672fcafd, type: 3}
+  m_Name: EnemyAI_Temperare
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI_Temperare
+  instinct: {fileID: 11400000, guid: 26d63fb829f79394997513bbdbf4a24b, type: 2}
+  overflowingWealth: {fileID: 11400000, guid: 8b970090391167447801958d875d3571, type: 2}
+  passiveEvasionBuff: {fileID: 11400000, guid: 4585bf214a42f554eb1aee3070bf7a67, type: 2}

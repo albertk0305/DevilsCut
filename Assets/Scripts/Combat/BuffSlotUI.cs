@@ -130,10 +130,12 @@ public class BuffSlotUI : MonoBehaviour
     {
         if (data == null) return false;
         if (data.specialType == SpecialEffectType.AccuracyUp ||
-        data.specialType == SpecialEffectType.EvasionUp)
+        data.specialType == SpecialEffectType.EvasionUp ||
+        data.specialType == SpecialEffectType.CritRateUp)
         {
             return false;
         }
+
         if (data.modifierType == ModifierType.Percentage) return true;
 
         switch (data.specialType)
@@ -141,7 +143,6 @@ public class BuffSlotUI : MonoBehaviour
             case SpecialEffectType.DamageAmp:
             case SpecialEffectType.DamageReduction:
             case SpecialEffectType.DamageGivenAmp:
-            case SpecialEffectType.CritRateUp:
             case SpecialEffectType.CritDamageUp:
                 return true;
             default:

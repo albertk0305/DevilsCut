@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0aa14b50fd4ca0d4eaa462662a5819ec, type: 3}
-  m_Name: RaphaelAccuDown
+  m_Name: TemperarePermEvade
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
-  effectID: RaphaelAccuDown
-  effectName: RaphaelAccuDown
-  category: 1
-  icon: {fileID: 21300000, guid: 6246a12eeca78bc4e9749985c9b96461, type: 3}
+  effectID: TemperarePermEvade
+  effectName: TemperarePermEvade
+  category: 2
+  icon: {fileID: 21300000, guid: 7c8b80e6aa846bf4e9447af30e175810, type: 3}
   targetStat: 0
   modifierType: 0
-  specialType: 19
+  specialType: 4
   baseDescription: 
-  isPermanentPassive: 0
+  isPermanentPassive: 1
   showStackDetails: 0
   valueFormat: 

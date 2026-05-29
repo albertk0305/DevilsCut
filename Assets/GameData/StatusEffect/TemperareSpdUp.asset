@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0aa14b50fd4ca0d4eaa462662a5819ec, type: 3}
-  m_Name: RaphaelAccuDown
+  m_Name: TemperareSpdUp
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
-  effectID: RaphaelAccuDown
-  effectName: RaphaelAccuDown
-  category: 1
-  icon: {fileID: 21300000, guid: 6246a12eeca78bc4e9749985c9b96461, type: 3}
-  targetStat: 0
-  modifierType: 0
-  specialType: 19
+  effectID: TemperareSpdUp
+  effectName: TemperareSpdUp
+  category: 0
+  icon: {fileID: 21300000, guid: b354b3b7ced5e1e45aff098f89cc880f, type: 3}
+  targetStat: 3
+  modifierType: 1
+  specialType: 0
   baseDescription: 
   isPermanentPassive: 0
   showStackDetails: 0

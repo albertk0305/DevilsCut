@@ -50,7 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LocalizationManager
   localizationCSVs:
   - {fileID: 4900000, guid: 9ffe22687c5b70243b40c502c2e4c96c, type: 3}
-  - {fileID: 4900000, guid: 5fd6bbae1e4c95f4ab246cf77b9b0ef7, type: 3}
   currentLanguage: 0
 --- !u!114 &2952436123089374904
 MonoBehaviour:
