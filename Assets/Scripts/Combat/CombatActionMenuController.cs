@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 public class CombatActionMenuController
@@ -88,6 +88,8 @@ public class CombatActionMenuController
 
     public void OnActionSlotClicked(int slotIndex)
     {
+        if (!IsPlayerSelectingPhase) return;
+        
         if (currentMenuState == MenuState.CategorySelect)
         {
             ShowSkillMenu(slotIndex);

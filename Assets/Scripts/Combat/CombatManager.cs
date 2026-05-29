@@ -74,6 +74,13 @@ public class CombatManager : MonoBehaviour
     private TurnEffectResolver turnEffectResolver;
     public CombatState currentState = new CombatState();
 
+    public bool CanInteractWithCombatUI =>
+    !combatEnded &&
+    currentActiveEntity != null &&
+    currentActiveEntity.type == EntityType.Player &&
+    actionMenuController != null &&
+    actionMenuController.IsPlayerSelectingPhase;
+
     private struct SkillCalculationContext
     {
         public int atkStr;
@@ -389,6 +396,38 @@ public class CombatManager : MonoBehaviour
         if (owner.type == EntityType.Player && PlayerManager.Instance != null)
         {
             TurnEffects.ApplyTricksterPreTurnEffects(PlayerManager.Instance);
+
+            var playerEffects = BuffManager.Instance.GetEffects(true);
+            var bleedEffects = playerEffects.FindAll(e => e.effectData != null && e.effectData.specialType == SpecialEffectType.Bleed);
+
+            if (bleedEffects.Count > 0)
+            {
+                float totalBleedMultiplier = 0f;
+                foreach (var bleedEffect in bleedEffects)
+                {
+                    totalBleedMultiplier += bleedEffect.value;
+                }
+
+                int enemyStr = currentEnemyData != null ? currentEnemyData.strength : 0;
+                if (StatManager.Instance != null)
+                {
+                    enemyStr = StatManager.Instance.GetEffectiveStat(false, TargetStat.Strength);
+                }
+
+                int bleedDamage = Mathf.Max(1, Mathf.RoundToInt(enemyStr * totalBleedMultiplier));
+                ApplyDamageToEntity(true, bleedDamage);
+
+                CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
+                CombatUIManager.Instance.SpawnDamageText("★" + bleedDamage.ToString(), false, true);
+
+                yield return CombatUIManager.Instance.TypeCommentary($"셰리가 {bleedDamage}의 출혈 지속 피해를 입습니다.", true, 0.5f);
+
+                yield return new WaitForSeconds(1.0f);
+                CombatUIManager.Instance.ResetDefenderImage(true);
+
+                if (CheckAndHandleBattleEnd())
+                    yield break;
+            }
         }
 
         if (owner.type == EntityType.Enemy)

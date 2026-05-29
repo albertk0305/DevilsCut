@@ -153,7 +153,8 @@ public class BuffSlotUI : MonoBehaviour
     public void OnSlotClicked()
     {
         // 1. 현재 턴 주인이 플레이어(true)가 아니면 클릭을 무시합니다.
-        if (CombatManager.Instance != null && !CombatManager.Instance.IsCurrentTurnOwner(true)) return;
+        if (CombatManager.Instance == null || !CombatManager.Instance.CanInteractWithCombatUI)
+            return;
 
         // 2. 전투 코멘터리 텍스트(카린 대사 역할)로 상세 정보를 띄워줍니다.
         if (CombatUIManager.Instance != null)
