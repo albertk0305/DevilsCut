@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
-  m_Name: HibikiPrema
+  m_Name: SilereGarden
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
-  skillID: Prema
-  skillLogic: {fileID: 11400000, guid: 021c8180a7cee024c9a56bc8042d6a6d, type: 2}
-  skillNameKey: Prema
-  skillDescKey: Prema
+  skillID: SilereGarden
+  skillLogic: {fileID: 11400000, guid: 3a7e045d6c1b87b4886f9c98294dd408, type: 2}
+  skillNameKey: SilereGarden
+  skillDescKey: SilereGarden
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 
@@ -24,11 +24,11 @@ MonoBehaviour:
   evolutionCDescKey: 
   category: 0
   skillLevel: 1
-  skillActionImage: {fileID: 21300000, guid: 6ad8041afcd274840a13e71f61cbfd5e, type: 3}
+  skillActionImage: {fileID: 21300000, guid: 1862a068bf21d2443a892b047d5df8bb, type: 3}
   damageMultipliers:
-  - 20
+  - 10
   breakPowers:
-  - 20
+  - 8
   bonusCritRates:
   - 0
   bonusAccuracyRates:
