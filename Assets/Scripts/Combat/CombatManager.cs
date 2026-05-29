@@ -304,6 +304,7 @@ public class CombatManager : MonoBehaviour
         enemyTurnCount = 0;
         BreakManager.Instance?.InitBreakState();
         BuffManager.Instance?.ClearAllEffects();
+        currentEnemyData?.aiBrain?.UpdatePassives(currentEnemyData);
         StyleRankManager.Instance?.InitCombat();
 
         EnsureActionMenuController();

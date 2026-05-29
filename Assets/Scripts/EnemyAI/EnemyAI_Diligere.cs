@@ -14,8 +14,6 @@ public class EnemyAI_Diligere : EnemyAIBase
 
     public override EnemyActionIntent DecideNextAction(int currentTurnCount, PlayerStats pStats, EnemyData enemy)
     {
-        if (!passiveApplied) ApplyPassive();
-
         EnemyActionIntent intent = new EnemyActionIntent();
 
         SkillData intendedSkill = (patternIndex == 0) ? vagueHope : wretchedWeaponry;
@@ -44,6 +42,7 @@ public class EnemyAI_Diligere : EnemyAIBase
 
     public override void UpdatePassives(EnemyData enemy)
     {
+        ApplyPassive();
     }
 
     private void ApplyPassive()

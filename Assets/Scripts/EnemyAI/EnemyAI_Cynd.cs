@@ -18,8 +18,6 @@ public class EnemyAI_Cynd : EnemyAIBase
 
     public override EnemyActionIntent DecideNextAction(int currentTurnCount, PlayerStats pStats, EnemyData enemy)
     {
-        ApplyLithiumFlowerPassive();
-
         EnemyActionIntent intent = new EnemyActionIntent();
         if (isOverheated)
         {

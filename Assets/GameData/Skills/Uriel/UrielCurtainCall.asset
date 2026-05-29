@@ -28,7 +28,7 @@ MonoBehaviour:
   damageMultipliers:
   - 1
   breakPowers:
-  - 20
+  - 30
   bonusCritRates:
   - 0
   bonusAccuracyRates:

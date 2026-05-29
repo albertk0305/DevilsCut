@@ -17,8 +17,6 @@ public class EnemyAI_Remiel : EnemyAIBase
 
     public override EnemyActionIntent DecideNextAction(int currentTurnCount, PlayerStats pStats, EnemyData enemy)
     {
-        if (!passiveApplied) ApplyPassive();
-
         EnemyActionIntent intent = new EnemyActionIntent();
         SkillData intendedSkill = GetPatternSkill();
 
@@ -48,6 +46,7 @@ public class EnemyAI_Remiel : EnemyAIBase
 
     public override void UpdatePassives(EnemyData enemy)
     {
+        ApplyPassive();
     }
 
     private void ApplyPassive()

@@ -39,8 +39,6 @@ public class EnemyAI_Uriel : EnemyAIBase
 
     public override EnemyActionIntent DecideNextAction(int currentTurnCount, PlayerStats pStats, EnemyData enemy)
     {
-        ApplyInfinity();
-
         EnemyActionIntent intent = new EnemyActionIntent();
         SkillData intendedSkill = GetSkillForCurrentEndurance();
 
@@ -64,6 +62,11 @@ public class EnemyAI_Uriel : EnemyAIBase
         if (curtainCall != null) skillList.Add(curtainCall);
 
         return skillList;
+    }
+
+    public override void UpdatePassives(EnemyData enemy)
+    {
+        ApplyInfinity();
     }
 
     private void ApplyInfinity()
