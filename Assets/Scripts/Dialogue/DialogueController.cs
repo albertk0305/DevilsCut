@@ -351,12 +351,16 @@ public class DialogueController : MonoBehaviour
 
         isChoiceActive = false;
         SetChoicePanelActive(false);
-        HandleChoiceSelection(action, nextLineID);
+        string actionValue = choice != null
+            ? (isYes ? choice.yesActionValue : choice.noActionValue)
+            : "";
+
+        HandleChoiceSelection(action, actionValue, nextLineID);
     }
 
-    private void HandleChoiceSelection(DialogueChoiceAction action, string nextLineID)
+    private void HandleChoiceSelection(DialogueChoiceAction action, string actionValue, string nextLineID)
     {
-        bool endsDialogue = HandleChoiceAction(action);
+        bool endsDialogue = HandleChoiceAction(action, actionValue);
         if (endsDialogue)
             return;
 
@@ -377,6 +381,11 @@ public class DialogueController : MonoBehaviour
 
     private bool HandleChoiceAction(DialogueChoiceAction action)
     {
+        return HandleChoiceAction(action, "");
+    }
+
+    private bool HandleChoiceAction(DialogueChoiceAction action, string actionValue)
+    {
         switch (action)
         {
             case DialogueChoiceAction.LoadNextScene:
@@ -391,6 +400,9 @@ public class DialogueController : MonoBehaviour
             case DialogueChoiceAction.UpgradePendingFacilityRank:
                 UpgradePendingFacilityRank();
                 return false;
+            case DialogueChoiceAction.GameClear:
+                HandleGameClear(actionValue);
+                return false;
             default:
                 return false;
         }
@@ -402,7 +414,7 @@ public class DialogueController : MonoBehaviour
         if (line == null || line.lineEndAction == DialogueChoiceAction.None)
             return false;
 
-        bool endsDialogue = HandleChoiceAction(line.lineEndAction);
+        bool endsDialogue = HandleChoiceAction(line.lineEndAction, line.lineEndActionValue);
         if (endsDialogue)
             return true;
 
@@ -413,6 +425,17 @@ public class DialogueController : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void HandleGameClear(string endingID)
+    {
+        if (SaveManager.Instance == null)
+        {
+            DevLog.LogWarning("[Dialogue] GameClear requested but SaveManager.Instance is missing.");
+            return;
+        }
+
+        SaveManager.Instance.HandleGameClear(endingID);
     }
 
     private void FinishDialogue()

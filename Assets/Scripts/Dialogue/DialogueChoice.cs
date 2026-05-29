@@ -8,6 +8,8 @@ public class DialogueChoice
     public string noTextKey;
     public DialogueChoiceAction yesAction;
     public DialogueChoiceAction noAction;
+    public string yesActionValue;
+    public string noActionValue;
     public string yesNextLineID;
     public string noNextLineID;
 }

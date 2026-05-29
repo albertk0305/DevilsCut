@@ -30,7 +30,8 @@ public class MainMenuManager : MonoBehaviour
         if (continueButton == null)
             return;
 
-        continueButton.interactable = SaveManager.Instance != null && SaveManager.Instance.HasContinueSave();
+        bool hasSave = SaveManager.Instance != null && SaveManager.Instance.HasContinueSave();
+        continueButton.gameObject.SetActive(hasSave);
     }
 
     public void OnClickStart()

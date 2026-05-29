@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37cfe8db388c2c14f897d49388a7f5a2, type: 3}
   m_Name: SkillLogic_Diligere_WretchedWeaponry
   m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Diligere_WretchedWeaponry
-  diligereBleed: {fileID: 0}
+  diligereBleed: {fileID: 11400000, guid: 9bf9656c8ab505b46833c673490a2152, type: 2}
   bleedMultiplierPerHit: 1
   bleedTurns: 3

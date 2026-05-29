@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: WorldWithoutReason
   skillLogic: {fileID: 11400000, guid: 96d29ebe4adf5b0458c6a7698d4bbade, type: 2}
-  skillNameKey: skill_name_magic3
-  skillDescKey: skill_desc_magic3
-  evolutionANameKey: 
-  evolutionADescKey: 
-  evolutionBNameKey: 
-  evolutionBDescKey: 
-  evolutionCNameKey: 
-  evolutionCDescKey: 
+  skillNameKey: sk_015_name
+  skillDescKey: sk_015_desc
+  evolutionANameKey: sk_015_evo_a_name
+  evolutionADescKey: sk_015_evo_a_desc
+  evolutionBNameKey: sk_015_evo_b_name
+  evolutionBDescKey: sk_015_evo_b_desc
+  evolutionCNameKey: sk_015_evo_c_name
+  evolutionCDescKey: sk_015_evo_c_desc
   category: 3
   skillLevel: 1
   skillActionImage: {fileID: 21300000, guid: da990d0f1e8d08544b3dc0d2bd9b19bb, type: 3}

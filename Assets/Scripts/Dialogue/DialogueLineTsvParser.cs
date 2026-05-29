@@ -78,11 +78,14 @@ public static class DialogueLineTsvParser
 
         TryParseAction(GetColumn(columns, header, "lineEndAction"), rowNumber, line.lineID, "lineEndAction", out DialogueChoiceAction lineEndAction);
         line.lineEndAction = lineEndAction;
+        line.lineEndActionValue = GetColumn(columns, header, "lineEndActionValue");
 
         string yesTextKey = GetColumn(columns, header, "yesTextKey");
         string noTextKey = GetColumn(columns, header, "noTextKey");
         string yesActionText = GetColumn(columns, header, "yesAction");
         string noActionText = GetColumn(columns, header, "noAction");
+        string yesActionValue = GetColumn(columns, header, "yesActionValue");
+        string noActionValue = GetColumn(columns, header, "noActionValue");
         string yesNextLineID = GetColumn(columns, header, "yesNextLineID");
         string noNextLineID = GetColumn(columns, header, "noNextLineID");
         bool hasValidYesAction = TryParseAction(yesActionText, rowNumber, line.lineID, "yesAction", out DialogueChoiceAction yesAction);
@@ -109,6 +112,8 @@ public static class DialogueLineTsvParser
                 noTextKey = noTextKey,
                 yesAction = yesAction,
                 noAction = noAction,
+                yesActionValue = yesActionValue,
+                noActionValue = noActionValue,
                 yesNextLineID = yesNextLineID,
                 noNextLineID = noNextLineID
             };

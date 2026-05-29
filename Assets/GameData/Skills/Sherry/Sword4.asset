@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Excalibur
   skillLogic: {fileID: 11400000, guid: ec4b44637af1a3c43b846e0bff407b2b, type: 2}
-  skillNameKey: skill_name_sword4
-  skillDescKey: skill_desc_sword4
-  evolutionANameKey: Excalibur a
-  evolutionADescKey: a evol desc
-  evolutionBNameKey: Excalibur b
-  evolutionBDescKey: b evol desc
-  evolutionCNameKey: Excalibur c
-  evolutionCDescKey: c evol desc
+  skillNameKey: sk_004_name
+  skillDescKey: sk_004_desc
+  evolutionANameKey: sk_004_evo_a_name
+  evolutionADescKey: sk_004_evo_a_desc
+  evolutionBNameKey: sk_004_evo_b_name
+  evolutionBDescKey: sk_004_evo_b_desc
+  evolutionCNameKey: sk_004_evo_c_name
+  evolutionCDescKey: sk_004_evo_c_desc
   category: 0
   skillLevel: 3
   skillActionImage: {fileID: 21300000, guid: 2b2776ff30f98c34ead0f4920035b5e0, type: 3}

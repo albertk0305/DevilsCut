@@ -4,5 +4,6 @@
     LoadNextScene,
     RecruitPendingSupporter,
     RejectPendingSupporter,
-    UpgradePendingFacilityRank
+    UpgradePendingFacilityRank,
+    GameClear
 }

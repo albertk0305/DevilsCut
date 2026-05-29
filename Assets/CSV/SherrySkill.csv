@@ -1,0 +1,161 @@
+Key,Korean,English
+sk_001_name,담력,Grit
+sk_001_desc,적에게 피해를 주고 가드 상태에 돌입합니다. 가드 상태에서는 적에게 피격당했을 때 받는 피해가 감소합니다.,"Deals damage to an enemy and enters the Guard state. While in the Guard state, damage taken from enemy attacks is reduced."
+sk_001_evo_a_name,인과율,Causality
+sk_001_evo_a_desc,"가드 상태에서 적의 공격을 받을 시, 가드로 감소시킨 피해량의 일정량을 적에게 되돌려줍니다.","When attacked while in the Guard state, reflects a portion of the damage mitigated by Guard back to the attacker."
+sk_001_evo_b_name,고드 핸드,God Hand
+sk_001_evo_b_desc,"가드 상태가 강화되어, 방어력 무시 고정 피해에도 피해 감소가 적용됩니다.","Strengthens the Guard state, allowing the damage reduction to apply even to defense-ignoring True Damage."
+sk_001_evo_c_name,제물의 낙인,Brand of Sacrifice
+sk_001_evo_c_desc,"더 이상 가드 상태를 획득하지 않는 대신, 힘과 방어력에 비례한 강력한 피해를 줍니다.","No longer gains the Guard state. Instead, deals powerful damage proportional to Strength and Defense."
+sk_002_name,타나토스,Thanatos
+sk_002_desc,"적을 타격하여 큰 브레이크 피해를 주고, 방어력 감소 디버프를 부여합니다.",Strikes an enemy to deal massive Break damage and inflicts a Defense reduction debuff.
+sk_002_evo_a_name,Color Your Night,Color Your Night
+sk_002_evo_a_desc,적에게 감소시킨 방어력만큼 플레이어의 방어력을 상승시킵니다.,Increases the player's Defense by the amount of Defense reduced from the enemy.
+sk_002_evo_b_name,Burn My Dread,Burn My Dread
+sk_002_evo_b_desc,"스킬의 기본 피해 계수가 감소하는 대신, 적의 누적된 브레이크 수치에 비례하여 스킬 피해량이 상승합니다.","Decreases the skill's base damage coefficient, but increases skill damage proportional to the enemy's accumulated Break value."
+sk_002_evo_c_name,Full Moon Full Life,Full Moon Full Life
+sk_002_evo_c_desc,8타 다단 히트 스킬로 변경됩니다. 방어력 감소 디버프는 한 번만 적용되며 중첩되지 않습니다.,Changes the skill into an 8-hit multi-strike attack. The Defense reduction debuff applies only once and does not stack.
+sk_003_name,악귀멸살,Evil Slayer
+sk_003_desc,적에게 큰 피해를 줍니다. 피해량의 일정 비율이 방어력 무시 고정 피해로 적용됩니다.,Deals massive damage to an enemy. A certain percentage of the damage is applied as defense-ignoring True Damage.
+sk_003_evo_a_name,내비치는 세계,Transparent World
+sk_003_evo_a_desc,적의 현재 체력이 최대 체력의 70% 이상일 때 추가 피해를 줍니다.,Deals additional damage when the enemy's current HP is 70% or higher of their maximum HP.
+sk_003_evo_b_name,오니가 되어라,Become a Demon
+sk_003_evo_b_desc,적에게 입힌 피해량의 일정 비율만큼 체력을 회복합니다.,Heals HP by a certain percentage of the damage dealt to the enemy.
+sk_003_evo_c_name,빈틈의 실,Thread of Interval
+sk_003_evo_c_desc,적에게 걸려 있는 디버프의 개수에 비례하여 스킬 피해량이 증가합니다.,Increases skill damage proportional to the number of debuffs inflicted on the enemy.
+sk_004_name,약속된 승리의 검,Excalibur
+sk_004_desc,적에게 큰 피해를 주며 스킬 피해량의 일정 비율을 방어력 무시 고정 피해로 입힙니다,Deals massive damage to an enemy and inflicts a certain percentage of the skill damage as defense-ignoring True Damage
+sk_004_evo_a_name,인비저블 에어,Invisible Air
+sk_004_evo_a_desc,이 스킬이 적에게 반드시 적중합니다,This skill is guaranteed to hit the enemy
+sk_004_evo_b_name,아발론,Avalon
+sk_004_evo_b_desc,스킬 사용 후 3턴 동안 턴마다 최대 체력의 30%씩 회복하는 버프를 획득합니다,After using the skill gains a buff that restores 30% of maximum HP every turn for 3 turns
+sk_004_evo_c_name,모르간,Morgan
+sk_004_evo_c_desc,방어력 무시 고정 피해 효과가 삭제되는 대신 적에게 3턴 동안 받는 피해가 증가하는 디버프를 부여합니다,The defense-ignoring True Damage effect is removed but inflicts a debuff that increases damage taken for 3 turns
+sk_005_name,데몬 암,Demon Arm
+sk_005_desc,적에게 피해를 줍니다 이 스킬은 치명타가 발생할 확률이 높습니다,Deals damage to an enemy This skill has a high Critical Hit chance
+sk_005_evo_a_name,성자의 행진,Come the Light
+sk_005_evo_a_desc,이 스킬의 치명타 피해량이 상승합니다,Increases the Critical Hit damage of this skill
+sk_005_evo_b_name,별 부스러기,Stars
+sk_005_evo_b_desc,이 스킬의 치명타 확률이 100%를 초과할 경우 초과한 수치에 비례하여 스킬 피해량이 상승합니다,If the Critical Hit chance of this skill exceeds 100% the skill damage increases proportional to the excess value
+sk_005_evo_c_name,러시안 룰렛,Russian Roulette
+sk_005_evo_c_desc,6타 다단 히트 스킬로 변경됩니다 단 무작위 한 발은 반드시 빗나가며 불발탄 이후의 타격은 전부 빗나갑니다,Changes into a 6-hit multi-strike skill However one random shot is guaranteed to miss and all subsequent strikes after the misfire will also miss
+sk_006_name,무한의 마탄,Infinite Magic Bullet
+sk_006_desc,적에게 큰 브레이크 피해를 주는 다단 히트 스킬입니다,A multi-strike skill that deals massive Break damage to an enemy
+sk_006_evo_a_name,티로 듀엣,Tiro Duet
+sk_006_evo_a_desc,다단 히트 타격이 적중할 때마다 연속 적중 횟수에 비례하여 치명타 확률과 피해량이 상승합니다,Each time a multi-strike hit lands Critical Hit chance and damage increase proportional to the consecutive hit count
+sk_006_evo_b_name,마기아,Magia
+sk_006_evo_b_desc,적에게 속도 감소 디버프를 3턴 동안 부여합니다,Inflicts a Speed reduction debuff on the enemy for 3 turns
+sk_006_evo_c_name,티로 피날레,Tiro Finale
+sk_006_evo_c_desc,단일 히트 스킬로 변경되며 적의 방어력을 일부 무시하는 다단 히트가 압축된 강력한 한 방을 날립니다,Changes into a single-hit skill that unleashes a powerful compressed strike incorporating multi-hit properties that partially ignore enemy Defense
+sk_007_name,판타스틱 드리머,Fantastic Dreamer
+sk_007_desc,운에 기반하여 무작위로 피해량이 결정됩니다 피해량 계수는 5단계가 존재하며 운 수치가 높을수록 높은 피해량이 발생할 확률이 높아집니다,Deals random damage based on Luck There are 5 tiers of damage coefficients and a higher Luck stat increases the chance of triggering higher damage
+sk_007_evo_a_name,최강급 행운,Ultimate Luck
+sk_007_evo_a_desc,가장 낮은 1단계 계수가 발생할 경우 3단계 계수로 보정합니다,If the lowest Tier 1 coefficient triggers it is adjusted up to the Tier 3 coefficient
+sk_007_evo_b_name,익스플로전,Explosion
+sk_007_evo_b_desc,6단계 피해량 계수가 추가되며 운 수치가 높을수록 6단계 계수가 발생할 확률이 높아집니다,Adds a Tier 6 damage coefficient and a higher Luck stat increases the chance of triggering the Tier 6 coefficient
+sk_007_evo_c_name,스틸,Steal
+sk_007_evo_c_desc,피해량 계수가 3단계 이상 발생할 경우 이번 전투 동안 적의 운 수치를 일정량 훔칩니다,If a Tier 3 or higher coefficient triggers steals a certain amount of the enemy's Luck stat for the duration of this battle
+sk_008_name,오니의 재보,Treasure of the Oni
+sk_008_desc,치명타가 발생할 확률이 높은 다단 히트 스킬입니다,A multi-strike skill that has a high Critical Hit chance
+sk_008_evo_a_name,컬렉터 EX,Collector EX
+sk_008_evo_a_desc,현재 운 능력치에 비례하여 스킬 타수가 증가합니다,Increases the number of skill hits proportional to the current Luck stat
+sk_008_evo_b_name,엘키두,Enkidu
+sk_008_evo_b_desc,이 스킬의 모든 타수가 반드시 명중합니다,Every single hit of this skill is guaranteed to land
+sk_008_evo_c_name,에누마 엘리시,Enuma Elish
+sk_008_evo_c_desc,이 스킬의 치명타 보정이 발동하지 않는 대신 스킬 명중 시 적의 모든 버프를 제거합니다,The Critical Hit correction of this skill does not trigger but removes all buffs from the enemy upon a successful hit
+sk_009_name,새벽별,akeboshi
+sk_009_desc,적에게 피해를 입히고 3턴 동안 회피율이 상승합니다,Deals damage to an enemy and increases Evasion Rate for 3 turns
+sk_009_evo_a_name,멸식,Annihilation Type
+sk_009_evo_a_desc,회피 상승 버프를 보유한 동안 적의 공격을 회피하면 힘 능력치에 비례하는 피해로 반격합니다,While holding the Evasion increase buff dodging an enemy attack triggers a counterattack with damage proportional to the Strength stat
+sk_009_evo_b_name,난식,Disorder
+sk_009_evo_b_desc,회피 상승 버프를 보유한 동안 적의 공격을 회피하면 행동 게이지를 일정량 회복합니다,While holding the Evasion increase buff dodging an enemy attack restores a certain amount of the Action Gauge
+sk_009_evo_c_name,종식,Final Form
+sk_009_evo_c_desc,더 이상 회피 상승 버프를 획득하지 않는 대신 현재 회피율 수치에 비례하여 스킬 피해량이 증가합니다,No longer gains the Evasion increase buff but increases skill damage proportional to the current Evasion Rate value
+sk_010_name,유록화홍,Yurokhwahong
+sk_010_desc,적에게 큰 브레이크 피해를 줍니다 이 스킬은 적에게 명중할 확률이 높습니다,Deals massive Break damage to an enemy This skill has a high chance to hit
+sk_010_evo_a_name,박수갈채가합,Hakushu Kassai Utaawase
+sk_010_evo_a_desc,이 스킬의 최종 명중률이 100%를 초과할 경우 초과량에 비례하여 브레이크 피해량이 증가합니다,If the final Hit Rate of this skill exceeds 100% the Break damage increases proportional to the excess amount
+sk_010_evo_b_name,비화낙엽,Bihwanakyeop
+sk_010_evo_b_desc,적에게 2턴 동안 회피 불가 디버프를 부여합니다,Inflicts an Unavoidable debuff on the enemy for 2 turns
+sk_010_evo_c_name,칠화팔열,Chilhwapalryeol
+sk_010_evo_c_desc,다단 히트 스킬로 변경되며 속도 능력치에 비례하여 타수가 증가합니다,Changes into a multi-strike skill and the number of hits increases proportional to the Speed stat
+sk_011_name,기,Ki
+sk_011_desc,적에게 피해를 줍니다 적이 그로기 상태라면 피해량이 증가합니다,Deals damage to an enemy If the enemy is in a Groggy state damage increases
+sk_011_evo_a_name,마관광살포,Special Beam Cannon
+sk_011_evo_a_desc,이 스킬이 그로기 상태인 적에게 적중할 경우 적의 행동 게이지를 0으로 초기화합니다 이 효과는 그로기 상태당 한 번만 발동합니다,If this skill hits an enemy in a Groggy state resets the enemy's Action Gauge to 0 This effect triggers only once per Groggy state
+sk_011_evo_b_name,기공포,Tri Beam
+sk_011_evo_b_desc,현재 체력의 20%를 스킬 비용으로 소모하는 대신 스킬 피해량이 상승합니다,Consumes 20% of current HP as a skill cost instead of increasing skill damage
+sk_011_evo_c_name,원기옥,Spirit Bomb
+sk_011_evo_c_desc,스킬이 차지 스킬로 변경됩니다 스킬 사용 시 차지 상태에 돌입하며 다음 턴에 큰 피해를 줍니다 차지 상태에서 피해를 받으면 취소됩니다,Changes into a Charge skill Enters a Charge state upon use and deals massive damage next turn Canceled if damage is taken while in the Charge state
+sk_012_name,크루세이더,Crusader
+sk_012_desc,적에게 다단 히트 피해를 줍니다 적이 그로기 상태라면 피해량이 증가합니다,Deals multi-strike damage to an enemy If the enemy is in a Groggy state damage increases
+sk_012_evo_a_name,Bloody Stream,Bloody Stream
+sk_012_evo_a_desc,각 타격이 적에게 적중할 때마다 방어력 및 브레이크 저항 감소 디버프를 부여합니다,Each time a hit lands on the enemy inflicts a Defense and Break Resistance reduction debuff
+sk_012_evo_b_name,Stand Proud,Stand Proud
+sk_012_evo_b_desc,타격이 연속으로 적중할수록 피해량이 상승합니다,The damage increases as hits land consecutively
+sk_012_evo_c_name,Last Train Home,Last Train Home
+sk_012_evo_c_desc,스킬 사용 시 적에게 피해를 주는 대신 피해량의 2.5배를 저장합니다 적의 다음 턴 시작 시 이 저장된 피해가 적에게 반드시 적중합니다,Upon using the skill stores 2.5 times the damage value instead of dealing immediate damage to the enemy This stored damage is guaranteed to hit the enemy at the start of their next turn
+sk_013_name,아수라,Asura
+sk_013_desc,힘과 방어력 상승 버프를 3턴 동안 획득합니다,Gains a Strength and Defense increase buff for 3 turns
+sk_013_evo_a_name,초인,Superhuman
+sk_013_evo_a_desc,아수라 버프를 보유하고 있다면 턴이 더 빨리 돌아옵니다,If holding the Asura buff the turn arrives faster
+sk_013_evo_b_name,마인,Demon
+sk_013_evo_b_desc,방어력 상승 버프를 획득하지 않는 대신 방어력 감소 디버프를 획득하며 감소한 방어력 수치만큼 힘이 증가합니다,Does not gain the Defense increase buff but receives a Defense reduction debuff instead and Strength increases by the amount of Defense reduced
+sk_013_evo_c_name,마창,Demonic Spear
+sk_013_evo_c_desc,더 이상 버프를 획득하지 않는 대신 스킬 사용 시 획득할 힘과 방어력 상승량에 비례하여 적에게 피해를 줍니다,No longer gains buffs but deals damage to the enemy proportional to the Strength and Defense increase values that would have been gained upon using the skill
+sk_014_name,Major Crimes,Major Crimes
+sk_014_desc,3턴 동안 속도와 운 상승 버프를 획득합니다,Gains a Speed and Luck increase buff for 3 turns
+sk_014_evo_a_name,This Fffire,This Fffire
+sk_014_evo_a_desc,3턴 동안 속도와 운이 크게 상승하지만 3턴 뒤에 최대 체력의 40%를 잃습니다,Greatly increases Speed and Luck for 3 turns but loses 40% of maximum HP after 3 turns
+sk_014_evo_b_name,Let You Down,Let You Down
+sk_014_evo_b_desc,버프를 획득하지 않는 대신 3턴 동안 적에게 입히는 피해량을 저장한 뒤 3턴 뒤에 추가 피해로 적용합니다 버프가 갱신될 경우 피해량은 계속 누적되어 저장됩니다,Does not gain the buff but stores the damage dealt to the enemy for 3 turns and applies it as additional damage after 3 turns If the buff is refreshed the damage continues to accumulate
+sk_014_evo_c_name,Cyber Psycho,Cyber Psycho
+sk_014_evo_c_desc,3턴 동안 힘 방어력 속도 운 능력치가 무작위로 보정되며 음수 수치로 보정될 수도 있습니다,The Strength Defense Speed and Luck stats are randomly adjusted for 3 turns and may even be adjusted to negative values
+sk_015_name,world without logos,world without logos
+sk_015_desc,최대 체력과 버스트 수치의 일정 비율을 회복합니다,Restores a certain percentage of maximum HP and the Burst Gauge
+sk_015_evo_a_name,Shine,Shine
+sk_015_evo_a_desc,자신에게 걸린 모든 디버프를 해제합니다,Removes all debuffs from oneself
+sk_015_evo_b_name,초재생,Hyper Regeneration
+sk_015_evo_b_desc,체력과 버스트 수치를 즉시 회복하지 않는 대신 3턴 동안 일정량씩 지속 회복하는 버프를 획득합니다,Does not instantly restore HP and the Burst Gauge but gains a buff that continuously restores a certain amount for 3 turns
+sk_015_evo_c_name,구속제어술식,Control Art Restriction System
+sk_015_evo_c_desc,체력을 회복할 때 회복량의 일정 비율을 적에게 피해로 입힙니다,When restoring HP inflicts a certain percentage of the healed amount as damage to the enemy
+sk_016_name,회옥,Hidden Inventory
+sk_016_desc,3턴 동안 힘 방어력 속도 운 능력치가 상승하며 최대 체력과 버스트 수치의 일정 비율을 회복합니다,Increases Strength Defense Speed and Luck stats for 3 turns and restores a certain percentage of maximum HP and the Burst Gauge
+sk_016_evo_a_name,반전술식,Reversed Cursed Technique
+sk_016_evo_a_desc,스킬 사용 시점에 잃은 체력과 누적된 버스트 수치에 비례하여 힘 능력치가 증가합니다,Increases the Strength stat proportional to the HP lost and Burst Gauge accumulated at the time of skill activation
+sk_016_evo_b_name,무하한,Limitless
+sk_016_evo_b_desc,1턴 동안 모든 피해와 브레이크 피해에 면역이 되지만 특수 효과는 무효화하지 못합니다,Becomes immune to all damage and Break damage for 1 turn but special effects cannot be blocked
+sk_016_evo_c_name,무량공처,Unlimited Void
+sk_016_evo_c_desc,적에게 1턴 동안 기절 상태이상을 부여하여 적의 턴을 1회 스킵하게 만듭니다,Inflicts a Stun status effect on the enemy for 1 turn causing them to skip their turn once
+sk_017_name,빈 상자,VOID
+sk_017_desc,적을 도발하며 스타일 랭크를 크게 상승시킵니다,Taunts the enemy and greatly increases Style Rank
+sk_017_evo_a_name,누구도 될 수 없는 나니까,I'm Nobody
+sk_017_evo_a_desc,도발 후 1턴 동안 회피율이 크게 상승합니다,After taunting Evasion Rate is greatly increased for 1 turn
+sk_017_evo_b_name,공백과 카타르시스,Emptiness and Catharsis
+sk_017_evo_b_desc,다음 턴까지 피해 증폭 버프를 획득합니다,Gains a Damage Amplification buff until the next turn
+sk_017_evo_c_name,운명의 꽃,I'm here
+sk_017_evo_c_desc,도발 후 1턴 동안 스타일 랭크가 하락하지 않으며 피격당할 때 일정 확률로 스타일 랭크가 추가 상승합니다,After taunting Style Rank does not drop for 1 turn and has a certain chance to further increase Style Rank when attacked
+sk_018_name,Papermoon,Papermoon
+sk_018_desc,현재 체력의 10%를 소모하며 잃은 체력에 비례하여 브레이크 피해량이 증가합니다,Consumes 10% of current HP and Break damage increases proportional to the lost HP
+sk_018_evo_a_name,공명,Resonance
+sk_018_evo_a_desc,체력 소모량이 약간 증가하는 대신 현재 체력이 30% 이하일 때 브레이크 피해량이 크게 증가합니다,Slightly increases HP consumption but greatly increases Break damage when current HP is 30% or lower
+sk_018_evo_b_name,I Wanna Be,I Wanna Be
+sk_018_evo_b_desc,이 스킬로 적을 브레이크 상태로 만들면 소모했던 체력을 즉시 회복합니다,If this skill inflicts Break on an enemy instantly restores the consumed HP
+sk_018_evo_c_name,스타일,Style
+sk_018_evo_c_desc,적의 행동 게이지를 일정량 감소시킵니다,Reduces a certain amount of the enemy's Action Gauge
+sk_019_name,etoile et toi,etoile et toi
+sk_019_desc,현재 체력의 20%를 소모하며 잃은 체력에 비례하여 피해량이 상승합니다,Consumes 20% of current HP and damage increases proportional to the lost HP
+sk_019_evo_a_name,네가 모르는 이야기,Kimi no Shiranai Monogatari
+sk_019_evo_a_desc,현재 체력이 낮을수록 피해량이 크게 상승하며 체력이 10% 이하라면 피해량이 더욱 크게 상승합니다,Damage increases greatly the lower the current HP and the damage increases even more significantly if HP is 10% or lower
+sk_019_evo_b_name,Mein Schatz,Mein Schatz
+sk_019_evo_b_desc,현재 체력이 낮을수록 이 공격의 치명타 확률과 치명타 피해량이 상승합니다,The Critical Hit chance and Critical Hit damage of this attack increase the lower the current HP
+sk_019_evo_c_name,언데드,Undead
+sk_019_evo_c_desc,스킬 사용 시 현재 체력을 1로 만드는 대신 소모한 체력량에 비례하여 적에게 큰 피해를 입힙니다,Upon using the skill reduces current HP to 1 instead of dealing massive damage to the enemy proportional to the amount of HP consumed
+sk_020_name,역몽,Sakayume
+sk_020_desc,잃은 체력에 비례하여 피해량이 증가하며 적에게 입힌 피해량의 일정량만큼 체력을 회복합니다,Damage increases proportional to lost HP and restores HP by a certain amount of the damage dealt to the enemy
+sk_020_evo_a_name,Vivid Vice,Vivid Vice
+sk_020_evo_a_desc,회복 효율이 크게 상승하며 회복량이 최대 체력을 초과할 경우 초과분만큼 피해 감소 버프를 획득합니다,Recovery efficiency increases greatly and if the healing amount exceeds maximum HP gains a damage reduction buff equal to the excess amount
+sk_020_evo_b_name,Give It Back,Give It Back
+sk_020_evo_b_desc,적이 가진 버프 중 하나를 무작위로 강탈합니다,Steals one random buff possessed by the enemy
+sk_020_evo_c_name,more than words,more than words
+sk_020_evo_c_desc,10타의 다단 히트 스킬로 변경되며 각 타격은 적중 시 적에게 출혈 디버프를 부여합니다,Changes into a 10-hit multi-strike skill and each successful hit inflicts a Bleed debuff on the enemy

@@ -14,6 +14,7 @@ public class DialogueLine
     public string speakerNameKey;
     public string bodyTextKey;
     public DialogueChoiceAction lineEndAction;
+    public string lineEndActionValue;
     public Sprite leftCharacterImage;
     public Sprite rightCharacterImage;
     public string backgroundID;

@@ -156,6 +156,22 @@ public class SaveManager : MonoBehaviour
         DevLog.Log("[Save] Continue save deleted.");
     }
 
+    public void DeleteCurrentSave()
+    {
+        DeleteContinueSave();
+    }
+
+    public void HandleGameClear(string endingID)
+    {
+        // Future extension point:
+        // SaveClearRecord(endingID);
+        // UnlockGallery(endingID);
+        // UnlockNewGamePlus();
+
+        DeleteCurrentSave();
+        DevLog.Log($"[Save] Game clear handled. endingID={endingID}");
+    }
+
     public List<ClearRecordSaveData> LoadClearRecords()
     {
         if (TryLoadClearRecordCollectionFromPath(ClearRecordsPath, out ClearRecordCollectionSaveData collection))

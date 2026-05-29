@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a780e61d5de4154ea127b62e4712c9d, type: 3}
   m_Name: SkillLogic_Diligere_VagueHope
   m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Diligere_VagueHope
-  apDebuff: {fileID: 0}
+  apDebuff: {fileID: 11400000, guid: 9cfb8bdb4eb8f9242aef9980c73958f1, type: 2}
   apDebuffValue: -0.2
   debuffTurns: 3

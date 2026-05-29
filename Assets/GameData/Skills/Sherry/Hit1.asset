@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: MorningStar
   skillLogic: {fileID: 11400000, guid: b4d382fed9961b24ba47f147a5449fe8, type: 2}
-  skillNameKey: skill_name_hit1
-  skillDescKey: skill_desc_hit1
-  evolutionANameKey: 
-  evolutionADescKey: 
-  evolutionBNameKey: 
-  evolutionBDescKey: 
-  evolutionCNameKey: 
-  evolutionCDescKey: 
+  skillNameKey: sk_009_name
+  skillDescKey: sk_009_desc
+  evolutionANameKey: sk_009_evo_a_name
+  evolutionADescKey: sk_009_evo_a_desc
+  evolutionBNameKey: sk_009_evo_b_name
+  evolutionBDescKey: sk_009_evo_b_desc
+  evolutionCNameKey: sk_009_evo_c_name
+  evolutionCDescKey: sk_009_evo_c_desc
   category: 2
   skillLevel: 1
   skillActionImage: {fileID: 21300000, guid: d5eb85a91f4418e4ebccb8d772c4a964, type: 3}
