@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0aa14b50fd4ca0d4eaa462662a5819ec, type: 3}
-  m_Name: PatiPermDamageReduction
+  m_Name: HibikiUltSpd
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
-  effectID: PatiPermDamageReduction
-  effectName: PatiPermDamageReduction
-  category: 2
-  icon: {fileID: 21300000, guid: 56775d9a808cd5a4da1418ce2c648171, type: 3}
-  targetStat: 0
-  modifierType: 0
-  specialType: 13
+  effectID: HibikiUltSpd
+  effectName: HibikiUltSpd
+  category: 0
+  icon: {fileID: 21300000, guid: b354b3b7ced5e1e45aff098f89cc880f, type: 3}
+  targetStat: 3
+  modifierType: 1
+  specialType: 0
   baseDescription: 
-  isPermanentPassive: 1
+  isPermanentPassive: 0
   showStackDetails: 0
   valueFormat: 

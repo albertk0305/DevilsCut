@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c932943b3c30482984d326d2ee87bfec, type: 3}
+  m_Name: SkillLogic_Hibiki_Tabiji
+  m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Hibiki_Tabiji
+  accuracyDebuff: {fileID: 11400000, guid: 0f582c353ee072b4daedf3948d838ef5, type: 2}
+  evasionDebuff: {fileID: 11400000, guid: 445064aab6a69d549a1fb7cdb3f5894f, type: 2}
+  accuracyDebuffValue: -20
+  evasionDebuffValue: -20
+  debuffTurns: 3

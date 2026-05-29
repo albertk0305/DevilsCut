@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
-  m_Name: PatiPlasticLove
+  m_Name: HibikiKirari
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
-  skillID: PatiPlasticLove
-  skillLogic: {fileID: 11400000, guid: 02031f7b960582041be0c150d053c1b4, type: 2}
-  skillNameKey: PlasticLove
-  skillDescKey: PlasticLove
+  skillID: Kirari
+  skillLogic: {fileID: 11400000, guid: 7520c4f664e522c4eaafd89a5df72baf, type: 2}
+  skillNameKey: Kirari
+  skillDescKey: Kirari
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 
@@ -24,19 +24,19 @@ MonoBehaviour:
   evolutionCDescKey: 
   category: 0
   skillLevel: 1
-  skillActionImage: {fileID: 21300000, guid: 7e087b497d0f3ef47aebeac73d0fb845, type: 3}
+  skillActionImage: {fileID: 21300000, guid: 9a49ee65a1b4823469cf187fe5f238e3, type: 3}
   damageMultipliers:
-  - 1
+  - 20
   breakPowers:
-  - 2
+  - 20
   bonusCritRates:
   - 0
   bonusAccuracyRates:
   - 0
-  baseAccuracy: 80
+  baseAccuracy: 90
   isUltimate: 0
   forceHitReaction: 0
-  hitCounts: 05000000
+  hitCounts: 01000000
   currentEvolution: 0
   evolutionA_Multipliers:
   - 0.5

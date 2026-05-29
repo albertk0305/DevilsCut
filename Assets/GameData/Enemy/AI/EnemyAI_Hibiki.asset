@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dfb0d1657dd47d98c1371681e3eaea3, type: 3}
+  m_Name: EnemyAI_Hibiki
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI_Hibiki
+  masshiro: {fileID: 11400000, guid: 82ba205d28eaa9a439df78b4ae81c6dd, type: 2}
+  tabiji: {fileID: 11400000, guid: deb36a600a0af2b40abe5afa7e949344, type: 2}
+  prema: {fileID: 11400000, guid: 8555f0b64ddf06040b41e30486dfaca5, type: 2}
+  kirari: {fileID: 11400000, guid: c5f4b7159945b6543bbd19831913a14f, type: 2}
+  damn: {fileID: 11400000, guid: 3901ff37282e9a04eaa935c73339027d, type: 2}
+  kazeyo: {fileID: 11400000, guid: dcaabcad672c97342b6b37bd9647b40d, type: 2}
+  grace: {fileID: 11400000, guid: 458ca25039c95b744b05aa6dfa02405c, type: 2}
+  matsuri: {fileID: 11400000, guid: 5cb0056137614354aa910200500e9677, type: 2}
+  matsuriApPermanentBuff: {fileID: 11400000, guid: 52e090703414a51428d27d9b94d9add5, type: 2}

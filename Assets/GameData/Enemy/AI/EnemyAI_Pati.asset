@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ab8e27db3bc44f789725bf67a40302c, type: 3}
   m_Name: EnemyAI_Pati
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI_Pati
-  plasticLove: {fileID: 0}
-  septemberDamageReduction: {fileID: 0}
-  counterImage: {fileID: 0}
+  plasticLove: {fileID: 11400000, guid: 62b14d2591f72074097e63a87bb96755, type: 2}
+  septemberDamageReduction: {fileID: 11400000, guid: ccdf56d48e2478940a31038022c96180, type: 2}
+  counterImage: {fileID: 21300000, guid: 7a36c2285561939498c7ecaf8ae7b1e4, type: 3}
