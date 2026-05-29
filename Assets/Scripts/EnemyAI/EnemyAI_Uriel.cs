@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "EnemyAI_Uriel", menuName = "EnemyAI/Uriel Boss AI")]
-public class EnemyAI_Uriel : EnemyAIBase
+public class EnemyAI_Uriel : EnemyAIBase, IEnemySkillDamageCounter
 {
     [SerializeField] private SkillData peterPan;
     [SerializeField] private SkillData strongest;
@@ -35,6 +35,38 @@ public class EnemyAI_Uriel : EnemyAIBase
         if (enemy != null && enemy.enemyImage != null) return enemy.enemyImage;
         if (enemy != null && enemy.guardImage != null) return enemy.guardImage;
         return enemy != null ? enemy.hit : null;
+    }
+
+    public bool CanCounterAfterSkillDamage()
+    {
+        return true;
+    }
+
+    public int GetCounterDamage(EnemyData enemy)
+    {
+        int defense = enemy != null ? enemy.defense : 1;
+
+        if (StatManager.Instance != null)
+        {
+            defense = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
+        }
+
+        return Mathf.Max(1, defense * 10);
+    }
+
+    public float GetCounterBreakDamage()
+    {
+        return 10f;
+    }
+
+    public string GetCounterMessage(int damage)
+    {
+        return $"[Shutter] Uriel counters for {damage} special damage.";
+    }
+
+    public void OnCounterTriggered(EnemyData enemy)
+    {
+        AddEnduranceStack(1);
     }
 
     public override EnemyActionIntent DecideNextAction(int currentTurnCount, PlayerStats pStats, EnemyData enemy)

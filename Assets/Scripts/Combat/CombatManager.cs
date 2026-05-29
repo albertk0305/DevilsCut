@@ -704,8 +704,8 @@ public class CombatManager : MonoBehaviour
         // On-hit skill effect
         EnqueueApplyEffectOnHit(context);
 
-        // Uriel counter
-        EnqueueUrielCounterIfNeeded(context);
+        // Enemy skill damage counter
+        EnqueueEnemyCounterIfNeeded(context);
 
         // Counter
         EnqueueMorningStarCounterIfNeeded(context);
@@ -986,16 +986,17 @@ public class CombatManager : MonoBehaviour
             BattleVisualizer.Instance.EnqueueDelay(2.0f);
     }
 
-    private void EnqueueUrielCounterIfNeeded(SkillExecutionContext context)
+    private void EnqueueEnemyCounterIfNeeded(SkillExecutionContext context)
     {
         if (!context.isPlayerAttacking) return;
         if (!context.result.anyHit) return;
         if (context.presentation.isPureUtility) return;
         if (currentEnemyData == null) return;
-        if (!(currentEnemyData.aiBrain is EnemyAI_Uriel)) return;
+        if (!(currentEnemyData.aiBrain is IEnemySkillDamageCounter counterAI)) return;
+        if (!counterAI.CanCounterAfterSkillDamage()) return;
 
         BattleVisualizer.Instance.EnqueueDelay(2.0f);   // 히트 여운
-        BattleVisualizer.Instance.EnqueueAction(TryTriggerUrielCounterAfterEnemyTakesSkillDamage);
+        BattleVisualizer.Instance.EnqueueAction(TryTriggerEnemyCounterAfterEnemyTakesSkillDamage);
     }
 
     private void EnqueueGuardAndReflectIfNeeded(SkillExecutionContext context)
@@ -1414,25 +1415,20 @@ public class CombatManager : MonoBehaviour
         return ApplyDamageToEntity(false, damage);
     }
 
-    private void TryTriggerUrielCounterAfterEnemyTakesSkillDamage()
+    private void TryTriggerEnemyCounterAfterEnemyTakesSkillDamage()
     {
         if (currentEnemyData == null) return;
-        if (!(currentEnemyData.aiBrain is EnemyAI_Uriel urielAI)) return;
+        if (!(currentEnemyData.aiBrain is IEnemySkillDamageCounter counterAI)) return;
+        if (!counterAI.CanCounterAfterSkillDamage()) return;
         if (currentState.hasTriggeredEnemyCounterThisSkill) return;
         if (currentEnemyHp <= 0) return;
 
         currentState.hasTriggeredEnemyCounterThisSkill = true;
-        urielAI.AddEnduranceStack(1);
+        counterAI.OnCounterTriggered(currentEnemyData);
 
-        int urielDef = currentEnemyData.defense;
-        if (StatManager.Instance != null)
-        {
-            urielDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
-        }
+        int counterDamage = counterAI.GetCounterDamage(currentEnemyData);
 
-        int counterDamage = Mathf.Max(1, urielDef * 10);
-
-        Sprite counterSprite = urielAI.GetCounterImage(currentEnemyData);
+        Sprite counterSprite = counterAI.GetCounterImage(currentEnemyData);
         if (counterSprite != null) CombatUIManager.Instance.SetCasterImage(false, counterSprite);
 
         CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
@@ -1441,11 +1437,11 @@ public class CombatManager : MonoBehaviour
 
         if (BreakManager.Instance != null && !BreakManager.Instance.IsBroken(true))
         {
-            if (BreakManager.Instance.AddBreakDamage(true, 10f)) UpdateTurnOrderUI();
+            if (BreakManager.Instance.AddBreakDamage(true, counterAI.GetCounterBreakDamage())) UpdateTurnOrderUI();
         }
 
-        CombatUIManager.Instance.InterruptAndTypeCommentary($"[Shutter] Uriel counters for {counterDamage} special damage.");
-        DevLog.Log($"[Uriel Shutter] Counter damage {counterDamage}.");
+        CombatUIManager.Instance.InterruptAndTypeCommentary(counterAI.GetCounterMessage(counterDamage));
+        DevLog.Log($"[Enemy Counter] Counter damage {counterDamage}.");
     }
 
     public bool ApplyDamageToEntity(bool isPlayerTarget, int damage)
