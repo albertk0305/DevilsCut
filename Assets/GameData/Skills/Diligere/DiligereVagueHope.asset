@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
   m_Name: DiligereVagueHope
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
-  skillID: 
-  skillLogic: {fileID: 0}
-  skillNameKey: 
-  skillDescKey: 
+  skillID: VagueHope
+  skillLogic: {fileID: 11400000, guid: 17550d53c2ca22d42af3dde3b2db24e1, type: 2}
+  skillNameKey: VagueHope
+  skillDescKey: VagueHope
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 
@@ -24,16 +24,16 @@ MonoBehaviour:
   evolutionCDescKey: 
   category: 0
   skillLevel: 1
-  skillActionImage: {fileID: 0}
+  skillActionImage: {fileID: 21300000, guid: 79e174e5fb2726d40a4e92976c5f01c5, type: 3}
   damageMultipliers:
-  - 1
+  - 8
   breakPowers:
-  - 20
+  - 10
   bonusCritRates:
   - 0
   bonusAccuracyRates:
   - 0
-  baseAccuracy: 80
+  baseAccuracy: 90
   isUltimate: 0
   forceHitReaction: 0
   hitCounts: 01000000

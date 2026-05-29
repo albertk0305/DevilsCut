@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20557d41f5339d242a80c12f5fc8a131, type: 3}
+  m_Name: EnemyAI_Sariel
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI_Sariel
+  stoneOcean: {fileID: 11400000, guid: 37e4f6eb153bc3e4397e14a0bd26608f, type: 2}
+  shynessBoy: {fileID: 11400000, guid: 3c09b86ebdeb1cd41a0b229830acdd87, type: 2}
+  rememberSummerDays: {fileID: 11400000, guid: f638a4f8ee298ef4da8ff7c73e54d79d, type: 2}
+  heavensFallingDown: {fileID: 11400000, guid: c0cfa6e25597bfc40a49924a48e711ec, type: 2}
+  windySummer: {fileID: 11400000, guid: 4a72dd3a7d7ad3c48bfe8f8e79bf9c50, type: 2}
+  passiveDamageGivenAmp: {fileID: 11400000, guid: 51be696effff39f4bba09b132a352db9, type: 2}

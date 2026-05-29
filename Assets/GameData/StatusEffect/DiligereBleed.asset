@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa14b50fd4ca0d4eaa462662a5819ec, type: 3}
   m_Name: DiligereBleed
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
-  effectID: 
-  effectName: 
-  category: 0
-  icon: {fileID: 0}
+  effectID: DiligereBleed
+  effectName: DiligereBleed
+  category: 1
+  icon: {fileID: 21300000, guid: ae2926dc99b2ce742be3cac85e961da0, type: 3}
   targetStat: 0
   modifierType: 0
-  specialType: 0
+  specialType: 14
   baseDescription: 
   isPermanentPassive: 0
   showStackDetails: 0

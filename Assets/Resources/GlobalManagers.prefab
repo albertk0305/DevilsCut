@@ -132,8 +132,6 @@ MonoBehaviour:
     starLevel: 1
   - data: {fileID: 11400000, guid: bad34f1eb37c6f74a8deeca7efa03601, type: 2}
     starLevel: 1
-  - data: {fileID: 11400000, guid: 0083bd405a34995429b6b7a82432338f, type: 2}
-    starLevel: 1
   - data: {fileID: 11400000, guid: 0fc042644d79d064da320cfa6d25db66, type: 2}
     starLevel: 1
   - data: {fileID: 11400000, guid: aaf562f5ad68e2949897f56cacbc7235, type: 2}
@@ -146,39 +144,21 @@ MonoBehaviour:
     starLevel: 1
   - data: {fileID: 11400000, guid: 4494c998f31652646b0bf5ca89bc46f8, type: 2}
     starLevel: 1
-  - data: {fileID: 11400000, guid: feb908c5438531b4b905e53087a17f16, type: 2}
-    starLevel: 1
   - data: {fileID: 11400000, guid: b691d67261ad18d448e408b1526b73b7, type: 2}
     starLevel: 1
   - data: {fileID: 11400000, guid: 81e21910a1d93b04d9839940403d48bb, type: 2}
-    starLevel: 1
-  - data: {fileID: 11400000, guid: 134e3e0f6c7e4a34fa439a42a65f7cd9, type: 2}
     starLevel: 1
   - data: {fileID: 11400000, guid: 0fc042644d79d064da320cfa6d25db66, type: 2}
     starLevel: 1
   - data: {fileID: 11400000, guid: 0fc042644d79d064da320cfa6d25db66, type: 2}
     starLevel: 2
-  - data: {fileID: 11400000, guid: eb29b40cbdb370348bb3bee35c84e192, type: 2}
-    starLevel: 1
-  - data: {fileID: 11400000, guid: 134e3e0f6c7e4a34fa439a42a65f7cd9, type: 2}
-    starLevel: 1
-  - data: {fileID: 11400000, guid: 889a401a33b6f734cb11d8c8ec9e5310, type: 2}
-    starLevel: 1
-  - data: {fileID: 11400000, guid: c132951b0111b7b429f073145de15314, type: 2}
-    starLevel: 1
-  - data: {fileID: 11400000, guid: 889a401a33b6f734cb11d8c8ec9e5310, type: 2}
-    starLevel: 1
   - data: {fileID: 11400000, guid: 33a2221e23ee2854b964296daa7812a5, type: 2}
     starLevel: 1
   - data: {fileID: 11400000, guid: 33a2221e23ee2854b964296daa7812a5, type: 2}
-    starLevel: 1
-  - data: {fileID: 11400000, guid: 0083bd405a34995429b6b7a82432338f, type: 2}
     starLevel: 1
   - data: {fileID: 11400000, guid: 4494c998f31652646b0bf5ca89bc46f8, type: 2}
     starLevel: 1
   - data: {fileID: 11400000, guid: ec0f12923bac1ee41814ae5562df331c, type: 2}
-    starLevel: 1
-  - data: {fileID: 11400000, guid: 48707246e5fde6644aefc6999003001c, type: 2}
     starLevel: 1
   - data: {fileID: 11400000, guid: 06473cfaafb4344479a1ac66ef363aff, type: 2}
     starLevel: 1
@@ -194,11 +174,9 @@ MonoBehaviour:
     starLevel: 1
   - data: {fileID: 11400000, guid: 71522d74c11d33140af6498600491c04, type: 2}
     starLevel: 1
+  - data: {fileID: 11400000, guid: 281f1efb77abcda4e8d823ea48fed5ad, type: 2}
+    starLevel: 1
   - data: {fileID: 11400000, guid: 71522d74c11d33140af6498600491c04, type: 2}
-    starLevel: 1
-  - data: {fileID: 11400000, guid: 281f1efb77abcda4e8d823ea48fed5ad, type: 2}
-    starLevel: 1
-  - data: {fileID: 11400000, guid: 281f1efb77abcda4e8d823ea48fed5ad, type: 2}
     starLevel: 1
   currentEnemyToFight: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
   currentBattleReward:

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa14b50fd4ca0d4eaa462662a5819ec, type: 3}
   m_Name: DiligereApDown
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
-  effectID: 
-  effectName: 
-  category: 0
-  icon: {fileID: 0}
-  targetStat: 0
-  modifierType: 0
+  effectID: DiligereApDown
+  effectName: DiligereApDown
+  category: 1
+  icon: {fileID: 21300000, guid: fcd5715451138514bba954d92be39d33, type: 3}
+  targetStat: 6
+  modifierType: 1
   specialType: 0
   baseDescription: 
   isPermanentPassive: 0

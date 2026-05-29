@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e14c0a3b01aff2e40806e4d7e0ca4093, type: 3}
   m_Name: SkillLogic_Remiel_ColdWindSentiment
   m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Remiel_ColdWindSentiment
-  remielBleed: {fileID: 11400000, guid: bbadfb48d05859047a2f79befd022c54, type: 2}
+  remielBleed: {fileID: 11400000, guid: acb20b0174310a1488ed72603c4a272c, type: 2}
   bleedMultiplier: 5
   bleedTurns: 3

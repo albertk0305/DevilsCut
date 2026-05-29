@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aabe14c3db0821041a83a602e1c1c49d, type: 3}
   m_Name: EnemyAI_Diligere
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI_Diligere
-  vagueHope: {fileID: 0}
-  wretchedWeaponry: {fileID: 0}
-  passiveApBuff: {fileID: 0}
+  vagueHope: {fileID: 11400000, guid: 2b07c7e78cabac146be3ec202626d7d7, type: 2}
+  wretchedWeaponry: {fileID: 11400000, guid: e48b8d119ca84044aa703eeaa99c2b5d, type: 2}
+  passiveApBuff: {fileID: 11400000, guid: d427453c0fd2cf04badc903ac6983e3a, type: 2}

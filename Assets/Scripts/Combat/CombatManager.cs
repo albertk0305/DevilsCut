@@ -1590,7 +1590,15 @@ public class CombatManager : MonoBehaviour
             }
 
             if (currentActiveEntity.isPlayer) BuffManager.Instance.AdvanceTurnActiveEffects(true);
-            else if (currentActiveEntity.type == EntityType.Enemy) BuffManager.Instance.AdvanceTurnActiveEffects(false);
+            else if (currentActiveEntity.type == EntityType.Enemy)
+            {
+                BuffManager.Instance.AdvanceTurnActiveEffects(false);
+
+                if (currentEnemyData != null && currentEnemyData.aiBrain != null)
+                    currentEnemyData.aiBrain.UpdatePassives(currentEnemyData);
+
+                CombatUIManager.Instance.RefreshBuffUI();
+            }
 
             //  캐스터 시너지: 매 턴 종료 시 무작위 독립 버프 부여
             if (currentActiveEntity.isPlayer && PlayerManager.Instance != null)

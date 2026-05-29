@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Sariel
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyNameKey: sariel
-  enemyImage: {fileID: 0}
-  CutIn: {fileID: 0}
-  hit: {fileID: 0}
-  evade: {fileID: 0}
-  breakImage: {fileID: 0}
+  enemyImage: {fileID: 21300000, guid: 0a6291fe3df4b954d987c05edc3a3e1d, type: 3}
+  CutIn: {fileID: 21300000, guid: b9cd1360c25251d4cbecb5b7350df0bd, type: 3}
+  hit: {fileID: 21300000, guid: 96d938c6054acd047b1b9bf67da2141a, type: 3}
+  evade: {fileID: 21300000, guid: dca017706ea981c42ac4e474f91e72e2, type: 3}
+  breakImage: {fileID: 21300000, guid: 20908d7d731da5e4c84ffb440e94233e, type: 3}
   guardImage: {fileID: 0}
-  aiBrain: {fileID: 0}
+  aiBrain: {fileID: 11400000, guid: 6bdbdad5fece424458cc78875ee161e0, type: 2}
   statModifier:
     maxHpPercent: 0
     actionPointsPercent: 0

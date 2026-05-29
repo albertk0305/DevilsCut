@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossEncounterData
   bossID: Remiel
   bossName: Remiel
-  minionEnemy: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
+  minionEnemy: {fileID: 11400000, guid: 09440571ef3397647a719b2db48ad968, type: 2}
   bossEnemy: {fileID: 11400000, guid: ecddd5095764a1f41be26dd46ec23efb, type: 2}
   nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
   defaultSD: {fileID: 21300000, guid: d2e08b0dc53c02644941d4bf4a757f05, type: 3}

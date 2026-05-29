@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01c22852ce65b74dbe6ac5ae8731c35, type: 3}
   m_Name: SkillLogic_Remiel_DreamyDateDrive
   m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Remiel_DreamyDateDrive
-  remielBleed: {fileID: 11400000, guid: 0fef43a3df5fe8d44a489a492f66245a, type: 2}
+  remielBleed: {fileID: 11400000, guid: acb20b0174310a1488ed72603c4a272c, type: 2}
   bleedMultiplierPerHit: 1
   bleedTurns: 3
