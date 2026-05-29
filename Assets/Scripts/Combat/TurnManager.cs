@@ -146,6 +146,19 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    public void SetGauge(EntityType targetType, float gaugeValue)
+    {
+        foreach (var entity in turnQueue)
+        {
+            if (entity.type == targetType)
+            {
+                entity.actionGauge = gaugeValue;
+                DevLog.Log($"[{targetType}] action gauge set to {gaugeValue}.");
+                break;
+            }
+        }
+    }
+
     private int GetDynamicAP(TurnEntity entity)
     {
         if (StatManager.Instance != null)

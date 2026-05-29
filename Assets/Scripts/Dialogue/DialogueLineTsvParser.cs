@@ -70,6 +70,8 @@ public static class DialogueLineTsvParser
             leftExpressionID = GetColumn(columns, header, "leftExpressionID"),
             rightActorID = GetColumn(columns, header, "rightActorID"),
             rightExpressionID = GetColumn(columns, header, "rightExpressionID"),
+            backgroundID = GetColumn(columns, header, "backgroundID"),
+            clearBackground = ParseBool(GetColumn(columns, header, "clearBackground")),
             storyImageID = GetColumn(columns, header, "storyImageID"),
             choiceID = GetColumn(columns, header, "choiceID")
         };
@@ -139,6 +141,15 @@ public static class DialogueLineTsvParser
         DevLog.LogWarning($"[Dialogue] Invalid DialogueChoiceAction ignored. row={rowNumber}, lineID={lineID}, column={columnName}, action={actionText}");
         action = DialogueChoiceAction.None;
         return false;
+    }
+
+    private static bool ParseBool(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return false;
+
+        return string.Equals(value, "true", StringComparison.OrdinalIgnoreCase)
+            || value == "1";
     }
 
     private static bool IsDialogueChoiceActionName(string actionText)

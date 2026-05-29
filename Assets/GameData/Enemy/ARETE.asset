@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: ARETE
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyNameKey: arete
-  enemyImage: {fileID: 0}
-  CutIn: {fileID: 0}
-  hit: {fileID: 0}
-  evade: {fileID: 0}
-  breakImage: {fileID: 0}
+  enemyImage: {fileID: 21300000, guid: b30d3e11358704d4eacb5e6da20213c7, type: 3}
+  CutIn: {fileID: 21300000, guid: 8bdf0a40d6fa5e343b73f52fe61404a3, type: 3}
+  hit: {fileID: 21300000, guid: de37f271751cf594ba0c430573fd9ee8, type: 3}
+  evade: {fileID: 21300000, guid: 415ce4b6afe8a2b448b2bb386429151e, type: 3}
+  breakImage: {fileID: 21300000, guid: 5a5221d2cff7edb4784ccedaf0b853ce, type: 3}
   guardImage: {fileID: 0}
-  aiBrain: {fileID: 0}
+  aiBrain: {fileID: 11400000, guid: ccde7aedd721abd418c4115fefa084b5, type: 2}
   statModifier:
     maxHpPercent: 0
     actionPointsPercent: 0

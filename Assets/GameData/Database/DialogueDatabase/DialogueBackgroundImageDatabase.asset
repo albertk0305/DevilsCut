@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a30611556204c34a4ddebf3b7d254d6, type: 3}
+  m_Name: DialogueBackgroundImageDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueBackgroundImageDatabase
+  backgrounds:
+  - backgroundID: AreteRoom
+    sprite: {fileID: 21300000, guid: 46b348c430a021646adb38e3817b1745, type: 3}
+  - backgroundID: Bar
+    sprite: {fileID: 21300000, guid: 6c65040fd84f3274ea5ce622d18cb113, type: 3}
+  - backgroundID: Base
+    sprite: {fileID: 21300000, guid: a278edf9736ee334fba9a4122a156f75, type: 3}
+  - backgroundID: Casino
+    sprite: {fileID: 21300000, guid: 6470e75382e7d0f458619463d8eb7b2b, type: 3}
+  - backgroundID: Church
+    sprite: {fileID: 21300000, guid: 956807d680ad81a4f97b8006162a697f, type: 3}
+  - backgroundID: DayStreet
+    sprite: {fileID: 21300000, guid: 85f27a0a3ee6a2445aa49b3ce8dbf262, type: 3}
+  - backgroundID: FightClub
+    sprite: {fileID: 21300000, guid: a68e39693b45a344a9edfd11dad79891, type: 3}
+  - backgroundID: Gothic
+    sprite: {fileID: 21300000, guid: 8a981d27570dc3e42a545bedd509f49f, type: 3}
+  - backgroundID: Idol
+    sprite: {fileID: 21300000, guid: fc39bdbfc4067194da2d0730c286b3f1, type: 3}
+  - backgroundID: Lab
+    sprite: {fileID: 21300000, guid: 93e3cf8fcbe1f3b4c96745a7d861c325, type: 3}
+  - backgroundID: MaidCafe
+    sprite: {fileID: 21300000, guid: 743fd283914d1d741b5f256ac58c9c4a, type: 3}
+  - backgroundID: BlackMarket
+    sprite: {fileID: 21300000, guid: 14207dc1e9f59754596bd89800afe928, type: 3}
+  - backgroundID: Monk
+    sprite: {fileID: 21300000, guid: 26ed7ac1fd6a34e4c97f8a8176267050, type: 3}
+  - backgroundID: NightStreet
+    sprite: {fileID: 21300000, guid: 6e1ed56da70e048438bf506477094518, type: 3}
+  - backgroundID: Office
+    sprite: {fileID: 21300000, guid: e0fdc8bc9cf95bc4493d4275a537d95b, type: 3}
+  - backgroundID: Police
+    sprite: {fileID: 21300000, guid: 4642dec31f3e9344781092cb4daaedf0, type: 3}
+  - backgroundID: Restaurant
+    sprite: {fileID: 21300000, guid: d1a2d5a70d1a0f341886b90518280510, type: 3}
+  - backgroundID: School
+    sprite: {fileID: 21300000, guid: 3b6099e7afe97524aac2f9a6430b84e2, type: 3}
+  - backgroundID: Shrine
+    sprite: {fileID: 21300000, guid: 1304a7f4533ca254aa326039d0d46408, type: 3}

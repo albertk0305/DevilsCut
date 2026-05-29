@@ -6,6 +6,7 @@ public class DialogueData : ScriptableObject
 {
     public string dialogueID;
     public string nextSceneName;
+    public string initialBackgroundID;
     public bool useLineTSV;
     public TextAsset lineTSV;
     public List<DialogueLine> lines = new List<DialogueLine>();

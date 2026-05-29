@@ -16,8 +16,10 @@ public class DialogueLine
     public DialogueChoiceAction lineEndAction;
     public Sprite leftCharacterImage;
     public Sprite rightCharacterImage;
+    public string backgroundID;
     public string storyImageID;
     public string choiceID;
+    public bool clearBackground;
     public bool showStoryImage;
     public Sprite storyImage;
     public DialogueChoice choice = new DialogueChoice();

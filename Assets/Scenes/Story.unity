@@ -2905,10 +2905,12 @@ MonoBehaviour:
   fallbackDialogueData: {fileID: 11400000, guid: 81f8632cdb6f6ef4382aa399dbbd8a0e, type: 2}
   portraitDatabase: {fileID: 11400000, guid: 5726d2c4b0389744b89533517da312e4, type: 2}
   storyImageDatabase: {fileID: 11400000, guid: 1fa61f28bb2d377439314fb690dfb7de, type: 2}
+  backgroundImageDatabase: {fileID: 11400000, guid: 92a8c57b254ff0448a1e541fa2a90c8c, type: 2}
   speakerText: {fileID: 1836385754}
   bodyText: {fileID: 371444432}
   leftCharacterImage: {fileID: 216066387}
   rightCharacterImage: {fileID: 1453883071}
+  backgroundImage: {fileID: 625022668}
   storyImage: {fileID: 126909428}
   nextIndicator: {fileID: 1064897735}
   keepPreviousCharacterImageWhenLineImageIsNull: 1

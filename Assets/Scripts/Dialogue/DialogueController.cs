@@ -11,6 +11,7 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private DialogueData fallbackDialogueData;
     [SerializeField] private DialoguePortraitDatabase portraitDatabase;
     [SerializeField] private DialogueStoryImageDatabase storyImageDatabase;
+    [SerializeField] private DialogueBackgroundImageDatabase backgroundImageDatabase;
 
     [Header("Text")]
     [SerializeField] private TextMeshProUGUI speakerText;
@@ -19,6 +20,7 @@ public class DialogueController : MonoBehaviour
     [Header("Images")]
     [SerializeField] private Image leftCharacterImage;
     [SerializeField] private Image rightCharacterImage;
+    [SerializeField] private Image backgroundImage;
     [SerializeField] private Image storyImage;
     [SerializeField] private GameObject nextIndicator;
     [SerializeField] private bool keepPreviousCharacterImageWhenLineImageIsNull = true;
@@ -81,6 +83,7 @@ public class DialogueController : MonoBehaviour
         SetNextIndicatorActive(false);
         SetCharacterImageActive(leftCharacterImage, false);
         SetCharacterImageActive(rightCharacterImage, false);
+        SetBackgroundImageActive(false);
         SetStoryImageActive(false);
     }
 
@@ -141,12 +144,18 @@ public class DialogueController : MonoBehaviour
         SetNextIndicatorActive(false);
         SetCharacterImageActive(leftCharacterImage, false);
         SetCharacterImageActive(rightCharacterImage, false);
+        SetBackgroundImageActive(false);
         SetStoryImageActive(false);
 
         if (currentDialogueData == null)
         {
             DevLog.LogWarning("[Dialogue] DialogueData is missing.");
             return;
+        }
+
+        if (!string.IsNullOrEmpty(currentDialogueData.initialBackgroundID))
+        {
+            SetBackgroundImageByID(currentDialogueData.initialBackgroundID);
         }
 
         ShowNextLine();
@@ -548,7 +557,25 @@ public class DialogueController : MonoBehaviour
         ApplyCharacterImage(leftCharacterImage, leftSprite);
         ApplyCharacterImage(rightCharacterImage, rightSprite);
 
+        ApplyBackgroundForLine(line);
         ApplyStoryImage(line);
+    }
+
+    private void ApplyBackgroundForLine(DialogueLine line)
+    {
+        if (line == null)
+            return;
+
+        if (line.clearBackground)
+        {
+            SetBackgroundImageActive(false);
+            return;
+        }
+
+        if (!string.IsNullOrEmpty(line.backgroundID))
+        {
+            SetBackgroundImageByID(line.backgroundID);
+        }
     }
 
     private void ApplyStoryImage(DialogueLine line)
@@ -727,6 +754,33 @@ public class DialogueController : MonoBehaviour
     {
         if (storyImage != null)
             storyImage.gameObject.SetActive(isActive);
+    }
+
+    private void SetBackgroundImageActive(bool isActive)
+    {
+        if (backgroundImage != null)
+            backgroundImage.gameObject.SetActive(isActive);
+    }
+
+    private void SetBackgroundImageByID(string backgroundID)
+    {
+        if (backgroundImage == null)
+            return;
+
+        if (backgroundImageDatabase == null)
+        {
+            DevLog.LogWarning("[Dialogue] backgroundImageDatabase is not assigned.");
+            return;
+        }
+
+        if (!backgroundImageDatabase.TryGetSprite(backgroundID, out Sprite sprite))
+        {
+            DevLog.LogWarning($"[Dialogue] Background not found: {backgroundID}");
+            return;
+        }
+
+        backgroundImage.sprite = sprite;
+        backgroundImage.gameObject.SetActive(true);
     }
 
     private void SetCharacterImageActive(Image targetImage, bool isActive)

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d585bf519c34b608fc846207c60a00a, type: 3}
   m_Name: EnemyAI_Silere
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI_Silere
-  garden: {fileID: 0}
-  itAintOver: {fileID: 0}
-  hachiko: {fileID: 0}
+  garden: {fileID: 11400000, guid: 4dd9b3218f1b3f643b891c3f68692c08, type: 2}
+  itAintOver: {fileID: 11400000, guid: 81145d76b3312ae43b27e9b6fb4e828e, type: 2}
+  hachiko: {fileID: 11400000, guid: 967f98332826813458c0a9be9c47a661, type: 2}

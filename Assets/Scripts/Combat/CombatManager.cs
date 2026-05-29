@@ -1467,6 +1467,28 @@ public class CombatManager : MonoBehaviour
         );
     }
 
+    public void SetPlayerHpToOneForScriptedEffect()
+    {
+        if (currentPlayerStats == null) return;
+        if (currentPlayerStats.currentHp <= 0) return;
+
+        currentPlayerStats.currentHp = Mathf.Min(currentPlayerStats.currentHp, 1);
+
+        if (PlayerManager.Instance != null && PlayerManager.Instance.stats != null)
+        {
+            PlayerManager.Instance.stats.currentHp = currentPlayerStats.currentHp;
+        }
+
+        BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
+
+        if (CombatUIManager.Instance != null && CombatUIManager.Instance.playerStatusUI != null)
+        {
+            CombatUIManager.Instance.playerStatusUI.UpdateHP(currentPlayerStats.currentHp, currentPlayerStats.maxHp);
+        }
+
+        RefreshSpecialStatsProgressUI();
+    }
+
     // 데몬 6점 및 전설 - 초과 회복(Over-heal) 비례 버프 발생기
     public void ApplyOverhealBuff(int excessHeal)
     {
