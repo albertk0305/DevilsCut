@@ -15,4 +15,4 @@ The demo is available on itch.io.
 - 🌐 Web version: Play directly in your browser
 - 🪟 Windows version: Downloadable build available on the same page
 
-👉 **[Play / Download on itch.io]([https://YOUR-ITCH-IO-LINK](https://neat3.itch.io/devils-cut))**
+👉 **[Play / Download on itch.io](https://neat3.itch.io/devils-cut)**
