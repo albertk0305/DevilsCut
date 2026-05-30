@@ -1224,6 +1224,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519300916}
   m_CullTransparentMesh: 1
+--- !u!1 &528077238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 528077240}
+  - component: {fileID: 528077239}
+  m_Layer: 0
+  m_Name: ScemeBGMPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &528077239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528077238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298b138403b54849b811d2c59fab45e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
+  bgmClip: {fileID: 8300000, guid: a1b7a502d2dc4984ba970a64b1e824ab, type: 3}
+  fadeTime: 1
+  stopBgmIfClipIsEmpty: 0
+--- !u!4 &528077240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528077238}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 419.6436, y: 266.06046, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &530328148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1693,6 +1740,9 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 60ef0883c24fc4541a0bf320e97d0ad9, type: 3}
   - {fileID: 4900000, guid: a4186246df8599c46b9ebca0db8805ca, type: 3}
   - {fileID: 4900000, guid: f572d408c5e67c44895549cd4885a364, type: 3}
+  - {fileID: 4900000, guid: 4e978a7c07e7aee4f866912204aa471d, type: 3}
+  - {fileID: 4900000, guid: a72a61a495eb17c46aeab40d9b7a7155, type: 3}
+  - {fileID: 4900000, guid: e9ef01a0b828e7b4ea1cea3e4615c299, type: 3}
 --- !u!4 &755815050
 Transform:
   m_ObjectHideFlags: 0
@@ -3097,3 +3147,4 @@ SceneRoots:
   - {fileID: 19737144}
   - {fileID: 755815050}
   - {fileID: 1883367617}
+  - {fileID: 528077240}

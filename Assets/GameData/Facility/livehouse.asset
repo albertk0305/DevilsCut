@@ -18,6 +18,6 @@ MonoBehaviour:
   operatorImage: {fileID: 21300000, guid: 1c9240fd690bcde4b86817c73c9502b7, type: 3}
   operatorSmileImage: {fileID: 21300000, guid: 81818268ad322db4da35260ae7a547e7, type: 3}
   linkedSupporter: {fileID: 11400000, guid: 393f560ec2c52ed45bbb5f5324003c40, type: 2}
-  rank0To1Dialogue: {fileID: 0}
-  rank1To2Dialogue: {fileID: 0}
-  rank2To3Dialogue: {fileID: 0}
+  rank0To1Dialogue: {fileID: 11400000, guid: 82b1630f6887d5e40854e9aff99f0241, type: 2}
+  rank1To2Dialogue: {fileID: 11400000, guid: 82b1630f6887d5e40854e9aff99f0241, type: 2}
+  rank2To3Dialogue: {fileID: 11400000, guid: 82b1630f6887d5e40854e9aff99f0241, type: 2}

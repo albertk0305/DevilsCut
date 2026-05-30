@@ -71,24 +71,24 @@ MonoBehaviour:
       keys: 0
     generalEnemyStats:
       level: 13
-      maxHp: 4000
-      actionPoints: 12
-      breakResistance: 18
-      maxBreakGauge: 45
-      strength: 14
-      defense: 14
-      speed: 14
-      luck: 14
+      maxHp: 3500
+      actionPoints: 11
+      breakResistance: 16
+      maxBreakGauge: 40
+      strength: 13
+      defense: 13
+      speed: 13
+      luck: 13
     bossEnemyStats:
       level: 24
-      maxHp: 18000
-      actionPoints: 18
-      breakResistance: 25
-      maxBreakGauge: 120
-      strength: 20
-      defense: 20
-      speed: 20
-      luck: 20
+      maxHp: 16000
+      actionPoints: 16
+      breakResistance: 22
+      maxBreakGauge: 110
+      strength: 18
+      defense: 18
+      speed: 18
+      luck: 18
     finalBossStats:
       level: 0
       maxHp: 0
@@ -114,24 +114,24 @@ MonoBehaviour:
       keys: 0
     generalEnemyStats:
       level: 25
-      maxHp: 10000
-      actionPoints: 22
-      breakResistance: 28
-      maxBreakGauge: 60
-      strength: 22
-      defense: 22
-      speed: 22
-      luck: 22
+      maxHp: 8500
+      actionPoints: 18
+      breakResistance: 24
+      maxBreakGauge: 50
+      strength: 20
+      defense: 20
+      speed: 20
+      luck: 20
     bossEnemyStats:
       level: 36
-      maxHp: 45000
-      actionPoints: 30
-      breakResistance: 40
-      maxBreakGauge: 150
-      strength: 32
-      defense: 32
-      speed: 32
-      luck: 32
+      maxHp: 38000
+      actionPoints: 26
+      breakResistance: 35
+      maxBreakGauge: 135
+      strength: 28
+      defense: 28
+      speed: 28
+      luck: 28
     finalBossStats:
       level: 0
       maxHp: 0
@@ -157,24 +157,24 @@ MonoBehaviour:
       keys: 0
     generalEnemyStats:
       level: 37
-      maxHp: 25000
-      actionPoints: 35
-      breakResistance: 45
-      maxBreakGauge: 80
-      strength: 35
-      defense: 35
-      speed: 35
-      luck: 35
+      maxHp: 20000
+      actionPoints: 26
+      breakResistance: 35
+      maxBreakGauge: 65
+      strength: 30
+      defense: 30
+      speed: 30
+      luck: 30
     bossEnemyStats:
       level: 48
-      maxHp: 85000
-      actionPoints: 45
-      breakResistance: 60
-      maxBreakGauge: 180
-      strength: 48
-      defense: 48
-      speed: 48
-      luck: 48
+      maxHp: 70000
+      actionPoints: 38
+      breakResistance: 50
+      maxBreakGauge: 160
+      strength: 42
+      defense: 42
+      speed: 42
+      luck: 42
     finalBossStats:
       level: 0
       maxHp: 0
@@ -200,24 +200,24 @@ MonoBehaviour:
       keys: 0
     generalEnemyStats:
       level: 49
-      maxHp: 50000
-      actionPoints: 55
-      breakResistance: 65
-      maxBreakGauge: 110
-      strength: 52
-      defense: 52
-      speed: 52
-      luck: 52
+      maxHp: 38000
+      actionPoints: 38
+      breakResistance: 50
+      maxBreakGauge: 85
+      strength: 44
+      defense: 44
+      speed: 44
+      luck: 44
     bossEnemyStats:
       level: 60
-      maxHp: 140000
-      actionPoints: 65
-      breakResistance: 85
-      maxBreakGauge: 220
-      strength: 68
-      defense: 68
+      maxHp: 115000
+      actionPoints: 52
+      breakResistance: 70
+      maxBreakGauge: 190
+      strength: 58
+      defense: 58
       speed: 68
-      luck: 68
+      luck: 58
     finalBossStats:
       level: 0
       maxHp: 0
@@ -243,24 +243,24 @@ MonoBehaviour:
       keys: 0
     generalEnemyStats:
       level: 61
-      maxHp: 90000
-      actionPoints: 70
-      breakResistance: 85
-      maxBreakGauge: 140
-      strength: 75
-      defense: 75
-      speed: 75
-      luck: 75
+      maxHp: 68000
+      actionPoints: 50
+      breakResistance: 70
+      maxBreakGauge: 110
+      strength: 60
+      defense: 60
+      speed: 60
+      luck: 60
     bossEnemyStats:
       level: 72
-      maxHp: 220000
-      actionPoints: 85
-      breakResistance: 115
-      maxBreakGauge: 250
-      strength: 92
-      defense: 92
-      speed: 92
-      luck: 92
+      maxHp: 180000
+      actionPoints: 68
+      breakResistance: 95
+      maxBreakGauge: 220
+      strength: 58
+      defense: 58
+      speed: 58
+      luck: 58
     finalBossStats:
       level: 0
       maxHp: 0
@@ -286,24 +286,24 @@ MonoBehaviour:
       keys: 0
     generalEnemyStats:
       level: 73
-      maxHp: 140000
-      actionPoints: 85
-      breakResistance: 110
-      maxBreakGauge: 180
-      strength: 100
-      defense: 100
-      speed: 100
-      luck: 100
+      maxHp: 100000
+      actionPoints: 62
+      breakResistance: 90
+      maxBreakGauge: 140
+      strength: 80
+      defense: 80
+      speed: 80
+      luck: 80
     bossEnemyStats:
       level: 84
-      maxHp: 340000
-      actionPoints: 105
-      breakResistance: 135
-      maxBreakGauge: 280
-      strength: 120
-      defense: 120
-      speed: 120
-      luck: 120
+      maxHp: 260000
+      actionPoints: 82
+      breakResistance: 115
+      maxBreakGauge: 250
+      strength: 96
+      defense: 96
+      speed: 96
+      luck: 96
     finalBossStats:
       level: 0
       maxHp: 0
@@ -329,24 +329,24 @@ MonoBehaviour:
       keys: 0
     generalEnemyStats:
       level: 85
-      maxHp: 200000
-      actionPoints: 100
-      breakResistance: 130
-      maxBreakGauge: 220
-      strength: 125
-      defense: 125
-      speed: 125
-      luck: 125
+      maxHp: 140000
+      actionPoints: 75
+      breakResistance: 110
+      maxBreakGauge: 170
+      strength: 100
+      defense: 100
+      speed: 100
+      luck: 100
     bossEnemyStats:
       level: 100
-      maxHp: 650000
-      actionPoints: 120
-      breakResistance: 150
-      maxBreakGauge: 300
-      strength: 150
-      defense: 150
+      maxHp: 450000
+      actionPoints: 95
+      breakResistance: 130
+      maxBreakGauge: 270
+      strength: 115
+      defense: 115
       speed: 150
-      luck: 150
+      luck: 115
     finalBossStats:
       level: 0
       maxHp: 0
@@ -372,31 +372,31 @@ MonoBehaviour:
       keys: 0
     generalEnemyStats:
       level: 97
-      maxHp: 270000
-      actionPoints: 115
-      breakResistance: 150
-      maxBreakGauge: 250
-      strength: 150
-      defense: 150
-      speed: 150
-      luck: 150
+      maxHp: 190000
+      actionPoints: 85
+      breakResistance: 125
+      maxBreakGauge: 200
+      strength: 120
+      defense: 120
+      speed: 120
+      luck: 120
     bossEnemyStats:
-      level: 0
-      maxHp: 0
-      actionPoints: 0
-      breakResistance: 0
-      maxBreakGauge: 0
-      strength: 0
-      defense: 0
-      speed: 0
-      luck: 0
+      level: 120
+      maxHp: 850000
+      actionPoints: 110
+      breakResistance: 150
+      maxBreakGauge: 320
+      strength: 140
+      defense: 140
+      speed: 140
+      luck: 140
     finalBossStats:
       level: 120
-      maxHp: 1200000
-      actionPoints: 150
-      breakResistance: 180
-      maxBreakGauge: 360
-      strength: 200
-      defense: 200
-      speed: 200
-      luck: 200
+      maxHp: 850000
+      actionPoints: 110
+      breakResistance: 150
+      maxBreakGauge: 320
+      strength: 140
+      defense: 140
+      speed: 140
+      luck: 140

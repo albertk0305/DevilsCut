@@ -151,6 +151,7 @@ public class PlayerManager : MonoBehaviour
 
     [Header("Saved Exploration State")]
     public bool hasSavedExplorationState;
+    public bool pendingNewGameExplorationReset;
     public GamePhase savedExplorationPhase;
     public int savedExplorationCycle;
     public int savedExplorationTurnInPhase;
@@ -195,11 +196,11 @@ public class PlayerManager : MonoBehaviour
             currentHp = 1000,
             ActionPoints = 10,
             breakResistance = 10,
-            maxBreakGauge = 50f,
-            strength = 10,
-            defense = 10,
-            speed = 10,
-            luck = 10,
+            maxBreakGauge = 100f,
+            strength = 20,
+            defense = 20,
+            speed = 20,
+            luck = 20,
             currentGold = 0,
             rejectedSupporterCount = 0,
             finalDamageAmp = 0f,
@@ -255,6 +256,8 @@ public class PlayerManager : MonoBehaviour
         currentBattleReward = new BattleReward();
         currentBattleType = default;
         currentBattlePhase = 0;
+        PlayerPrefs.SetInt("FastCombat", 0);
+        PlayerPrefs.Save();
 
         pendingAdvanceBattleTurn = false;
         pendingBattleType = default;
@@ -264,6 +267,7 @@ public class PlayerManager : MonoBehaviour
         ClearCurrentFacilityVisit();
 
         hasSavedExplorationState = false;
+        pendingNewGameExplorationReset = true;
         savedExplorationPhase = GamePhase.BossSelection;
         savedExplorationCycle = 1;
         savedExplorationTurnInPhase = 0;
@@ -274,6 +278,15 @@ public class PlayerManager : MonoBehaviour
         savedFacilityRanks.Clear();
 
         DevLog.Log("[PlayerManager] 새 게임 상태로 초기화했습니다.");
+    }
+
+    public bool ConsumePendingNewGameExplorationReset()
+    {
+        if (!pendingNewGameExplorationReset)
+            return false;
+
+        pendingNewGameExplorationReset = false;
+        return true;
     }
 
     public SupporterChoiceState GetSupporterChoiceState(string supporterID)

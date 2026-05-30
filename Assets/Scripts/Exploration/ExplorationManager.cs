@@ -498,6 +498,7 @@ public class ExplorationManager : MonoBehaviour
         currentTargetBoss = null;
         lastVisitedFacility = null;
         lastVisitedNodeImage = null;
+        remainingMidBosses = new List<BossEncounterData>();
         facilityRanks.Clear();
         currentOptions.Clear();
         RestoreInitialBossListFromDatabase();
@@ -576,20 +577,33 @@ public class ExplorationManager : MonoBehaviour
         if (playerManager == null)
             return;
 
-        if (!playerManager.hasSavedExplorationState)
+        if (playerManager.ConsumePendingNewGameExplorationReset())
         {
-            RestoreFacilityRanksFromPlayerManager(playerManager);
+            ResetForNewGame();
+            DevLog.Log("[ExplorationManager] New Game exploration reset consumed. Initialized new game exploration state.");
             return;
         }
 
-        currentPhase = playerManager.savedExplorationPhase;
-        currentCycle = playerManager.savedExplorationCycle;
-        currentTurnInPhase = playerManager.savedExplorationTurnInPhase;
-        currentKeys = playerManager.savedExplorationKeys;
-        currentTargetBoss = playerManager.savedCurrentTargetBoss;
-        lastVisitedNodeImage = playerManager.savedLastVisitedNodeImage;
-        lastVisitedFacility = playerManager.savedLastVisitedFacility;
-        RestoreFacilityRanksFromPlayerManager(playerManager);
+        if (playerManager.hasSavedExplorationState)
+        {
+            currentPhase = playerManager.savedExplorationPhase;
+            currentCycle = playerManager.savedExplorationCycle;
+            currentTurnInPhase = playerManager.savedExplorationTurnInPhase;
+            currentKeys = playerManager.savedExplorationKeys;
+            currentTargetBoss = playerManager.savedCurrentTargetBoss;
+            lastVisitedNodeImage = playerManager.savedLastVisitedNodeImage;
+            lastVisitedFacility = playerManager.savedLastVisitedFacility;
+            RestoreFacilityRanksFromPlayerManager(playerManager);
+            DevLog.Log("[ExplorationManager] Restored saved exploration state.");
+            return;
+        }
+
+#if UNITY_EDITOR
+        DevLog.Log("[ExplorationManager] No saved state and no new game reset request. Keeping serialized scene state for editor testing.");
+#else
+        ResetForNewGame();
+        DevLog.Log("[ExplorationManager] No saved state and no new game reset request. Initialized safe default exploration state.");
+#endif
     }
 
     private void RestoreFacilityRanksFromPlayerManager(PlayerManager playerManager)

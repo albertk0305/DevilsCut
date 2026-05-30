@@ -1,5 +1,0 @@
-lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID	
-post_boss_001								post_boss_001	None					FALSE	FALSE	FALSE								
-post_boss_002								post_boss_002	None					FALSE	FALSE	TRUE	choice_recruit_yes	choice_recruit_no	None	None			post_boss_recruit_yes	post_boss_recruit_no
-post_boss_recruit_yes								post_boss_recruit_yes	None					FALSE	FALSE	FALSE								
-post_boss_recruit_no								post_boss_recruit_no	None					FALSE	FALSE	FALSE								

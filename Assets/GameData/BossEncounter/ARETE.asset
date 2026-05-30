@@ -20,4 +20,4 @@ MonoBehaviour:
   defaultSD: {fileID: 21300000, guid: fd8af8e23e8f9a6438e50bcbc44c2edc, type: 3}
   readySD: {fileID: 21300000, guid: da79cbad617c59340982926206081691, type: 3}
   imprisonedSupporter: {fileID: 0}
-  postBossDialogue: {fileID: 0}
+  postBossDialogue: {fileID: 11400000, guid: f4dda2f17479b0244bd02ac61f585f0b, type: 2}

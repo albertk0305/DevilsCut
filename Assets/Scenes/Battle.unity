@@ -18159,6 +18159,53 @@ MonoBehaviour:
   iconImage: {fileID: 1571530770}
   slotButton: {fileID: 1571530769}
   overLimitSprite: {fileID: 21300000, guid: e16b98fe6f1c3e1489ec35c54760ab5a, type: 3}
+--- !u!1 &1573971065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1573971067}
+  - component: {fileID: 1573971066}
+  m_Layer: 0
+  m_Name: ScemeBGMPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1573971066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573971065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298b138403b54849b811d2c59fab45e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
+  bgmClip: {fileID: 8300000, guid: bcb98e4be45fc694db2bb2ec4d917a66, type: 3}
+  fadeTime: 1
+  stopBgmIfClipIsEmpty: 0
+--- !u!4 &1573971067
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573971065}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 419.6436, y: 266.06046, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1582776688
 GameObject:
   m_ObjectHideFlags: 0
@@ -23748,3 +23795,4 @@ SceneRoots:
   - {fileID: 703357719}
   - {fileID: 1391351012}
   - {fileID: 311812381}
+  - {fileID: 1573971067}

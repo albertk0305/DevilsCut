@@ -1,0 +1,2 @@
+Key	Korean	English
+facility_rankup_001	시설 레벨이 1 증가하였다!	The facility level increased by 1!

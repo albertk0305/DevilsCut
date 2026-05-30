@@ -84,7 +84,7 @@ public class CombatVictoryUIController : MonoBehaviour
 
     [Header("Scenes")]
     [SerializeField] private string explorationSceneName = "Exploration";
-    [SerializeField] private string dialogueSceneName = "DialogueScene";
+    [SerializeField] private string dialogueSceneName = "Story";
 
     private readonly Queue<string> messageQueue = new Queue<string>();
     private readonly Queue<SupporterPassiveRewardResult> supporterPassiveResultQueue = new Queue<SupporterPassiveRewardResult>();
@@ -302,6 +302,31 @@ public class CombatVictoryUIController : MonoBehaviour
 
         if (continueButton != null)
             continueButton.gameObject.SetActive(false);
+    }
+
+    private void LockVictoryUIForSceneTransition()
+    {
+        SetButtonInteractable(continueButton, false);
+        SetButtonInteractable(messageAdvanceButton, false);
+        SetButtonInteractable(confirmButton, false);
+
+        if (rewardItemSlots == null)
+            return;
+
+        foreach (RewardItemSlotUI slot in rewardItemSlots)
+        {
+            if (slot == null)
+                continue;
+
+            SetButtonInteractable(slot.itemButton, false);
+            SetButtonInteractable(slot.rerollButton, false);
+        }
+    }
+
+    private void SetButtonInteractable(Button button, bool interactable)
+    {
+        if (button != null)
+            button.interactable = interactable;
     }
 
     private void SetGroupActive(GameObject group, bool isActive)
@@ -1270,7 +1295,6 @@ public class CombatVictoryUIController : MonoBehaviour
             return;
         }
 
-        HideAllStageGroups();
         StartPostRewardPassivesOrReturn();
     }
 
@@ -1551,10 +1575,7 @@ public class CombatVictoryUIController : MonoBehaviour
         string nextSceneName = ResolvePostVictorySceneName();
         isContinuing = true;
         IsVictoryUIActive = false;
-        StopMergeAnimation();
-        ClearMergePresentationControlStateWithoutRestoringHiddenObjects();
-        PrepareVictoryUIForSceneTransition();
-        ClearMergePresentationStars();
+        LockVictoryUIForSceneTransition();
 
         Time.timeScale = 1f;
         SceneManager.LoadScene(nextSceneName);
@@ -1572,33 +1593,77 @@ public class CombatVictoryUIController : MonoBehaviour
     {
         PlayerManager playerManager = PlayerManager.Instance;
         if (playerManager == null)
-            return false;
-
-        if (playerManager.currentBattleType != BattleType.Boss
-            || playerManager.currentBattlePhase < 1
-            || playerManager.currentBattlePhase > 7)
         {
+            DevLog.LogWarning("[VictoryReward] Post boss dialogue skipped: PlayerManager.Instance is missing.");
+            return false;
+        }
+
+        if (playerManager.currentBattleType != BattleType.Boss)
+        {
+            DevLog.Log("[VictoryReward] Post boss dialogue skipped: not boss battle.");
+            return false;
+        }
+
+        int phase = playerManager.currentBattlePhase;
+        if (phase <= 0)
+        {
+            DevLog.LogWarning($"[VictoryReward] Post boss dialogue skipped: invalid battle phase. phase={phase}");
             return false;
         }
 
         BossEncounterData bossEncounter = playerManager.savedCurrentTargetBoss;
         if (bossEncounter == null)
         {
-            DevLog.LogWarning("[VictoryReward] Post boss dialogue skipped: current boss encounter is missing.");
+            DevLog.LogWarning("[VictoryReward] Post boss dialogue skipped: savedCurrentTargetBoss null.");
             return false;
         }
 
-        if (bossEncounter.postBossDialogue == null || bossEncounter.imprisonedSupporter == null)
+        DialogueData postBossDialogue = bossEncounter.postBossDialogue;
+        if (postBossDialogue == null)
+        {
+            DevLog.LogWarning($"[VictoryReward] Post boss dialogue skipped: postBossDialogue null. bossID={bossEncounter.bossID}");
             return false;
+        }
 
-        if (playerManager.IsSupporterChoiceResolved(bossEncounter.imprisonedSupporter))
+        string dialogueID = postBossDialogue.dialogueID;
+        if (string.IsNullOrWhiteSpace(dialogueID))
+        {
+            DevLog.LogWarning($"[VictoryReward] Post boss dialogue skipped: postBossDialogue.dialogueID empty. bossID={bossEncounter.bossID}");
             return false;
+        }
 
-        playerManager.SetPendingSupporterDialogue(
-            bossEncounter.postBossDialogue,
-            bossEncounter.imprisonedSupporter,
-            explorationSceneName);
+        if (phase >= 1 && phase <= 7)
+        {
+            if (bossEncounter.imprisonedSupporter == null)
+            {
+                DevLog.LogWarning($"[VictoryReward] Post boss dialogue skipped: imprisonedSupporter null for supporter rescue phase. phase={phase}, bossID={bossEncounter.bossID}");
+                return false;
+            }
 
+            if (playerManager.IsSupporterChoiceResolved(bossEncounter.imprisonedSupporter))
+            {
+                DevLog.Log($"[VictoryReward] Post boss dialogue skipped: supporter choice already resolved. supporterID={bossEncounter.imprisonedSupporter.supporterID}");
+                return false;
+            }
+
+            playerManager.SetPendingSupporterDialogue(
+                postBossDialogue,
+                bossEncounter.imprisonedSupporter,
+                explorationSceneName);
+
+            DevLog.Log($"[VictoryReward] Prepared supporter rescue dialogue. phase={phase}, supporterID={bossEncounter.imprisonedSupporter.supporterID}");
+        }
+        else if (phase == 8)
+        {
+            DevLog.Log($"[VictoryReward] Prepared story-only post boss dialogue. phase={phase}, bossID={bossEncounter.bossID}");
+        }
+        else
+        {
+            DevLog.Log($"[VictoryReward] Prepared ending post boss dialogue. phase={phase}, bossID={bossEncounter.bossID}");
+        }
+
+        DialogueRuntimeContext.SetPendingDialogueID(dialogueID);
+        DevLog.Log($"[VictoryReward] Post boss dialogue prepared: {dialogueID}");
         return true;
     }
 }
