@@ -1,18 +1,27 @@
 # Devil's Cut
 
-> 하드보일드 누아르의 스킨을 입은 스타일리시 2D 턴제 RPG
+A stylish 2D turn-based RPG demo built with Unity.
 
 <p align="center">
-  <a href="https://YOUR-ITCH-IO-LINK">
+  <a href="https://neat3.itch.io/devils-cut">
     <img src="https://img.shields.io/badge/Play%20Demo-itch.io-fa5c5c?style=for-the-badge&logo=itchdotio&logoColor=white" alt="Play Demo on itch.io">
   </a>
 </p>
 
-## Demo
+## Play the Demo
 
-The demo is available on itch.io.
+🎮 **Play the demo on itch.io:**  
+👉 [https://neat3.itch.io/devils-cut](https://neat3.itch.io/devils-cut)
 
-- 🌐 Web version: Play directly in your browser
-- 🪟 Windows version: Downloadable build available on the same page
+The demo is available as both a browser version and a Windows download.
 
-👉 **[Play / Download on itch.io](https://neat3.itch.io/devils-cut)**
+If the browser version does not load or runs slowly, please try the Windows download version on the itch.io page.
+
+## About
+
+**Devil's Cut** is a 2D turn-based RPG featuring visual-novel-style story scenes, AP-based combat, supporter choices, item synergies, and boss encounters.
+
+## Built With
+
+- Unity
+- C#
