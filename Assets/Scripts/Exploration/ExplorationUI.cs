@@ -276,7 +276,7 @@ public class ExplorationUI : MonoBehaviour
     {
         if (selectedIndex == -1)
         {
-            karinDialogueText.text = LocalizationManager.Instance.GetText("msg_karin_exploration_idle");
+            karinDialogueText.text = LocalizationManager.Instance.GetText("msg_select_destination");
         }
         else
         {
@@ -288,28 +288,28 @@ public class ExplorationUI : MonoBehaviour
 
                 if (rank > 0)
                 {
-                    string fmt = LocalizationManager.Instance.GetText("msg_facility_info_format");
+                    string fmt = LocalizationManager.Instance.GetText("msg_facility_status");
                     string opName = LocalizationManager.Instance.GetText(facility.operatorName);
                     karinDialogueText.text = string.Format(fmt, opName, rank);
                 }
                 else
                 {
-                    karinDialogueText.text = LocalizationManager.Instance.GetText("msg_operator_not_unlocked");
+                    karinDialogueText.text = LocalizationManager.Instance.GetText("msg_facility_owned_by_baito");
                 }
             }
             else if (data is BossSelectionNodeData)
             {
-                karinDialogueText.text = LocalizationManager.Instance.GetText("msg_boss_selected");
+                karinDialogueText.text = LocalizationManager.Instance.GetText("msg_confirm_next_destination");
             }
             else if (data is PhaseBattleNodeData pBattle)
             {
                 if (pBattle.isBossBattle)
                 {
-                    karinDialogueText.text = LocalizationManager.Instance.GetText("msg_boss_battle_ready");
+                    karinDialogueText.text = LocalizationManager.Instance.GetText("msg_strong_enemy_warning");
                 }
                 else
                 {
-                    karinDialogueText.text = LocalizationManager.Instance.GetText("msg_general_battle_ready");
+                    karinDialogueText.text = LocalizationManager.Instance.GetText("msg_enemy_warning");
                 }
             }
         }

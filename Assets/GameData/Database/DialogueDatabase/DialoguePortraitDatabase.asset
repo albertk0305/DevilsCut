@@ -13,49 +13,74 @@ MonoBehaviour:
   m_Name: DialoguePortraitDatabase
   m_EditorClassIdentifier: Assembly-CSharp::DialoguePortraitDatabase
   speakers:
-  - speakerID: sherry
-    speakerNameKey: character.sherry.name
-  - speakerID: asmodeus
-    speakerNameKey: character.asmodeus.name
-  - speakerID: lucifer
-    speakerNameKey: character.lucifer.name
+  - speakerID: Karin
+    speakerNameKey: name_karin
+  - speakerID: A.R.E.T.E
+    speakerNameKey: name_arete
+  - speakerID: Hibiki
+    speakerNameKey: name_hibiki
+  - speakerID: Patrol Robot
+    speakerNameKey: name_patrol_robot
+  - speakerID: Sherry
+    speakerNameKey: name_sherry
   portraits:
-  - actorID: sherry
+  - actorID: Karin
+    expressionID: neutral
+    portraitSprite: {fileID: 21300000, guid: 39f2cd94de332534db7c27d51254e0be, type: 3}
+  - actorID: Karin
+    expressionID: serious
+    portraitSprite: {fileID: 21300000, guid: b7aa2544828489e44a7c5d3de7272302, type: 3}
+  - actorID: A.R.E.T.E
+    expressionID: serious
+    portraitSprite: {fileID: 21300000, guid: 3b7a20f4ebd8aeb449e4fc418581728f, type: 3}
+  - actorID: Hibiki
+    expressionID: serious
+    portraitSprite: {fileID: 21300000, guid: c998b6cee3f438c4a9beb970b2164bda, type: 3}
+  - actorID: Hibiki
+    expressionID: neutral
+    portraitSprite: {fileID: 21300000, guid: 357b02f70645f1a428c8da35a81ea90d, type: 3}
+  - actorID: Patrol Robot
+    expressionID: normal
+    portraitSprite: {fileID: 21300000, guid: db55a842b62519a4fbb9b0a0d5bf3dcd, type: 3}
+  - actorID: Karin
+    expressionID: panic
+    portraitSprite: {fileID: 21300000, guid: a48fd7bf0a6d19347b32e179d239f5ce, type: 3}
+  - actorID: Karin
+    expressionID: surprised
+    portraitSprite: {fileID: 21300000, guid: f23e1736b02341041a4b672a23583cfd, type: 3}
+  - actorID: Karin
+    expressionID: amazed
+    portraitSprite: {fileID: 21300000, guid: b52d66d626a90d145a032e2763f7814a, type: 3}
+  - actorID: Karin
+    expressionID: curious
+    portraitSprite: {fileID: 21300000, guid: f23e1736b02341041a4b672a23583cfd, type: 3}
+  - actorID: Karin
+    expressionID: bright
+    portraitSprite: {fileID: 21300000, guid: b52d66d626a90d145a032e2763f7814a, type: 3}
+  - actorID: Karin
+    expressionID: proud
+    portraitSprite: {fileID: 21300000, guid: e7fd87d5144e1b44fb3ada2aaf6963da, type: 3}
+  - actorID: Sherry
+    expressionID: annoyed
+    portraitSprite: {fileID: 21300000, guid: fe67a35f495051b40ab5153dd87084a7, type: 3}
+  - actorID: Sherry
+    expressionID: smirk
+    portraitSprite: {fileID: 21300000, guid: 76a161e11c08e7e4a9d3c7db30a6dd12, type: 3}
+  - actorID: Sherry
     expressionID: normal
     portraitSprite: {fileID: 21300000, guid: 80f59ac506b068846840d8caf06bf2fb, type: 3}
-  - actorID: sherry
+  - actorID: Sherry
+    expressionID: calm
+    portraitSprite: {fileID: 21300000, guid: 2bad1de1e29ffff4fa100a6d6e91b309, type: 3}
+  - actorID: Sherry
+    expressionID: bored
+    portraitSprite: {fileID: 21300000, guid: 04175c3d85903e24fac3dccdaa2e74ad, type: 3}
+  - actorID: Sherry
     expressionID: surprised
-    portraitSprite: {fileID: 21300000, guid: 357640688a1b61949be7fb0b44e3ef55, type: 3}
-  - actorID: sherry
-    expressionID: angry
-    portraitSprite: {fileID: 21300000, guid: 01f18b61a12ac114fa6291d31c7d1bed, type: 3}
-  - actorID: sherry
-    expressionID: happy
+    portraitSprite: {fileID: 21300000, guid: 2f81b2d090ab07c409e2d27a339ae02b, type: 3}
+  - actorID: Sherry
+    expressionID: surprised
+    portraitSprite: {fileID: 21300000, guid: 2f81b2d090ab07c409e2d27a339ae02b, type: 3}
+  - actorID: Sherry
+    expressionID: excited
     portraitSprite: {fileID: 21300000, guid: 9a63e8f983585bd498bc8b6c301fb8c9, type: 3}
-  - actorID: sherry
-    expressionID: smirk
-    portraitSprite: {fileID: 21300000, guid: 5218d133fe84dbe4690063df0b9547cc, type: 3}
-  - actorID: asmodeus
-    expressionID: happy
-    portraitSprite: {fileID: 21300000, guid: 476b6b5c4d8c26746bab3b3d24e793c8, type: 3}
-  - actorID: asmodeus
-    expressionID: smirk
-    portraitSprite: {fileID: 21300000, guid: 70b485d0a6158374ebcef76937f93bd4, type: 3}
-  - actorID: asmodeus
-    expressionID: serious
-    portraitSprite: {fileID: 21300000, guid: 99664e35c28095645bfa2045a317d26c, type: 3}
-  - actorID: asmodeus
-    expressionID: normal
-    portraitSprite: {fileID: 21300000, guid: 9310ea1addd46bf4686f793a13674af4, type: 3}
-  - actorID: asmodeus
-    expressionID: angry
-    portraitSprite: {fileID: 21300000, guid: d7e610e128ea5e642acd9e11d940c49e, type: 3}
-  - actorID: asmodeus
-    expressionID: surprised
-    portraitSprite: {fileID: 21300000, guid: fbd16a5e6bb7eec49aee26d47af9dcab, type: 3}
-  - actorID: lucifer
-    expressionID: happy
-    portraitSprite: {fileID: 21300000, guid: 17142d0a9ae83144eb2a65743b39c282, type: 3}
-  - actorID: lucifer
-    expressionID: smirk
-    portraitSprite: {fileID: 21300000, guid: c61647ae0a584b7458f518df6368f409, type: 3}

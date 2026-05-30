@@ -407,8 +407,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -510, y: -90}
-  m_SizeDelta: {x: 900, y: 900}
+  m_AnchoredPosition: {x: -510, y: 0}
+  m_SizeDelta: {x: 1080, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &216066387
 MonoBehaviour:
@@ -430,7 +430,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b464d697bf706b34dae27097728f03b2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1733,7 +1733,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueLocalizationManager
   dialogueTSVs:
-  - {fileID: 4900000, guid: dcfa6cc644e677646babea762dd8b96b, type: 3}
+  - {fileID: 4900000, guid: 1364a8ff6f19d8640a897186f0548819, type: 3}
+  - {fileID: 4900000, guid: 60ef0883c24fc4541a0bf320e97d0ad9, type: 3}
+  - {fileID: 4900000, guid: a4186246df8599c46b9ebca0db8805ca, type: 3}
 --- !u!4 &755815050
 Transform:
   m_ObjectHideFlags: 0
@@ -2558,8 +2560,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 510, y: -90}
-  m_SizeDelta: {x: 900, y: 900}
+  m_AnchoredPosition: {x: 510, y: 0}
+  m_SizeDelta: {x: 1080, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1453883071
 MonoBehaviour:
@@ -2581,7 +2583,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 01f18b61a12ac114fa6291d31c7d1bed, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: HandOfFate
   m_EditorClassIdentifier: Assembly-CSharp::KarinItemData
   itemID: HandOfFate
-  itemName: HandOfFate
+  itemName: item_002_name
   itemIcon: {fileID: 21300000, guid: 84989b4247a0f7d45babeb430335bd61, type: 3}
-  itemDescription: 
-  previewDialogue: 
-  equipDialogue: 
+  itemDescription: item_002_desc
+  previewDialogue: item_002_preview
+  equipDialogue: item_002_equip
   itemLogic: {fileID: 11400000, guid: ee7ff75b32f768b4cab1807a54d0c3e2, type: 2}

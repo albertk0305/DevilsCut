@@ -1,0 +1,55 @@
+Key,Korean,English
+item_001_name,작은 모험가,Little Adventurer
+item_001_desc,적에게 셰리의 힘에 비례하여 피해를 입힙니다,Deals damage to an enemy proportional to Sherry's Strength
+item_001_preview,폭렬 마법의 기운이 느껴집니다...!,I can feel the aura of Explosion Magic...!
+item_001_equip,"어째서인지 ""익스플로전""을 외치고 싶어지네요","For some reason I feel like shouting ""Explosion"""
+,,
+item_002_name,Hand Of Fate,Hand of Fate
+item_002_desc,적에게 셰리의 방어력에 비례하여 피해를 입힙니다,Deals damage to an enemy proportional to Sherry's Defense
+item_002_preview,누구에게도 침범받지 않는 성스러운 영역 마음의 빛,A sacred realm inviolable by anyone the light of the heart
+item_002_equip,누구나 가지고 있는 마음의 벽,The wall of the heart that everyone possesses
+,,
+item_003_name,On Our Way,On Our Way
+item_003_desc,적에게 셰리의 속도 능력치에 비례하여 피해를 입힙니다,Deals damage to an enemy proportional to Sherry's Speed
+item_003_preview,시노비가 될 수 있을 것 같아요!,I feel like I could become a shinobi!
+item_003_equip,슈슈슈슉!,Swish swish swish!
+,,
+item_004_name,Manhattan Joke,Manhattan Joke
+item_004_desc,적에게 셰리의 운 능력치에 비례하여 피해를 입힙니다,Deals damage to an enemy proportional to Sherry's Luck
+item_004_preview,전설적인 대도가 될 것 같은 기분이에요!,I feel like I'm going to become a legendary phantom thief!
+item_004_equip,어떤 때에는 여도둑 또 어떤 때에는 여자 스파이 수수께끼의 여자 카린!,Sometimes a female thief sometimes a female spy... Karin the woman of mystery!
+,,
+item_005_name,Ride On Shooting Star,Ride On Shooting Star
+item_005_desc,셰리의 행동력을 3턴 동안 30% 상승시키는 버프를 부여합니다,Grants a buff that increases Sherry's Action Speed by 30% for 3 turns
+item_005_preview,Never Knows Best,Never Knows Best
+item_005_equip,배트를 휘두르지 않으면 아무것도 시작되지 않는 법이죠!,Nothing starts unless you swing the bat!
+,,
+item_006_name,God Knows,God Knows
+item_006_desc,셰리의 힘과 운 능력치를 3턴 동안 상승시키는 버프를 부여합니다,Grants a buff that increases Sherry's Strength and Luck stats for 3 turns
+item_006_preview,이 메가폰에서는 신적인 힘이 느껴집니다...!,I can feel a divine power from this megaphone...!
+item_006_equip,평범한 인간에게는 관심 없습니다 이 중에 우주인 미래인 이세계인 초능력자가 있다면 저에게로 와주십시오 이상!,I have no interest in ordinary humans If there are any aliens time travelers people from another world or espers among you please come see me That is all!
+,,
+item_007_name,Blues Drive Monster,Blues Drive Monster
+item_007_desc,셰리의 방어력과 속도 능력치를 3턴 동안 상승시키는 버프를 부여합니다,Grants a buff that increases Sherry's Defense and Speed stats for 3 turns
+item_007_preview,어른이 된다는 건 그냥 그렇게 되는 거죠,Becoming an adult is just something that happens
+item_007_equip,흔들리고 헤매고 그래도 우리는 지금을 살아갑니다!,Swaying and wandering yet we still live in the present!
+,,
+item_008_name,On the Way,On the Way
+item_008_desc,3턴 동안 적에게 방어력과 속도 감소 디버프를 부여합니다,Grants a debuff that decreases the enemy's Defense and Speed for 3 turns
+item_008_preview,맥빠지네요...,It is a bit disappointing...
+item_008_equip,전력을 다해볼까요?,Shall we give it our all?
+,,
+item_009_name,소녀 배트,Girl Bat
+item_009_desc,적에게 3턴 동안 힘과 운 감소 디버프를 부여합니다,Grants a debuff that decreases the enemy's Strength and Luck for 3 turns
+item_009_preview,소녀 배트 등장!,Girl Bat arrives!
+item_009_equip,있을 곳이 없는 현실이야말로 제가 진정으로 있을 곳입니다!,A reality where I have no place to belong is exactly where I truly belong!
+,,
+item_010_name,필요 없는 것,Chained
+item_010_desc,적에게 적은 피해와 큰 브레이크 데미지를 줍니다,Deals low damage and high Break damage to an enemy
+item_010_preview,시대를 만드는 것은 검이 아니라 그걸 다루는 사람이죠,"It is not the sword that creates an era, but the one who wields it"
+item_010_equip,제 검은 사람을 지키기 위한 검입니다!,My sword is meant for protecting people!
+,,
+item_011_name,불꽃의 보물,Flame Treasure
+item_011_desc,적에게 셰리의 힘 방어 속도 운에 비례한 데미지를 줍니다. 균형잡힌 데미지를 주는 무기입니다.,Deals damage to an enemy proportional to Sherry's Strength Defense Speed and Luck. A weapon that deals balanced damage.
+item_011_preview,전설의 명사수가 된 느낌이네요!,I feel like I've become a legendary sharpshooter!
+item_011_equip,낭만 넘치는 리볼버네요!,It's a revolver full of romance!

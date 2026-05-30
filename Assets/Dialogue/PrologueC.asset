@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad7aaf49fceb9ee48a54b62876f0b420, type: 3}
-  m_Name: FacilityTest
+  m_Name: PrologueC
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  dialogueID: FacilityTest
-  nextSceneName: Bar
+  dialogueID: Prologue_C_Moonshine
+  nextSceneName: Exploration
+  initialBackgroundID: NightStreet
   useLineTSV: 1
-  lineTSV: {fileID: 4900000, guid: d6226491007b8394f96c9cb4a8e9719d, type: 3}
+  lineTSV: {fileID: 4900000, guid: 3871590dbccc31345b6b1a91820c7cd5, type: 3}
   lines: []

@@ -51,3 +51,7 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 3b6099e7afe97524aac2f9a6430b84e2, type: 3}
   - backgroundID: Shrine
     sprite: {fileID: 21300000, guid: 1304a7f4533ca254aa326039d0d46408, type: 3}
+  - backgroundID: DevilsCut
+    sprite: {fileID: 21300000, guid: 48a889458954bf24c8c2359ead86b207, type: 3}
+  - backgroundID: Jukebox
+    sprite: {fileID: 21300000, guid: 498c54fa30a24ef4898c3240dee23669, type: 3}

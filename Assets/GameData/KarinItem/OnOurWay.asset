@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: OnOurWay
   m_EditorClassIdentifier: Assembly-CSharp::KarinItemData
   itemID: OnOurWay
-  itemName: OnOurWay
+  itemName: item_003_name
   itemIcon: {fileID: 21300000, guid: fab2b24fbe1ed1549a6679042370e7e4, type: 3}
-  itemDescription: 
-  previewDialogue: 
-  equipDialogue: 
+  itemDescription: item_003_desc
+  previewDialogue: item_003_preview
+  equipDialogue: item_003_equip
   itemLogic: {fileID: 11400000, guid: 660f6ff8571f362428c12810ad8fb0cd, type: 2}

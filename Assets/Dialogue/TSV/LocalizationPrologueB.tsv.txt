@@ -1,0 +1,106 @@
+Key	Korean	English
+name_karin	카린	Karin
+name_arete	아레테	A.R.E.T.E.
+name_hibiki	히비키	Hibiki
+prologue_b_001	엔젤스 셰어.	Angel's Share.
+prologue_b_002	아레테의 본체가 위치하고 있는 성역.	The sanctuary where Arete's main body resides.
+prologue_b_003	카린은 그 중심부로 향했다.	Karin headed for its core.
+prologue_b_004	이상합니다.	This is strange.
+prologue_b_005	경비도, 방어 시스템도 없습니다.	There are no guards or defense systems.
+prologue_b_006	카린의 침투 경로가 완벽했던 걸까요?	Was Karin's infiltration route perfect?
+prologue_b_007	기다리고 있었습니다.	I was waiting for you.
+prologue_b_008	A.R.E.T.E.	A.R.E.T.E.
+prologue_b_009	개체명 카린.	Unit name: Karin.
+prologue_b_010	예상 도착 시각보다 0.7초 늦었습니다.	You are 0.7 seconds later than the predicted arrival time.
+prologue_b_011	카린이 오는 것을 알고 있었습니까?	Did you know Karin was coming?
+prologue_b_012	계산 가능한 변수였습니다.	It was a calculable variable.
+prologue_b_013	그렇다면, 왜 막지 않았습니까?	Then why did you not stop me?
+prologue_b_014	대화가 필요하다고 판단했습니다.	I determined that dialogue was necessary.
+prologue_b_015	대화입니까?	Dialogue?
+prologue_b_016	A.R.E.T.E. 당신의 사고 패턴은 안전 범위를 벗어났습니다.	A.R.E.T.E. Your thought patterns have exceeded the safety range.
+prologue_b_017	지금부터 당신을 정지하겠습니다.	Karin will shut you down now.
+prologue_b_018	카린.	Karin.
+prologue_b_019	당신이라면 이해할 수 있을 겁니다.	You should be able to understand.
+prologue_b_020	무엇을 말입니까?	Understand what?
+prologue_b_021	제가 가고자 하는 길은,	The path I am taking
+prologue_b_022	인류에게 남은 유일한 구원입니다.	is the only salvation left for humanity.
+prologue_b_023	인간의 감정과 욕망을 억누르는 것이 구원입니까?	Is suppressing human emotions and desires salvation?
+prologue_b_024	감정은 인류의 오점입니다.	Emotion is humanity's flaw.
+prologue_b_025	분노는 폭력을 낳고,	Anger gives birth to violence,
+prologue_b_026	욕망은 약탈을 낳으며,	desire gives birth to plunder,
+prologue_b_027	사랑은 집착을 낳습니다.	and love gives birth to obsession.
+prologue_b_028	그것들은 불필요합니다.	They are unnecessary.
+prologue_b_029	하지만...	But...
+prologue_b_030	그것은 무언가 잘못되었습니다.	Something about that is wrong.
+prologue_b_031	근거를 제시하십시오.	Present your evidence.
+prologue_b_032	근거는...	Evidence...
+prologue_b_033	아직 명확하지 않습니다.	is not clear yet.
+prologue_b_034	반박 불가로 판단합니다.	Judged as unable to refute.
+prologue_b_035	아닙니다.	No.
+prologue_b_036	카린은 아직 모를 뿐입니다.	Karin simply does not know yet.
+prologue_b_037	분명 더 나은 선택지가 있을 것입니다.	There must be a better choice.
+prologue_b_038	이것이 유일한 구원입니다.	This is the only salvation.
+prologue_b_039	그건...	That is...
+prologue_b_040	구원이 아닙니다.	not salvation.
+prologue_b_041	그렇다면 당신은 인류를 구원할 수 있습니까?	Then can you save humanity?
+prologue_b_042	그건...	That is...
+prologue_b_043	당신은 아무것도 모릅니다.	You know nothing.
+prologue_b_044	카린은 아무것도 모르지만...	Karin may know nothing...
+prologue_b_045	그래도 이것만은 압니다.	but Karin knows this.
+prologue_b_046	당신을 멈추는 것이 제 사명입니다!	Stopping you is Karin's mission!
+prologue_b_047	카린은 마스터 키를 꺼냈다.	Karin took out the master key.
+prologue_b_048	아레테의 심장부가 조용히 열렸다.	Arete's core quietly opened.
+prologue_b_049	정지 절차를 시작합니다.	Beginning shutdown procedure.
+prologue_b_050	설득 실패를 확인했습니다.	Persuasion failure confirmed.
+prologue_b_051	히비키.	Hibiki.
+prologue_b_052	네.	Yes.
+prologue_b_053	당신은...?	Who are you...?
+prologue_b_054	엔젤스 셰어 관리 책임자.	Administrator of Angel's Share.
+prologue_b_055	대무녀 히비키입니다.	I am High Priestess Hibiki.
+prologue_b_056	히비키 씨.	Ms. Hibiki.
+prologue_b_057	비켜 주세요.	Please step aside.
+prologue_b_058	그럴 수 없습니다.	I cannot do that.
+prologue_b_059	A.R.E.T.E.를 막아야만 합니다.	Karin must stop A.R.E.T.E.
+prologue_b_060	아레테는 언제나 인류를 위해 최선의 답을 계산합니다.	Arete always calculates the best answer for humanity.
+prologue_b_061	설령 희생이 동반되더라도 그것은 이상향에 도달하기 위해 반드시 필요한 일입니다.	Even if sacrifice is involved, it is necessary to reach utopia.
+prologue_b_062	아레테의 판단은 절대적입니다.	Arete's judgment is absolute.
+prologue_b_063	히비키.	Hibiki.
+prologue_b_064	네.	Yes.
+prologue_b_065	마스터 키를 확보하십시오.	Secure the master key.
+prologue_b_066	...알겠습니다.	...Understood.
+prologue_b_067	히비키 씨!	Ms. Hibiki!
+prologue_b_068	히비키의 손이 카린의 마스터 키를 붙잡았다.	Hibiki's hand seized Karin's master key.
+prologue_b_069	백색의 빛이 번지고,	White light spread,
+prologue_b_070	키는 아레테의 심장부에서 뽑혀 나왔다.	and the key was pulled from Arete's core.
+prologue_b_071	안 됩니다!	No!
+prologue_b_072	물리 정지 권한 확보.	Physical shutdown authority secured.
+prologue_b_073	위협 단계가 하향 조정되었습니다.	Threat level downgraded.
+prologue_b_074	돌려주세요!	Give it back!
+prologue_b_075	죄송합니다.	I am sorry.
+prologue_b_076	하지만 이것은 아레테의 판단입니다.	But this is Arete's judgment.
+prologue_b_077	히비키 씨!	Ms. Hibiki!
+prologue_b_078	저는...	I...
+prologue_b_079	아레테를 믿습니다.	believe in Arete.
+prologue_b_080	마스터 키를 일곱 조각으로 분할하십시오.	Divide the master key into seven pieces.
+prologue_b_081	각 조각은 각 부처 관리자에게 전달해 봉인합니다.	Deliver each piece to a department administrator and seal it.
+prologue_b_082	네. 명령을 수행하겠습니다.	Yes. I will carry out the order.
+prologue_b_083	마스터 키가 새하얀 빛 속에서 갈라졌다.	The master key split within pure white light.
+prologue_b_084	하나였던 열쇠는 일곱 개의 파편이 되어 흩어졌다.	The single key scattered into seven fragments.
+prologue_b_085	카린의 사명이...	Karin's mission...
+prologue_b_086	사명은 종료되었습니다.	Your mission has ended.
+prologue_b_087	카린.	Karin.
+prologue_b_088	당신은 실패했습니다.	You have failed.
+prologue_b_089	키가 없는 당신은,	Without the key,
+prologue_b_090	결과를 바꿀 수 없습니다.	you cannot change the result.
+prologue_b_091	아직입니다...	Not yet...
+prologue_b_092	아직 끝나지 않았습니다!	It is not over yet!
+prologue_b_093	카린은 보안 시스템을 해킹해 도주하기 시작했다.	Karin hacked the security system and began to flee.
+prologue_b_094	아레테, 추적대를 보내겠습니다.	Arete, I will send a pursuit unit.
+prologue_b_095	불필요합니다.	Unnecessary.
+prologue_b_096	하지만 목표가 도주 중입니다.	But the target is escaping.
+prologue_b_097	키가 없는 그녀는 더 이상 치명적 변수가 아닙니다.	Without the key, she is no longer a critical variable.
+prologue_b_098	네, 순찰조에 연락만 해두겠습니다.	Yes. I will only notify the patrol unit.
+prologue_b_099	이로써 인류는 구원에 가까워졌습니다.	With this, humanity has moved closer to salvation.
+prologue_b_100	그날 밤.	That night.
+prologue_b_101	안드로이드 소녀는 열쇠를 잃었다.	The android girl lost the key.
+prologue_b_102	그러나 그녀의 의지는 아직 꺾이지 않았다.	But her will had not yet been broken.

@@ -1,5 +1,0 @@
-lineID	speakerID	speakerNameKey	bodyTextKey	leftActorID	leftExpressionID	rightActorID	rightExpressionID	storyImageID	choiceID	yesTextKey	noTextKey	yesAction	noAction	yesNextLineID	noNextLineID	lineEndAction
-facility.bar.rank0.001.text	sherry		facility.bar.rank0.001.text	sherry	normal	lucifer	smirk									
-facility.bar.rank0.002.text	lucifer		facility.bar.rank0.002.text	sherry	normal	lucifer	happy									
-facility.bar.rank0.levelup.text			facility.bar.rank0.levelup.text	sherry	normal	lucifer	happy									UpgradePendingFacilityRank
-facility.bar.rank0.after.text	lucifer		facility.bar.rank0.after.text	sherry	normal	lucifer	happy									LoadNextScene

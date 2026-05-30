@@ -65,7 +65,7 @@ public class SupporterUI : MonoBehaviour
             passiveText.text = "";
             startText.text = "";
             battleText.text = "";
-            dialogueText.text = LocalizationManager.Instance.GetText("msg_no_supporter");
+            dialogueText.text = LocalizationManager.Instance.GetText("msg_no_active_supporter");
 
             joinButton.interactable = false;
             leaveButton.interactable = false;

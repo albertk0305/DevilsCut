@@ -51,6 +51,8 @@ MonoBehaviour:
   localizationCSVs:
   - {fileID: 4900000, guid: 9ffe22687c5b70243b40c502c2e4c96c, type: 3}
   - {fileID: 4900000, guid: e5ad3baa4c0af0b4db03323bfdf2b51f, type: 3}
+  - {fileID: 4900000, guid: 2b9b763831a0cea48925d7b68a4661b9, type: 3}
+  - {fileID: 4900000, guid: 3d19604b1a752624cbf19f6b7c5b64b7, type: 3}
   currentLanguage: 0
 --- !u!114 &2952436123089374904
 MonoBehaviour:

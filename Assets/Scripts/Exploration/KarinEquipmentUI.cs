@@ -99,8 +99,8 @@ public class KarinEquipmentUI : MonoBehaviour
             mainItemImage.gameObject.SetActive(false);
 
             itemNameText.text = "";
-            itemDescText.text = GetSafeText("msg_no_equipment");
-            karinDialogueText.text = GetSafeText("msg_karin_idle");
+            itemDescText.text = GetSafeText("msg_no_equipped_item");
+            karinDialogueText.text = GetSafeText("msg_supporter_join_ready");
 
             if (karinFaceImage != null) karinFaceImage.sprite = karinNormal;
 

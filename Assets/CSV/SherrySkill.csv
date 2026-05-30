@@ -2,7 +2,7 @@ Key,Korean,English
 sk_001_name,담력,Grit
 sk_001_desc,적에게 피해를 주고 가드 상태에 돌입합니다. 가드 상태에서는 적에게 피격당했을 때 받는 피해가 감소합니다.,"Deals damage to an enemy and enters the Guard state. While in the Guard state, damage taken from enemy attacks is reduced."
 sk_001_evo_a_name,인과율,Causality
-sk_001_evo_a_desc,"가드 상태에서 적의 공격을 받을 시, 가드로 감소시킨 피해량의 일정량을 적에게 되돌려줍니다.","When attacked while in the Guard state, reflects a portion of the damage mitigated by Guard back to the attacker."
+sk_001_evo_a_desc,가드 상태에서 적의 공격을 받을 시 가드로 감소시킨 피해량의 일정량을 적에게 되돌려줍니다.,"When attacked while in the Guard state, reflects a portion of the damage mitigated by Guard back to the attacker."
 sk_001_evo_b_name,고드 핸드,God Hand
 sk_001_evo_b_desc,"가드 상태가 강화되어, 방어력 무시 고정 피해에도 피해 감소가 적용됩니다.","Strengthens the Guard state, allowing the damage reduction to apply even to defense-ignoring True Damage."
 sk_001_evo_c_name,제물의 낙인,Brand of Sacrifice

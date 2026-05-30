@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: P38
   m_EditorClassIdentifier: Assembly-CSharp::KarinItemData
   itemID: ManhattanJoke
-  itemName: P38
+  itemName: item_004_name
   itemIcon: {fileID: 21300000, guid: 34f701fb8fa03e14caa00f6f46310a4a, type: 3}
-  itemDescription: p38 desc
-  previewDialogue: seems cool
-  equipDialogue: let's roll
+  itemDescription: item_004_desc
+  previewDialogue: item_004_preview
+  equipDialogue: item_004_equip
   itemLogic: {fileID: 11400000, guid: 3c732f456dfb36a4c8fdae309a1a322c, type: 2}

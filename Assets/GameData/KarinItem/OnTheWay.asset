@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: OnTheWay
   m_EditorClassIdentifier: Assembly-CSharp::KarinItemData
   itemID: OnTheWay
-  itemName: OnTheWay
+  itemName: item_008_name
   itemIcon: {fileID: 21300000, guid: 1f5b7b0658b4dd349a18d764272ddc30, type: 3}
-  itemDescription: 
-  previewDialogue: 
-  equipDialogue: 
+  itemDescription: item_008_desc
+  previewDialogue: item_008_preview
+  equipDialogue: item_008_equip
   itemLogic: {fileID: 11400000, guid: 8593e274282e0f54895050898503c048, type: 2}

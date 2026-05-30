@@ -1,0 +1,95 @@
+Key	Korean	English
+name_karin	카린	Karin
+name_sherry	셰리	Sherry
+name_patrol_robot	순찰 로봇	Patrol Robot
+prologue_c_001	문샤인.	Moonshine.
+prologue_c_002	아파테이아의 빛이 닿지 않는 뒷골목.	A back alley untouched by Apeteia's light.
+prologue_c_003	카린은 그 어두운 골목을 달리고 있었다.	Karin was running through its dark streets.
+prologue_c_004	정지 요청을 거부합니다!	Request to stop denied!
+prologue_c_005	수배 대상 확인.	Wanted target confirmed.
+prologue_c_006	개체명 카린.	Unit name: Karin.
+prologue_c_007	즉시 정지하십시오.	Stop immediately.
+prologue_c_008	카린은 여기서 멈출 수 없습니다!	Karin cannot stop here!
+prologue_c_009	불응 확인.	Noncompliance confirmed.
+prologue_c_010	제압 절차를 개시합니다.	Initiating suppression procedure.
+prologue_c_011	차가운 총구가 카린의 등을 겨눴다.	A cold muzzle aimed at Karin's back.
+prologue_c_012	아, 시끄러워.	Ugh, noisy.
+prologue_c_013	...?	...?
+prologue_c_014	새벽부터 골목에서 깡통 굴러가는 소리가 나네.	Sounds like tin cans rolling around the alley at dawn.
+prologue_c_015	민간인 확인.	Civilian confirmed.
+prologue_c_016	작전 구역에서 이탈하십시오.	Leave the operation area.
+prologue_c_017	민간인?	Civilian?
+prologue_c_018	아레테네 깡통들이 아직 이 동네 녀석들을 사람 취급 해주다니.	Arete's tin cans still treat people from this neighborhood as human?
+prologue_c_019	우린 불량품 아니면 이단자 취급인 줄 알았는데.	I thought we were classified as defective goods or heretics.
+prologue_c_020	경고.	Warning.
+prologue_c_021	이탈하지 않을 경우—	If you do not leave—
+prologue_c_022	말이 끝나기도 전에,	Before it could finish speaking,
+prologue_c_023	검은 틈새가 허공에 벌어졌다.	a black rift opened in the air.
+prologue_c_024	셰리의 손에 권총이 쥐어졌다.	a pistol settled into Sherry's hand.
+prologue_c_025	경고는 술값 외상 청구서로 충분해.	Warnings are enough when they come as unpaid bar tabs.
+prologue_c_026	총성이 골목을 갈랐다.	Gunfire split the alley.
+prologue_c_027	순찰 로봇들의 무장과 다리 관절이 차례로 멈췄다.	The patrol robots' weapons and leg joints stopped one after another.
+prologue_c_028	전투 지속 불가.	Combat continuation impossible.
+prologue_c_029	후퇴합니다.	Retreating.
+prologue_c_030	순찰 로봇들은 삐걱대며 골목 밖으로 물러났다.	The patrol robots creaked as they withdrew from the alley.
+prologue_c_031	굉장합니다.	Incredible.
+prologue_c_032	방금 전투 효율은 일반 인간의 범주를 벗어났습니다.	That combat efficiency exceeded the range of an ordinary human.
+prologue_c_033	감탄은 돈으로 전달될 때 가장 따뜻하게 느껴지는 법이야.	Awe feels warmest when delivered in cash.
+prologue_c_034	왜 카린을 도와주셨습니까?	Why did you help Karin?
+prologue_c_035	꼬맹이 하나 쫓아다니는 어른 중에,	Among adults chasing one little kid around,
+prologue_c_036	제대로 된 녀석이 있을 리 없잖아.	there's no way any of them are decent.
+prologue_c_037	마침 일도 없어서 한가했고.	And I happened to be bored with no work.
+prologue_c_038	카린은 꼬맹이가 아닙니다.	Karin is not a little kid.
+prologue_c_039	그래, 그래. 꼬마 아가씨.	Yeah, yeah. Little lady.
+prologue_c_040	늦었으니 집에 가서 빨리 자렴.	It's late, so go home and get to bed.
+prologue_c_041	기다려 주세요!	Please wait!
+prologue_c_042	당신의 도움이 필요합니다!	Karin needs your help!
+prologue_c_043	싫어.	Nope.
+prologue_c_044	아직 의뢰 내용을 말하지 않았습니다.	Karin has not explained the request yet.
+prologue_c_045	꼬맹이 의뢰는 안 받아.	I don't take jobs from kids.
+prologue_c_046	돈도 없고, 뒤처리도 귀찮고,	No money, annoying cleanup,
+prologue_c_047	대체로 세상 구한다는 말로 시작하거든.	and they usually start with saving the world.
+prologue_c_048	정확합니다!	Correct!
+prologue_c_049	봐라.	See?
+prologue_c_050	하지만 보수는 있습니다.	But there is a reward.
+prologue_c_051	사탕이라든가 돈 안 되는 건 사절이야.	If it's candy or anything that doesn't pay, hard pass.
+prologue_c_052	카린이 깨어난 연구실에,	In the laboratory where Karin awakened,
+prologue_c_053	구세대의 위스키가 보관되어 있습니다.	old-world whiskey is being stored.
+prologue_c_054	...	...
+prologue_c_055	저기...	Um...
+prologue_c_056	구세대?	Old-world?
+prologue_c_057	네.	Yes.
+prologue_c_058	제조 기록상 현재는 단종된 최고급 위스키입니다.	According to manufacturing records, it is a now-discontinued premium whiskey.
+prologue_c_059	...	...
+prologue_c_060	꼬맹이.	Kid.
+prologue_c_061	카린입니다.	Karin.
+prologue_c_062	그 중요한 말을 왜 이제 해?	Why didn't you say the important part first?
+prologue_c_063	의뢰를 수락하시는 겁니까?	Are you accepting the request?
+prologue_c_064	수락?	Accepting?
+prologue_c_065	원한다면 지금의 난 너를 달에도 데려다 줄 수 있어.	Right now, if you asked, I could take you to the moon.
+prologue_c_066	감사합니다!	Thank you!
+prologue_c_067	혹시 어떻게 부르면 될까요?	What should Karin call you?
+prologue_c_068	셰리라고 불러.	Call me Sherry.
+prologue_c_069	네, 셰리 씨!	Yes, Ms. Sherry!
+prologue_c_070	씨는 무슨 씨냐. 귀찮게.	What's with the Ms.? Annoying.
+prologue_c_071	그냥 셰리라고 불러.	Just call me Sherry.
+prologue_c_072	네, 셰리!	Yes, Sherry!
+prologue_c_073	습득 빠르네.	Fast learner.
+prologue_c_074	카린은 고성능입니다!	Karin is high-performance!
+prologue_c_075	좋아, 고성능 꼬맹이.	Alright, high-performance kid.
+prologue_c_076	그래서 내가 뭘 하면 되는데?	So what do I have to do?
+prologue_c_077	현재 목표는 폭주 중인 A.R.E.T.E.를 정지시키기 위해,	The current objective is to stop the rogue A.R.E.T.E.,
+prologue_c_078	각 부처에 봉인된 7개의 열쇠 조각을 되찾고,	recover the seven key fragments sealed in each department,
+prologue_c_079	그 열쇠를 이용해 엔젤스 셰어 중심부에 재진입한 뒤—	then use the key to re-enter the core of Angel's Share—
+prologue_c_080	오케이.	Okay.
+prologue_c_081	7천사 엉덩이를 걷어차고,	Kick the Seven Angels' asses,
+prologue_c_082	깡통 하나 정지시키면 된다는 거네.	and shut down one tin can. That about right?
+prologue_c_083	목표는 7명의 관리자입니다.	The targets are seven administrators.
+prologue_c_084	이름은 별로 중요하지 않아.	Names aren't that important.
+prologue_c_085	중요한 건 위스키고.	What's important is the whiskey.
+prologue_c_086	도시의 구원도 포함해 주세요!	Please include saving the city as well!
+prologue_c_087	생각해볼게.	I'll think about it.
+prologue_c_088	그날 밤.	That night,
+prologue_c_089	꼬마 안드로이드와 해결사의 계약이 성립됐다.	a little android and a fixer made a contract.
+prologue_c_090	보수는 도시의 운명.	The reward was the fate of the city.
+prologue_c_091	그리고 단종된 위스키 한 병.	And one bottle of discontinued whiskey.
