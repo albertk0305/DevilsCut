@@ -407,8 +407,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -510, y: 0}
-  m_SizeDelta: {x: 1080, y: 1080}
+  m_AnchoredPosition: {x: -560, y: -140}
+  m_SizeDelta: {x: 800, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &216066387
 MonoBehaviour:
@@ -1484,45 +1484,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 682184800159534396, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 733989083797116624, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998369485294946751, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2215912496682732513, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3745548160754550851, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4050414901425619930, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
       propertyPath: m_Name
       value: SettingsPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 5293632928244273565, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5694541756657742253, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5898431294163760607, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6076736197257571045, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6220075386489131238, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
       propertyPath: m_Pivot.x
@@ -1602,14 +1566,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6220075386489131238, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7201992413342659114, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8433746128998774340, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
-      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1736,6 +1692,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 1364a8ff6f19d8640a897186f0548819, type: 3}
   - {fileID: 4900000, guid: 60ef0883c24fc4541a0bf320e97d0ad9, type: 3}
   - {fileID: 4900000, guid: a4186246df8599c46b9ebca0db8805ca, type: 3}
+  - {fileID: 4900000, guid: f572d408c5e67c44895549cd4885a364, type: 3}
 --- !u!4 &755815050
 Transform:
   m_ObjectHideFlags: 0
@@ -2560,8 +2517,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 510, y: 0}
-  m_SizeDelta: {x: 1080, y: 1080}
+  m_AnchoredPosition: {x: 560, y: -140}
+  m_SizeDelta: {x: 800, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1453883071
 MonoBehaviour:
@@ -2904,7 +2861,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7717724c209c6a444a2dd11c74373a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueController
-  fallbackDialogueData: {fileID: 11400000, guid: 81f8632cdb6f6ef4382aa399dbbd8a0e, type: 2}
+  fallbackDialogueData: {fileID: 11400000, guid: 7e99686744f968e478b0580e620c6010, type: 2}
+  dialogueDataDatabase: {fileID: 11400000, guid: 0bb3dd23896e4fa19d1063d3842f62e6, type: 2}
   portraitDatabase: {fileID: 11400000, guid: 5726d2c4b0389744b89533517da312e4, type: 2}
   storyImageDatabase: {fileID: 11400000, guid: 1fa61f28bb2d377439314fb690dfb7de, type: 2}
   backgroundImageDatabase: {fileID: 11400000, guid: 92a8c57b254ff0448a1e541fa2a90c8c, type: 2}

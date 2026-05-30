@@ -1,41 +1,41 @@
-lineID	speakerID	leftActorID	rightActorID	expressionID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
-prologue_a_001								prologue_a_001	None		Jukebox			FALSE	FALSE	FALSE								
-prologue_a_002								prologue_a_002	None					FALSE	FALSE	FALSE								
-prologue_a_003								prologue_a_003	None					FALSE	FALSE	FALSE								
-prologue_a_004								prologue_a_004	None					FALSE	FALSE	FALSE								
-prologue_a_005								prologue_a_005	None					FALSE	FALSE	FALSE								
-prologue_a_006								prologue_a_006	None					FALSE	FALSE	FALSE								
-prologue_a_007								prologue_a_007	None					FALSE	FALSE	FALSE								
-prologue_a_008								prologue_a_008	None					FALSE	FALSE	FALSE								
-prologue_a_009								prologue_a_009	None					FALSE	FALSE	FALSE								
-prologue_a_010								prologue_a_010	None					FALSE	FALSE	FALSE								
-prologue_a_011								prologue_a_011	None					FALSE	FALSE	FALSE								
-prologue_a_012								prologue_a_012	None					FALSE	FALSE	FALSE								
-prologue_a_013								prologue_a_013	None					FALSE	FALSE	FALSE								
-prologue_a_014								prologue_a_014	None					FALSE	FALSE	FALSE								
-prologue_a_015								prologue_a_015	None					FALSE	FALSE	FALSE								
-prologue_a_016								prologue_a_016	None					FALSE	FALSE	FALSE								
-prologue_a_017								prologue_a_017	None					FALSE	FALSE	FALSE								
-prologue_a_018								prologue_a_018	None					FALSE	FALSE	FALSE								
-prologue_a_019								prologue_a_019	None					FALSE	FALSE	FALSE								
-prologue_a_020								prologue_a_020	None					FALSE	FALSE	FALSE								
-prologue_a_021								prologue_a_021	None					FALSE	FALSE	FALSE								
-prologue_a_022								prologue_a_022	None					FALSE	FALSE	FALSE								
-prologue_a_023								prologue_a_023	None					FALSE	FALSE	FALSE								
-prologue_a_024								prologue_a_024	None					FALSE	FALSE	FALSE								
-prologue_a_025								prologue_a_025	None					FALSE	FALSE	FALSE								
-prologue_a_026								prologue_a_026	None					FALSE	FALSE	FALSE								
-prologue_a_027								prologue_a_027	None					FALSE	FALSE	FALSE								
-prologue_a_028								prologue_a_028	None					FALSE	FALSE	FALSE								
-prologue_a_029								prologue_a_029	None					FALSE	FALSE	FALSE								
-prologue_a_030								prologue_a_030	None					FALSE	FALSE	FALSE								
-prologue_a_031								prologue_a_031	None					FALSE	FALSE	FALSE								
-prologue_a_032								prologue_a_032	None		Lab			FALSE	FALSE	FALSE								
-prologue_a_033								prologue_a_033	None					FALSE	TRUE	FALSE								
-prologue_a_034	karin	karin		normal	normal		name_karin	prologue_a_034	None					FALSE	FALSE	FALSE								
-prologue_a_035	karin	karin		normal	normal		name_karin	prologue_a_035	None					FALSE	FALSE	FALSE								
-prologue_a_036	karin	karin		normal	normal		name_karin	prologue_a_036	None					FALSE	FALSE	FALSE								
-prologue_a_037	karin	karin		serious	serious		name_karin	prologue_a_037	None					FALSE	FALSE	FALSE								
-prologue_a_038	karin	karin		serious	serious		name_karin	prologue_a_038	None					FALSE	FALSE	FALSE								
-prologue_a_039	karin	karin		serious	serious		name_karin	prologue_a_039	None					FALSE	FALSE	FALSE								
-prologue_a_040	karin	karin		serious	serious		name_karin	prologue_a_040	LoadNextScene	Prologue_B_AngelsShare				FALSE	FALSE	FALSE								
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID	noNextLineID
+prologue_a_001							prologue_a_001	None		Jukebox			FALSE	FALSE	FALSE									
+prologue_a_002							prologue_a_002	None					FALSE	FALSE	FALSE									
+prologue_a_003							prologue_a_003	None					FALSE	FALSE	FALSE									
+prologue_a_004							prologue_a_004	None					FALSE	FALSE	FALSE									
+prologue_a_005							prologue_a_005	None					FALSE	FALSE	FALSE									
+prologue_a_006							prologue_a_006	None					FALSE	FALSE	FALSE									
+prologue_a_007							prologue_a_007	None					FALSE	FALSE	FALSE									
+prologue_a_008							prologue_a_008	None					FALSE	FALSE	FALSE									
+prologue_a_009							prologue_a_009	None					FALSE	FALSE	FALSE									
+prologue_a_010							prologue_a_010	None					FALSE	FALSE	FALSE									
+prologue_a_011							prologue_a_011	None					FALSE	FALSE	FALSE									
+prologue_a_012							prologue_a_012	None					FALSE	FALSE	FALSE									
+prologue_a_013							prologue_a_013	None					FALSE	FALSE	FALSE									
+prologue_a_014							prologue_a_014	None					FALSE	FALSE	FALSE									
+prologue_a_015							prologue_a_015	None					FALSE	FALSE	FALSE									
+prologue_a_016							prologue_a_016	None					FALSE	FALSE	FALSE									
+prologue_a_017							prologue_a_017	None					FALSE	FALSE	FALSE									
+prologue_a_018							prologue_a_018	None					FALSE	FALSE	FALSE									
+prologue_a_019							prologue_a_019	None					FALSE	FALSE	FALSE									
+prologue_a_020							prologue_a_020	None					FALSE	FALSE	FALSE									
+prologue_a_021							prologue_a_021	None					FALSE	FALSE	FALSE									
+prologue_a_022							prologue_a_022	None					FALSE	FALSE	FALSE									
+prologue_a_023							prologue_a_023	None					FALSE	FALSE	FALSE									
+prologue_a_024							prologue_a_024	None					FALSE	FALSE	FALSE									
+prologue_a_025							prologue_a_025	None					FALSE	FALSE	FALSE									
+prologue_a_026							prologue_a_026	None					FALSE	FALSE	FALSE									
+prologue_a_027							prologue_a_027	None					FALSE	FALSE	FALSE									
+prologue_a_028							prologue_a_028	None					FALSE	FALSE	FALSE									
+prologue_a_029							prologue_a_029	None					FALSE	FALSE	FALSE									
+prologue_a_030							prologue_a_030	None					FALSE	FALSE	FALSE									
+prologue_a_031							prologue_a_031	None					FALSE	FALSE	FALSE									
+prologue_a_032							prologue_a_032	None		Lab			FALSE	FALSE	FALSE									
+prologue_a_033							prologue_a_033	None					FALSE	TRUE	FALSE									
+prologue_a_034	karin	karin		normal		name_karin	prologue_a_034	None					FALSE	FALSE	FALSE									
+prologue_a_035	karin	karin		normal		name_karin	prologue_a_035	None					FALSE	FALSE	FALSE									
+prologue_a_036	karin	karin		normal		name_karin	prologue_a_036	None					FALSE	FALSE	FALSE									
+prologue_a_037	karin	karin		serious		name_karin	prologue_a_037	None					FALSE	FALSE	FALSE									
+prologue_a_038	karin	karin		serious		name_karin	prologue_a_038	None					FALSE	FALSE	FALSE									
+prologue_a_039	karin	karin		serious		name_karin	prologue_a_039	None					FALSE	FALSE	FALSE									
+prologue_a_040	karin	karin		serious		name_karin	prologue_a_040	None					FALSE	FALSE	FALSE									

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7aaf49fceb9ee48a54b62876f0b420, type: 3}
   m_Name: PrologueB
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  dialogueID: Prologue_B_AngelsShare
-  nextSceneName: Story
+  dialogueID: Prologue_B
+  nextDialogueID: Prologue_C
+  nextSceneName: ""
   initialBackgroundID: AreteRoom
   useLineTSV: 1
   lineTSV: {fileID: 4900000, guid: 8a574bb1d0106a244afc5aa728732755, type: 3}

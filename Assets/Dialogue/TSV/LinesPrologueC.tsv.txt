@@ -1,92 +1,92 @@
-lineID	speakerID	leftActorID	rightActorID	expressionID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
-prologue_c_001								prologue_c_001	None		NightStreet			FALSE	FALSE	FALSE								
-prologue_c_002								prologue_c_002	None					FALSE	FALSE	FALSE								
-prologue_c_003								prologue_c_003	None					FALSE	FALSE	FALSE								
-prologue_c_004	karin	karin		panic	panic		name_karin	prologue_c_004	None					FALSE	FALSE	FALSE								
-prologue_c_005	patrol_robot	karin	patrol_robot	normal	panic	normal	name_patrol_robot	prologue_c_005	None					FALSE	FALSE	FALSE								
-prologue_c_006	patrol_robot	karin	patrol_robot	normal	panic	normal	name_patrol_robot	prologue_c_006	None					FALSE	FALSE	FALSE								
-prologue_c_007	patrol_robot	karin	patrol_robot	normal	panic	normal	name_patrol_robot	prologue_c_007	None					FALSE	FALSE	FALSE								
-prologue_c_008	karin	karin	patrol_robot	panic	panic	normal	name_karin	prologue_c_008	None					FALSE	FALSE	FALSE								
-prologue_c_009	patrol_robot	karin	patrol_robot	normal	panic	normal	name_patrol_robot	prologue_c_009	None					FALSE	FALSE	FALSE								
-prologue_c_010	patrol_robot	karin	patrol_robot	normal	panic	normal	name_patrol_robot	prologue_c_010	None					FALSE	FALSE	FALSE								
-prologue_c_011								prologue_c_011	None					FALSE	FALSE	FALSE								
-prologue_c_012	sherry	karin	sherry	annoyed	panic	annoyed	name_sherry	prologue_c_012	None					FALSE	FALSE	FALSE								
-prologue_c_013	karin	karin	sherry	surprised	surprised	annoyed	name_karin	prologue_c_013	None					FALSE	FALSE	FALSE								
-prologue_c_014	sherry	karin	sherry	annoyed	surprised	annoyed	name_sherry	prologue_c_014	None					FALSE	FALSE	FALSE								
-prologue_c_015	patrol_robot	karin	patrol_robot	normal	surprised	normal	name_patrol_robot	prologue_c_015	None					FALSE	FALSE	FALSE								
-prologue_c_016	patrol_robot	karin	patrol_robot	normal	surprised	normal	name_patrol_robot	prologue_c_016	None					FALSE	FALSE	FALSE								
-prologue_c_017	sherry	karin	sherry	annoyed	surprised	annoyed	name_sherry	prologue_c_017	None					FALSE	FALSE	FALSE								
-prologue_c_018	sherry	karin	sherry	smirk	surprised	smirk	name_sherry	prologue_c_018	None					FALSE	FALSE	FALSE								
-prologue_c_019	sherry	karin	sherry	smirk	surprised	smirk	name_sherry	prologue_c_019	None					FALSE	FALSE	FALSE								
-prologue_c_020	patrol_robot	karin	patrol_robot	normal	surprised	normal	name_patrol_robot	prologue_c_020	None					FALSE	FALSE	FALSE								
-prologue_c_021	patrol_robot	karin	patrol_robot	normal	surprised	normal	name_patrol_robot	prologue_c_021	None					FALSE	FALSE	FALSE								
-prologue_c_022								prologue_c_022	None					FALSE	FALSE	FALSE								
-prologue_c_023								prologue_c_023	None					FALSE	FALSE	FALSE								
-prologue_c_024								prologue_c_024	None					FALSE	FALSE	FALSE								
-prologue_c_025	sherry	karin	sherry	smirk	surprised	smirk	name_sherry	prologue_c_025	None					FALSE	FALSE	FALSE								
-prologue_c_026								prologue_c_026	None					FALSE	FALSE	FALSE								
-prologue_c_027								prologue_c_027	None					FALSE	FALSE	FALSE								
-prologue_c_028	patrol_robot	karin	patrol_robot	normal	surprised	normal	name_patrol_robot	prologue_c_028	None					FALSE	FALSE	FALSE								
-prologue_c_029	patrol_robot	karin	patrol_robot	normal	surprised	normal	name_patrol_robot	prologue_c_029	None					FALSE	FALSE	FALSE								
-prologue_c_030								prologue_c_030	None					FALSE	FALSE	FALSE								
-prologue_c_031	karin	karin	sherry	amazed	amazed	normal	name_karin	prologue_c_031	None					FALSE	FALSE	FALSE								
-prologue_c_032	karin	karin	sherry	amazed	amazed	normal	name_karin	prologue_c_032	None					FALSE	FALSE	FALSE								
-prologue_c_033	sherry	karin	sherry	smirk	amazed	smirk	name_sherry	prologue_c_033	None					FALSE	FALSE	FALSE								
-prologue_c_034	karin	karin	sherry	curious	curious	smirk	name_karin	prologue_c_034	None					FALSE	FALSE	FALSE								
-prologue_c_035	sherry	karin	sherry	calm	curious	calm	name_sherry	prologue_c_035	None					FALSE	FALSE	FALSE								
-prologue_c_036	sherry	karin	sherry	calm	curious	calm	name_sherry	prologue_c_036	None					FALSE	FALSE	FALSE								
-prologue_c_037	sherry	karin	sherry	smirk	curious	smirk	name_sherry	prologue_c_037	None					FALSE	FALSE	FALSE								
-prologue_c_038	karin	karin	sherry	pout	serious	smirk	name_karin	prologue_c_038	None					FALSE	FALSE	FALSE								
-prologue_c_039	sherry	karin	sherry	smirk	serious	smirk	name_sherry	prologue_c_039	None					FALSE	FALSE	FALSE								
-prologue_c_040	sherry	karin	sherry	smirk	serious	smirk	name_sherry	prologue_c_040	None					FALSE	FALSE	FALSE								
-prologue_c_041	karin	karin	sherry	panic	panic	smirk	name_karin	prologue_c_041	None					FALSE	FALSE	FALSE								
-prologue_c_042	karin	karin	sherry	serious	serious	smirk	name_karin	prologue_c_042	None					FALSE	FALSE	FALSE								
-prologue_c_043	sherry	karin	sherry	bored	serious	bored	name_sherry	prologue_c_043	None					FALSE	FALSE	FALSE								
-prologue_c_044	karin	karin	sherry	serious	serious	bored	name_karin	prologue_c_044	None					FALSE	FALSE	FALSE								
-prologue_c_045	sherry	karin	sherry	bored	serious	bored	name_sherry	prologue_c_045	None					FALSE	FALSE	FALSE								
-prologue_c_046	sherry	karin	sherry	bored	serious	bored	name_sherry	prologue_c_046	None					FALSE	FALSE	FALSE								
-prologue_c_047	sherry	karin	sherry	bored	serious	bored	name_sherry	prologue_c_047	None					FALSE	FALSE	FALSE								
-prologue_c_048	karin	karin	sherry	bright	bright	bored	name_karin	prologue_c_048	None					FALSE	FALSE	FALSE								
-prologue_c_049	sherry	karin	sherry	bored	bright	bored	name_sherry	prologue_c_049	None					FALSE	FALSE	FALSE								
-prologue_c_050	karin	karin	sherry	serious	serious	bored	name_karin	prologue_c_050	None					FALSE	FALSE	FALSE								
-prologue_c_051	sherry	karin	sherry	bored	serious	bored	name_sherry	prologue_c_051	None					FALSE	FALSE	FALSE								
-prologue_c_052	karin	karin	sherry	serious	serious	bored	name_karin	prologue_c_052	None					FALSE	FALSE	FALSE								
-prologue_c_053	karin	karin	sherry	serious	serious	surprised	name_karin	prologue_c_053	None					FALSE	FALSE	FALSE								
-prologue_c_054	sherry	karin	sherry	surprised	serious	surprised	name_sherry	prologue_c_054	None					FALSE	FALSE	FALSE								
-prologue_c_055	karin	karin	sherry	curious	curious	surprised	name_karin	prologue_c_055	None					FALSE	FALSE	FALSE								
-prologue_c_056	sherry	karin	sherry	serious	curious	surprised	name_sherry	prologue_c_056	None					FALSE	FALSE	FALSE								
-prologue_c_057	karin	karin	sherry	normal	normal	surprised	name_karin	prologue_c_057	None					FALSE	FALSE	FALSE								
-prologue_c_058	karin	karin	sherry	normal	normal	surprised	name_karin	prologue_c_058	None					FALSE	FALSE	FALSE								
-prologue_c_059	sherry	karin	sherry	serious	normal	surprised	name_sherry	prologue_c_059	None					FALSE	FALSE	FALSE								
-prologue_c_060	sherry	karin	sherry	serious	normal	surprised	name_sherry	prologue_c_060	None					FALSE	FALSE	FALSE								
-prologue_c_061	karin	karin	sherry	pout	serious	surprised	name_karin	prologue_c_061	None					FALSE	FALSE	FALSE								
-prologue_c_062	sherry	karin	sherry	excited	serious	excited	name_sherry	prologue_c_062	None					FALSE	FALSE	FALSE								
-prologue_c_063	karin	karin	sherry	curious	curious	excited	name_karin	prologue_c_063	None					FALSE	FALSE	FALSE								
-prologue_c_064	sherry	karin	sherry	excited	curious	excited	name_sherry	prologue_c_064	None					FALSE	FALSE	FALSE								
-prologue_c_065	sherry	karin	sherry	excited	curious	excited	name_sherry	prologue_c_065	None					FALSE	FALSE	FALSE								
-prologue_c_066	karin	karin	sherry	bright	bright	excited	name_karin	prologue_c_066	None					FALSE	FALSE	FALSE								
-prologue_c_067	karin	karin	sherry	curious	curious	excited	name_karin	prologue_c_067	None					FALSE	FALSE	FALSE								
-prologue_c_068	sherry	karin	sherry	calm	curious	calm	name_sherry	prologue_c_068	None					FALSE	FALSE	FALSE								
-prologue_c_069	karin	karin	sherry	bright	bright	calm	name_karin	prologue_c_069	None					FALSE	FALSE	FALSE								
-prologue_c_070	sherry	karin	sherry	annoyed	bright	annoyed	name_sherry	prologue_c_070	None					FALSE	FALSE	FALSE								
-prologue_c_071	sherry	karin	sherry	annoyed	bright	annoyed	name_sherry	prologue_c_071	None					FALSE	FALSE	FALSE								
-prologue_c_072	karin	karin	sherry	bright	bright	annoyed	name_karin	prologue_c_072	None					FALSE	FALSE	FALSE								
-prologue_c_073	sherry	karin	sherry	smirk	bright	smirk	name_sherry	prologue_c_073	None					FALSE	FALSE	FALSE								
-prologue_c_074	karin	karin	sherry	proud	proud	smirk	name_karin	prologue_c_074	None					FALSE	FALSE	FALSE								
-prologue_c_075	sherry	karin	sherry	smirk	proud	smirk	name_sherry	prologue_c_075	None					FALSE	FALSE	FALSE								
-prologue_c_076	sherry	karin	sherry	calm	proud	calm	name_sherry	prologue_c_076	None					FALSE	FALSE	FALSE								
-prologue_c_077	karin	karin	sherry	serious	serious	calm	name_karin	prologue_c_077	None					FALSE	FALSE	FALSE								
-prologue_c_078	karin	karin	sherry	serious	serious	calm	name_karin	prologue_c_078	None					FALSE	FALSE	FALSE								
-prologue_c_079	karin	karin	sherry	serious	serious	calm	name_karin	prologue_c_079	None					FALSE	FALSE	FALSE								
-prologue_c_080	sherry	karin	sherry	smirk	serious	smirk	name_sherry	prologue_c_080	None					FALSE	FALSE	FALSE								
-prologue_c_081	sherry	karin	sherry	smirk	serious	smirk	name_sherry	prologue_c_081	None					FALSE	FALSE	FALSE								
-prologue_c_082	sherry	karin	sherry	smirk	serious	smirk	name_sherry	prologue_c_082	None					FALSE	FALSE	FALSE								
-prologue_c_083	karin	karin	sherry	serious	serious	smirk	name_karin	prologue_c_083	None					FALSE	FALSE	FALSE								
-prologue_c_084	sherry	karin	sherry	smirk	serious	smirk	name_sherry	prologue_c_084	None					FALSE	FALSE	FALSE								
-prologue_c_085	sherry	karin	sherry	smirk	serious	smirk	name_sherry	prologue_c_085	None					FALSE	FALSE	FALSE								
-prologue_c_086	karin	karin	sherry	serious	serious	smirk	name_karin	prologue_c_086	None					FALSE	FALSE	FALSE								
-prologue_c_087	sherry	karin	sherry	smirk	serious	smirk	name_sherry	prologue_c_087	None					FALSE	FALSE	FALSE								
-prologue_c_088								prologue_c_088	None					FALSE	FALSE	FALSE								
-prologue_c_089								prologue_c_089	None					FALSE	FALSE	FALSE								
-prologue_c_090								prologue_c_090	None					FALSE	FALSE	FALSE								
-prologue_c_091								prologue_c_091	LoadNextScene	Exploration				FALSE	FALSE	FALSE								
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID	noNextLineID
+prologue_c_001							prologue_c_001	None		NightStreet			FALSE	FALSE	FALSE									
+prologue_c_002							prologue_c_002	None					FALSE	FALSE	FALSE									
+prologue_c_003							prologue_c_003	None					FALSE	FALSE	FALSE									
+prologue_c_004	karin	karin		panic		name_karin	prologue_c_004	None					FALSE	FALSE	FALSE									
+prologue_c_005	patrol_robot	karin	patrol_robot	panic	normal	name_patrol_robot	prologue_c_005	None					FALSE	FALSE	FALSE									
+prologue_c_006	patrol_robot	karin	patrol_robot	panic	normal	name_patrol_robot	prologue_c_006	None					FALSE	FALSE	FALSE									
+prologue_c_007	patrol_robot	karin	patrol_robot	panic	normal	name_patrol_robot	prologue_c_007	None					FALSE	FALSE	FALSE									
+prologue_c_008	karin	karin	patrol_robot	panic	normal	name_karin	prologue_c_008	None					FALSE	FALSE	FALSE									
+prologue_c_009	patrol_robot	karin	patrol_robot	panic	normal	name_patrol_robot	prologue_c_009	None					FALSE	FALSE	FALSE									
+prologue_c_010	patrol_robot	karin	patrol_robot	panic	normal	name_patrol_robot	prologue_c_010	None					FALSE	FALSE	FALSE									
+prologue_c_011							prologue_c_011	None					FALSE	FALSE	FALSE									
+prologue_c_012	sherry	karin	sherry	panic	annoyed	name_sherry	prologue_c_012	None					FALSE	FALSE	FALSE									
+prologue_c_013	karin	karin	sherry	surprised	annoyed	name_karin	prologue_c_013	None					FALSE	FALSE	FALSE									
+prologue_c_014	sherry	karin	sherry	surprised	annoyed	name_sherry	prologue_c_014	None					FALSE	FALSE	FALSE									
+prologue_c_015	patrol_robot	karin	patrol_robot	surprised	normal	name_patrol_robot	prologue_c_015	None					FALSE	FALSE	FALSE									
+prologue_c_016	patrol_robot	karin	patrol_robot	surprised	normal	name_patrol_robot	prologue_c_016	None					FALSE	FALSE	FALSE									
+prologue_c_017	sherry	karin	sherry	surprised	annoyed	name_sherry	prologue_c_017	None					FALSE	FALSE	FALSE									
+prologue_c_018	sherry	karin	sherry	surprised	smirk	name_sherry	prologue_c_018	None					FALSE	FALSE	FALSE									
+prologue_c_019	sherry	karin	sherry	surprised	smirk	name_sherry	prologue_c_019	None					FALSE	FALSE	FALSE									
+prologue_c_020	patrol_robot	karin	patrol_robot	surprised	normal	name_patrol_robot	prologue_c_020	None					FALSE	FALSE	FALSE									
+prologue_c_021	patrol_robot	karin	patrol_robot	surprised	normal	name_patrol_robot	prologue_c_021	None					FALSE	FALSE	FALSE									
+prologue_c_022							prologue_c_022	None					FALSE	FALSE	FALSE									
+prologue_c_023							prologue_c_023	None					FALSE	FALSE	FALSE									
+prologue_c_024							prologue_c_024	None					FALSE	FALSE	FALSE									
+prologue_c_025	sherry	karin	sherry	surprised	smirk	name_sherry	prologue_c_025	None					FALSE	FALSE	FALSE									
+prologue_c_026							prologue_c_026	None					FALSE	FALSE	FALSE									
+prologue_c_027							prologue_c_027	None					FALSE	FALSE	FALSE									
+prologue_c_028	patrol_robot	karin	patrol_robot	surprised	normal	name_patrol_robot	prologue_c_028	None					FALSE	FALSE	FALSE									
+prologue_c_029	patrol_robot	karin	patrol_robot	surprised	normal	name_patrol_robot	prologue_c_029	None					FALSE	FALSE	FALSE									
+prologue_c_030							prologue_c_030	None					FALSE	FALSE	FALSE									
+prologue_c_031	karin	karin	sherry	amazed	normal	name_karin	prologue_c_031	None					FALSE	FALSE	FALSE									
+prologue_c_032	karin	karin	sherry	amazed	normal	name_karin	prologue_c_032	None					FALSE	FALSE	FALSE									
+prologue_c_033	sherry	karin	sherry	amazed	smirk	name_sherry	prologue_c_033	None					FALSE	FALSE	FALSE									
+prologue_c_034	karin	karin	sherry	curious	smirk	name_karin	prologue_c_034	None					FALSE	FALSE	FALSE									
+prologue_c_035	sherry	karin	sherry	curious	calm	name_sherry	prologue_c_035	None					FALSE	FALSE	FALSE									
+prologue_c_036	sherry	karin	sherry	curious	calm	name_sherry	prologue_c_036	None					FALSE	FALSE	FALSE									
+prologue_c_037	sherry	karin	sherry	curious	smirk	name_sherry	prologue_c_037	None					FALSE	FALSE	FALSE									
+prologue_c_038	karin	karin	sherry	serious	smirk	name_karin	prologue_c_038	None					FALSE	FALSE	FALSE									
+prologue_c_039	sherry	karin	sherry	serious	smirk	name_sherry	prologue_c_039	None					FALSE	FALSE	FALSE									
+prologue_c_040	sherry	karin	sherry	serious	smirk	name_sherry	prologue_c_040	None					FALSE	FALSE	FALSE									
+prologue_c_041	karin	karin	sherry	panic	smirk	name_karin	prologue_c_041	None					FALSE	FALSE	FALSE									
+prologue_c_042	karin	karin	sherry	serious	smirk	name_karin	prologue_c_042	None					FALSE	FALSE	FALSE									
+prologue_c_043	sherry	karin	sherry	serious	bored	name_sherry	prologue_c_043	None					FALSE	FALSE	FALSE									
+prologue_c_044	karin	karin	sherry	serious	bored	name_karin	prologue_c_044	None					FALSE	FALSE	FALSE									
+prologue_c_045	sherry	karin	sherry	serious	bored	name_sherry	prologue_c_045	None					FALSE	FALSE	FALSE									
+prologue_c_046	sherry	karin	sherry	serious	bored	name_sherry	prologue_c_046	None					FALSE	FALSE	FALSE									
+prologue_c_047	sherry	karin	sherry	serious	bored	name_sherry	prologue_c_047	None					FALSE	FALSE	FALSE									
+prologue_c_048	karin	karin	sherry	bright	bored	name_karin	prologue_c_048	None					FALSE	FALSE	FALSE									
+prologue_c_049	sherry	karin	sherry	bright	bored	name_sherry	prologue_c_049	None					FALSE	FALSE	FALSE									
+prologue_c_050	karin	karin	sherry	serious	bored	name_karin	prologue_c_050	None					FALSE	FALSE	FALSE									
+prologue_c_051	sherry	karin	sherry	serious	bored	name_sherry	prologue_c_051	None					FALSE	FALSE	FALSE									
+prologue_c_052	karin	karin	sherry	serious	bored	name_karin	prologue_c_052	None					FALSE	FALSE	FALSE									
+prologue_c_053	karin	karin	sherry	serious	surprised	name_karin	prologue_c_053	None					FALSE	FALSE	FALSE									
+prologue_c_054	sherry	karin	sherry	serious	surprised	name_sherry	prologue_c_054	None					FALSE	FALSE	FALSE									
+prologue_c_055	karin	karin	sherry	curious	surprised	name_karin	prologue_c_055	None					FALSE	FALSE	FALSE									
+prologue_c_056	sherry	karin	sherry	curious	surprised	name_sherry	prologue_c_056	None					FALSE	FALSE	FALSE									
+prologue_c_057	karin	karin	sherry	normal	surprised	name_karin	prologue_c_057	None					FALSE	FALSE	FALSE									
+prologue_c_058	karin	karin	sherry	normal	surprised	name_karin	prologue_c_058	None					FALSE	FALSE	FALSE									
+prologue_c_059	sherry	karin	sherry	normal	surprised	name_sherry	prologue_c_059	None					FALSE	FALSE	FALSE									
+prologue_c_060	sherry	karin	sherry	normal	surprised	name_sherry	prologue_c_060	None					FALSE	FALSE	FALSE									
+prologue_c_061	karin	karin	sherry	serious	surprised	name_karin	prologue_c_061	None					FALSE	FALSE	FALSE									
+prologue_c_062	sherry	karin	sherry	serious	excited	name_sherry	prologue_c_062	None					FALSE	FALSE	FALSE									
+prologue_c_063	karin	karin	sherry	curious	excited	name_karin	prologue_c_063	None					FALSE	FALSE	FALSE									
+prologue_c_064	sherry	karin	sherry	curious	excited	name_sherry	prologue_c_064	None					FALSE	FALSE	FALSE									
+prologue_c_065	sherry	karin	sherry	curious	excited	name_sherry	prologue_c_065	None					FALSE	FALSE	FALSE									
+prologue_c_066	karin	karin	sherry	bright	excited	name_karin	prologue_c_066	None					FALSE	FALSE	FALSE									
+prologue_c_067	karin	karin	sherry	curious	excited	name_karin	prologue_c_067	None					FALSE	FALSE	FALSE									
+prologue_c_068	sherry	karin	sherry	curious	calm	name_sherry	prologue_c_068	None					FALSE	FALSE	FALSE									
+prologue_c_069	karin	karin	sherry	bright	calm	name_karin	prologue_c_069	None					FALSE	FALSE	FALSE									
+prologue_c_070	sherry	karin	sherry	bright	annoyed	name_sherry	prologue_c_070	None					FALSE	FALSE	FALSE									
+prologue_c_071	sherry	karin	sherry	bright	annoyed	name_sherry	prologue_c_071	None					FALSE	FALSE	FALSE									
+prologue_c_072	karin	karin	sherry	bright	annoyed	name_karin	prologue_c_072	None					FALSE	FALSE	FALSE									
+prologue_c_073	sherry	karin	sherry	bright	smirk	name_sherry	prologue_c_073	None					FALSE	FALSE	FALSE									
+prologue_c_074	karin	karin	sherry	proud	smirk	name_karin	prologue_c_074	None					FALSE	FALSE	FALSE									
+prologue_c_075	sherry	karin	sherry	proud	smirk	name_sherry	prologue_c_075	None					FALSE	FALSE	FALSE									
+prologue_c_076	sherry	karin	sherry	proud	calm	name_sherry	prologue_c_076	None					FALSE	FALSE	FALSE									
+prologue_c_077	karin	karin	sherry	serious	calm	name_karin	prologue_c_077	None					FALSE	FALSE	FALSE									
+prologue_c_078	karin	karin	sherry	serious	calm	name_karin	prologue_c_078	None					FALSE	FALSE	FALSE									
+prologue_c_079	karin	karin	sherry	serious	calm	name_karin	prologue_c_079	None					FALSE	FALSE	FALSE									
+prologue_c_080	sherry	karin	sherry	serious	smirk	name_sherry	prologue_c_080	None					FALSE	FALSE	FALSE									
+prologue_c_081	sherry	karin	sherry	serious	smirk	name_sherry	prologue_c_081	None					FALSE	FALSE	FALSE									
+prologue_c_082	sherry	karin	sherry	serious	smirk	name_sherry	prologue_c_082	None					FALSE	FALSE	FALSE									
+prologue_c_083	karin	karin	sherry	serious	smirk	name_karin	prologue_c_083	None					FALSE	FALSE	FALSE									
+prologue_c_084	sherry	karin	sherry	serious	smirk	name_sherry	prologue_c_084	None					FALSE	FALSE	FALSE									
+prologue_c_085	sherry	karin	sherry	serious	smirk	name_sherry	prologue_c_085	None					FALSE	FALSE	FALSE									
+prologue_c_086	karin	karin	sherry	serious	smirk	name_karin	prologue_c_086	None					FALSE	FALSE	FALSE									
+prologue_c_087	sherry	karin	sherry	serious	smirk	name_sherry	prologue_c_087	None					FALSE	FALSE	FALSE									
+prologue_c_088							prologue_c_088	None					FALSE	FALSE	FALSE									
+prologue_c_089							prologue_c_089	None					FALSE	FALSE	FALSE									
+prologue_c_090							prologue_c_090	None					FALSE	FALSE	FALSE									
+prologue_c_091							prologue_c_091	None					FALSE	FALSE	FALSE									

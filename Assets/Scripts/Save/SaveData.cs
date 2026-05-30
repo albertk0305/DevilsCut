@@ -6,6 +6,8 @@ public class ContinueSaveData
 {
     public int version;
     public string savedAt;
+    public string sceneName;
+    public string dialogueID;
     public PlayerGrowthSaveData player;
     public ExplorationContinueSaveData exploration;
 }

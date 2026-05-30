@@ -3156,7 +3156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  textKey: luck_text
+  textKey: label_luck
 --- !u!1 &1566258152428326737
 GameObject:
   m_ObjectHideFlags: 0
@@ -4325,7 +4325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  textKey: btn_status
+  textKey: menu_status
 --- !u!1 &2235395928161356345
 GameObject:
   m_ObjectHideFlags: 0
@@ -5293,7 +5293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  textKey: btn_helper
+  textKey: menu_supporter
 --- !u!1 &2964224449902512472
 GameObject:
   m_ObjectHideFlags: 0
@@ -11568,6 +11568,7 @@ GameObject:
   - component: {fileID: 7308939369842945117}
   - component: {fileID: 36061988748739937}
   - component: {fileID: 2067502909514957054}
+  - component: {fileID: 4774258627190159838}
   m_Layer: 5
   m_Name: BreakGaugeHead
   m_TagString: Untagged
@@ -11694,6 +11695,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4774258627190159838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5392019293387105604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: label_break
 --- !u!1 &5408193944533260107
 GameObject:
   m_ObjectHideFlags: 0
@@ -11844,7 +11858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  textKey: btn_return
+  textKey: btn_back
 --- !u!1 &5450542024708838885
 GameObject:
   m_ObjectHideFlags: 0
@@ -13269,7 +13283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  textKey: hp_text
+  textKey: label_hp
 --- !u!1 &5932356063943428706
 GameObject:
   m_ObjectHideFlags: 0
@@ -13420,7 +13434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  textKey: lv_text
+  textKey: label_level
 --- !u!1 &5976553641343547227
 GameObject:
   m_ObjectHideFlags: 0
@@ -13986,7 +14000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  textKey: btn_equipment
+  textKey: menu_equipment
 --- !u!1 &6314364295892043362
 GameObject:
   m_ObjectHideFlags: 0
@@ -14212,7 +14226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  textKey: stamina_text
+  textKey: label_ap
 --- !u!1 &6422785377046887126
 GameObject:
   m_ObjectHideFlags: 0
@@ -14726,7 +14740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  textKey: karin
+  textKey: menu_karin
 --- !u!1 &6731923177164798483
 GameObject:
   m_ObjectHideFlags: 0
@@ -16859,7 +16873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  textKey: speed_text
+  textKey: label_speed
 --- !u!1 &7610134924712189282
 GameObject:
   m_ObjectHideFlags: 0
@@ -18240,7 +18254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  textKey: resist_text
+  textKey: label_break_resistance
 --- !u!1 &8424144027552015059
 GameObject:
   m_ObjectHideFlags: 0
@@ -18918,7 +18932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  textKey: defense_text
+  textKey: label_defense
 --- !u!1 &8865872225972706412
 GameObject:
   m_ObjectHideFlags: 0
@@ -19616,7 +19630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  textKey: power_text
+  textKey: label_strength
 --- !u!1 &9190279657463371752
 GameObject:
   m_ObjectHideFlags: 0

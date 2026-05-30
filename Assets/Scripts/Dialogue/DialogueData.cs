@@ -5,6 +5,7 @@ using UnityEngine;
 public class DialogueData : ScriptableObject
 {
     public string dialogueID;
+    public string nextDialogueID;
     public string nextSceneName;
     public string initialBackgroundID;
     public bool useLineTSV;

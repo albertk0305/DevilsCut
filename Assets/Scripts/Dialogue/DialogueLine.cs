@@ -8,7 +8,6 @@ public class DialogueLine
     public string speakerID;
     public string leftActorID;
     public string rightActorID;
-    public string expressionID;
     public string leftExpressionID;
     public string rightExpressionID;
     public string speakerNameKey;

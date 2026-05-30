@@ -8,6 +8,9 @@ public class SaveManager : MonoBehaviour
 {
     public static SaveManager Instance;
 
+    private const string StorySceneName = "Story";
+    private const string ExplorationSceneName = "Exploration";
+
     [Header("Databases")]
     public ItemDatabase itemDatabase;
     public SkillDatabase skillDatabase;
@@ -65,6 +68,8 @@ public class SaveManager : MonoBehaviour
             {
                 version = 1,
                 savedAt = DateTime.UtcNow.ToString("o"),
+                sceneName = ExplorationSceneName,
+                dialogueID = "",
                 player = BuildPlayerGrowthSaveData(PlayerManager.Instance),
                 exploration = BuildExplorationContinueSaveData(ExplorationManager.Instance, savedOptions)
             };
@@ -76,6 +81,79 @@ public class SaveManager : MonoBehaviour
         catch (Exception ex)
         {
             DevLog.LogWarning($"[Save] Continue auto save failed: {ex.Message}");
+        }
+        finally
+        {
+            suppressAutoSave = false;
+        }
+    }
+
+    public bool SaveContinueData()
+    {
+        if (PlayerManager.Instance == null)
+        {
+            DevLog.LogWarning("[Save] Continue save failed: PlayerManager missing.");
+            return false;
+        }
+
+        suppressAutoSave = true;
+        try
+        {
+            ContinueSaveData data = BuildContinueSaveData();
+            if (data == null || data.player == null || data.exploration == null)
+            {
+                DevLog.LogWarning("[Save] Continue save failed: save data is incomplete.");
+                return false;
+            }
+
+            data.sceneName = ExplorationSceneName;
+            data.dialogueID = "";
+            string json = JsonUtility.ToJson(data, true);
+            WriteContinueSaveSafely(json);
+            DevLog.Log($"[Save] Continue save complete: {ContinueSavePath}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            DevLog.LogWarning($"[Save] Continue save failed: {ex.Message}");
+            return false;
+        }
+        finally
+        {
+            suppressAutoSave = false;
+        }
+    }
+
+    public bool SaveContinueDataForDialogue(string sceneName, string dialogueID)
+    {
+        if (PlayerManager.Instance == null)
+        {
+            DevLog.LogWarning("[Save] Dialogue continue save failed: PlayerManager missing.");
+            return false;
+        }
+
+        suppressAutoSave = true;
+        try
+        {
+            ContinueSaveData data = BuildContinueSaveData();
+            if (data == null || data.player == null || data.exploration == null)
+            {
+                DevLog.LogWarning("[Save] Dialogue continue save failed: save data is incomplete.");
+                return false;
+            }
+
+            data.sceneName = string.IsNullOrEmpty(sceneName) ? StorySceneName : sceneName;
+            data.dialogueID = dialogueID;
+
+            string json = JsonUtility.ToJson(data, true);
+            WriteContinueSaveSafely(json);
+            DevLog.Log($"[Save] Dialogue continue save complete: sceneName={data.sceneName}, dialogueID={data.dialogueID}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            DevLog.LogWarning($"[Save] Dialogue continue save failed: {ex.Message}");
+            return false;
         }
         finally
         {
@@ -115,6 +193,38 @@ public class SaveManager : MonoBehaviour
         pendingContinueLoad = false;
     }
 
+    public bool TryPrepareContinueLoad(out string sceneName)
+    {
+        sceneName = "";
+
+        if (!HasContinueSave())
+        {
+            pendingContinueLoad = false;
+            DevLog.LogWarning("[Save] Continue load request failed: save file not found.");
+            return false;
+        }
+
+        if (!TryLoadContinueStartData(out ContinueSaveData data))
+            return false;
+
+        sceneName = string.IsNullOrEmpty(data.sceneName) ? ExplorationSceneName : data.sceneName;
+        if (sceneName != ExplorationSceneName)
+        {
+            pendingContinueLoad = false;
+            if (!ApplyContinueSaveData(data))
+                return false;
+
+            if (!string.IsNullOrEmpty(data.dialogueID))
+                DialogueRuntimeContext.SetPendingDialogueID(data.dialogueID);
+
+            DevLog.Log($"[Save] Continue dialogue load prepared: sceneName={sceneName}, dialogueID={data.dialogueID}");
+            return true;
+        }
+
+        sceneName = ExplorationSceneName;
+        return RequestLoadContinueOnNextExplorationStart();
+    }
+
     public bool TryLoadContinueSave()
     {
         if (!HasContinueSave())
@@ -146,6 +256,17 @@ public class SaveManager : MonoBehaviour
             suppressAutoSave = false;
             isLoading = false;
         }
+    }
+
+    private bool TryLoadContinueStartData(out ContinueSaveData data)
+    {
+        if (TryLoadFromPath(ContinueSavePath, out data))
+            return true;
+
+        if (File.Exists(ContinueSavePath))
+            DevLog.LogWarning("[Save] Primary continue save failed. Trying backup.");
+
+        return TryLoadFromPath(BackupSavePath, out data);
     }
 
     public void DeleteContinueSave()
@@ -385,11 +506,122 @@ public class SaveManager : MonoBehaviour
         {
             version = 1,
             savedAt = DateTime.UtcNow.ToString("o"),
+            sceneName = SceneManager.GetActiveScene().name,
+            dialogueID = "",
             player = BuildPlayerGrowthSaveData(PlayerManager.Instance),
-            exploration = BuildExplorationContinueSaveData(
-                ExplorationManager.Instance,
-                ExplorationManager.Instance.GetCurrentOptionsForSave())
+            exploration = BuildCurrentExplorationContinueSaveData()
         };
+    }
+
+    private ExplorationContinueSaveData BuildCurrentExplorationContinueSaveData()
+    {
+        if (ExplorationManager.Instance != null)
+        {
+            return BuildExplorationContinueSaveData(
+                ExplorationManager.Instance,
+                ExplorationManager.Instance.GetCurrentOptionsForSave());
+        }
+
+        return BuildInitialExplorationContinueSaveData(PlayerManager.Instance);
+    }
+
+    private ExplorationContinueSaveData BuildInitialExplorationContinueSaveData(PlayerManager playerManager)
+    {
+        List<string> remainingMidBossIDs = BuildInitialRemainingMidBossIDs();
+
+        ExplorationContinueSaveData data = new ExplorationContinueSaveData
+        {
+            currentPhase = playerManager != null && playerManager.hasSavedExplorationState
+                ? playerManager.savedExplorationPhase
+                : GamePhase.BossSelection,
+            currentCycle = playerManager != null && playerManager.hasSavedExplorationState
+                ? Mathf.Max(1, playerManager.savedExplorationCycle)
+                : 1,
+            currentTurnInPhase = playerManager != null && playerManager.hasSavedExplorationState
+                ? Mathf.Max(0, playerManager.savedExplorationTurnInPhase)
+                : 0,
+            currentKeys = playerManager != null && playerManager.hasSavedExplorationState
+                ? Mathf.Max(0, playerManager.savedExplorationKeys)
+                : 0,
+            currentTargetBossID = playerManager != null
+                && playerManager.hasSavedExplorationState
+                && playerManager.savedCurrentTargetBoss != null
+                ? playerManager.savedCurrentTargetBoss.bossID
+                : null,
+            remainingMidBossIDs = remainingMidBossIDs,
+            lastVisitedFacilityID = playerManager != null
+                && playerManager.hasSavedExplorationState
+                && playerManager.savedLastVisitedFacility != null
+                ? playerManager.savedLastVisitedFacility.nodeID
+                : null,
+            lastVisitedNodeID = playerManager != null
+                && playerManager.hasSavedExplorationState
+                && playerManager.savedLastVisitedFacility != null
+                ? playerManager.savedLastVisitedFacility.nodeID
+                : null,
+            currentOptions = BuildInitialBossSelectionOptions(remainingMidBossIDs)
+        };
+
+        if (playerManager != null && playerManager.savedFacilityRanks != null)
+        {
+            foreach (PlayerFacilityRankRecord rank in playerManager.savedFacilityRanks)
+            {
+                if (rank == null || string.IsNullOrEmpty(rank.facilityID))
+                    continue;
+
+                data.facilityRanks.Add(new SavedFacilityRank
+                {
+                    facilityID = rank.facilityID,
+                    rank = Mathf.Clamp(rank.rank, 0, 3)
+                });
+            }
+        }
+
+        return data;
+    }
+
+    private List<string> BuildInitialRemainingMidBossIDs()
+    {
+        List<string> bossIDs = new List<string>();
+        if (bossDatabase == null || bossDatabase.allBosses == null)
+            return bossIDs;
+
+        int midBossCount = bossDatabase.allBosses.Count > 7
+            ? Mathf.Max(0, bossDatabase.allBosses.Count - 2)
+            : bossDatabase.allBosses.Count;
+        midBossCount = Mathf.Min(7, midBossCount);
+
+        for (int i = 0; i < midBossCount; i++)
+        {
+            BossEncounterData boss = bossDatabase.allBosses[i];
+            if (boss != null && !string.IsNullOrEmpty(boss.bossID))
+                bossIDs.Add(boss.bossID);
+        }
+
+        return bossIDs;
+    }
+
+    private List<SavedExplorationOption> BuildInitialBossSelectionOptions(List<string> remainingMidBossIDs)
+    {
+        List<SavedExplorationOption> options = new List<SavedExplorationOption>();
+        for (int i = 0; i < 3; i++)
+        {
+            SavedExplorationOption option = new SavedExplorationOption
+            {
+                slotIndex = i,
+                optionType = "None"
+            };
+
+            if (remainingMidBossIDs != null && i < remainingMidBossIDs.Count)
+            {
+                option.optionType = "BossSelection";
+                option.bossID = remainingMidBossIDs[i];
+            }
+
+            options.Add(option);
+        }
+
+        return options;
     }
 
     private PlayerGrowthSaveData BuildPlayerGrowthSaveData(PlayerManager playerManager)

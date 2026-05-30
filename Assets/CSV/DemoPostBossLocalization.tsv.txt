@@ -1,0 +1,7 @@
+Key	Korean	English
+post_boss_001	강적을 쓰러뜨렸다.	You defeated a powerful enemy.
+post_boss_002	갇혀 있던 조력자를 영입하겠습니까?	Will you recruit the imprisoned supporter?
+post_boss_recruit_yes	조력자를 영입했다.	The supporter joined you.
+post_boss_recruit_no	조력자를 영입하지 않았다.	You chose not to recruit the supporter.
+choice_recruit_yes	네	Yes
+choice_recruit_no	아니요	No

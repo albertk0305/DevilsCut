@@ -489,6 +489,49 @@ public class ExplorationManager : MonoBehaviour
         facilityRanks[id] = targetRank;
     }
 
+    public void ResetForNewGame()
+    {
+        currentPhase = GamePhase.BossSelection;
+        currentCycle = 1;
+        currentTurnInPhase = 0;
+        currentKeys = 0;
+        currentTargetBoss = null;
+        lastVisitedFacility = null;
+        lastVisitedNodeImage = null;
+        facilityRanks.Clear();
+        currentOptions.Clear();
+        RestoreInitialBossListFromDatabase();
+    }
+
+    private void RestoreInitialBossListFromDatabase()
+    {
+        if (SaveManager.Instance == null
+            || SaveManager.Instance.bossDatabase == null
+            || SaveManager.Instance.bossDatabase.allBosses == null)
+        {
+            return;
+        }
+
+        List<BossEncounterData> allBosses = SaveManager.Instance.bossDatabase.allBosses;
+        int midBossCount = allBosses.Count > 7
+            ? Mathf.Max(0, allBosses.Count - 2)
+            : allBosses.Count;
+        midBossCount = Mathf.Min(7, midBossCount);
+
+        remainingMidBosses = new List<BossEncounterData>();
+        for (int i = 0; i < midBossCount; i++)
+        {
+            if (allBosses[i] != null)
+                remainingMidBosses.Add(allBosses[i]);
+        }
+
+        if (allBosses.Count >= 2)
+        {
+            finalBoss = allBosses[allBosses.Count - 2];
+            trueFinalBoss = allBosses[allBosses.Count - 1];
+        }
+    }
+
     private void ApplyPendingBattleProgressIfNeeded()
     {
         PlayerManager playerManager = PlayerManager.Instance;

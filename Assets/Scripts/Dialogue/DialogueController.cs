@@ -9,6 +9,7 @@ public class DialogueController : MonoBehaviour
 {
     [Header("Data")]
     [SerializeField] private DialogueData fallbackDialogueData;
+    [SerializeField] private DialogueDataDatabase dialogueDataDatabase;
     [SerializeField] private DialoguePortraitDatabase portraitDatabase;
     [SerializeField] private DialogueStoryImageDatabase storyImageDatabase;
     [SerializeField] private DialogueBackgroundImageDatabase backgroundImageDatabase;
@@ -121,6 +122,16 @@ public class DialogueController : MonoBehaviour
     {
         isPendingDialogue = false;
 
+        string pendingDialogueID = DialogueRuntimeContext.ConsumePendingDialogueID();
+        if (!string.IsNullOrEmpty(pendingDialogueID))
+        {
+            DialogueData pendingDialogueData = ResolveDialogueDataByID(pendingDialogueID);
+            if (pendingDialogueData != null)
+                return pendingDialogueData;
+
+            DevLog.LogWarning($"[Dialogue] Pending dialogueID not found: {pendingDialogueID}. Using fallbackDialogueData.");
+        }
+
         if (PlayerManager.Instance != null && PlayerManager.Instance.HasPendingDialogue())
         {
             isPendingDialogue = true;
@@ -128,6 +139,27 @@ public class DialogueController : MonoBehaviour
         }
 
         return fallbackDialogueData;
+    }
+
+    private DialogueData ResolveDialogueDataByID(string dialogueID)
+    {
+        if (string.IsNullOrEmpty(dialogueID))
+            return null;
+
+        if (dialogueDataDatabase != null && dialogueDataDatabase.TryGetDialogueData(dialogueID, out DialogueData data))
+            return data;
+
+        if (PlayerManager.Instance != null
+            && PlayerManager.Instance.pendingDialogueData != null
+            && PlayerManager.Instance.pendingDialogueData.dialogueID == dialogueID)
+        {
+            return PlayerManager.Instance.pendingDialogueData;
+        }
+
+        if (fallbackDialogueData != null && fallbackDialogueData.dialogueID == dialogueID)
+            return fallbackDialogueData;
+
+        return null;
     }
 
     private void BeginDialogue(DialogueData data)
@@ -447,9 +479,29 @@ public class DialogueController : MonoBehaviour
 
     private void LoadNextSceneOrWarn()
     {
+        if (TryStartNextDialogue())
+            return;
+
         string nextSceneName = GetNextSceneName();
         ClearPendingDialogueIfNeeded();
         LoadSceneOrWarn(nextSceneName);
+    }
+
+    private bool TryStartNextDialogue()
+    {
+        if (currentDialogueData == null || string.IsNullOrEmpty(currentDialogueData.nextDialogueID))
+            return false;
+
+        DialogueData nextDialogueData = ResolveDialogueDataByID(currentDialogueData.nextDialogueID);
+        if (nextDialogueData == null)
+        {
+            DevLog.LogWarning($"[Dialogue] nextDialogueID not found: {currentDialogueData.nextDialogueID}");
+            return false;
+        }
+
+        isPlayingPendingDialogue = false;
+        BeginDialogue(nextDialogueData);
+        return true;
     }
 
     private string GetNextSceneName()
@@ -639,7 +691,7 @@ public class DialogueController : MonoBehaviour
         if (line == null)
             return "";
 
-        return !string.IsNullOrEmpty(line.leftExpressionID) ? line.leftExpressionID : line.expressionID;
+        return line.leftExpressionID;
     }
 
     private string GetRightExpressionID(DialogueLine line)
@@ -647,7 +699,7 @@ public class DialogueController : MonoBehaviour
         if (line == null)
             return "";
 
-        return !string.IsNullOrEmpty(line.rightExpressionID) ? line.rightExpressionID : line.expressionID;
+        return line.rightExpressionID;
     }
 
     private DialogueLine GetCurrentLine()

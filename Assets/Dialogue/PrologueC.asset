@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7aaf49fceb9ee48a54b62876f0b420, type: 3}
   m_Name: PrologueC
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  dialogueID: Prologue_C_Moonshine
+  dialogueID: Prologue_C
+  nextDialogueID: ""
   nextSceneName: Exploration
   initialBackgroundID: NightStreet
   useLineTSV: 1

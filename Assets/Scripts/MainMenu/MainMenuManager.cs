@@ -36,14 +36,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickStart()
     {
-        if (SaveManager.Instance == null)
-        {
-            DevLog.LogWarning("[Save] SaveManager missing; starting a new game without save-state check.");
-            StartNewGameInternal();
-            return;
-        }
-
-        if (SaveManager.Instance.HasContinueSave())
+        if (SaveManager.Instance != null && SaveManager.Instance.HasContinueSave())
         {
             ShowNewGameConfirmPanel();
             return;
@@ -57,13 +50,6 @@ public class MainMenuManager : MonoBehaviour
         if (confirmNewGamePanel != null)
             confirmNewGamePanel.SetActive(false);
 
-        if (SaveManager.Instance != null)
-        {
-            SaveManager.Instance.CancelPendingContinueLoadRequest();
-            SaveManager.Instance.DeleteContinueSave();
-        }
-
-        UpdateContinueButtonState();
         StartNewGameInternal();
     }
 
@@ -90,17 +76,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void StartNewGameInternal()
     {
-        DevLog.Log("[MainMenu] Starting new game.");
-
-        if (SaveManager.Instance != null)
-            SaveManager.Instance.CancelPendingContinueLoadRequest();
-
-        if (PlayerManager.Instance != null)
-            PlayerManager.Instance.ResetForNewGame();
-        else
-            DevLog.LogWarning("[NewGame] PlayerManager missing; skipping player reset.");
-
-        SceneManager.LoadScene(explorationSceneName);
+        GameStartManager.GetOrCreateInstance().StartNewGame();
     }
     public void OnClickContinue()
     {
@@ -111,14 +87,14 @@ public class MainMenuManager : MonoBehaviour
             return;
         }
 
-        if (!SaveManager.Instance.RequestLoadContinueOnNextExplorationStart())
+        if (!SaveManager.Instance.TryPrepareContinueLoad(out string sceneName))
         {
             UpdateContinueButtonState();
             return;
         }
 
         DevLog.Log("[MainMenu] Loading continue data.");
-        SceneManager.LoadScene(explorationSceneName);
+        SceneManager.LoadScene(string.IsNullOrEmpty(sceneName) ? explorationSceneName : sceneName);
     }
 
     public void OnClickHelp()
