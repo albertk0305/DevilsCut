@@ -89,8 +89,6 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
     [Header("Text")]
     [SerializeField] private string lockedIntroText = "어서오세요!";
     [SerializeField] private string unlockedIntroText = "어서와!";
-    [SerializeField] private string lockedSelectText = "그 물건으로 하시나요?";
-    [SerializeField] private string unlockedSelectText = "물건 보는 안목이 좋은데?";
     [SerializeField] private string lockedPurchaseSuccessText = "매번 감사합니다!";
     [SerializeField] private string unlockedPurchaseSuccessText = "고마워!";
     [SerializeField] private string lockedPurchaseFailText = "골드가 부족합니다.";
@@ -494,7 +492,9 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         selectedIndex = index;
         ApplyCharacterView(false);
         RefreshShopUI();
-        ShowMessage(isOperatorResolved ? unlockedSelectText : lockedSelectText, BlackMarketState.Shop);
+
+        string bonusText = GetLocalizedOrFallback(shopItem.itemData.itemBonusKey, shopItem.itemData.itemBonusKey);
+        ShowMessage(bonusText, BlackMarketState.Shop, "");
     }
 
     private void OnClickBuy()
@@ -744,7 +744,7 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
             rerollCostText.text = $"Reroll Cost: {rerollCost:N0}";
     }
 
-    private void ShowMessage(string message, BlackMarketState nextState)
+    private void ShowMessage(string message, BlackMarketState nextState, string speakerOverride = null)
     {
         StopTyping();
         currentState = nextState;
@@ -752,9 +752,19 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         isTextComplete = false;
         SetTextCompleteIndicatorActive(false);
         EnsureDialoguePanelCanAdvance();
+        ApplySpeakerNameOverride(speakerOverride);
 
         if (dialogueText != null)
             typingCoroutine = StartCoroutine(TypeMessageRoutine(currentMessage));
+    }
+
+    private void ApplySpeakerNameOverride(string speakerOverride)
+    {
+        if (speakerNameText == null)
+            return;
+
+        speakerNameText.text = speakerOverride ?? (isOperatorResolved ? operatorDisplayName : baitoDisplayName);
+        speakerNameText.gameObject.SetActive(true);
     }
 
     private IEnumerator TypeMessageRoutine(string message)
@@ -828,6 +838,18 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         }
 
         return item.name;
+    }
+
+    private string GetLocalizedOrFallback(string key, string fallback)
+    {
+        if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
+        {
+            string localized = LocalizationManager.Instance.GetText(key);
+            if (!string.IsNullOrEmpty(localized))
+                return localized;
+        }
+
+        return fallback ?? "";
     }
 
     private void ApplyRankButtonSprite()

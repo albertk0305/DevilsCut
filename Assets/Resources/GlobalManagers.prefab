@@ -96,7 +96,7 @@ MonoBehaviour:
     defense: 10
     speed: 10
     luck: 10
-    currentGold: 1000
+    currentGold: 100000
     rejectedSupporterCount: 0
     finalDamageAmp: 0
     finalDamageReduction: 0
