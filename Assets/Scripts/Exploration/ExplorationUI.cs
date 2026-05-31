@@ -351,7 +351,7 @@ public class ExplorationUI : MonoBehaviour
                 return;
             ExplorationManager.Instance.lastVisitedNodeImage = pBattle.nodeImage;
             ExplorationManager.Instance.SaveStateToPlayerManager();
-            SceneManager.LoadScene("Battle");
+            SceneLoader.LoadScene("Battle");
         }
     }
 
@@ -388,14 +388,14 @@ public class ExplorationUI : MonoBehaviour
         if (canRankUp && rankUpDialogue != null)
         {
             PlayerManager.Instance.SetPendingFacilityUpgradeDialogue(rankUpDialogue, facility.nodeID, currentRank + 1, facilitySceneName);
-            SceneManager.LoadScene(dialogueSceneName);
+            SceneLoader.LoadScene(dialogueSceneName);
             return;
         }
 
         if (canRankUp && rankUpDialogue == null)
             DevLog.LogWarning($"[ExplorationUI] Facility rank-up dialogue is missing. nodeID={facility.nodeID}, currentRank={currentRank}");
 
-        SceneManager.LoadScene(facilitySceneName);
+        SceneLoader.LoadScene(facilitySceneName);
     }
 
     private DialogueData GetRankUpDialogue(FacilityData facility, int currentRank)

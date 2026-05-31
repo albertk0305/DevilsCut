@@ -37,6 +37,6 @@ public class FacilitySceneControllerBase : MonoBehaviour
     public virtual void ReturnToExploration()
     {
         PlayerManager.Instance?.ClearCurrentFacilityVisit();
-        SceneManager.LoadScene(returnSceneName);
+        SceneLoader.LoadScene(returnSceneName);
     }
 }

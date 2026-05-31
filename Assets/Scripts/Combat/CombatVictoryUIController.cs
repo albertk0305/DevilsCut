@@ -1094,22 +1094,25 @@ public class CombatVictoryUIController : MonoBehaviour
     private string BuildEquipmentConfirmMessage(EquipmentItemData item)
     {
         string itemName = GetLocalizedOrFallback(item != null ? item.itemNameKey : null, item != null ? item.name : "");
-        string description = GetLocalizedOrFallback(item != null ? item.itemDescKey : null, "");
+        string bonusText = GetLocalizedOrFallback(item != null ? item.itemBonusKey : null, "");
 
         StringBuilder builder = new StringBuilder();
         builder.AppendLine(string.IsNullOrEmpty(itemName) ? "Item" : itemName);
 
-        if (!string.IsNullOrEmpty(description))
-            builder.AppendLine(description);
+        if (!string.IsNullOrEmpty(bonusText))
+            builder.AppendLine(bonusText);
 
+        // TODO: Move confirmation prompts to localization keys with the next reward UI text pass.
         builder.Append("\uC774 \uC544\uC774\uD15C\uC744 \uD68D\uB4DD\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?");
         return builder.ToString();
     }
 
     private string BuildKarinItemConfirmMessage(KarinItemData item)
     {
-        string itemName = item != null ? item.itemName : "";
-        string description = item != null ? item.itemDescription : "";
+        string itemNameKey = item != null ? item.itemName : "";
+        string descriptionKey = item != null ? item.itemDescription : "";
+        string itemName = GetLocalizedOrFallback(itemNameKey, itemNameKey);
+        string description = GetLocalizedOrFallback(descriptionKey, descriptionKey);
 
         StringBuilder builder = new StringBuilder();
         builder.AppendLine(string.IsNullOrEmpty(itemName) ? "Karin Item" : itemName);
@@ -1117,6 +1120,7 @@ public class CombatVictoryUIController : MonoBehaviour
         if (!string.IsNullOrEmpty(description))
             builder.AppendLine(description);
 
+        // TODO: Move confirmation prompts to localization keys with the next reward UI text pass.
         builder.Append("\uC774 \uCE74\uB9B0 \uC7A5\uBE44\uB97C \uD68D\uB4DD\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?");
         return builder.ToString();
     }
@@ -1578,7 +1582,7 @@ public class CombatVictoryUIController : MonoBehaviour
         LockVictoryUIForSceneTransition();
 
         Time.timeScale = 1f;
-        SceneManager.LoadScene(nextSceneName);
+        SceneLoader.LoadScene(nextSceneName);
     }
 
     private string ResolvePostVictorySceneName()

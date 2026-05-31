@@ -475,7 +475,7 @@ public class BarFacilityController : FacilitySceneControllerBase
             playerManager.AddPermanentStat(primaryStat, primaryAmount);
 
             if (lastOrderStat.HasValue)
-                playerManager.AddPermanentStat(lastOrderStat.Value, 2);
+                playerManager.AddPermanentStat(lastOrderStat.Value, 5);
 
             playerManager.RecoverCurrentHpToEffectiveMax();
         }
@@ -491,9 +491,9 @@ public class BarFacilityController : FacilitySceneControllerBase
     private int GetPrimaryDrinkAmount(BarDrinkType drinkType)
     {
         if (drinkType == BarDrinkType.DevilsCut)
-            return CurrentRank >= 2 ? 8 : 6;
+            return CurrentRank >= 2 ? 20 : 10;
 
-        return CurrentRank >= 2 ? 5 : 3;
+        return CurrentRank >= 2 ? 10 : 5;
     }
 
     private PermanentStatType GetPermanentStatType(BarDrinkType drinkType)

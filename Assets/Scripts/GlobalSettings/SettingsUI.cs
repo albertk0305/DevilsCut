@@ -71,7 +71,7 @@ public class SettingsUI : MonoBehaviour
         confirmationPopup.SetActive(false);
         gameObject.SetActive(false);
         Time.timeScale = 1f;
-        SceneManager.LoadScene(mainMenuSceneName);
+        SceneLoader.LoadScene(mainMenuSceneName);
     }
 
     public void OnFastCombatToggleChanged(bool isOn)
@@ -120,6 +120,6 @@ public class SettingsUI : MonoBehaviour
         CombatManager.Instance.RestorePlayerHpToBattleStart();
 
         Time.timeScale = 1f;
-        SceneManager.LoadScene(battleSceneName);
+        SceneLoader.LoadScene(battleSceneName);
     }
 }

@@ -671,11 +671,11 @@ public class CasinoFacilityController : FacilitySceneControllerBase
         switch (outcome)
         {
             case CasinoSlotOutcome.Pair:
-                return 3000;
+                return 5000;
             case CasinoSlotOutcome.Triple:
-                return 10000;
+                return 20000;
             case CasinoSlotOutcome.Jackpot:
-                return 50000;
+                return 77777;
             default:
                 return 0;
         }

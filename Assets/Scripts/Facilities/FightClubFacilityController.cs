@@ -559,15 +559,15 @@ public class FightClubFacilityController : FacilitySceneControllerBase
         {
             PermanentStatType first = GetRandomPermanentStatType();
             PermanentStatType second = GetDifferentRandomPermanentStatType(first);
-            gains.Add(new StatGain { statType = first, amount = 2 });
-            gains.Add(new StatGain { statType = second, amount = 2 });
+            gains.Add(new StatGain { statType = first, amount = 5 });
+            gains.Add(new StatGain { statType = second, amount = 5 });
             return gains;
         }
 
         gains.Add(new StatGain
         {
             statType = GetRandomPermanentStatType(),
-            amount = CurrentRank >= 2 ? 2 : 1
+            amount = CurrentRank >= 2 ? 5 : 2
         });
         return gains;
     }

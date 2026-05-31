@@ -1586,7 +1586,7 @@ public class CombatManager : MonoBehaviour
 
             DevLog.LogWarning("CombatManager: CombatVictoryUIController is not assigned. Returning to Exploration immediately.");
             Time.timeScale = 1f;
-            SceneManager.LoadScene("Exploration");
+            SceneLoader.LoadScene("Exploration");
             return;
         }
 

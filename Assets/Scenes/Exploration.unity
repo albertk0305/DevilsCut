@@ -2855,7 +2855,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0510bba5566c3e449988d77a65541805, type: 2}
   lastVisitedFacility: {fileID: 0}
   lastVisitedNodeImage: {fileID: 0}
-  currentPhase: 2
+  currentPhase: 1
   currentCycle: 1
   currentTurnInPhase: 0
   currentKeys: 0

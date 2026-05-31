@@ -560,7 +560,7 @@ public class DialogueController : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(sceneName))
         {
-            SceneManager.LoadScene(sceneName);
+            SceneLoader.LoadScene(sceneName);
             return;
         }
 

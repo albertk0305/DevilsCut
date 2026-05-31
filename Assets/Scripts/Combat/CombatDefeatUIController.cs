@@ -117,7 +117,7 @@ public class CombatDefeatUIController : MonoBehaviour
             CombatManager.Instance.RestorePlayerHpToBattleStart();
 
         Time.timeScale = 1f;
-        SceneManager.LoadScene(battleSceneName);
+        SceneLoader.LoadScene(battleSceneName);
     }
 
     private void OnClickGiveUp()
@@ -201,7 +201,7 @@ public class CombatDefeatUIController : MonoBehaviour
         yield return new WaitForSecondsRealtime(1.0f);
 
         Time.timeScale = 1f;
-        SceneManager.LoadScene(mainMenuSceneName);
+        SceneLoader.LoadScene(mainMenuSceneName);
     }
 
     private void TypeMessage(string message)

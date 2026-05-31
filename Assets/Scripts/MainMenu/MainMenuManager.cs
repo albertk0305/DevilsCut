@@ -94,7 +94,7 @@ public class MainMenuManager : MonoBehaviour
         }
 
         DevLog.Log("[MainMenu] Loading continue data.");
-        SceneManager.LoadScene(string.IsNullOrEmpty(sceneName) ? explorationSceneName : sceneName);
+        SceneLoader.LoadScene(string.IsNullOrEmpty(sceneName) ? explorationSceneName : sceneName);
     }
 
     public void OnClickHelp()

@@ -56,6 +56,6 @@ public class GameStartManager : MonoBehaviour
             SaveManager.Instance.SaveContinueDataForDialogue(StorySceneName, NewGameDialogueID);
 
         DialogueRuntimeContext.SetPendingDialogueID(NewGameDialogueID);
-        SceneManager.LoadScene(StorySceneName);
+        SceneLoader.LoadScene(StorySceneName);
     }
 }
