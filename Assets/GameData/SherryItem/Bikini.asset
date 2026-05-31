@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Bikini
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: Bikini
-  itemNameKey: Bikini
+  itemNameKey: item_love_is_not_enough_name
   itemIcon: {fileID: 21300000, guid: d7fc31e39b702c64a99b25fc42e7766e, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_love_is_not_enough_desc
+  itemBonusKey: item_love_is_not_enough_bonus
   grade: 0
   itemClass: 1
   currentStarLevel: 1

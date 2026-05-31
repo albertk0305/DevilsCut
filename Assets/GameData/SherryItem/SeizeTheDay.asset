@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SeizeTheDay
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: SeizeTheDay
-  itemNameKey: SeizeTheDay
+  itemNameKey: item_seize_the_day_name
   itemIcon: {fileID: 21300000, guid: 1af9dee33d300934cb08ef43376443fd, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_seize_the_day_desc
+  itemBonusKey: item_seize_the_day_bonus
   grade: 1
   itemClass: 4
   currentStarLevel: 1

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: HuntingSoul
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: HuntingSoul
-  itemNameKey: HuntingSoul
+  itemNameKey: item_hunting_soul_name
   itemIcon: {fileID: 21300000, guid: 393cc3698154ff747a617b37fa364833, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_hunting_soul_desc
+  itemBonusKey: item_hunting_soul_bonus
   grade: 1
   itemClass: 7
   currentStarLevel: 1

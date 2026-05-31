@@ -11,7 +11,7 @@ public class LocalizationManager : MonoBehaviour
     public TextAsset[] localizationCSVs;
 
     public enum Language { Korean, English }
-    public Language currentLanguage = Language.Korean;
+    public Language currentLanguage = Language.English;
     public Action OnLanguageChanged;
 
     private Dictionary<string, string[]> dictionary = new Dictionary<string, string[]>();

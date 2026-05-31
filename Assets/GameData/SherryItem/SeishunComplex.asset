@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SeishunComplex
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: SeishunComplex
-  itemNameKey: SeishunComplex
+  itemNameKey: item_youth_complex_name
   itemIcon: {fileID: 21300000, guid: c6b55845e4414b4459723169825e7cbb, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_youth_complex_desc
+  itemBonusKey: item_youth_complex_bonus
   grade: 2
   itemClass: 6
   currentStarLevel: 1

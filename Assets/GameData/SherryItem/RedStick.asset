@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: RedStick
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: RedStick
-  itemNameKey: RedStick
+  itemNameKey: item_nyoibo_name
   itemIcon: {fileID: 21300000, guid: c8a717c031e5e274d9ded080b5c011fa, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_nyoibo_desc
+  itemBonusKey: item_nyoibo_bonus
   grade: 1
   itemClass: 0
   currentStarLevel: 1

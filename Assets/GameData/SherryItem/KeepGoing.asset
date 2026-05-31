@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: KeepGoing
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: KeepGoing
-  itemNameKey: KeepGoing
+  itemNameKey: item_keep_going_name
   itemIcon: {fileID: 21300000, guid: 1080189d2d98fee4eb582ce2a040320f, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_keep_going_desc
+  itemBonusKey: item_keep_going_bonus
   grade: 2
   itemClass: 4
   currentStarLevel: 1

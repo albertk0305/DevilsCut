@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: BeautifulWorld
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: BeautifulWorld
-  itemNameKey: BeautifulWorld
+  itemNameKey: item_beautiful_world_name
   itemIcon: {fileID: 21300000, guid: bbc5f463f62cdd347846e425264d9538, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_beautiful_world_desc
+  itemBonusKey: item_beautiful_world_bonus
   grade: 0
   itemClass: 7
   currentStarLevel: 1

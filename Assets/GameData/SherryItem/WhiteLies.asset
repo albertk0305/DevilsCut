@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: WhiteLies
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: WhiteLies
-  itemNameKey: WhiteLies
+  itemNameKey: item_white_lies_name
   itemIcon: {fileID: 21300000, guid: cfeb60787a526304692ead4488c580ff, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_white_lies_desc
+  itemBonusKey: item_white_lies_bonus
   grade: 1
   itemClass: 5
   currentStarLevel: 1

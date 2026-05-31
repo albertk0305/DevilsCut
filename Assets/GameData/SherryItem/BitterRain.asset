@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: BitterRain
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: BitterRain
-  itemNameKey: BitterRain
+  itemNameKey: item_bitter_rain_name
   itemIcon: {fileID: 21300000, guid: b56f127e1950e1348a2e9eb4983b335e, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_bitter_rain_desc
+  itemBonusKey: item_bitter_rain_bonus
   grade: 1
   itemClass: 3
   currentStarLevel: 1

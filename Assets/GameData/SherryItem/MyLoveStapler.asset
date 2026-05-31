@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: MyLoveStapler
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: MyLoveStapler
-  itemNameKey: MyLoveStapler
+  itemNameKey: item_my_love_is_a_stapler_name
   itemIcon: {fileID: 21300000, guid: d7db51a919a3eea4da2f398a8758392b, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_my_love_is_a_stapler_desc
+  itemBonusKey: item_my_love_is_a_stapler_bonus
   grade: 0
   itemClass: 6
   currentStarLevel: 1

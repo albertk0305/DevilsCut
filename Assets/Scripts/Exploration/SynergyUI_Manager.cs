@@ -4,32 +4,41 @@ using System.Collections.Generic;
 
 public class SynergyUI_Manager : MonoBehaviour
 {
-    public List<SynergyUI_Column> allColumns; // 11개의 세로줄 연결
-    public TextMeshProUGUI descriptionText;   // 하단 설명 출력창
+    private const string SelectSynergyPromptKey = "ui_select_synergy_prompt";
+    private const string ActivatedKey = "ui_status_activated";
+    private const string DeactivatedKey = "ui_status_deactivated";
+
+    public List<SynergyUI_Column> allColumns;
+    public TextMeshProUGUI descriptionText;
 
     private void OnEnable()
     {
         RefreshSynergyCanvas();
+
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged += RefreshCurrentText;
+    }
+
+    private void OnDisable()
+    {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged -= RefreshCurrentText;
     }
 
     public void RefreshSynergyCanvas()
     {
         if (PlayerManager.Instance == null) return;
 
-        // 1. 현재 인벤토리의 시너지 점수 사전 가져오기
         var syn = PlayerManager.Instance.GetCurrentSynergies();
 
-        // 2. 컬럼 세팅
         foreach (var column in allColumns)
         {
             int points = 0;
 
-            // [핵심] 11번째 클래스라면 아이템이 아니라 '영입 거절 횟수'를 점수로 씁니다!
             if (column.myClass == ItemClass.LoneWolf)
             {
                 points = PlayerManager.Instance.stats.rejectedSupporterCount;
             }
-            // 기존 1~10번째 클래스들은 아이템 시너지 사전을 참조합니다.
             else if (syn.ContainsKey(column.myClass))
             {
                 points = syn[column.myClass];
@@ -38,17 +47,39 @@ public class SynergyUI_Manager : MonoBehaviour
             column.UpdateColumn(points, this);
         }
 
-        descriptionText.text = "확인할 시너지를 선택해 주세요.";
+        SetDefaultPrompt();
+    }
+
+    private void SetDefaultPrompt()
+    {
+        if (descriptionText == null)
+            return;
+
+        descriptionText.text = GetLocalizedText(SelectSynergyPromptKey);
+    }
+
+    private void RefreshCurrentText()
+    {
+        SetDefaultPrompt();
     }
 
     public void ShowDescription(string nameKey, string descKey, bool isActive)
     {
-        string nameStr = LocalizationManager.Instance != null ? LocalizationManager.Instance.GetText(nameKey) : nameKey;
-        string descStr = LocalizationManager.Instance != null ? LocalizationManager.Instance.GetText(descKey) : descKey;
+        string nameStr = GetLocalizedText(nameKey);
+        string descStr = GetLocalizedText(descKey);
 
-        string statusTag = isActive ? "<color=#00FF00>[활성화됨]</color>" : "<color=#888888>[비활성화]</color>";
+        string statusKey = isActive ? ActivatedKey : DeactivatedKey;
+        string statusText = GetLocalizedText(statusKey);
+        string statusColor = isActive ? "#00FF00" : "#888888";
+        string statusTag = $"<color={statusColor}>[{statusText}]</color>";
 
-        // 하단 텍스트 즉시 출력
         descriptionText.text = $"<b>{nameStr}</b> {statusTag}\n\n{descStr}";
+    }
+
+    private string GetLocalizedText(string key)
+    {
+        return LocalizationManager.Instance != null
+            ? LocalizationManager.Instance.GetText(key)
+            : key;
     }
 }

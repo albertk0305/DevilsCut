@@ -9,8 +9,11 @@ public class SupporterUI : MonoBehaviour
     [Header("메인 디스플레이")]
     public Image mainImage;
     public TextMeshProUGUI passiveText;
+    public TextMeshProUGUI passiveLevelText;
     public TextMeshProUGUI startText;
+    public TextMeshProUGUI startSkillLevelText;
     public TextMeshProUGUI battleText;
+    public TextMeshProUGUI battleSkillLevelText;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI supporterNameText;
 
@@ -65,6 +68,7 @@ public class SupporterUI : MonoBehaviour
             passiveText.text = "";
             startText.text = "";
             battleText.text = "";
+            SetSkillLevelTexts(null);
             dialogueText.text = LocalizationManager.Instance.GetText("msg_no_active_supporter");
 
             joinButton.interactable = false;
@@ -80,6 +84,7 @@ public class SupporterUI : MonoBehaviour
             passiveText.text = LocalizationManager.Instance.GetText(data.passiveSkillDesc);
             startText.text = LocalizationManager.Instance.GetText(data.startSkillDesc);
             battleText.text = LocalizationManager.Instance.GetText(data.battleSkillDesc);
+            SetSkillLevelTexts(data);
 
             string dialogueKey = isJoinedState ? data.joinMessage : data.selectMessage;
             dialogueText.text = LocalizationManager.Instance.GetText(dialogueKey);
@@ -88,6 +93,26 @@ public class SupporterUI : MonoBehaviour
             leaveButton.interactable = isJoinedState && isExploration;
             if (cancelButton != null) cancelButton.gameObject.SetActive(!isJoinedState);
         }
+    }
+
+    private void SetSkillLevelTexts(SupporterData data)
+    {
+        if (data == null)
+        {
+            if (passiveLevelText != null) passiveLevelText.text = "";
+            if (startSkillLevelText != null) startSkillLevelText.text = "";
+            if (battleSkillLevelText != null) battleSkillLevelText.text = "";
+            return;
+        }
+
+        if (passiveLevelText != null) passiveLevelText.text = FormatSkillLevel(data.passiveLevel);
+        if (startSkillLevelText != null) startSkillLevelText.text = FormatSkillLevel(data.startSkillLevel);
+        if (battleSkillLevelText != null) battleSkillLevelText.text = FormatSkillLevel(data.battleSkillLevel);
+    }
+
+    private string FormatSkillLevel(int level)
+    {
+        return $"Lv.{Mathf.Max(1, level)}";
     }
 
     private void RefreshRosterList()

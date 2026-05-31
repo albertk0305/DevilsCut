@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Kaneda
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: Kaneda
-  itemNameKey: Kaneda
+  itemNameKey: item_kaneda_name
   itemIcon: {fileID: 21300000, guid: e4fa7c6c987d4cd47a86d3029959352c, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_kaneda_desc
+  itemBonusKey: item_kaneda_bonus
   grade: 3
   itemClass: 3
   currentStarLevel: 1

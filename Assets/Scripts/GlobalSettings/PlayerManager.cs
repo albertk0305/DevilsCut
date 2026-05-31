@@ -721,10 +721,41 @@ public class PlayerManager : MonoBehaviour
 
     public float GetReflectRatio()
     {
-        var courageSkill = unlockedSkills.Find(s => s.skillNameKey == "skill_name_sword1");
-        if (courageSkill != null && courageSkill.currentEvolution == SkillEvolution.PathA)
-            return courageSkill.evolutionA_Multipliers[Mathf.Clamp(courageSkill.skillLevel - 1, 0, 2)];
-        return 0f;
+        float reflectRatio = 0f;
+
+        var courageSkill = unlockedSkills.Find(IsCourageSkill);
+        if (courageSkill != null &&
+            courageSkill.currentEvolution == SkillEvolution.PathA &&
+            courageSkill.evolutionA_Multipliers != null &&
+            courageSkill.evolutionA_Multipliers.Length > 0)
+        {
+            int index = Mathf.Clamp(
+                courageSkill.skillLevel - 1,
+                0,
+                courageSkill.evolutionA_Multipliers.Length - 1);
+            reflectRatio += courageSkill.evolutionA_Multipliers[index];
+        }
+
+        if (BuffManager.Instance != null)
+        {
+            foreach (var effect in BuffManager.Instance.GetEffects(true))
+            {
+                if (effect.effectData != null && effect.effectData.specialType == SpecialEffectType.Reflect)
+                    reflectRatio += effect.value;
+            }
+        }
+
+        return reflectRatio;
+    }
+
+    private bool IsCourageSkill(SkillData skill)
+    {
+        if (skill == null) return false;
+
+        return skill.skillID == "Courage" ||
+            skill.skillNameKey == "sk_001_name" ||
+            skill.skillNameKey == "skill_name_sword1" ||
+            skill.skillLogic is SkillLogic_Courage;
     }
 
     public void AcquireItem(EquipmentItemData newItemData)

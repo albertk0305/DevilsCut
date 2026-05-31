@@ -1002,9 +1002,19 @@ public class CombatManager : MonoBehaviour
     private void EnqueueGuardAndReflectIfNeeded(SkillExecutionContext context)
     {
         SkillResult skillResult = context.result;
+        bool isPlayerAttacking = context.isPlayerAttacking;
         bool isPlayerDefending = context.presentation.isPlayerDefending;
+        bool shouldLogReflectDebug = isPlayerDefending || skillResult.isGuardTriggered;
+
+        if (shouldLogReflectDebug)
+            DevLog.Log($"[IngaYul Debug] guard check. isPlayerAttacking={isPlayerAttacking}, isPlayerDefending={isPlayerDefending}, anyHit={skillResult.anyHit}, isGuardTriggered={skillResult.isGuardTriggered}, totalMitigatedDamage={skillResult.totalMitigatedDamage}");
+
         if (!skillResult.isGuardTriggered)
+        {
+            if (shouldLogReflectDebug)
+                DevLog.Log("[IngaYul Debug] skipped: isGuardTriggered == false");
             return;
+        }
 
         BattleVisualizer.Instance.EnqueueAction(() =>
         {
@@ -1013,19 +1023,29 @@ public class CombatManager : MonoBehaviour
         });
 
         if (!isPlayerDefending)
+        {
+            DevLog.Log("[IngaYul Debug] skipped: isPlayerDefending == false");
             return;
+        }
 
         float reflectRatio = 0f;
 
         if (PlayerManager.Instance != null)
             reflectRatio = PlayerManager.Instance.GetReflectRatio();
 
+        DevLog.Log($"[IngaYul Debug] reflectRatio={reflectRatio}");
+
         if (reflectRatio <= 0f)
+        {
+            DevLog.Log("[IngaYul Debug] skipped: reflectRatio <= 0");
             return;
+        }
 
         int reflectDamage = Mathf.Max(
             1,
             Mathf.RoundToInt(skillResult.totalMitigatedDamage * reflectRatio));
+
+        DevLog.Log($"[IngaYul Debug] reflect triggered. damage={reflectDamage}");
 
         Sprite reflectSprite = playerData.reflectImage != null
             ? playerData.reflectImage

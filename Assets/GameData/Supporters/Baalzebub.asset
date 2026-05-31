@@ -25,11 +25,11 @@ MonoBehaviour:
   battleSkillImage: {fileID: 21300000, guid: a9000af1f17c0774a8a17a4692fb0d7c, type: 3}
   worried: {fileID: 21300000, guid: 88beee60da0082040a6f59d8b9204b81, type: 3}
   happy: {fileID: 21300000, guid: 0c9ac23088833864089f886dd2e7847e, type: 3}
-  passiveSkillDesc: dummy_Passive
-  startSkillDesc: dummy_StartSkill
-  battleSkillDesc: dummy_BattleSkill
-  selectMessage: dummy_SelectMessage
-  joinMessage: dummy_JoinMessage
+  passiveSkillDesc: supporter_passive_shiny_days
+  startSkillDesc: supporter_start_apron_boy
+  battleSkillDesc: supporter_battle_collage
+  selectMessage: support_baalzebub_select
+  joinMessage: support_baalzebub_join
   linkedFacilityID: restaurant
   passiveLevel: 3
   startSkillLevel: 1

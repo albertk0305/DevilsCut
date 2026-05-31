@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: BerserkArmor
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: BerserkArmor
-  itemNameKey: BerserkArmor
+  itemNameKey: item_no_paradise_after_escape_name
   itemIcon: {fileID: 21300000, guid: 2b84c3fa0032c75419e0b09c0d760f46, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_no_paradise_after_escape_desc
+  itemBonusKey: item_no_paradise_after_escape_bonus
   grade: 3
   itemClass: 8
   currentStarLevel: 1

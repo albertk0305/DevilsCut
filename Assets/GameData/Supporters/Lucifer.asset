@@ -25,11 +25,11 @@ MonoBehaviour:
   battleSkillImage: {fileID: 21300000, guid: 3103ca45e58457b46878cf92c9dae4a1, type: 3}
   worried: {fileID: 21300000, guid: 5b3211894fb79b64ebc037e35d5f070c, type: 3}
   happy: {fileID: 21300000, guid: be150377faf34494bbd2527accc78884, type: 3}
-  passiveSkillDesc: dummy_Passive
-  startSkillDesc: dummy_StartSkill
-  battleSkillDesc: dummy_BattleSkill
-  selectMessage: dummy_SelectMessage
-  joinMessage: dummy_JoinMessage
+  passiveSkillDesc: supporter_passive_im_the_only_ghost
+  startSkillDesc: supporter_start_neat3
+  battleSkillDesc: supporter_battle_happy_spiral
+  selectMessage: support_lucifer_select
+  joinMessage: support_lucifer_join
   linkedFacilityID: bar
   passiveLevel: 3
   startSkillLevel: 1

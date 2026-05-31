@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AmbivalentWorld
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: AmbivalentWorld
-  itemNameKey: AmbivalentWorld
+  itemNameKey: item_ambivalent_world_name
   itemIcon: {fileID: 21300000, guid: 7fc21e667dc1d904c8c53786832b4eca, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_ambivalent_world_desc
+  itemBonusKey: item_ambivalent_world_bonus
   grade: 0
   itemClass: 5
   currentStarLevel: 1

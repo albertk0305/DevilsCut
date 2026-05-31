@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: ilVentoDoro
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: ilVentoDoro
-  itemNameKey: ilVentoDoro
+  itemNameKey: item_il_vento_doro_name
   itemIcon: {fileID: 21300000, guid: 512786f4457f46b41904a7d26dfb711e, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_il_vento_doro_desc
+  itemBonusKey: item_il_vento_doro_bonus
   grade: 2
   itemClass: 1
   currentStarLevel: 1

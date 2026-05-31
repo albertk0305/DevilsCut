@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Rain
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: Rain
-  itemNameKey: Rain
+  itemNameKey: item_rain_name
   itemIcon: {fileID: 21300000, guid: f84df1fc7683f9647bf436da0d9156a3, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_rain_desc
+  itemBonusKey: item_rain_bonus
   grade: 1
   itemClass: 1
   currentStarLevel: 1

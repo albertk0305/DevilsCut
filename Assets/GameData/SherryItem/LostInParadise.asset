@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: LostInParadise
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: LostInParadise
-  itemNameKey: LostInParadise
+  itemNameKey: item_lost_in_paradise_name
   itemIcon: {fileID: 21300000, guid: 416c9ca9e2e74174bbd9db2d23e095b2, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_lost_in_paradise_desc
+  itemBonusKey: item_lost_in_paradise_bonus
   grade: 1
   itemClass: 9
   currentStarLevel: 1

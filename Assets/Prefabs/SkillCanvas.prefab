@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8374507348834161758}
   - component: {fileID: 3212286103140199674}
   - component: {fileID: 5459806971380876993}
+  - component: {fileID: 9040388013714052243}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -137,6 +138,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &9040388013714052243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8879519193571882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_what_color_is_your_blood_name
 --- !u!1 &19186011179182615
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,8 +566,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 2
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_that_band_name
+  synergyDescKey: syn_that_band_desc
   nameText: {fileID: 2318034035425324644}
   activeBorder: {fileID: 8102983650520387622}
   myButton: {fileID: 6856790045906987952}
@@ -1049,8 +1063,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 4
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_suteki_meppou_name
+  synergyDescKey: syn_suteki_meppou_desc
   nameText: {fileID: 4398311284332388485}
   activeBorder: {fileID: 2060079935976772880}
   myButton: {fileID: 6235005549518120699}
@@ -1450,6 +1464,7 @@ GameObject:
   - component: {fileID: 2211642987297268243}
   - component: {fileID: 7900356320474208818}
   - component: {fileID: 2623756141986798635}
+  - component: {fileID: 2887009889088053041}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1576,6 +1591,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2887009889088053041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339280545604328844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_bad_bully_name
 --- !u!1 &394158730235101243
 GameObject:
   m_ObjectHideFlags: 0
@@ -2830,6 +2858,7 @@ GameObject:
   - component: {fileID: 3183665462037197653}
   - component: {fileID: 6530477711419256924}
   - component: {fileID: 3711357022059764786}
+  - component: {fileID: 2430710348953234450}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2956,6 +2985,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2430710348953234450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697179784280234361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_bad_dog_no_biscuits_name
 --- !u!1 &697763581584386606
 GameObject:
   m_ObjectHideFlags: 0
@@ -3011,8 +3053,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 4
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_seasons_die_one_after_another_name
+  synergyDescKey: syn_seasons_die_one_after_another_desc
   nameText: {fileID: 8159469891200445986}
   activeBorder: {fileID: 4593394419724985034}
   myButton: {fileID: 7812949365691398572}
@@ -3285,8 +3327,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 6
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_komm_susser_tod_name
+  synergyDescKey: syn_komm_susser_tod_desc
   nameText: {fileID: 9122400009301027152}
   activeBorder: {fileID: 5431708022658233728}
   myButton: {fileID: 2392791719237820434}
@@ -3480,8 +3522,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 2
-  synergyNameKey: saber2
-  synergyDescKey: this is saber2
+  synergyNameKey: syn_flower_song_name
+  synergyDescKey: syn_flower_song_desc
   nameText: {fileID: 5198746718444138222}
   activeBorder: {fileID: 4166771829513627612}
   myButton: {fileID: 3520986627900730713}
@@ -3863,6 +3905,7 @@ GameObject:
   - component: {fileID: 3341896341185873555}
   - component: {fileID: 434454363240115012}
   - component: {fileID: 2318034035425324644}
+  - component: {fileID: 8133590554951121742}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -3989,6 +4032,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8133590554951121742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830111376912932001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_that_band_name
 --- !u!1 &834002141850038984
 GameObject:
   m_ObjectHideFlags: 0
@@ -4962,8 +5018,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 2
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_reckless_name
+  synergyDescKey: syn_reckless_desc
   nameText: {fileID: 8791625403535018713}
   activeBorder: {fileID: 1269089500393736948}
   myButton: {fileID: 420953880086784700}
@@ -5399,6 +5455,7 @@ GameObject:
   - component: {fileID: 3345815590908646500}
   - component: {fileID: 1573391004007846261}
   - component: {fileID: 8455411528196484294}
+  - component: {fileID: 9140619089034289682}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -5525,6 +5582,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &9140619089034289682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130912446390640074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_friend_name
 --- !u!1 &1158373416716441870
 GameObject:
   m_ObjectHideFlags: 0
@@ -5803,8 +5873,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 2
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_last_day_adolescence_name
+  synergyDescKey: syn_last_day_adolescence_desc
   nameText: {fileID: 8563537993844500418}
   activeBorder: {fileID: 7973630310464461330}
   myButton: {fileID: 450988001932147800}
@@ -6061,8 +6131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 6
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_unworthy_to_live_today_name
+  synergyDescKey: syn_unworthy_to_live_today_desc
   nameText: {fileID: 206179062413240841}
   activeBorder: {fileID: 326431565312777126}
   myButton: {fileID: 4793371269658273083}
@@ -7116,8 +7186,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 4
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_divine_name
+  synergyDescKey: syn_divine_desc
   nameText: {fileID: 5191627140362395125}
   activeBorder: {fileID: 2653189725252486171}
   myButton: {fileID: 2199095263569794534}
@@ -8271,6 +8341,7 @@ GameObject:
   - component: {fileID: 384834411710368277}
   - component: {fileID: 16727264634521611}
   - component: {fileID: 8563537993844500418}
+  - component: {fileID: 3871211503828877554}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -8397,6 +8468,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3871211503828877554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696190408504841737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_last_day_adolescence_name
 --- !u!1 &1726867319619814926
 GameObject:
   m_ObjectHideFlags: 0
@@ -8829,6 +8913,7 @@ GameObject:
   - component: {fileID: 3592820122271535139}
   - component: {fileID: 3740464091250068858}
   - component: {fileID: 4398311284332388485}
+  - component: {fileID: 5232859526074034567}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -8955,6 +9040,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5232859526074034567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803237891194778288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_suteki_meppou_name
 --- !u!1 &1820101367089027174
 GameObject:
   m_ObjectHideFlags: 0
@@ -8966,6 +9064,7 @@ GameObject:
   - component: {fileID: 2637245579618748264}
   - component: {fileID: 5586738548952411299}
   - component: {fileID: 2935171320457662203}
+  - component: {fileID: 8489421879978624874}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -9092,6 +9191,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8489421879978624874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820101367089027174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_one_last_kiss_name
 --- !u!1 &1820184700770078511
 GameObject:
   m_ObjectHideFlags: 0
@@ -10168,8 +10280,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 4
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_rumor_name
+  synergyDescKey: syn_rumor_desc
   nameText: {fileID: 3905370558565283286}
   activeBorder: {fileID: 2421331540962113387}
   myButton: {fileID: 3409055612314376848}
@@ -10442,6 +10554,7 @@ GameObject:
   - component: {fileID: 1646381300181997540}
   - component: {fileID: 621292253822166564}
   - component: {fileID: 340615483892572734}
+  - component: {fileID: 7213974019682391175}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -10568,6 +10681,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7213974019682391175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056121510661329229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_spasibo_name
 --- !u!1 &2060079935976772880
 GameObject:
   m_ObjectHideFlags: 0
@@ -11264,6 +11390,7 @@ GameObject:
   - component: {fileID: 9120348037454139790}
   - component: {fileID: 8188347584269421349}
   - component: {fileID: 8128908743919123993}
+  - component: {fileID: 3681866228755273096}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -11390,6 +11517,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3681866228755273096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2152886870630441836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_last_stardust_name
 --- !u!1 &2173677393978185695
 GameObject:
   m_ObjectHideFlags: 0
@@ -11622,8 +11762,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 2
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_dogland_name
+  synergyDescKey: syn_dogland_desc
   nameText: {fileID: 5391446554218027331}
   activeBorder: {fileID: 7536804583741844207}
   myButton: {fileID: 989557474279196667}
@@ -12306,6 +12446,7 @@ GameObject:
   - component: {fileID: 6020894920744778883}
   - component: {fileID: 3922584336434809551}
   - component: {fileID: 8159469891200445986}
+  - component: {fileID: 3255884057073291167}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -12387,8 +12528,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12432,6 +12573,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3255884057073291167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2394361032505477022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_seasons_die_one_after_another_name
 --- !u!1 &2417056689578012611
 GameObject:
   m_ObjectHideFlags: 0
@@ -13858,6 +14012,7 @@ GameObject:
   - component: {fileID: 6583666160663066844}
   - component: {fileID: 4310235666405451498}
   - component: {fileID: 3905370558565283286}
+  - component: {fileID: 657173785031125897}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -13984,6 +14139,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &657173785031125897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2817781958450796993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_rumor_name
 --- !u!1 &2829954242542253740
 GameObject:
   m_ObjectHideFlags: 0
@@ -15669,6 +15837,7 @@ GameObject:
   - component: {fileID: 6031196812781788275}
   - component: {fileID: 2950198959239123518}
   - component: {fileID: 6753387563173045749}
+  - component: {fileID: 7366368686807583568}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -15795,6 +15964,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7366368686807583568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3201216534138847984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_melissa_name
 --- !u!1 &3231906451445732189
 GameObject:
   m_ObjectHideFlags: 0
@@ -15806,6 +15988,7 @@ GameObject:
   - component: {fileID: 7558064018026611780}
   - component: {fileID: 7263042699279538341}
   - component: {fileID: 8791625403535018713}
+  - component: {fileID: 7984625204490599974}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -15932,6 +16115,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7984625204490599974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231906451445732189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_reckless_name
 --- !u!1 &3237262574509819367
 GameObject:
   m_ObjectHideFlags: 0
@@ -15987,8 +16183,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 4
-  synergyNameKey: saber4
-  synergyDescKey: this is saber4
+  synergyNameKey: syn_ring_your_bell_name
+  synergyDescKey: syn_ring_your_bell_desc
   nameText: {fileID: 4200782469425606859}
   activeBorder: {fileID: 2722505622974313848}
   myButton: {fileID: 1488984688647858012}
@@ -16486,6 +16682,7 @@ GameObject:
   - component: {fileID: 6603168162746084999}
   - component: {fileID: 8926417354853581865}
   - component: {fileID: 206179062413240841}
+  - component: {fileID: 9210953827855275593}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -16612,6 +16809,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &9210953827855275593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3352130275676071601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_unworthy_to_live_today_name
 --- !u!1 &3381055003975621392
 GameObject:
   m_ObjectHideFlags: 0
@@ -16744,8 +16954,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 6
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_go_go_maniac_name
+  synergyDescKey: syn_go_go_maniac_desc
   nameText: {fileID: 8254642197764816333}
   activeBorder: {fileID: 1598335181364854889}
   myButton: {fileID: 1127919596830616424}
@@ -16802,8 +17012,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 2
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_cat_blues_name
+  synergyDescKey: syn_cat_blues_desc
   nameText: {fileID: 8897860806918459988}
   activeBorder: {fileID: 5120984443493311226}
   myButton: {fileID: 1546853884072766639}
@@ -17447,8 +17657,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 2
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_unravel_name
+  synergyDescKey: syn_unravel_desc
   nameText: {fileID: 5057655878731859350}
   activeBorder: {fileID: 6122900314562242380}
   myButton: {fileID: 901496105336055959}
@@ -17778,8 +17988,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 4
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_final_decision_name
+  synergyDescKey: syn_final_decision_desc
   nameText: {fileID: 3552445140355557943}
   activeBorder: {fileID: 1824372158424090095}
   myButton: {fileID: 7500563781214733639}
@@ -19321,6 +19531,7 @@ GameObject:
   - component: {fileID: 4363049517739615609}
   - component: {fileID: 5550960995872695000}
   - component: {fileID: 5191627140362395125}
+  - component: {fileID: 3842197536160584576}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -19447,6 +19658,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3842197536160584576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4030454386466163880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_divine_name
 --- !u!1 &4090476647212087230
 GameObject:
   m_ObjectHideFlags: 0
@@ -19577,8 +19801,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 4
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_bad_dog_no_biscuits_name
+  synergyDescKey: syn_bad_dog_no_biscuits_desc
   nameText: {fileID: 3711357022059764786}
   activeBorder: {fileID: 8271564506423119157}
   myButton: {fileID: 268168025476976192}
@@ -19893,6 +20117,7 @@ GameObject:
   - component: {fileID: 3705326008347027984}
   - component: {fileID: 3938553251324789613}
   - component: {fileID: 9122400009301027152}
+  - component: {fileID: 941872960607728492}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -20019,6 +20244,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &941872960607728492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4291556976898488400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_komm_susser_tod_name
 --- !u!1 &4339383504363896615
 GameObject:
   m_ObjectHideFlags: 0
@@ -20030,6 +20268,7 @@ GameObject:
   - component: {fileID: 5235769610884980566}
   - component: {fileID: 9108498553698143808}
   - component: {fileID: 8897860806918459988}
+  - component: {fileID: 1508844273938535578}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -20156,6 +20395,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1508844273938535578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4339383504363896615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_cat_blues_name
 --- !u!1 &4349080834714930452
 GameObject:
   m_ObjectHideFlags: 0
@@ -21559,6 +21811,7 @@ GameObject:
   - component: {fileID: 1232023394655624741}
   - component: {fileID: 4136566093246832928}
   - component: {fileID: 6382431206917215260}
+  - component: {fileID: 7630247777612317038}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -21685,6 +21938,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7630247777612317038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4652229894950660454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_kick_back_name
 --- !u!1 &4668866122863285148
 GameObject:
   m_ObjectHideFlags: 0
@@ -22064,6 +22330,7 @@ GameObject:
   - component: {fileID: 1854183229777251963}
   - component: {fileID: 5753391162293516732}
   - component: {fileID: 4618210329150610556}
+  - component: {fileID: 3014405723616994975}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -22145,8 +22412,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -22190,6 +22457,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3014405723616994975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4876104241941064499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_a_feeling_close_to_lust_name
 --- !u!1 &4915523507294392020
 GameObject:
   m_ObjectHideFlags: 0
@@ -22322,8 +22602,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 6
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_connect_name
+  synergyDescKey: syn_connect_desc
   nameText: {fileID: 3687517400488483004}
   activeBorder: {fileID: 7450602716688567163}
   myButton: {fileID: 7801871100814579776}
@@ -22532,8 +22812,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 4
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_what_color_is_your_blood_name
+  synergyDescKey: syn_what_color_is_your_blood_desc
   nameText: {fileID: 5459806971380876993}
   activeBorder: {fileID: 3901907177182448013}
   myButton: {fileID: 5116939539815234653}
@@ -23214,8 +23494,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 6
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_iris_out_name
+  synergyDescKey: syn_iris_out_desc
   nameText: {fileID: 7317253961800801648}
   activeBorder: {fileID: 1616937762913997404}
   myButton: {fileID: 7461813619501690194}
@@ -23530,6 +23810,7 @@ GameObject:
   - component: {fileID: 2944338764702751086}
   - component: {fileID: 2458245860789700670}
   - component: {fileID: 5603142098868789938}
+  - component: {fileID: 193854822413809895}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -23656,6 +23937,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &193854822413809895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5200062271134405902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_the_real_folk_blues_name
 --- !u!1 &5224188129773766769
 GameObject:
   m_ObjectHideFlags: 0
@@ -23711,8 +24005,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 4
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_melissa_name
+  synergyDescKey: syn_melissa_desc
   nameText: {fileID: 6753387563173045749}
   activeBorder: {fileID: 2375218551047748512}
   myButton: {fileID: 1295785600241960026}
@@ -23848,8 +24142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 6
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_spasibo_name
+  synergyDescKey: syn_spasibo_desc
   nameText: {fileID: 340615483892572734}
   activeBorder: {fileID: 3439976717315445307}
   myButton: {fileID: 5261243977224222232}
@@ -24644,8 +24938,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 2
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_negotiator_name
+  synergyDescKey: syn_negotiator_desc
   nameText: {fileID: 7120590069554979641}
   activeBorder: {fileID: 8061148942985636435}
   myButton: {fileID: 2242505641915586727}
@@ -24660,6 +24954,7 @@ GameObject:
   - component: {fileID: 3066239179482941275}
   - component: {fileID: 8233568825463806033}
   - component: {fileID: 8254642197764816333}
+  - component: {fileID: 1683881081794383426}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -24786,6 +25081,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1683881081794383426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5521381358737010487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_go_go_maniac_name
 --- !u!1 &5524999135674439831
 GameObject:
   m_ObjectHideFlags: 0
@@ -25606,6 +25914,7 @@ GameObject:
   - component: {fileID: 8736552246059555617}
   - component: {fileID: 1629282158934660736}
   - component: {fileID: 5198746718444138222}
+  - component: {fileID: 7808778882742974729}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -25732,6 +26041,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7808778882742974729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5671033633764189459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_flower_song_name
 --- !u!1 &5702348372203206253
 GameObject:
   m_ObjectHideFlags: 0
@@ -25939,6 +26261,7 @@ GameObject:
   - component: {fileID: 4526408893968338424}
   - component: {fileID: 7122960285205478418}
   - component: {fileID: 6504322863460622483}
+  - component: {fileID: 2520110851652254274}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -26065,6 +26388,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2520110851652254274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5738290469593518776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_innocent_prank_name
 --- !u!1 &5802267504349139481
 GameObject:
   m_ObjectHideFlags: 0
@@ -26813,8 +27149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 6
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_one_last_kiss_name
+  synergyDescKey: syn_one_last_kiss_desc
   nameText: {fileID: 2935171320457662203}
   activeBorder: {fileID: 2102807160520005525}
   myButton: {fileID: 8268842918001218871}
@@ -26994,8 +27330,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 4
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_kick_back_name
+  synergyDescKey: syn_kick_back_desc
   nameText: {fileID: 6382431206917215260}
   activeBorder: {fileID: 895136661917838989}
   myButton: {fileID: 6521992344619522281}
@@ -27127,8 +27463,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 2
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_whats_up_people_name
+  synergyDescKey: syn_whats_up_people_desc
   nameText: {fileID: 7797168673498927904}
   activeBorder: {fileID: 6352065543764707601}
   myButton: {fileID: 5022741710686532980}
@@ -27414,6 +27750,7 @@ GameObject:
   - component: {fileID: 5077469690835973634}
   - component: {fileID: 8407140687251589066}
   - component: {fileID: 8108155545646234550}
+  - component: {fileID: 693440709410697269}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -27540,6 +27877,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &693440709410697269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6056233679308193235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_full_name_name
 --- !u!1 &6061477595577805442
 GameObject:
   m_ObjectHideFlags: 0
@@ -28212,6 +28562,7 @@ GameObject:
   - component: {fileID: 4731858641248102092}
   - component: {fileID: 2032167632394547147}
   - component: {fileID: 5391446554218027331}
+  - component: {fileID: 961117990941173439}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -28338,6 +28689,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &961117990941173439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6154984685759497898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_dogland_name
 --- !u!1 &6206422129859365559
 GameObject:
   m_ObjectHideFlags: 0
@@ -28620,6 +28984,7 @@ GameObject:
   - component: {fileID: 8171309195354630364}
   - component: {fileID: 1510692301272257841}
   - component: {fileID: 2123149912044159714}
+  - component: {fileID: 3759036071500998130}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -28746,6 +29111,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3759036071500998130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6257196568892017919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_no_time_to_hesitate_name
 --- !u!1 &6289630503221669085
 GameObject:
   m_ObjectHideFlags: 0
@@ -29044,6 +29422,7 @@ GameObject:
   - component: {fileID: 6348842124246439891}
   - component: {fileID: 70196570775104993}
   - component: {fileID: 5002780350446118152}
+  - component: {fileID: 4575026119203055803}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -29170,6 +29549,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4575026119203055803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6461815158892918368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_aiue_name
 --- !u!1 &6464599789057312432
 GameObject:
   m_ObjectHideFlags: 0
@@ -30547,8 +30939,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 4
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_ui_name
+  synergyDescKey: syn_ui_desc
   nameText: {fileID: 2113850953357751110}
   activeBorder: {fileID: 5590675895194374875}
   myButton: {fileID: 7887865508481839588}
@@ -30845,8 +31237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 1
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_friend_name
+  synergyDescKey: syn_friend_desc
   nameText: {fileID: 8455411528196484294}
   activeBorder: {fileID: 7186153223097129381}
   myButton: {fileID: 7115806425547472522}
@@ -30936,6 +31328,7 @@ GameObject:
   - component: {fileID: 7103934561333212941}
   - component: {fileID: 8864039392782775019}
   - component: {fileID: 7120590069554979641}
+  - component: {fileID: 5781941311622761442}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -31062,6 +31455,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5781941311622761442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7011883388369375844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_negotiator_name
 --- !u!1 &7041685584039899928
 GameObject:
   m_ObjectHideFlags: 0
@@ -31677,6 +32083,7 @@ GameObject:
   - component: {fileID: 6322565627141384448}
   - component: {fileID: 7326154781942352236}
   - component: {fileID: 5057655878731859350}
+  - component: {fileID: 70865060165690021}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -31803,6 +32210,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &70865060165690021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7183387616227194378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_unravel_name
 --- !u!1 &7186153223097129381
 GameObject:
   m_ObjectHideFlags: 0
@@ -33665,8 +34085,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 6
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_asphyxia_name
+  synergyDescKey: syn_asphyxia_desc
   nameText: {fileID: 5706884295127013653}
   activeBorder: {fileID: 9138916683563161946}
   myButton: {fileID: 5267979112371479371}
@@ -33871,8 +34291,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 5
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_a_feeling_close_to_lust_name
+  synergyDescKey: syn_a_feeling_close_to_lust_desc
   nameText: {fileID: 4618210329150610556}
   activeBorder: {fileID: 1244363530557505346}
   myButton: {fileID: 6920525308274122203}
@@ -34483,8 +34903,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 2
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_aiue_name
+  synergyDescKey: syn_aiue_desc
   nameText: {fileID: 5002780350446118152}
   activeBorder: {fileID: 4599429410143689490}
   myButton: {fileID: 412217675109837191}
@@ -35080,8 +35500,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 6
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_the_real_folk_blues_name
+  synergyDescKey: syn_the_real_folk_blues_desc
   nameText: {fileID: 5603142098868789938}
   activeBorder: {fileID: 4439809411848411471}
   myButton: {fileID: 6537610112910203205}
@@ -35668,6 +36088,7 @@ GameObject:
   - component: {fileID: 6806332690084971690}
   - component: {fileID: 3297411358892763746}
   - component: {fileID: 7797168673498927904}
+  - component: {fileID: 5875154999983634569}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -35794,6 +36215,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5875154999983634569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8024471263332283328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_whats_up_people_name
 --- !u!1 &8047669555288035186
 GameObject:
   m_ObjectHideFlags: 0
@@ -36209,8 +36643,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 2
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_no_time_to_hesitate_name
+  synergyDescKey: syn_no_time_to_hesitate_desc
   nameText: {fileID: 2123149912044159714}
   activeBorder: {fileID: 9005953956579481070}
   myButton: {fileID: 5910748138630717220}
@@ -37406,6 +37840,7 @@ GameObject:
   - component: {fileID: 1385678552093171057}
   - component: {fileID: 1996173640204861797}
   - component: {fileID: 4200782469425606859}
+  - component: {fileID: 3998463643212610821}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -37532,6 +37967,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3998463643212610821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8275636217999368563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_ring_your_bell_name
 --- !u!1 &8321864348337585772
 GameObject:
   m_ObjectHideFlags: 0
@@ -38493,8 +38941,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 3
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_full_name_name
+  synergyDescKey: syn_full_name_desc
   nameText: {fileID: 8108155545646234550}
   activeBorder: {fileID: 7376732140902662671}
   myButton: {fileID: 2497803676080611990}
@@ -39352,6 +39800,7 @@ GameObject:
   - component: {fileID: 6301587032735593887}
   - component: {fileID: 3989465440472329543}
   - component: {fileID: 2113850953357751110}
+  - component: {fileID: 3295513963952884129}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -39478,6 +39927,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3295513963952884129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710533163401355189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_ui_name
 --- !u!1 &8711757916036592372
 GameObject:
   m_ObjectHideFlags: 0
@@ -39610,8 +40072,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 6
-  synergyNameKey: saber6
-  synergyDescKey: this is saber6
+  synergyNameKey: syn_last_stardust_name
+  synergyDescKey: syn_last_stardust_desc
   nameText: {fileID: 8128908743919123993}
   activeBorder: {fileID: 632214782918787409}
   myButton: {fileID: 8807109616633280508}
@@ -39701,6 +40163,7 @@ GameObject:
   - component: {fileID: 7991515308914441587}
   - component: {fileID: 1040752534056044426}
   - component: {fileID: 3552445140355557943}
+  - component: {fileID: 6025499167906603902}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -39782,8 +40245,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -39827,6 +40290,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6025499167906603902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8721911359559316277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_final_decision_name
 --- !u!1 &8728272551045904237
 GameObject:
   m_ObjectHideFlags: 0
@@ -40015,8 +40491,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 7
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_bad_bully_name
+  synergyDescKey: syn_bad_bully_desc
   nameText: {fileID: 2623756141986798635}
   activeBorder: {fileID: 6665633090197232723}
   myButton: {fileID: 2074377554106054239}
@@ -40031,6 +40507,7 @@ GameObject:
   - component: {fileID: 9127541673868422919}
   - component: {fileID: 5963626399342498983}
   - component: {fileID: 3687517400488483004}
+  - component: {fileID: 7820099436120522906}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -40157,6 +40634,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7820099436120522906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8784697551563516801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_connect_name
 --- !u!1 &8786279077649783132
 GameObject:
   m_ObjectHideFlags: 0
@@ -40208,8 +40698,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Button
   requiredPoints: 6
-  synergyNameKey: 
-  synergyDescKey: 
+  synergyNameKey: syn_innocent_prank_name
+  synergyDescKey: syn_innocent_prank_desc
   nameText: {fileID: 6504322863460622483}
   activeBorder: {fileID: 8628826898743681199}
   myButton: {fileID: 5367963456104555112}
@@ -40224,6 +40714,7 @@ GameObject:
   - component: {fileID: 1035789310524214023}
   - component: {fileID: 2959440251376137530}
   - component: {fileID: 7317253961800801648}
+  - component: {fileID: 8482899457706945738}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -40350,6 +40841,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8482899457706945738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8791310187507419571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_iris_out_name
 --- !u!1 &8845403019734810622
 GameObject:
   m_ObjectHideFlags: 0
@@ -41007,6 +41511,7 @@ GameObject:
   - component: {fileID: 699475001596001416}
   - component: {fileID: 7807590287099853693}
   - component: {fileID: 5706884295127013653}
+  - component: {fileID: 8433009437050649065}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -41133,6 +41638,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8433009437050649065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9014169712258699126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: syn_asphyxia_name
 --- !u!1 &9022084208115023433
 GameObject:
   m_ObjectHideFlags: 0

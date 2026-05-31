@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: InnerUniverse
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: InnerUniverse
-  itemNameKey: InnerUniverse
+  itemNameKey: item_inner_universe_name
   itemIcon: {fileID: 21300000, guid: 8399bf62bc7c31340907aee857c7b98c, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_inner_universe_desc
+  itemBonusKey: item_inner_universe_bonus
   grade: 2
   itemClass: 2
   currentStarLevel: 1

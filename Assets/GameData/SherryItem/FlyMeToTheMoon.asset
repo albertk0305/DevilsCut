@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: FlyMeToTheMoon
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: FlyMeToTheMoon
-  itemNameKey: FlyMeToTheMoon
+  itemNameKey: item_fly_me_to_the_moon_name
   itemIcon: {fileID: 21300000, guid: 455bbb6aafb1aab4db9a2b12f45767bb, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_fly_me_to_the_moon_desc
+  itemBonusKey: item_fly_me_to_the_moon_bonus
   grade: 3
   itemClass: 9
   currentStarLevel: 1

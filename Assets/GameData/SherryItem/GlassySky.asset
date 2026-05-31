@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: GlassySky
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: GlassySky
-  itemNameKey: GlassySky
+  itemNameKey: item_glassy_sky_name
   itemIcon: {fileID: 21300000, guid: 957412cefa48fbf4aa9464f145e34fb3, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_glassy_sky_desc
+  itemBonusKey: item_glassy_sky_bonus
   grade: 2
   itemClass: 9
   currentStarLevel: 1

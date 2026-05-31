@@ -1,0 +1,78 @@
+Key,Korean,English
+arete,A.R.E.T.E.,A.R.E.T.E.
+Caritas,카리타스,Caritas
+Castus,카스투스,Castus
+Cynd,신드,Cynd
+Diligere,딜리게레,Diligere
+gabriel,가브리엘,Gabriel
+hibiki,히비키,Hibiki
+humus,후무스,Humus
+Integrity,인테그리티,Integrity
+michael,미카엘,Michael
+Pati,파티,Pati
+raguel,라구엘,Raguel
+raphael,라파엘,Raphael
+remiel,레미엘,Remiel
+sariel,사리엘,Sariel
+Silere,실레레,Silere
+Temperare,템퍼라레,Temperare
+uriel,우리엘,Uriel
+sherry,셰리,Sherry
+karin,카린,Karin
+baito,바이토,Baito
+asmodeus,아스모데우스,Asmodeus
+baalzebub,바알제붑,Baalzebub
+belphegor,벨페고르,Belphegor
+leviathan,레비아탄,Leviathan
+lucifer,루시퍼,Lucifer
+mammon,마몬,Mammon
+satan,사탄,Satan
+,,
+support_asmodeus_select,주인님의 요청이라면 아스모는 언제든지 준비 완료라구요!,If it is your request Master then Asmo is always ready!
+support_asmodeus_join,맡겨주세요! 아스모가 반하게 만들어드릴게요!,Leave it to me! Asmo will make them fall head over heels!
+,,
+support_baalzebub_select,오냐! 필요하면 언제든 달려가 주마!,Alright! Call me whenever you need me!
+support_baalzebub_join,맡겨둬! 화끈하게 볶아주마!,Leave it to me! I will stir fry them nice and hot!
+,,
+support_belphegor_select,하아암... 오늘은 잭팟이나 터지면 좋겠네...,Yaaawn... Maybe today will be the day we hit the jackpot...
+support_belphegor_join,행운의 여신이 너랑 함께할 거야... 아마도... 음냐...,Lady Luck will be with you... probably... mnya...
+,,
+support_leviathan_select,셰리 님의 부름이라면 레비아탄은 언제든 응답하겠습니다...,If Lady Sherry calls then Leviathan will answer anytime...
+support_leviathan_join,레비아탄은 셰리 님과 함께할 수 있어서 행복합니다... 아주 많이요.,Leviathan is happy to be with Lady Sherry... very happy.
+,,
+support_lucifer_select,저... 정말 저로 괜찮으신가요...?,Um... Are you really sure I am okay...?
+support_lucifer_join,히... 힘내보겠습니다!,I-I will do my best!
+,,
+support_mammon_select,"카캇! 내 몸값은 꽤 비싸다구요, 고객님?","Kakak! My price is pretty high, dear customer."
+support_mammon_join,V.I.P.의 부탁이니 이번만 특별 서비스예요!,"Since it is a V.I.P. request, this one is a special service!"
+,,
+support_satan_select,"셰리 부르면 나, 바로 간다!","If Sherry calls, I come running!"
+support_satan_join,"셰리 옆, 내 자리다!","By Sherry's side, that is my place!"
+,,
+supporter_passive_fluffy_time,푹신푹신 타임: 전투 종료마다 (10%/15%/25%) 확률로 체력 브레이크 최대치 브레이크 저항 행동력 중 하나의 스탯이 영구적으로 (1/2/3)만큼 상승합니다. 체력은 (91/182/273)만큼 상승합니다,Fuwa Fuwa Time: At the end of each battle there is a (10%/15%/25%) chance to permanently increase one stat from HP Max Break Break Resistance or AP by (1/2/3). HP increases by (91/182/273).
+supporter_start_met_an_angel,천사를 만났어: 적의 힘을 (10%/15%/20%)만큼 3턴간 감소시키고 셰리의 스타일 랭크를 한 단계 상승시킵니다,Tenshi ni Fureta yo!: Decreases enemy Strength by (10%/15%/20%) for 3 turns and raises Sherry's Style Rank by 1 level.
+supporter_battle_pure_pure_heart,퓨어퓨어하트: 셰리의 체력을 20% 회복시키고 모든 디버프를 해제합니다. 힘 방어 속도 운이 3턴간 20% 상승합니다,Pure Pure Heart: Restores 20% of Sherry's HP and removes all debuffs. Strength Defense Speed and Luck increase by 20% for 3 turns.
+,,
+supporter_passive_shiny_days,Shiny Days: 전투 종료마다 최대 체력의 (5%/10%/20%)만큼 회복합니다,Shiny Days: At the end of each battle recover (5%/10%/20%) of Max HP.
+supporter_start_apron_boy,에이프런 보이: 적에게 3턴간 화상 디버프를 부여하고 방어를 (7%/10%/15%)만큼 감소시킵니다. 화상 상태인 적은 턴마다 최대 체력의 (2%/3%/5%)만큼 피해를 입습니다,Apron Boy: Inflicts Burn on the enemy for 3 turns and decreases Defense by (7%/10%/15%). A burned enemy takes damage equal to (2%/3%/5%) of Max HP each turn.
+supporter_battle_collage,콜라주: 6타 다단 히트 피해를 입힙니다. 각 타격마다 (20%/30%/40%) 확률로 출혈 디버프를 부여합니다. 스킬 피해는 적이 보유 중인 디버프 개수에 비례하여 증가합니다. 출혈 상태인 적은 턴마다 셰리 힘의 (80%/100%/120%)만큼 피해를 입습니다,Collage: Deals 6 hit multi hit damage. Each hit has a (20%/30%/40%) chance to inflict Bleed. Skill damage increases based on the number of debuffs on the enemy. A bleeding enemy takes damage equal to (80%/100%/120%) of Sherry's Strength each turn.
+,,
+supporter_passive_there_is_a_reason,There is a Reason: 전투 종료마다 아이템 리롤을 실행할 때 (10%/20%/35%) 확률로 아이템의 등급이 한 단계 상승합니다,There Is a Reason: When rerolling items at the end of battle there is a (10%/20%/35%) chance to increase an item's grade by 1 level.
+supporter_start_this_game,This Game: 적에게 힘 방어 속도 운 중 두 개의 스탯을 무작위로 (5%~30%/10%~50%/20%~80%)만큼 3턴간 감소시킵니다,This Game: Randomly decreases 2 stats from enemy Strength Defense Speed or Luck by (5%~30%/10%~50%/20%~80%) for 3 turns.
+supporter_battle_deal_with_the_devil,Deal with the Devil: 적에게 무작위로 6가지 효과 중 하나를 적용합니다. 셰리의 운이 높을수록 좋은 효과가 발생할 확률이 높아집니다,Deal with the Devil: Randomly applies 1 of 6 effects to the enemy. The higher Sherry's Luck is the higher the chance of a favorable effect.
+,,
+supporter_passive_if_i_could_be_a_constellation,별자리가 될 수 있다면: 전투 종료마다 (10%/20%/35%) 확률로 일반 등급 아이템을 획득합니다,If I Could Be a Constellation: At the end of each battle there is a (10%/20%/35%) chance to obtain a Common grade item.
+supporter_start_guitar_loneliness_blue_planet,기타와 고독과 푸른 행성: 적의 AP를 3턴간 (15%/25%/40%) 감소시키고 셰리의 AP를 3턴간 (10%/20%/30%) 상승시킵니다,Guitar Loneliness and Blue Planet: Decreases enemy AP by (15%/25%/40%) for 3 turns and increases Sherry's AP by (10%/20%/30%) for 3 turns.
+supporter_battle_sweet_hurt,Sweet Hurt: 적에게 5타 다단 히트 피해를 입힙니다. 각 타격마다 적의 버프 1개의 잔여 턴을 1턴씩 줄입니다. 줄인 버프 턴 1개당 피해량이 (15%/20%/30%) 증가합니다,Sweet Hurt: Deals 5 hit multi hit damage to the enemy. Each hit reduces the remaining duration of 1 enemy buff by 1 turn. Damage increases by (15%/20%/30%) for each buff turn reduced.
+,,
+supporter_passive_im_the_only_ghost,나만 유령이야: 전투 종료마다 (10%/15%/25%) 확률로 힘 방어 속도 운 중 하나가 (1/2/3)만큼 상승합니다,I'm the Only Ghost: At the end of each battle there is a (10%/15%/25%) chance to increase one stat from Strength Defense Speed or Luck by (1/2/3).
+supporter_start_neat3,Neat3: 3턴간 운이 (15%/20%/30%)만큼 증가합니다. 전투 시작 즉시 행동 수치를 (100/150/200)만큼 채워줍니다,Neat3: Increases Luck by (15%/20%/30%) for 3 turns. Immediately fills the action gauge by (100/150/200) at the start of battle.
+supporter_battle_happy_spiral,해피 스파이럴: 적의 방어를 (20%/30%/40%)만큼 무시하는 강력한 피해를 입힙니다. 스킬 사용 후 (40%/35%/20%) 확률로 숙취가 발생하여 루시퍼의 행동 수치가 50만큼 감소합니다,Happy Spiral: Deals powerful damage that ignores (20%/30%/40%) of enemy Defense. After using this skill there is a (40%/35%/20%) chance of Hangover reducing Lucifer's action gauge by 50.
+,,
+supporter_passive_viva_namida,Viva Namida: 전투 종료 후 획득하는 골드가 (10%/20%/35%)만큼 증가합니다,Viva Namida: Gold gained after battle increases by (10%/20%/35%).
+supporter_start_freekn_you,Freek'n You: 3턴간 적의 명중률을 (15%/20%/30%)만큼 감소시키고 방어를 (10%/15%/25%)만큼 감소시킵니다,Freek'n You: Decreases enemy Hit Rate by (15%/20%/30%) and Defense by (10%/15%/25%) for 3 turns.
+supporter_battle_layer_cake,Layer Cake: 9개의 효과 중 무작위로 3개를 사용합니다. 스킬 레벨에 따라 효과가 강해집니다,Layer Cake: Uses 3 random effects from a pool of 9. Effects become stronger based on skill level.
+,,
+supporter_passive_wo_ai_ni,워 아이 니: 전투 종료마다 획득하는 경험치가 (10%/20%/35%)만큼 증가합니다,Wo Ai Ni: EXP gained after battle increases by (10%/20%/35%).
+supporter_start_lock_on,록온: 3턴 동안 셰리의 힘과 방어가 (15%/25%/35%)만큼 증가합니다,Lock On: Increases Sherry's Strength and Defense by (15%/25%/35%) for 3 turns.
+supporter_battle_dont_make_me_a_shrew,말괄량이로 만들지 마: 적에게 5타 다단 히트 피해를 입힙니다. 각 타격이 적중할 때마다 (15%/20%/30%) 확률로 적이 보유 중인 디버프 1개의 지속 시간을 1턴 연장합니다,Don't Make Me a Wild Girl: Deals 5 hit multi hit damage to the enemy. Each successful hit has a (15%/20%/30%) chance to extend the duration of 1 enemy debuff by 1 turn.

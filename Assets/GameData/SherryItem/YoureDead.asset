@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: YoureDead
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: YoureDead
-  itemNameKey: YoureDead
+  itemNameKey: item_already_dead_name
   itemIcon: {fileID: 21300000, guid: 2dbd3444ea21b634c9623db7a4cef602, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_already_dead_desc
+  itemBonusKey: item_already_dead_bonus
   grade: 3
   itemClass: 4
   currentStarLevel: 1

@@ -25,11 +25,11 @@ MonoBehaviour:
   battleSkillImage: {fileID: 21300000, guid: cfd38a09d0f72504f835202d8b017bcf, type: 3}
   worried: {fileID: 21300000, guid: d49d30243acace74991f6290479c55b8, type: 3}
   happy: {fileID: 21300000, guid: ef12907a59b06424b8bacdcbcd229534, type: 3}
-  passiveSkillDesc: dummy_Passive
-  startSkillDesc: dummy_StartSkill
-  battleSkillDesc: dummy_BattleSkill
-  selectMessage: dummy_SelectMessage
-  joinMessage: dummy_JoinMessage
+  passiveSkillDesc: supporter_passive_if_i_could_be_a_constellation
+  startSkillDesc: supporter_start_guitar_loneliness_blue_planet
+  battleSkillDesc: supporter_battle_sweet_hurt
+  selectMessage: support_leviathan_select
+  joinMessage: support_leviathan_join
   linkedFacilityID: livehouse
   passiveLevel: 3
   startSkillLevel: 1

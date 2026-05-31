@@ -4,15 +4,15 @@ sk_001_desc,적에게 피해를 주고 가드 상태에 돌입합니다. 가드 
 sk_001_evo_a_name,인과율,Causality
 sk_001_evo_a_desc,가드 상태에서 적의 공격을 받을 시 가드로 감소시킨 피해량의 일정량을 적에게 되돌려줍니다.,"When attacked while in the Guard state, reflects a portion of the damage mitigated by Guard back to the attacker."
 sk_001_evo_b_name,고드 핸드,God Hand
-sk_001_evo_b_desc,"가드 상태가 강화되어, 방어력 무시 고정 피해에도 피해 감소가 적용됩니다.","Strengthens the Guard state, allowing the damage reduction to apply even to defense-ignoring True Damage."
+sk_001_evo_b_desc,가드 상태가 강화되어 방어력 무시 고정 피해에도 피해 감소가 적용됩니다.,Strengthens the Guard state allowing the damage reduction to apply even to defense-ignoring True Damage.
 sk_001_evo_c_name,제물의 낙인,Brand of Sacrifice
-sk_001_evo_c_desc,"더 이상 가드 상태를 획득하지 않는 대신, 힘과 방어력에 비례한 강력한 피해를 줍니다.","No longer gains the Guard state. Instead, deals powerful damage proportional to Strength and Defense."
+sk_001_evo_c_desc,더 이상 가드 상태를 획득하지 않는 대신 힘과 방어력에 비례한 강력한 피해를 줍니다.,No longer gains the Guard state. Instead deals powerful damage proportional to Strength and Defense.
 sk_002_name,타나토스,Thanatos
-sk_002_desc,"적을 타격하여 큰 브레이크 피해를 주고, 방어력 감소 디버프를 부여합니다.",Strikes an enemy to deal massive Break damage and inflicts a Defense reduction debuff.
+sk_002_desc,적을 타격하여 큰 브레이크 피해를 주고 방어력 감소 디버프를 부여합니다.,Strikes an enemy to deal massive Break damage and inflicts a Defense reduction debuff.
 sk_002_evo_a_name,Color Your Night,Color Your Night
 sk_002_evo_a_desc,적에게 감소시킨 방어력만큼 플레이어의 방어력을 상승시킵니다.,Increases the player's Defense by the amount of Defense reduced from the enemy.
 sk_002_evo_b_name,Burn My Dread,Burn My Dread
-sk_002_evo_b_desc,"스킬의 기본 피해 계수가 감소하는 대신, 적의 누적된 브레이크 수치에 비례하여 스킬 피해량이 상승합니다.","Decreases the skill's base damage coefficient, but increases skill damage proportional to the enemy's accumulated Break value."
+sk_002_evo_b_desc,스킬의 기본 피해 계수가 감소하는 대신 적의 누적된 브레이크 수치에 비례하여 스킬 피해량이 상승합니다.,Decreases the skill's base damage coefficient but increases skill damage proportional to the enemy's accumulated Break value.
 sk_002_evo_c_name,Full Moon Full Life,Full Moon Full Life
 sk_002_evo_c_desc,8타 다단 히트 스킬로 변경됩니다. 방어력 감소 디버프는 한 번만 적용되며 중첩되지 않습니다.,Changes the skill into an 8-hit multi-strike attack. The Defense reduction debuff applies only once and does not stack.
 sk_003_name,악귀멸살,Evil Slayer
@@ -120,7 +120,7 @@ sk_015_evo_b_desc,체력과 버스트 수치를 즉시 회복하지 않는 대�
 sk_015_evo_c_name,구속제어술식,Control Art Restriction System
 sk_015_evo_c_desc,체력을 회복할 때 회복량의 일정 비율을 적에게 피해로 입힙니다,When restoring HP inflicts a certain percentage of the healed amount as damage to the enemy
 sk_016_name,회옥,Hidden Inventory
-sk_016_desc,3턴 동안 힘 방어력 속도 운 능력치가 상승하며 최대 체력과 버스트 수치의 일정 비율을 회복합니다,Increases Strength Defense Speed and Luck stats for 3 turns and restores a certain percentage of maximum HP and the Burst Gauge
+sk_016_desc,3턴 동안 힘/방어/속도/운 능력치가 상승하며 최대 체력과 버스트 수치의 일정 비율을 회복합니다,Increases Strength/Defense/Speed/Luck stats for 3 turns and restores a certain percentage of maximum HP and the Burst Gauge
 sk_016_evo_a_name,반전술식,Reversed Cursed Technique
 sk_016_evo_a_desc,스킬 사용 시점에 잃은 체력과 누적된 버스트 수치에 비례하여 힘 능력치가 증가합니다,Increases the Strength stat proportional to the HP lost and Burst Gauge accumulated at the time of skill activation
 sk_016_evo_b_name,무하한,Limitless

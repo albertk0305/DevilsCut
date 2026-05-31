@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: TheHero
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: TheHero
-  itemNameKey: TheHero
+  itemNameKey: item_the_hero_name
   itemIcon: {fileID: 21300000, guid: 6e084be0cc8d1664da67431bc5173731, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_the_hero_desc
+  itemBonusKey: item_the_hero_bonus
   grade: 3
   itemClass: 5
   currentStarLevel: 1

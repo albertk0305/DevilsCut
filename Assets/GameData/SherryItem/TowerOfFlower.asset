@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: TowerOfFlower
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: TowerOfFlower
-  itemNameKey: TowerOfFlower
+  itemNameKey: item_flower_tower_name
   itemIcon: {fileID: 21300000, guid: 5242588827ae208409e0c04b2230cf66, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_flower_tower_desc
+  itemBonusKey: item_flower_tower_bonus
   grade: 0
   itemClass: 2
   currentStarLevel: 1

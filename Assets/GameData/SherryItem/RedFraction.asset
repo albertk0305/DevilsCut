@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: RedFraction
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: RedFraction
-  itemNameKey: RedFraction
+  itemNameKey: item_red_fraction_name
   itemIcon: {fileID: 21300000, guid: fda9fe867ce22c14fbf6ef504267d0ac, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_red_fraction_desc
+  itemBonusKey: item_red_fraction_bonus
   grade: 1
   itemClass: 2
   currentStarLevel: 1

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: JaneDoe
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: JaneDoe
-  itemNameKey: JaneDoe
+  itemNameKey: item_jane_doe_name
   itemIcon: {fileID: 21300000, guid: a3db2431200989848a9e1092436b9541, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_jane_doe_desc
+  itemBonusKey: item_jane_doe_bonus
   grade: 1
   itemClass: 8
   currentStarLevel: 1

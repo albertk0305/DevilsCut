@@ -25,11 +25,11 @@ MonoBehaviour:
   battleSkillImage: {fileID: 21300000, guid: 061ae30feb8678b49ad5e9c475c141a5, type: 3}
   worried: {fileID: 21300000, guid: d7e610e128ea5e642acd9e11d940c49e, type: 3}
   happy: {fileID: 21300000, guid: 70b485d0a6158374ebcef76937f93bd4, type: 3}
-  passiveSkillDesc: dummy_Passive
-  startSkillDesc: dummy_StartSkill
-  battleSkillDesc: dummy_BattleSkill
-  selectMessage: dummy_SelectMessage
-  joinMessage: dummy_JoinMessage
+  passiveSkillDesc: supporter_passive_fluffy_time
+  startSkillDesc: supporter_start_met_an_angel
+  battleSkillDesc: supporter_battle_pure_pure_heart
+  selectMessage: support_asmodeus_select
+  joinMessage: support_asmodeus_join
   linkedFacilityID: maidcafe
   passiveLevel: 3
   startSkillLevel: 1

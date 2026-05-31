@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: GottaKnockALittleHarder
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: GottaKnockALittleHarder
-  itemNameKey: GottaKnockALittleHarder
+  itemNameKey: item_gotta_knock_name
   itemIcon: {fileID: 21300000, guid: 4dc920805025edb419c535188f697f7d, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_gotta_knock_desc
+  itemBonusKey: item_gotta_knock_bonus
   grade: 3
   itemClass: 2
   currentStarLevel: 1

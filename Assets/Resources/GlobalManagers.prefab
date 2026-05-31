@@ -53,6 +53,8 @@ MonoBehaviour:
   - {fileID: 4900000, guid: e5ad3baa4c0af0b4db03323bfdf2b51f, type: 3}
   - {fileID: 4900000, guid: 2b9b763831a0cea48925d7b68a4661b9, type: 3}
   - {fileID: 4900000, guid: 3d19604b1a752624cbf19f6b7c5b64b7, type: 3}
+  - {fileID: 4900000, guid: 5f992bdf609a22947b6568aa7a733918, type: 3}
+  - {fileID: 4900000, guid: a50ed603c35946544a0008c63286b20a, type: 3}
   currentLanguage: 0
 --- !u!114 &2952436123089374904
 MonoBehaviour:
@@ -67,6 +69,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   masterVolume: 1
+  bgmSource: {fileID: 0}
+  bgmVolume: 1
 --- !u!114 &6879955947631341113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,13 +89,13 @@ MonoBehaviour:
     currentExp: 0
     maxHp: 10000
     currentHp: 10000
-    ActionPoints: 100
+    ActionPoints: 10
     breakResistance: 200
     maxBreakGauge: 200
-    strength: 20000
-    defense: 200
-    speed: 200
-    luck: 200
+    strength: 10
+    defense: 10
+    speed: 10
+    luck: 10
     currentGold: 1000
     rejectedSupporterCount: 0
     finalDamageAmp: 0
@@ -103,10 +107,11 @@ MonoBehaviour:
     bonusAccuracy: 0
     bonusEvasion: 0
     healingReceivedAmp: 0
-  unlockedSupporters: []
+  unlockedSupporters:
+  - {fileID: 11400000, guid: 8f7a108444158544399cf83ab876c34c, type: 2}
   supporterChoiceRecords:
   - supporterID: asmodeus
-    state: 0
+    state: 1
   - supporterID: lucifer
     state: 0
   - supporterID: baalzebub
@@ -119,7 +124,7 @@ MonoBehaviour:
     state: 0
   - supporterID: leviathan
     state: 0
-  activeSupporter: {fileID: 0}
+  activeSupporter: {fileID: 11400000, guid: 8f7a108444158544399cf83ab876c34c, type: 2}
   ownedKarinItems:
   - {fileID: 11400000, guid: 1f62c13dc91f5f34e8003534a0fe132f, type: 2}
   equippedKarinItem: {fileID: 11400000, guid: 1f62c13dc91f5f34e8003534a0fe132f, type: 2}

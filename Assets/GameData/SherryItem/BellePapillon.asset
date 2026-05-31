@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: BellePapillon
   m_EditorClassIdentifier: Assembly-CSharp::EquipmentItemData
   itemID: BellePapillon
-  itemNameKey: BellePapillon
+  itemNameKey: item_belle_papillon_name
   itemIcon: {fileID: 21300000, guid: 92d01c7a62c97114380cb2b4fc3d3f62, type: 3}
-  itemDescKey: 
-  itemBonusKey: 
+  itemDescKey: item_belle_papillon_desc
+  itemBonusKey: item_belle_papillon_bonus
   grade: 1
   itemClass: 6
   currentStarLevel: 1

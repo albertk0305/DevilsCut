@@ -31,3 +31,10 @@ btn_remove,제거하기,Remove
 msg_no_equipped_item,장비한 아이템이 없습니다.,No item is currently equipped.
 msg_supporter_join_ready,전투에서 도움이 되고 싶어요.,I want to help in battle.
 menu_class,클래스,Class
+ui_select_synergy_prompt,확인할 시너지를 선택해 주세요.,Please select a synergy to view.
+ui_select_skill_prompt,확인할 스킬을 선택해 주세요.,Please select a skill to view.
+ui_status_activated,활성화됨,Activated
+ui_status_deactivated,비활성화됨,Deactivated
+passive_text,패시브 스킬,Passive Skill
+initiation_text,개전 스킬,Initiation Skill
+battleSkill_text,배틀 스킬,Battle Skill

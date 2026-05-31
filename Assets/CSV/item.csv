@@ -1,0 +1,206 @@
+Key,Korean,English
+item_sorairo_days_name,하늘색 데이즈,Sorairo Days
+item_sorairo_days_desc,하늘을 뚫을 의지가 담긴 드릴 목걸이,A drill necklace filled with the will to pierce the heavens.
+item_sorairo_days_bonus,힘이 (2/12/60)만큼 증가합니다,Strength increases by (2/12/60).
+item_nyoibo_name,여의봉,Power Pole
+item_nyoibo_desc,외계인 전사가 사용하던 무기. 길이를 마음대로 조절할 수 있다,A weapon once used by an alien warrior. Its length can be freely adjusted.
+item_nyoibo_bonus,힘이 (3%/15%/80%)만큼 증가합니다,Strength increases by (3%/15%/80%).
+item_chainsaw_blood_name,Chainsaw Blood,Chainsaw Blood
+item_chainsaw_blood_desc,악마의 힘이 깃들어 있는 전기톱. 피비린내가 난다,A chainsaw imbued with demonic power. It reeks of blood.
+item_chainsaw_blood_bonus,적의 체력이 70% 이상일때 (4%/20%/100%)만큼 추가 피해를 줍니다,Deals (4%/20%/100%) additional damage when the enemy's HP is 70% or higher.
+item_brave_shine_name,Brave Shine,Brave Shine
+item_brave_shine_desc,빛의 왕자가 사용하던 인과를 역전시키는 창.,A spear once wielded by the prince of light that reverses causality.
+item_brave_shine_bonus,스킬 데미지의 10%를 방어 무시 고정 피해로 전환합니다,Converts 10% of skill damage into fixed damage that ignores defense.
+syn_flower_song_name,꽃의 노래,Flower Song
+syn_flower_song_desc,힘이 15% 상승합니다,Strength increases by 15%.
+syn_ring_your_bell_name,Ring your bell,Ring Your Bell
+syn_ring_your_bell_desc,피해증폭 30%를 얻습니다,Gain 30% damage amplification.
+syn_last_stardust_name,LAST STARDUST,LAST STARDUST
+syn_last_stardust_desc,스킬 데미지의 20%를 방어 무시 고정 피해로 전환합니다,Converts 20% of skill damage into fixed damage that ignores defense.
+,,
+item_love_is_not_enough_name,사랑이 부족해,Love Is Not Enough
+item_love_is_not_enough_desc,전격을 다루는 외계 오니 소녀가 입던 호피 비키니,A leopard print bikini once worn by an alien oni girl who controls lightning.
+item_love_is_not_enough_bonus,방어가 (2/12/60)만큼 상승합니다,Defense increases by (2/12/60).
+item_rain_name,Rain,Rain
+item_rain_desc,진리를 깨달은 연금술사의 의수,The prosthetic arm of an alchemist who learned the truth.
+item_rain_bonus,방어가 (3%/15%/80%)만큼 상승합니다,Defense increases by (3%/15%/80%).
+item_il_vento_doro_name,il vento d'oro,Il Vento d'Oro
+item_il_vento_doro_desc,꿈이 있는 갱스터의 무당벌레 브로치,A ladybug brooch owned by a gangster with a dream.
+item_il_vento_doro_bonus,받는 피해량이 (4%/15%/50%)만큼 감소합니다,Damage taken decreases by (4%/15%/50%).
+item_silver_garden_name,그대의 은의 정원,Your Silver Garden
+item_silver_garden_desc,상냥한 소녀의 마법소녀 복장,The magical girl outfit of a kindhearted girl.
+item_silver_garden_bonus,방어의 50%만큼 힘이 상승합니다,Strength increases by 50% of Defense.
+syn_aiue_name,아이우에,AIUE
+syn_aiue_desc,방어가 20% 상승합니다,Defense increases by 20%.
+syn_melissa_name,Melissa,Melissa
+syn_melissa_desc,받는 피해가 20% 감소합니다,Damage taken decreases by 20%.
+syn_connect_name,Connect,Connect
+syn_connect_desc,방어의 100%만큼 힘이 상승합니다,Strength increases by 100% of Defense.
+,,
+item_flower_tower_name,꽃의 탑,Tower of Flower
+item_flower_tower_desc,찻집 종업원이자 특수요원으로 활동하던 소녀의 권총,A pistol once used by a girl who worked as a cafe waitress and special agent.
+item_flower_tower_bonus,운이 (2/12/60)만큼 상승합니다,Luck increases by (2/12/60).
+item_red_fraction_name,Red Fraction,Red Fraction
+item_red_fraction_desc,아킴보 사격의 달인이 사용하던 권총,A pistol once used by a master of akimbo shooting.
+item_red_fraction_bonus,운이 (3%/15%/80%)만큼 상승합니다,Luck increases by (3%/15%/80%).
+item_inner_universe_name,Inner Universe,Inner Universe
+item_inner_universe_desc,기계화된 세계 속에서 인간성을 지킨 남자의 권총,A pistol once used by a man who preserved his humanity in a mechanized world.
+item_inner_universe_bonus,치명타 피해량이 (10%/50%/150%)만큼 상승합니다,Critical damage increases by (10%/50%/150%).
+item_gotta_knock_name,Gotta Knock a Little Harder,Gotta Knock a Little Harder
+item_gotta_knock_desc,깨어나지 않는 꿈을 꾸던 남자의 권총,A pistol once used by a man trapped in an endless dream.
+item_gotta_knock_bonus,운의 50%만큼 치명타 피해량이 상승합니다,Critical damage increases by 50% of Luck.
+syn_cat_blues_name,Cat Blues,Cat Blues
+syn_cat_blues_desc,운이 15% 상승합니다,Luck increases by 15%.
+syn_bad_dog_no_biscuits_name,Bad Dog No Biscuits,Bad Dog No Biscuits
+syn_bad_dog_no_biscuits_desc,치명타 확률이 15% 상승합니다,Critical rate increases by 15%.
+syn_the_real_folk_blues_name,The Real Folk Blues,The Real Folk Blues
+syn_the_real_folk_blues_desc,운의 100%만큼 치명타 피해량이 상승합니다,Critical damage increases by 100% of Luck.
+,,
+item_fly_away_name,Fly Away,Fly Away
+item_fly_away_desc,빗치 천사들이 사용하던 분홍색 험비,A pink Humvee once used by bitch angels.
+item_fly_away_bonus,행동력이 (2/12/60)만큼 상승합니다,AP increases by (2/12/60).
+item_bitter_rain_name,Bitter Rain,Bitter Rain
+item_bitter_rain_desc,원숭이를 닮은 대도가 애용하던 자동차,A car favored by a master thief who resembled a monkey.
+item_bitter_rain_bonus,행동력이 (3%/15%/80%)만큼 상승합니다,AP increases by (3%/15%/80%).
+item_voyager_name,Voyager,Voyager
+item_voyager_desc,어른스럽지 못한 지휘관이 타던 자동차,A car once driven by an immature commander.
+item_voyager_bonus,적과의 AP 차이에 비례하여 피해가 (7%/30%/100%)만큼 증가합니다,Damage increases by (7%/30%/100%) based on the AP difference from the enemy.
+item_kaneda_name,Kaneda,Kaneda
+item_kaneda_desc,폭주족 소년이 타던 붉은 바이크,A red bike once ridden by a biker gang boy.
+item_kaneda_bonus,행동력의 25%만큼 치명타 확률이 증가합니다,Critical rate increases by 25% of AP.
+syn_reckless_name,Reckless,Reckless
+syn_reckless_desc,행동력이 15% 상승합니다,AP increases by 15%.
+syn_divine_name,Divine,Divine
+syn_divine_desc,적과의 AP 차이에 비례하여 피해가 30%만큼 증폭됩니다,Damage is amplified by 30% based on the AP difference from the enemy.
+syn_one_last_kiss_name,One Last Kiss,One Last Kiss
+syn_one_last_kiss_desc,행동력의 100%만큼 치명타 피해량이 증가합니다,Critical damage increases by 100% of AP.
+,,
+item_fuyubiyori_name,Fuyubiyori,Fuyubiyori
+item_fuyubiyori_desc,솔로 캠핑을 즐기는 소녀의 바이크,A bike ridden by a girl who enjoys solo camping.
+item_fuyubiyori_bonus,속도가 (2/12/60)만큼 증가합니다,Speed increases by (2/12/60).
+item_seize_the_day_name,Seize The Day,Seize The Day
+item_seize_the_day_desc,겨울 캠핑을 즐기는 소녀의 바이크,A bike ridden by a girl who enjoys winter camping.
+item_seize_the_day_bonus,속도가 (3%/15%/80%)만큼 증가합니다,Speed increases by (3%/15%/80%).
+item_keep_going_name,계속할 건가?,Are You Going to Keep Going?
+item_keep_going_desc,지상 최강 생물의 아들이 입던 파이트 쇼츠,Fight shorts once worn by the son of the strongest creature on Earth.
+item_keep_going_bonus,적과의 속도 차이에 비례하여 피해가 (7%/30%/100%)만큼 증가합니다,Damage increases by (7%/30%/100%) based on the Speed difference from the enemy.
+item_already_dead_name,너는 이미 죽어 있다,You Are Already Dead
+item_already_dead_desc,세기말 구세주의 가죽 재킷,A leather jacket once worn by the savior of the end century.
+item_already_dead_bonus,속도의 50%만큼 힘이 증가합니다,Strength increases by 50% of Speed.
+syn_no_time_to_hesitate_name,머뭇거릴 틈이 없다!!,No Time to Hesitate!!
+syn_no_time_to_hesitate_desc,속도가 20% 상승합니다,Speed increases by 20%.
+syn_what_color_is_your_blood_name,네놈들의 피는 무슨 색이냐!!,What Color Is Your Blood!!
+syn_what_color_is_your_blood_desc,명중률과 회피율이 20% 상승합니다,Hit rate and evasion rate increase by 20%.
+syn_unworthy_to_live_today_name,네놈들은 오늘을 살아갈 자격이 없다!!,You Are Not Worthy to Live Today!!
+syn_unworthy_to_live_today_desc,속도의 100%만큼 힘이 상승합니다,Strength increases by 100% of Speed.
+,,
+item_ambivalent_world_name,ambivalent world,Ambivalent World
+item_ambivalent_world_desc,소원을 이루어주는 대신 그 사람에게 빙의하는 괴이,An oddity that grants a wish in exchange for possessing that person.
+item_ambivalent_world_bonus,최대 체력이 (100/600/3000)만큼 증가합니다,Max HP increases by (100/600/3000).
+item_white_lies_name,white lies,White Lies
+item_white_lies_desc,금발 금안의 흡혈귀 소녀가 착용하던 헬멧,A helmet once worn by a blond golden eyed vampire girl.
+item_white_lies_bonus,브레이크 저항이 (2/12/60)만큼 증가합니다,Break Resistance increases by (2/12/60).
+item_love_circulation_name,연애 서큘레이션,Renai Circulation
+item_love_circulation_desc,짝사랑 끝에 신이 되었던 소녀의 모자,A hat once worn by a girl who became a god after unrequited love.
+item_love_circulation_bonus,최대 체력이 (4%/20%/100%)만큼 증가합니다,Max HP increases by (4%/20%/100%).
+item_the_hero_name,THE HERO!!,THE HERO!!
+item_the_hero_desc,취미로 히어로를 하는 사나이의 글러브,Gloves once worn by a man who works as a hero for fun.
+item_the_hero_bonus,최대 체력의 5%만큼 힘이 상승합니다,Strength increases by 5% of Max HP.
+syn_last_day_adolescence_name,the last day of my adolescence,The Last Day of My Adolescence
+syn_last_day_adolescence_desc,최대 체력이 15% 상승합니다,Max HP increases by 15%.
+syn_suteki_meppou_name,suteki meppou,Suteki Meppou
+syn_suteki_meppou_desc,브레이크 저항이 20% 상승합니다,Break Resistance increases by 20%.
+syn_spasibo_name,Spasibo!,Spasibo!
+syn_spasibo_desc,최대 체력의 10%만큼 힘이 상승합니다,Strength increases by 10% of Max HP.
+,,
+item_my_love_is_a_stapler_name,내 사랑은 호치키스,My Love Is a Stapler
+item_my_love_is_a_stapler_desc,부끄럼쟁이 베이시스트 소녀의 베이스 기타,A bass guitar owned by a shy bassist girl.
+item_my_love_is_a_stapler_bonus,스킬 피해가 (1%/5%/20%)만큼 증가합니다,Skill damage increases by (1%/5%/20%).
+item_belle_papillon_name,Belle papillon,Belle Papillon
+item_belle_papillon_desc,탈퇴가 특기인 밴드맨이 사용하던 일렉 기타,An electric guitar once used by a bandman known for quitting.
+item_belle_papillon_bonus,매 턴 힘/방어/속도/운 중 하나가 (2%/8%/30%) 상승하는 버프를 획득합니다. U&I와 합산됩니다,Each turn gain a buff that increases one of Strength/Defense/Speed/Luck by (2%/8%/30%). Stacks with U&I.
+item_youth_complex_name,청춘 콤플렉스,Seisyun Complex
+item_youth_complex_desc,외톨이 소녀가 사용하던 기타,A guitar once used by a lonely girl.
+item_youth_complex_bonus,매 턴 치명타 확률/치명타 피해/회피율/명중률/피해 증폭 중 하나가 (2%/8%/30%) 상승하는 버프를 획득합니다,Each turn gain a buff that increases one of Critical Rate/Critical Damage/Evasion/Hit Rate/Damage Amplification by (2%/8%/30%).
+item_dont_say_lazy_name,"Don't say ""lazy""","Don't Say ""Lazy"""
+item_dont_say_lazy_desc,덜렁이 기타리스트 소녀의 기타,A guitar owned by a clumsy guitarist girl.
+item_dont_say_lazy_bonus,보유 중인 버프 1개당 피해 증폭이 2%씩 상승합니다,Damage amplification increases by 2% for each active buff.
+syn_that_band_name,That band,That Band
+syn_that_band_desc,피해 증폭이 5% 상승합니다,Damage amplification increases by 5%.
+syn_ui_name,U&I,U&I
+syn_ui_desc,매 턴 힘/방어/속도/운 중 하나가 5% 상승하는 버프를 획득합니다. Belle papillon과 합산됩니다,Each turn gain a buff that increases one of Strength/Defense/Speed/Luck by 5%. Stacks with Belle Papillon.
+syn_go_go_maniac_name,GO! GO! MANIAC,GO! GO! MANIAC
+syn_go_go_maniac_desc,보유 중인 버프 1개당 피해 증폭이 3%씩 상승합니다,Damage amplification increases by 3% for each active buff.
+,,
+item_beautiful_world_name,Beautiful World,Beautiful World
+item_beautiful_world_desc,애정 결핍이 있는 소년의 휴대용 카세트테이프 플레이어,A portable cassette tape player owned by a boy starved for affection.
+item_beautiful_world_bonus,피해 증폭이 (1%/5%/20%)만큼 증가합니다,Damage amplification increases by (1%/5%/20%).
+item_hunting_soul_name,Hunting Soul,Hunting Soul
+item_hunting_soul_desc,요괴가 빙의된 마네키네코,A maneki neko possessed by a yokai.
+item_hunting_soul_bonus,매 턴 적에게 힘/방어/속도/운 중 하나가 (2%/8%/25%) 감소하는 디버프를 부여합니다. The Final Decision We All Must Take와 중첩됩니다,Each turn inflict a debuff on the enemy that decreases one of Strength/Defense/Speed/Luck by (2%/8%/25%). Stacks with The Final Decision We All Must Take.
+item_the_world_name,the WORLD,The WORLD
+item_the_world_desc,사신의 힘이 깃든 검은색 표지의 노트,A black covered notebook imbued with the power of a death god.
+item_the_world_bonus,매 턴 적에게 회피율/받는 피해 증폭/명중률/출혈/화상 중 하나의 디버프를 (2%/8%/25%)만큼 부여합니다,Each turn inflict one debuff on the enemy from Evasion/Damage Taken Amplification/Hit Rate/Bleed/Burn by (2%/8%/25%).
+item_always_here_name,언제나 이곳에서,Always in this Place
+item_always_here_desc,매드 사이언티스트의 휴대폰,A cellphone owned by a mad scientist.
+item_always_here_bonus,적이 보유 중인 디버프 1개당 피해 증폭이 2%씩 상승합니다,Damage amplification increases by 2% for each debuff on the enemy.
+syn_whats_up_people_name,What's up people?,What's Up People?
+syn_whats_up_people_desc,피해 증폭이 5% 상승합니다,Damage amplification increases by 5%.
+syn_final_decision_name,The Final Decision We All Must Take,The Final Decision We All Must Take
+syn_final_decision_desc,매 턴 적에게 힘/방어/속도/운 중 하나가 5% 감소하는 디버프를 부여합니다. Hunting Soul과 중첩됩니다,Each turn inflict a debuff on the enemy that decreases one of Strength/Defense/Speed/Luck by 5%. Stacks with Hunting Soul.
+syn_komm_susser_tod_name,komm susser tod,Komm Susser Tod
+syn_komm_susser_tod_desc,적이 보유 중인 디버프 1개당 피해 증폭이 3%씩 상승합니다,Damage amplification increases by 3% for each debuff on the enemy.
+,,
+item_walk_like_an_egyptian_name,Walk Like an Egyptian,Walk Like an Egyptian
+item_walk_like_an_egyptian_desc,사용자를 흡혈귀로 변하게 하는 기묘한 가면,A bizarre mask that turns its wearer into a vampire.
+item_walk_like_an_egyptian_bonus,받는 피해량이 (2%/10%/35%)만큼 감소합니다,Damage taken decreases by (2%/10%/35%).
+item_jane_doe_name,JANE DOE,JANE DOE
+item_jane_doe_desc,폭탄의 악마의 힘을 사용하던 소녀가 착용하던 초커,A choker once worn by a girl who used the power of the Bomb Devil.
+item_jane_doe_bonus,잃은 체력에 비례하여 피해 증폭이 최대 (10%/40%/120%)까지 상승합니다,Damage amplification increases up to (10%/40%/120%) based on missing HP.
+item_monsters_are_killed_by_humans_name,괴물을 죽이는 것은 언제나 인간이다,It Is Always Humans Who Kill Monsters
+item_monsters_are_killed_by_humans_desc,No Life King이 사용하던 대괴물용 자동권총,An anti monster automatic pistol once used by the No Life King.
+item_monsters_are_killed_by_humans_bonus,잃은 체력에 비례하여 힘 방어 속도 운이 최대 (5%/25%/70%)까지 상승합니다,Strength Defense Speed and Luck increase up to (5%/25%/70%) based on missing HP.
+item_no_paradise_after_escape_name,도망쳐서 도착한 곳에 낙원이란 있을 수 없는 거야,There Is No Paradise Waiting After You Run Away
+item_no_paradise_after_escape_desc,낙인의 검사가 착용하던 늑대 형상의 갑주,Wolf shaped armor once worn by the branded swordsman.
+item_no_paradise_after_escape_bonus,전투당 1회 사망에 이르는 피해를 체력 1로 버팁니다. IRIS OUT이 활성화되어 있다면 생존 직후 최대 체력의 100%를 회복합니다,Once per battle survive lethal damage with 1 HP. If IRIS OUT is active recover 100% of Max HP immediately after surviving.
+syn_dogland_name,Dogland,Dogland
+syn_dogland_desc,받는 피해 감소가 10% 상승합니다,Damage reduction increases by 10%.
+syn_kick_back_name,KICK BACK,KICK BACK
+syn_kick_back_desc,잃은 체력에 비례하여 피해 증폭이 최대 50%까지 상승합니다,Damage amplification increases up to 50% based on missing HP.
+syn_iris_out_name,IRIS OUT,IRIS OUT
+syn_iris_out_desc,전투당 1회 사망에 이르는 피해를 체력 1로 버팁니다. 광전사의 갑주를 보유 중이라면 생존 직후 최대 체력의 100%를 회복합니다,Once per battle survive lethal damage with 1 HP. If you have the Berserker Armor recover 100% of Max HP immediately after surviving.
+,,
+item_where_our_blue_is_name,푸르름이 사는 곳,Where Our Blue Is
+item_where_our_blue_is_desc,현대 최강의 주술사가 착용하던 안대,A blindfold once worn by the strongest modern sorcerer.
+item_where_our_blue_is_bonus,피해 흡혈이 (1%/5%/20%)만큼 증가합니다,Damage lifesteal increases by (1%/5%/20%).
+item_lost_in_paradise_name,LOST IN PARADISE,LOST IN PARADISE
+item_lost_in_paradise_desc,저주의 왕의 혼이 담긴 손가락,A finger containing the soul of the King of Curses.
+item_lost_in_paradise_bonus,잃은 체력에 비례하여 피해 흡혈이 최대 (2%/10%/30%)까지 증가합니다,Damage lifesteal increases up to (2%/10%/30%) based on missing HP.
+item_glassy_sky_name,Glassy Sky,Glassy Sky
+item_glassy_sky_desc,척안의 왕이라 불리던 남자의 가면,A mask once worn by the man known as the One Eyed King.
+item_glassy_sky_bonus,모든 회복 효과의 효율이 (7%/27%/100%)만큼 증가합니다,All healing effect efficiency increases by (7%/27%/100%).
+item_fly_me_to_the_moon_name,Fly Me To The Moon,Fly Me To The Moon
+item_fly_me_to_the_moon_desc,결계를 무효화하는 신비로운 창,A mystical spear that nullifies barriers.
+item_fly_me_to_the_moon_bonus,최대 체력을 초과하여 회복한 수치의 최대 체력 비례 수치의 0.5%만큼 1턴간 피해 증폭을 획득합니다,Gain 1 turn of damage amplification equal to 0.5% of overhealing as a percentage of Max HP.
+syn_unravel_name,Unravel,Unravel
+syn_unravel_desc,피해 흡혈이 3% 상승합니다,Damage lifesteal increases by 3%.
+syn_seasons_die_one_after_another_name,계절은 차례차례 죽어간다,The Seasons Die One After Another
+syn_seasons_die_one_after_another_desc,모든 회복 효과의 효율이 20% 상승합니다,All healing effect efficiency increases by 20%.
+syn_asphyxia_name,Asphyxia,Asphyxia
+syn_asphyxia_desc,최대 체력을 초과하여 회복한 수치의 최대 체력 비례 수치의 1%만큼 1턴간 피해 증폭을 획득합니다,Gain 1 turn of damage amplification equal to 1% of overhealing as a percentage of Max HP.
+,,
+syn_friend_name,Friend,Friend
+syn_negotiator_name,Negotiator,Negotiator
+syn_full_name_name,Full Name,Full Name
+syn_rumor_name,Rumor,Rumor
+syn_a_feeling_close_to_lust_name,A Feeling Close To Lust,A Feeling Close To Lust
+syn_innocent_prank_name,Innocent Prank,Innocent Prank
+syn_bad_bully_name,Bad Bully,Bad Bully
+,,
+syn_friend_desc,힘 방어 속도 운 체력 행동력 브레이크 저항이 5% 상승합니다,Strength Defense Speed Luck HP AP and Break Resistance increase by 5%.
+syn_negotiator_desc,힘 방어 속도 운 체력 행동력 브레이크 저항이 10% 상승합니다,Strength Defense Speed Luck HP AP and Break Resistance increase by 10%.
+syn_full_name_desc,힘 방어 속도 운 체력 행동력 브레이크 저항이 20% 상승합니다,Strength Defense Speed Luck HP AP and Break Resistance increase by 20%.
+syn_rumor_desc,힘 방어 속도 운 체력 행동력 브레이크 저항이 40% 상승합니다,Strength Defense Speed Luck HP AP and Break Resistance increase by 40%.
+syn_a_feeling_close_to_lust_desc,힘 방어 속도 운 체력 행동력 브레이크 저항이 75% 상승합니다,Strength Defense Speed Luck HP AP and Break Resistance increase by 75%.
+syn_innocent_prank_desc,힘 방어 속도 운 체력 행동력 브레이크 저항이 130% 상승합니다,Strength Defense Speed Luck HP AP and Break Resistance increase by 130%.
+syn_bad_bully_desc,힘 방어 속도 운 체력 행동력 브레이크 저항이 200% 상승합니다,Strength Defense Speed Luck HP AP and Break Resistance increase by 200%.
