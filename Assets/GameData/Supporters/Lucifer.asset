@@ -31,8 +31,8 @@ MonoBehaviour:
   selectMessage: support_lucifer_select
   joinMessage: support_lucifer_join
   linkedFacilityID: bar
-  passiveLevel: 3
-  startSkillLevel: 1
+  passiveLevel: 1
+  startSkillLevel: 2
   battleSkillLevel: 1
   startSkillLogic: {fileID: 11400000, guid: f59b83eeb46ca4248904117fe325e2b0, type: 2}
   battleSkillLogic: {fileID: 11400000, guid: 7918fe9a245cfd4488ca34211c68be0b, type: 2}

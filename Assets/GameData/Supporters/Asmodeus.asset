@@ -21,8 +21,8 @@ MonoBehaviour:
   sdImage: {fileID: 21300000, guid: e591bdb9608cb634481a4bb2e950e547, type: 3}
   CutIn: {fileID: 21300000, guid: 69a0e4ba93e1e39418d011e83a293f88, type: 3}
   startSkillCutIn: {fileID: 0}
-  startSkillImage: {fileID: 21300000, guid: 583b133904f0f7e44973ca51f2ce01e1, type: 3}
-  battleSkillImage: {fileID: 21300000, guid: 061ae30feb8678b49ad5e9c475c141a5, type: 3}
+  startSkillImage: {fileID: 21300000, guid: 212ca758facb9494fad29cc0c197bc16, type: 3}
+  battleSkillImage: {fileID: 21300000, guid: 8b063434cafb3bb42b30161bfc606075, type: 3}
   worried: {fileID: 21300000, guid: d7e610e128ea5e642acd9e11d940c49e, type: 3}
   happy: {fileID: 21300000, guid: 70b485d0a6158374ebcef76937f93bd4, type: 3}
   passiveSkillDesc: supporter_passive_fluffy_time
@@ -31,8 +31,8 @@ MonoBehaviour:
   selectMessage: support_asmodeus_select
   joinMessage: support_asmodeus_join
   linkedFacilityID: maidcafe
-  passiveLevel: 3
-  startSkillLevel: 1
-  battleSkillLevel: 1
+  passiveLevel: 2
+  startSkillLevel: 2
+  battleSkillLevel: 2
   startSkillLogic: {fileID: 11400000, guid: 4689145c7eb13af449e8f452c19a5c8c, type: 2}
   battleSkillLogic: {fileID: 11400000, guid: a02aafce9899a6e478b1cdcf8a287a66, type: 2}

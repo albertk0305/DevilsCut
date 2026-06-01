@@ -49,23 +49,23 @@ support_mammon_join,V.I.P.의 부탁이니 이번만 특별 서비스예요!,"Si
 support_satan_select,"셰리 부르면 나, 바로 간다!","If Sherry calls, I come running!"
 support_satan_join,"셰리 옆, 내 자리다!","By Sherry's side, that is my place!"
 ,,
-supporter_passive_fluffy_time,푹신푹신 타임: 전투 종료마다 (10%/15%/25%) 확률로 체력 브레이크 최대치 브레이크 저항 행동력 중 하나의 스탯이 영구적으로 (1/2/3)만큼 상승합니다. 체력은 (91/182/273)만큼 상승합니다,Fuwa Fuwa Time: At the end of each battle there is a (10%/15%/25%) chance to permanently increase one stat from HP Max Break Break Resistance or AP by (1/2/3). HP increases by (91/182/273).
+supporter_passive_fluffy_time,푹신푹신 타임: 전투 종료마다 (10%/15%/25%) 확률로 체력/브레이크 최대치/브레이크 저항/행동력 중 하나의 스탯이 영구적으로 (1/2/3)만큼 상승합니다. 체력은 (91/182/273)만큼 상승합니다,Fuwa Fuwa Time: At the end of each battle there is a (10%/15%/25%) chance to permanently increase one stat from HP/Max Break/Break Resistance/AP by (1/2/3). HP increases by (91/182/273).
 supporter_start_met_an_angel,천사를 만났어: 적의 힘을 (10%/15%/20%)만큼 3턴간 감소시키고 셰리의 스타일 랭크를 한 단계 상승시킵니다,Tenshi ni Fureta yo!: Decreases enemy Strength by (10%/15%/20%) for 3 turns and raises Sherry's Style Rank by 1 level.
-supporter_battle_pure_pure_heart,퓨어퓨어하트: 셰리의 체력을 20% 회복시키고 모든 디버프를 해제합니다. 힘 방어 속도 운이 3턴간 20% 상승합니다,Pure Pure Heart: Restores 20% of Sherry's HP and removes all debuffs. Strength Defense Speed and Luck increase by 20% for 3 turns.
+supporter_battle_pure_pure_heart,퓨어퓨어하트: 셰리의 체력을 20% 회복시키고 모든 디버프를 해제합니다. 힘/방어/속도/운이 3턴간 20% 상승합니다,Pure Pure Heart: Restores 20% of Sherry's HP and removes all debuffs. Strength/Defense/Speed/Luck increase by 20% for 3 turns.
 ,,
 supporter_passive_shiny_days,Shiny Days: 전투 종료마다 최대 체력의 (5%/10%/20%)만큼 회복합니다,Shiny Days: At the end of each battle recover (5%/10%/20%) of Max HP.
 supporter_start_apron_boy,에이프런 보이: 적에게 3턴간 화상 디버프를 부여하고 방어를 (7%/10%/15%)만큼 감소시킵니다. 화상 상태인 적은 턴마다 최대 체력의 (2%/3%/5%)만큼 피해를 입습니다,Apron Boy: Inflicts Burn on the enemy for 3 turns and decreases Defense by (7%/10%/15%). A burned enemy takes damage equal to (2%/3%/5%) of Max HP each turn.
 supporter_battle_collage,콜라주: 6타 다단 히트 피해를 입힙니다. 각 타격마다 (20%/30%/40%) 확률로 출혈 디버프를 부여합니다. 스킬 피해는 적이 보유 중인 디버프 개수에 비례하여 증가합니다. 출혈 상태인 적은 턴마다 셰리 힘의 (80%/100%/120%)만큼 피해를 입습니다,Collage: Deals 6 hit multi hit damage. Each hit has a (20%/30%/40%) chance to inflict Bleed. Skill damage increases based on the number of debuffs on the enemy. A bleeding enemy takes damage equal to (80%/100%/120%) of Sherry's Strength each turn.
 ,,
 supporter_passive_there_is_a_reason,There is a Reason: 전투 종료마다 아이템 리롤을 실행할 때 (10%/20%/35%) 확률로 아이템의 등급이 한 단계 상승합니다,There Is a Reason: When rerolling items at the end of battle there is a (10%/20%/35%) chance to increase an item's grade by 1 level.
-supporter_start_this_game,This Game: 적에게 힘 방어 속도 운 중 두 개의 스탯을 무작위로 (5%~30%/10%~50%/20%~80%)만큼 3턴간 감소시킵니다,This Game: Randomly decreases 2 stats from enemy Strength Defense Speed or Luck by (5%~30%/10%~50%/20%~80%) for 3 turns.
+supporter_start_this_game,This Game: 셰리의 힘/방어/속도/운 중 두 개의 스탯을 무작위로 (5%~30%/10%~50%/20%~80%)만큼 3턴간 증가시킵니다,This Game: Randomly decreases 2 stats from enemy Strength/Defense/Speed/Luck by (5%~30%/10%~50%/20%~80%) for 3 turns.
 supporter_battle_deal_with_the_devil,Deal with the Devil: 적에게 무작위로 6가지 효과 중 하나를 적용합니다. 셰리의 운이 높을수록 좋은 효과가 발생할 확률이 높아집니다,Deal with the Devil: Randomly applies 1 of 6 effects to the enemy. The higher Sherry's Luck is the higher the chance of a favorable effect.
 ,,
 supporter_passive_if_i_could_be_a_constellation,별자리가 될 수 있다면: 전투 종료마다 (10%/20%/35%) 확률로 일반 등급 아이템을 획득합니다,If I Could Be a Constellation: At the end of each battle there is a (10%/20%/35%) chance to obtain a Common grade item.
 supporter_start_guitar_loneliness_blue_planet,기타와 고독과 푸른 행성: 적의 AP를 3턴간 (15%/25%/40%) 감소시키고 셰리의 AP를 3턴간 (10%/20%/30%) 상승시킵니다,Guitar Loneliness and Blue Planet: Decreases enemy AP by (15%/25%/40%) for 3 turns and increases Sherry's AP by (10%/20%/30%) for 3 turns.
 supporter_battle_sweet_hurt,Sweet Hurt: 적에게 5타 다단 히트 피해를 입힙니다. 각 타격마다 적의 버프 1개의 잔여 턴을 1턴씩 줄입니다. 줄인 버프 턴 1개당 피해량이 (15%/20%/30%) 증가합니다,Sweet Hurt: Deals 5 hit multi hit damage to the enemy. Each hit reduces the remaining duration of 1 enemy buff by 1 turn. Damage increases by (15%/20%/30%) for each buff turn reduced.
 ,,
-supporter_passive_im_the_only_ghost,나만 유령이야: 전투 종료마다 (10%/15%/25%) 확률로 힘 방어 속도 운 중 하나가 (1/2/3)만큼 상승합니다,I'm the Only Ghost: At the end of each battle there is a (10%/15%/25%) chance to increase one stat from Strength Defense Speed or Luck by (1/2/3).
+supporter_passive_im_the_only_ghost,나만 유령이야: 전투 종료마다 (10%/15%/25%) 확률로 힘/방어/속도/운 중 하나가 (1/2/3)만큼 상승합니다,I'm the Only Ghost: At the end of each battle there is a (10%/15%/25%) chance to increase one stat from Strength/Defense/Speed/Luck by (1/2/3).
 supporter_start_neat3,Neat3: 3턴간 운이 (15%/20%/30%)만큼 증가합니다. 전투 시작 즉시 행동 수치를 (100/150/200)만큼 채워줍니다,Neat3: Increases Luck by (15%/20%/30%) for 3 turns. Immediately fills the action gauge by (100/150/200) at the start of battle.
 supporter_battle_happy_spiral,해피 스파이럴: 적의 방어를 (20%/30%/40%)만큼 무시하는 강력한 피해를 입힙니다. 스킬 사용 후 (40%/35%/20%) 확률로 숙취가 발생하여 루시퍼의 행동 수치가 50만큼 감소합니다,Happy Spiral: Deals powerful damage that ignores (20%/30%/40%) of enemy Defense. After using this skill there is a (40%/35%/20%) chance of Hangover reducing Lucifer's action gauge by 50.
 ,,

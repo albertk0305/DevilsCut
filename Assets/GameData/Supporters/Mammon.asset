@@ -31,7 +31,7 @@ MonoBehaviour:
   selectMessage: support_mammon_select
   joinMessage: support_mammon_join
   linkedFacilityID: blackmarket
-  passiveLevel: 3
+  passiveLevel: 1
   startSkillLevel: 1
   battleSkillLevel: 1
   startSkillLogic: {fileID: 11400000, guid: 9d7797de3a6aadf41af464c2da543348, type: 2}

@@ -31,7 +31,7 @@ MonoBehaviour:
   selectMessage: support_satan_select
   joinMessage: support_satan_join
   linkedFacilityID: fightclub
-  passiveLevel: 3
+  passiveLevel: 1
   startSkillLevel: 1
   battleSkillLevel: 1
   startSkillLogic: {fileID: 11400000, guid: 2baf3e26e48b3fa4ebb9f87971daf907, type: 2}

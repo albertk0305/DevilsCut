@@ -81,7 +81,7 @@ MonoBehaviour:
       luck: 9
     bossEnemyStats:
       level: 24
-      maxHp: 1300
+      maxHp: 13000
       actionPoints: 15
       breakResistance: 20
       maxBreakGauge: 115
@@ -142,7 +142,7 @@ MonoBehaviour:
       defense: 0
       speed: 0
       luck: 0
-  - phase: 9
+  - phase: 4
     generalBattleReward:
       exp: 5500
       gold: 3000

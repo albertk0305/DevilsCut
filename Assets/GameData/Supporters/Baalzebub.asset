@@ -31,7 +31,7 @@ MonoBehaviour:
   selectMessage: support_baalzebub_select
   joinMessage: support_baalzebub_join
   linkedFacilityID: restaurant
-  passiveLevel: 3
+  passiveLevel: 1
   startSkillLevel: 1
   battleSkillLevel: 1
   startSkillLogic: {fileID: 11400000, guid: e3136e35f6e068c4883162dcd1df2436, type: 2}

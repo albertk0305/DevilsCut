@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 061ae30feb8678b49ad5e9c475c141a5
+guid: 8b063434cafb3bb42b30161bfc606075
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4692672118839958109
-    second: AsmoBattleSkill_0
+      213: 2580715122858645179
+    second: AsmoBattleFinal_alpha_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: AsmoBattleSkill_0
+      name: AsmoBattleFinal_alpha_0
       rect:
         serializedVersion: 2
-        x: 100
+        x: 0
         y: 0
-        width: 924
-        height: 984
+        width: 1024
+        height: 1021
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3a52a2d129740eeb0800000000000000
-      internalID: -4692672118839958109
+      spriteID: bb6d7742bba80d320800000000000000
+      internalID: 2580715122858645179
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      AsmoBattleSkill_0: -4692672118839958109
+      AsmoBattleFinal_alpha_0: 2580715122858645179
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

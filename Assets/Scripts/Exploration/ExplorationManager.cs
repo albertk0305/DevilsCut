@@ -172,12 +172,25 @@ public class ExplorationManager : MonoBehaviour
 
     private List<BossEncounterData> GetBossCandidates()
     {
+        List<BossEncounterData> candidates;
+
         if (currentCycle <= 7)
         {
-            return remainingMidBosses.OrderBy(x => Random.value).Take(3).ToList();
+            candidates = remainingMidBosses != null
+                ? remainingMidBosses.Where(b => b != null).OrderBy(x => Random.value).Take(3).ToList()
+                : new List<BossEncounterData>();
         }
-        else if (currentCycle == 8) return finalBoss != null ? new List<BossEncounterData> { finalBoss } : new List<BossEncounterData>();
-        else return trueFinalBoss != null ? new List<BossEncounterData> { trueFinalBoss } : new List<BossEncounterData>();
+        else if (currentCycle == 8)
+        {
+            candidates = finalBoss != null ? new List<BossEncounterData> { finalBoss } : new List<BossEncounterData>();
+        }
+        else
+        {
+            candidates = trueFinalBoss != null ? new List<BossEncounterData> { trueFinalBoss } : new List<BossEncounterData>();
+        }
+
+        DevLog.Log($"[Exploration] BossSelection candidates: {BuildBossNameList(candidates)}");
+        return candidates;
     }
 
     private BossSelectionNodeData CreateBossNode(BossEncounterData data)
@@ -231,20 +244,15 @@ public class ExplorationManager : MonoBehaviour
         }
         else
         {
+            DevLog.Log($"[Exploration] BossBattle cleared. cycle={currentCycle}, target={GetBossLogName(currentTargetBoss)}");
+
             if (IsCurrentBattleMidBoss())
             {
                 currentKeys++;
                 DevLog.Log($"[중간보스 보상] Key +1, 현재 Key: {currentKeys}");
             }
 
-            // Only mid-boss cycles consume entries from the remaining list.
-            if (currentCycle <= 7 && remainingMidBosses != null)
-            {
-                if (currentTargetBoss != null && !string.IsNullOrEmpty(currentTargetBoss.bossID))
-                    remainingMidBosses.RemoveAll(b => b != null && b.bossID == currentTargetBoss.bossID);
-                else
-                    remainingMidBosses.Remove(currentTargetBoss);
-            }
+            RemoveCurrentTargetFromRemainingMidBossesIfNeeded();
 
             currentCycle++;
             currentTargetBoss = null;
@@ -255,6 +263,30 @@ public class ExplorationManager : MonoBehaviour
 
         GenerateCurrentOptions();
         SaveStateToPlayerManager();
+    }
+
+    private void RemoveCurrentTargetFromRemainingMidBossesIfNeeded()
+    {
+        if (currentCycle > 7 || remainingMidBosses == null)
+            return;
+
+        int removedCount = RemoveBossFromList(remainingMidBosses, currentTargetBoss);
+        DevLog.Log($"[Exploration] Removed defeated midboss. removedCount={removedCount}, remaining={remainingMidBosses.Count}");
+    }
+
+    private int RemoveBossFromList(List<BossEncounterData> bossList, BossEncounterData targetBoss)
+    {
+        if (bossList == null || targetBoss == null)
+            return 0;
+
+        string targetID = targetBoss.bossID;
+        string targetName = targetBoss.bossName;
+
+        return bossList.RemoveAll(b =>
+            b != null &&
+            ((!string.IsNullOrEmpty(targetID) && b.bossID == targetID) ||
+             (!string.IsNullOrEmpty(targetName) && b.bossName == targetName) ||
+             b == targetBoss));
     }
 
     public List<SavedExplorationOption> GetCurrentOptionsForSave()
@@ -431,6 +463,13 @@ public class ExplorationManager : MonoBehaviour
         return bossIDs;
     }
 
+    private List<BossEncounterData> CopyRemainingMidBosses()
+    {
+        return remainingMidBosses != null
+            ? remainingMidBosses.Where(b => b != null).ToList()
+            : new List<BossEncounterData>();
+    }
+
     public bool RestoreBossProgressFromSave(string currentTargetBossID, List<string> remainingMidBossIDs, BossDatabase bossDatabase)
     {
         if (bossDatabase == null)
@@ -565,6 +604,8 @@ public class ExplorationManager : MonoBehaviour
         playerManager.savedExplorationTurnInPhase = currentTurnInPhase;
         playerManager.savedExplorationKeys = currentKeys;
         playerManager.savedCurrentTargetBoss = currentTargetBoss;
+        playerManager.hasSavedRemainingMidBosses = true;
+        playerManager.savedRemainingMidBosses = CopyRemainingMidBosses();
         playerManager.savedLastVisitedNodeImage = lastVisitedNodeImage;
         playerManager.savedLastVisitedFacility = lastVisitedFacility;
         playerManager.SetSavedFacilityRanks(facilityRanks);
@@ -591,6 +632,12 @@ public class ExplorationManager : MonoBehaviour
             currentTurnInPhase = playerManager.savedExplorationTurnInPhase;
             currentKeys = playerManager.savedExplorationKeys;
             currentTargetBoss = playerManager.savedCurrentTargetBoss;
+            if (playerManager.hasSavedRemainingMidBosses)
+                remainingMidBosses = playerManager.savedRemainingMidBosses != null
+                    ? playerManager.savedRemainingMidBosses.Where(b => b != null).ToList()
+                    : new List<BossEncounterData>();
+            else
+                DevLog.LogWarning("[ExplorationManager] Saved exploration state has no saved remaining midboss list. Keeping scene list.");
             lastVisitedNodeImage = playerManager.savedLastVisitedNodeImage;
             lastVisitedFacility = playerManager.savedLastVisitedFacility;
             RestoreFacilityRanksFromPlayerManager(playerManager);
@@ -632,6 +679,29 @@ public class ExplorationManager : MonoBehaviour
 
         return a == b;
     }
+
+    private string BuildBossNameList(List<BossEncounterData> bosses)
+    {
+        if (bosses == null || bosses.Count == 0)
+            return "(none)";
+
+        return string.Join(", ", bosses.Select(GetBossLogName));
+    }
+
+    private string GetBossLogName(BossEncounterData boss)
+    {
+        if (boss == null)
+            return "(null)";
+
+        if (!string.IsNullOrEmpty(boss.bossName))
+            return boss.bossName;
+
+        if (!string.IsNullOrEmpty(boss.bossID))
+            return boss.bossID;
+
+        return boss.name;
+    }
+
     private bool IsCurrentBattleMidBoss()
     {
         if (currentTargetBoss == null)

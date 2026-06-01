@@ -31,7 +31,7 @@ MonoBehaviour:
   selectMessage: support_leviathan_select
   joinMessage: support_leviathan_join
   linkedFacilityID: livehouse
-  passiveLevel: 3
+  passiveLevel: 1
   startSkillLevel: 1
   battleSkillLevel: 1
   startSkillLogic: {fileID: 11400000, guid: 4b8f6be4c9d44da47905ba95a6bc5c8a, type: 2}

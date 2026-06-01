@@ -157,6 +157,8 @@ public class PlayerManager : MonoBehaviour
     public int savedExplorationTurnInPhase;
     public int savedExplorationKeys;
     public BossEncounterData savedCurrentTargetBoss;
+    public bool hasSavedRemainingMidBosses;
+    public List<BossEncounterData> savedRemainingMidBosses = new List<BossEncounterData>();
     public Sprite savedLastVisitedNodeImage;
     public FacilityData savedLastVisitedFacility;
     public List<PlayerFacilityRankRecord> savedFacilityRanks = new List<PlayerFacilityRankRecord>();
@@ -273,6 +275,8 @@ public class PlayerManager : MonoBehaviour
         savedExplorationTurnInPhase = 0;
         savedExplorationKeys = 0;
         savedCurrentTargetBoss = null;
+        hasSavedRemainingMidBosses = false;
+        savedRemainingMidBosses.Clear();
         savedLastVisitedNodeImage = null;
         savedLastVisitedFacility = null;
         savedFacilityRanks.Clear();

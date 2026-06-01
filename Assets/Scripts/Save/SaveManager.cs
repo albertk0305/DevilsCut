@@ -527,7 +527,10 @@ public class SaveManager : MonoBehaviour
 
     private ExplorationContinueSaveData BuildInitialExplorationContinueSaveData(PlayerManager playerManager)
     {
-        List<string> remainingMidBossIDs = BuildInitialRemainingMidBossIDs();
+        List<string> remainingMidBossIDs = BuildRemainingMidBossIDsFromPlayerManager(playerManager);
+
+        if (remainingMidBossIDs.Count == 0 && (playerManager == null || !playerManager.hasSavedExplorationState))
+            remainingMidBossIDs = BuildInitialRemainingMidBossIDs();
 
         ExplorationContinueSaveData data = new ExplorationContinueSaveData
         {
@@ -578,6 +581,27 @@ public class SaveManager : MonoBehaviour
         }
 
         return data;
+    }
+
+    private List<string> BuildRemainingMidBossIDsFromPlayerManager(PlayerManager playerManager)
+    {
+        List<string> bossIDs = new List<string>();
+
+        if (playerManager == null ||
+            !playerManager.hasSavedExplorationState ||
+            !playerManager.hasSavedRemainingMidBosses ||
+            playerManager.savedRemainingMidBosses == null)
+        {
+            return bossIDs;
+        }
+
+        foreach (BossEncounterData boss in playerManager.savedRemainingMidBosses)
+        {
+            if (boss != null && !string.IsNullOrEmpty(boss.bossID))
+                bossIDs.Add(boss.bossID);
+        }
+
+        return bossIDs;
     }
 
     private List<string> BuildInitialRemainingMidBossIDs()
