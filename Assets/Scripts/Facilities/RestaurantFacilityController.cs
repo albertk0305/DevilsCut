@@ -820,19 +820,37 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
 
     private int GetGeneralBattleExp()
     {
-        int currentCycle = ExplorationManager.Instance != null ? ExplorationManager.Instance.currentCycle : 1;
+        int currentCycle = ResolveRewardCycle();
 
         if (battleBalanceDatabase == null)
         {
             DevLog.LogWarning("[RestaurantFacility] battleBalanceDatabase is not assigned.");
+            DevLog.Log($"[RestaurantFacility] General battle EXP resolved. cycle={currentCycle}, exp=0");
             return 0;
         }
 
         PhaseBattleBalance phaseBalance = battleBalanceDatabase.GetPhaseBalance(currentCycle);
         if (phaseBalance == null || phaseBalance.generalBattleReward == null)
+        {
+            DevLog.LogWarning($"[RestaurantFacility] General battle reward is missing. cycle={currentCycle}");
+            DevLog.Log($"[RestaurantFacility] General battle EXP resolved. cycle={currentCycle}, exp=0");
             return 0;
+        }
 
-        return Mathf.Max(0, phaseBalance.generalBattleReward.exp);
+        int exp = Mathf.Max(0, phaseBalance.generalBattleReward.exp);
+        DevLog.Log($"[RestaurantFacility] General battle EXP resolved. cycle={currentCycle}, exp={exp}");
+        return exp;
+    }
+
+    private int ResolveRewardCycle()
+    {
+        if (ExplorationManager.Instance != null)
+            return Mathf.Max(1, ExplorationManager.Instance.currentCycle);
+
+        if (PlayerManager.Instance != null && PlayerManager.Instance.savedExplorationCycle > 0)
+            return PlayerManager.Instance.savedExplorationCycle;
+
+        return 1;
     }
 
     private LevelUpResult GrantExp(int expAmount)

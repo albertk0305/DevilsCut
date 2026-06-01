@@ -2856,7 +2856,7 @@ MonoBehaviour:
   lastVisitedFacility: {fileID: 0}
   lastVisitedNodeImage: {fileID: 0}
   currentPhase: 1
-  currentCycle: 1
+  currentCycle: 2
   currentTurnInPhase: 0
   currentKeys: 0
   bossSelectionEventIcon: {fileID: 21300000, guid: a290edb1d6fb15046af8721e77ae9ba0, type: 3}

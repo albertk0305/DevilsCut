@@ -48,13 +48,13 @@ item_inner_universe_desc,기계화된 세계 속에서 인간성을 지킨 남�
 item_inner_universe_bonus,치명타 피해량이 (10%/50%/150%)만큼 상승합니다,Critical damage increases by (10%/50%/150%).
 item_gotta_knock_name,Gotta Knock a Little Harder,Gotta Knock a Little Harder
 item_gotta_knock_desc,깨어나지 않는 꿈을 꾸던 남자의 권총,A pistol once used by a man trapped in an endless dream.
-item_gotta_knock_bonus,운의 50%만큼 치명타 피해량이 상승합니다,Critical damage increases by 50% of Luck.
+item_gotta_knock_bonus,운의 25%만큼 치명타 피해량이 상승합니다,Critical damage increases by 25% of Luck.
 syn_cat_blues_name,Cat Blues,Cat Blues
 syn_cat_blues_desc,운이 15% 상승합니다,Luck increases by 15%.
 syn_bad_dog_no_biscuits_name,Bad Dog No Biscuits,Bad Dog No Biscuits
 syn_bad_dog_no_biscuits_desc,치명타 확률이 15% 상승합니다,Critical rate increases by 15%.
 syn_the_real_folk_blues_name,The Real Folk Blues,The Real Folk Blues
-syn_the_real_folk_blues_desc,운의 100%만큼 치명타 피해량이 상승합니다,Critical damage increases by 100% of Luck.
+syn_the_real_folk_blues_desc,운의 50%만큼 치명타 피해량이 상승합니다,Critical damage increases by 50% of Luck.
 ,,
 item_fly_away_name,Fly Away,Fly Away
 item_fly_away_desc,빗치 천사들이 사용하던 분홍색 험비,A pink Humvee once used by bitch angels.
@@ -73,7 +73,7 @@ syn_reckless_desc,행동력이 15% 상승합니다,AP increases by 15%.
 syn_divine_name,Divine,Divine
 syn_divine_desc,적과의 AP 차이에 비례하여 피해가 30%만큼 증폭됩니다,Damage is amplified by 30% based on the AP difference from the enemy.
 syn_one_last_kiss_name,One Last Kiss,One Last Kiss
-syn_one_last_kiss_desc,행동력의 100%만큼 치명타 피해량이 증가합니다,Critical damage increases by 100% of AP.
+syn_one_last_kiss_desc,행동력의 50%만큼 치명타 피해량이 증가합니다,Critical damage increases by 50% of AP.
 ,,
 item_fuyubiyori_name,Fuyubiyori,Fuyubiyori
 item_fuyubiyori_desc,솔로 캠핑을 즐기는 소녀의 바이크,A bike ridden by a girl who enjoys solo camping.
@@ -105,13 +105,13 @@ item_love_circulation_desc,짝사랑 끝에 신이 되었던 소녀의 모자,A 
 item_love_circulation_bonus,최대 체력이 (4%/20%/100%)만큼 증가합니다,Max HP increases by (4%/20%/100%).
 item_the_hero_name,THE HERO!!,THE HERO!!
 item_the_hero_desc,취미로 히어로를 하는 사나이의 글러브,Gloves once worn by a man who works as a hero for fun.
-item_the_hero_bonus,최대 체력의 5%만큼 힘이 상승합니다,Strength increases by 5% of Max HP.
+item_the_hero_bonus,최대 체력의 1%만큼 힘이 상승합니다,Strength increases by 1% of Max HP.
 syn_last_day_adolescence_name,the last day of my adolescence,The Last Day of My Adolescence
 syn_last_day_adolescence_desc,최대 체력이 15% 상승합니다,Max HP increases by 15%.
 syn_suteki_meppou_name,suteki meppou,Suteki Meppou
 syn_suteki_meppou_desc,브레이크 저항이 20% 상승합니다,Break Resistance increases by 20%.
 syn_spasibo_name,Spasibo!,Spasibo!
-syn_spasibo_desc,최대 체력의 10%만큼 힘이 상승합니다,Strength increases by 10% of Max HP.
+syn_spasibo_desc,최대 체력의 2%만큼 힘이 상승합니다,Strength increases by 2% of Max HP.
 ,,
 item_my_love_is_a_stapler_name,내 사랑은 호치키스,My Love Is a Stapler
 item_my_love_is_a_stapler_desc,부끄럼쟁이 베이시스트 소녀의 베이스 기타,A bass guitar owned by a shy bassist girl.
