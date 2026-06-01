@@ -111,6 +111,9 @@ public class PlayerManager : MonoBehaviour
 
     public SupporterData activeSupporter = null;
 
+    [Header("조력자 데이터베이스")]
+    public SupporterDatabase supporterDatabase;
+
     [Header("카린 장비 관리")]
     public List<KarinItemData> ownedKarinItems = new List<KarinItemData>();
     public KarinItemData equippedKarinItem = null;
@@ -230,6 +233,7 @@ public class PlayerManager : MonoBehaviour
             unlockedSkills.Add(runtimeSkill);
         }
 
+        ResetAllSupporterSkillLevels();
         unlockedSupporters.Clear();
         supporterChoiceRecords.Clear();
         activeSupporter = null;
@@ -282,6 +286,46 @@ public class PlayerManager : MonoBehaviour
         savedFacilityRanks.Clear();
 
         DevLog.Log("[PlayerManager] 새 게임 상태로 초기화했습니다.");
+    }
+
+    public void ResetAllSupporterSkillLevels()
+    {
+        HashSet<SupporterData> supportersToReset = new HashSet<SupporterData>();
+
+        AddSupporterToResetSet(supportersToReset, activeSupporter);
+        AddSupporterToResetSet(supportersToReset, pendingSupporterChoice);
+
+        if (unlockedSupporters != null)
+        {
+            foreach (SupporterData supporter in unlockedSupporters)
+                AddSupporterToResetSet(supportersToReset, supporter);
+        }
+
+        SupporterDatabase database = supporterDatabase;
+        if (database == null && SaveManager.Instance != null)
+            database = SaveManager.Instance.supporterDatabase;
+
+        if (database != null && database.allSupporters != null)
+        {
+            foreach (SupporterData supporter in database.allSupporters)
+                AddSupporterToResetSet(supportersToReset, supporter);
+        }
+
+        foreach (SupporterData supporter in supportersToReset)
+        {
+            // TODO: SupporterData is a ScriptableObject; prefer runtime copies for mutable skill levels long term.
+            supporter.passiveLevel = 1;
+            supporter.startSkillLevel = 1;
+            supporter.battleSkillLevel = 1;
+        }
+    }
+
+    private void AddSupporterToResetSet(HashSet<SupporterData> supporters, SupporterData supporter)
+    {
+        if (supporters == null || supporter == null)
+            return;
+
+        supporters.Add(supporter);
     }
 
     public bool ConsumePendingNewGameExplorationReset()
@@ -990,13 +1034,13 @@ public class PlayerManager : MonoBehaviour
 
         // Gunner: LUK to crit damage.
         float luckToCritDmg = 0f;
-        if (syn.GetValueOrDefault(ItemClass.Gunner) >= 6) luckToCritDmg += 1.0f;
+        if (syn.GetValueOrDefault(ItemClass.Gunner) >= 6) luckToCritDmg += 0.5f;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Gunner && x.data.grade == ItemGrade.Legendary))
-            luckToCritDmg += 0.5f;
+            luckToCritDmg += 0.25f;
         modified.critDamage += modified.luck * luckToCritDmg;
 
         // Assassin: AP to crit stats.
-        if (syn.GetValueOrDefault(ItemClass.Assassin) >= 6) modified.critDamage += modified.ActionPoints * 1.0f;
+        if (syn.GetValueOrDefault(ItemClass.Assassin) >= 6) modified.critDamage += modified.ActionPoints * 0.5f;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Assassin && x.data.grade == ItemGrade.Legendary))
             modified.critRate += modified.ActionPoints * 0.25f;
 
@@ -1009,9 +1053,9 @@ public class PlayerManager : MonoBehaviour
 
         // Beast: MaxHP to STR.
         float hpToStrRatio = 0f;
-        if (syn.GetValueOrDefault(ItemClass.Beast) >= 6) hpToStrRatio += 0.10f;
+        if (syn.GetValueOrDefault(ItemClass.Beast) >= 6) hpToStrRatio += 0.02f;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Beast && x.data.grade == ItemGrade.Legendary))
-            hpToStrRatio += 0.05f;
+            hpToStrRatio += 0.01f;
         modified.strength += Mathf.RoundToInt(modified.maxHp * hpToStrRatio);
 
 

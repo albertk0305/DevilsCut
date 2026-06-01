@@ -125,6 +125,7 @@ MonoBehaviour:
   - supporterID: leviathan
     state: 0
   activeSupporter: {fileID: 11400000, guid: 8f7a108444158544399cf83ab876c34c, type: 2}
+  supporterDatabase: {fileID: 11400000, guid: 51dd2413502c8f641a2cacd0d2de3478, type: 2}
   ownedKarinItems:
   - {fileID: 11400000, guid: 1f62c13dc91f5f34e8003534a0fe132f, type: 2}
   equippedKarinItem: {fileID: 11400000, guid: 1f62c13dc91f5f34e8003534a0fe132f, type: 2}
