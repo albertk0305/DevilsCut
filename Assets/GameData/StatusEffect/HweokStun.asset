@@ -18,6 +18,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 34c2a5e04a30b5445b75ccee12140179, type: 3}
   targetStat: 0
   modifierType: 0
-  specialType: 13
+  specialType: 12
   baseDescription: 
+  isPermanentPassive: 0
+  showStackDetails: 0
   valueFormat: 

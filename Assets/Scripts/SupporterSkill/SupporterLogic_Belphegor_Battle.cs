@@ -71,8 +71,8 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
 
             case 2: // Low Bet
                 textToDisplay = "SMALL BLIND"; ;
-                int lowDmg = Mathf.Max(1, Mathf.RoundToInt(pStats.strength * lowBetMultipliers[index]));
-                CombatManager.Instance.ApplyDamageToEntity(false, lowDmg);
+                int lowRawDmg = Mathf.Max(1, Mathf.RoundToInt(pStats.strength * lowBetMultipliers[index]));
+                CombatManager.Instance.ApplyMitigatedDamageToEnemy(lowRawDmg, "Supporter:Belphegor:LowBet", out int lowDmg);
                 CombatUIManager.Instance.SpawnDamageText(lowDmg.ToString(), false, false);
                 isBrokenNow = BreakManager.Instance.AddBreakDamage(false, smallBlindBreak[index]);
                 break;
@@ -111,8 +111,8 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
             case 6: // Jackpot!
                 textToDisplay = "THE DEVIL'S HAND";
                 int luckStat = StatManager.Instance.GetEffectiveStat(true, TargetStat.Luck);
-                int jackpotDmg = Mathf.Max(1, luckStat * jackpotMultipliers[index]);
-                CombatManager.Instance.ApplyDamageToEntity(false, jackpotDmg);
+                int jackpotRawDmg = Mathf.Max(1, luckStat * jackpotMultipliers[index]);
+                CombatManager.Instance.ApplyMitigatedDamageToEnemy(jackpotRawDmg, "Supporter:Belphegor:Jackpot", out int jackpotDmg);
                 CombatUIManager.Instance.SpawnDamageText(jackpotDmg.ToString(), true, false);
                 isBrokenNow = BreakManager.Instance.AddBreakDamage(false, jackpotBreak[index]);
                 StyleRankManager.Instance.IncreaseRank(7);

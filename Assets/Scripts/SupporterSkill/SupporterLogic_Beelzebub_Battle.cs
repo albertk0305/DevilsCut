@@ -28,9 +28,6 @@ public class SupporterLogic_Beelzebub_Battle : SupporterLogicBase
         int index = Mathf.Clamp(skillLevel - 1, 0, baseDamageValues.Length - 1);
         List<int> damages = new List<int>();
 
-        int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
-        float dr = CombatMath.GetDamageReduction(enemyDef);
-
         var enemyEffects = BuffManager.Instance.GetEffects(false);
         int currentDebuffCount = enemyEffects.Count(e => e.effectData.category == EffectCategory.Debuff);
 
@@ -45,7 +42,7 @@ public class SupporterLogic_Beelzebub_Battle : SupporterLogicBase
             }
 
             float hitMultiplier = baseDamageValues[index] * (1f + (currentDebuffCount * debuffBoostRates[index]));
-            int hitDamage = Mathf.Max(1, Mathf.RoundToInt((pStats.strength * hitMultiplier) * (1f - dr)));
+            int hitDamage = Mathf.Max(1, Mathf.RoundToInt(pStats.strength * hitMultiplier));
 
             damages.Add(hitDamage);
         }

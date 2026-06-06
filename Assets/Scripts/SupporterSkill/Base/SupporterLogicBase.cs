@@ -11,6 +11,8 @@ public class SupporterLogicBase : ScriptableObject
     // 리스트에 데미지를 담아 반환하면 CompanionManager가 알아서 연타 연출을 해줍니다!
     public virtual List<int> CalculateMultiHitDamages(PlayerStats pStats, EnemyData enemy, int skillLevel = 1) { return null; }
 
+    public virtual float GetArmorPenetrationRatio(int skillLevel = 1, int hitIndex = 0) { return 0f; }
+
     // 2. 특수 효과 발동 (버프, 디버프 등)
     public virtual void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1) { }
 }

@@ -371,6 +371,10 @@ public class CombatManager : MonoBehaviour
 
         if (currentEnemyHp <= 0 || currentPlayerStats.currentHp <= 0) yield break;
 
+        bool turnSkipped = false;
+        yield return TryConsumeStunTurn(currentTurnOwner, skipped => turnSkipped = skipped);
+        if (turnSkipped) yield break;
+
         switch (currentTurnOwner.type)
         {
             case EntityType.Enemy:
@@ -385,6 +389,65 @@ public class CombatManager : MonoBehaviour
             case EntityType.Supporter:
                 yield return HandleSupporterTurn();
                 break;
+        }
+    }
+
+    private IEnumerator TryConsumeStunTurn(TurnEntity owner, System.Action<bool> onComplete)
+    {
+        onComplete?.Invoke(false);
+
+        if (owner == null || BuffManager.Instance == null)
+            yield break;
+
+        if (owner.type != EntityType.Enemy && owner.type != EntityType.Player)
+            yield break;
+
+        bool isPlayerTarget = owner.type == EntityType.Player;
+        var effects = BuffManager.Instance.GetEffects(isPlayerTarget);
+        LogTurnStartEffects(owner.type, effects);
+
+        var stunEffect = effects.Find(e => e.effectData != null && e.effectData.specialType == SpecialEffectType.Stun);
+        bool stunFound = stunEffect != null;
+        DevLog.Log($"[Stun Debug] {owner.type} turn start. stunFound={stunFound}");
+
+        if (!stunFound)
+            yield break;
+
+        effects.Remove(stunEffect);
+        if (CombatUIManager.Instance != null) CombatUIManager.Instance.RefreshBuffUI();
+
+        string targetName = isPlayerTarget
+            ? (playerData != null ? GetTranslatedText(playerData.playerNamekey) : "주인공")
+            : (currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "적");
+
+        string commentary = isPlayerTarget
+            ? $"{targetName}은(는) 스턴 효과로 행동할 수 없습니다!"
+            : $"{targetName}은(는) 무량공처의 효과로 행동할 수 없습니다!";
+
+        if (CombatUIManager.Instance != null)
+            yield return CombatUIManager.Instance.TypeCommentary(commentary, true, 1.0f);
+
+        ResolveTurnEnd();
+        onComplete?.Invoke(true);
+    }
+
+    private void LogTurnStartEffects(EntityType ownerType, List<BuffManager.ActiveEffect> effects)
+    {
+        string sideName = ownerType == EntityType.Player ? "Player" : "Enemy";
+        int count = effects != null ? effects.Count : 0;
+        DevLog.Log($"[Stun Debug] {sideName} turn start effects. count={count}");
+
+        if (effects == null) return;
+
+        for (int i = 0; i < effects.Count; i++)
+        {
+            var effect = effects[i];
+            StatusEffectData data = effect.effectData;
+            string dataName = data != null ? data.name : "null";
+            string effectName = data != null ? data.effectName : "null";
+            string specialType = data != null ? data.specialType.ToString() : "null";
+
+            DevLog.Log($"[Stun Debug] {sideName} effect[{i}] dataName={dataName}, effectName={effectName}, specialType={specialType}, turnsLeft={effect.turnsLeft}, isNewlyApplied={effect.isNewlyApplied}");
         }
     }
 
@@ -502,16 +565,6 @@ public class CombatManager : MonoBehaviour
     private IEnumerator HandleEnemyTurn()
     {
         string eName = currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "적";
-        var enemyEffects = BuffManager.Instance.GetEffects(false);
-        var stunEffect = enemyEffects.Find(e => e.effectData.specialType == SpecialEffectType.Stun);
-        if (stunEffect != null)
-        {
-            enemyEffects.Remove(stunEffect);
-            CombatUIManager.Instance.RefreshBuffUI();
-            yield return CombatUIManager.Instance.TypeCommentary($"{eName}은(는) 무량공처의 효과로 행동할 수 없습니다!", true, 1.0f);
-            ResolveTurnEnd();
-            yield break;
-        }
 
         if (BreakManager.Instance.IsBroken(false))
         {
@@ -1433,6 +1486,53 @@ public class CombatManager : MonoBehaviour
     public bool ApplyDamageToEnemy(int damage)
     {
         return ApplyDamageToEntity(false, damage);
+    }
+
+    public int CalculateEnemyMitigatedDamageFromRaw(int rawDamage, string sourceLabel, float armorPenetrationRatio = 0f)
+    {
+        if (rawDamage <= 0) return 0;
+
+        int enemyDefense = currentEnemyData != null ? currentEnemyData.defense : 0;
+        if (StatManager.Instance != null)
+            enemyDefense = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
+
+        armorPenetrationRatio = Mathf.Clamp01(armorPenetrationRatio);
+        float defenseReduction = CombatMath.GetDamageReduction(enemyDefense);
+        float effectiveDefenseReduction = defenseReduction * (1f - armorPenetrationRatio);
+        float defenseMultiplier = 1f - effectiveDefenseReduction;
+        float damageReduction = GetActiveDamageReduction(false);
+
+        float mitigatedDamage = rawDamage * defenseMultiplier;
+        if (damageReduction > 0f)
+            mitigatedDamage *= (1f - Mathf.Clamp01(damageReduction));
+
+        int finalDamage = Mathf.Max(1, Mathf.RoundToInt(mitigatedDamage));
+        DevLog.Log($"[CompanionDamage] source={sourceLabel}, raw={rawDamage}, enemyDEF={enemyDefense}, defMultiplier={defenseMultiplier:F3}, damageReduction={damageReduction:F3}, final={finalDamage}");
+
+        return finalDamage;
+    }
+
+    public bool ApplyMitigatedDamageToEnemy(int rawDamage, string sourceLabel, out int finalDamage, float armorPenetrationRatio = 0f)
+    {
+        finalDamage = CalculateEnemyMitigatedDamageFromRaw(rawDamage, sourceLabel, armorPenetrationRatio);
+        if (finalDamage <= 0) return false;
+
+        return ApplyDamageToEnemy(finalDamage);
+    }
+
+    private float GetActiveDamageReduction(bool isPlayerTarget)
+    {
+        if (BuffManager.Instance == null) return 0f;
+
+        float damageReduction = 0f;
+        var effects = BuffManager.Instance.GetEffects(isPlayerTarget);
+        foreach (var effect in effects)
+        {
+            if (effect.effectData != null && effect.effectData.specialType == SpecialEffectType.DamageReduction)
+                damageReduction += effect.value;
+        }
+
+        return damageReduction;
     }
 
     private void TryTriggerEnemyCounterAfterEnemyTakesSkillDamage()

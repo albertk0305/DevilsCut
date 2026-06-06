@@ -21,9 +21,6 @@ public class SupporterLogic_Leviathan_Battle : SupporterLogicBase
         int index = Mathf.Clamp(skillLevel - 1, 0, baseDamageValues.Length - 1);
         List<int> damages = new List<int>();
 
-        int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
-        float dr = CombatMath.GetDamageReduction(enemyDef);
-
         // Buff/debuff rule.
         var enemyBuffs = BuffManager.Instance.GetEffects(false).Where(e => e.effectData.category == EffectCategory.Buff).ToList(); 
         int availableBuffTurns = enemyBuffs.Sum(e => e.turnsLeft);
@@ -41,7 +38,7 @@ public class SupporterLogic_Leviathan_Battle : SupporterLogicBase
 
             // Damage scaling rule.
             float hitMultiplier = baseDamageValues[index] * (1f + (storedTotalReducedTurns * damageAmpPerTurnRemoved[index]));
-            int hitDamage = Mathf.Max(1, Mathf.RoundToInt((pStats.strength * hitMultiplier) * (1f - dr)));
+            int hitDamage = Mathf.Max(1, Mathf.RoundToInt(pStats.strength * hitMultiplier));
 
             damages.Add(hitDamage);
         }

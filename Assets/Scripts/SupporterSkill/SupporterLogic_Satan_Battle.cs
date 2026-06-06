@@ -20,12 +20,9 @@ public class SupporterLogic_Satan_Battle : SupporterLogicBase
         int index = Mathf.Clamp(skillLevel - 1, 0, baseDamageValues.Length - 1);
         List<int> damages = new List<int>();
 
-        int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
-        float dr = CombatMath.GetDamageReduction(enemyDef);
-
         for (int i = 0; i < hitCount; i++)
         {
-            int hitDamage = Mathf.Max(1, Mathf.RoundToInt((pStats.strength * baseDamageValues[index]) * (1f - dr)));
+            int hitDamage = Mathf.Max(1, Mathf.RoundToInt(pStats.strength * baseDamageValues[index]));
             damages.Add(hitDamage);
         }
 

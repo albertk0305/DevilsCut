@@ -103,6 +103,7 @@ public class SkillLogic_Hweok : SkillLogicBase
         if (skill.currentEvolution == SkillEvolution.PathC && pathC_StunDebuff != null)
         {
             BuffManager.Instance.AddEffect(false, pathC_StunDebuff, 0, 1);
+            DevLog.Log($"[Stun Debug] Hweok applied stun to Enemy. effectName={pathC_StunDebuff.effectName}, specialType={pathC_StunDebuff.specialType}");
             DevLog.Log("[진화 C] 무량공처 전개! 끝없는 정보로 적의 정신을 붕괴시켜 다음 행동을 마비시킵니다.");
         }
     }

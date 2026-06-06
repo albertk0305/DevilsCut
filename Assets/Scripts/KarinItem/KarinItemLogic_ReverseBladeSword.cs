@@ -13,11 +13,9 @@ public class KarinItemLogic_ReverseBladeSword : KarinItemLogicBase
     {
         // Buff/debuff rule.
         int effectiveStr = StatManager.Instance.GetEffectiveStat(true, TargetStat.Strength);
-        int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
 
         // Damage scaling rule.
-        float dr = CombatMath.GetDamageReduction(enemyDef);
-        float expectedDamage = (effectiveStr * strMultiplier) * (1f - dr);
+        float expectedDamage = effectiveStr * strMultiplier;
 
         // Damage scaling rule.
         return Mathf.Max(1, Mathf.RoundToInt(expectedDamage));

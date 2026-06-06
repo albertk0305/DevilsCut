@@ -13,13 +13,11 @@ public class KarinItemLogic_OnOurWay : KarinItemLogicBase
     {
         // Buff/debuff rule.
         int rawSpeed = StatManager.Instance.GetEffectiveStat(true, TargetStat.Speed);
-        int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
 
         float effectiveSpeed = CombatMath.GetEffectiveSpeed(rawSpeed);
 
         // Damage scaling rule.
-        float dr = CombatMath.GetDamageReduction(enemyDef);
-        float expectedDamage = (effectiveSpeed * speedMultiplier) * (1f - dr);
+        float expectedDamage = effectiveSpeed * speedMultiplier;
 
         // Damage scaling rule.
         return Mathf.Max(1, Mathf.RoundToInt(expectedDamage));

@@ -13,12 +13,9 @@ public class KarinItemLogic_P38 : KarinItemLogicBase
     {
         // Buff/debuff rule.
         int effectiveLuck = StatManager.Instance.GetEffectiveStat(true, TargetStat.Luck);
-        int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
 
         // Damage scaling rule.
-        // Damage scaling rule.
-        float dr = CombatMath.GetDamageReduction(enemyDef);
-        float expectedDamage = (effectiveLuck * luckMultiplier) * (1f - dr);
+        float expectedDamage = effectiveLuck * luckMultiplier;
 
         // Damage scaling rule.
         return Mathf.Max(1, Mathf.RoundToInt(expectedDamage));

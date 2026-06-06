@@ -19,14 +19,9 @@ public class KarinItemLogic_Model19 : KarinItemLogicBase
 
         float effectiveSpeed = CombatMath.GetEffectiveSpeed(rawSpeed);
 
-        int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
-
         // Damage scaling rule.
         float totalStatSum = effectiveStr + effectiveDef + effectiveSpeed + effectiveLuck;
-        float baseDamage = totalStatSum * statMultiplier;
-
-        float dr = CombatMath.GetDamageReduction(enemyDef);
-        float expectedDamage = baseDamage * (1f - dr);
+        float expectedDamage = totalStatSum * statMultiplier;
 
         // Damage scaling rule.
         return Mathf.Max(1, Mathf.RoundToInt(expectedDamage));

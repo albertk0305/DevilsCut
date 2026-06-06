@@ -81,13 +81,17 @@ public class CompanionManager : MonoBehaviour
         string itemName = GetTranslatedText(item.itemName);
         Coroutine textCoroutine = StartCoroutine(CombatUIManager.Instance.TypeCommentary($"카린이 {itemName}을(를) 사용했습니다!"));
 
-        int damage = 0;
+        int rawDamage = 0;
+        int finalDamage = 0;
         PlayerStats pStats = CombatManager.Instance.GetCurrentPlayerStats();
         EnemyData eData = CombatManager.Instance.GetCurrentEnemyData();
 
         if (item.itemLogic != null)
         {
-            damage = item.itemLogic.CalculateDamage(pStats, eData);
+            rawDamage = item.itemLogic.CalculateDamage(pStats, eData);
+            if (rawDamage > 0)
+                finalDamage = CombatManager.Instance.CalculateEnemyMitigatedDamageFromRaw(rawDamage, "Karin");
+
             item.itemLogic.ApplyEffect(pStats, eData);
         }
 
@@ -97,13 +101,12 @@ public class CompanionManager : MonoBehaviour
         bool isPlayerDefending = false;
         Sprite defenderHitSprite = eData != null ? eData.hit : null;
 
-        if (damage > 0)
+        if (finalDamage > 0)
         {
             CombatUIManager.Instance.SetDefenderImage(isPlayerDefending, defenderHitSprite);
-            CombatUIManager.Instance.SpawnDamageText(damage.ToString(), false, isPlayerDefending);
+            CombatUIManager.Instance.SpawnDamageText(finalDamage.ToString(), false, isPlayerDefending);
 
-            // [핵심] 여기서 즉시 데미지 적용 및 체력바 업데이트
-            bool isDead = CombatManager.Instance.ApplyDamageToEnemy(damage);
+            bool isDead = CombatManager.Instance.ApplyDamageToEnemy(finalDamage);
 
             if (isDead)
             {
@@ -122,7 +125,7 @@ public class CompanionManager : MonoBehaviour
         CombatUIManager.Instance.ClearCombatEffects();
         CombatManager.Instance.RestorePlayerSideImage();
 
-        if (damage > 0)
+        if (finalDamage > 0)
             CombatManager.Instance.RestoreDefenderImage(isPlayerDefending);
 
         CombatManager.Instance.ResolveTurnEnd();
@@ -154,6 +157,7 @@ public class CompanionManager : MonoBehaviour
         EnemyData eData = CombatManager.Instance.GetCurrentEnemyData();
 
         List<int> hitDamages = new List<int>();
+        List<int> finalHitDamages = new List<int>();
 
         if (logic != null)
         {
@@ -169,6 +173,16 @@ public class CompanionManager : MonoBehaviour
                 if (singleDamage > 0) hitDamages.Add(singleDamage);
             }
 
+            for (int i = 0; i < hitDamages.Count; i++)
+            {
+                float armorPenetrationRatio = logic.GetArmorPenetrationRatio(currentLevel, i);
+                int finalDamage = CombatManager.Instance.CalculateEnemyMitigatedDamageFromRaw(
+                    hitDamages[i],
+                    $"Supporter:{supporter.supporterID}",
+                    armorPenetrationRatio);
+                finalHitDamages.Add(finalDamage);
+            }
+
             // 2. 특수 효과(버프, 디버프 등) 우선 적용
             logic.ApplyEffect(pStats, eData, currentLevel);
         }
@@ -178,11 +192,11 @@ public class CompanionManager : MonoBehaviour
 
         bool isPlayerDefending = false;
 
-        if (hitDamages.Count > 0)
+        if (finalHitDamages.Count > 0)
         {
-            for (int i = 0; i < hitDamages.Count; i++)
+            for (int i = 0; i < finalHitDamages.Count; i++)
             {
-                int currentDamage = hitDamages[i];
+                int currentDamage = finalHitDamages[i];
                 Sprite defenderHitSprite = eData != null ? eData.hit : null;
 
                 CombatUIManager.Instance.SetDefenderImage(isPlayerDefending, defenderHitSprite);
@@ -202,7 +216,7 @@ public class CompanionManager : MonoBehaviour
                 }
 
                 // 타격 간격 대기 (마지막 타격이 아닐 때만 0.15초 대기)
-                if (i < hitDamages.Count - 1)
+                if (i < finalHitDamages.Count - 1)
                 {
                     yield return new WaitForSeconds(0.15f);
                     CombatManager.Instance.RestoreDefenderImage(isPlayerDefending);
@@ -216,7 +230,7 @@ public class CompanionManager : MonoBehaviour
         CombatUIManager.Instance.ClearCombatEffects();
         CombatManager.Instance.RestorePlayerSideImage();
 
-        if (hitDamages.Count > 0)
+        if (finalHitDamages.Count > 0)
             CombatManager.Instance.RestoreDefenderImage(isPlayerDefending);
 
         if (!isStartSkill)

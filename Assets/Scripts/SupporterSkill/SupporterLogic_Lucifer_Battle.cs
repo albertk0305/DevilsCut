@@ -20,14 +20,13 @@ public class SupporterLogic_Lucifer_Battle : SupporterLogicBase
 
         float baseDamage = pStats.strength * damageMultipliers[index];
 
-        int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
-        float dr = CombatMath.GetDamageReduction(enemyDef);
+        return Mathf.Max(1, Mathf.RoundToInt(baseDamage));
+    }
 
-        float effectiveDr = dr * (1f - armorPenetrations[index]);
-
-        float finalDamage = baseDamage * (1f - effectiveDr);
-
-        return Mathf.Max(1, Mathf.RoundToInt(finalDamage));
+    public override float GetArmorPenetrationRatio(int skillLevel = 1, int hitIndex = 0)
+    {
+        int index = Mathf.Clamp(skillLevel - 1, 0, armorPenetrations.Length - 1);
+        return armorPenetrations[index];
     }
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)

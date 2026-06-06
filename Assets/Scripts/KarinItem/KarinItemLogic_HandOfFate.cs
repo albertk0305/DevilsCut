@@ -13,11 +13,9 @@ public class KarinItemLogic_HandOfFate : KarinItemLogicBase
     {
         // Buff/debuff rule.
         int effectiveDef = StatManager.Instance.GetEffectiveStat(true, TargetStat.Defense);
-        int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
 
         // Damage scaling rule.
-        float dr = CombatMath.GetDamageReduction(enemyDef);
-        float expectedDamage = (effectiveDef * defMultiplier) * (1f - dr);
+        float expectedDamage = effectiveDef * defMultiplier;
 
         // Damage scaling rule.
         return Mathf.Max(1, Mathf.RoundToInt(expectedDamage));

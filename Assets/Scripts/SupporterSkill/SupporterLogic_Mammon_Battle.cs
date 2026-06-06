@@ -60,21 +60,15 @@ public class SupporterLogic_Mammon_Battle : SupporterLogicBase
         selectedItems.Add(pool[2]);
 
         List<int> damages = new List<int>();
-        int enemyDef = StatManager.Instance.GetEffectiveStat(false, TargetStat.Defense);
-        float dr = CombatMath.GetDamageReduction(enemyDef);
-
         foreach (int itemCode in selectedItems)
         {
             float hitDamage = 0f;
             switch (itemCode)
             {
-                case 0: hitDamage = (pStats.strength * dmgIncendiary[index]) * (1f - dr); break;
-                case 1: hitDamage = (pStats.strength * dmgKnife[index]) * (1f - dr); break;
-                case 2: hitDamage = (pStats.strength * dmgAtm[index]) * (1f - dr); break;
-                case 5:
-                    float effectiveDr = dr * 0.75f;
-                    hitDamage = (pStats.strength * dmgHolyWater[index]) * (1f - effectiveDr);
-                    break;
+                case 0: hitDamage = pStats.strength * dmgIncendiary[index]; break;
+                case 1: hitDamage = pStats.strength * dmgKnife[index]; break;
+                case 2: hitDamage = pStats.strength * dmgAtm[index]; break;
+                case 5: hitDamage = pStats.strength * dmgHolyWater[index]; break;
             }
 
             if (hitDamage > 0f)
@@ -85,6 +79,12 @@ public class SupporterLogic_Mammon_Battle : SupporterLogicBase
 
         DevLog.Log($"[Layer Cake] 주사위 재고 매물: {selectedItems[0]}, {selectedItems[1]}, {selectedItems[2]}");
         return damages;
+    }
+
+    public override float GetArmorPenetrationRatio(int skillLevel = 1, int hitIndex = 0)
+    {
+        if (hitIndex < 0 || hitIndex >= selectedItems.Count) return 0f;
+        return selectedItems[hitIndex] == 5 ? 0.25f : 0f;
     }
 
     public override void ApplyEffect(PlayerStats pStats, EnemyData enemy, int skillLevel = 1)
