@@ -11,6 +11,9 @@ public class BossEncounterData : ScriptableObject
     public Sprite defaultSD;
     public Sprite readySD;
 
+    [Header("Pre Boss Dialogue")]
+    public DialogueData preBossDialogue;
+
     [Header("Post Boss Dialogue")]
     public SupporterData imprisonedSupporter;
     public DialogueData postBossDialogue;

@@ -351,8 +351,31 @@ public class ExplorationUI : MonoBehaviour
                 return;
             ExplorationManager.Instance.lastVisitedNodeImage = pBattle.nodeImage;
             ExplorationManager.Instance.SaveStateToPlayerManager();
-            SceneLoader.LoadScene("Battle");
+            TryStartPreBossDialogueOrBattle(pBattle);
         }
+    }
+
+    private void TryStartPreBossDialogueOrBattle(PhaseBattleNodeData battleNode)
+    {
+        if (battleNode != null && battleNode.isBossBattle)
+        {
+            DialogueData preBossDialogue = battleNode.bossData != null ? battleNode.bossData.preBossDialogue : null;
+            string dialogueID = preBossDialogue != null ? preBossDialogue.dialogueID : "";
+
+            if (!string.IsNullOrWhiteSpace(dialogueID))
+            {
+                if (preBossDialogue.nextSceneName != "Battle")
+                {
+                    DevLog.LogWarning($"[ExplorationUI] Pre-boss dialogue nextSceneName should be Battle. bossID={battleNode.bossData.bossID}, dialogueID={dialogueID}, nextSceneName={preBossDialogue.nextSceneName}");
+                }
+
+                DialogueRuntimeContext.SetPendingDialogueID(dialogueID);
+                SceneLoader.LoadScene(dialogueSceneName);
+                return;
+            }
+        }
+
+        SceneLoader.LoadScene("Battle");
     }
 
     private void ConfirmFacilitySelection(FacilityData facility)
