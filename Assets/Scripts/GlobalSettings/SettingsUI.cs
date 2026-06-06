@@ -14,8 +14,6 @@ public class SettingsUI : MonoBehaviour
     public string mainMenuSceneName = "MainMenu";
     public string battleSceneName = "Battle";
 
-    private float timeScaleBeforePause = 1f;
-
     private void OnEnable()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
@@ -45,19 +43,21 @@ public class SettingsUI : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        TimeScalePauseManager.ReleasePause(this);
+    }
+
     public void OpenSettings()
     {
-        timeScaleBeforePause = Time.timeScale;
-        if (timeScaleBeforePause <= 0) timeScaleBeforePause = 1f;
-
-        Time.timeScale = 0f;
-        DevLog.Log($"[Settings] Opened: time paused (restore scale: {timeScaleBeforePause})");
+        TimeScalePauseManager.RequestPause(this);
+        DevLog.Log("[Settings] Opened: time paused");
         gameObject.SetActive(true);
     }
 
     public void CloseSettings()
     {
-        Time.timeScale = timeScaleBeforePause;
+        TimeScalePauseManager.ReleasePause(this);
         DevLog.Log("[Settings] Closed.");
         gameObject.SetActive(false);
     }
@@ -69,6 +69,7 @@ public class SettingsUI : MonoBehaviour
     {
         DevLog.Log("[Settings] Returning to main menu.");
         confirmationPopup.SetActive(false);
+        TimeScalePauseManager.ReleasePause(this);
         gameObject.SetActive(false);
         Time.timeScale = 1f;
         SceneLoader.LoadScene(mainMenuSceneName);
@@ -76,29 +77,15 @@ public class SettingsUI : MonoBehaviour
 
     public void OnFastCombatToggleChanged(bool isOn)
     {
-        float targetSpeed = isOn ? 2.0f : 1.0f;
-
         PlayerPrefs.SetInt("FastCombat", isOn ? 1 : 0);
         PlayerPrefs.Save();
 
         if (CombatManager.Instance != null)
         {
-            if (Time.timeScale == 0f)
-            {
-                timeScaleBeforePause = targetSpeed;
-            }
-            else
-            {
-                Time.timeScale = targetSpeed;
-            }
+            TimeScalePauseManager.ApplyGameplayTimeScale();
 
             if (CombatUIManager.Instance != null)
                 CombatUIManager.Instance.UpdateFastCombatIcon(isOn);
-        }
-        else
-        {
-            // Keep non-combat scenes at normal speed when closing settings.
-            timeScaleBeforePause = 1.0f;
         }
     }
 
@@ -115,6 +102,7 @@ public class SettingsUI : MonoBehaviour
         if (confirmationPopup != null)
             confirmationPopup.SetActive(false);
 
+        TimeScalePauseManager.ReleasePause(this);
         gameObject.SetActive(false);
 
         CombatManager.Instance.RestorePlayerHpToBattleStart();

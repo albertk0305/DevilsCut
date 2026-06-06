@@ -63,6 +63,7 @@ public class CombatManager : MonoBehaviour
     private int battleStartPlayerHp;
 
     private bool combatEnded;
+    public bool IsCombatEnded => combatEnded;
 
     private int currentEnemyHp;
     private int enemyTurnCount = 0;

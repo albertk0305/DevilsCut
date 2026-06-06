@@ -9,7 +9,14 @@ public static class SceneLoader
 
     public static void LoadScene(string targetSceneName)
     {
+        if (string.IsNullOrEmpty(targetSceneName))
+        {
+            DevLog.LogWarning("[SceneLoader] LoadScene called with an empty target scene name.");
+            return;
+        }
+
         TargetSceneName = targetSceneName;
+        TimeScalePauseManager.ClearAllPauses();
         Time.timeScale = 1f;
         SceneManager.LoadScene(LoadingSceneName);
     }

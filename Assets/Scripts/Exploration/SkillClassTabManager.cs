@@ -19,9 +19,6 @@ public class SkillClassTabManager : MonoBehaviour
     public Color normalColor = Color.white;
     public Color activeColor = new Color(0.6f, 0.6f, 0.6f);
 
-    // 돌아갈 원래 속도를 기억할 변수
-    private float timeScaleBeforePause = 1f;
-
     private void OnEnable()
     {
         // 탭이 열릴 때 강제로 스킬 패널을 먼저 띄우기 위해 초기화합니다.
@@ -29,16 +26,18 @@ public class SkillClassTabManager : MonoBehaviour
         OnClickShowSkill();
     }
 
+    private void OnDisable()
+    {
+        TimeScalePauseManager.ReleasePause(this);
+    }
+
     // =========================================================
     // [신규 추가] 캔버스를 열 때 호출할 함수 (시간 정지)
     // =========================================================
     public void OpenCanvas()
     {
-        timeScaleBeforePause = Time.timeScale;
-        if (timeScaleBeforePause <= 0) timeScaleBeforePause = 1f; // 방어 코드
-
-        Time.timeScale = 0f;
-        DevLog.Log($"[메뉴] 스킬/시너지 창 열기: 시간 정지 (복구 속도: {timeScaleBeforePause})");
+        TimeScalePauseManager.RequestPause(this);
+        DevLog.Log("[메뉴] 스킬/시너지 창 열기: 시간 정지");
 
         gameObject.SetActive(true);
     }
@@ -48,8 +47,8 @@ public class SkillClassTabManager : MonoBehaviour
     // =========================================================
     public void CloseCanvas()
     {
-        Time.timeScale = timeScaleBeforePause;
-        DevLog.Log("[메뉴] 스킬/시너지 창 닫기: 시간 복구");
+        TimeScalePauseManager.ReleasePause(this);
+        DevLog.Log("[메뉴] 스킬/시너지 창 닫기: 시간 갱신");
 
         gameObject.SetActive(false);
     }

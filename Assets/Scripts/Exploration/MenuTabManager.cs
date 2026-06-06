@@ -15,28 +15,28 @@ public class MenuTabManager : MonoBehaviour
     public Color normalColor = Color.white;
     public Color activeColor = new Color(0.6f, 0.6f, 0.6f);
     
-    private float timeScaleBeforePause = 1f;
-
     private void OnEnable()
     {
         SwitchTab(0);
     }
 
+    private void OnDisable()
+    {
+        TimeScalePauseManager.ReleasePause(this);
+    }
+
     public void OpenMenu()
     {
-        timeScaleBeforePause = Time.timeScale;
-        if (timeScaleBeforePause <= 0) timeScaleBeforePause = 1f;
-
-        Time.timeScale = 0f;
-        DevLog.Log($"[Menu] Opened: time paused (restore scale: {timeScaleBeforePause})");
+        TimeScalePauseManager.RequestPause(this);
+        DevLog.Log("[Menu] Opened: time paused");
 
         gameObject.SetActive(true);
     }
 
     public void CloseMenu()
     {
-        Time.timeScale = timeScaleBeforePause;
-        DevLog.Log("[Menu] Closed: time restored");
+        TimeScalePauseManager.ReleasePause(this);
+        DevLog.Log("[Menu] Closed: time scale refreshed");
 
         gameObject.SetActive(false);
     }
