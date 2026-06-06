@@ -70,7 +70,7 @@ public class SkillLogic_MajorCrime : SkillLogicBase
                     BattleEventSystem.CallHpChanged(true, pStats.currentHp, pStats.maxHp);
                 });
 
-                BattleVisualizer.Instance.EnqueueDelay(1.0f);
+                BattleVisualizer.Instance.EnqueueDelay(CombatManager.Instance.Timing.skillSpecialPenaltyHold);
 
                 BattleVisualizer.Instance.EnqueueAction(() =>
                 {

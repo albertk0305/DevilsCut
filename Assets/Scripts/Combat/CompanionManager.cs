@@ -55,12 +55,15 @@ public class CompanionManager : MonoBehaviour
     public IEnumerator ExecuteKarinTurn()
     {
         DevLog.Log("카린의 턴입니다!");
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(CombatManager.Instance.Timing.companionTurnIntroDelay);
 
         KarinItemData equippedItem = PlayerManager.Instance.equippedKarinItem;
         if (equippedItem == null)
         {
-            yield return StartCoroutine(CombatUIManager.Instance.TypeCommentary("카린: \"어라? 쓸 수 있는 물건이 없네!\""));
+            yield return StartCoroutine(CombatUIManager.Instance.TypeCommentary(
+                "카린: \"어라? 쓸 수 있는 물건이 없네!\"",
+                true,
+                CombatManager.Instance.Timing.companionActionCommentDelay));
             CombatManager.Instance.ResolveTurnEnd();
             yield break;
         }
@@ -79,7 +82,10 @@ public class CompanionManager : MonoBehaviour
             CombatUIManager.Instance.SetCasterImage(true, karinData.battle);
 
         string itemName = GetTranslatedText(item.itemName);
-        Coroutine textCoroutine = StartCoroutine(CombatUIManager.Instance.TypeCommentary($"카린이 {itemName}을(를) 사용했습니다!"));
+        Coroutine textCoroutine = StartCoroutine(CombatUIManager.Instance.TypeCommentary(
+            $"카린이 {itemName}을(를) 사용했습니다!",
+            true,
+            CombatManager.Instance.Timing.companionActionCommentDelay));
 
         int rawDamage = 0;
         int finalDamage = 0;
@@ -111,7 +117,7 @@ public class CompanionManager : MonoBehaviour
             if (isDead)
             {
                 // 연타 도중 적이 죽었으면 즉시 승리 처리 후 코루틴 종료!
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(CombatManager.Instance.Timing.killConfirmDelay);
                 CombatUIManager.Instance.ClearCombatEffects();
                 CombatManager.Instance.RestorePlayerSideImage();
                 CombatManager.Instance.EndCombat(true);
@@ -119,7 +125,7 @@ public class CompanionManager : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(CombatManager.Instance.Timing.companionActionHold);
         yield return textCoroutine;
 
         CombatUIManager.Instance.ClearCombatEffects();
@@ -149,7 +155,10 @@ public class CompanionManager : MonoBehaviour
         if (actionImage != null) CombatUIManager.Instance.SetCasterImage(true, actionImage);
 
         string skillType = isStartSkill ? "개전 스킬" : "전투 스킬";
-        Coroutine textCoroutine = StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{supName}의 {skillType} 발동!"));
+        Coroutine textCoroutine = StartCoroutine(CombatUIManager.Instance.TypeCommentary(
+            $"{supName}의 {skillType} 발동!",
+            true,
+            CombatManager.Instance.Timing.companionActionCommentDelay));
 
         SupporterLogicBase logic = isStartSkill ? supporter.startSkillLogic : supporter.battleSkillLogic;
         int currentLevel = isStartSkill ? supporter.startSkillLevel : supporter.battleSkillLevel;
@@ -208,7 +217,7 @@ public class CompanionManager : MonoBehaviour
                 if (isDead)
                 {
                     // 연타 도중 적이 죽었으면 즉시 승리 처리 후 코루틴 종료!
-                    yield return new WaitForSeconds(1.0f);
+                    yield return new WaitForSeconds(CombatManager.Instance.Timing.killConfirmDelay);
                     CombatUIManager.Instance.ClearCombatEffects();
                     CombatManager.Instance.RestorePlayerSideImage();
                     CombatManager.Instance.EndCombat(true);
@@ -218,13 +227,13 @@ public class CompanionManager : MonoBehaviour
                 // 타격 간격 대기 (마지막 타격이 아닐 때만 0.15초 대기)
                 if (i < finalHitDamages.Count - 1)
                 {
-                    yield return new WaitForSeconds(0.15f);
+                    yield return new WaitForSeconds(CombatManager.Instance.Timing.hitInterval);
                     CombatManager.Instance.RestoreDefenderImage(isPlayerDefending);
                 }
             }
         }
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(CombatManager.Instance.Timing.companionActionHold);
         yield return textCoroutine;
 
         CombatUIManager.Instance.ClearCombatEffects();

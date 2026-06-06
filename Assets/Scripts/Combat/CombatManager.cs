@@ -73,7 +73,10 @@ public class CombatManager : MonoBehaviour
     private CombatPresentationDirector presentationDirector;
     private DamageResolutionService damageResolutionService;
     private TurnEffectResolver turnEffectResolver;
+    [SerializeField] private CombatTimingSettings timing = new CombatTimingSettings();
     public CombatState currentState = new CombatState();
+
+    public CombatTimingSettings Timing => timing;
 
     public bool CanInteractWithCombatUI =>
     !combatEnded &&
@@ -125,9 +128,6 @@ public class CombatManager : MonoBehaviour
         public SkillResult result;
         public SkillPresentationContext presentation;
     }
-
-    // [최적화] 코루틴 대기 객체 캐싱
-    private readonly WaitForSeconds oneSecondWait = new WaitForSeconds(1.0f);
 
     public bool IsPlayerSelectingPhase
     {
@@ -254,8 +254,8 @@ public class CombatManager : MonoBehaviour
     {
         string eName = currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "적";
 
-        yield return CombatUIManager.Instance.TypeCommentary($"{eName} 조우!", true, 1.0f);
-        yield return oneSecondWait;
+        yield return CombatUIManager.Instance.TypeCommentary($"{eName} 조우!", true, timing.encounterCommentDelay);
+        yield return new WaitForSeconds(timing.encounterCommentDelay);
 
         SupporterData activeSup = PlayerManager.Instance.activeSupporter;
         if (activeSup != null && activeSup.startSkillLogic != null)
@@ -425,7 +425,7 @@ public class CombatManager : MonoBehaviour
             : $"{targetName}은(는) 무량공처의 효과로 행동할 수 없습니다!";
 
         if (CombatUIManager.Instance != null)
-            yield return CombatUIManager.Instance.TypeCommentary(commentary, true, 1.0f);
+            yield return CombatUIManager.Instance.TypeCommentary(commentary, true, timing.turnSkipCommentDelay);
 
         ResolveTurnEnd();
         onComplete?.Invoke(true);
@@ -485,9 +485,9 @@ public class CombatManager : MonoBehaviour
                 CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
                 CombatUIManager.Instance.SpawnDamageText("★" + bleedDamage.ToString(), false, true);
 
-                yield return CombatUIManager.Instance.TypeCommentary($"셰리가 {bleedDamage}의 출혈 지속 피해를 입습니다.", true, 0.5f);
+                yield return CombatUIManager.Instance.TypeCommentary($"셰리가 {bleedDamage}의 출혈 지속 피해를 입습니다.", true, timing.dotCommentDelay);
 
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(timing.dotHitHold);
                 CombatUIManager.Instance.ResetDefenderImage(true);
 
                 if (CheckAndHandleBattleEnd())
@@ -509,9 +509,9 @@ public class CombatManager : MonoBehaviour
                 CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit);
                 CombatUIManager.Instance.SpawnDamageText("★" + bleedDmg.ToString(), false, false);
 
-                yield return CombatUIManager.Instance.TypeCommentary($"심연의 출혈! {eName}이(가) {bleedDmg}의 지속 피해를 입습니다.", true, 0.5f);
+                yield return CombatUIManager.Instance.TypeCommentary($"심연의 출혈! {eName}이(가) {bleedDmg}의 지속 피해를 입습니다.", true, timing.dotCommentDelay);
 
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(timing.dotHitHold);
                 CombatUIManager.Instance.ResetDefenderImage(false);
 
                 if (CheckAndHandleBattleEnd())
@@ -527,9 +527,9 @@ public class CombatManager : MonoBehaviour
                 CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit);
                 CombatUIManager.Instance.SpawnDamageText("★" + burnDmg.ToString(), false, false);
 
-                yield return CombatUIManager.Instance.TypeCommentary($"지옥의 플람베! {eName}이(가) {burnDmg}의 화상 피해를 입습니다.", true, 0.5f);
+                yield return CombatUIManager.Instance.TypeCommentary($"지옥의 플람베! {eName}이(가) {burnDmg}의 화상 피해를 입습니다.", true, timing.dotCommentDelay);
 
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(timing.dotHitHold);
                 CombatUIManager.Instance.ResetDefenderImage(false);
 
                 if (CheckAndHandleBattleEnd())
@@ -544,13 +544,13 @@ public class CombatManager : MonoBehaviour
 
                 CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit);
 
-                yield return CombatUIManager.Instance.TypeCommentary("라스트 트레인 홈 발동!!", true, 0.5f);
+                yield return CombatUIManager.Instance.TypeCommentary("라스트 트레인 홈 발동!!", true, timing.dotCommentDelay);
 
                 ApplyDamageToEntity(false, currentState.savedBombDamage);
                 CombatUIManager.Instance.SpawnDamageText("★" + currentState.savedBombDamage.ToString(), false, false);
                 DevLog.Log($"[라스트 트레인 홈] 적에게 {currentState.savedBombDamage}의 확정 피해를 입힙니다!");
 
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(timing.dotHitHold);
                 CombatUIManager.Instance.ResetDefenderImage(false);
 
                 if (CheckAndHandleBattleEnd())
@@ -575,7 +575,7 @@ public class CombatManager : MonoBehaviour
             yield break;
         }
 
-        yield return CombatUIManager.Instance.TypeCommentary($"{eName}의 차례입니다!");
+        yield return CombatUIManager.Instance.TypeCommentary($"{eName}의 차례입니다!", true, timing.enemyTurnCommentDelay);
         yield return EnemyTurnRoutine();
     }
 
@@ -630,7 +630,7 @@ public class CombatManager : MonoBehaviour
 
     private IEnumerator EnemyTurnRoutine()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(timing.enemyIntentDelay);
 
         EnemyActionIntent intent = null;
 
@@ -906,7 +906,7 @@ public class CombatManager : MonoBehaviour
                     ProcessHitAction(hit, isPlayerAttacking, isPlayerDefending, isPureUtility, skillResult, skill);
             });
 
-            BattleVisualizer.Instance.EnqueueDelay(0.15f);
+            BattleVisualizer.Instance.EnqueueDelay(timing.hitInterval);
         }
     }
 
@@ -1027,16 +1027,16 @@ public class CombatManager : MonoBehaviour
                 {
                     isCounterTriggered = true;
 
-                    BattleVisualizer.Instance.EnqueueDelay(2.0f);
+                    BattleVisualizer.Instance.EnqueueDelay(timing.counterPreDelay);
                     BattleVisualizer.Instance.EnqueueAction(() =>
                         ApplyCounterAndReflectUI(counterDmg, counterImage, false));
-                    BattleVisualizer.Instance.EnqueueDelay(2.0f);
+                    BattleVisualizer.Instance.EnqueueDelay(timing.counterHold);
                 }
             }
         }
 
         if (!isCounterTriggered)
-            BattleVisualizer.Instance.EnqueueDelay(2.0f);
+            BattleVisualizer.Instance.EnqueueDelay(timing.postSkillHold);
     }
 
     private void EnqueueEnemyCounterIfNeeded(SkillExecutionContext context)
@@ -1048,7 +1048,7 @@ public class CombatManager : MonoBehaviour
         if (!(currentEnemyData.aiBrain is IEnemySkillDamageCounter counterAI)) return;
         if (!counterAI.CanCounterAfterSkillDamage()) return;
 
-        BattleVisualizer.Instance.EnqueueDelay(2.0f);   // 히트 여운
+        BattleVisualizer.Instance.EnqueueDelay(timing.enemyCounterPreDelay);   // 히트 여운
         BattleVisualizer.Instance.EnqueueAction(TryTriggerEnemyCounterAfterEnemyTakesSkillDamage);
     }
 
@@ -1104,10 +1104,11 @@ public class CombatManager : MonoBehaviour
             ? playerData.reflectImage
             : playerData.guardImage;
 
+        BattleVisualizer.Instance.EnqueueDelay(timing.counterPreDelay);
         BattleVisualizer.Instance.EnqueueAction(() =>
             ApplyCounterAndReflectUI(reflectDamage, reflectSprite, true));
 
-        BattleVisualizer.Instance.EnqueueDelay(2.0f);
+        BattleVisualizer.Instance.EnqueueDelay(timing.counterHold);
     }
 
     private void CompleteSkillSequence(bool isPlayerAttacking)
@@ -1740,7 +1741,7 @@ public class CombatManager : MonoBehaviour
                 string targetName = isPlayerTurn ? (playerData != null ? GetTranslatedText(playerData.playerNamekey) : "셰리") : "적";
 
                 // 1. 회복 알림 텍스트 출력 (0.5초간 타자 치듯 출력)
-                yield return CombatUIManager.Instance.TypeCommentary($"{targetName}의 지속 회복 효과 발동!", true, 0.5f);
+                yield return CombatUIManager.Instance.TypeCommentary($"{targetName}의 지속 회복 효과 발동!", true, timing.specialExpireCommentDelay);
 
                 // 2. 실제 회복 수치 연산 및 데미지 텍스트 팝업
                 if (hpRegenRate > 0f)
@@ -1776,7 +1777,7 @@ public class CombatManager : MonoBehaviour
                 }
 
                 // 3. 유저가 초록색 회복 데미지 텍스트와 UI 바가 차오르는 것을 감상할 수 있도록 1초 대기!
-                yield return new WaitForSeconds(1.0f);
+                yield return new WaitForSeconds(timing.specialExpireHold);
             }
 
             if (currentActiveEntity.isPlayer) BuffManager.Instance.AdvanceTurnActiveEffects(true);
@@ -1814,7 +1815,7 @@ public class CombatManager : MonoBehaviour
                 // 1. [진화 A] 과열 폭발 (주인공 피격)
                 if (e.effectData.specialType == SpecialEffectType.Overheat)
                 {
-                    yield return CombatUIManager.Instance.TypeCommentary("과열(Overheat) 디버프 발동!!", true, 0.5f);
+                    yield return CombatUIManager.Instance.TypeCommentary("과열(Overheat) 디버프 발동!!", true, timing.specialExpireCommentDelay);
 
                     int selfDamage = Mathf.RoundToInt(currentPlayerStats.currentHp * 0.4f);
                     ApplyDamageToEntity(true, selfDamage);
@@ -1823,14 +1824,14 @@ public class CombatManager : MonoBehaviour
                     CombatUIManager.Instance.SpawnDamageText("★" + selfDamage.ToString(), false, true);
                     BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
 
-                    yield return new WaitForSeconds(1.0f);
+                    yield return new WaitForSeconds(timing.specialExpireHold);
                     CombatUIManager.Instance.ResetDefenderImage(true);
                 }
 
                 // 2. [진화 B] 피해 누적 폭발 (적 피격)
                 if (e.effectData.specialType == SpecialEffectType.DamageAccumulator)
                 {
-                    yield return CombatUIManager.Instance.TypeCommentary("렛 유 다운(Let You Down) 추가 피해 발동!", true, 0.5f);
+                    yield return CombatUIManager.Instance.TypeCommentary("렛 유 다운(Let You Down) 추가 피해 발동!", true, timing.specialExpireCommentDelay);
 
                     // 기록된 피해의 50%를 추가로 입힘
                     int extraDmg = Mathf.RoundToInt(currentState.accumulatedDamage * 0.5f);
@@ -1841,7 +1842,7 @@ public class CombatManager : MonoBehaviour
                     BattleEventSystem.CallHpChanged(false, currentEnemyHp, currentEnemyData.maxHp);
 
                     currentState.accumulatedDamage = 0; // 초기화
-                    yield return new WaitForSeconds(1.0f);
+                    yield return new WaitForSeconds(timing.specialExpireHold);
                     CombatUIManager.Instance.ResetDefenderImage(false);
                 }
             }
