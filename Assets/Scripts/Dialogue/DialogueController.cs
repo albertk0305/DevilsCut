@@ -185,6 +185,8 @@ public class DialogueController : MonoBehaviour
             return;
         }
 
+        ApplyDialogueBgm(currentDialogueData);
+
         if (!string.IsNullOrEmpty(currentDialogueData.initialBackgroundID))
         {
             SetBackgroundImageByID(currentDialogueData.initialBackgroundID);
@@ -208,6 +210,21 @@ public class DialogueController : MonoBehaviour
         }
 
         return DialogueLineTsvParser.Parse(data.lineTSV);
+    }
+
+    private void ApplyDialogueBgm(DialogueData data)
+    {
+        if (data == null || SoundManager.Instance == null)
+            return;
+
+        if (data.bgmClip != null)
+        {
+            SoundManager.Instance.PlayBGM(data.bgmClip, data.bgmFadeTime);
+            return;
+        }
+
+        if (data.stopBgmIfEmpty)
+            SoundManager.Instance.StopBGM(data.bgmFadeTime);
     }
 
     public void OnClickStoryTextPanel()

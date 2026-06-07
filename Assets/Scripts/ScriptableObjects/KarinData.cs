@@ -9,7 +9,6 @@ public class KarinData : ScriptableObject
     public Sprite normal;
     public Sprite worried;
     public Sprite happy;
-    public Sprite ready;
     public Sprite CutIn;
     public Sprite UsingItem;
     public Sprite battle;

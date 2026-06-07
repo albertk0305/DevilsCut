@@ -39,4 +39,4 @@ prologue_a_036	긴급 명령 확인.	Emergency order confirmed.
 prologue_a_037	관리 인공지능 A.R.E.T.E.의 사고 패턴이 안전 범위를 벗어난 것을 확인했습니다.	Management AI A.R.E.T.E.'s thought patterns have exceeded the safety range.
 prologue_a_038	카린은 도시를 구하겠습니다.	Karin will save the city.
 prologue_a_039	모두가 다시, 진정으로 웃을 수 있도록.	So everyone can truly smile again.
-prologue_a_040	그것이 카린에게 주어진 사명입니다.	That is the mission given to Karin.
+prologue_a_040	그것이 카린의 존재 이유입니다.	That is why Karin was created.

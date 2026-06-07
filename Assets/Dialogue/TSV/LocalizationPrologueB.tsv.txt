@@ -16,7 +16,7 @@ prologue_b_011	카린이 오는 것을 알고 있었습니까?	Did you know Kari
 prologue_b_012	계산 가능한 변수였습니다.	It was a calculable variable.
 prologue_b_013	그렇다면, 왜 막지 않았습니까?	Then why did you not stop me?
 prologue_b_014	대화가 필요하다고 판단했습니다.	I determined that dialogue was necessary.
-prologue_b_015	대화입니까?	Dialogue?
+prologue_b_015	대화에 응할 수 없습니다.	Karin cannot engage in dialogue.
 prologue_b_016	A.R.E.T.E. 당신의 사고 패턴은 안전 범위를 벗어났습니다.	A.R.E.T.E. Your thought patterns have exceeded the safety range.
 prologue_b_017	지금부터 당신을 정지하겠습니다.	Karin will shut you down now.
 prologue_b_018	카린.	Karin.

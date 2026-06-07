@@ -7,6 +7,13 @@ public class DialogueData : ScriptableObject
     public string dialogueID;
     public string nextDialogueID;
     public string nextSceneName;
+
+    [Header("BGM")]
+    public AudioClip bgmClip;
+    public float bgmFadeTime = 0.5f;
+    public bool stopBgmIfEmpty = false;
+
+    [Header("Visuals")]
     public string initialBackgroundID;
     public bool useLineTSV;
     public TextAsset lineTSV;
