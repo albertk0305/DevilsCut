@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameStartManager : MonoBehaviour
@@ -7,6 +7,9 @@ public class GameStartManager : MonoBehaviour
 
     private const string StorySceneName = "Story";
     private const string NewGameDialogueID = "Prologue_A";
+
+    [SerializeField] private DialogueDataDatabase dialogueDataDatabase;
+    [SerializeField] private DialogueData newGameDialogueData;
 
     private void Awake()
     {
@@ -30,7 +33,7 @@ public class GameStartManager : MonoBehaviour
         return managerObject.AddComponent<GameStartManager>();
     }
 
-    public void StartNewGame()
+    public void StartNewGame(DialogueDataDatabase dialogueDataDatabaseOverride = null, DialogueData newGameDialogueDataOverride = null)
     {
         DevLog.Log("[NewGame] Starting new game.");
 
@@ -51,6 +54,20 @@ public class GameStartManager : MonoBehaviour
 
         if (ExplorationManager.Instance != null)
             ExplorationManager.Instance.ResetForNewGame();
+
+        DialogueDataDatabase resolverDatabase = dialogueDataDatabaseOverride != null ? dialogueDataDatabaseOverride : dialogueDataDatabase;
+        DialogueData resolverDialogueData = newGameDialogueDataOverride != null ? newGameDialogueDataOverride : newGameDialogueData;
+        StorySkipResolveResult storySkipResult = resolverDialogueData != null
+            ? StorySkipResolver.Resolve(resolverDialogueData, resolverDatabase)
+            : StorySkipResolver.Resolve(NewGameDialogueID, resolverDatabase);
+        if (storySkipResult.action == StorySkipResolveAction.LoadSceneDirectly)
+        {
+            if (SaveManager.Instance != null)
+                SaveManager.Instance.SaveContinueData();
+
+            SceneLoader.LoadScene(storySkipResult.sceneName);
+            return;
+        }
 
         if (SaveManager.Instance != null)
             SaveManager.Instance.SaveContinueDataForDialogue(StorySceneName, NewGameDialogueID);

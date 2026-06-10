@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: PrologueC
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   dialogueID: Prologue_C
-  nextDialogueID: ""
+  nextDialogueID: 
   nextSceneName: Exploration
+  storySkipPolicy: 0
+  bgmPlaylist: []
+  bgmClip: {fileID: 0}
+  bgmFadeTime: 0.5
+  stopBgmIfEmpty: 0
   initialBackgroundID: NightStreet
   useLineTSV: 1
   lineTSV: {fileID: 4900000, guid: 3871590dbccc31345b6b1a91820c7cd5, type: 3}

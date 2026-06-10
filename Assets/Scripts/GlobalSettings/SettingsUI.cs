@@ -8,6 +8,7 @@ public class SettingsUI : MonoBehaviour
     public GameObject goToMainButton;
     public GameObject confirmationPopup;
     public Toggle fastCombatToggle;
+    public Toggle storySkipToggle;
     public GameObject restartBattleButton;
 
     [Header("씬 이름 설정")]
@@ -40,6 +41,13 @@ public class SettingsUI : MonoBehaviour
             fastCombatToggle.onValueChanged.RemoveAllListeners();
             fastCombatToggle.isOn = isFast;
             fastCombatToggle.onValueChanged.AddListener(OnFastCombatToggleChanged);
+        }
+
+        if (storySkipToggle != null)
+        {
+            storySkipToggle.onValueChanged.RemoveListener(OnStorySkipToggleChanged);
+            storySkipToggle.SetIsOnWithoutNotify(StorySkipSettings.Load());
+            storySkipToggle.onValueChanged.AddListener(OnStorySkipToggleChanged);
         }
     }
 
@@ -87,6 +95,11 @@ public class SettingsUI : MonoBehaviour
             if (CombatUIManager.Instance != null)
                 CombatUIManager.Instance.UpdateFastCombatIcon(isOn);
         }
+    }
+
+    public void OnStorySkipToggleChanged(bool isOn)
+    {
+        StorySkipSettings.SetEnabled(isOn);
     }
 
     public void RestartBattle()

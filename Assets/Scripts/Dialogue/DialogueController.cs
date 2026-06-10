@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class DialogueController : MonoBehaviour
 {
+    private const int MaxStorySkipResolveDepth = 64;
+
     [Header("Data")]
     [SerializeField] private DialogueData fallbackDialogueData;
     [SerializeField] private DialogueDataDatabase dialogueDataDatabase;
@@ -127,7 +129,10 @@ public class DialogueController : MonoBehaviour
         {
             DialogueData pendingDialogueData = ResolveDialogueDataByID(pendingDialogueID);
             if (pendingDialogueData != null)
+            {
+                isPendingDialogue = IsPlayerManagerPendingDialogue(pendingDialogueID);
                 return pendingDialogueData;
+            }
 
             DevLog.LogWarning($"[Dialogue] Pending dialogueID not found: {pendingDialogueID}. Using fallbackDialogueData.");
         }
@@ -139,6 +144,13 @@ public class DialogueController : MonoBehaviour
         }
 
         return fallbackDialogueData;
+    }
+
+    private bool IsPlayerManagerPendingDialogue(string dialogueID)
+    {
+        return PlayerManager.Instance != null
+            && PlayerManager.Instance.pendingDialogueData != null
+            && PlayerManager.Instance.pendingDialogueData.dialogueID == dialogueID;
     }
 
     private DialogueData ResolveDialogueDataByID(string dialogueID)
@@ -502,6 +514,27 @@ public class DialogueController : MonoBehaviour
         if (currentDialogueData == null || string.IsNullOrEmpty(currentDialogueData.nextDialogueID))
             return false;
 
+        if (!StorySkipSettings.IsEnabled)
+            return TryStartNextDialogueByID(currentDialogueData.nextDialogueID);
+
+        return TryStartNextDialogueWithStorySkip();
+    }
+
+    private bool TryStartNextDialogueByID(string dialogueID)
+    {
+        DialogueData nextDialogueData = ResolveDialogueDataByID(dialogueID);
+        if (nextDialogueData == null)
+        {
+            DevLog.LogWarning($"[Dialogue] nextDialogueID not found: {dialogueID}");
+            return false;
+        }
+
+        BeginDialogue(nextDialogueData);
+        return true;
+    }
+
+    private bool TryStartNextDialogueWithStorySkip()
+    {
         DialogueData nextDialogueData = ResolveDialogueDataByID(currentDialogueData.nextDialogueID);
         if (nextDialogueData == null)
         {
@@ -509,17 +542,66 @@ public class DialogueController : MonoBehaviour
             return false;
         }
 
-        isPlayingPendingDialogue = false;
-        BeginDialogue(nextDialogueData);
-        return true;
+        HashSet<string> visitedDialogueIDs = new HashSet<string>();
+        int depth = 0;
+
+        while (nextDialogueData != null)
+        {
+            if (depth >= MaxStorySkipResolveDepth)
+            {
+                DevLog.LogWarning($"[Dialogue] Story Skip nextDialogueID max depth reached: {nextDialogueData.dialogueID}");
+                return false;
+            }
+
+            depth++;
+
+            if (!string.IsNullOrEmpty(nextDialogueData.dialogueID)
+                && !visitedDialogueIDs.Add(nextDialogueData.dialogueID))
+            {
+                DevLog.LogWarning($"[Dialogue] Story Skip nextDialogueID loop detected: {nextDialogueData.dialogueID}");
+                return false;
+            }
+
+            if (nextDialogueData.storySkipPolicy != DialogueSkipPolicy.SkippablePureText)
+            {
+                BeginDialogue(nextDialogueData);
+                return true;
+            }
+
+            if (string.IsNullOrEmpty(nextDialogueData.nextDialogueID))
+            {
+                string nextSceneName = GetNextSceneName(nextDialogueData);
+                ClearPendingDialogueIfNeeded();
+                LoadSceneOrWarn(nextSceneName);
+                return true;
+            }
+
+            DialogueData skippedDialogueData = nextDialogueData;
+            nextDialogueData = ResolveDialogueDataByID(skippedDialogueData.nextDialogueID);
+            if (nextDialogueData == null)
+            {
+                DevLog.LogWarning($"[Dialogue] nextDialogueID not found: {skippedDialogueData.nextDialogueID}");
+                string nextSceneName = GetNextSceneName(skippedDialogueData);
+                ClearPendingDialogueIfNeeded();
+                LoadSceneOrWarn(nextSceneName);
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private string GetNextSceneName()
     {
+        return GetNextSceneName(currentDialogueData);
+    }
+
+    private string GetNextSceneName(DialogueData dialogueData)
+    {
         if (PlayerManager.Instance != null && !string.IsNullOrEmpty(PlayerManager.Instance.pendingDialogueReturnSceneName))
             return PlayerManager.Instance.pendingDialogueReturnSceneName;
 
-        return currentDialogueData != null ? currentDialogueData.nextSceneName : "";
+        return dialogueData != null ? dialogueData.nextSceneName : "";
     }
 
     private void ResolvePendingSupporterChoice(bool isRecruit)

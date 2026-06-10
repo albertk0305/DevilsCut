@@ -54,6 +54,7 @@ public class ExplorationUI : MonoBehaviour
     public GameObject settingsCanvas;
 
     [SerializeField] private string dialogueSceneName = "Story";
+    [SerializeField] private DialogueDataDatabase dialogueDataDatabase;
     private List<ExplorationNodeData> currentOptions = new List<ExplorationNodeData>();
     private int selectedIndex = -1;
 
@@ -369,6 +370,13 @@ public class ExplorationUI : MonoBehaviour
                     DevLog.LogWarning($"[ExplorationUI] Pre-boss dialogue nextSceneName should be Battle. bossID={battleNode.bossData.bossID}, dialogueID={dialogueID}, nextSceneName={preBossDialogue.nextSceneName}");
                 }
 
+                StorySkipResolveResult storySkipResult = StorySkipResolver.Resolve(preBossDialogue, dialogueDataDatabase);
+                if (storySkipResult.action == StorySkipResolveAction.LoadSceneDirectly)
+                {
+                    SceneLoader.LoadScene(storySkipResult.sceneName);
+                    return;
+                }
+
                 DialogueRuntimeContext.SetPendingDialogueID(dialogueID);
                 SceneLoader.LoadScene(dialogueSceneName);
                 return;
@@ -410,6 +418,13 @@ public class ExplorationUI : MonoBehaviour
 
         if (canRankUp && rankUpDialogue != null)
         {
+            if (StorySkipSettings.IsEnabled)
+            {
+                PlayerManager.Instance.EnsureFacilityRankAtLeast(facility.nodeID, currentRank + 1);
+                SceneLoader.LoadScene(facilitySceneName);
+                return;
+            }
+
             PlayerManager.Instance.SetPendingFacilityUpgradeDialogue(rankUpDialogue, facility.nodeID, currentRank + 1, facilitySceneName);
             SceneLoader.LoadScene(dialogueSceneName);
             return;

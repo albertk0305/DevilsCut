@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   dialogueID: Prologue_A
   nextDialogueID: Prologue_B
-  nextSceneName: ""
+  nextSceneName: 
+  storySkipPolicy: 0
+  bgmPlaylist: []
+  bgmClip: {fileID: 0}
+  bgmFadeTime: 0.5
+  stopBgmIfEmpty: 0
   initialBackgroundID: Jukebox
   useLineTSV: 1
   lineTSV: {fileID: 4900000, guid: 5d51ebdea8efccf489ff6ab2bf1de12b, type: 3}

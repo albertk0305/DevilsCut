@@ -15,6 +15,11 @@ MonoBehaviour:
   dialogueID: DemoGameClear
   nextDialogueID: 
   nextSceneName: MainMenu
+  storySkipPolicy: 0
+  bgmPlaylist: []
+  bgmClip: {fileID: 0}
+  bgmFadeTime: 0.5
+  stopBgmIfEmpty: 0
   initialBackgroundID: NightStreet
   useLineTSV: 1
   lineTSV: {fileID: 4900000, guid: 5972f8dde4530b74eb88c36297697740, type: 3}

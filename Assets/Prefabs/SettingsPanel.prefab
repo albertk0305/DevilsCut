@@ -2356,6 +2356,7 @@ MonoBehaviour:
   goToMainButton: {fileID: 3454493685775574125}
   confirmationPopup: {fileID: 6694823996789785941}
   fastCombatToggle: {fileID: 1614757622428504546}
+  storySkipToggle: {fileID: 8199717817667179435}
   restartBattleButton: {fileID: 3454290313852758065}
   mainMenuSceneName: MainMenu
   battleSceneName: Battle

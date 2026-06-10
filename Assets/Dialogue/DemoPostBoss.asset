@@ -15,6 +15,11 @@ MonoBehaviour:
   dialogueID: DemoPostBoss
   nextDialogueID: 
   nextSceneName: Exploration
+  storySkipPolicy: 2
+  bgmPlaylist: []
+  bgmClip: {fileID: 0}
+  bgmFadeTime: 0.5
+  stopBgmIfEmpty: 0
   initialBackgroundID: DayStreet
   useLineTSV: 1
   lineTSV: {fileID: 4900000, guid: 82639ffd12420d24ba70febd12d8a3c3, type: 3}

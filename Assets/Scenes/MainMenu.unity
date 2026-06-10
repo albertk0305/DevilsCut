@@ -3003,6 +3003,8 @@ MonoBehaviour:
   confirmNewGamePanel: {fileID: 389209194}
   confirmNewGameText: {fileID: 236541560}
   explorationSceneName: Exploration
+  dialogueDataDatabase: {fileID: 11400000, guid: 0bb3dd23896e4fa19d1063d3842f62e6, type: 2}
+  newGameDialogueData: {fileID: 11400000, guid: 7e99686744f968e478b0580e620c6010, type: 2}
 --- !u!4 &1808452307
 Transform:
   m_ObjectHideFlags: 0

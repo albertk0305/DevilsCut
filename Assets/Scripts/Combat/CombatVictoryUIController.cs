@@ -85,6 +85,7 @@ public class CombatVictoryUIController : MonoBehaviour
     [Header("Scenes")]
     [SerializeField] private string explorationSceneName = "Exploration";
     [SerializeField] private string dialogueSceneName = "Story";
+    [SerializeField] private DialogueDataDatabase dialogueDataDatabase;
 
     private readonly Queue<string> messageQueue = new Queue<string>();
     private readonly Queue<SupporterPassiveRewardResult> supporterPassiveResultQueue = new Queue<SupporterPassiveRewardResult>();
@@ -1587,14 +1588,15 @@ public class CombatVictoryUIController : MonoBehaviour
 
     private string ResolvePostVictorySceneName()
     {
-        if (TryPreparePostBossDialogue())
-            return dialogueSceneName;
+        if (TryPreparePostBossDialogue(out string sceneName))
+            return sceneName;
 
         return explorationSceneName;
     }
 
-    private bool TryPreparePostBossDialogue()
+    private bool TryPreparePostBossDialogue(out string sceneName)
     {
+        sceneName = dialogueSceneName;
         PlayerManager playerManager = PlayerManager.Instance;
         if (playerManager == null)
         {
@@ -1636,6 +1638,7 @@ public class CombatVictoryUIController : MonoBehaviour
             return false;
         }
 
+        bool hasPendingSupporterDialogue = false;
         if (phase >= 1 && phase <= 7)
         {
             if (bossEncounter.imprisonedSupporter == null)
@@ -1654,6 +1657,7 @@ public class CombatVictoryUIController : MonoBehaviour
                 postBossDialogue,
                 bossEncounter.imprisonedSupporter,
                 explorationSceneName);
+            hasPendingSupporterDialogue = true;
 
             DevLog.Log($"[VictoryReward] Prepared supporter rescue dialogue. phase={phase}, supporterID={bossEncounter.imprisonedSupporter.supporterID}");
         }
@@ -1664,6 +1668,14 @@ public class CombatVictoryUIController : MonoBehaviour
         else
         {
             DevLog.Log($"[VictoryReward] Prepared ending post boss dialogue. phase={phase}, bossID={bossEncounter.bossID}");
+        }
+
+        StorySkipResolveResult storySkipResult = StorySkipResolver.Resolve(postBossDialogue, dialogueDataDatabase);
+        if (!hasPendingSupporterDialogue && storySkipResult.action == StorySkipResolveAction.LoadSceneDirectly)
+        {
+            sceneName = storySkipResult.sceneName;
+            DevLog.Log($"[VictoryReward] Post boss dialogue skipped by Story Skip: {dialogueID}");
+            return true;
         }
 
         DialogueRuntimeContext.SetPendingDialogueID(dialogueID);

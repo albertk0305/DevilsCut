@@ -7,6 +7,7 @@ public class DialogueData : ScriptableObject
     public string dialogueID;
     public string nextDialogueID;
     public string nextSceneName;
+    public DialogueSkipPolicy storySkipPolicy = DialogueSkipPolicy.NeverSkip;
 
     [Header("BGM")]
     public List<AudioClip> bgmPlaylist = new List<AudioClip>();

@@ -10,6 +10,8 @@ public class MainMenuManager : MonoBehaviour
     public GameObject confirmNewGamePanel;
     public TextMeshProUGUI confirmNewGameText;
     public string explorationSceneName = "Exploration";
+    [SerializeField] private DialogueDataDatabase dialogueDataDatabase;
+    [SerializeField] private DialogueData newGameDialogueData;
 
     private const string NewGameOverwriteMessage = "저장된 진행 상황이 있습니다.\n새 게임을 시작하면 기존 이어하기 데이터가 삭제됩니다.\n정말 새로 시작하시겠습니까?";
 
@@ -76,7 +78,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void StartNewGameInternal()
     {
-        GameStartManager.GetOrCreateInstance().StartNewGame();
+        GameStartManager.GetOrCreateInstance().StartNewGame(dialogueDataDatabase, newGameDialogueData);
     }
     public void OnClickContinue()
     {

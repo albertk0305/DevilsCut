@@ -3787,6 +3787,7 @@ MonoBehaviour:
   statusCanvas: {fileID: 368076949}
   settingsCanvas: {fileID: 1369678688}
   dialogueSceneName: Story
+  dialogueDataDatabase: {fileID: 0}
   encounterBuilder: {fileID: 1223019334}
 --- !u!1 &1610099446
 GameObject:
