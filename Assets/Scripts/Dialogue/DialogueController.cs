@@ -217,14 +217,7 @@ public class DialogueController : MonoBehaviour
         if (data == null || SoundManager.Instance == null)
             return;
 
-        if (data.bgmClip != null)
-        {
-            SoundManager.Instance.PlayBGM(data.bgmClip, data.bgmFadeTime);
-            return;
-        }
-
-        if (data.stopBgmIfEmpty)
-            SoundManager.Instance.StopBGM(data.bgmFadeTime);
+        SoundManager.Instance.ApplyBGM(data.bgmPlaylist, data.bgmClip, data.bgmFadeTime, data.stopBgmIfEmpty);
     }
 
     public void OnClickStoryTextPanel()

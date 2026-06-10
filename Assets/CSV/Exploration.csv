@@ -38,4 +38,5 @@ ui_status_deactivated,비활성화됨,Deactivated
 passive_text,패시브 스킬,Passive Skill
 initiation_text,개전 스킬,Initiation Skill
 battleSkill_text,배틀 스킬,Battle Skill
-msg_turn wait,턴을 기다리는 중입니다,Waiting for Turn
+msg_turn_wait,턴을 기다리는 중입니다,Waiting for Turn
+menu_story_skip,스토리 스킵,Skip Story

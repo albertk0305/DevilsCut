@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 using System.Collections;
+using System.Collections.Generic;
 
 //Global Manager에서 소리 조절해주는 함수
 public class SoundManager : MonoBehaviour
@@ -16,6 +17,7 @@ public class SoundManager : MonoBehaviour
 
     private AudioClip currentBgm;
     private Coroutine bgmFadeCoroutine;
+    private Coroutine bgmPlaylistCoroutine;
 
     private void Awake()
     {
@@ -52,22 +54,33 @@ public class SoundManager : MonoBehaviour
             return;
         }
 
-        StopBgmFadeCoroutine();
-        InitializeBgmSource();
+        PlayBGM(new List<AudioClip> { clip }, fadeTime);
+    }
 
-        if (currentBgm == clip && bgmSource.clip == clip && bgmSource.isPlaying)
+    public void PlayBGM(IList<AudioClip> playlist, float fadeTime)
+    {
+        List<AudioClip> validPlaylist = CreateValidPlaylist(playlist, null);
+        if (validPlaylist.Count == 0)
         {
-            bgmSource.volume = bgmVolume;
+            StopBGM(fadeTime);
             return;
         }
 
-        if (fadeTime <= 0f)
+        StartBgmPlaylist(validPlaylist, fadeTime);
+    }
+
+    public void ApplyBGM(IList<AudioClip> playlist, AudioClip legacyClip, float fadeTime, bool stopBgmIfEmpty)
+    {
+        List<AudioClip> validPlaylist = CreateValidPlaylist(playlist, legacyClip);
+        if (validPlaylist.Count == 0)
         {
-            PlayBgmImmediate(clip);
+            if (stopBgmIfEmpty)
+                StopBGM(fadeTime);
+
             return;
         }
 
-        bgmFadeCoroutine = StartCoroutine(FadeToBgm(clip, fadeTime));
+        StartBgmPlaylist(validPlaylist, fadeTime);
     }
 
     public void StopBGM()
@@ -78,7 +91,7 @@ public class SoundManager : MonoBehaviour
     public void StopBGM(float fadeTime)
     {
         InitializeBgmSource();
-        StopBgmFadeCoroutine();
+        StopBgmPlaybackCoroutines();
 
         if (!bgmSource.isPlaying)
         {
@@ -110,7 +123,7 @@ public class SoundManager : MonoBehaviour
         if (bgmSource == null)
             bgmSource = gameObject.AddComponent<AudioSource>();
 
-        bgmSource.loop = true;
+        bgmSource.loop = false;
         bgmSource.playOnAwake = false;
 
         if (!bgmSource.isPlaying && bgmSource.clip == null)
@@ -121,7 +134,7 @@ public class SoundManager : MonoBehaviour
     {
         bgmSource.clip = clip;
         bgmSource.volume = bgmVolume;
-        bgmSource.loop = true;
+        bgmSource.loop = false;
         bgmSource.Play();
         currentBgm = clip;
     }
@@ -141,7 +154,7 @@ public class SoundManager : MonoBehaviour
 
         bgmSource.clip = clip;
         bgmSource.volume = 0f;
-        bgmSource.loop = true;
+        bgmSource.loop = false;
         bgmSource.Play();
         currentBgm = clip;
 
@@ -173,6 +186,88 @@ public class SoundManager : MonoBehaviour
         bgmSource.volume = to;
     }
 
+    private List<AudioClip> CreateValidPlaylist(IList<AudioClip> playlist, AudioClip legacyClip)
+    {
+        List<AudioClip> validPlaylist = new List<AudioClip>();
+
+        if (playlist != null)
+        {
+            for (int i = 0; i < playlist.Count; i++)
+            {
+                if (playlist[i] != null)
+                    validPlaylist.Add(playlist[i]);
+            }
+        }
+
+        if (validPlaylist.Count == 0 && legacyClip != null)
+            validPlaylist.Add(legacyClip);
+
+        return validPlaylist;
+    }
+
+    private void StartBgmPlaylist(List<AudioClip> playlist, float fadeTime)
+    {
+        StopBgmPlaybackCoroutines();
+        InitializeBgmSource();
+
+        int startIndex = playlist.Count > 1 ? Random.Range(0, playlist.Count) : 0;
+        bgmPlaylistCoroutine = StartCoroutine(PlayBgmPlaylistRoutine(playlist, startIndex, fadeTime));
+    }
+
+    private IEnumerator PlayBgmPlaylistRoutine(List<AudioClip> playlist, int startIndex, float fadeTime)
+    {
+        int currentIndex = Mathf.Clamp(startIndex, 0, playlist.Count - 1);
+
+        while (playlist.Count > 0)
+        {
+            AudioClip clip = playlist[currentIndex];
+            float effectiveFadeTime = GetEffectiveFadeTime(clip, fadeTime);
+
+            if (bgmSource.isPlaying)
+                yield return FadeBgmVolume(bgmSource.volume, 0f, effectiveFadeTime);
+
+            bgmSource.Stop();
+            bgmSource.clip = clip;
+            bgmSource.volume = 0f;
+            bgmSource.loop = false;
+            bgmSource.Play();
+            currentBgm = clip;
+
+            if (effectiveFadeTime > 0f)
+                yield return FadeBgmVolume(0f, bgmVolume, effectiveFadeTime);
+            else
+                bgmSource.volume = bgmVolume;
+
+            float waitTime = Mathf.Max(0f, clip.length - (effectiveFadeTime * 2f));
+            float elapsed = 0f;
+            while (elapsed < waitTime)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                yield return null;
+            }
+
+            if (effectiveFadeTime > 0f)
+                yield return FadeBgmVolume(bgmSource.volume, 0f, effectiveFadeTime);
+            else
+                bgmSource.volume = 0f;
+
+            if (waitTime <= 0f && effectiveFadeTime <= 0f)
+                yield return null;
+
+            currentIndex = (currentIndex + 1) % playlist.Count;
+        }
+
+        bgmPlaylistCoroutine = null;
+    }
+
+    private float GetEffectiveFadeTime(AudioClip clip, float fadeTime)
+    {
+        if (clip == null || fadeTime <= 0f)
+            return 0f;
+
+        return Mathf.Min(fadeTime, clip.length * 0.5f);
+    }
+
     private void StopBgmFadeCoroutine()
     {
         if (bgmFadeCoroutine == null)
@@ -180,5 +275,20 @@ public class SoundManager : MonoBehaviour
 
         StopCoroutine(bgmFadeCoroutine);
         bgmFadeCoroutine = null;
+    }
+
+    private void StopBgmPlaylistCoroutine()
+    {
+        if (bgmPlaylistCoroutine == null)
+            return;
+
+        StopCoroutine(bgmPlaylistCoroutine);
+        bgmPlaylistCoroutine = null;
+    }
+
+    private void StopBgmPlaybackCoroutines()
+    {
+        StopBgmFadeCoroutine();
+        StopBgmPlaylistCoroutine();
     }
 }

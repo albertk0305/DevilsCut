@@ -24,7 +24,7 @@ MonoBehaviour:
   evolutionCDescKey: sk_012_evo_c_desc
   category: 2
   skillLevel: 1
-  skillActionImage: {fileID: 21300000, guid: fb7d3305d58291c48a2a0465ea666543, type: 3}
+  skillActionImage: {fileID: 21300000, guid: 9bd3eb3e676ce3145af6633d46f481bc, type: 3}
   damageMultipliers:
   - 2.5
   - 2.7

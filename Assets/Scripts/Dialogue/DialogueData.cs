@@ -9,6 +9,7 @@ public class DialogueData : ScriptableObject
     public string nextSceneName;
 
     [Header("BGM")]
+    public List<AudioClip> bgmPlaylist = new List<AudioClip>();
     public AudioClip bgmClip;
     public float bgmFadeTime = 0.5f;
     public bool stopBgmIfEmpty = false;
