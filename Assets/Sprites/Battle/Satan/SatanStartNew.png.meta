@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 8b20e4b1734f9e547955659db34988b2
+guid: 75138d98c34228c49abd4eec9b9714d5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3496498014297313479
-    second: SherryMusket_0
-  - first:
-      213: 289955134644087181
-    second: SherryMusket_1
-  - first:
-      213: 6726704538265721784
-    second: SherryMusket_2
-  - first:
-      213: 8635724480028446391
-    second: SherryMusket_3
-  - first:
-      213: -5064287741802846589
-    second: SherryMusket_4
+      213: -1195160002279117715
+    second: SatanStartNew_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -121,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SherryMusket_0
+      name: SatanStartNew_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 4
-        width: 956
-        height: 964
+        y: 10
+        width: 1024
+        height: 1014
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,96 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 93f23fbc491f97fc0800000000000000
-      internalID: -3496498014297313479
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SherryMusket_1
-      rect:
-        serializedVersion: 2
-        x: 728
-        y: 0
-        width: 100
-        height: 264
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d89e241a8a0260400800000000000000
-      internalID: 289955134644087181
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SherryMusket_2
-      rect:
-        serializedVersion: 2
-        x: 868
-        y: 56
-        width: 156
-        height: 292
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8bb1650532e0a5d50800000000000000
-      internalID: 6726704538265721784
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SherryMusket_3
-      rect:
-        serializedVersion: 2
-        x: 871
-        y: 212
-        width: 121
-        height: 344
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7be8d3a19a148d770800000000000000
-      internalID: 8635724480028446391
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SherryMusket_4
-      rect:
-        serializedVersion: 2
-        x: 280
-        y: 0
-        width: 100
-        height: 196
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 386e97d612908b9b0800000000000000
-      internalID: -5064287741802846589
+      spriteID: d6ce5666f40f96fe0800000000000000
+      internalID: -1195160002279117715
       vertices: []
       indices: 
       edges: []
@@ -248,11 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SherryMusket_0: -3496498014297313479
-      SherryMusket_1: 289955134644087181
-      SherryMusket_2: 6726704538265721784
-      SherryMusket_3: 8635724480028446391
-      SherryMusket_4: -5064287741802846589
+      SatanStartNew_0: -1195160002279117715
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

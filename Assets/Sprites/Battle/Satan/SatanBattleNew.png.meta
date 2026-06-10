@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fb7d3305d58291c48a2a0465ea666543
+guid: 381c95b741a98f944b29054cd6e11ae1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2738068592241198302
-    second: SherryRush_0
+      213: -4978605916273653260
+    second: SatanBattleNew_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SherryRush_0
+      name: SatanBattleNew_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 8
-        width: 988
-        height: 976
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 22b3fcc4f1d600ad0800000000000000
-      internalID: -2738068592241198302
+      spriteID: 4f9c9d30c4078eab0800000000000000
+      internalID: -4978605916273653260
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SherryRush_0: -2738068592241198302
+      SatanBattleNew_0: -4978605916273653260
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

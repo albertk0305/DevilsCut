@@ -1,13 +1,22 @@
 fileFormatVersion: 2
-guid: 6f4b545a1014cda44912d55565ed2933
+guid: 583f101b5b7b7484f82f5fb3c3057bc0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5325212459829544689
-    second: SatanStart_0
+      213: -8556087965617763787
+    second: SherrySandevistan_0
   - first:
-      213: -4178259626683771026
-    second: SatanStart_1
+      213: -6833077583224197878
+    second: SherrySandevistan_1
+  - first:
+      213: -2082155531353661700
+    second: SherrySandevistan_2
+  - first:
+      213: -3968347299639595379
+    second: SherrySandevistan_3
+  - first:
+      213: 2389809855397079778
+    second: SherrySandevistan_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -112,17 +121,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SatanStart_0
+      name: SherrySandevistan_0
       rect:
         serializedVersion: 2
-        x: 250
-        y: 180
-        width: 24
-        height: 28
+        x: 0
+        y: 0
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f0930626b7b0916b0800000000000000
-      internalID: -5325212459829544689
+      spriteID: 53acb5ec35ba24980800000000000000
+      internalID: -8556087965617763787
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SatanStart_1
+      name: SherrySandevistan_1
       rect:
         serializedVersion: 2
-        x: 253
-        y: 0
-        width: 695
-        height: 994
+        x: 353
+        y: 968
+        width: 7
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +175,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e675824c107d306c0800000000000000
-      internalID: -4178259626683771026
+      spriteID: a0dac3924280c21a0800000000000000
+      internalID: -6833077583224197878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SherrySandevistan_2
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 45
+        width: 35
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfedc827392ba13e0800000000000000
+      internalID: -2082155531353661700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SherrySandevistan_3
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 42
+        width: 307
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8ee99bf7299de8c0800000000000000
+      internalID: -3968347299639595379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SherrySandevistan_4
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 43
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2eaaba7d66f4a2120800000000000000
+      internalID: 2389809855397079778
       vertices: []
       indices: 
       edges: []
@@ -173,8 +261,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SatanStart_0: -5325212459829544689
-      SatanStart_1: -4178259626683771026
+      SherrySandevistan_0: -8556087965617763787
+      SherrySandevistan_1: -6833077583224197878
+      SherrySandevistan_2: -2082155531353661700
+      SherrySandevistan_3: -3968347299639595379
+      SherrySandevistan_4: 2389809855397079778
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

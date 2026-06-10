@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 45c693806acbb66429e890360c45b4fe
+guid: 44fd653f67a43ed42aae17be9f04efa3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7954559848969107188
-    second: SherrySande_0
+      213: -618928719102335769
+    second: SherryMusketNew_0
+  - first:
+      213: -6804269005682194091
+    second: SherryMusketNew_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +112,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SherrySande_0
+      name: SherryMusketNew_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 14
-        width: 942
-        height: 966
+        x: 12
+        y: 22
+        width: 1012
+        height: 971
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +144,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4f6736e9906446e60800000000000000
-      internalID: 7954559848969107188
+      spriteID: 7e42e94fb9f1967f0800000000000000
+      internalID: -618928719102335769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SherryMusketNew_1
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 12
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 559cc10d3616291a0800000000000000
+      internalID: -6804269005682194091
       vertices: []
       indices: 
       edges: []
@@ -148,7 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SherrySande_0: 7954559848969107188
+      SherryMusketNew_0: -618928719102335769
+      SherryMusketNew_1: -6804269005682194091
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
