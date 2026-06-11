@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Sirius
   skillLogic: {fileID: 11400000, guid: 713fe15122d77f14994157068216d4f8, type: 2}
-  skillNameKey: Sirius
-  skillDescKey: Sirius
+  skillNameKey: enemy_skill_sirius_name
+  skillDescKey: enemy_skill_sirius_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

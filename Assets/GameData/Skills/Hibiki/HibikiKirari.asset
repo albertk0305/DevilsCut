@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Kirari
   skillLogic: {fileID: 11400000, guid: 7520c4f664e522c4eaafd89a5df72baf, type: 2}
-  skillNameKey: Kirari
-  skillDescKey: Kirari
+  skillNameKey: enemy_skill_kirari_name
+  skillDescKey: enemy_skill_kirari_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

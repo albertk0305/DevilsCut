@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: FlydayChinatown
   skillLogic: {fileID: 11400000, guid: 3c49744644155c849872e915ffb29c3f, type: 2}
-  skillNameKey: FlydayChinatown
-  skillDescKey: FlydayChinatown
+  skillNameKey: enemy_skill_flyday_chinatown_name
+  skillDescKey: enemy_skill_flyday_chinatown_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

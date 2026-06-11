@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: IntegrityBrandNewDays
   skillLogic: {fileID: 11400000, guid: f06bc79f3f6b1f04b9ffdb1ac5913b5b, type: 2}
-  skillNameKey: IntegrityBrandNewDays
-  skillDescKey: IntegrityBrandNewDays
+  skillNameKey: enemy_skill_brand_new_days_name
+  skillDescKey: enemy_skill_brand_new_days_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

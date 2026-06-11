@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: RememberSummerDays
   skillLogic: {fileID: 11400000, guid: 9fa397ea9bb937a4794ce609607ccf6f, type: 2}
-  skillNameKey: RememberSummerDays
-  skillDescKey: RememberSummerDays
+  skillNameKey: enemy_skill_remember_summer_days_name
+  skillDescKey: enemy_skill_remember_summer_days_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

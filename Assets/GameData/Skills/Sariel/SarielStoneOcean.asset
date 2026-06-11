@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: StoneOcean
   skillLogic: {fileID: 11400000, guid: 7215ec565f1afd8428688fa37001c2fa, type: 2}
-  skillNameKey: StoneOcean
-  skillDescKey: StoneOcean
+  skillNameKey: enemy_skill_stone_ocean_name
+  skillDescKey: enemy_skill_stone_ocean_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

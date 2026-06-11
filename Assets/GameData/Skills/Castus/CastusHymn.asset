@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: CastusHymn
   skillLogic: {fileID: 11400000, guid: f1c3160ef788738428307ec57b28e611, type: 2}
-  skillNameKey: CastusHymn
-  skillDescKey: CastusHymn
+  skillNameKey: enemy_skill_hymn_name
+  skillDescKey: enemy_skill_hymn_name
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

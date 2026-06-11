@@ -28,9 +28,7 @@ public class BuffSlotUI : MonoBehaviour
         var myStacks = allEffects.FindAll(e => e.effectData == data);
         int stackCount = myStacks.Count;
 
-        // 1. 기본 이름 및 설명 출력
         StringBuilder sb = new StringBuilder();
-        sb.Append($"<b>{data.effectName}</b> : {data.baseDescription}");
 
         float displayTotal = totalValue;
 
@@ -46,50 +44,56 @@ public class BuffSlotUI : MonoBehaviour
             }
         }
 
-        if (Mathf.Abs(displayTotal) > 0.0001f)
-        {
-            string formattedValue = FormatEffectValue(data, displayTotal);
+        bool hasDisplayValue = Mathf.Abs(displayTotal) > 0.0001f;
+        string formattedDisplayValue = hasDisplayValue ? FormatEffectValue(data, displayTotal) : "";
 
-            if (!string.IsNullOrEmpty(data.valueFormat))
-            {
-                // 인스펙터에 포맷을 적어뒀다면 (예: "(총 {0})") 그 포맷을 따름
-                sb.Append(" ").Append(string.Format(data.valueFormat, formattedValue));
-            }
-            else
-            {
-                // 인스펙터에 포맷을 안 적어뒀더라도 기본 형태로 강제 출력!
-                sb.Append($" (현재 적용 수치: {formattedValue})");
-            }
-        }
+        if (stackCount > 0 && data.showStackDetails)
+        {
+            sb.Append($"{data.effectName} [Active Stacks: {stackCount}]");
+            sb.Append("\n");
 
-        // [수정] 1. 영구 패시브일 경우 깔끔하게 고유 문구 출력 후 종료
-        if (data.isPermanentPassive)
-        {
-            sb.Append("\n\n<color=#FFD700>[ 영구 귀속 스탯 ]</color>");
-            //sb.Append("\n<color=#DDDDDD><size=80%>* 장비, 시너지, 고유 특성이 반영된 캐릭터의 기본 스탯입니다.</size></color>");
-            //sb.Append("\n<color=#DDDDDD><size=80%>* 전투 중 스킬로 발생한 일시적 버프는 별도로 합산됩니다.</size></color>");
-        }
-        // [수정] 2. 스택 추적이 켜진 버프/디버프(예: 혈액 저주)만 낱개 리스트를 출력하도록 제한!
-        else if (stackCount > 0 && data.showStackDetails)
-        {
-            sb.Append($"\n[적용 중인 중첩: {stackCount}개]");
             for (int i = 0; i < myStacks.Count; i++)
             {
-                sb.Append("\n - ");
+                if (i > 0) sb.Append(" ");
 
-                if (myStacks[i].value != 0f)
+                bool hasStackValue = Mathf.Abs(myStacks[i].value) > 0.0001f;
+                string durationText = GetDurationText(data, myStacks[i].turnsLeft);
+
+                if (hasStackValue)
                 {
-                    sb.Append($"수치: {FormatEffectValue(data, myStacks[i].value)} | ");
+                    sb.Append($"({FormatEffectValue(data, myStacks[i].value)} / {durationText})");
                 }
-                sb.Append($"남은 시간: {myStacks[i].turnsLeft}턴");
+                else
+                {
+                    sb.Append($"({durationText})");
+                }
+            }
+        }
+        else if (data.isPermanentPassive)
+        {
+            sb.Append($"{data.effectName} [Permanent Effect]");
+
+            if (hasDisplayValue)
+            {
+                sb.Append($" (Current Value: {formattedDisplayValue})");
             }
         }
         else
         {
-            // 스택 추적이 필요 없는 일반 지속시간제 버프는 가장 짧은 남은 턴수 하나만 심플하게 보여줍니다.
             int minTurn = int.MaxValue;
             foreach (var stack in myStacks) if (stack.turnsLeft < minTurn) minTurn = stack.turnsLeft;
-            if (minTurn != int.MaxValue) sb.Append($"\n(지속 시간: {minTurn}턴 남음)");
+            string durationText = minTurn != int.MaxValue ? GetDurationText(data, minTurn) : "0 turns";
+
+            sb.Append(data.effectName);
+
+            if (hasDisplayValue)
+            {
+                sb.Append($" (Current Value: {formattedDisplayValue} / {durationText})");
+            }
+            else
+            {
+                sb.Append($" ({durationText})");
+            }
         }
 
         clickMessage = sb.ToString();
@@ -104,6 +108,13 @@ public class BuffSlotUI : MonoBehaviour
         string numberFormat = Mathf.Abs(displayValue - Mathf.Round(displayValue)) < 0.001f ? "F0" : "F1";
 
         return $"{sign}{displayValue.ToString(numberFormat)}{unit}";
+    }
+
+    private string GetDurationText(StatusEffectData data, int turnsLeft)
+    {
+        if (data != null && data.isPermanentPassive) return "Permanent";
+        if (turnsLeft >= 999) return "Permanent";
+        return turnsLeft == 1 ? "1 turn" : $"{turnsLeft} turns";
     }
 
     private bool ShouldDisplayAsPercentage(StatusEffectData data)

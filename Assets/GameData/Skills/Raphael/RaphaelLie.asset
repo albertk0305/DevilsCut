@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Lie
   skillLogic: {fileID: 11400000, guid: 78feb384bf03a1546a2e370c4ebd24ac, type: 2}
-  skillNameKey: Lie
-  skillDescKey: Lie
+  skillNameKey: enemy_skill_lie_name
+  skillDescKey: enemy_skill_lie_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

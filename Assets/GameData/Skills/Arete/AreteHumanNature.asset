@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: AreteHumanNature
   skillLogic: {fileID: 11400000, guid: a530be47ea818ab4ba42fbe2ddace8ff, type: 2}
-  skillNameKey: AreteHumanNature
-  skillDescKey: AreteHumanNature
+  skillNameKey: enemy_skill_human_nature_name
+  skillDescKey: enemy_skill_human_nature_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

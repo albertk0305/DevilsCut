@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: RemielSentiment
   skillLogic: {fileID: 11400000, guid: 2a598fe9e0d5d854c8c9beec44f7eda8, type: 2}
-  skillNameKey: RemielSentiment
-  skillDescKey: RemielSentiment
+  skillNameKey: enemy_skill_cold_wind_sentiment_name
+  skillDescKey: enemy_skill_cold_wind_sentiment_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

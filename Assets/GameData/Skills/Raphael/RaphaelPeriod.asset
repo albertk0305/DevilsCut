@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Period
   skillLogic: {fileID: 11400000, guid: 081501566192b414bb94ad3e9f96dfd6, type: 2}
-  skillNameKey: Period
-  skillDescKey: Period
+  skillNameKey: enemy_skill_period_name
+  skillDescKey: enemy_skill_period_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

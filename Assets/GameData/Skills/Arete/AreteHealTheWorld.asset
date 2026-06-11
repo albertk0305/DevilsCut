@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: AreteHealTheWorld
   skillLogic: {fileID: 11400000, guid: ac3f9b5391f88dc4c89a5b9fa813fb9c, type: 2}
-  skillNameKey: AreteHealTheWorld
-  skillDescKey: AreteHealTheWorld
+  skillNameKey: enemy_skill_heal_the_world_name
+  skillDescKey: enemy_skill_heal_the_world_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

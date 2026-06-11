@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: WindySummer
   skillLogic: {fileID: 11400000, guid: 51d5280901e9d904099a1a25257470a8, type: 2}
-  skillNameKey: WindySummer
-  skillDescKey: WindySummer
+  skillNameKey: enemy_skill_windy_summer_name
+  skillDescKey: enemy_skill_windy_summer_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

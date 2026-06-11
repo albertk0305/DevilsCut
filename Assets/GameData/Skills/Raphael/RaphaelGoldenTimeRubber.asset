@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: RaphaelGoldenTimeRubber
   skillLogic: {fileID: 11400000, guid: 91f6a201966370a49ae42e79e66f6e35, type: 2}
-  skillNameKey: RaphaelGoldenTimeRubber
-  skillDescKey: RaphaelGoldenTimeRubber
+  skillNameKey: enemy_skill_golden_time_rubber_name
+  skillDescKey: enemy_skill_golden_time_rubber_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Men
   skillLogic: {fileID: 11400000, guid: 7652506e9bdd7bc4caaeaf7c3cc36c7f, type: 2}
-  skillNameKey: Men
-  skillDescKey: Men
+  skillNameKey: enemy_skill_men_name
+  skillDescKey: enemy_skill_men_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

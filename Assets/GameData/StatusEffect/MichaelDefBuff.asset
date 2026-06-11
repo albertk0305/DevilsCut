@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MichaelDefBuff
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
   effectID: MichaelDefBuff
-  effectName: MichaelDefBuff
+  effectName: TimeLeftDefBuff
   category: 0
   icon: {fileID: 21300000, guid: bf4b3fa02fbf7944d93f2d6a03ae6235, type: 3}
   targetStat: 2

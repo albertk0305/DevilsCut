@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CyndDamageAmp
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
   effectID: CyndDamageAmp
-  effectName: CyndDamageAmp
+  effectName: lithium flower Damage Amp
   category: 1
   icon: {fileID: 21300000, guid: 77159e96e78270a489d6514c0e385f32, type: 3}
   targetStat: 0

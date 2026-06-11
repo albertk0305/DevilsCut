@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Kote
   skillLogic: {fileID: 11400000, guid: 9ee3d4f9d98152f439dc2eb0d4b7edce, type: 2}
-  skillNameKey: Kote
-  skillDescKey: Kote
+  skillNameKey: enemy_skill_kote_name
+  skillDescKey: enemy_skill_kote_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

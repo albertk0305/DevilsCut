@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: MidnightReflection
   skillLogic: {fileID: 11400000, guid: 784ad4119ac1bb24eb78cbd8de943b78, type: 2}
-  skillNameKey: MidnightReflection
-  skillDescKey: MidnightReflection
+  skillNameKey: enemy_skill_midnight_reflection_name
+  skillDescKey: enemy_skill_midnight_reflection_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

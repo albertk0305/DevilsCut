@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Strongest
   skillLogic: {fileID: 11400000, guid: 82aec61161adc3f45b7dcf6840574aef, type: 2}
-  skillNameKey: Strongest
-  skillDescKey: Strongest
+  skillNameKey: enemy_skill_strongest_name
+  skillDescKey: enemy_skill_strongest_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

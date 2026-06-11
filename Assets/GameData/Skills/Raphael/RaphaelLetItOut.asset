@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: LetItOut
   skillLogic: {fileID: 11400000, guid: c93dfb022c46a7f4c98ac336b65c64f2, type: 2}
-  skillNameKey: LetItOut
-  skillDescKey: LetItOut
+  skillNameKey: enemy_skill_let_it_out_name
+  skillDescKey: enemy_skill_let_it_out_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Masshiro
   skillLogic: {fileID: 11400000, guid: 644c11898790ab647a3d43e85467759f, type: 2}
-  skillNameKey: Masshiro
-  skillDescKey: Masshiro
+  skillNameKey: enemy_skill_masshiro_name
+  skillDescKey: enemy_skill_masshiro_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

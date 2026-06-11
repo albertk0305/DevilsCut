@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: DiligereWretchedWeaponry
   skillLogic: {fileID: 11400000, guid: 019ab4803b0888c4baceacc7419e55b9, type: 2}
-  skillNameKey: DiligereWretchedWeaponry
-  skillDescKey: DiligereWretchedWeaponry
+  skillNameKey: enemy_skill_wretched_weaponry_name
+  skillDescKey: enemy_skill_wretched_weaponry_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

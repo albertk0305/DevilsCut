@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
   m_Name: ChainsawScratch
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillID: 
   skillLogic: {fileID: 11400000, guid: d590fe1c339deda49a1572f315230c92, type: 2}
-  skillNameKey: ChainsawScratch
-  skillDescKey: ChainsawScratch
+  skillNameKey: enemy_skill_violence_name
+  skillDescKey: enemy_skill_violence_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

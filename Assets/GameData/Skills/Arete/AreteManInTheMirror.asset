@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: AreteManInTheMirror
   skillLogic: {fileID: 11400000, guid: 677d3290faca1b64d9bce6ff42f82f72, type: 2}
-  skillNameKey: AreteManInTheMirror
-  skillDescKey: AreteManInTheMirror
+  skillNameKey: enemy_skill_man_in_the_mirror_name
+  skillDescKey: enemy_skill_man_in_the_mirror_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

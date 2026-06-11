@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: VagueHope
   skillLogic: {fileID: 11400000, guid: 17550d53c2ca22d42af3dde3b2db24e1, type: 2}
-  skillNameKey: VagueHope
-  skillDescKey: VagueHope
+  skillNameKey: enemy_skill_vague_hope_name
+  skillDescKey: enemy_skill_vague_hope_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

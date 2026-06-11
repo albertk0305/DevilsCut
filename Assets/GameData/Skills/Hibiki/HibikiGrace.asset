@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Grace
   skillLogic: {fileID: 11400000, guid: eea6a46a6744f654d97917910ffc8ec0, type: 2}
-  skillNameKey: Grace
-  skillDescKey: Grace
+  skillNameKey: enemy_skill_grace_name
+  skillDescKey: enemy_skill_grace_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

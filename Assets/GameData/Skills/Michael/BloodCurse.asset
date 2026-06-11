@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
   m_Name: BloodCurse
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillID: 
   skillLogic: {fileID: 11400000, guid: 4a8203559280d674db2f1848b740f996, type: 2}
-  skillNameKey: BloodCurse
-  skillDescKey: BloodCurse
+  skillNameKey: enemy_skill_cerebral_rendezvous_name
+  skillDescKey: enemy_skill_cerebral_rendezvous_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

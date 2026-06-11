@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Matsuri
   skillLogic: {fileID: 11400000, guid: 6f266dab64f6eb044982d078d9f3c187, type: 2}
-  skillNameKey: Matsuri
-  skillDescKey: Matsuri
+  skillNameKey: enemy_skill_matsuri_name
+  skillDescKey: enemy_skill_matsuri_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

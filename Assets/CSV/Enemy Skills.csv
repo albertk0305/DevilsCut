@@ -1,0 +1,175 @@
+Key,Korean,English
+enemy_skill_extra_life_name,잔기,Time Left
+enemy_skill_extra_life_desc,체력이 낮을수록 피해 증폭을 얻습니다. 체력이 최초로 50% 이하로 떨어지면 최대 체력의 50%를 회복하고 운이 0으로 감소합니다. 대신 힘과 방어가 증가하고 체력이 낮을수록 피해 흡혈을 얻습니다,Gains damage amplification as HP decreases. When HP falls to 50% or lower for the first time recover 50% of Max HP and Luck decreases to 0. Instead Strength and Defense increase and gains damage lifesteal as HP decreases.
+enemy_skill_violence_name,바이올런스,Violence
+enemy_skill_violence_desc,다단 히트 피해를 입힙니다,Deals multi hit damage.
+enemy_skill_deep_down_name,Deep down,Deep down
+enemy_skill_deep_down_desc,적중 시 속도 감소 디버프를 부여합니다,Inflicts a Speed decrease debuff on hit.
+enemy_skill_cerebral_rendezvous_name,대뇌적인 랑데부,Cerebral Rendezvous
+enemy_skill_cerebral_rendezvous_desc,다단 히트 피해를 입히며 적중한 타격마다 속도 감소 디버프를 부여합니다,Deals multi hit damage and inflicts a Speed decrease debuff for each successful hit.
+enemy_skill_200_million_centimeter_blade_name,칼날 길이 2억 센티,200 Million Centimeter Blade
+enemy_skill_200_million_centimeter_blade_desc,다단 히트 피해를 입히며 적중한 타격마다 대뇌적인 랑데부의 디버프를 제거하고 추가 피해를 입힙니다,Deals multi hit damage. Each successful hit removes a Cerebral Rendezvous debuff and deals additional damage.
+enemy_skill_in_the_backrooms_name,인 더 백룸,In the Backroom
+enemy_skill_in_the_backrooms_desc,적중 시 행동 게이지를 차감합니다,Reduces the action gauge on hit.
+enemy_skill_inside_identity_name,Inside Identity,Inside Identity
+enemy_skill_inside_identity_desc,체력이 낮을수록 피해 증폭을 얻습니다,Gains damage amplification as HP decreases.
+enemy_skill_voice_name,Voice,Voice
+enemy_skill_voice_desc,피해를 입힙니다,Deals damage.
+enemy_skill_sparkling_daydream_name,Sparkling Daydream,Sparkling Daydream
+enemy_skill_sparkling_daydream_desc,적중 시 속도 감소 디버프를 부여합니다,Inflicts a Speed decrease debuff on hit.
+enemy_skill_before_my_body_is_dry_name,Before my body is dry,Before my body is dry
+enemy_skill_before_my_body_is_dry_desc,스킬 적중마다 브레이크 저항 감소 디버프를 부여합니다,Inflicts a Break Resistance decrease debuff with each successful skill hit.
+enemy_skill_men_name,멘,Men
+enemy_skill_men_desc,AP 감소 디버프를 부여합니다,Inflicts an AP decrease debuff.
+enemy_skill_kote_name,코테,Kote
+enemy_skill_kote_desc,힘 감소 디버프를 부여합니다,Inflicts a Strength decrease debuff.
+enemy_skill_do_name,도,Do
+enemy_skill_do_desc,속도 감소 디버프를 부여합니다,Inflicts a Speed decrease debuff.
+enemy_skill_tsuki_name,츠키,Tsuki
+enemy_skill_tsuki_desc,방어 감소 디버프를 부여합니다,Inflicts a Defense decrease debuff.
+enemy_skill_sirius_name,시리우스,Sirius
+enemy_skill_sirius_desc,큰 그로기 피해를 주며 스킬 피해의 일부가 방어 무시 고정 피해로 적용됩니다,Deals heavy groggy damage and converts part of skill damage into fixed damage that ignores defense.
+enemy_skill_till_i_die_name,Till I Die,Till I Die
+enemy_skill_till_i_die_desc,스킬 적중마다 브레이크 저항 감소 디버프를 부여합니다,Inflicts a Break Resistance decrease debuff with each successful skill hit.
+enemy_skill_ambiguous_name,ambiguous,ambiguous
+enemy_skill_ambiguous_desc,적중 시 AP와 속도 감소 디버프를 부여합니다,Inflicts AP and Speed decrease debuffs on hit.
+enemy_skill_hymn_name,찬미가,Sanbika
+enemy_skill_hymn_desc,적중 시 힘과 방어 감소 디버프를 부여합니다,Inflicts Strength and Defense decrease debuffs on hit.
+enemy_skill_plazma_name,Plazma,Plazma
+enemy_skill_plazma_desc,로봇 호출 3스택 보유 시 로봇에 탑승하며 1턴 동안 피해 감소 99%를 얻고 피해 증폭과 피해 감소 버프를 영구적으로 얻습니다,Mounts the robot when Robot Call reaches 3 stacks. Gains 99% damage reduction for 1 turn and permanently gains damage amplification and damage reduction buffs.
+enemy_skill_i_dont_care_name,I don't care,I don't care
+enemy_skill_i_dont_care_desc,피해를 입히고 로봇 호출 1스택을 획득합니다,Deals damage and gains 1 stack of Robot Call.
+enemy_skill_midnight_reflection_name,Midnight Reflection,Midnight Reflection
+enemy_skill_midnight_reflection_desc,속도 감소 디버프를 부여합니다,Inflicts a Speed decrease debuff.
+enemy_skill_bloom_in_the_night_name,Bloom in the night,Bloom in the night
+enemy_skill_bloom_in_the_night_desc,방어 감소 디버프를 부여합니다,Inflicts a Defense decrease debuff.
+enemy_skill_halo_name,Halo,Halo
+enemy_skill_halo_desc,다단 히트 피해를 입히고 적중한 타격마다 받는 피해 증가 디버프를 부여합니다,Deals multi hit damage and inflicts a Damage Taken increase debuff for each successful hit.
+enemy_skill_raguelOverheat_name,과열 회복,Overheat Recover
+enemy_skill_raguelOverheat_desc,과열 상태를 회복합니다,Recovers from Overheat
+enemy_skill_beyond_the_time_name,BEYOND THE TIME,BEYOND THE TIME
+enemy_skill_beyond_the_time_desc,반드시 명중합니다. 큰 피해를 입히고 1턴간 과열 상태에 빠집니다. 과열 상태일 때는 받는 피해가 증가합니다,Always hits. Deals heavy damage and enters Overheat for 1 turn. While overheated damage taken increases.
+enemy_skill_lithium_flower_name,lithium flower,lithium flower
+enemy_skill_lithium_flower_desc,피해 감소 버프를 영구적으로 얻습니다. 과열 상태일 때는 받는 피해가 크게 증가합니다,Permanently gains a damage reduction buff. While overheated damage taken greatly increases.
+enemy_skill_rise_name,rise,rise
+enemy_skill_rise_desc,적중 시 속도 감소 디버프를 부여합니다,Inflicts a Speed decrease debuff on hit.
+enemy_skill_cyndOverheat_name,과열 회복,Overheat Recover
+enemy_skill_cyndOverheat_desc,과열 상태를 회복합니다,Recovers from Overheat
+enemy_skill_living_inside_the_shell_name,living inside the shell,living inside the shell
+enemy_skill_living_inside_the_shell_desc,피해를 입히고 과열 상태에 빠집니다,Deals damage and enters Overheat.
+enemy_skill_again_name,again,again
+enemy_skill_again_desc,회피 증가 버프를 영구적으로 얻습니다,Permanently gains an Evasion increase buff.
+enemy_skill_lie_name,거짓말,Uso
+enemy_skill_lie_desc,속도 증가 버프를 얻습니다,Gains a Speed increase buff.
+enemy_skill_golden_time_rubber_name,Golden Time Rubber,Golden Time Rubber
+enemy_skill_golden_time_rubber_desc,적중 시 속도 감소 디버프를 부여합니다,Inflicts a Speed decrease debuff on hit.
+enemy_skill_period_name,Period,Period
+enemy_skill_period_desc,적중한 타격마다 명중률 감소 디버프를 부여합니다,Inflicts a Hit Rate decrease debuff for each successful hit.
+enemy_skill_let_it_out_name,LET IT OUT,LET IT OUT
+enemy_skill_let_it_out_desc,최대 체력의 20%만큼 체력을 회복하고 회피와 AP 증가 버프를 얻습니다,Recovers HP equal to 20% of Max HP and gains Evasion and AP increase buffs.
+enemy_skill_instant_sentimental_name,순간 센티멘탈,Shunkan Sentimental
+enemy_skill_instant_sentimental_desc,적중한 타격마다 속도 감소 디버프를 부여합니다,Inflicts a Speed decrease debuff for each successful hit.
+enemy_skill_life_is_full_of_dreams_name,인생은 꿈투성이,Life Is Full of Dreams
+enemy_skill_life_is_full_of_dreams_desc,회피 증가 버프를 영구적으로 획득합니다,Permanently gains an Evasion increase buff.
+enemy_skill_instinct_name,본능,Instinct
+enemy_skill_instinct_desc,속도와 AP 상승 버프를 획득합니다,Gains Speed and AP increase buffs.
+enemy_skill_overflowing_wealth_name,넘쳐흐르는 부,OAriamaru Tomi
+enemy_skill_overflowing_wealth_desc,적중 시 속도와 명중률 감소 디버프를 부여합니다,Inflicts Speed and Hit Rate decrease debuffs on hit.
+enemy_skill_fast_love_name,fast love,fast love
+enemy_skill_fast_love_desc,AP 증가 버프를 영구적으로 획득합니다,Permanently gains an AP increase buff.
+enemy_skill_shiori_name,SHIORI,SHIORI
+enemy_skill_shiori_desc,AP 증가 버프와 브레이크 저항 감소 디버프를 획득합니다,Gains an AP increase buff and a Break Resistance decrease debuff.
+enemy_skill_staple_staple_name,staple staple,staple staple
+enemy_skill_staple_staple_desc,적중 시 AP 감소 디버프를 부여합니다,Inflicts an AP decrease debuff on hit.
+enemy_skill_cold_wind_sentiment_name,코가라시 센티멘트,Kogarashi Sentiment
+enemy_skill_cold_wind_sentiment_desc,적중 시 출혈 디버프를 부여합니다,Inflicts a Bleed debuff on hit.
+enemy_skill_dreamy_date_drive_name,dreamy date drive,dreamy date drive
+enemy_skill_dreamy_date_drive_desc,적중한 타격마다 출혈 디버프를 부여합니다,Inflicts a Bleed debuff for each successful hit.
+enemy_skill_snowdrop_name,snowdrop,snowdrop
+enemy_skill_snowdrop_desc,적중한 타격마다 출혈 디버프를 부여합니다. 마지막 타격 이후 모든 출혈 디버프를 소멸시키고 소멸된 양에 비례하여 큰 피해를 입힙니다,Inflicts a Bleed debuff for each successful hit. After the final hit removes all Bleed debuffs and deals heavy damage based on the amount removed.
+enemy_skill_birth_of_a_wish_name,Birth of a Wish,Birth of a Wish
+enemy_skill_birth_of_a_wish_desc,AP 증가 버프를 영구적으로 획득합니다,Permanently gains an AP increase buff.
+enemy_skill_vague_hope_name,Vague Hope,Vague Hope
+enemy_skill_vague_hope_desc,적중 시 AP 감소 디버프를 부여합니다,Inflicts an AP decrease debuff on hit.
+enemy_skill_wretched_weaponry_name,Wretched Weaponry,Wretched Weaponry
+enemy_skill_wretched_weaponry_desc,적중한 타격마다 출혈 디버프를 부여합니다,Inflicts a Bleed debuff for each successful hit.
+enemy_skill_distant_dreamer_name,Distant Dreamer,Distant Dreamer
+enemy_skill_distant_dreamer_desc,보유 중인 버프 개수만큼 피해 증폭이 증가합니다,Damage amplification increases based on the number of active buffs.
+enemy_skill_stone_ocean_name,STONE OCEAN,STONE OCEAN
+enemy_skill_stone_ocean_desc,힘 방어 속도 운 증가 버프를 획득합니다,Gains Strength Defense Speed and Luck increase buffs.
+enemy_skill_shyness_boy_name,SHYNESS BOY,SHYNESS BOY
+enemy_skill_shyness_boy_desc,적중 시 무작위 버프 1개를 강탈합니다. 강탈할 버프가 없다면 피해 감소 버프를 획득합니다,Steals 1 random buff on hit. If there is no buff to steal gains a damage reduction buff.
+enemy_skill_remember_summer_days_name,Remember Summer Days,Remember Summer Days
+enemy_skill_remember_summer_days_desc,적중 시 피해량의 일정 비율만큼 체력을 회복합니다,Recovers HP equal to a portion of damage dealt on hit.
+enemy_skill_heavens_falling_down_name,Heaven's falling down,Heaven's falling down
+enemy_skill_heavens_falling_down_desc,보유 중인 버프들의 잔여 턴이 1턴 연장됩니다,Extends the remaining duration of active buffs by 1 turn.
+enemy_skill_windy_summer_name,Windy Summer,Windy Summer
+enemy_skill_windy_summer_desc,적중한 타격마다 무작위 버프 1개를 강탈합니다. 강탈할 버프가 없다면 피해 감소 버프를 획득합니다,Steals 1 random buff for each successful hit. If there is no buff to steal gains a damage reduction buff.
+enemy_skill_lady_sunshine_name,Lady Sunshine,Lady Sunshine
+enemy_skill_lady_sunshine_desc,보유 중인 버프 개수만큼 피해 증폭이 증가합니다,Damage amplification increases based on the number of active buffs.
+enemy_skill_i_cant_stop_the_loneliness_name,I CAN'T STOP THE LONELINESS,I CAN'T STOP THE LONELINESS
+enemy_skill_i_cant_stop_the_loneliness_desc,적중 시 무작위 버프 1개를 강탈합니다. 강탈할 버프가 없다면 피해 감소 버프를 획득합니다,Steals 1 random buff on hit. If there is no buff to steal gains a damage reduction buff.
+enemy_skill_flyday_chinatown_name,Flyday Chinatown,Flyday Chinatown
+enemy_skill_flyday_chinatown_desc,적중 시 피해량의 일정 비율만큼 체력을 회복합니다,Recovers HP equal to a portion of damage dealt on hit.
+enemy_skill_infinity_name,Infinity,Infinity
+enemy_skill_infinity_desc,받는 피해 감소 버프를 영구적으로 획득합니다,Permanently gains a Damage Taken decrease buff.
+enemy_skill_shutter_name,Shutter,Shutter
+enemy_skill_shutter_desc,피격당했을 때 반격하여 방어에 비례한 피해를 입힙니다,When hit counters and deals damage based on Defense.
+enemy_skill_peter_pan_name,Peter Pan,Peter Pan
+enemy_skill_peter_pan_desc,방어 상승 버프를 획득합니다,Gains a Defense increase buff.
+enemy_skill_strongest_name,Strongest,Strongest
+enemy_skill_strongest_desc,적중 시 회피 감소 디버프를 부여합니다,Inflicts an Evasion decrease debuff on hit.
+enemy_skill_merry_go_round_name,Merry Go Round,Merry Go Round
+enemy_skill_merry_go_round_desc,명중률 상승 버프를 획득합니다,Gains a Hit Rate increase buff.
+enemy_skill_curtain_call_name,Curtain Call,Curtain Call
+enemy_skill_curtain_call_desc,힘과 방어에 비례한 큰 피해를 입힙니다,Deals heavy damage based on Strength and Defense.
+enemy_skill_september_name,September,September
+enemy_skill_september_desc,받는 피해 감소 버프를 영구적으로 획득합니다,Permanently gains a Damage Taken decrease buff.
+enemy_skill_camouflage_name,Camouflage,Camouflage
+enemy_skill_camouflage_desc,피격당했을 때 반격하여 방어에 비례한 피해를 입힙니다,When hit counters and deals damage based on Defense.
+enemy_skill_plastic_love_name,Plastic Love,Plastic Love
+enemy_skill_plastic_love_desc,다단 히트 피해를 입힙니다,Deals multi hit damage.
+enemy_skill_masshiro_name,Masshiro,Masshiro
+enemy_skill_masshiro_desc,큰 피해를 입힙니다. 피해의 일정 비율은 방어 무시 고정 피해로 적용됩니다,Deals heavy damage. A portion of the damage is applied as fixed damage that ignores defense.
+enemy_skill_tabiji_name,Tabiji,Tabiji
+enemy_skill_tabiji_desc,적중 시 명중률과 회피율 감소 디버프를 부여합니다,Inflicts Hit Rate and Evasion decrease debuffs on hit.
+enemy_skill_prema_name,Prema,Prema
+enemy_skill_prema_desc,적중 시 무작위 버프 1개를 강탈합니다,Steals 1 random buff on hit.
+enemy_skill_kirari_name,Kirari,Kirari
+enemy_skill_kirari_desc,명중률과 회피율 증가 버프를 획득합니다,Gains Hit Rate and Evasion increase buffs.
+enemy_skill_damn_name,Damn,Damn
+enemy_skill_damn_desc,적중 시 큰 그로기 피해를 입히고 브레이크 저항 감소 디버프를 부여합니다,Deals heavy groggy damage on hit and inflicts a Break Resistance decrease debuff.
+enemy_skill_kazeyo_name,Kazeyo,Kazeyo
+enemy_skill_kazeyo_desc,적중한 타격마다 방어 감소 디버프를 부여하고 AP 상승 버프를 획득합니다,Inflicts a Defense decrease debuff and gains an AP increase buff for each successful hit.
+enemy_skill_grace_name,Grace,Grace
+enemy_skill_grace_desc,피해 증폭과 피해 감소 버프를 획득합니다,Gains damage amplification and damage reduction buffs.
+enemy_skill_matsuri_name,Matsuri,Matsuri
+enemy_skill_matsuri_desc,모든 디버프를 해제하고 최대 체력의 30%만큼 체력을 회복합니다. 힘 방어 속도 운 상승 버프를 획득합니다. Matsuri를 사용할 때마다 AP 상승 버프를 영구적으로 획득합니다. 최대 5스택,Removes all debuffs and recovers HP equal to 30% of Max HP. Gains Strength Defense Speed and Luck increase buffs. Each time Matsuri is used permanently gains an AP increase buff. Max 5 stacks.
+enemy_skill_garden_name,Garden,Garden
+enemy_skill_garden_desc,속도와 AP 상승 버프를 획득합니다,Gains Speed and AP increase buffs.
+enemy_skill_it_aint_over_name,It Ain't Over,It Ain't Over
+enemy_skill_it_aint_over_desc,힘과 방어 감소 디버프를 부여합니다,Inflicts Strength and Defense decrease debuffs.
+enemy_skill_hachiko_name,Hachiko,Hachiko
+enemy_skill_hachiko_desc,큰 피해를 입힙니다,Deals heavy damage.
+enemy_skill_remember_the_time_name,Remember the Time,Remember the Time
+enemy_skill_remember_the_time_desc,행동 수치를 100으로 초기화하여 턴을 다시 가져갑니다,Resets the action gauge to 100 and takes another turn.
+enemy_skill_beat_it_name,Beat It,Beat It
+enemy_skill_beat_it_desc,스킬 피해가 100% 방어 무시 고정 피해로 적용됩니다,Skill damage is applied entirely as fixed damage that ignores defense.
+enemy_skill_black_and_white_name,Black and White,Black and White
+enemy_skill_black_and_white_desc,적중 시 힘 방어 속도 운 감소 디버프를 부여합니다,Inflicts Strength Defense Speed and Luck decrease debuffs on hit.
+enemy_skill_heal_the_world_name,Heal the World,Heal the World
+enemy_skill_heal_the_world_desc,최대 체력의 20%만큼 체력을 회복하고 힘 방어 속도 운 상승 버프를 획득합니다,Recovers HP equal to 20% of Max HP and gains Strength Defense Speed and Luck increase buffs.
+enemy_skill_off_the_wall_name,Off the Wall,Off the Wall
+enemy_skill_off_the_wall_desc,적중 시 행동 게이지를 -100으로 초기화합니다,Resets the action gauge to -100 on hit.
+enemy_skill_man_in_the_mirror_name,Man in the Mirror,Man in the Mirror
+enemy_skill_man_in_the_mirror_desc,적중 시 모든 버프를 제거합니다,Removes all buffs on hit.
+enemy_skill_smooth_criminal_name,Smooth Criminal,Smooth Criminal
+enemy_skill_smooth_criminal_desc,큰 피해 증폭 버프를 획득합니다,Gains a large damage amplification buff.
+enemy_skill_human_nature_name,Human Nature,Human Nature
+enemy_skill_human_nature_desc,반드시 명중합니다. 셰리의 체력을 1로 만듭니다,Always hits. Sets Sherry's HP to 1.
+enemy_skill_brand_new_days_name,Brand New Days,Brand New Days
+enemy_skill_brand_new_days_desc,피해 증폭과 피해 감소 버프를 획득합니다. 행동 수치를 100으로 초기화하여 턴을 다시 가져갑니다,Gains damage amplification and damage reduction buffs. Resets the action gauge to 100 and takes another turn.
+enemy_skill_mass_destruction_name,Mass Destruction,Mass Destruction
+enemy_skill_mass_destruction_desc,적중한 타격마다 체력을 회복합니다,Recovers HP for each successful hit.
+enemy_skill_heartful_cry_name,Heartful Cry,Heartful Cry
+enemy_skill_heartful_cry_desc,적중한 타격마다 버프를 1개 제거합니다,Removes 1 buff for each successful hit.

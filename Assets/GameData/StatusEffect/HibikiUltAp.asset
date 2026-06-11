@@ -20,6 +20,6 @@ MonoBehaviour:
   modifierType: 1
   specialType: 0
   baseDescription: 
-  isPermanentPassive: 0
+  isPermanentPassive: 1
   showStackDetails: 0
   valueFormat: 

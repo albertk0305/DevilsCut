@@ -20,6 +20,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a0a15da1d850a4f429d1e8d86ac6114a, type: 3}
   rankDescriptions:
   - restaurant rank 0 bonus description
-  - restaurant rank 1 bonus description
-  - restaurant rank 2 bonus description
-  - restaurant rank 3 bonus description
+  - facility_restaurant_rank1
+  - facility_restaurant_rank2
+  - facility_restaurant_rank3

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: AreteSmoothCriminal
   skillLogic: {fileID: 11400000, guid: 7c35f01c932cf334b81c4af261ebdc19, type: 2}
-  skillNameKey: AreteSmoothCriminal
-  skillDescKey: AreteSmoothCriminal
+  skillNameKey: enemy_skill_smooth_criminal_name
+  skillDescKey: enemy_skill_smooth_criminal_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

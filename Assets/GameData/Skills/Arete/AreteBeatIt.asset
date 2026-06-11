@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: AreteBeatIt
   skillLogic: {fileID: 11400000, guid: e41297dfd1335f745aaf5a51e53f5797, type: 2}
-  skillNameKey: AreteBeatIt
-  skillDescKey: AreteBeatIt
+  skillNameKey: enemy_skill_beat_it_name
+  skillDescKey: enemy_skill_beat_it_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

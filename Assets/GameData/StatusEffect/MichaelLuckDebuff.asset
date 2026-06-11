@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MichaelLuckDebuff
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
   effectID: MichaelLuckDebuff
-  effectName: MichaelLuckDebuff
+  effectName: TimeLeftLuckDebuff
   category: 2
   icon: {fileID: 21300000, guid: 95cf21eec85cd2b4581d56cd44b9fa57, type: 3}
   targetStat: 4

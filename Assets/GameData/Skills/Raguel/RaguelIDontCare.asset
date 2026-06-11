@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: IDontCare
   skillLogic: {fileID: 11400000, guid: 4ee32890e90152a4aa32167154d1f17f, type: 2}
-  skillNameKey: IDontCare
-  skillDescKey: IDontCare
+  skillNameKey: enemy_skill_i_dont_care_name
+  skillDescKey: enemy_skill_i_dont_care_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

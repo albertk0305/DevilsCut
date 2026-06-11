@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: RemielShiori
   skillLogic: {fileID: 11400000, guid: 11e11925872552c4bb4763726022b0e1, type: 2}
-  skillNameKey: RemielShiori
-  skillDescKey: RemielShiori
+  skillNameKey: enemy_skill_shiori_name
+  skillDescKey: enemy_skill_shiori_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

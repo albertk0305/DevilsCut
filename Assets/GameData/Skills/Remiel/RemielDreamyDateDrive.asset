@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: DreamyDateDrive
   skillLogic: {fileID: 11400000, guid: 33ddf7134b868804f918850ff8881ce2, type: 2}
-  skillNameKey: DreamyDateDrive
-  skillDescKey: DreamyDateDrive
+  skillNameKey: enemy_skill_dreamy_date_drive_name
+  skillDescKey: enemy_skill_dreamy_date_drive_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

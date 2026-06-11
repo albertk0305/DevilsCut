@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Damn
   skillLogic: {fileID: 11400000, guid: 7bfd12fb9ed33e349a35f152747e1493, type: 2}
-  skillNameKey: Damn
-  skillDescKey: Damn
+  skillNameKey: enemy_skill_damn_name
+  skillDescKey: enemy_skill_damn_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

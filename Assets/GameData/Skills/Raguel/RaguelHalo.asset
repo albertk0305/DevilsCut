@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Halo
   skillLogic: {fileID: 11400000, guid: 04a173c62390866479c97029f0f2ba01, type: 2}
-  skillNameKey: Halo
-  skillDescKey: Halo
+  skillNameKey: enemy_skill_halo_name
+  skillDescKey: enemy_skill_halo_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

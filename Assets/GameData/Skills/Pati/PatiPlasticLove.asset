@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: PatiPlasticLove
   skillLogic: {fileID: 11400000, guid: 02031f7b960582041be0c150d053c1b4, type: 2}
-  skillNameKey: PlasticLove
-  skillDescKey: PlasticLove
+  skillNameKey: enemy_skill_plastic_love_name
+  skillDescKey: enemy_skill_plastic_love_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

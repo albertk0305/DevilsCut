@@ -20,6 +20,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a0a15da1d850a4f429d1e8d86ac6114a, type: 3}
   rankDescriptions:
   - livehouse rank 0 bonus description
-  - livehouse rank 1 bonus description
-  - livehouse rank 2 bonus description
-  - livehouse rank 3 bonus description
+  - facility_live_house_rank1
+  - facility_live_house_rank2
+  - facility_live_house_rank3

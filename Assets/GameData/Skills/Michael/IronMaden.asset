@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
   m_Name: IronMaden
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillID: 
   skillLogic: {fileID: 11400000, guid: a561dd395fdc74f45b60492687f991e4, type: 2}
-  skillNameKey: IronMaden
-  skillDescKey: IronMaden
+  skillNameKey: enemy_skill_in_the_backrooms_name
+  skillDescKey: enemy_skill_in_the_backrooms_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

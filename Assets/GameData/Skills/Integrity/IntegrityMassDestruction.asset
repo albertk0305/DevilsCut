@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: IntegrityMassDestruction
   skillLogic: {fileID: 11400000, guid: 1d5b5c2e4516c59469f6ca7017240a80, type: 2}
-  skillNameKey: IntegrityMassDestruction
-  skillDescKey: IntegrityMassDestruction
+  skillNameKey: enemy_skill_mass_destruction_name
+  skillDescKey: enemy_skill_mass_destruction_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

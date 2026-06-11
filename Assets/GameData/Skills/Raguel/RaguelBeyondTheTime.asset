@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: BeyondTheTime
   skillLogic: {fileID: 11400000, guid: e2132f935df452a4182ea09867c88ceb, type: 2}
-  skillNameKey: BeyondTheTime
-  skillDescKey: BeyondTheTime
+  skillNameKey: enemy_skill_beyond_the_time_name
+  skillDescKey: enemy_skill_beyond_the_time_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

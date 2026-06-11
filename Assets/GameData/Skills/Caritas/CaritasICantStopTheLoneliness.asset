@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: ICantStopTheLoneliness
   skillLogic: {fileID: 11400000, guid: 9f2340a400e2ebe47aa810482216b0cd, type: 2}
-  skillNameKey: ICantStopTheLoneliness
-  skillDescKey: ICantStopTheLoneliness
+  skillNameKey: enemy_skill_i_cant_stop_the_loneliness_name
+  skillDescKey: enemy_skill_i_cant_stop_the_loneliness_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

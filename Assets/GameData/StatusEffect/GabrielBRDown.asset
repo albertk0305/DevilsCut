@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GabrielBRDown
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
   effectID: GabrielBRDown
-  effectName: GabrielBRDown
+  effectName: Before my body is dry
   category: 1
   icon: {fileID: 21300000, guid: 84ca8e1f1bac92e4ca04b66c5463233d, type: 3}
   targetStat: 5

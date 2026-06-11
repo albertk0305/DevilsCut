@@ -16,11 +16,11 @@ MonoBehaviour:
   - phase: 1
     generalBattleReward:
       exp: 250
-      gold: 800
+      gold: 400
       keys: 0
     bossBattleReward:
       exp: 1200
-      gold: 3000
+      gold: 2000
       keys: 1
     finalBossReward:
       exp: 0
@@ -59,11 +59,11 @@ MonoBehaviour:
   - phase: 2
     generalBattleReward:
       exp: 850
-      gold: 1200
+      gold: 600
       keys: 0
     bossBattleReward:
       exp: 4500
-      gold: 5000
+      gold: 3000
       keys: 1
     finalBossReward:
       exp: 0
@@ -102,11 +102,11 @@ MonoBehaviour:
   - phase: 3
     generalBattleReward:
       exp: 2200
-      gold: 2000
+      gold: 800
       keys: 0
     bossBattleReward:
       exp: 11000
-      gold: 8000
+      gold: 4500
       keys: 1
     finalBossReward:
       exp: 0
@@ -145,11 +145,11 @@ MonoBehaviour:
   - phase: 4
     generalBattleReward:
       exp: 5500
-      gold: 3000
+      gold: 1100
       keys: 0
     bossBattleReward:
       exp: 25000
-      gold: 12000
+      gold: 6500
       keys: 1
     finalBossReward:
       exp: 0
@@ -188,11 +188,11 @@ MonoBehaviour:
   - phase: 5
     generalBattleReward:
       exp: 12000
-      gold: 5000
+      gold: 1500
       keys: 0
     bossBattleReward:
       exp: 55000
-      gold: 18000
+      gold: 9000
       keys: 1
     finalBossReward:
       exp: 0
@@ -231,11 +231,11 @@ MonoBehaviour:
   - phase: 6
     generalBattleReward:
       exp: 25000
-      gold: 8000
+      gold: 2000
       keys: 0
     bossBattleReward:
       exp: 120000
-      gold: 25000
+      gold: 12000
       keys: 1
     finalBossReward:
       exp: 0
@@ -274,11 +274,11 @@ MonoBehaviour:
   - phase: 7
     generalBattleReward:
       exp: 55000
-      gold: 12000
+      gold: 2600
       keys: 0
     bossBattleReward:
       exp: 250000
-      gold: 40000
+      gold: 16000
       keys: 1
     finalBossReward:
       exp: 0
@@ -317,11 +317,11 @@ MonoBehaviour:
   - phase: 8
     generalBattleReward:
       exp: 110000
-      gold: 15000
+      gold: 3300
       keys: 0
     bossBattleReward:
       exp: 500000
-      gold: 60000
+      gold: 21000
       keys: 0
     finalBossReward:
       exp: 0
@@ -360,15 +360,15 @@ MonoBehaviour:
   - phase: 9
     generalBattleReward:
       exp: 200000
-      gold: 20000
+      gold: 4000
       keys: 0
     bossBattleReward:
-      exp: 0
-      gold: 0
+      exp: 1000000
+      gold: 30000
       keys: 0
     finalBossReward:
       exp: 1000000
-      gold: 100000
+      gold: 30000
       keys: 0
     generalEnemyStats:
       level: 97

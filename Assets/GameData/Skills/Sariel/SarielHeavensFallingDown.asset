@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: HeavensFallingDown
   skillLogic: {fileID: 11400000, guid: 6524fd77b0f4566439294210780c590c, type: 2}
-  skillNameKey: HeavensFallingDown
-  skillDescKey: HeavensFallingDown
+  skillNameKey: enemy_skill_heavens_falling_down_name
+  skillDescKey: enemy_skill_heavens_falling_down_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

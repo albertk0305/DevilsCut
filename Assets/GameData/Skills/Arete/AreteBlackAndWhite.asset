@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: AreteBlackAndWhite
   skillLogic: {fileID: 11400000, guid: 5542121653207b34bb4b5dff4b60a14e, type: 2}
-  skillNameKey: AreteBlackAndWhite
-  skillDescKey: AreteBlackAndWhite
+  skillNameKey: enemy_skill_black_and_white_name
+  skillDescKey: enemy_skill_black_and_white_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Instinct
   skillLogic: {fileID: 11400000, guid: 0956cbcddc9d3b04daaf23eb77c906c4, type: 2}
-  skillNameKey: Instinct
-  skillDescKey: Instinct
+  skillNameKey: enemy_skill_instinct_name
+  skillDescKey: enemy_skill_instinct_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

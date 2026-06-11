@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: SilereHachiko
   skillLogic: {fileID: 11400000, guid: c49b4c1830160dd4aa9f16a0a7858846, type: 2}
-  skillNameKey: SilereHachiko
-  skillDescKey: SilereHachiko
+  skillNameKey: enemy_skill_hachiko_name
+  skillDescKey: enemy_skill_hachiko_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

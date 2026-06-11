@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: OverflowingWealth
   skillLogic: {fileID: 0}
-  skillNameKey: OverflowingWealth
-  skillDescKey: OverflowingWealth
+  skillNameKey: enemy_skill_overflowing_wealth_name
+  skillDescKey: enemy_skill_overflowing_wealth_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

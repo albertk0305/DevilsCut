@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
   m_Name: ChainBury
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillID: 
   skillLogic: {fileID: 11400000, guid: 2c1d8744e0308f94dbcfb4b7c8caf513, type: 2}
-  skillNameKey: ChainBury
-  skillDescKey: ChainBury
+  skillNameKey: enemy_skill_deep_down_name
+  skillDescKey: enemy_skill_deep_down_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

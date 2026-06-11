@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: RemielSnowdrop
   skillLogic: {fileID: 11400000, guid: a11af61630b0d0848be324beaa34c216, type: 2}
-  skillNameKey: RemielSnowdrop
-  skillDescKey: RemielSnowdrop
+  skillNameKey: enemy_skill_snowdrop_name
+  skillDescKey: enemy_skill_snowdrop_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

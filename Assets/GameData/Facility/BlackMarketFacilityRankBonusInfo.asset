@@ -20,6 +20,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a0a15da1d850a4f429d1e8d86ac6114a, type: 3}
   rankDescriptions:
   - blackmarket rank 0 bonus description
-  - blackmarket rank 1 bonus description
-  - blackmarket rank 2 bonus description
-  - blackmarket rank 3 bonus description
+  - facility_black_market_rank1
+  - facility_black_market_rank2
+  - facility_black_market_rank3

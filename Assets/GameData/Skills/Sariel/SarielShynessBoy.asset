@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: ShynessBoy
   skillLogic: {fileID: 11400000, guid: 55523cb1fac3fc5428e976a69c6cebc6, type: 2}
-  skillNameKey: ShynessBoy
-  skillDescKey: ShynessBoy
+  skillNameKey: enemy_skill_shyness_boy_name
+  skillDescKey: enemy_skill_shyness_boy_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

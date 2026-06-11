@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Kazeyo
   skillLogic: {fileID: 11400000, guid: 993f38ba287e69b4aa6a02ccebfd2796, type: 2}
-  skillNameKey: Kazeyo
-  skillDescKey: Kazeyo
+  skillNameKey: enemy_skill_kazeyo_name
+  skillDescKey: enemy_skill_kazeyo_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

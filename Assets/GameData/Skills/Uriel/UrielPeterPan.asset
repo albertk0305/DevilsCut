@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: PeterPan
   skillLogic: {fileID: 11400000, guid: dd240bcf0abc9af4fae38386ee745c55, type: 2}
-  skillNameKey: PeterPan
-  skillDescKey: PeterPan
+  skillNameKey: enemy_skill_peter_pan_name
+  skillDescKey: enemy_skill_peter_pan_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

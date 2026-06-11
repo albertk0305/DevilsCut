@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: IntegrityHeartfulCry
   skillLogic: {fileID: 11400000, guid: a1175273e0478ab43af9dc97c221b23f, type: 2}
-  skillNameKey: IntegrityHeartfulCry
-  skillDescKey: IntegrityHeartfulCry
+  skillNameKey: enemy_skill_heartful_cry_name
+  skillDescKey: enemy_skill_heartful_cry_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

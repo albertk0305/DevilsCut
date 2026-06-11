@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SarielBoost
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
   effectID: SarielBoost
-  effectName: SarielBoost
+  effectName: Distand Dreamer Damage Given Amp
   category: 2
   icon: {fileID: 21300000, guid: 266567d3b87732a479a13b4111fd4f26, type: 3}
   targetStat: 0

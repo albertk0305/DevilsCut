@@ -1,0 +1,30 @@
+Key,Korean,English
+facility_bar_rank1,무작위 스탯을 크게 상승시켜 주는 루시퍼 특제 데빌스 컷이 개방됩니다,Unlocks Lucifer's special Devil's Cut which greatly increases a random stat.
+facility_bar_rank2,선택한 주류에 따라 상승하는 스탯 양이 더욱 커집니다,The stat increase becomes greater based on the selected drink.
+facility_bar_rank3,선택한 주류를 마신 후 보너스로 무작위 스탯이 소량 상승합니다,After drinking the selected drink a random stat increases slightly as a bonus.
+facility_restaurant_rank1,메뉴 선택 후 경험치를 추가로 획득합니다,Gain additional EXP after selecting a menu.
+facility_restaurant_rank2,스킬 진화 선택 시 새로고침이 개방됩니다,Unlocks refresh when choosing skill evolution.
+facility_restaurant_rank3,획득하는 경험치 양이 추가로 상승합니다,Further increases the amount of EXP gained.
+facility_maid_cafe_rank1,시설을 이용할 때 선물로 아이템을 받습니다,Receive an item as a gift when using the facility.
+facility_maid_cafe_rank2,선물로 더 높은 희귀도의 아이템을 받을 확률이 증가합니다,Increases the chance to receive a higher rarity item as a gift.
+facility_maid_cafe_rank3,선물로 더 높은 희귀도의 아이템을 받을 확률이 더욱 증가합니다,Further increases the chance to receive a higher rarity item as a gift.
+facility_casino_rank1,슬롯머신에서 좋은 결과가 나올 확률이 증가합니다,Increases the chance of good results from the slot machine.
+facility_casino_rank2,슬롯머신에서 좋은 결과가 나올 확률이 더욱 증가합니다,Further increases the chance of good results from the slot machine.
+facility_casino_rank3,슬롯머신에서 좋은 결과가 나올 확률이 크게 증가합니다,Greatly increases the chance of good results from the slot machine.
+facility_live_house_rank1,선택한 응원 방식에 따라 주력 스탯 이외의 스탯들도 소폭 상승합니다,Depending on the selected support style stats other than the main stat also increase slightly.
+facility_live_house_rank2,응원이 끝난 뒤 50% 확률로 주력 스탯의 상승량이 2배가 됩니다,After support ends there is a 50% chance for the main stat increase to be doubled.
+facility_live_house_rank3,모든 응원 방식이 제공하는 스탯 상승 폭이 증가합니다,Increases the stat gain provided by all support styles.
+facility_black_market_rank1,상점에 더 높은 희귀도의 아이템이 등장합니다,Higher rarity items appear in the shop.
+facility_black_market_rank2,상점에 더 높은 희귀도의 아이템이 등장할 확률이 증가합니다,Increases the chance for higher rarity items to appear in the shop.
+facility_black_market_rank3,상점에 더 높은 희귀도의 아이템이 등장할 확률이 더욱 증가합니다,Further increases the chance for higher rarity items to appear in the shop.
+facility_martial_arts_dojo_rank1,스킬 레벨업 이후 (힘/방어/속도/운) 중 하나가 무작위로 상승합니다,After leveling up a skill one stat from (Strength/Defense/Speed/Luck) increases randomly.
+facility_martial_arts_dojo_rank2,스킬 레벨업 이후 (힘/방어/속도/운) 중 하나의 상승량이 증가합니다,After leveling up a skill the increase for one stat from (Strength/Defense/Speed/Luck) becomes greater.
+facility_martial_arts_dojo_rank3,스킬 레벨업 이후 (힘/방어/속도/운) 중 두 개가 무작위로 상승합니다,After leveling up a skill two stats from (Strength/Defense/Speed/Luck) increase randomly.
+,,
+bar_name,슬러프,Slough
+blackmarket_name,파시오네,Passione
+live_house_name,스트레이,Stray
+fightclub_name,언체인,Unchain
+maidcafe_name,카페 메이러스트,Cafe Mailust
+restaurant_name,견반점,Kyeonhanten
+casino_name,벨벳 소서,Velvet Saucer

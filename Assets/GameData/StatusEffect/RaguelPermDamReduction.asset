@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RaguelPermDamReduction
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
   effectID: RaguelPermDamReduction
-  effectName: RaguelPermDamReduction
+  effectName: PlazmaDamageReduction
   category: 2
   icon: {fileID: 21300000, guid: 56775d9a808cd5a4da1418ce2c648171, type: 3}
   targetStat: 0

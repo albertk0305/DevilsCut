@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: UrielCurtainCall
   skillLogic: {fileID: 11400000, guid: 3e5d4a9cd8280214a8cc8995177aebb8, type: 2}
-  skillNameKey: UrielCurtainCall
-  skillDescKey: UrielCurtainCall
+  skillNameKey: enemy_skill_curtain_call_name
+  skillDescKey: enemy_skill_curtain_call_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

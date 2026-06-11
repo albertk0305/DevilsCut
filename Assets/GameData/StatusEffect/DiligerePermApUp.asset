@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DiligerePermApUp
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
   effectID: DeligerePermApUp
-  effectName: DeligerePermApUp
+  effectName: Birth of a Wish AP Up
   category: 2
   icon: {fileID: 21300000, guid: e9753dfa23f93a3419d4bb2e106b1fa0, type: 3}
   targetStat: 6

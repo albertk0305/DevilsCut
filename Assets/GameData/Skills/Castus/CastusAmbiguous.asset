@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Ambiguous
   skillLogic: {fileID: 11400000, guid: ef040c2912be9aa45b175a0ceb89a87c, type: 2}
-  skillNameKey: Ambiguous
-  skillDescKey: Ambiguous
+  skillNameKey: enemy_skill_ambiguous_name
+  skillDescKey: enemy_skill_ambiguous_name
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

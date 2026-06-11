@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: AreteRememberTheTime
   skillLogic: {fileID: 11400000, guid: c1f71330d350608439c811a65888dd8b, type: 2}
-  skillNameKey: AreteRememberTheTime
-  skillDescKey: AreteRememberTheTime
+  skillNameKey: enemy_skill_remember_the_time_name
+  skillDescKey: enemy_skill_remember_the_time_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: CyndRise
   skillLogic: {fileID: 11400000, guid: c0f6a429b6217074ca9521284c21effd, type: 2}
-  skillNameKey: CyndRise
-  skillDescKey: CyndRise
+  skillNameKey: enemy_skill_rise_name
+  skillDescKey: enemy_skill_rise_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

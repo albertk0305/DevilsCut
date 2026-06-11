@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
   m_Name: Enrage
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillID: Extra Life
   skillLogic: {fileID: 11400000, guid: 34f44c6509750c648959ae378f0eabe9, type: 2}
-  skillNameKey: Enrage
-  skillDescKey: Enrage
+  skillNameKey: enemy_skill_extra_life_name
+  skillDescKey: enemy_skill_extra_life_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

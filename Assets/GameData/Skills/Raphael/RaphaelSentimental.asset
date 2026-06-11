@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Sentimental
   skillLogic: {fileID: 11400000, guid: 419d57073f54fad409c9b0965a580b35, type: 2}
-  skillNameKey: Sentimental
-  skillDescKey: Sentimental
+  skillNameKey: enemy_skill_instant_sentimental_name
+  skillDescKey: enemy_skill_instant_sentimental_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

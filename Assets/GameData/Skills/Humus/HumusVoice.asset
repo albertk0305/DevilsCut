@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Voice
   skillLogic: {fileID: 11400000, guid: 13cf08f10a6cb744f8701e007c5572bb, type: 2}
-  skillNameKey: Voice
-  skillDescKey: Voice
+  skillNameKey: enemy_skill_voice_name
+  skillDescKey: enemy_skill_voice_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

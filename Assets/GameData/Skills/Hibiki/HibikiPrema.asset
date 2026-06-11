@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Prema
   skillLogic: {fileID: 11400000, guid: 021c8180a7cee024c9a56bc8042d6a6d, type: 2}
-  skillNameKey: Prema
-  skillDescKey: Prema
+  skillNameKey: enemy_skill_prema_name
+  skillDescKey: enemy_skill_prema_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

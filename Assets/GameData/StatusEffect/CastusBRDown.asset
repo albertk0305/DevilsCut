@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CastusBRDown
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
   effectID: CastusBRDown
-  effectName: CastusBRDown
+  effectName: Till I Die
   category: 1
   icon: {fileID: 21300000, guid: 84ca8e1f1bac92e4ca04b66c5463233d, type: 3}
   targetStat: 5

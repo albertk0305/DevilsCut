@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: StapleStaple
   skillLogic: {fileID: 11400000, guid: a3878f8957ff5d340a01d42bb3aaee10, type: 2}
-  skillNameKey: StapleStaple
-  skillDescKey: StapleStaple
+  skillNameKey: enemy_skill_staple_staple_name
+  skillDescKey: enemy_skill_staple_staple_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: SparklingDaydream
   skillLogic: {fileID: 11400000, guid: f977bee055a66bf48ae36849c9ca02c6, type: 2}
-  skillNameKey: SparklingDaydream
-  skillDescKey: SparklingDaydream
+  skillNameKey: enemy_skill_sparkling_daydream_name
+  skillDescKey: enemy_skill_sparkling_daydream_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

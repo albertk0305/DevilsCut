@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TemperarePermEvade
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
   effectID: TemperarePermEvade
-  effectName: TemperarePermEvade
+  effectName: Life is Full of Dreams Evade Up
   category: 2
   icon: {fileID: 21300000, guid: 7c8b80e6aa846bf4e9447af30e175810, type: 3}
   targetStat: 0

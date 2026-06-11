@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: SilereItAintOver
   skillLogic: {fileID: 11400000, guid: fa147534fab6d074289e6c1ce023789e, type: 2}
-  skillNameKey: SilereItAintOver
-  skillDescKey: SilereItAintOver
+  skillNameKey: enemy_skill_it_aint_over_name
+  skillDescKey: enemy_skill_it_aint_over_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

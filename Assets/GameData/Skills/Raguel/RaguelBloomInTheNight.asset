@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: BloomInTheNight
   skillLogic: {fileID: 11400000, guid: 5f9512dee068ad145a6d22a9cf0ee450, type: 2}
-  skillNameKey: BloomInTheNight
-  skillDescKey: BloomInTheNight
+  skillNameKey: enemy_skill_bloom_in_the_night_name
+  skillDescKey: enemy_skill_bloom_in_the_night_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

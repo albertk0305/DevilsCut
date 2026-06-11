@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: UrielMerryGoRound
   skillLogic: {fileID: 11400000, guid: f300fa90db23d6441b78999f9637c271, type: 2}
-  skillNameKey: UrielMerryGoRound
-  skillDescKey: UrielMerryGoRound
+  skillNameKey: enemy_skill_merry_go_round_name
+  skillDescKey: enemy_skill_merry_go_round_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

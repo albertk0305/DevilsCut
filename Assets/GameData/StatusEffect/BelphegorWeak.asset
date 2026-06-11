@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: BelphegorWeak
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectData
   effectID: BelphegorWeak
-  effectName: BelphegorWeak
+  effectName: BelphegorDamageAmp
   category: 0
   icon: {fileID: 21300000, guid: 77159e96e78270a489d6514c0e385f32, type: 3}
   targetStat: 0
   modifierType: 0
   specialType: 6
   baseDescription: 
+  isPermanentPassive: 0
+  showStackDetails: 0
   valueFormat: 

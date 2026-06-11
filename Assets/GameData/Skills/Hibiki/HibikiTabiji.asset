@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Tabiji
   skillLogic: {fileID: 11400000, guid: 9b734de913ca59e4c96562a63f09c1e2, type: 2}
-  skillNameKey: Tabiji
-  skillDescKey: Tabiji
+  skillNameKey: enemy_skill_tabiji_name
+  skillDescKey: enemy_skill_tabiji_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

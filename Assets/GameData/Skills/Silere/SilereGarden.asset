@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: SilereGarden
   skillLogic: {fileID: 11400000, guid: 3a7e045d6c1b87b4886f9c98294dd408, type: 2}
-  skillNameKey: SilereGarden
-  skillDescKey: SilereGarden
+  skillNameKey: enemy_skill_garden_name
+  skillDescKey: enemy_skill_garden_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

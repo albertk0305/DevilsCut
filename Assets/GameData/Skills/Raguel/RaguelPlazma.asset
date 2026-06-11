@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Plazma
   skillLogic: {fileID: 11400000, guid: 82638a8d5f24cfd44980f219c6571741, type: 2}
-  skillNameKey: Plazma
-  skillDescKey: Plazma
+  skillNameKey: enemy_skill_plazma_name
+  skillDescKey: enemy_skill_plazma_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 

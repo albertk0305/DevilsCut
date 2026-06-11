@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SkillData
   skillID: Tsuki
   skillLogic: {fileID: 11400000, guid: caee236e57cc28a4181925e017b7cd34, type: 2}
-  skillNameKey: Tsuki
-  skillDescKey: Tsuki
+  skillNameKey: enemy_skill_tsuki_name
+  skillDescKey: enemy_skill_tsuki_desc
   evolutionANameKey: 
   evolutionADescKey: 
   evolutionBNameKey: 
