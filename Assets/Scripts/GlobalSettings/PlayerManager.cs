@@ -262,8 +262,6 @@ public class PlayerManager : MonoBehaviour
         currentBattleReward = new BattleReward();
         currentBattleType = default;
         currentBattlePhase = 0;
-        PlayerPrefs.SetInt("FastCombat", 0);
-        PlayerPrefs.Save();
 
         pendingAdvanceBattleTurn = false;
         pendingBattleType = default;

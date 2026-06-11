@@ -377,7 +377,7 @@ public class ExplorationUI : MonoBehaviour
                     return;
                 }
 
-                DialogueRuntimeContext.SetPendingDialogueID(dialogueID);
+                DialogueRuntimeContext.SetPendingDialogueID(dialogueID, storySkipResult.action == StorySkipResolveAction.EnterStoryForcedFastForward);
                 SceneLoader.LoadScene(dialogueSceneName);
                 return;
             }

@@ -1678,7 +1678,7 @@ public class CombatVictoryUIController : MonoBehaviour
             return true;
         }
 
-        DialogueRuntimeContext.SetPendingDialogueID(dialogueID);
+        DialogueRuntimeContext.SetPendingDialogueID(dialogueID, storySkipResult.action == StorySkipResolveAction.EnterStoryForcedFastForward);
         DevLog.Log($"[VictoryReward] Post boss dialogue prepared: {dialogueID}");
         return true;
     }

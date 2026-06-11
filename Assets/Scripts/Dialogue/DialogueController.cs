@@ -52,9 +52,15 @@ public class DialogueController : MonoBehaviour
     private int currentLineIndex = -1;
     private bool isTyping;
     private bool isSkipping;
+    private bool userFastForwardRequested;
+    private bool forcedFastForwardByStorySkip;
+    private bool currentDialogueAllowsForcedStorySkip;
     private bool isChoiceActive;
     private bool isPlayingPendingDialogue;
     private bool isSubscribedToLanguageChanged;
+    private bool isSubscribedToStorySkipChanged;
+
+    private bool IsFastForwardActive => userFastForwardRequested || forcedFastForwardByStorySkip;
 
     private void Awake()
     {
@@ -93,22 +99,27 @@ public class DialogueController : MonoBehaviour
     private void OnEnable()
     {
         SubscribeLanguageChanged();
+        SubscribeStorySkipChanged();
     }
 
     private void OnDisable()
     {
         UnsubscribeLanguageChanged();
+        UnsubscribeStorySkipChanged();
+        StopSkipping();
+        ClearFastForwardRequests();
     }
 
     private void Start()
     {
         SubscribeLanguageChanged();
+        SubscribeStorySkipChanged();
 
-        DialogueData startDialogueData = GetStartDialogueData(out bool isPendingDialogue);
+        DialogueData startDialogueData = GetStartDialogueData(out bool isPendingDialogue, out bool forceFastForwardByStorySkip);
         if (startDialogueData != null)
         {
             isPlayingPendingDialogue = isPendingDialogue;
-            BeginDialogue(startDialogueData);
+            BeginDialogue(startDialogueData, forceFastForwardByStorySkip);
         }
         else
             DevLog.LogWarning("[Dialogue] fallbackDialogueData is not assigned.");
@@ -120,9 +131,10 @@ public class DialogueController : MonoBehaviour
         BeginDialogue(dialogueData);
     }
 
-    private DialogueData GetStartDialogueData(out bool isPendingDialogue)
+    private DialogueData GetStartDialogueData(out bool isPendingDialogue, out bool forceFastForwardByStorySkip)
     {
         isPendingDialogue = false;
+        forceFastForwardByStorySkip = false;
 
         string pendingDialogueID = DialogueRuntimeContext.ConsumePendingDialogueID();
         if (!string.IsNullOrEmpty(pendingDialogueID))
@@ -131,9 +143,11 @@ public class DialogueController : MonoBehaviour
             if (pendingDialogueData != null)
             {
                 isPendingDialogue = IsPlayerManagerPendingDialogue(pendingDialogueID);
+                forceFastForwardByStorySkip = DialogueRuntimeContext.ConsumeForceFastForwardForPendingDialogue();
                 return pendingDialogueData;
             }
 
+            DialogueRuntimeContext.ConsumeForceFastForwardForPendingDialogue();
             DevLog.LogWarning($"[Dialogue] Pending dialogueID not found: {pendingDialogueID}. Using fallbackDialogueData.");
         }
 
@@ -174,10 +188,17 @@ public class DialogueController : MonoBehaviour
         return null;
     }
 
-    private void BeginDialogue(DialogueData data)
+    private void BeginDialogue(DialogueData data, bool forceFastForwardByStorySkip = false)
     {
         StopTyping();
         StopSkipping();
+        userFastForwardRequested = false;
+        currentDialogueAllowsForcedStorySkip = data != null
+            && data.storySkipPolicy == DialogueSkipPolicy.ForceFastForwardUntilChoice;
+        this.forcedFastForwardByStorySkip = currentDialogueAllowsForcedStorySkip
+            && forceFastForwardByStorySkip
+            && StorySkipSettings.IsEnabled;
+        UpdateSkipButtonState();
 
         currentDialogueData = data;
         currentLines = ResolveLines(data);
@@ -204,7 +225,8 @@ public class DialogueController : MonoBehaviour
             SetBackgroundImageByID(currentDialogueData.initialBackgroundID);
         }
 
-        ShowNextLine();
+        ShowNextLine(this.forcedFastForwardByStorySkip);
+        StartFastForwardIfNeeded();
     }
 
     private List<DialogueLine> ResolveLines(DialogueData data)
@@ -254,14 +276,15 @@ public class DialogueController : MonoBehaviour
         if (isChoiceActive || isSkipping)
             return;
 
-        skipCoroutine = StartCoroutine(SkipRoutine());
+        userFastForwardRequested = true;
+        StartFastForwardIfNeeded();
     }
 
     private IEnumerator SkipRoutine()
     {
         isSkipping = true;
 
-        while (!isChoiceActive)
+        while (IsFastForwardActive && !isChoiceActive)
         {
             if (currentLineIndex < 0)
                 ShowNextLine(true);
@@ -280,8 +303,12 @@ public class DialogueController : MonoBehaviour
             yield return new WaitForSecondsRealtime(Mathf.Max(0f, skipInterval));
         }
 
+        if (!forcedFastForwardByStorySkip)
+            userFastForwardRequested = false;
+
         isSkipping = false;
         skipCoroutine = null;
+        UpdateSkipButtonState();
     }
 
     private void ShowNextLine(bool instantText = false)
@@ -366,9 +393,11 @@ public class DialogueController : MonoBehaviour
         if (line == null || line.choice == null || !line.choice.hasChoice)
             return;
 
+        userFastForwardRequested = false;
         StopSkipping();
         isChoiceActive = true;
         SetChoicePanelActive(true);
+        UpdateSkipButtonState();
 
         if (yesButtonText != null)
             yesButtonText.text = GetDialogueText(line.choice.yesTextKey);
@@ -421,6 +450,7 @@ public class DialogueController : MonoBehaviour
         if (!string.IsNullOrEmpty(nextLineID))
         {
             JumpToLine(nextLineID);
+            ResumeForcedFastForwardAfterChoiceIfNeeded();
             return;
         }
 
@@ -431,6 +461,7 @@ public class DialogueController : MonoBehaviour
         }
 
         ShowNextLine();
+        ResumeForcedFastForwardAfterChoiceIfNeeded();
     }
 
     private bool HandleChoiceAction(DialogueChoiceAction action)
@@ -496,6 +527,7 @@ public class DialogueController : MonoBehaviour
     {
         StopTyping();
         StopSkipping();
+        ClearFastForwardRequests();
         LoadNextSceneOrWarn();
     }
 
@@ -564,13 +596,15 @@ public class DialogueController : MonoBehaviour
 
             if (nextDialogueData.storySkipPolicy != DialogueSkipPolicy.SkippablePureText)
             {
-                BeginDialogue(nextDialogueData);
+                BeginDialogue(nextDialogueData, ShouldForceFastForwardByStorySkip(nextDialogueData));
                 return true;
             }
 
             if (string.IsNullOrEmpty(nextDialogueData.nextDialogueID))
             {
                 string nextSceneName = GetNextSceneName(nextDialogueData);
+                StopSkipping();
+                ClearFastForwardRequests();
                 ClearPendingDialogueIfNeeded();
                 LoadSceneOrWarn(nextSceneName);
                 return true;
@@ -582,6 +616,8 @@ public class DialogueController : MonoBehaviour
             {
                 DevLog.LogWarning($"[Dialogue] nextDialogueID not found: {skippedDialogueData.nextDialogueID}");
                 string nextSceneName = GetNextSceneName(skippedDialogueData);
+                StopSkipping();
+                ClearFastForwardRequests();
                 ClearPendingDialogueIfNeeded();
                 LoadSceneOrWarn(nextSceneName);
                 return true;
@@ -915,6 +951,96 @@ public class DialogueController : MonoBehaviour
     {
         if (choicePanel != null)
             choicePanel.SetActive(isActive);
+    }
+
+    private void StartFastForwardIfNeeded()
+    {
+        if (!IsFastForwardActive || isChoiceActive || skipCoroutine != null)
+            return;
+
+        skipCoroutine = StartCoroutine(SkipRoutine());
+        UpdateSkipButtonState();
+    }
+
+    private void ResumeForcedFastForwardAfterChoiceIfNeeded()
+    {
+        if (!forcedFastForwardByStorySkip)
+            return;
+
+        if (!StorySkipSettings.IsEnabled)
+        {
+            forcedFastForwardByStorySkip = false;
+            UpdateSkipButtonState();
+            return;
+        }
+
+        StartFastForwardIfNeeded();
+    }
+
+    private bool ShouldForceFastForwardByStorySkip(DialogueData dialogueData)
+    {
+        return StorySkipSettings.IsEnabled
+            && dialogueData != null
+            && dialogueData.storySkipPolicy == DialogueSkipPolicy.ForceFastForwardUntilChoice;
+    }
+
+    private void ClearFastForwardRequests()
+    {
+        userFastForwardRequested = false;
+        forcedFastForwardByStorySkip = false;
+        currentDialogueAllowsForcedStorySkip = false;
+        UpdateSkipButtonState();
+    }
+
+    private void UpdateSkipButtonState()
+    {
+        if (skipButton != null)
+            skipButton.interactable = !forcedFastForwardByStorySkip;
+    }
+
+    private void SubscribeStorySkipChanged()
+    {
+        if (isSubscribedToStorySkipChanged)
+            return;
+
+        StorySkipSettings.OnStorySkipChanged += OnStorySkipChanged;
+        isSubscribedToStorySkipChanged = true;
+    }
+
+    private void UnsubscribeStorySkipChanged()
+    {
+        if (!isSubscribedToStorySkipChanged)
+            return;
+
+        StorySkipSettings.OnStorySkipChanged -= OnStorySkipChanged;
+        isSubscribedToStorySkipChanged = false;
+    }
+
+    private void OnStorySkipChanged(bool isEnabled)
+    {
+        if (isEnabled)
+        {
+            if (!currentDialogueAllowsForcedStorySkip || IsDialogueFinished())
+                return;
+
+            forcedFastForwardByStorySkip = true;
+            UpdateSkipButtonState();
+
+            if (!isChoiceActive)
+                StartFastForwardIfNeeded();
+
+            return;
+        }
+
+        if (!forcedFastForwardByStorySkip)
+            return;
+
+        forcedFastForwardByStorySkip = false;
+
+        if (!userFastForwardRequested)
+            StopSkipping();
+
+        UpdateSkipButtonState();
     }
 
     private void SetStoryImageActive(bool isActive)
