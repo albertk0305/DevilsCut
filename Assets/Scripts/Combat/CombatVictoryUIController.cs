@@ -87,6 +87,9 @@ public class CombatVictoryUIController : MonoBehaviour
     [SerializeField] private string dialogueSceneName = "Story";
     [SerializeField] private DialogueDataDatabase dialogueDataDatabase;
 
+    [Header("Result BGM")]
+    [SerializeField] private CombatResultBgmPlayer resultBgmPlayer;
+
     private readonly Queue<string> messageQueue = new Queue<string>();
     private readonly Queue<SupporterPassiveRewardResult> supporterPassiveResultQueue = new Queue<SupporterPassiveRewardResult>();
     private readonly List<ItemMergeResult> pendingMergeResults = new List<ItemMergeResult>();
@@ -151,6 +154,8 @@ public class CombatVictoryUIController : MonoBehaviour
         else
             gameObject.SetActive(true);
 
+        PlayVictoryBgm();
+
         HideEquipmentRewardUI();
         ShowResultMessageStage();
         SetNextIndicatorActive(false);
@@ -195,6 +200,21 @@ public class CombatVictoryUIController : MonoBehaviour
             victoryRoot.SetActive(false);
         else
             gameObject.SetActive(false);
+    }
+
+    private void PlayVictoryBgm()
+    {
+        CombatResultBgmPlayer bgmPlayer = GetResultBgmPlayer();
+        if (bgmPlayer != null)
+            bgmPlayer.PlayVictoryBgm();
+    }
+
+    private CombatResultBgmPlayer GetResultBgmPlayer()
+    {
+        if (resultBgmPlayer == null)
+            resultBgmPlayer = FindFirstObjectByType<CombatResultBgmPlayer>();
+
+        return resultBgmPlayer;
     }
 
     private void ShowResultMessageStage()

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,6 +30,9 @@ public class CombatDefeatUIController : MonoBehaviour
     [Header("Typewriter")]
     [SerializeField] private float typeInterval = 0.035f;
 
+    [Header("Result BGM")]
+    [SerializeField] private CombatResultBgmPlayer resultBgmPlayer;
+
     private Coroutine typingCoroutine;
     private bool isFinalizingGiveUp;
 
@@ -47,6 +50,8 @@ public class CombatDefeatUIController : MonoBehaviour
         else
             gameObject.SetActive(true);
 
+        PlayDefeatBgm();
+
         if (sherryImage != null && sherryDefeatImage != null)
             sherryImage.sprite = sherryDefeatImage;
 
@@ -60,6 +65,21 @@ public class CombatDefeatUIController : MonoBehaviour
             defeatCanvasRoot.SetActive(false);
         else
             gameObject.SetActive(false);
+    }
+
+    private void PlayDefeatBgm()
+    {
+        CombatResultBgmPlayer bgmPlayer = GetResultBgmPlayer();
+        if (bgmPlayer != null)
+            bgmPlayer.PlayDefeatBgm();
+    }
+
+    private CombatResultBgmPlayer GetResultBgmPlayer()
+    {
+        if (resultBgmPlayer == null)
+            resultBgmPlayer = FindFirstObjectByType<CombatResultBgmPlayer>();
+
+        return resultBgmPlayer;
     }
 
     private void SetupDefeatChoiceButtons()

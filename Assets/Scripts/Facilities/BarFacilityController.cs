@@ -23,6 +23,7 @@ public class DrinkView
     public GameObject selectedHighlight;
     public TMP_Text nameText;
     public TMP_Text statText;
+    public string monologueTextKey;
     [TextArea] public string monologueText;
 }
 
@@ -31,7 +32,6 @@ public class BarFacilityController : FacilitySceneControllerBase
     private enum BarState
     {
         Welcome,
-        ChooseIntro,
         SelectingDrink,
         Result,
         Farewell
@@ -67,32 +67,50 @@ public class BarFacilityController : FacilitySceneControllerBase
     [SerializeField] private string baitoDisplayName = "바이토";
 
     [Header("Dialogue Text")]
-    [SerializeField] private string welcomeText = "어서 오세요. 오늘은 어떤 한 잔으로 하시겠어요?";
-    [SerializeField] private string chooseDrinkText = "마실 음료를 골라 주세요.";
-    [SerializeField] private string operatorFarewellText = "방문해주셔서 감사합니다!";
-    [SerializeField] private string baitoFarewellText = "매번 감사합니다!";
+    [SerializeField] private string operatorOrderTextKey = "bar_operator_order";
+    [SerializeField] private string baitoOrderTextKey = "bar_baito_order";
+    [SerializeField] private string operatorOrderTextFallback = "주문 도와드릴게요.";
+    [SerializeField] private string baitoOrderTextFallback = "주문 도와드리겠습니다.";
+    [SerializeField] private string operatorFarewellTextKey = "bar_operator_farewell";
+    [SerializeField] private string baitoFarewellTextKey = "bar_baito_farewell";
+    [SerializeField] private string operatorFarewellTextFallback = "방문해주셔서 감사합니다!";
+    [SerializeField] private string baitoFarewellTextFallback = "매번 감사합니다!";
 
     [Header("Drink Names")]
-    [SerializeField] private string strengthDrinkName = "STR 음료";
-    [SerializeField] private string defenseDrinkName = "DEF 음료";
-    [SerializeField] private string speedDrinkName = "SPD 음료";
-    [SerializeField] private string luckDrinkName = "LUK 음료";
-    [SerializeField] private string devilsCutDrinkName = "데빌스 컷";
+    [SerializeField] private string strengthDrinkNameKey = "bar_drink_strength_name";
+    [SerializeField] private string defenseDrinkNameKey = "bar_drink_defense_name";
+    [SerializeField] private string speedDrinkNameKey = "bar_drink_speed_name";
+    [SerializeField] private string luckDrinkNameKey = "bar_drink_luck_name";
+    [SerializeField] private string devilsCutDrinkNameKey = "bar_drink_devils_cut_name";
+    [SerializeField] private string strengthDrinkNameFallback = "STR 음료";
+    [SerializeField] private string defenseDrinkNameFallback = "DEF 음료";
+    [SerializeField] private string speedDrinkNameFallback = "SPD 음료";
+    [SerializeField] private string luckDrinkNameFallback = "LUK 음료";
+    [SerializeField] private string devilsCutDrinkNameFallback = "데빌스 컷";
 
     [Header("Stat Names")]
-    [SerializeField] private string strengthStatName = "STR";
-    [SerializeField] private string defenseStatName = "DEF";
-    [SerializeField] private string speedStatName = "SPD";
-    [SerializeField] private string luckStatName = "LUK";
+    [SerializeField] private string strengthStatNameKey = "stat_strength";
+    [SerializeField] private string defenseStatNameKey = "stat_defense";
+    [SerializeField] private string speedStatNameKey = "stat_speed";
+    [SerializeField] private string luckStatNameKey = "stat_luck";
+    [SerializeField] private string strengthStatNameFallback = "힘";
+    [SerializeField] private string defenseStatNameFallback = "방어";
+    [SerializeField] private string speedStatNameFallback = "속도";
+    [SerializeField] private string luckStatNameFallback = "행운";
 
     [Header("Result Text")]
-    [SerializeField] private string normalDrinkMonologueFormat = "{0}을 마셨다.";
-    [SerializeField] private string devilsCutMonologueText = "데빌스 컷을 마셨다.\n알 수 없는 열기가 몸을 타고 오른다.";
-    [SerializeField] private string statGainResultFormat = "{0}이 {1} 상승했다.";
-    [SerializeField] private string hpRecoveryResultText = "HP가 최대치까지 회복되었다.";
-    [SerializeField] private string lastOrderBonusFormat = "라스트 오더 보너스로 {0}이 2 상승했다.";
-    [SerializeField] private string drinkStatFormat = "{0} +{1}";
-    [SerializeField] private string devilsCutStatFormat = "랜덤 +{0}";
+    [SerializeField] private string drinkConsumedFormatKey = "bar_drink_consumed_format";
+    [SerializeField] private string drinkConsumedFormatFallback = "{0}을 마셨다.";
+    [SerializeField] private string statGainResultFormatKey = "bar_result_stat_gain_format";
+    [SerializeField] private string hpRecoveryResultTextKey = "bar_result_hp_recovery";
+    [SerializeField] private string lastOrderBonusFormatKey = "bar_result_last_order_bonus_format";
+    [SerializeField] private string statGainResultFormatFallback = "{0}이 {1} 상승했다.";
+    [SerializeField] private string hpRecoveryResultTextFallback = "HP가 최대치까지 회복되었다.";
+    [SerializeField] private string lastOrderBonusFormatFallback = "라스트 오더 보너스로 {0}이 {1} 상승했다.";
+    [SerializeField] private string drinkStatFormatKey = "bar_drink_stat_format";
+    [SerializeField] private string devilsCutStatFormatKey = "bar_drink_devils_cut_stat_format";
+    [SerializeField] private string drinkStatFormatFallback = "{0} +{1}";
+    [SerializeField] private string devilsCutStatFormatFallback = "랜덤 +{0}";
 
     [Header("Typewriter")]
     [SerializeField] private float typeInterval = 0.03f;
@@ -113,6 +131,7 @@ public class BarFacilityController : FacilitySceneControllerBase
         public PermanentStatType primaryStat;
         public int primaryAmount;
         public PermanentStatType? lastOrderStat;
+        public int lastOrderAmount;
     }
 
     protected override void Start()
@@ -122,12 +141,26 @@ public class BarFacilityController : FacilitySceneControllerBase
         BindButtons();
         SetupInitialUI();
         ApplyOperatorView();
-        ShowMessage(welcomeText, BarState.Welcome);
+        ShowMessage(GetOrderText(), BarState.Welcome);
+    }
+
+    private void OnEnable()
+    {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged += OnLanguageChanged;
     }
 
     private void OnDisable()
     {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+
         StopTyping();
+    }
+
+    private void OnLanguageChanged()
+    {
+        RefreshDrinkViews();
     }
 
     private void BindButtons()
@@ -210,7 +243,7 @@ public class BarFacilityController : FacilitySceneControllerBase
 
         if (speakerNameText != null)
         {
-            speakerNameText.text = speakerName;
+            speakerNameText.text = GetLocalizedText(speakerName, speakerName);
             speakerNameText.gameObject.SetActive(true);
         }
     }
@@ -382,9 +415,6 @@ public class BarFacilityController : FacilitySceneControllerBase
         switch (currentState)
         {
             case BarState.Welcome:
-                ShowMessage(chooseDrinkText, BarState.ChooseIntro);
-                break;
-            case BarState.ChooseIntro:
                 ShowDrinkSelection();
                 break;
             case BarState.Result:
@@ -467,15 +497,19 @@ public class BarFacilityController : FacilitySceneControllerBase
             primaryStat = GetRandomPermanentStatType();
 
         PermanentStatType? lastOrderStat = null;
+        int lastOrderAmount = 0;
         if (CurrentRank >= 3)
+        {
             lastOrderStat = GetRandomPermanentStatType();
+            lastOrderAmount = 5;
+        }
 
         if (playerManager != null)
         {
             playerManager.AddPermanentStat(primaryStat, primaryAmount);
 
             if (lastOrderStat.HasValue)
-                playerManager.AddPermanentStat(lastOrderStat.Value, 5);
+                playerManager.AddPermanentStat(lastOrderStat.Value, lastOrderAmount);
 
             playerManager.RecoverCurrentHpToEffectiveMax();
         }
@@ -484,7 +518,8 @@ public class BarFacilityController : FacilitySceneControllerBase
         {
             primaryStat = primaryStat,
             primaryAmount = primaryAmount,
-            lastOrderStat = lastOrderStat
+            lastOrderStat = lastOrderStat,
+            lastOrderAmount = lastOrderAmount
         };
     }
 
@@ -519,12 +554,13 @@ public class BarFacilityController : FacilitySceneControllerBase
     private void BuildResultLines(BarDrinkResult result)
     {
         resultLines.Clear();
+        resultLines.Add(BuildDrinkConsumedText(selectedDrink));
         resultLines.Add(BuildDrinkMonologueText(selectedDrink));
         resultLines.Add(BuildStatGainText(result.primaryStat, result.primaryAmount));
         resultLines.Add(BuildHpRecoveryText());
 
         if (result.lastOrderStat.HasValue)
-            resultLines.Add(BuildLastOrderBonusText(result.lastOrderStat.Value));
+            resultLines.Add(BuildLastOrderBonusText(result.lastOrderStat.Value, result.lastOrderAmount));
     }
 
     private void BeginResultSequence()
@@ -556,34 +592,39 @@ public class BarFacilityController : FacilitySceneControllerBase
     private void StartFarewellStep()
     {
         ApplyCharacterView(true);
-        ShowMessage(IsOperatorResolved() ? operatorFarewellText : baitoFarewellText, BarState.Farewell);
+        ShowMessage(GetFarewellText(), BarState.Farewell);
+    }
+
+    private string BuildDrinkConsumedText(BarDrinkType drinkType)
+    {
+        return FormatLocalizedText(drinkConsumedFormatKey, drinkConsumedFormatFallback, GetDrinkName(drinkType));
     }
 
     private string BuildDrinkMonologueText(BarDrinkType drinkType)
     {
         DrinkView drinkView = GetDrinkView(drinkType);
+        if (drinkView != null && !string.IsNullOrEmpty(drinkView.monologueTextKey))
+            return GetLocalizedText(drinkView.monologueTextKey, drinkView.monologueText);
+
         if (drinkView != null && !string.IsNullOrEmpty(drinkView.monologueText))
             return drinkView.monologueText;
 
-        if (drinkType == BarDrinkType.DevilsCut)
-            return devilsCutMonologueText;
-
-        return string.Format(normalDrinkMonologueFormat, GetDrinkName(drinkType));
+        return "";
     }
 
     private string BuildStatGainText(PermanentStatType statType, int amount)
     {
-        return string.Format(statGainResultFormat, GetStatDisplayName(statType), amount);
+        return FormatLocalizedText(statGainResultFormatKey, statGainResultFormatFallback, GetStatDisplayName(statType), amount);
     }
 
     private string BuildHpRecoveryText()
     {
-        return hpRecoveryResultText;
+        return GetLocalizedText(hpRecoveryResultTextKey, hpRecoveryResultTextFallback);
     }
 
-    private string BuildLastOrderBonusText(PermanentStatType statType)
+    private string BuildLastOrderBonusText(PermanentStatType statType, int amount)
     {
-        return string.Format(lastOrderBonusFormat, GetStatDisplayName(statType));
+        return FormatLocalizedText(lastOrderBonusFormatKey, lastOrderBonusFormatFallback, GetStatDisplayName(statType), amount);
     }
 
     private DrinkView GetDrinkView(BarDrinkType drinkType)
@@ -605,15 +646,15 @@ public class BarFacilityController : FacilitySceneControllerBase
         switch (drinkType)
         {
             case BarDrinkType.Defense:
-                return defenseDrinkName;
+                return GetLocalizedText(defenseDrinkNameKey, defenseDrinkNameFallback);
             case BarDrinkType.Speed:
-                return speedDrinkName;
+                return GetLocalizedText(speedDrinkNameKey, speedDrinkNameFallback);
             case BarDrinkType.Luck:
-                return luckDrinkName;
+                return GetLocalizedText(luckDrinkNameKey, luckDrinkNameFallback);
             case BarDrinkType.DevilsCut:
-                return devilsCutDrinkName;
+                return GetLocalizedText(devilsCutDrinkNameKey, devilsCutDrinkNameFallback);
             default:
-                return strengthDrinkName;
+                return GetLocalizedText(strengthDrinkNameKey, strengthDrinkNameFallback);
         }
     }
 
@@ -622,9 +663,9 @@ public class BarFacilityController : FacilitySceneControllerBase
         int amount = GetPrimaryDrinkAmount(drinkType);
 
         if (drinkType == BarDrinkType.DevilsCut)
-            return string.Format(devilsCutStatFormat, amount);
+            return FormatLocalizedText(devilsCutStatFormatKey, devilsCutStatFormatFallback, amount);
 
-        return string.Format(drinkStatFormat, GetStatDisplayName(GetPermanentStatType(drinkType)), amount);
+        return FormatLocalizedText(drinkStatFormatKey, drinkStatFormatFallback, GetStatDisplayName(GetPermanentStatType(drinkType)), amount);
     }
 
     private string GetStatDisplayName(PermanentStatType statType)
@@ -632,14 +673,53 @@ public class BarFacilityController : FacilitySceneControllerBase
         switch (statType)
         {
             case PermanentStatType.Defense:
-                return defenseStatName;
+                return GetLocalizedText(defenseStatNameKey, defenseStatNameFallback);
             case PermanentStatType.Speed:
-                return speedStatName;
+                return GetLocalizedText(speedStatNameKey, speedStatNameFallback);
             case PermanentStatType.Luck:
-                return luckStatName;
+                return GetLocalizedText(luckStatNameKey, luckStatNameFallback);
             default:
-                return strengthStatName;
+                return GetLocalizedText(strengthStatNameKey, strengthStatNameFallback);
         }
+    }
+
+    private string GetOrderText()
+    {
+        return IsOperatorResolved()
+            ? GetLocalizedText(operatorOrderTextKey, operatorOrderTextFallback)
+            : GetLocalizedText(baitoOrderTextKey, baitoOrderTextFallback);
+    }
+
+    private string GetFarewellText()
+    {
+        return IsOperatorResolved()
+            ? GetLocalizedText(operatorFarewellTextKey, operatorFarewellTextFallback)
+            : GetLocalizedText(baitoFarewellTextKey, baitoFarewellTextFallback);
+    }
+
+    private string FormatLocalizedText(string key, string fallback, params object[] args)
+    {
+        string format = GetLocalizedText(key, fallback);
+        try
+        {
+            return string.Format(format, args);
+        }
+        catch (FormatException)
+        {
+            return string.Format(fallback, args);
+        }
+    }
+
+    private string GetLocalizedText(string key, string fallback)
+    {
+        if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
+        {
+            string localized = LocalizationManager.Instance.GetText(key);
+            if (!string.IsNullOrEmpty(localized) && localized != key)
+                return localized;
+        }
+
+        return fallback ?? key ?? "";
     }
 
     private void OnClickRankButton()

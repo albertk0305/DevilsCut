@@ -1,0 +1,28 @@
+Key,Korean,English
+bar_baito_order,주문 도와드리겠습니다! 편하게 골라주세요!,I will help with your order! Please take your time choosing!
+bar_baito_farewell,감사합니다! 다음 방문도 대환영입니다!,Thank you! Your next visit is more than welcome!
+bar_operator_order,주... 주문 도와드리겠습니다... 편하게 말씀해 주세요...,I-I will help with your order... Please tell me what you would like...
+bar_operator_farewell,가... 감사합니다... 다음 방문을 기다리고 있겠습니다...,T-Thank you... I will be waiting for your next visit...
+bar_drink_strength_name,아일라 위스키,Islay Whiskey
+bar_drink_defense_name,버번 위스키,Bourbon Whiskey
+bar_drink_speed_name,진,Gin
+bar_drink_luck_name,샴페인,Champagne
+bar_drink_devils_cut_name,데빌스 컷,Devil's Cut
+bar_drink_monologue_format,{0}을 마셨다.,Drank {0}.
+,,
+bar_result_stat_gain_format,{0}이 {1} 상승했다,{0} increased by {1}.
+,,
+bar_result_hp_recovery,HP가 최대치까지 회복되었다,HP was fully recovered.
+bar_result_last_order_bonus_format,라스트 오더 보너스로 {0}이 {1} 상승했다,Last Order Bonus increased {0} by {1}.
+bar_drink_stat_format,{0} +{1},{0} +{1}
+bar_drink_devils_cut_stat_format,랜덤 +{0},Random +{0}
+stat_strength,힘,STR
+stat_defense,방어,DEF
+stat_speed,속도,SPD
+stat_luck,운,LUK
+,,
+bar_drink_strength_monologue,연기... 소금기... 눅눅한 밤. 그래... 인생도 대충 이런 맛이지.,Smoke... salt... a damp night. Yeah... life tastes something like this.
+bar_drink_defense_monologue,인생은 충분히 쓰니까 위스키 한 잔쯤은 달아도 봐줘야지.,Life is bitter enough so I can forgive one glass of whiskey for being sweet.
+bar_drink_speed_monologue,깨끗한 척하면서 제일 독한 녀석들이 있지. 이 녀석도 그렇고.,Some things act clean while hiding the sharpest bite. This one included.
+bar_drink_luck_monologue,아직 이기지도 않았는데 축배라. 뭐 미리 마셔두는 것도 나쁘지 않지.,A toast before we have even won. Well drinking ahead of time is not so bad.
+bar_drink_devils_cut_monologue,첫맛은 부드러운데 뒷맛이 지옥처럼 달아오르네. 마음에 들어.,The first taste is smooth but the finish burns like hell. I like it.

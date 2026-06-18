@@ -3134,35 +3134,45 @@ MonoBehaviour:
     selectedHighlight: {fileID: 99708734}
     nameText: {fileID: 923633725}
     statText: {fileID: 1654868006}
-    monologueText: "Islay Whiskey \uB3C5\uBC31"
+    monologueTextKey: bar_drink_strength_monologue
+    monologueText: Smoke... salt... a damp night. Yeah... life tastes something like
+      this.
   - drinkType: 1
     root: {fileID: 1567892030}
     button: {fileID: 2114670546}
     selectedHighlight: {fileID: 942048418}
     nameText: {fileID: 2073538452}
     statText: {fileID: 1749630747}
-    monologueText: "Bourbon Whiskey \uB3C5\uBC31"
+    monologueTextKey: bar_drink_defense_monologue
+    monologueText: Life is bitter enough so I can forgive one glass of whiskey for
+      being sweet.
   - drinkType: 2
     root: {fileID: 225178837}
     button: {fileID: 1543355420}
     selectedHighlight: {fileID: 594185980}
     nameText: {fileID: 832126671}
     statText: {fileID: 94415698}
-    monologueText: "Gin \uB3C5\uBC31"
+    monologueTextKey: 
+    monologueText: Some things act clean while hiding the sharpest bite. This one
+      included.
   - drinkType: 3
     root: {fileID: 1822565381}
     button: {fileID: 955087565}
     selectedHighlight: {fileID: 1373207979}
     nameText: {fileID: 1261718820}
     statText: {fileID: 418894335}
-    monologueText: "Champagne \uB3C5\uBC31"
+    monologueTextKey: bar_drink_luck_monologue
+    monologueText: A toast before we have even won. Well drinking ahead of time is
+      not so bad.
   - drinkType: 4
     root: {fileID: 1491677045}
     button: {fileID: 1026107960}
     selectedHighlight: {fileID: 1457259728}
     nameText: {fileID: 1193641848}
     statText: {fileID: 132211732}
-    monologueText: "Devil's Cut \uB3C5\uBC31"
+    monologueTextKey: bar_drink_devils_cut_monologue
+    monologueText: The first taste is smooth but the finish burns like hell. I like
+      it.
   confirmButton: {fileID: 2144002858}
   rankButton: {fileID: 1722218316}
   rankButtonImage: {fileID: 1722218317}
@@ -3174,29 +3184,45 @@ MonoBehaviour:
   baitoHappySprite: {fileID: 21300000, guid: 584baddc70a4d8444af40adf8603bcc4, type: 3}
   operatorDisplayName: "\uB8E8\uC2DC\uD37C"
   baitoDisplayName: "\uBC14\uC774\uD1A0"
-  welcomeText: "\uC5B4\uC11C \uC624\uC138\uC694. \uC624\uB298\uC740 \uC5B4\uB5A4
-    \uD55C \uC794\uC73C\uB85C \uD558\uC2DC\uACA0\uC5B4\uC694?"
-  chooseDrinkText: "\uB9C8\uC2E4 \uC74C\uB8CC\uB97C \uACE8\uB77C \uC8FC\uC138\uC694."
-  operatorFarewellText: "\uBC29\uBB38\uD574\uC8FC\uC154\uC11C \uAC10\uC0AC\uD569\uB2C8\uB2E4!"
-  baitoFarewellText: "\uB9E4\uBC88 \uAC10\uC0AC\uD569\uB2C8\uB2E4!"
-  strengthDrinkName: "STR \uC74C\uB8CC"
-  defenseDrinkName: "DEF \uC74C\uB8CC"
-  speedDrinkName: "SPD \uC74C\uB8CC"
-  luckDrinkName: "LUK \uC74C\uB8CC"
-  devilsCutDrinkName: "\uB370\uBE4C\uC2A4 \uCEF7"
-  strengthStatName: STR
-  defenseStatName: DEF
-  speedStatName: SPD
-  luckStatName: LUK
-  normalDrinkMonologueFormat: "{0}\uC744 \uB9C8\uC168\uB2E4."
-  devilsCutMonologueText: "\uB370\uBE4C\uC2A4 \uCEF7\uC744 \uB9C8\uC168\uB2E4.\n\uC54C
-    \uC218 \uC5C6\uB294 \uC5F4\uAE30\uAC00 \uBAB8\uC744 \uD0C0\uACE0 \uC624\uB978\uB2E4."
-  statGainResultFormat: "{0}\uC774 {1} \uC0C1\uC2B9\uD588\uB2E4."
-  hpRecoveryResultText: "HP\uAC00 \uCD5C\uB300\uCE58\uAE4C\uC9C0 \uD68C\uBCF5\uB418\uC5C8\uB2E4."
-  lastOrderBonusFormat: "\n\uB77C\uC2A4\uD2B8 \uC624\uB354 \uBCF4\uB108\uC2A4\uB85C
-    {0}\uC774 2 \uC0C1\uC2B9\uD588\uB2E4."
-  drinkStatFormat: '{0} +{1}'
-  devilsCutStatFormat: "\uB79C\uB364 +{0}"
+  operatorOrderTextKey: bar_operator_order
+  baitoOrderTextKey: bar_baito_order
+  operatorOrderTextFallback: I-I will help with your order... Please tell me what
+    you would like...
+  baitoOrderTextFallback: I will help with your order! Please take your time choosing!
+  operatorFarewellTextKey: bar_operator_farewell
+  baitoFarewellTextKey: bar_baito_farewell
+  operatorFarewellTextFallback: T-Thank you... I will be waiting for your next visit...
+  baitoFarewellTextFallback: Thank you! Your next visit is more than welcome!
+  strengthDrinkNameKey: bar_drink_strength_name
+  defenseDrinkNameKey: bar_drink_defense_name
+  speedDrinkNameKey: bar_drink_speed_name
+  luckDrinkNameKey: bar_drink_luck_name
+  devilsCutDrinkNameKey: bar_drink_devils_cut_name
+  strengthDrinkNameFallback: Islay Whiskey
+  defenseDrinkNameFallback: Bourbon Whiskey
+  speedDrinkNameFallback: Gin
+  luckDrinkNameFallback: Champagne
+  devilsCutDrinkNameFallback: Devil's Cut
+  strengthStatNameKey: stat_strength
+  defenseStatNameKey: stat_defense
+  speedStatNameKey: stat_speed
+  luckStatNameKey: stat_luck
+  strengthStatNameFallback: STR
+  defenseStatNameFallback: DEF
+  speedStatNameFallback: SPD
+  luckStatNameFallback: LUK
+  drinkConsumedFormatKey: bar_drink_monologue_format
+  drinkConsumedFormatFallback: Drank {0}.
+  statGainResultFormatKey: bar_result_stat_gain_format
+  hpRecoveryResultTextKey: bar_result_hp_recovery
+  lastOrderBonusFormatKey: bar_result_last_order_bonus_format
+  statGainResultFormatFallback: '{0} increased by {1}.'
+  hpRecoveryResultTextFallback: HP was fully recovered.
+  lastOrderBonusFormatFallback: Last Order Bonus increased {0} by {1}.
+  drinkStatFormatKey: '{0} +{1}'
+  devilsCutStatFormatKey: bar_drink_devils_cut_stat_format
+  drinkStatFormatFallback: '{0} +{1}'
+  devilsCutStatFormatFallback: Random +{0}
   typeInterval: 0.03
 --- !u!1 &832126669
 GameObject:
@@ -6129,9 +6155,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298b138403b54849b811d2c59fab45e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
+  bgmPlaylist: []
   bgmClip: {fileID: 8300000, guid: 544cf5b6aadd40b45b2d023b5c11cdfb, type: 3}
   fadeTime: 1
-  stopBgmIfClipIsEmpty: 0
+  stopBgmIfEmpty: 0
 --- !u!4 &1569786367
 Transform:
   m_ObjectHideFlags: 0

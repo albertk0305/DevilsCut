@@ -12300,6 +12300,25 @@ MonoBehaviour:
     tricksterBurnDebuff: {fileID: 11400000, guid: e425e5ecd952ccc4a9c2c82754677b96, type: 2}
   defeatUIController: {fileID: 1018720934}
   victoryUIController: {fileID: 1018720935}
+  timing:
+    hitInterval: 0.15
+    postSkillHold: 1
+    counterPreDelay: 0.5
+    counterHold: 1
+    enemyCounterPreDelay: 0.6
+    enemyIntentDelay: 0.3
+    enemyTurnCommentDelay: 0.5
+    encounterCommentDelay: 1
+    turnSkipCommentDelay: 1
+    dotCommentDelay: 0.5
+    dotHitHold: 0.8
+    specialExpireCommentDelay: 0.5
+    specialExpireHold: 0.8
+    companionTurnIntroDelay: 0.2
+    companionActionCommentDelay: 0.4
+    companionActionHold: 1
+    killConfirmDelay: 0.8
+    skillSpecialPenaltyHold: 1
 --- !u!4 &1018720924
 Transform:
   m_ObjectHideFlags: 0
@@ -12469,6 +12488,7 @@ MonoBehaviour:
   battleSceneName: Battle
   mainMenuSceneName: MainMenu
   typeInterval: 0.035
+  resultBgmPlayer: {fileID: 0}
 --- !u!114 &1018720935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12554,6 +12574,8 @@ MonoBehaviour:
   - {fileID: 150014122}
   explorationSceneName: Exploration
   dialogueSceneName: Story
+  dialogueDataDatabase: {fileID: 0}
+  resultBgmPlayer: {fileID: 0}
 --- !u!1 &1024095176
 GameObject:
   m_ObjectHideFlags: 0
@@ -18169,6 +18191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1573971067}
   - component: {fileID: 1573971066}
+  - component: {fileID: 1573971068}
   m_Layer: 0
   m_Name: ScemeBGMPlayer
   m_TagString: Untagged
@@ -18188,9 +18211,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298b138403b54849b811d2c59fab45e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
+  bgmPlaylist: []
   bgmClip: {fileID: 8300000, guid: bcb98e4be45fc694db2bb2ec4d917a66, type: 3}
   fadeTime: 1
-  stopBgmIfClipIsEmpty: 0
+  stopBgmIfEmpty: 0
 --- !u!4 &1573971067
 Transform:
   m_ObjectHideFlags: 0
@@ -18206,6 +18230,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1573971068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573971065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f9d390ddc9b4d37ab3e75ad4a645978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatResultBgmPlayer
+  victoryBgmClip: {fileID: 0}
+  victoryBgmPlaylist: []
+  victoryFadeTime: 1
+  stopBgmIfVictoryEmpty: 0
+  defeatBgmClip: {fileID: 0}
+  defeatBgmPlaylist: []
+  defeatFadeTime: 1
+  stopBgmIfDefeatEmpty: 0
 --- !u!1 &1582776688
 GameObject:
   m_ObjectHideFlags: 0
