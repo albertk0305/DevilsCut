@@ -3182,8 +3182,10 @@ MonoBehaviour:
   operatorHappySprite: {fileID: 21300000, guid: 17142d0a9ae83144eb2a65743b39c282, type: 3}
   baitoDefaultSprite: {fileID: 21300000, guid: e18634539d2eba244b88783f2d8890f5, type: 3}
   baitoHappySprite: {fileID: 21300000, guid: 584baddc70a4d8444af40adf8603bcc4, type: 3}
-  operatorDisplayName: "\uB8E8\uC2DC\uD37C"
-  baitoDisplayName: "\uBC14\uC774\uD1A0"
+  operatorSpeakerNameKey: lucifer
+  baitoSpeakerNameKey: baito
+  operatorDisplayNameFallback: Lucifer
+  baitoDisplayNameFallback: Baito
   operatorOrderTextKey: bar_operator_order
   baitoOrderTextKey: bar_baito_order
   operatorOrderTextFallback: I-I will help with your order... Please tell me what

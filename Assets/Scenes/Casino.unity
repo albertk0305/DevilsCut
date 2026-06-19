@@ -2456,7 +2456,10 @@ MonoBehaviour:
   facilityData: {fileID: 11400000, guid: 6bc66f0ddd3a3c149a72c5eda14320df, type: 2}
   operatorDefaultSprite: {fileID: 21300000, guid: 5c44bdc8c73ff704780bbcb2a9fbabe6, type: 3}
   operatorHappySprite: {fileID: 21300000, guid: 4088168e32151394b8766079952945fc, type: 3}
-  operatorDisplayName: "\uBCA8\uD398\uACE0\uB974"
+  operatorSadSprite: {fileID: 21300000, guid: 86be4492c39b0d54083449e8ff4a2615, type: 3}
+  operatorJackpotSprite: {fileID: 21300000, guid: affa7ecbe83dfd54aa0f67b24c25f023, type: 3}
+  operatorDisplayNameKey: belphegor
+  operatorDisplayName: Belphegor
   characterImage: {fileID: 649209665}
   speakerNameText: {fileID: 1373431097}
   dialogueText: {fileID: 1454890088}
@@ -2489,22 +2492,35 @@ MonoBehaviour:
   rankButtonImage: {fileID: 1722218317}
   rankBonusInfo: {fileID: 11400000, guid: 7c1170490a5633a4bbd131a4e6d1a98b, type: 2}
   rankBonusPanel: {fileID: 91833046}
-  lockedIntroText: "\uC2AC\uB86F\uBA38\uC2E0 \uB3CC\uB824\uBCFC\uAE4C?"
-  unlockedIntroText1: "\uC548\uB155~ \uB108\uB3C4 \uB180\uB7EC\uC654\uB2C8?"
-  unlockedIntroText2: "\uC624\uB298\uC740 \uC800 \uAE30\uACC4\uAC00 \uB290\uB08C\uC774
-    \uC88B\uB354\uB77C~ \uB098\uB9CC \uBBFF\uC5B4\uBD10!"
-  missResultText: "\uAF5D\uC774\uB2E4... \uACE8\uB4DC\uB97C \uD68D\uB4DD\uD558\uC9C0
-    \uBABB\uD588\uB2E4."
-  goldGainResultFormat: "{0:N0} \uACE8\uB4DC\uB97C \uC5BB\uC5C8\uB2E4."
-  lockedMissReactionText: "\uC544\uC27D\uB2E4..."
-  lockedPairReactionText: "\uADF8\uB7ED\uC800\uB7ED\uC774\uAD70."
-  lockedTripleReactionText: "\uAF64 \uAD1C\uCC2E\uC740 \uACB0\uACFC\uB2E4."
-  lockedJackpotReactionText: "\uB300\uBC15\uC774\uB2E4!"
-  unlockedMissReactionText: "\uD750\uC74C... \uC774\uB7F0 \uB0A0\uB3C4 \uC788\uB294
-    \uAC70\uC9C0."
-  unlockedPairReactionText: "\uC5B4\uB54C? \uB098\uC058\uC9C0 \uC54A\uC9C0?"
-  unlockedTripleReactionText: "\uC624, \uC81C\uBC95 \uC798 \uD130\uC84C\uB124."
-  unlockedJackpotReactionText: "\uAC70\uBD10! \uB098\uB9CC \uBBFF\uC73C\uB77C\uB2C8\uAE4C!"
+  lockedIntroTextKey: casino_locked_intro
+  unlockedIntroText1Key: casino_unlocked_intro_1
+  unlockedIntroText2Key: casino_unlocked_intro_2
+  lockedIntroText: A lever instead of a trigger... not bad.
+  unlockedIntroText1: Going to spin the slots...?
+  unlockedIntroText2: Today's luck seems to be sticking to that machine over there...
+    probably...
+  missResultTextKey: casino_result_miss
+  goldGainResultFormatKey: casino_result_gold_gain_format
+  missResultText: The lever turned but the wallet stayed the same.
+  goldGainResultFormat: Gained {0:N0} gold.
+  lockedMissReactionTextKey: casino_locked_reaction_miss
+  lockedPairReactionTextKey: casino_locked_reaction_pair
+  lockedTripleReactionTextKey: casino_locked_reaction_triple
+  lockedJackpotReactionTextKey: casino_locked_reaction_jackpot
+  unlockedMissReactionTextKey: casino_unlocked_reaction_miss
+  unlockedPairReactionTextKey: casino_unlocked_reaction_pair
+  unlockedTripleReactionTextKey: casino_unlocked_reaction_triple
+  unlockedJackpotReactionTextKey: casino_unlocked_reaction_jackpot
+  lockedMissReactionText: I will call it tuition for one of life's lessons.
+  lockedPairReactionText: Not bad. At least I covered the drinking money.
+  lockedTripleReactionText: Not bad at all. I can drink something better tonight.
+  lockedJackpotReactionText: Jackpot. Tonight even fate is pouring a drink into my
+    glass.
+  unlockedMissReactionText: Yaaawn... The flow is dead. This is a hand you fold...
+  unlockedPairReactionText: Not bad... If you did not lose then it counts as a win...
+  unlockedTripleReactionText: Mnya... Money earned without working really is the
+    sweetest...
+  unlockedJackpotReactionText: Jackpot... Looks like Lady Luck is on your side...
   initialShuffleInterval: 0.04
   finalShuffleInterval: 0.16
   jackpotPostCutInSpinDuration: 0.5
@@ -3755,9 +3771,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298b138403b54849b811d2c59fab45e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
+  bgmPlaylist: []
   bgmClip: {fileID: 8300000, guid: 544cf5b6aadd40b45b2d023b5c11cdfb, type: 3}
   fadeTime: 1
-  stopBgmIfClipIsEmpty: 0
+  stopBgmIfEmpty: 0
 --- !u!4 &1583151410
 Transform:
   m_ObjectHideFlags: 0

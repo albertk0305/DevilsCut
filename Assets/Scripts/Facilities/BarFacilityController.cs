@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public enum BarDrinkType
@@ -63,8 +64,12 @@ public class BarFacilityController : FacilitySceneControllerBase
     [SerializeField] private Sprite operatorHappySprite;
     [SerializeField] private Sprite baitoDefaultSprite;
     [SerializeField] private Sprite baitoHappySprite;
-    [SerializeField] private string operatorDisplayName = "";
-    [SerializeField] private string baitoDisplayName = "바이토";
+    [SerializeField] private string operatorSpeakerNameKey = "bar_speaker_lucifer";
+    [SerializeField] private string baitoSpeakerNameKey = "bar_speaker_baito";
+    [FormerlySerializedAs("operatorDisplayName")]
+    [SerializeField] private string operatorDisplayNameFallback = "";
+    [FormerlySerializedAs("baitoDisplayName")]
+    [SerializeField] private string baitoDisplayNameFallback = "바이토";
 
     [Header("Dialogue Text")]
     [SerializeField] private string operatorOrderTextKey = "bar_operator_order";
@@ -125,6 +130,8 @@ public class BarFacilityController : FacilitySceneControllerBase
     private bool hasUsedBar;
     private readonly List<string> resultLines = new List<string>();
     private int resultLineIndex = -1;
+    private BarDrinkResult lastResult;
+    private bool hasLastResult;
 
     private struct BarDrinkResult
     {
@@ -160,7 +167,49 @@ public class BarFacilityController : FacilitySceneControllerBase
 
     private void OnLanguageChanged()
     {
+        RefreshLocalizedUI();
+    }
+
+    private void RefreshLocalizedUI()
+    {
         RefreshDrinkViews();
+
+        bool wasTyping = isTyping;
+        bool wasIndicatorActive = textCompleteIndicator != null && textCompleteIndicator.activeSelf;
+        StopTyping();
+
+        if (currentState == BarState.Result)
+        {
+            if (hasLastResult)
+                BuildResultLines(lastResult);
+
+            if (speakerNameText != null)
+            {
+                speakerNameText.text = "";
+                speakerNameText.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            ApplyCharacterView(currentState == BarState.Farewell);
+        }
+
+        currentMessage = RebuildCurrentMessage();
+
+        if (dialogueText != null)
+            dialogueText.text = currentMessage;
+
+        if (wasTyping)
+        {
+            isTextComplete = true;
+
+            if (textCompleteIndicator != null)
+                textCompleteIndicator.SetActive(true);
+        }
+        else if (textCompleteIndicator != null)
+        {
+            textCompleteIndicator.SetActive(wasIndicatorActive);
+        }
     }
 
     private void BindButtons()
@@ -233,7 +282,6 @@ public class BarFacilityController : FacilitySceneControllerBase
         Sprite speakerSprite = useOperator
             ? (happy && operatorHappySprite != null ? operatorHappySprite : operatorDefaultSprite)
             : (happy && baitoHappySprite != null ? baitoHappySprite : baitoDefaultSprite);
-        string speakerName = useOperator ? operatorDisplayName : baitoDisplayName;
 
         if (characterImage != null)
         {
@@ -243,7 +291,7 @@ public class BarFacilityController : FacilitySceneControllerBase
 
         if (speakerNameText != null)
         {
-            speakerNameText.text = GetLocalizedText(speakerName, speakerName);
+            speakerNameText.text = GetSpeakerDisplayName();
             speakerNameText.gameObject.SetActive(true);
         }
     }
@@ -483,6 +531,8 @@ public class BarFacilityController : FacilitySceneControllerBase
         }
 
         BarDrinkResult result = ApplySelectedDrinkEffect();
+        lastResult = result;
+        hasLastResult = true;
         BuildResultLines(result);
         BeginResultSequence();
     }
@@ -695,6 +745,31 @@ public class BarFacilityController : FacilitySceneControllerBase
         return IsOperatorResolved()
             ? GetLocalizedText(operatorFarewellTextKey, operatorFarewellTextFallback)
             : GetLocalizedText(baitoFarewellTextKey, baitoFarewellTextFallback);
+    }
+
+    private string GetSpeakerDisplayName()
+    {
+        return IsOperatorResolved()
+            ? GetLocalizedText(operatorSpeakerNameKey, operatorDisplayNameFallback)
+            : GetLocalizedText(baitoSpeakerNameKey, baitoDisplayNameFallback);
+    }
+
+    private string RebuildCurrentMessage()
+    {
+        switch (currentState)
+        {
+            case BarState.Result:
+                if (resultLineIndex >= 0 && resultLineIndex < resultLines.Count)
+                    return resultLines[resultLineIndex];
+                return "";
+            case BarState.Farewell:
+                return GetFarewellText();
+            case BarState.Welcome:
+            case BarState.SelectingDrink:
+                return GetOrderText();
+            default:
+                return currentMessage;
+        }
     }
 
     private string FormatLocalizedText(string key, string fallback, params object[] args)

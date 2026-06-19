@@ -5179,8 +5179,10 @@ MonoBehaviour:
   operatorHappySprite: {fileID: 21300000, guid: f057c8954c6b7524e9e604a55fcbca25, type: 3}
   baitoDefaultSprite: {fileID: 21300000, guid: e18634539d2eba244b88783f2d8890f5, type: 3}
   baitoHappySprite: {fileID: 21300000, guid: 584baddc70a4d8444af40adf8603bcc4, type: 3}
-  operatorDisplayName: "\uB9C8\uBAAC"
-  baitoDisplayName: "\uBC14\uC774\uD1A0"
+  operatorSpeakerNameKey: mammon
+  baitoSpeakerNameKey: baito
+  operatorDisplayName: Mammon
+  baitoDisplayName: Baito
   characterImage: {fileID: 649209665}
   speakerNameText: {fileID: 1373431097}
   dialogueText: {fileID: 1454890088}
@@ -5193,6 +5195,8 @@ MonoBehaviour:
     itemButton: {fileID: 1014573819}
     itemImage: {fileID: 1014573820}
     classImage: {fileID: 1274222637}
+    itemNameText: {fileID: 0}
+    itemDescriptionText: {fileID: 0}
     priceText: {fileID: 860459290}
     ownedStar1Text: {fileID: 1226189473}
     ownedStar2Text: {fileID: 1271443370}
@@ -5202,6 +5206,8 @@ MonoBehaviour:
     itemButton: {fileID: 446369309}
     itemImage: {fileID: 446369310}
     classImage: {fileID: 1145403857}
+    itemNameText: {fileID: 0}
+    itemDescriptionText: {fileID: 0}
     priceText: {fileID: 1818618754}
     ownedStar1Text: {fileID: 2103093831}
     ownedStar2Text: {fileID: 2121201484}
@@ -5211,6 +5217,8 @@ MonoBehaviour:
     itemButton: {fileID: 2041163734}
     itemImage: {fileID: 2041163735}
     classImage: {fileID: 73881331}
+    itemNameText: {fileID: 0}
+    itemDescriptionText: {fileID: 0}
     priceText: {fileID: 870892051}
     ownedStar1Text: {fileID: 1113500866}
     ownedStar2Text: {fileID: 892749515}
@@ -5220,6 +5228,8 @@ MonoBehaviour:
     itemButton: {fileID: 1188902913}
     itemImage: {fileID: 1188902914}
     classImage: {fileID: 2065368524}
+    itemNameText: {fileID: 0}
+    itemDescriptionText: {fileID: 0}
     priceText: {fileID: 1498892614}
     ownedStar1Text: {fileID: 662748626}
     ownedStar2Text: {fileID: 153354678}
@@ -5229,6 +5239,8 @@ MonoBehaviour:
     itemButton: {fileID: 1201946328}
     itemImage: {fileID: 1201946329}
     classImage: {fileID: 1564650979}
+    itemNameText: {fileID: 0}
+    itemDescriptionText: {fileID: 0}
     priceText: {fileID: 1556030394}
     ownedStar1Text: {fileID: 78686618}
     ownedStar2Text: {fileID: 1083609470}
@@ -5238,6 +5250,8 @@ MonoBehaviour:
     itemButton: {fileID: 1553923683}
     itemImage: {fileID: 1553923684}
     classImage: {fileID: 1367306466}
+    itemNameText: {fileID: 0}
+    itemDescriptionText: {fileID: 0}
     priceText: {fileID: 1788852576}
     ownedStar1Text: {fileID: 1096765579}
     ownedStar2Text: {fileID: 1249975161}
@@ -5249,6 +5263,11 @@ MonoBehaviour:
   confirmationGroup: {fileID: 1648749177}
   yesButton: {fileID: 1683330823}
   noButton: {fileID: 470861932}
+  buyButtonText: {fileID: 455080255}
+  rerollButtonText: {fileID: 792246826}
+  exitButtonText: {fileID: 1037161372}
+  yesButtonText: {fileID: 834351525}
+  noButtonText: {fileID: 772167783}
   classIconMappings:
   - itemClass: 0
     icon: {fileID: 21300000, guid: 5bc1573d2ad6c78478a3bf18403350a9, type: 3}
@@ -5274,21 +5293,49 @@ MonoBehaviour:
   rarePrice: 1000
   epicPrice: 2500
   legendaryPrice: 20000
-  lockedIntroText: "\uC5B4\uC11C\uC624\uC138\uC694!"
-  unlockedIntroText: "\uC5B4\uC11C\uC640!"
-  lockedSelectText: "\uADF8 \uBB3C\uAC74\uC73C\uB85C \uD558\uC2DC\uB098\uC694?"
-  unlockedSelectText: "\uBB3C\uAC74 \uBCF4\uB294 \uC548\uBAA9\uC774 \uC88B\uC740\uB370?"
-  lockedPurchaseSuccessText: "\uB9E4\uBC88 \uAC10\uC0AC\uD569\uB2C8\uB2E4!"
-  unlockedPurchaseSuccessText: "\uACE0\uB9C8\uC6CC!"
-  lockedPurchaseFailText: "\uACE8\uB4DC\uAC00 \uBD80\uC871\uD569\uB2C8\uB2E4."
-  unlockedPurchaseFailText: "\uB3C8\uC774 \uBAA8\uC790\uB77C\uB124~ \uB2E4\uC74C\uC5D4
-    \uB354 \uCC59\uACA8\uC640."
-  lockedRerollSuccessText: "\uC0C8 \uC0C1\uD488\uC744 \uC900\uBE44\uD588\uC2B5\uB2C8\uB2E4."
-  unlockedRerollSuccessText: "\uC88B\uC544, \uD310\uC744 \uB2E4\uC2DC \uAE54\uC544\uBCFC\uAE4C?"
-  lockedRerollFailText: "\uB9AC\uB864 \uBE44\uC6A9\uC774 \uBD80\uC871\uD569\uB2C8\uB2E4."
-  unlockedRerollFailText: "\uC218\uC218\uB8CC\uB3C4 \uBABB \uB0B4\uBA74 \uACE4\uB780\uD558\uC9C0."
-  purchaseItemFormat: "{0}\uC744 \uAD6C\uB9E4\uD588\uB2E4!"
-  noItemsAvailableText: "\uD310\uB9E4 \uAC00\uB2A5\uD55C \uC0C1\uD488\uC774 \uC5C6\uC2B5\uB2C8\uB2E4."
+  operatorIntroTextKey: black_market_mammon_greeting
+  baitoIntroTextKey: black_market_baito_greeting
+  operatorPurchaseSuccessTextKey: black_market_mammon_purchase_success
+  baitoPurchaseSuccessTextKey: black_market_baito_purchase_success
+  operatorPurchaseFailTextKey: black_market_mammon_purchase_no_gold
+  baitoPurchaseFailTextKey: black_market_baito_purchase_no_gold
+  operatorRerollSuccessTextKey: black_market_mammon_reroll_success
+  baitoRerollSuccessTextKey: black_market_baito_reroll_success
+  operatorRerollFailTextKey: black_market_mammon_reroll_no_gold
+  baitoRerollFailTextKey: black_market_baito_reroll_no_gold
+  lockedIntroText: Welcome! Feel free to take a look around!
+  unlockedIntroText: Kaka! Welcome dear customer! Every item today is top quality!
+  lockedPurchaseSuccessText: Thank you for your purchase!
+  unlockedPurchaseSuccessText: Excellent choice! You have a good eye dear customer!
+  lockedPurchaseFailText: It looks like you are a little short on gold!
+  unlockedPurchaseFailText: Too bad but you do not have enough gold! I do not run
+    a charity!
+  lockedRerollSuccessText: Restock complete! Maybe you will find something you like
+    this time!
+  unlockedRerollSuccessText: A V.I.P. customer deserves more options!
+  lockedRerollFailText: It looks like you are a little short on the fee!
+  unlockedRerollFailText: If you want to see more goods then you will need to open
+    your wallet wider!
+  purchaseItemFormatKey: black_market_purchase_item_format
+  purchaseItemFormat: Purchased {0}
+  noItemsAvailableTextKey: black_market_no_items_available
+  noItemsAvailableText: No items available for sale.
+  rerollCostFormatKey: black_market_reroll_cost_format
+  rerollCostFormatFallback: 'Restock fee: {0:N0}'
+  priceFormatKey: black_market_price_format
+  priceFormatFallback: '{0:N0}'
+  soldOutTextKey: black_market_sold_out
+  soldOutTextFallback: Sold Out
+  buyButtonTextKey: btn_buy
+  buyButtonTextFallback: Buy
+  rerollButtonTextKey: btn_reroll
+  rerollButtonTextFallback: Restock
+  exitButtonTextKey: btn_exit
+  exitButtonTextFallback: Exit
+  yesButtonTextKey: common_yes
+  yesButtonTextFallback: Yes
+  noButtonTextKey: common_no
+  noButtonTextFallback: No
   typeInterval: 0.03
 --- !u!1 &792246824
 GameObject:
@@ -11219,9 +11266,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298b138403b54849b811d2c59fab45e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
+  bgmPlaylist: []
   bgmClip: {fileID: 8300000, guid: 544cf5b6aadd40b45b2d023b5c11cdfb, type: 3}
   fadeTime: 1
-  stopBgmIfClipIsEmpty: 0
+  stopBgmIfEmpty: 0
 --- !u!4 &1578263487
 Transform:
   m_ObjectHideFlags: 0

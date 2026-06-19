@@ -96,7 +96,18 @@ public class FacilityRankBonusPanelController : MonoBehaviour
             return "";
         }
 
-        return info.rankDescriptions[rank] ?? "";
+        string descriptionKey = info.rankDescriptions[rank];
+        if (string.IsNullOrEmpty(descriptionKey))
+            return "";
+
+        if (LocalizationManager.Instance == null)
+            return descriptionKey;
+
+        string localized = LocalizationManager.Instance.GetText(descriptionKey);
+        if (string.IsNullOrEmpty(localized))
+            return descriptionKey;
+
+        return localized;
     }
 
     private void RestoreTimeScale()

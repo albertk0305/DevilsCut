@@ -12,6 +12,8 @@ public class BlackMarketItemSlotView
     public Button itemButton;
     public Image itemImage;
     public Image classImage;
+    public TMP_Text itemNameText;
+    public TMP_Text itemDescriptionText;
     public TMP_Text priceText;
     public TMP_Text ownedStar1Text;
     public TMP_Text ownedStar2Text;
@@ -33,6 +35,19 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         Shop,
         PurchaseMessage,
         Merge
+    }
+
+    private enum BlackMarketMessageKind
+    {
+        None,
+        Greeting,
+        SelectedItemDescription,
+        PurchaseItem,
+        PurchaseSuccess,
+        PurchaseNoGold,
+        RerollSuccess,
+        RerollNoGold,
+        NoItemsAvailable
     }
 
     private class ShopItem
@@ -58,6 +73,8 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
     [SerializeField] private Sprite operatorHappySprite;
     [SerializeField] private Sprite baitoDefaultSprite;
     [SerializeField] private Sprite baitoHappySprite;
+    [SerializeField] private string operatorSpeakerNameKey = "black_market_speaker_mammon";
+    [SerializeField] private string baitoSpeakerNameKey = "black_market_speaker_baito";
     [SerializeField] private string operatorDisplayName = "마몬";
     [SerializeField] private string baitoDisplayName = "바이토";
 
@@ -78,6 +95,11 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
     [SerializeField] private GameObject confirmationGroup;
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
+    [SerializeField] private TMP_Text buyButtonText;
+    [SerializeField] private TMP_Text rerollButtonText;
+    [SerializeField] private TMP_Text exitButtonText;
+    [SerializeField] private TMP_Text yesButtonText;
+    [SerializeField] private TMP_Text noButtonText;
     [SerializeField] private BlackMarketItemClassIconMapping[] classIconMappings;
 
     [Header("Prices")]
@@ -87,6 +109,16 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
     [SerializeField] private int legendaryPrice = 20000;
 
     [Header("Text")]
+    [SerializeField] private string operatorIntroTextKey = "black_market_mammon_greeting";
+    [SerializeField] private string baitoIntroTextKey = "black_market_baito_greeting";
+    [SerializeField] private string operatorPurchaseSuccessTextKey = "black_market_mammon_purchase_success";
+    [SerializeField] private string baitoPurchaseSuccessTextKey = "black_market_baito_purchase_success";
+    [SerializeField] private string operatorPurchaseFailTextKey = "black_market_mammon_purchase_no_gold";
+    [SerializeField] private string baitoPurchaseFailTextKey = "black_market_baito_purchase_no_gold";
+    [SerializeField] private string operatorRerollSuccessTextKey = "black_market_mammon_reroll_success";
+    [SerializeField] private string baitoRerollSuccessTextKey = "black_market_baito_reroll_success";
+    [SerializeField] private string operatorRerollFailTextKey = "black_market_mammon_reroll_no_gold";
+    [SerializeField] private string baitoRerollFailTextKey = "black_market_baito_reroll_no_gold";
     [SerializeField] private string lockedIntroText = "어서오세요!";
     [SerializeField] private string unlockedIntroText = "어서와!";
     [SerializeField] private string lockedPurchaseSuccessText = "매번 감사합니다!";
@@ -97,8 +129,26 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
     [SerializeField] private string unlockedRerollSuccessText = "좋아, 판을 다시 깔아볼까?";
     [SerializeField] private string lockedRerollFailText = "리롤 비용이 부족합니다.";
     [SerializeField] private string unlockedRerollFailText = "수수료도 못 내면 곤란하지.";
+    [SerializeField] private string purchaseItemFormatKey = "black_market_purchase_item_format";
     [SerializeField] private string purchaseItemFormat = "{0}을 구매했다!";
+    [SerializeField] private string noItemsAvailableTextKey = "black_market_no_items_available";
     [SerializeField] private string noItemsAvailableText = "판매 가능한 상품이 없습니다.";
+    [SerializeField] private string rerollCostFormatKey = "black_market_reroll_cost_format";
+    [SerializeField] private string rerollCostFormatFallback = "Restock Cost: {0}G";
+    [SerializeField] private string priceFormatKey = "black_market_price_format";
+    [SerializeField] private string priceFormatFallback = "{0}G";
+    [SerializeField] private string soldOutTextKey = "black_market_sold_out";
+    [SerializeField] private string soldOutTextFallback = "Sold Out";
+    [SerializeField] private string buyButtonTextKey = "black_market_buy_button";
+    [SerializeField] private string buyButtonTextFallback = "Buy!";
+    [SerializeField] private string rerollButtonTextKey = "black_market_reroll_button";
+    [SerializeField] private string rerollButtonTextFallback = "Reroll";
+    [SerializeField] private string exitButtonTextKey = "black_market_exit_button";
+    [SerializeField] private string exitButtonTextFallback = "Exit";
+    [SerializeField] private string yesButtonTextKey = "common_yes";
+    [SerializeField] private string yesButtonTextFallback = "Yes";
+    [SerializeField] private string noButtonTextKey = "common_no";
+    [SerializeField] private string noButtonTextFallback = "No";
 
     [Header("Typewriter")]
     [SerializeField] private float typeInterval = 0.03f;
@@ -107,6 +157,9 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
     private List<ItemMergeResult> pendingMergeResults = new List<ItemMergeResult>();
     private Coroutine typingCoroutine;
     private string currentMessage = "";
+    private BlackMarketMessageKind currentMessageKind;
+    private EquipmentItemData currentMessageItem;
+    private string currentSpeakerOverride;
     private BlackMarketState currentState;
     private bool isOperatorResolved;
     private bool isTyping;
@@ -123,12 +176,52 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         SetupInitialUI();
         GenerateShopItems();
         RefreshShopUI();
-        ShowMessage(HasAnyShopItem() ? (isOperatorResolved ? unlockedIntroText : lockedIntroText) : noItemsAvailableText, BlackMarketState.Shop);
+        ShowLocalizedMessage(HasAnyShopItem() ? BlackMarketMessageKind.Greeting : BlackMarketMessageKind.NoItemsAvailable, BlackMarketState.Shop);
+    }
+
+    private void OnEnable()
+    {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged += OnLanguageChanged;
     }
 
     private void OnDisable()
     {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+
         StopTyping();
+    }
+
+    private void OnLanguageChanged()
+    {
+        RefreshLocalizedUI();
+    }
+
+    private void RefreshLocalizedUI()
+    {
+        bool wasTyping = isTyping;
+        bool wasIndicatorActive = textCompleteIndicator != null && textCompleteIndicator.activeSelf;
+        StopTyping();
+
+        ApplySpeakerNameOverride(currentSpeakerOverride);
+        currentMessage = RebuildCurrentMessage();
+
+        if (dialogueText != null)
+            dialogueText.text = currentMessage;
+
+        RefreshShopUI();
+        RefreshFixedUIText();
+
+        if (wasTyping)
+        {
+            isTextComplete = true;
+            SetTextCompleteIndicatorActive(true);
+        }
+        else
+        {
+            SetTextCompleteIndicatorActive(wasIndicatorActive);
+        }
     }
 
     private void BindButtons()
@@ -214,6 +307,7 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         EnsureDialoguePanelCanAdvance();
         RefreshGoldUI();
         RefreshRerollCostUI();
+        RefreshFixedUIText();
         RefreshButtons();
     }
 
@@ -239,7 +333,7 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
 
         if (speakerNameText != null)
         {
-            speakerNameText.text = isOperatorResolved ? operatorDisplayName : baitoDisplayName;
+            speakerNameText.text = GetSpeakerDisplayName();
             speakerNameText.gameObject.SetActive(true);
         }
     }
@@ -434,8 +528,14 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
             view.classImage.gameObject.SetActive(classIcon != null);
         }
 
+        if (view.itemNameText != null)
+            view.itemNameText.text = hasItem ? GetItemDisplayName(item) : "";
+
+        if (view.itemDescriptionText != null)
+            view.itemDescriptionText.text = hasItem ? GetItemDescription(item) : "";
+
         if (view.priceText != null)
-            view.priceText.text = hasItem ? shopItem.price.ToString("N0") : "";
+            view.priceText.text = hasItem ? FormatLocalizedText(priceFormatKey, priceFormatFallback, shopItem.price) : "";
 
         if (view.ownedStar1Text != null)
             view.ownedStar1Text.text = hasItem ? $"×{GetOwnedItemCount(item.itemID, 1)}" : "";
@@ -448,7 +548,10 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
 
         bool sold = hasItem && shopItem.sold;
         if (view.soldOutText != null)
+        {
+            view.soldOutText.text = GetLocalizedText(soldOutTextKey, soldOutTextFallback);
             view.soldOutText.gameObject.SetActive(sold);
+        }
     }
 
     private int GetOwnedItemCount(string itemID, int starLevel)
@@ -493,8 +596,7 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         ApplyCharacterView(false);
         RefreshShopUI();
 
-        string bonusText = GetLocalizedOrFallback(shopItem.itemData.itemBonusKey, shopItem.itemData.itemBonusKey);
-        ShowMessage(bonusText, BlackMarketState.Shop, "");
+        ShowLocalizedMessage(BlackMarketMessageKind.SelectedItemDescription, BlackMarketState.Shop, shopItem.itemData, "");
     }
 
     private void OnClickBuy()
@@ -516,7 +618,7 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         if (playerManager.stats.currentGold < shopItem.price)
         {
             ApplyCharacterView(false);
-            ShowMessage(isOperatorResolved ? unlockedPurchaseFailText : lockedPurchaseFailText, BlackMarketState.Shop);
+            ShowLocalizedMessage(BlackMarketMessageKind.PurchaseNoGold, BlackMarketState.Shop);
             return;
         }
 
@@ -533,7 +635,7 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         if (mergePresentation != null)
             mergePresentation.SetRootActive(false);
 
-        ShowMessage(string.Format(purchaseItemFormat, GetItemDisplayName(purchasedItem)), BlackMarketState.PurchaseMessage);
+        ShowLocalizedMessage(BlackMarketMessageKind.PurchaseItem, BlackMarketState.PurchaseMessage, purchasedItem);
     }
 
     private void OnClickReroll()
@@ -556,7 +658,7 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         if (playerManager.stats.currentGold < rerollCost)
         {
             ApplyCharacterView(false);
-            ShowMessage(isOperatorResolved ? unlockedRerollFailText : lockedRerollFailText, BlackMarketState.Shop);
+            ShowLocalizedMessage(BlackMarketMessageKind.RerollNoGold, BlackMarketState.Shop);
             return;
         }
 
@@ -566,7 +668,7 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         RefreshShopUI();
 
         ApplyCharacterView(false);
-        ShowMessage(HasAnyShopItem() ? (isOperatorResolved ? unlockedRerollSuccessText : lockedRerollSuccessText) : noItemsAvailableText, BlackMarketState.Shop);
+        ShowLocalizedMessage(HasAnyShopItem() ? BlackMarketMessageKind.RerollSuccess : BlackMarketMessageKind.NoItemsAvailable, BlackMarketState.Shop);
     }
 
     private void OnClickExit()
@@ -652,7 +754,7 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
 
         currentState = BlackMarketState.Shop;
         RefreshShopUI();
-        ShowMessage(isOperatorResolved ? unlockedPurchaseSuccessText : lockedPurchaseSuccessText, BlackMarketState.Shop);
+        ShowLocalizedMessage(BlackMarketMessageKind.PurchaseSuccess, BlackMarketState.Shop);
     }
 
     private void ClearSelection()
@@ -741,7 +843,33 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
     private void RefreshRerollCostUI()
     {
         if (rerollCostText != null)
-            rerollCostText.text = $"Reroll Cost: {rerollCost:N0}";
+            rerollCostText.text = FormatLocalizedText(rerollCostFormatKey, rerollCostFormatFallback, rerollCost);
+    }
+
+    private void RefreshFixedUIText()
+    {
+        SetButtonText(buyButtonText, buyButton, buyButtonTextKey, buyButtonTextFallback);
+        SetButtonText(rerollButtonText, rerollButton, rerollButtonTextKey, rerollButtonTextFallback);
+        SetButtonText(exitButtonText, exitButton, exitButtonTextKey, exitButtonTextFallback);
+        SetButtonText(yesButtonText, yesButton, yesButtonTextKey, yesButtonTextFallback);
+        SetButtonText(noButtonText, noButton, noButtonTextKey, noButtonTextFallback);
+    }
+
+    private void SetButtonText(TMP_Text explicitText, Button button, string key, string fallback)
+    {
+        TMP_Text targetText = explicitText;
+        if (targetText == null && button != null)
+            targetText = button.GetComponentInChildren<TMP_Text>(true);
+
+        if (targetText != null)
+            targetText.text = GetLocalizedText(key, fallback);
+    }
+
+    private void ShowLocalizedMessage(BlackMarketMessageKind messageKind, BlackMarketState nextState, EquipmentItemData item = null, string speakerOverride = null)
+    {
+        currentMessageKind = messageKind;
+        currentMessageItem = item;
+        ShowMessage(RebuildMessage(messageKind, item), nextState, speakerOverride);
     }
 
     private void ShowMessage(string message, BlackMarketState nextState, string speakerOverride = null)
@@ -749,6 +877,7 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         StopTyping();
         currentState = nextState;
         currentMessage = message ?? "";
+        currentSpeakerOverride = speakerOverride;
         isTextComplete = false;
         SetTextCompleteIndicatorActive(false);
         EnsureDialoguePanelCanAdvance();
@@ -763,7 +892,7 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         if (speakerNameText == null)
             return;
 
-        speakerNameText.text = speakerOverride ?? (isOperatorResolved ? operatorDisplayName : baitoDisplayName);
+        speakerNameText.text = speakerOverride ?? GetSpeakerDisplayName();
         speakerNameText.gameObject.SetActive(true);
     }
 
@@ -830,26 +959,103 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         if (item == null)
             return "";
 
-        if (!string.IsNullOrEmpty(item.itemNameKey) && LocalizationManager.Instance != null)
-        {
-            string localized = LocalizationManager.Instance.GetText(item.itemNameKey);
-            if (!string.IsNullOrEmpty(localized))
-                return localized;
-        }
+        return GetLocalizedText(item.itemNameKey, item.name);
+    }
 
-        return item.name;
+    private string GetItemDescription(EquipmentItemData item)
+    {
+        if (item == null)
+            return "";
+
+        if (!string.IsNullOrEmpty(item.itemDescKey))
+            return GetLocalizedText(item.itemDescKey, item.itemDescKey);
+
+        return GetLocalizedText(item.itemBonusKey, item.itemBonusKey);
+    }
+
+    private string GetItemBonusText(EquipmentItemData item)
+    {
+        if (item == null)
+            return "";
+
+        return GetLocalizedText(item.itemBonusKey, item.itemBonusKey);
     }
 
     private string GetLocalizedOrFallback(string key, string fallback)
     {
+        return GetLocalizedText(key, fallback);
+    }
+
+    private string GetSpeakerDisplayName()
+    {
+        return isOperatorResolved
+            ? GetLocalizedText(operatorSpeakerNameKey, operatorDisplayName)
+            : GetLocalizedText(baitoSpeakerNameKey, baitoDisplayName);
+    }
+
+    private string RebuildCurrentMessage()
+    {
+        return RebuildMessage(currentMessageKind, currentMessageItem);
+    }
+
+    private string RebuildMessage(BlackMarketMessageKind messageKind, EquipmentItemData item)
+    {
+        switch (messageKind)
+        {
+            case BlackMarketMessageKind.Greeting:
+                return GetCharacterText(operatorIntroTextKey, unlockedIntroText, baitoIntroTextKey, lockedIntroText);
+            case BlackMarketMessageKind.SelectedItemDescription:
+                return GetItemBonusText(item);
+            case BlackMarketMessageKind.PurchaseItem:
+                return FormatLocalizedText(purchaseItemFormatKey, purchaseItemFormat, GetItemDisplayName(item));
+            case BlackMarketMessageKind.PurchaseSuccess:
+                return GetCharacterText(operatorPurchaseSuccessTextKey, unlockedPurchaseSuccessText, baitoPurchaseSuccessTextKey, lockedPurchaseSuccessText);
+            case BlackMarketMessageKind.PurchaseNoGold:
+                return GetCharacterText(operatorPurchaseFailTextKey, unlockedPurchaseFailText, baitoPurchaseFailTextKey, lockedPurchaseFailText);
+            case BlackMarketMessageKind.RerollSuccess:
+                return GetCharacterText(operatorRerollSuccessTextKey, unlockedRerollSuccessText, baitoRerollSuccessTextKey, lockedRerollSuccessText);
+            case BlackMarketMessageKind.RerollNoGold:
+                return GetCharacterText(operatorRerollFailTextKey, unlockedRerollFailText, baitoRerollFailTextKey, lockedRerollFailText);
+            case BlackMarketMessageKind.NoItemsAvailable:
+                return GetLocalizedText(noItemsAvailableTextKey, noItemsAvailableText);
+            default:
+                return currentMessage;
+        }
+    }
+
+    private string GetCharacterText(string operatorKey, string operatorFallback, string baitoKey, string baitoFallback)
+    {
+        return isOperatorResolved
+            ? GetLocalizedText(operatorKey, operatorFallback)
+            : GetLocalizedText(baitoKey, baitoFallback);
+    }
+
+    private string FormatLocalizedText(string key, string fallback, params object[] args)
+    {
+        string format = GetLocalizedText(key, fallback);
+        try
+        {
+            return string.Format(format, args);
+        }
+        catch (FormatException)
+        {
+            return string.Format(fallback, args);
+        }
+    }
+
+    private string GetLocalizedText(string key, string fallback)
+    {
         if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
         {
             string localized = LocalizationManager.Instance.GetText(key);
-            if (!string.IsNullOrEmpty(localized))
+            if (!string.IsNullOrEmpty(localized) && localized != key)
                 return localized;
         }
 
-        return fallback ?? "";
+        if (!string.IsNullOrEmpty(fallback))
+            return fallback;
+
+        return key ?? "";
     }
 
     private void ApplyRankButtonSprite()

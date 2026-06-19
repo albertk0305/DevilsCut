@@ -38,12 +38,34 @@ public class CasinoFacilityController : FacilitySceneControllerBase
         Result
     }
 
+    private enum CasinoMessageKind
+    {
+        None,
+        LockedIntro,
+        UnlockedIntro1,
+        UnlockedIntro2,
+        ResultMiss,
+        ResultGoldGain,
+        Reaction
+    }
+
+    private enum CasinoCharacterMood
+    {
+        Default,
+        Happy,
+        Sad,
+        Jackpot
+    }
+
     [Header("Data")]
     [SerializeField] private FacilityData facilityData;
 
     [Header("Character Sprites")]
     [SerializeField] private Sprite operatorDefaultSprite;
     [SerializeField] private Sprite operatorHappySprite;
+    [SerializeField] private Sprite operatorSadSprite;
+    [SerializeField] private Sprite operatorJackpotSprite;
+    [SerializeField] private string operatorDisplayNameKey = "casino_speaker_belphegor";
     [SerializeField] private string operatorDisplayName = "벨페고르";
 
     [Header("Dialogue UI")]
@@ -74,15 +96,28 @@ public class CasinoFacilityController : FacilitySceneControllerBase
     [SerializeField] private FacilityRankBonusPanelController rankBonusPanel;
 
     [Header("Intro Text")]
+    [SerializeField] private string lockedIntroTextKey = "casino_locked_intro";
+    [SerializeField] private string unlockedIntroText1Key = "casino_unlocked_intro_1";
+    [SerializeField] private string unlockedIntroText2Key = "casino_unlocked_intro_2";
     [SerializeField] private string lockedIntroText = "슬롯머신 돌려볼까?";
     [SerializeField] private string unlockedIntroText1 = "안녕~ 너도 놀러왔니?";
     [SerializeField] private string unlockedIntroText2 = "오늘은 저 기계가 느낌이 좋더라~ 나만 믿어봐!";
 
     [Header("Result Text")]
+    [SerializeField] private string missResultTextKey = "casino_result_miss";
+    [SerializeField] private string goldGainResultFormatKey = "casino_result_gold_gain_format";
     [SerializeField] private string missResultText = "꽝이다... 골드를 획득하지 못했다.";
     [SerializeField] private string goldGainResultFormat = "{0:N0} 골드를 얻었다.";
 
     [Header("Reaction Text")]
+    [SerializeField] private string lockedMissReactionTextKey = "casino_locked_reaction_miss";
+    [SerializeField] private string lockedPairReactionTextKey = "casino_locked_reaction_pair";
+    [SerializeField] private string lockedTripleReactionTextKey = "casino_locked_reaction_triple";
+    [SerializeField] private string lockedJackpotReactionTextKey = "casino_locked_reaction_jackpot";
+    [SerializeField] private string unlockedMissReactionTextKey = "casino_unlocked_reaction_miss";
+    [SerializeField] private string unlockedPairReactionTextKey = "casino_unlocked_reaction_pair";
+    [SerializeField] private string unlockedTripleReactionTextKey = "casino_unlocked_reaction_triple";
+    [SerializeField] private string unlockedJackpotReactionTextKey = "casino_unlocked_reaction_jackpot";
     [SerializeField] private string lockedMissReactionText = "아쉽다...";
     [SerializeField] private string lockedPairReactionText = "그럭저럭이군.";
     [SerializeField] private string lockedTripleReactionText = "꽤 괜찮은 결과다.";
@@ -103,11 +138,12 @@ public class CasinoFacilityController : FacilitySceneControllerBase
     [Header("Typewriter")]
     [SerializeField] private float typeInterval = 0.03f;
 
-    private readonly Queue<string> introLines = new Queue<string>();
-    private readonly List<string> resultLines = new List<string>();
+    private readonly Queue<CasinoMessageKind> introLines = new Queue<CasinoMessageKind>();
+    private readonly List<CasinoMessageKind> resultLines = new List<CasinoMessageKind>();
     private Coroutine typingCoroutine;
     private Coroutine slotCoroutine;
     private string currentMessage = "";
+    private CasinoMessageKind currentMessageKind;
     private CasinoState currentState;
     private bool isTyping;
     private bool isTextComplete;
@@ -117,6 +153,7 @@ public class CasinoFacilityController : FacilitySceneControllerBase
     private int resultLineIndex = -1;
     private CasinoSlotSymbol[] finalSymbols = new CasinoSlotSymbol[3];
     private CasinoSlotOutcome currentOutcome;
+    private int lastRewardGold;
 
     protected override void Start()
     {
@@ -128,14 +165,53 @@ public class CasinoFacilityController : FacilitySceneControllerBase
         ShowNextIntroLine();
     }
 
+    private void OnEnable()
+    {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged += OnLanguageChanged;
+    }
+
     private void OnDisable()
     {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+
         StopTyping();
 
         if (slotCoroutine != null)
         {
             StopCoroutine(slotCoroutine);
             slotCoroutine = null;
+        }
+    }
+
+    private void OnLanguageChanged()
+    {
+        RefreshLocalizedUI();
+    }
+
+    private void RefreshLocalizedUI()
+    {
+        bool wasTyping = isTyping;
+        bool wasIndicatorActive = textCompleteIndicator != null && textCompleteIndicator.activeSelf;
+        StopTyping();
+
+        RefreshCurrentCharacterView();
+        currentMessage = RebuildCurrentMessage();
+
+        if (dialogueText != null)
+            dialogueText.text = currentMessage;
+
+        if (wasTyping)
+        {
+            isTextComplete = true;
+
+            if (textCompleteIndicator != null)
+                textCompleteIndicator.SetActive(true);
+        }
+        else if (textCompleteIndicator != null)
+        {
+            textCompleteIndicator.SetActive(wasIndicatorActive);
         }
     }
 
@@ -164,7 +240,7 @@ public class CasinoFacilityController : FacilitySceneControllerBase
     {
         isOperatorResolved = IsOperatorResolved();
         ApplyRankButtonSprite();
-        ApplyCharacterView(false);
+        ApplyCharacterView(CasinoCharacterMood.Default);
 
         if (rankBonusPanel != null)
             rankBonusPanel.gameObject.SetActive(false);
@@ -200,7 +276,7 @@ public class CasinoFacilityController : FacilitySceneControllerBase
             && PlayerManager.Instance.IsSupporterChoiceResolved(facilityData.linkedSupporter);
     }
 
-    private void ApplyCharacterView(bool happy)
+    private void ApplyCharacterView(CasinoCharacterMood mood)
     {
         if (!isOperatorResolved)
         {
@@ -215,7 +291,7 @@ public class CasinoFacilityController : FacilitySceneControllerBase
             return;
         }
 
-        Sprite sprite = happy && operatorHappySprite != null ? operatorHappySprite : operatorDefaultSprite;
+        Sprite sprite = GetOperatorSprite(mood);
         if (characterImage != null)
         {
             characterImage.sprite = sprite;
@@ -224,9 +300,58 @@ public class CasinoFacilityController : FacilitySceneControllerBase
 
         if (speakerNameText != null)
         {
-            speakerNameText.text = operatorDisplayName;
+            speakerNameText.text = GetOperatorDisplayName();
             speakerNameText.gameObject.SetActive(true);
         }
+    }
+
+    private Sprite GetOperatorSprite(CasinoCharacterMood mood)
+    {
+        switch (mood)
+        {
+            case CasinoCharacterMood.Happy:
+                return operatorHappySprite != null ? operatorHappySprite : operatorDefaultSprite;
+            case CasinoCharacterMood.Sad:
+                if (operatorSadSprite != null)
+                    return operatorSadSprite;
+                return operatorDefaultSprite != null ? operatorDefaultSprite : operatorHappySprite;
+            case CasinoCharacterMood.Jackpot:
+                if (operatorJackpotSprite != null)
+                    return operatorJackpotSprite;
+                return operatorHappySprite != null ? operatorHappySprite : operatorDefaultSprite;
+            default:
+                return operatorDefaultSprite;
+        }
+    }
+
+    private void ApplyReactionCharacterView(CasinoSlotOutcome outcome)
+    {
+        if (!isOperatorResolved)
+        {
+            ApplyCharacterView(CasinoCharacterMood.Default);
+            return;
+        }
+
+        switch (outcome)
+        {
+            case CasinoSlotOutcome.Miss:
+                ApplyCharacterView(CasinoCharacterMood.Sad);
+                break;
+            case CasinoSlotOutcome.Jackpot:
+                ApplyCharacterView(CasinoCharacterMood.Jackpot);
+                break;
+            default:
+                ApplyCharacterView(CasinoCharacterMood.Happy);
+                break;
+        }
+    }
+
+    private void RefreshCurrentCharacterView()
+    {
+        if (currentMessageKind == CasinoMessageKind.Reaction)
+            ApplyReactionCharacterView(currentOutcome);
+        else
+            ApplyCharacterView(CasinoCharacterMood.Default);
     }
 
     private void BuildIntroLines()
@@ -235,12 +360,12 @@ public class CasinoFacilityController : FacilitySceneControllerBase
 
         if (!isOperatorResolved)
         {
-            introLines.Enqueue(lockedIntroText);
+            introLines.Enqueue(CasinoMessageKind.LockedIntro);
             return;
         }
 
-        introLines.Enqueue(unlockedIntroText1);
-        introLines.Enqueue(unlockedIntroText2);
+        introLines.Enqueue(CasinoMessageKind.UnlockedIntro1);
+        introLines.Enqueue(CasinoMessageKind.UnlockedIntro2);
     }
 
     private void ShowNextIntroLine()
@@ -285,12 +410,13 @@ public class CasinoFacilityController : FacilitySceneControllerBase
         }
     }
 
-    private void ShowMessage(string message, CasinoState nextState)
+    private void ShowMessage(CasinoMessageKind messageKind, CasinoState nextState)
     {
         StopTyping();
 
         currentState = nextState;
-        currentMessage = message ?? "";
+        currentMessageKind = messageKind;
+        currentMessage = RebuildMessage(messageKind);
         isTextComplete = false;
 
         if (textCompleteIndicator != null)
@@ -443,12 +569,6 @@ public class CasinoFacilityController : FacilitySceneControllerBase
             }
             else if (stoppedCount == 2 && tick >= thirdStopTick)
             {
-                if (ShouldPlayJackpotCutIn(outcome))
-                {
-                    yield return StartCoroutine(PlayCutInRoutine(2, currentSymbols, symbols[2]));
-                    yield return StartCoroutine(PlayPostCutInSpinRoutine(2, currentSymbols, symbols[2]));
-                }
-
                 SetSlotImage(2, symbols[2]);
                 stoppedSlots[2] = true;
                 stoppedCount = 3;
@@ -636,12 +756,13 @@ public class CasinoFacilityController : FacilitySceneControllerBase
     private void ApplyRewardAndBuildResult(CasinoSlotOutcome outcome)
     {
         int rewardGold = GetRewardGold(outcome);
+        lastRewardGold = rewardGold;
         if (rewardGold > 0 && PlayerManager.Instance != null)
             PlayerManager.Instance.stats.currentGold += rewardGold;
 
         resultLines.Clear();
-        resultLines.Add(rewardGold > 0 ? string.Format(goldGainResultFormat, rewardGold) : missResultText);
-        resultLines.Add(GetReactionText(outcome));
+        resultLines.Add(rewardGold > 0 ? CasinoMessageKind.ResultGoldGain : CasinoMessageKind.ResultMiss);
+        resultLines.Add(CasinoMessageKind.Reaction);
     }
 
     private void BeginResultSequence()
@@ -660,10 +781,11 @@ public class CasinoFacilityController : FacilitySceneControllerBase
             return;
         }
 
-        if (resultLineIndex == resultLines.Count - 1)
-            ApplyCharacterView(true);
+        CasinoMessageKind messageKind = resultLines[resultLineIndex];
+        if (messageKind == CasinoMessageKind.Reaction)
+            ApplyReactionCharacterView(currentOutcome);
 
-        ShowMessage(resultLines[resultLineIndex], CasinoState.Result);
+        ShowMessage(messageKind, CasinoState.Result);
     }
 
     private int GetRewardGold(CasinoSlotOutcome outcome)
@@ -681,6 +803,37 @@ public class CasinoFacilityController : FacilitySceneControllerBase
         }
     }
 
+    private string RebuildCurrentMessage()
+    {
+        return RebuildMessage(currentMessageKind);
+    }
+
+    private string RebuildMessage(CasinoMessageKind messageKind)
+    {
+        switch (messageKind)
+        {
+            case CasinoMessageKind.LockedIntro:
+                return GetLocalizedText(lockedIntroTextKey, lockedIntroText);
+            case CasinoMessageKind.UnlockedIntro1:
+                return GetLocalizedText(unlockedIntroText1Key, unlockedIntroText1);
+            case CasinoMessageKind.UnlockedIntro2:
+                return GetLocalizedText(unlockedIntroText2Key, unlockedIntroText2);
+            case CasinoMessageKind.ResultMiss:
+                return GetLocalizedText(missResultTextKey, missResultText);
+            case CasinoMessageKind.ResultGoldGain:
+                return FormatLocalizedText(goldGainResultFormatKey, goldGainResultFormat, lastRewardGold);
+            case CasinoMessageKind.Reaction:
+                return GetReactionText(currentOutcome);
+            default:
+                return currentMessage;
+        }
+    }
+
+    private string GetOperatorDisplayName()
+    {
+        return GetLocalizedText(operatorDisplayNameKey, operatorDisplayName);
+    }
+
     private string GetReactionText(CasinoSlotOutcome outcome)
     {
         if (isOperatorResolved)
@@ -688,27 +841,55 @@ public class CasinoFacilityController : FacilitySceneControllerBase
             switch (outcome)
             {
                 case CasinoSlotOutcome.Pair:
-                    return unlockedPairReactionText;
+                    return GetLocalizedText(unlockedPairReactionTextKey, unlockedPairReactionText);
                 case CasinoSlotOutcome.Triple:
-                    return unlockedTripleReactionText;
+                    return GetLocalizedText(unlockedTripleReactionTextKey, unlockedTripleReactionText);
                 case CasinoSlotOutcome.Jackpot:
-                    return unlockedJackpotReactionText;
+                    return GetLocalizedText(unlockedJackpotReactionTextKey, unlockedJackpotReactionText);
                 default:
-                    return unlockedMissReactionText;
+                    return GetLocalizedText(unlockedMissReactionTextKey, unlockedMissReactionText);
             }
         }
 
         switch (outcome)
         {
             case CasinoSlotOutcome.Pair:
-                return lockedPairReactionText;
+                return GetLocalizedText(lockedPairReactionTextKey, lockedPairReactionText);
             case CasinoSlotOutcome.Triple:
-                return lockedTripleReactionText;
+                return GetLocalizedText(lockedTripleReactionTextKey, lockedTripleReactionText);
             case CasinoSlotOutcome.Jackpot:
-                return lockedJackpotReactionText;
+                return GetLocalizedText(lockedJackpotReactionTextKey, lockedJackpotReactionText);
             default:
-                return lockedMissReactionText;
+                return GetLocalizedText(lockedMissReactionTextKey, lockedMissReactionText);
         }
+    }
+
+    private string FormatLocalizedText(string key, string fallback, params object[] args)
+    {
+        string format = GetLocalizedText(key, fallback);
+        try
+        {
+            return string.Format(format, args);
+        }
+        catch (FormatException)
+        {
+            return string.Format(fallback, args);
+        }
+    }
+
+    private string GetLocalizedText(string key, string fallback)
+    {
+        if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
+        {
+            string localized = LocalizationManager.Instance.GetText(key);
+            if (!string.IsNullOrEmpty(localized) && localized != key)
+                return localized;
+        }
+
+        if (!string.IsNullOrEmpty(fallback))
+            return fallback;
+
+        return key ?? "";
     }
 
     private CasinoSlotSymbol[] GetAllSymbols()
