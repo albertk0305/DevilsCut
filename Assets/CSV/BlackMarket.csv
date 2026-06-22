@@ -14,7 +14,7 @@ black_market_mammon_reroll_success,V.I.P. 고객님께는 더 많은 선택지�
 black_market_baito_reroll_success,재진열 완료입니다! 이번엔 마음에 드는 게 있을지도 몰라요!,Restock complete! Maybe you will find something you like this time!
 black_market_mammon_reroll_no_gold,더 많은 물건이 보고 싶다면 지갑도 더 열어주셔야죠!,If you want to see more goods then you will need to open your wallet wider!
 black_market_baito_reroll_no_gold,수수료가 조금 부족한 것 같아요!,It looks like you are a little short on the fee!
-black_market_purchase_item_format,{0}을 구매했다,Purchased {0}
+black_market_purchase_item_format,{0}을(를) 구매했다,Purchased {0}
 black_market_no_items_available,판매 가능한 상품이 없습니다.,No items available for sale.
 black_market_reroll_cost_format,재진열 비용: {0:N0},Restock fee: {0:N0}
 ,,

@@ -1,0 +1,28 @@
+Key,Korean,English
+restaurant_unlocked_intro,우리 가게 메뉴는 뭐든 맛있다구! 마음껏 골라봐!,Everything on our menu is delicious! Pick whatever you want!
+restaurant_locked_intro,주문 도와드리겠습니다!,I will take your order!
+restaurant_select_evolution_prompt,진화를 선택하자.,Select evolution.
+restaurant_no_candidate,더 이상 진화할 수 있는 스킬이 없다.,No more skills can be evolved.
+restaurant_reroll_failed,다른 진화 후보가 없다.,No other evolution candidates available.
+restaurant_apply_evolution_failed,진화를 적용할 수 없다.,Evolution cannot be applied.
+restaurant_unlocked_finish,배고프면 언제든지 또 오라구! 내가 든든히 먹여줄 테니까!,Come back anytime you are hungry! I will make sure you leave full!
+restaurant_locked_finish,맛있게 드셨나요? 다음에도 또 찾아주세요!,Did you enjoy your meal? Please come again next time!
+,,
+restaurant_menu_shoyu_ramen,쇼유라멘,Shoyu Ramen
+restaurant_menu_gyoza,교자,Gyoza
+restaurant_menu_tonkotsu_ramen,돈코츠라멘,Tonkotsu Ramen
+restaurant_menu_miso_ramen,미소라멘,Miso Ramen
+restaurant_menu_tantanmen,탄탄멘,Tantanmen
+restaurant_menu_sword_monologue,짭조름한 간장 맛이 국물에 잘 배었네. 이런 건 결국 기본기가 전부지.,The salty soy sauce flavor has soaked nicely into the broth. In the end this kind of dish is all about the basics.
+restaurant_menu_gun_monologue,겉은 바삭하고 속은 뜨겁네. 방심하면 혀가 먼저 당하겠어.,Crisp on the outside and hot inside. Let your guard down and your tongue takes the first hit.
+restaurant_menu_martial_monologue,진한 돼지뼈 국물이 입 안을 묵직하게 채우네. 배고플 때는 이런 게 정답이지.,The rich pork bone broth fills the mouth with weight. When you are hungry this is the right answer.
+restaurant_menu_magic_monologue,짠맛 뒤에 구수한 단맛이 남네. 이런 국물은 천천히 마셔야 제맛이지.,A savory sweetness lingers behind the salt. This kind of broth is best enjoyed slowly.
+restaurant_menu_oni_monologue_format,혀는 따가운데 젓가락은 멈추질 않네. 위험한 맛이라는 건 이런 거지.,My tongue stings but the chopsticks will not stop. This is what a dangerous flavor tastes like.
+,,
+restaurant_evolution_result_format,{0}이(가) {1}으로 진화했다.,{0} evolved into {1}.
+restaurant_exp_gain_format,EXP를 {0} 획득했다.,Gained {0} EXP.
+restaurant_no_candidate_exp_gain_format,진화할 스킬이 없다. 대신 경험치를 {0} 획득했다.,No skills available for evolution. Obtained {0} EXP instead.
+restaurant_facility_bonus_exp_gain_format,보너스로 경험치를 {0} 획득했다.,No skills available for evolution. Obtained {0} EXP instead.
+restaurant_level_up_header_format,레벨 업! Lv.{0} → Lv.{1},You have gained {0} bonus EXP.
+,,
+restaurant_default_menu_monologue_format,{0}을 먹었다.,Ate {0}.

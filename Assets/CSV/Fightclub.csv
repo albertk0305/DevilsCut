@@ -1,0 +1,22 @@
+Key,Korean,English
+btn_confirm,확인,Confirm
+gym_locked_intro,몸 좀 풀어두자. 세상은 늘 예고 없이 시비를 걸어오니까.,Let's loosen up. The world always picks fights without warning.
+gym_unlocked_intro,단련? 셰리 부탁이면 나 얼마든지 도와준다!,Training? If Sherry asks then I help as much as you want!
+gym_locked_outro,운동 끝. 이제 이 고생을 술로 씻어낼 시간이네.,Training done. Now it is time to wash this suffering down with a drink.
+gym_unlocked_outro,단련 필요하면 꼭 나한테 부탁한다! 다른 사람 말고!,If you need training then ask me! Not anyone else!
+gym_category_sword,검술,Swordsmanship
+gym_category_gun,사격술,Marksmanship
+gym_category_martial,무술,Martial Arts
+gym_category_magic,요술,Magic
+gym_category_oni,오니,Oni
+gym_category_sword_monologue,칼은 정직하지. 가까이 가야 베이고 가까이 가야 벤다.,A blade is honest. You must get close to be cut and close to cut back.
+gym_category_gun_monologue,방아쇠를 당긴다는 건 맞을 각오도 끝났다는 뜻이야.,Pulling the trigger means you are ready to be shot too.
+gym_category_martial_monologue,맨손 싸움은 귀찮아. 변명할 도구가 없거든.,Hand to hand fighting is a pain. There is no tool to blame.
+gym_category_magic_monologue,요술이라. 원리는 몰라도 편하면 됐지.,Magic huh. I do not need to know how it works if it makes things easier.
+gym_category_oni_monologue,아무것도 걸지 않으면 아무것도 얻을 수 없지.,"Nothing ventured, nothing gained."
+gym_category_improved_format,{0}실력이 향상되었다.,{0} skill increased.
+gym_category_maxed_format,{0}은 이미 충분히 단련되어 있다.,{0} is already fully mastered.
+gym_skill_level_up_format,{0}이(가) {1}레벨에서 {2} 레벨로 상승했습니다.,{0} has leveled up from Level {1} to Level {2}.
+gym_replacement_stat_gain_format,{0}이(가) {1}만큼 상승했습니다.,{0} increased by {1}.
+gym_rank_bonus_monologue,셰리의 움직임이 한층 날카로워졌다.,Sherry’s movements became noticeably sharper.
+gym_stat_gain_format,{0}이(가) {1}만큼 상승했습니다.,{0} increased by {1}.

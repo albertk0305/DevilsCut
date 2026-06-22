@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 [Serializable]
@@ -15,6 +16,7 @@ public class RestaurantMenuView
     public GameObject selectedHighlight;
     public TMP_Text nameText;
     public TMP_Text categoryText;
+    public string monologueTextKey;
     [TextArea] public string monologueText;
 }
 
@@ -46,6 +48,34 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
         public SkillEvolution evolution;
     }
 
+    private enum RestaurantMessageKind
+    {
+        None,
+        UnlockedIntro,
+        LockedIntro,
+        MenuMonologue,
+        SelectEvolutionPrompt,
+        EvolutionDescription,
+        RerollFailed,
+        ApplyEvolutionFailed,
+        NoCandidate,
+        EvolutionResult,
+        ExpGain,
+        NoCandidateExpGain,
+        FacilityBonusExpGain,
+        LevelUp,
+        Finish
+    }
+
+    private struct RestaurantMessageDescriptor
+    {
+        public RestaurantMessageKind kind;
+        public SkillCategory category;
+        public EvolutionCandidate candidate;
+        public int amount;
+        public LevelUpResult levelUpResult;
+    }
+
     [Header("Data")]
     [SerializeField] private FacilityData facilityData;
     [SerializeField] private BattleBalanceDatabase battleBalanceDatabase;
@@ -55,8 +85,12 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
     [SerializeField] private Sprite operatorHappySprite;
     [SerializeField] private Sprite baitoDefaultSprite;
     [SerializeField] private Sprite baitoHappySprite;
-    [SerializeField] private string operatorDisplayName = "바알제붑";
-    [SerializeField] private string baitoDisplayName = "바이토";
+    [SerializeField] private string operatorDisplayNameKey = "restaurant_speaker_baalzebub";
+    [SerializeField] private string baitoDisplayNameKey = "restaurant_speaker_baito";
+    [FormerlySerializedAs("operatorDisplayName")]
+    [SerializeField] private string operatorDisplayNameFallback = "바알제붑";
+    [FormerlySerializedAs("baitoDisplayName")]
+    [SerializeField] private string baitoDisplayNameFallback = "바이토";
 
     [Header("Dialogue UI")]
     [SerializeField] private Image characterImage;
@@ -75,12 +109,23 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
 
     [Header("Controls")]
     [SerializeField] private Button confirmButton;
+    [SerializeField] private TMP_Text confirmButtonText;
+    [SerializeField] private string confirmButtonTextKey = "";
+    [SerializeField] private string confirmButtonTextFallback = "Confirm";
     [SerializeField] private Button rankButton;
     [SerializeField] private Image rankButtonImage;
     [SerializeField] private FacilityRankBonusInfo rankBonusInfo;
     [SerializeField] private FacilityRankBonusPanelController rankBonusPanel;
 
     [Header("Dialogue Text")]
+    [SerializeField] private string unlockedIntroTextKey = "restaurant_unlocked_intro";
+    [SerializeField] private string lockedIntroTextKey = "restaurant_locked_intro";
+    [SerializeField] private string selectEvolutionPromptTextKey = "restaurant_select_evolution_prompt";
+    [SerializeField] private string noCandidateTextKey = "restaurant_no_candidate";
+    [SerializeField] private string rerollFailedTextKey = "restaurant_reroll_failed";
+    [SerializeField] private string applyEvolutionFailedTextKey = "restaurant_apply_evolution_failed";
+    [SerializeField] private string unlockedFinishTextKey = "restaurant_unlocked_finish";
+    [SerializeField] private string lockedFinishTextKey = "restaurant_locked_finish";
     [SerializeField] private string unlockedIntroText = "어서와! 메뉴는 뭘로 할래?";
     [SerializeField] private string lockedIntroText = "어서오세요! 뭘로 하실래요?";
     [SerializeField] private string selectEvolutionPromptText = "진화를 선택해 효과를 확인하자.";
@@ -91,6 +136,22 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
     [SerializeField] private string lockedFinishText = "감사합니다!";
 
     [Header("Menu Text")]
+    [SerializeField] private string shoyuRamenNameKey = "restaurant_menu_shoyu_ramen";
+    [SerializeField] private string gyozaNameKey = "restaurant_menu_gyoza";
+    [SerializeField] private string tonkotsuRamenNameKey = "restaurant_menu_tonkotsu_ramen";
+    [SerializeField] private string misoRamenNameKey = "restaurant_menu_miso_ramen";
+    [SerializeField] private string tantanmenNameKey = "restaurant_menu_tantanmen";
+    [SerializeField] private string swordCategoryTextKey = "restaurant_category_sword";
+    [SerializeField] private string gunCategoryTextKey = "restaurant_category_gun";
+    [SerializeField] private string martialCategoryTextKey = "restaurant_category_martial";
+    [SerializeField] private string magicCategoryTextKey = "restaurant_category_magic";
+    [SerializeField] private string oniCategoryTextKey = "restaurant_category_oni";
+    [SerializeField] private string swordMenuMonologueTextKey = "restaurant_menu_sword_monologue";
+    [SerializeField] private string gunMenuMonologueTextKey = "restaurant_menu_gun_monologue";
+    [SerializeField] private string martialMenuMonologueTextKey = "restaurant_menu_martial_monologue";
+    [SerializeField] private string magicMenuMonologueTextKey = "restaurant_menu_magic_monologue";
+    [SerializeField] private string oniMenuMonologueTextKey = "restaurant_menu_oni_monologue";
+    [SerializeField] private string defaultMenuMonologueFormatKey = "restaurant_default_menu_monologue_format";
     [SerializeField] private string shoyuRamenName = "쇼유라멘";
     [SerializeField] private string gyozaName = "교자";
     [SerializeField] private string tonkotsuRamenName = "돈코츠라멘";
@@ -104,6 +165,19 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
     [SerializeField] private string defaultMenuMonologueFormat = "{0}을 먹었다.";
 
     [Header("Result Text")]
+    [SerializeField] private string evolutionResultFormatKey = "restaurant_evolution_result_format";
+    [SerializeField] private string expGainFormatKey = "restaurant_exp_gain_format";
+    [SerializeField] private string noCandidateExpGainFormatKey = "restaurant_no_candidate_exp_gain_format";
+    [SerializeField] private string facilityBonusExpGainFormatKey = "restaurant_facility_bonus_exp_gain_format";
+    [SerializeField] private string levelUpHeaderFormatKey = "restaurant_level_up_header_format";
+    [SerializeField] private string hpStatNameKey = "stat_hp";
+    [SerializeField] private string maxBreakGaugeStatNameKey = "stat_max_break_gauge";
+    [SerializeField] private string breakResistanceStatNameKey = "stat_break_resistance";
+    [SerializeField] private string strengthShortStatNameKey = "stat_strength_short";
+    [SerializeField] private string defenseShortStatNameKey = "stat_defense_short";
+    [SerializeField] private string speedShortStatNameKey = "stat_speed_short";
+    [SerializeField] private string actionPointsShortStatNameKey = "stat_action_points_short";
+    [SerializeField] private string luckShortStatNameKey = "stat_luck_short";
     [SerializeField] private string evolutionResultFormat = "{0}이 {1}으로 진화했다.";
     [SerializeField] private string expGainFormat = "EXP를 {0} 획득했다.";
     [SerializeField] private string noCandidateExpGainFormat = "후보 없음 보상으로 EXP를 {0} 획득했다.";
@@ -114,6 +188,7 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
 
     private Coroutine typingCoroutine;
     private string currentMessage = "";
+    private RestaurantMessageDescriptor currentMessageDescriptor;
     private RestaurantState currentState;
     private SkillCategory selectedCategory = SkillCategory.None;
     private bool hasSelectedMenu;
@@ -123,7 +198,7 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
     private bool isOperatorResolved;
     private readonly List<EvolutionCandidate> candidatePool = new List<EvolutionCandidate>();
     private readonly List<EvolutionCandidate> displayedCandidates = new List<EvolutionCandidate>();
-    private readonly List<string> resultLines = new List<string>();
+    private readonly List<RestaurantMessageDescriptor> resultLines = new List<RestaurantMessageDescriptor>();
     private bool[] rerollUsed;
     private int selectedCandidateIndex = -1;
     private int resultLineIndex = -1;
@@ -132,15 +207,68 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
     {
         base.Start();
 
+        SubscribeLocalizationChanged();
         BindButtons();
         SetupInitialUI();
         ApplyCharacterView(false);
-        ShowMessage(isOperatorResolved ? unlockedIntroText : lockedIntroText, RestaurantState.Intro);
+        ShowMessage(new RestaurantMessageDescriptor { kind = isOperatorResolved ? RestaurantMessageKind.UnlockedIntro : RestaurantMessageKind.LockedIntro }, RestaurantState.Intro);
+    }
+
+    private void OnEnable()
+    {
+        SubscribeLocalizationChanged();
+    }
+
+    private void SubscribeLocalizationChanged()
+    {
+        if (LocalizationManager.Instance != null)
+        {
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+            LocalizationManager.Instance.OnLanguageChanged += OnLanguageChanged;
+        }
     }
 
     private void OnDisable()
     {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+
         StopTyping();
+    }
+
+    private void OnLanguageChanged()
+    {
+        RefreshLocalizedUI();
+    }
+
+    private void RefreshLocalizedUI()
+    {
+        RefreshMenuViews();
+        RefreshEvolutionChoiceViews();
+        RefreshConfirmButtonText();
+
+        bool wasTyping = isTyping;
+        bool wasIndicatorActive = textCompleteIndicator != null && textCompleteIndicator.activeSelf;
+        StopTyping();
+
+        ApplySpeakerForMessage(currentMessageDescriptor);
+
+        currentMessage = RebuildMessage(currentMessageDescriptor);
+
+        if (dialogueText != null)
+            dialogueText.text = currentMessage;
+
+        if (wasTyping)
+        {
+            isTextComplete = true;
+
+            if (textCompleteIndicator != null)
+                textCompleteIndicator.SetActive(true);
+        }
+        else if (textCompleteIndicator != null)
+        {
+            textCompleteIndicator.SetActive(wasIndicatorActive);
+        }
     }
 
     private void BindButtons()
@@ -229,6 +357,7 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
             confirmButton.interactable = false;
             confirmButton.gameObject.SetActive(false);
         }
+        RefreshConfirmButtonText();
 
         if (textCompleteIndicator != null)
             textCompleteIndicator.SetActive(false);
@@ -264,9 +393,32 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
 
         if (speakerNameText != null)
         {
-            speakerNameText.text = isOperatorResolved ? operatorDisplayName : baitoDisplayName;
+            speakerNameText.text = GetOperatorDisplayName();
             speakerNameText.gameObject.SetActive(true);
         }
+    }
+
+    private void ApplySpeakerForMessage(RestaurantMessageDescriptor descriptor)
+    {
+        if (speakerNameText == null)
+            return;
+
+        if (ShouldShowSpeakerName(descriptor.kind))
+        {
+            speakerNameText.text = GetOperatorDisplayName();
+            speakerNameText.gameObject.SetActive(true);
+            return;
+        }
+
+        speakerNameText.text = "";
+        speakerNameText.gameObject.SetActive(false);
+    }
+
+    private bool ShouldShowSpeakerName(RestaurantMessageKind kind)
+    {
+        return kind == RestaurantMessageKind.UnlockedIntro
+            || kind == RestaurantMessageKind.LockedIntro
+            || kind == RestaurantMessageKind.Finish;
     }
 
     private void ApplyRankButtonSprite()
@@ -329,6 +481,16 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
         }
     }
 
+    private void RefreshConfirmButtonText()
+    {
+        TMP_Text targetText = confirmButtonText;
+        if (targetText == null && confirmButton != null)
+            targetText = confirmButton.GetComponentInChildren<TMP_Text>(true);
+
+        if (targetText != null)
+            targetText.text = GetLocalizedText(confirmButtonTextKey, confirmButtonTextFallback);
+    }
+
     private void ClearMenuSelection()
     {
         if (menuViews == null)
@@ -355,13 +517,16 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
         }
     }
 
-    private void ShowMessage(string message, RestaurantState nextState)
+    private void ShowMessage(RestaurantMessageDescriptor message, RestaurantState nextState)
     {
         StopTyping();
 
         currentState = nextState;
-        currentMessage = message ?? "";
+        currentMessageDescriptor = message;
+        currentMessage = RebuildMessage(message);
         isTextComplete = false;
+
+        ApplySpeakerForMessage(message);
 
         if (textCompleteIndicator != null)
             textCompleteIndicator.SetActive(false);
@@ -465,6 +630,7 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
             confirmButton.gameObject.SetActive(true);
             confirmButton.interactable = false;
         }
+        RefreshConfirmButtonText();
 
         if (textCompleteIndicator != null)
             textCompleteIndicator.SetActive(false);
@@ -523,7 +689,11 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
             confirmButton.gameObject.SetActive(false);
         }
 
-        ShowMessage(GetMenuMonologueText(selectedCategory), RestaurantState.MenuMonologue);
+        ShowMessage(new RestaurantMessageDescriptor
+        {
+            kind = RestaurantMessageKind.MenuMonologue,
+            category = selectedCategory
+        }, RestaurantState.MenuMonologue);
     }
 
     private void BeginEvolutionFlow()
@@ -538,7 +708,7 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
 
         PickInitialDisplayedCandidates();
         ShowEvolutionChoices();
-        ShowMessage(selectEvolutionPromptText, RestaurantState.WaitingEvolutionSelection);
+        ShowMessage(new RestaurantMessageDescriptor { kind = RestaurantMessageKind.SelectEvolutionPrompt }, RestaurantState.WaitingEvolutionSelection);
     }
 
     private void BuildCandidatePool(SkillCategory category)
@@ -586,6 +756,7 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
             confirmButton.gameObject.SetActive(true);
             confirmButton.interactable = false;
         }
+        RefreshConfirmButtonText();
 
         RefreshEvolutionChoiceViews();
         ClearEvolutionSelection();
@@ -613,10 +784,10 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
             EvolutionCandidate candidate = displayedCandidates[i];
 
             if (choiceView.skillNameText != null)
-                choiceView.skillNameText.text = GetLocalizedText(candidate.skill.skillNameKey);
+                choiceView.skillNameText.text = GetLocalizedText(candidate.skill.skillNameKey, candidate.skill.skillNameKey);
 
             if (choiceView.evolutionNameText != null)
-                choiceView.evolutionNameText.text = GetLocalizedText(GetEvolutionNameKey(candidate.skill, candidate.evolution));
+                choiceView.evolutionNameText.text = GetLocalizedText(GetEvolutionNameKey(candidate.skill, candidate.evolution), GetEvolutionNameKey(candidate.skill, candidate.evolution));
 
             if (choiceView.skillButton != null)
                 choiceView.skillButton.interactable = true;
@@ -661,7 +832,11 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
             confirmButton.interactable = true;
 
         EvolutionCandidate candidate = displayedCandidates[slotIndex];
-        ShowMessage(GetLocalizedText(GetEvolutionDescKey(candidate.skill, candidate.evolution)), RestaurantState.WaitingEvolutionSelection);
+        ShowMessage(new RestaurantMessageDescriptor
+        {
+            kind = RestaurantMessageKind.EvolutionDescription,
+            candidate = candidate
+        }, RestaurantState.WaitingEvolutionSelection);
     }
 
     private void OnClickReroll(int slotIndex)
@@ -676,7 +851,7 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
         if (candidates.Count <= 0)
         {
             DisableRerollButton(slotIndex);
-            ShowMessage(rerollFailedText, RestaurantState.WaitingEvolutionSelection);
+            ShowMessage(new RestaurantMessageDescriptor { kind = RestaurantMessageKind.RerollFailed }, RestaurantState.WaitingEvolutionSelection);
             return;
         }
 
@@ -690,7 +865,7 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
         if (confirmButton != null)
             confirmButton.interactable = false;
 
-        ShowMessage(selectEvolutionPromptText, RestaurantState.WaitingEvolutionSelection);
+        ShowMessage(new RestaurantMessageDescriptor { kind = RestaurantMessageKind.SelectEvolutionPrompt }, RestaurantState.WaitingEvolutionSelection);
     }
 
     private List<EvolutionCandidate> FindRerollCandidates(int slotIndex)
@@ -765,7 +940,7 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
             if (confirmButton != null)
                 confirmButton.interactable = false;
 
-            ShowMessage(applyEvolutionFailedText, RestaurantState.WaitingEvolutionSelection);
+            ShowMessage(new RestaurantMessageDescriptor { kind = RestaurantMessageKind.ApplyEvolutionFailed }, RestaurantState.WaitingEvolutionSelection);
             return;
         }
 
@@ -866,41 +1041,40 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
     private void BuildEvolutionResultLines(EvolutionCandidate candidate, int expAmount, LevelUpResult levelUpResult)
     {
         resultLines.Clear();
-        resultLines.Add(string.Format(
-            evolutionResultFormat,
-            GetLocalizedText(candidate.skill.skillNameKey),
-            GetLocalizedText(GetEvolutionNameKey(candidate.skill, candidate.evolution))));
+        resultLines.Add(new RestaurantMessageDescriptor
+        {
+            kind = RestaurantMessageKind.EvolutionResult,
+            candidate = candidate
+        });
 
         AddExpAndLevelUpResultLines(expAmount, levelUpResult);
-        resultLines.Add(GetFinishText());
+        resultLines.Add(new RestaurantMessageDescriptor { kind = RestaurantMessageKind.Finish });
     }
 
     private void BuildNoCandidateResultLines(int noCandidateExp, int facilityBonusExp, LevelUpResult levelUpResult)
     {
         resultLines.Clear();
-        resultLines.Add(noCandidateText);
+        resultLines.Add(new RestaurantMessageDescriptor { kind = RestaurantMessageKind.NoCandidate });
 
         if (noCandidateExp > 0)
-            resultLines.Add(string.Format(noCandidateExpGainFormat, noCandidateExp));
+            resultLines.Add(new RestaurantMessageDescriptor { kind = RestaurantMessageKind.NoCandidateExpGain, amount = noCandidateExp });
 
         if (facilityBonusExp > 0)
-            resultLines.Add(string.Format(facilityBonusExpGainFormat, facilityBonusExp));
+            resultLines.Add(new RestaurantMessageDescriptor { kind = RestaurantMessageKind.FacilityBonusExpGain, amount = facilityBonusExp });
 
-        string levelUpMessage = BuildLevelUpMessage(levelUpResult);
-        if (!string.IsNullOrEmpty(levelUpMessage))
-            resultLines.Add(levelUpMessage);
+        if (levelUpResult != null && levelUpResult.HasLevelUp)
+            resultLines.Add(new RestaurantMessageDescriptor { kind = RestaurantMessageKind.LevelUp, levelUpResult = levelUpResult });
 
-        resultLines.Add(GetFinishText());
+        resultLines.Add(new RestaurantMessageDescriptor { kind = RestaurantMessageKind.Finish });
     }
 
     private void AddExpAndLevelUpResultLines(int expAmount, LevelUpResult levelUpResult)
     {
         if (expAmount > 0)
-            resultLines.Add(string.Format(expGainFormat, expAmount));
+            resultLines.Add(new RestaurantMessageDescriptor { kind = RestaurantMessageKind.ExpGain, amount = expAmount });
 
-        string levelUpMessage = BuildLevelUpMessage(levelUpResult);
-        if (!string.IsNullOrEmpty(levelUpMessage))
-            resultLines.Add(levelUpMessage);
+        if (levelUpResult != null && levelUpResult.HasLevelUp)
+            resultLines.Add(new RestaurantMessageDescriptor { kind = RestaurantMessageKind.LevelUp, levelUpResult = levelUpResult });
     }
 
     private void BeginResultSequence()
@@ -933,11 +1107,22 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
         StringBuilder builder = new StringBuilder();
         StatGrowthSummary growth = levelUp.totalGrowth;
 
-        builder.AppendLine($"Level Up! Lv.{levelUp.oldLevel} \u2192 Lv.{levelUp.newLevel}");
+        builder.AppendLine(FormatLocalizedText(levelUpHeaderFormatKey, "Level Up! Lv.{0} \u2192 Lv.{1}", levelUp.oldLevel, levelUp.newLevel));
 
-        AppendGrowthLine(builder, ("HP", growth.maxHp), ("Max Break Gauge", growth.maxBreakGauge), ("Break Resistance", growth.breakResistance));
-        AppendGrowthLine(builder, ("STR", growth.strength), ("DEF", growth.defense), ("SPD", growth.speed));
-        AppendGrowthLine(builder, ("AP", growth.actionPoints), ("LUCK", growth.luck));
+        AppendGrowthLine(
+            builder,
+            (GetLocalizedText(hpStatNameKey, "HP"), growth.maxHp),
+            (GetLocalizedText(maxBreakGaugeStatNameKey, "Max Break Gauge"), growth.maxBreakGauge),
+            (GetLocalizedText(breakResistanceStatNameKey, "Break Resistance"), growth.breakResistance));
+        AppendGrowthLine(
+            builder,
+            (GetLocalizedText(strengthShortStatNameKey, "STR"), growth.strength),
+            (GetLocalizedText(defenseShortStatNameKey, "DEF"), growth.defense),
+            (GetLocalizedText(speedShortStatNameKey, "SPD"), growth.speed));
+        AppendGrowthLine(
+            builder,
+            (GetLocalizedText(actionPointsShortStatNameKey, "AP"), growth.actionPoints),
+            (GetLocalizedText(luckShortStatNameKey, "LUCK"), growth.luck));
 
         return builder.ToString().TrimEnd();
     }
@@ -965,10 +1150,21 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
     private string GetMenuMonologueText(SkillCategory category)
     {
         RestaurantMenuView menuView = GetMenuView(category);
+        if (menuView != null)
+        {
+            string menuViewText = GetLocalizedText(menuView.monologueTextKey, "");
+            if (!string.IsNullOrEmpty(menuViewText))
+                return menuViewText;
+        }
+
+        string categoryText = GetLocalizedText(GetMenuMonologueKey(category), "");
+        if (!string.IsNullOrEmpty(categoryText))
+            return categoryText;
+
         if (menuView != null && !string.IsNullOrEmpty(menuView.monologueText))
             return menuView.monologueText;
 
-        return string.Format(defaultMenuMonologueFormat, GetMenuName(category));
+        return FormatLocalizedText(defaultMenuMonologueFormatKey, defaultMenuMonologueFormat, GetMenuName(category));
     }
 
     private RestaurantMenuView GetMenuView(SkillCategory category)
@@ -990,15 +1186,15 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
         switch (category)
         {
             case SkillCategory.Gun:
-                return gyozaName;
+                return GetLocalizedText(gyozaNameKey, gyozaName);
             case SkillCategory.Martial:
-                return tonkotsuRamenName;
+                return GetLocalizedText(tonkotsuRamenNameKey, tonkotsuRamenName);
             case SkillCategory.Magic:
-                return misoRamenName;
+                return GetLocalizedText(misoRamenNameKey, misoRamenName);
             case SkillCategory.Oni:
-                return tantanmenName;
+                return GetLocalizedText(tantanmenNameKey, tantanmenName);
             default:
-                return shoyuRamenName;
+                return GetLocalizedText(shoyuRamenNameKey, shoyuRamenName);
         }
     }
 
@@ -1007,15 +1203,75 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
         switch (category)
         {
             case SkillCategory.Gun:
-                return gunCategoryText;
+                return GetLocalizedText(gunCategoryTextKey, gunCategoryText);
             case SkillCategory.Martial:
-                return martialCategoryText;
+                return GetLocalizedText(martialCategoryTextKey, martialCategoryText);
             case SkillCategory.Magic:
-                return magicCategoryText;
+                return GetLocalizedText(magicCategoryTextKey, magicCategoryText);
             case SkillCategory.Oni:
-                return oniCategoryText;
+                return GetLocalizedText(oniCategoryTextKey, oniCategoryText);
             default:
-                return swordCategoryText;
+                return GetLocalizedText(swordCategoryTextKey, swordCategoryText);
+        }
+    }
+
+    private string GetMenuMonologueKey(SkillCategory category)
+    {
+        switch (category)
+        {
+            case SkillCategory.Gun:
+                return gunMenuMonologueTextKey;
+            case SkillCategory.Martial:
+                return martialMenuMonologueTextKey;
+            case SkillCategory.Magic:
+                return magicMenuMonologueTextKey;
+            case SkillCategory.Oni:
+                return oniMenuMonologueTextKey;
+            default:
+                return swordMenuMonologueTextKey;
+        }
+    }
+
+    private string RebuildMessage(RestaurantMessageDescriptor descriptor)
+    {
+        switch (descriptor.kind)
+        {
+            case RestaurantMessageKind.UnlockedIntro:
+                return GetLocalizedText(unlockedIntroTextKey, unlockedIntroText);
+            case RestaurantMessageKind.LockedIntro:
+                return GetLocalizedText(lockedIntroTextKey, lockedIntroText);
+            case RestaurantMessageKind.MenuMonologue:
+                return GetMenuMonologueText(descriptor.category);
+            case RestaurantMessageKind.SelectEvolutionPrompt:
+                return GetLocalizedText(selectEvolutionPromptTextKey, selectEvolutionPromptText);
+            case RestaurantMessageKind.EvolutionDescription:
+                return GetLocalizedText(GetEvolutionDescKey(descriptor.candidate.skill, descriptor.candidate.evolution), GetEvolutionDescKey(descriptor.candidate.skill, descriptor.candidate.evolution));
+            case RestaurantMessageKind.RerollFailed:
+                return GetLocalizedText(rerollFailedTextKey, rerollFailedText);
+            case RestaurantMessageKind.ApplyEvolutionFailed:
+                return GetLocalizedText(applyEvolutionFailedTextKey, applyEvolutionFailedText);
+            case RestaurantMessageKind.NoCandidate:
+                return GetLocalizedText(noCandidateTextKey, noCandidateText);
+            case RestaurantMessageKind.EvolutionResult:
+                return FormatLocalizedText(
+                    evolutionResultFormatKey,
+                    evolutionResultFormat,
+                    GetLocalizedText(descriptor.candidate.skill != null ? descriptor.candidate.skill.skillNameKey : null, descriptor.candidate.skill != null ? descriptor.candidate.skill.skillNameKey : ""),
+                    GetLocalizedText(GetEvolutionNameKey(descriptor.candidate.skill, descriptor.candidate.evolution), GetEvolutionNameKey(descriptor.candidate.skill, descriptor.candidate.evolution)));
+            case RestaurantMessageKind.ExpGain:
+                return FormatLocalizedText(expGainFormatKey, expGainFormat, descriptor.amount);
+            case RestaurantMessageKind.NoCandidateExpGain:
+                return FormatLocalizedText(noCandidateExpGainFormatKey, noCandidateExpGainFormat, descriptor.amount);
+            case RestaurantMessageKind.FacilityBonusExpGain:
+                return FormatLocalizedText(facilityBonusExpGainFormatKey, facilityBonusExpGainFormat, descriptor.amount);
+            case RestaurantMessageKind.LevelUp:
+                return BuildLevelUpMessage(descriptor.levelUpResult);
+            case RestaurantMessageKind.Finish:
+                return isOperatorResolved
+                    ? GetLocalizedText(unlockedFinishTextKey, unlockedFinishText)
+                    : GetLocalizedText(lockedFinishTextKey, lockedFinishText);
+            default:
+                return currentMessage;
         }
     }
 
@@ -1055,14 +1311,46 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
         }
     }
 
-    private string GetLocalizedText(string key)
+    private string GetLocalizedText(string key, string fallback)
     {
-        return LocalizationManager.Instance != null ? LocalizationManager.Instance.GetText(key) : key;
+        if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
+        {
+            string localized = LocalizationManager.Instance.GetText(key);
+            if (!string.IsNullOrEmpty(localized) && localized != key)
+                return localized;
+        }
+
+        if (!string.IsNullOrEmpty(fallback))
+            return fallback;
+
+        return key ?? "";
     }
 
-    private string GetFinishText()
+    private string FormatLocalizedText(string key, string fallback, params object[] args)
     {
-        return isOperatorResolved ? unlockedFinishText : lockedFinishText;
+        string format = GetLocalizedText(key, fallback);
+        try
+        {
+            return string.Format(format, args);
+        }
+        catch (FormatException)
+        {
+            try
+            {
+                return string.Format(fallback, args);
+            }
+            catch (FormatException)
+            {
+                return fallback ?? "";
+            }
+        }
+    }
+
+    private string GetOperatorDisplayName()
+    {
+        return isOperatorResolved
+            ? GetLocalizedText(operatorDisplayNameKey, operatorDisplayNameFallback)
+            : GetLocalizedText(baitoDisplayNameKey, baitoDisplayNameFallback);
     }
 
     private void OnClickRankButton()

@@ -1,0 +1,20 @@
+Key,Korean,English
+live_house_locked_intro,라이브하우스 안쪽에서 공연의 열기가 새어 나오고 있다.,The heat of a performance spills out from inside the live house.
+live_house_unlocked_intro,무대 위의 레비아탄은 평소보다 훨씬 빛나 보인다.,On stage Leviathan looks far brighter than usual.
+live_house_choose_action,음악의 열기가 셰리를 천천히 휘감는다.,The heat of the music slowly wraps around Sherry.
+live_house_locked_finish,음악은 끝났지만 열기는 남아 있었다. 셰리는 그 잔향을 뒤로하고 발걸음을 옮겼다.,The music had ended but the heat remained. Sherry left its echoes behind and moved on.
+live_house_unlocked_finish,셰리 님... 오늘 레비아탄의 공연은 만족스러우셨나요? 부디 셰리 님의 기억에 영원히 남았으면 좋겠습니다...,Lady Sherry... Was Leviathan's performance satisfying today? I hope it remains in your memory forever...
+live_house_action_shout,구호를 외친다,Shout out the chants
+live_house_action_wotagei,안무를 따라 춘다,Follow the dance moves
+live_house_action_cyalume,응원봉을 흔든다,Wave the lightstick
+live_house_action_toast,노래를 따라 부른다,Sing along to the song
+live_house_action_shout_monologue,다 같이 소리 지르는 것도 나름 화력은 있네.,Everyone shouting together has its own kind of firepower.
+live_house_action_wotagei_monologue,이 움직임... 전투 회피보다 더 어려운 것 같은데.,These moves... might be harder than dodging in battle.
+live_house_action_cyalume_monologue,방아쇠 대신 응원봉이라. 오늘 밤도 이상하게 흘러가네.,A lightstick instead of a trigger. Tonight keeps getting stranger.
+live_house_action_toast_monologue,총성보다 덜 날카롭고 침묵보다 덜 차갑네. 나쁘지 않아.,Less sharp than gunfire and less cold than silence. Not bad.
+live_house_hp_gain_format,최대 체력이 {0} 상승했다.,Max HP increased by {0}.
+live_house_break_resistance_gain_format,브레이크 저항이 {0} 상승했다.,Break Resistance increased by {0}.
+live_house_action_point_gain_format,행동력이 {0} 상승했다.,Action Points increased by {0}.
+live_house_max_break_gauge_gain_format,브레이크 게이지가 {0} 상승했다.,Break Gauge increased by {0}.
+live_house_support_bonus_header,달아오르는 공연 분위기에 휩싸여 셰리의 감각이 한층 깨어났다.,Swept up in the heated performance Sherry's senses awakened even further.
+live_house_encore_gain_prefix,꺼지지 않는 함성이 무대를 다시 불러냈다. 앙코르가 시작된다!,The cheers refused to fade and called the stage back. The encore begins!

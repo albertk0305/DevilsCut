@@ -2939,7 +2939,8 @@ MonoBehaviour:
   facilityData: {fileID: 11400000, guid: ae87c6288b1c73641a112a04f2c64307, type: 2}
   leviathanDefaultSprite: {fileID: 21300000, guid: ef12907a59b06424b8bacdcbcd229534, type: 3}
   leviathanHappySprite: {fileID: 21300000, guid: 856ee14d7696f0846a2e0ba058841b34, type: 3}
-  leviathanDisplayName: "\uB808\uBE44\uC544\uD0C4"
+  leviathanDisplayNameKey: leviathan
+  leviathanDisplayNameFallback: Leviathan
   characterImage: {fileID: 649209665}
   speakerNameText: {fileID: 1373431097}
   dialogueText: {fileID: 1454890088}
@@ -2952,47 +2953,77 @@ MonoBehaviour:
     button: {fileID: 226539253}
     labelText: {fileID: 1698207399}
     selectedHighlight: {fileID: 526133722}
+    monologueTextKey: 
     monologueText: "\uD568\uC131\uC744 \uC9C8\uB800\uB2E4"
   - actionType: 1
     root: {fileID: 852122509}
     button: {fileID: 1819317263}
     labelText: {fileID: 1527875217}
     selectedHighlight: {fileID: 1988925513}
+    monologueTextKey: 
     monologueText: "\uC624\uD0C0\uAC8C\uB97C \uCDC4\uB2E4"
   - actionType: 2
     root: {fileID: 545034186}
     button: {fileID: 1248835377}
     labelText: {fileID: 1065911235}
     selectedHighlight: {fileID: 1646206781}
+    monologueTextKey: 
     monologueText: "\uC751\uC6D0\uBD09\uC744 \uD754\uB4E4\uC5C8\uB2E4"
   - actionType: 3
     root: {fileID: 151610649}
     button: {fileID: 195019184}
     labelText: {fileID: 49715243}
     selectedHighlight: {fileID: 43342262}
+    monologueTextKey: 
     monologueText: "\uAC74\uBC30\uD588\uB2E4"
   confirmButton: {fileID: 2144002858}
+  confirmButtonText: {fileID: 455080255}
+  confirmButtonTextKey: btn_confirm
+  confirmButtonTextFallback: Confirm
   rankButton: {fileID: 1722218316}
   rankButtonImage: {fileID: 1722218317}
   rankBonusInfo: {fileID: 11400000, guid: f3bcc0301201b2241b537419118d659d, type: 2}
   rankBonusPanel: {fileID: 91833046}
-  lockedIntroText: "\uACF5\uC5F0\uC774 \uC9C4\uD589\uC911\uC774\uB2E4."
-  unlockedIntroText: "\uB808\uBE44\uC544\uD0C4\uC774 \uACF5\uC5F0\uD558\uB294 \uC911\uC774\uB2E4."
-  chooseActionText: "\uBB34\uC2A8 \uD589\uB3D9\uC744 \uD560\uAE4C?"
-  lockedFinishText: "\uACF5\uC5F0\uC774 \uB05D\uB0AC\uB2E4. \uB3CC\uC544\uAC00\uC790."
-  unlockedFinishText: "\uC640\uC918\uC11C \uACE0\uB9C8\uC6CC!"
-  shoutActionName: "\uD568\uC131\uC744 \uC9C0\uB978\uB2E4"
-  wotageiActionName: "\uC624\uD0C0\uAC8C\uB97C \uCD98\uB2E4"
-  cyalumeActionName: "\uC751\uC6D0\uBD09\uC744 \uD754\uB4E0\uB2E4"
-  toastActionName: "\uAC74\uBC30\uD55C\uB2E4"
+  lockedIntroTextKey: live_house_locked_intro
+  unlockedIntroTextKey: live_house_unlocked_intro
+  chooseActionTextKey: live_house_choose_action
+  lockedFinishTextKey: live_house_locked_finish
+  unlockedFinishTextKey: live_house_unlocked_finish
+  lockedIntroText: The heat of a performance spills out from inside the live house.
+  unlockedIntroText: On stage Leviathan looks far brighter than usual.
+  chooseActionText: The heat of the music slowly wraps around Sherry.
+  lockedFinishText: The music had ended but the heat remained. Sherry left its echoes
+    behind and moved on.
+  unlockedFinishText: Lady Sherry... Was Leviathan's performance satisfying today?
+    I hope it remains in your memory forever...
+  shoutActionNameKey: live_house_action_shout
+  wotageiActionNameKey: live_house_action_wotagei
+  cyalumeActionNameKey: live_house_action_cyalume
+  toastActionNameKey: live_house_action_toast
+  shoutMonologueTextKey: live_house_action_shout_monologue
+  wotageiMonologueTextKey: live_house_action_wotagei_monologue
+  cyalumeMonologueTextKey: live_house_action_cyalume_monologue
+  toastMonologueTextKey: live_house_action_toast_monologue
+  defaultMonologueFormatKey: '{0}.'
+  shoutActionName: Shout out the chants
+  wotageiActionName: Follow the dance moves
+  cyalumeActionName: Wave the lightstick
+  toastActionName: Sing along to the song
   defaultMonologueFormat: '{0}.'
-  hpGainFormat: "\uCD5C\uB300 HP\uAC00 {0} \uC0C1\uC2B9\uD588\uB2E4."
-  breakResistanceGainFormat: "Break Resistance\uAC00 {0} \uC0C1\uC2B9\uD588\uB2E4."
-  actionPointGainFormat: "AP\uAC00 {0} \uC0C1\uC2B9\uD588\uB2E4."
-  maxBreakGaugeGainFormat: "Max Break Gauge\uAC00 {0} \uC0C1\uC2B9\uD588\uB2E4."
-  supportBonusHeaderText: "\uACF5\uC5F0\uC758 \uC5F4\uAE30\uB85C \uC120\uD0DD\uD558\uC9C0
-    \uC54A\uC740 \uB2A5\uB825\uB3C4 \uC870\uAE08 \uC131\uC7A5\uD588\uB2E4."
-  encoreGainPrefix: "\uC559\uCF54\uB974 \uBC1C\uB3D9! "
+  hpGainFormatKey: live_house_hp_gain_format
+  breakResistanceGainFormatKey: live_house_break_resistance_gain_format
+  actionPointGainFormatKey: live_house_action_point_gain_format
+  maxBreakGaugeGainFormatKey: live_house_max_break_gauge_gain_format
+  supportBonusHeaderTextKey: live_house_support_bonus_header
+  encoreGainPrefixKey: live_house_encore_gain_prefix
+  hpGainFormat: Max HP increased by {0}.
+  breakResistanceGainFormat: Break Resistance increased by {0}.
+  actionPointGainFormat: Action Points increased by {0}.
+  maxBreakGaugeGainFormat: Break Gauge increased by {0}.
+  supportBonusHeaderText: Swept up in the heated performance Sherry's senses awakened
+    even further.
+  encoreGainPrefix: The cheers refused to fade and called the stage back. The encore
+    begins!
   typeInterval: 0.03
 --- !u!1 &839233506
 GameObject:
@@ -4474,9 +4505,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298b138403b54849b811d2c59fab45e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
+  bgmPlaylist: []
   bgmClip: {fileID: 8300000, guid: 544cf5b6aadd40b45b2d023b5c11cdfb, type: 3}
   fadeTime: 1
-  stopBgmIfClipIsEmpty: 0
+  stopBgmIfEmpty: 0
 --- !u!4 &1591659578
 Transform:
   m_ObjectHideFlags: 0

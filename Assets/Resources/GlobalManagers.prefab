@@ -60,6 +60,10 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 1582a3da35084c54bb470072266da4db, type: 3}
   - {fileID: 4900000, guid: 4ff19d5126b742a1a893d76d83d16c3b, type: 3}
   - {fileID: 4900000, guid: 7cbf0156b8d741a68a32cc01a675e51d, type: 3}
+  - {fileID: 4900000, guid: 3cb751e013a47414c97ccb3916ba9cf8, type: 3}
+  - {fileID: 4900000, guid: a52001c9d11f8724b96313e6e646f1a6, type: 3}
+  - {fileID: 4900000, guid: aab31fbcfda4bda4ba7ab739655385bc, type: 3}
+  - {fileID: 4900000, guid: 5e99a6eda9056204887c07bf94ee320c, type: 3}
   currentLanguage: 0
 --- !u!114 &2952436123089374904
 MonoBehaviour:
@@ -112,25 +116,23 @@ MonoBehaviour:
     bonusAccuracy: 0
     bonusEvasion: 0
     healingReceivedAmp: 0
-  unlockedSupporters:
-  - {fileID: 11400000, guid: 8f7a108444158544399cf83ab876c34c, type: 2}
-  - {fileID: 11400000, guid: 9725619daf76abb45848508807a510f2, type: 2}
+  unlockedSupporters: []
   supporterChoiceRecords:
   - supporterID: asmodeus
-    state: 1
+    state: 0
   - supporterID: lucifer
     state: 0
   - supporterID: baalzebub
-    state: 1
+    state: 0
   - supporterID: belphegor
-    state: 1
+    state: 0
   - supporterID: mammon
     state: 0
   - supporterID: satan
     state: 0
   - supporterID: leviathan
     state: 0
-  activeSupporter: {fileID: 11400000, guid: 8f7a108444158544399cf83ab876c34c, type: 2}
+  activeSupporter: {fileID: 0}
   supporterDatabase: {fileID: 11400000, guid: 51dd2413502c8f641a2cacd0d2de3478, type: 2}
   ownedKarinItems:
   - {fileID: 11400000, guid: 1f62c13dc91f5f34e8003534a0fe132f, type: 2}

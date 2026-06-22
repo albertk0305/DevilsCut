@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public enum LiveHouseActionType
@@ -21,6 +22,7 @@ public class LiveHouseActionView
     public Button button;
     public TMP_Text labelText;
     public GameObject selectedHighlight;
+    public string monologueTextKey;
     [TextArea] public string monologueText;
 }
 
@@ -32,6 +34,28 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
         ChooseIntro,
         SelectingAction,
         Result
+    }
+
+    private enum LiveHouseMessageKind
+    {
+        None,
+        LockedIntro,
+        UnlockedIntro,
+        ChooseAction,
+        ActionMonologue,
+        SelectedGain,
+        SupportBonus,
+        LockedFinish,
+        UnlockedFinish
+    }
+
+    private struct LiveHouseMessageDescriptor
+    {
+        public LiveHouseMessageKind kind;
+        public LiveHouseActionType actionType;
+        public float amount;
+        public bool encoreTriggered;
+        public List<LiveHouseActionGain> supportGains;
     }
 
     private struct LiveHouseActionGain
@@ -55,7 +79,9 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
     [Header("Leviathan")]
     [SerializeField] private Sprite leviathanDefaultSprite;
     [SerializeField] private Sprite leviathanHappySprite;
-    [SerializeField] private string leviathanDisplayName = "레비아탄";
+    [SerializeField] private string leviathanDisplayNameKey = "live_house_speaker_leviathan";
+    [FormerlySerializedAs("leviathanDisplayName")]
+    [SerializeField] private string leviathanDisplayNameFallback = "레비아탄";
 
     [Header("Dialogue UI")]
     [SerializeField] private Image characterImage;
@@ -68,6 +94,9 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
     [SerializeField] private GameObject actionsRoot;
     [SerializeField] private LiveHouseActionView[] actionViews;
     [SerializeField] private Button confirmButton;
+    [SerializeField] private TMP_Text confirmButtonText;
+    [SerializeField] private string confirmButtonTextKey = "";
+    [SerializeField] private string confirmButtonTextFallback = "Confirm";
 
     [Header("Rank Bonus")]
     [SerializeField] private Button rankButton;
@@ -76,6 +105,11 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
     [SerializeField] private FacilityRankBonusPanelController rankBonusPanel;
 
     [Header("Dialogue Text")]
+    [SerializeField] private string lockedIntroTextKey = "live_house_locked_intro";
+    [SerializeField] private string unlockedIntroTextKey = "live_house_unlocked_intro";
+    [SerializeField] private string chooseActionTextKey = "live_house_choose_action";
+    [SerializeField] private string lockedFinishTextKey = "live_house_locked_finish";
+    [SerializeField] private string unlockedFinishTextKey = "live_house_unlocked_finish";
     [SerializeField] private string lockedIntroText = "공연이 진행중이다.";
     [SerializeField] private string unlockedIntroText = "레비아탄이 공연하는 중이다.";
     [SerializeField] private string chooseActionText = "무슨 행동을 할까?";
@@ -83,6 +117,15 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
     [SerializeField] private string unlockedFinishText = "와줘서 고마워!";
 
     [Header("Action Text")]
+    [SerializeField] private string shoutActionNameKey = "live_house_action_shout";
+    [SerializeField] private string wotageiActionNameKey = "live_house_action_wotagei";
+    [SerializeField] private string cyalumeActionNameKey = "live_house_action_cyalume";
+    [SerializeField] private string toastActionNameKey = "live_house_action_toast";
+    [SerializeField] private string shoutMonologueTextKey = "live_house_action_shout_monologue";
+    [SerializeField] private string wotageiMonologueTextKey = "live_house_action_wotagei_monologue";
+    [SerializeField] private string cyalumeMonologueTextKey = "live_house_action_cyalume_monologue";
+    [SerializeField] private string toastMonologueTextKey = "live_house_action_toast_monologue";
+    [SerializeField] private string defaultMonologueFormatKey = "";
     [SerializeField] private string shoutActionName = "함성을 지른다";
     [SerializeField] private string wotageiActionName = "오타게를 춘다";
     [SerializeField] private string cyalumeActionName = "응원봉을 흔든다";
@@ -90,6 +133,12 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
     [SerializeField] private string defaultMonologueFormat = "{0}.";
 
     [Header("Result Text")]
+    [SerializeField] private string hpGainFormatKey = "live_house_hp_gain_format";
+    [SerializeField] private string breakResistanceGainFormatKey = "live_house_break_resistance_gain_format";
+    [SerializeField] private string actionPointGainFormatKey = "live_house_action_point_gain_format";
+    [SerializeField] private string maxBreakGaugeGainFormatKey = "live_house_max_break_gauge_gain_format";
+    [SerializeField] private string supportBonusHeaderTextKey = "live_house_support_bonus_header";
+    [SerializeField] private string encoreGainPrefixKey = "live_house_encore_gain_prefix";
     [SerializeField] private string hpGainFormat = "최대 HP가 {0} 상승했다.";
     [SerializeField] private string breakResistanceGainFormat = "Break Resistance가 {0} 상승했다.";
     [SerializeField] private string actionPointGainFormat = "AP가 {0} 상승했다.";
@@ -102,6 +151,7 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
 
     private Coroutine typingCoroutine;
     private string currentMessage = "";
+    private LiveHouseMessageDescriptor currentMessageDescriptor;
     private LiveHouseState currentState;
     private LiveHouseActionType selectedAction;
     private bool hasSelectedAction;
@@ -109,22 +159,77 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
     private bool isTyping;
     private bool isTextComplete;
     private bool isLeviathanResolved;
-    private readonly List<string> resultLines = new List<string>();
+    private readonly List<LiveHouseMessageDescriptor> resultLines = new List<LiveHouseMessageDescriptor>();
     private int resultLineIndex = -1;
+    private LiveHouseResult lastResult;
+    private bool hasLastResult;
 
     protected override void Start()
     {
         base.Start();
 
+        SubscribeLocalizationChanged();
         BindButtons();
         SetupInitialUI();
-        ApplyLeviathanIntroView();
-        ShowMessage(GetIntroText(), LiveHouseState.Intro);
+        ShowMessage(CreateIntroDescriptor(), LiveHouseState.Intro);
+    }
+
+    private void OnEnable()
+    {
+        SubscribeLocalizationChanged();
+    }
+
+    private void SubscribeLocalizationChanged()
+    {
+        if (LocalizationManager.Instance != null)
+        {
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+            LocalizationManager.Instance.OnLanguageChanged += OnLanguageChanged;
+        }
     }
 
     private void OnDisable()
     {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+
         StopTyping();
+    }
+
+    private void OnLanguageChanged()
+    {
+        RefreshLocalizedUI();
+    }
+
+    private void RefreshLocalizedUI()
+    {
+        RefreshActionViews();
+        RefreshConfirmButtonText();
+
+        bool wasTyping = isTyping;
+        bool wasIndicatorActive = textCompleteIndicator != null && textCompleteIndicator.activeSelf;
+        StopTyping();
+
+        if (currentState == LiveHouseState.Result && hasLastResult)
+            BuildResultLines(lastResult);
+
+        ApplyViewForMessage(currentMessageDescriptor);
+        currentMessage = RebuildMessage(currentMessageDescriptor);
+
+        if (dialogueText != null)
+            dialogueText.text = currentMessage;
+
+        if (wasTyping)
+        {
+            isTextComplete = true;
+
+            if (textCompleteIndicator != null)
+                textCompleteIndicator.SetActive(true);
+        }
+        else if (textCompleteIndicator != null)
+        {
+            textCompleteIndicator.SetActive(wasIndicatorActive);
+        }
     }
 
     private void BindButtons()
@@ -177,12 +282,14 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
             confirmButton.interactable = false;
             confirmButton.gameObject.SetActive(false);
         }
+        RefreshConfirmButtonText();
 
         if (textCompleteIndicator != null)
             textCompleteIndicator.SetActive(false);
 
         hasSelectedAction = false;
         hasUsedLiveHouse = false;
+        hasLastResult = false;
         RefreshActionViews();
         ClearActionSelection();
     }
@@ -233,19 +340,9 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
 
         if (speakerNameText != null)
         {
-            speakerNameText.text = leviathanDisplayName;
+            speakerNameText.text = GetLeviathanDisplayName();
             speakerNameText.gameObject.SetActive(true);
         }
-    }
-
-    private string GetIntroText()
-    {
-        return isLeviathanResolved ? unlockedIntroText : lockedIntroText;
-    }
-
-    private string GetFinishText()
-    {
-        return isLeviathanResolved ? unlockedFinishText : lockedFinishText;
     }
 
     private void ApplyRankButtonSprite()
@@ -305,6 +402,16 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
         }
     }
 
+    private void RefreshConfirmButtonText()
+    {
+        TMP_Text targetText = confirmButtonText;
+        if (targetText == null && confirmButton != null)
+            targetText = confirmButton.GetComponentInChildren<TMP_Text>(true);
+
+        if (targetText != null)
+            targetText.text = GetLocalizedText(confirmButtonTextKey, confirmButtonTextFallback);
+    }
+
     private void ClearActionSelection()
     {
         if (actionViews == null)
@@ -317,13 +424,16 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
         }
     }
 
-    private void ShowMessage(string message, LiveHouseState nextState)
+    private void ShowMessage(LiveHouseMessageDescriptor descriptor, LiveHouseState nextState)
     {
         StopTyping();
 
         currentState = nextState;
-        currentMessage = message ?? "";
+        currentMessageDescriptor = descriptor;
+        currentMessage = RebuildMessage(descriptor);
         isTextComplete = false;
+
+        ApplyViewForMessage(descriptor);
 
         if (textCompleteIndicator != null)
             textCompleteIndicator.SetActive(false);
@@ -401,7 +511,7 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
         switch (currentState)
         {
             case LiveHouseState.Intro:
-                ShowMessage(chooseActionText, LiveHouseState.ChooseIntro);
+                ShowMessage(new LiveHouseMessageDescriptor { kind = LiveHouseMessageKind.ChooseAction }, LiveHouseState.ChooseIntro);
                 break;
             case LiveHouseState.ChooseIntro:
                 ShowActionSelection();
@@ -421,6 +531,7 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
 
         if (confirmButton != null)
             confirmButton.gameObject.SetActive(true);
+        RefreshConfirmButtonText();
 
         if (textCompleteIndicator != null)
             textCompleteIndicator.SetActive(false);
@@ -467,6 +578,8 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
 
         LiveHouseResult result = CalculateResult(selectedAction);
         ApplyResult(result);
+        lastResult = result;
+        hasLastResult = true;
         BuildResultLines(result);
         BeginResultSequence();
     }
@@ -567,13 +680,32 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
     private void BuildResultLines(LiveHouseResult result)
     {
         resultLines.Clear();
-        resultLines.Add(BuildActionMonologueText(result.selectedAction));
-        resultLines.Add(BuildSelectedGainText(result));
+        resultLines.Add(new LiveHouseMessageDescriptor
+        {
+            kind = LiveHouseMessageKind.ActionMonologue,
+            actionType = result.selectedAction
+        });
+        resultLines.Add(new LiveHouseMessageDescriptor
+        {
+            kind = LiveHouseMessageKind.SelectedGain,
+            actionType = result.selectedAction,
+            amount = result.selectedFinalAmount,
+            encoreTriggered = result.encoreTriggered
+        });
 
         if (CurrentRank >= 1 && result.supportGains != null && result.supportGains.Count > 0)
-            resultLines.Add(BuildSupportBonusText(result.supportGains));
+        {
+            resultLines.Add(new LiveHouseMessageDescriptor
+            {
+                kind = LiveHouseMessageKind.SupportBonus,
+                supportGains = result.supportGains
+            });
+        }
 
-        resultLines.Add(GetFinishText());
+        resultLines.Add(new LiveHouseMessageDescriptor
+        {
+            kind = isLeviathanResolved ? LiveHouseMessageKind.UnlockedFinish : LiveHouseMessageKind.LockedFinish
+        });
     }
 
     private void BeginResultSequence()
@@ -592,19 +724,27 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
             return;
         }
 
-        if (resultLineIndex == resultLines.Count - 1)
-            ApplyLeviathanFinishView();
-
         ShowMessage(resultLines[resultLineIndex], LiveHouseState.Result);
     }
 
     private string BuildActionMonologueText(LiveHouseActionType actionType)
     {
         LiveHouseActionView actionView = GetActionView(actionType);
+        if (actionView != null)
+        {
+            string actionViewText = GetLocalizedText(actionView.monologueTextKey, "");
+            if (!string.IsNullOrEmpty(actionViewText))
+                return actionViewText;
+        }
+
+        string defaultActionKeyText = GetLocalizedText(GetActionMonologueKey(actionType), "");
+        if (!string.IsNullOrEmpty(defaultActionKeyText))
+            return defaultActionKeyText;
+
         if (actionView != null && !string.IsNullOrEmpty(actionView.monologueText))
             return actionView.monologueText;
 
-        return string.Format(defaultMonologueFormat, GetActionName(actionType));
+        return FormatLocalizedText(defaultMonologueFormatKey, defaultMonologueFormat, GetActionName(actionType));
     }
 
     private string BuildGainText(LiveHouseActionType actionType, float amount)
@@ -612,27 +752,27 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
         switch (actionType)
         {
             case LiveHouseActionType.Shout:
-                return string.Format(hpGainFormat, Mathf.RoundToInt(amount));
+                return FormatLocalizedText(hpGainFormatKey, hpGainFormat, Mathf.RoundToInt(amount));
             case LiveHouseActionType.Wotagei:
-                return string.Format(breakResistanceGainFormat, Mathf.RoundToInt(amount));
+                return FormatLocalizedText(breakResistanceGainFormatKey, breakResistanceGainFormat, Mathf.RoundToInt(amount));
             case LiveHouseActionType.Cyalume:
-                return string.Format(actionPointGainFormat, Mathf.RoundToInt(amount));
+                return FormatLocalizedText(actionPointGainFormatKey, actionPointGainFormat, Mathf.RoundToInt(amount));
             case LiveHouseActionType.Toast:
-                return string.Format(maxBreakGaugeGainFormat, FormatAmount(amount));
+                return FormatLocalizedText(maxBreakGaugeGainFormatKey, maxBreakGaugeGainFormat, FormatAmount(amount));
             default:
                 return "";
         }
     }
 
-    private string BuildSelectedGainText(LiveHouseResult result)
+    private string BuildSelectedGainText(LiveHouseActionType actionType, float amount, bool encoreTriggered)
     {
-        string gainText = BuildGainText(result.selectedAction, result.selectedFinalAmount);
-        return result.encoreTriggered ? encoreGainPrefix + gainText : gainText;
+        string gainText = BuildGainText(actionType, amount);
+        return encoreTriggered ? GetLocalizedText(encoreGainPrefixKey, encoreGainPrefix) + gainText : gainText;
     }
 
     private string BuildSupportBonusText(List<LiveHouseActionGain> supportGains)
     {
-        List<string> lines = new List<string> { supportBonusHeaderText };
+        List<string> lines = new List<string> { GetLocalizedText(supportBonusHeaderTextKey, supportBonusHeaderText) };
 
         foreach (LiveHouseActionGain gain in supportGains)
         {
@@ -640,6 +780,53 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
         }
 
         return string.Join("\n", lines);
+    }
+
+    private LiveHouseMessageDescriptor CreateIntroDescriptor()
+    {
+        return new LiveHouseMessageDescriptor
+        {
+            kind = isLeviathanResolved ? LiveHouseMessageKind.UnlockedIntro : LiveHouseMessageKind.LockedIntro
+        };
+    }
+
+    private string RebuildMessage(LiveHouseMessageDescriptor descriptor)
+    {
+        switch (descriptor.kind)
+        {
+            case LiveHouseMessageKind.LockedIntro:
+                return GetLocalizedText(lockedIntroTextKey, lockedIntroText);
+            case LiveHouseMessageKind.UnlockedIntro:
+                return GetLocalizedText(unlockedIntroTextKey, unlockedIntroText);
+            case LiveHouseMessageKind.ChooseAction:
+                return GetLocalizedText(chooseActionTextKey, chooseActionText);
+            case LiveHouseMessageKind.ActionMonologue:
+                return BuildActionMonologueText(descriptor.actionType);
+            case LiveHouseMessageKind.SelectedGain:
+                return BuildSelectedGainText(descriptor.actionType, descriptor.amount, descriptor.encoreTriggered);
+            case LiveHouseMessageKind.SupportBonus:
+                return BuildSupportBonusText(descriptor.supportGains);
+            case LiveHouseMessageKind.LockedFinish:
+                return GetLocalizedText(lockedFinishTextKey, lockedFinishText);
+            case LiveHouseMessageKind.UnlockedFinish:
+                return GetLocalizedText(unlockedFinishTextKey, unlockedFinishText);
+            default:
+                return currentMessage;
+        }
+    }
+
+    private void ApplyViewForMessage(LiveHouseMessageDescriptor descriptor)
+    {
+        if (descriptor.kind == LiveHouseMessageKind.LockedIntro || descriptor.kind == LiveHouseMessageKind.UnlockedIntro)
+        {
+            ApplyLeviathanIntroView();
+            return;
+        }
+
+        if (descriptor.kind == LiveHouseMessageKind.LockedFinish || descriptor.kind == LiveHouseMessageKind.UnlockedFinish)
+        {
+            ApplyLeviathanFinishView();
+        }
     }
 
     private string FormatAmount(float amount)
@@ -666,14 +853,69 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
         switch (actionType)
         {
             case LiveHouseActionType.Wotagei:
-                return wotageiActionName;
+                return GetLocalizedText(wotageiActionNameKey, wotageiActionName);
             case LiveHouseActionType.Cyalume:
-                return cyalumeActionName;
+                return GetLocalizedText(cyalumeActionNameKey, cyalumeActionName);
             case LiveHouseActionType.Toast:
-                return toastActionName;
+                return GetLocalizedText(toastActionNameKey, toastActionName);
             default:
-                return shoutActionName;
+                return GetLocalizedText(shoutActionNameKey, shoutActionName);
         }
+    }
+
+    private string GetActionMonologueKey(LiveHouseActionType actionType)
+    {
+        switch (actionType)
+        {
+            case LiveHouseActionType.Wotagei:
+                return wotageiMonologueTextKey;
+            case LiveHouseActionType.Cyalume:
+                return cyalumeMonologueTextKey;
+            case LiveHouseActionType.Toast:
+                return toastMonologueTextKey;
+            default:
+                return shoutMonologueTextKey;
+        }
+    }
+
+    private string GetLeviathanDisplayName()
+    {
+        return GetLocalizedText(leviathanDisplayNameKey, leviathanDisplayNameFallback);
+    }
+
+    private string FormatLocalizedText(string key, string fallback, params object[] args)
+    {
+        string format = GetLocalizedText(key, fallback);
+        try
+        {
+            return string.Format(format, args);
+        }
+        catch (FormatException)
+        {
+            try
+            {
+                return string.Format(fallback, args);
+            }
+            catch (FormatException)
+            {
+                return fallback ?? "";
+            }
+        }
+    }
+
+    private string GetLocalizedText(string key, string fallback)
+    {
+        if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
+        {
+            string localized = LocalizationManager.Instance.GetText(key);
+            if (!string.IsNullOrEmpty(localized) && localized != key)
+                return localized;
+        }
+
+        if (!string.IsNullOrEmpty(fallback))
+            return fallback;
+
+        return key ?? "";
     }
 
     private void OnClickRankButton()

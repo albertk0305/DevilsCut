@@ -3589,8 +3589,10 @@ MonoBehaviour:
   operatorEmbarrassedSprite: {fileID: 21300000, guid: fbd16a5e6bb7eec49aee26d47af9dcab, type: 3}
   baitoDefaultSprite: {fileID: 21300000, guid: e18634539d2eba244b88783f2d8890f5, type: 3}
   baitoHappySprite: {fileID: 21300000, guid: 584baddc70a4d8444af40adf8603bcc4, type: 3}
-  operatorDisplayName: "\uC544\uC2A4\uBAA8\uB370\uC6B0\uC2A4"
-  baitoDisplayName: "\uBC14\uC774\uD1A0"
+  operatorDisplayNameKey: asmodeus
+  baitoDisplayNameKey: baito
+  operatorDisplayNameFallback: Asmodeus
+  baitoDisplayNameFallback: Baito
   characterImage: {fileID: 649209665}
   speakerNameText: {fileID: 1373431097}
   dialogueText: {fileID: 1454890088}
@@ -3619,42 +3621,66 @@ MonoBehaviour:
   leftButton: {fileID: 1986282316}
   rightButton: {fileID: 290746127}
   confirmButton: {fileID: 2144002858}
+  confirmButtonText: {fileID: 455080255}
+  confirmButtonTextKey: btn_confirm
+  confirmButtonTextFallback: Confirm
   itemImage: {fileID: 1339766648}
   rankButton: {fileID: 1722218316}
   rankButtonImage: {fileID: 1722218317}
   rankBonusInfo: {fileID: 11400000, guid: 0d750a212b8465e4da65541771afe731, type: 2}
   rankBonusPanel: {fileID: 91833046}
   mergePresentation: {fileID: 1845169211}
-  unlockedIntroText: "\uC5B4\uC11C\uC624\uC138\uC694 \uC8FC\uC778\uB2D8! \uB204\uAD6C\uC640
-    \uC624\uC168\uB098\uC694?"
-  lockedIntroText: "\uC5B4\uC11C\uC624\uC138\uC694! \uB204\uAD6C\uC640 \uD568\uAED8
-    \uC624\uC168\uB098\uC694?"
-  unlockedSoloIntroText: "\uC5B4\uC11C\uC624\uC138\uC694 \uC8FC\uC778\uB2D8! \uD63C\uC790
-    \uC624\uC168\uB098\uC694?"
-  lockedSoloIntroText: "\uC5B4\uC11C\uC624\uC138\uC694, \uD55C \uBD84\uC774\uC2E0\uAC00\uC694?"
-  soloMonologueText: "\uACE0\uB3C5\uC774 \uB290\uAEF4\uC9C4\uB2E4..."
-  unlockedPityGiftText: "\uD63C\uC790 \uC628 \uC8FC\uC778\uB2D8\uC5D0\uAC8C \uC8FC\uB294
-    \uC544\uC2A4\uBAA8\uC758 \uC120\uBB3C\uC774\uC5D0\uC694!"
-  lockedPityGiftText: "\uAE30\uC6B4\uB0B4\uC138\uC694..."
-  soloFarewellText: "\uB3CC\uC544\uAC00\uC790..."
-  guestPairText: "\uC8FC\uC778\uB2D8 2\uBA85 \uB4E4\uC5B4\uAC00\uC2ED\uB2C8\uB2E4!"
-  operatorSelectedText: "\uB124? \uC800\uC640 \uD568\uAED8 \uAC00\uACE0 \uC2F6\uB2E4\uACE0\uC694?
-    \uD5E4\uD5E4.."
-  defaultSupporterSelectedText: "\uD568\uAED8 \uBA54\uC774\uB4DC \uCE74\uD398\uB97C
-    \uC990\uACBC\uB2E4."
-  defaultGiftText: "\uC120\uBB3C\uC744 \uBC1B\uC558\uB2E4."
-  defaultMaxSkillGiftText: "\uB354 \uC62C\uB9B4 \uC2A4\uD0AC\uC740 \uC5C6\uC9C0\uB9CC,
-    \uB300\uC2E0 \uC120\uBB3C\uC744 \uBC1B\uC558\uB2E4."
-  unlockedFinishText: "\uB610 \uC640\uC8FC\uC138\uC694 \uC8FC\uC778\uB2D8!"
-  lockedFinishText: "\uAC10\uC0AC\uD569\uB2C8\uB2E4!"
-  noGiftAvailableText: "\uBC1B\uC744 \uC218 \uC788\uB294 \uC120\uBB3C\uC774 \uC5C6\uB2E4."
-  skillLevelUpFormat: "{0}\uC758 {1} \uB808\uBCA8\uC774 {2}\uC5D0\uC11C {3}\uB85C
-    \uC0C1\uC2B9\uD588\uB2E4."
-  itemGainFormat: "{0}\uC744 \uD68D\uB4DD\uD588\uB2E4!"
-  facilityGiftText: "\uC2DC\uC124 \uBCF4\uB108\uC2A4 \uC120\uBB3C\uC744 \uBC1B\uC558\uB2E4."
-  passiveSkillName: "\uD328\uC2DC\uBE0C \uC2A4\uD0AC"
-  startSkillName: "\uAC1C\uC804 \uC2A4\uD0AC"
-  battleSkillName: "\uC804\uD22C \uC2A4\uD0AC"
+  unlockedIntroTextKey: maid_cafe_unlocked_intro
+  lockedIntroTextKey: maid_cafe_locked_intro
+  unlockedSoloIntroTextKey: maid_cafe_unlocked_solo_intro
+  lockedSoloIntroTextKey: maid_cafe_locked_solo_intro
+  soloMonologueTextKey: maid_cafe_solo_monologue
+  unlockedPityGiftTextKey: maid_cafe_unlocked_pity_gift
+  lockedPityGiftTextKey: maid_cafe_locked_pity_gift
+  soloFarewellTextKey: maid_cafe_solo_farewell
+  guestPairTextKey: maid_cafe_guest_pair
+  operatorSelectedTextKey: maid_cafe_operator_selected
+  defaultSupporterSelectedTextKey: maid_cafe_default_supporter_selected
+  defaultGiftTextKey: maid_cafe_default_gift
+  defaultMaxSkillGiftTextKey: maid_cafe_default_max_skill_gift
+  unlockedFinishTextKey: maid_cafe_unlocked_finish
+  lockedFinishTextKey: maid_cafe_locked_finish
+  noGiftAvailableTextKey: maid_cafe_no_gift_available
+  unlockedIntroText: Welcome Master! Asmo will make even your companion fall head
+    over heels!
+  lockedIntroText: Welcome! Who did you come with today?
+  unlockedSoloIntroText: Welcome Master! Since you came alone that means Asmo gets
+    you all to herself right?
+  lockedSoloIntroText: Welcome! Did you come alone today?
+  soloMonologueText: A guest who comes alone looks more refined. Probably.
+  unlockedPityGiftText: Master came alone so Asmo will give you exclusive care! Here
+    is a special gift!
+  lockedPityGiftText: Not because you looked lonely or anything! It is just a special
+    service!
+  soloFarewellText: I came in alone and I leave alone. Well protagonists are usually
+    alone anyway.
+  guestPairText: All right! I will help you with the pair course!
+  operatorSelectedText: With Asmo? Oh wow... Master that is so unfair!
+  defaultSupporterSelectedText: Enjoyed the Maid Cafe together.
+  defaultGiftText: Received a gift.
+  defaultMaxSkillGiftText: The supporter's skill has been enhanced to the maximum.
+    Obtained an additional gift instead.
+  unlockedFinishText: You fell head over heels for Asmo's charm right? Please come
+    see me again next time!
+  lockedFinishText: Did you have a good time? Please visit us again!
+  noGiftAvailableText: There are no gifts available to receive.
+  skillLevelUpFormatKey: maid_cafe_skill_level_up_format
+  itemGainFormatKey: maid_cafe_item_gain_format
+  facilityGiftTextKey: maid_cafe_facility_gift
+  passiveSkillNameKey: maid_cafe_skill_passive
+  startSkillNameKey: maid_cafe_skill_start
+  battleSkillNameKey: maid_cafe_skill_battle
+  skillLevelUpFormat: '{0}''s {1} level has increased from {2} to {3}.'
+  itemGainFormat: Obtained {0}!
+  facilityGiftText: Received a bonus gift.
+  passiveSkillName: Passive Skill
+  startSkillName: Start Skill
+  battleSkillName: Battle Skill
   typeInterval: 0.03
 --- !u!1 &815093563
 GameObject:
@@ -5890,9 +5916,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298b138403b54849b811d2c59fab45e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
+  bgmPlaylist: []
   bgmClip: {fileID: 8300000, guid: 544cf5b6aadd40b45b2d023b5c11cdfb, type: 3}
   fadeTime: 1
-  stopBgmIfClipIsEmpty: 0
+  stopBgmIfEmpty: 0
 --- !u!4 &1595411086
 Transform:
   m_ObjectHideFlags: 0

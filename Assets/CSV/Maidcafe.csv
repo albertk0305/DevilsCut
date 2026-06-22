@@ -1,0 +1,23 @@
+Key,Korean,English
+maid_cafe_unlocked_intro,어서 오세요 주인님! 같이 온 분까지 아스모가 잔뜩 반하게 해드릴게요!,Welcome Master! Asmo will make even your companion fall head over heels!
+maid_cafe_locked_intro,어서 오세요! 오늘은 어느 분과 함께 오셨나요?,Welcome! Who did you come with today?
+maid_cafe_unlocked_solo_intro,어서 오세요 주인님! 혼자 오셨다니 아스모가 독점해도 되는 거죠?,Welcome Master! Since you came alone that means Asmo gets you all to herself right?
+maid_cafe_locked_solo_intro,어서 오세요! 오늘은 혼자 오셨나요?,Welcome! Did you come alone today?
+maid_cafe_solo_monologue,혼자 온 손님은 더 품격 있어 보이는 법이지. 아마도.,A guest who comes alone looks more refined. Probably.
+maid_cafe_unlocked_pity_gift,혼자 온 주인님은 아스모가 독점 케어해드릴게요! 자 특별 선물이에요!,Master came alone so Asmo will give you exclusive care! Here is a special gift!
+maid_cafe_solo_farewell,혼자 들어왔고 혼자 나간다. 뭐 원래 주인공은 대체로 혼자인 법이지.,I came in alone and I leave alone. Well protagonists are usually alone anyway.
+maid_cafe_guest_pair,네! 2인 코스로 도와드리겠습니다!,All right! I will help you with the pair course!
+maid_cafe_operator_selected,아스모랑 같이요? 아 진짜... 주인님 그런 거 너무 반칙이에요!,With Asmo? Oh wow... Master that is so unfair!
+maid_cafe_default_supporter_selected,함께 메이드 카페를 즐겼다.,Enjoyed the Maid Cafe together.
+maid_cafe_default_gift,선물을 받았다.,Received a gift.
+maid_cafe_default_max_skill_gift,조력자의 스킬은 최대로 강화되었다. 대신에 추가 선물을 획득했다.,The supporter's skill has been enhanced to the maximum. Obtained an additional gift instead.
+maid_cafe_unlocked_finish,아스모의 매력에 푹 빠지셨죠? 다음번에도 꼭 만나러 와주세요!,You fell head over heels for Asmo's charm right? Please come see me again next time!
+maid_cafe_locked_finish,즐거운 시간 되셨나요? 다음에도 꼭 들러주세요!,Did you have a good time? Please visit us again!
+maid_cafe_no_gift_available,받을 수 있는 선물이 없다.,There are no gifts available to receive.
+maid_cafe_skill_level_up_format,{0}의 {1} 레벨이 {2}에서 {3}(으)로 상승했다.,{0}'s {1} level has increased from {2} to {3}.
+maid_cafe_item_gain_format,{0}을 획득했다!,Obtained {0}!
+maid_cafe_facility_gift,보너스 선물을 받았다.,Received a bonus gift.
+maid_cafe_skill_passive,패시브 스킬,Passive Skill
+maid_cafe_skill_start,개전 스킬,Start Skill
+maid_cafe_skill_battle,전투 스킬,Battle Skill
+maid_cafe_locked_pity_gift,쓸쓸해 보이셔서 그런 건 아니고요! 그냥 특별 서비스예요!,Not because you looked lonely or anything! It is just a special service!

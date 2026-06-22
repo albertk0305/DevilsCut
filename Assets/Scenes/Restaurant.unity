@@ -3796,8 +3796,10 @@ MonoBehaviour:
   operatorHappySprite: {fileID: 21300000, guid: 0c9ac23088833864089f886dd2e7847e, type: 3}
   baitoDefaultSprite: {fileID: 21300000, guid: e18634539d2eba244b88783f2d8890f5, type: 3}
   baitoHappySprite: {fileID: 21300000, guid: 584baddc70a4d8444af40adf8603bcc4, type: 3}
-  operatorDisplayName: "\uBC14\uC54C\uC81C\uBD91"
-  baitoDisplayName: "\uBC14\uC774\uD1A0"
+  operatorDisplayNameKey: baalzebub
+  baitoDisplayNameKey: baito
+  operatorDisplayNameFallback: Baalzebub
+  baitoDisplayNameFallback: Baito
   characterImage: {fileID: 649209665}
   speakerNameText: {fileID: 1373431097}
   dialogueText: {fileID: 1454890088}
@@ -3811,38 +3813,45 @@ MonoBehaviour:
     selectedHighlight: {fileID: 99708734}
     nameText: {fileID: 923633725}
     categoryText: {fileID: 1654868006}
-    monologueText: "\uC1FC\uC720 \uB77C\uBA58. \uB9DB\uC788\uB2E4. \uC601\uAC10\uC774
-      \uB5A0\uC624\uB978\uB2E4."
+    monologueTextKey: restaurant_menu_sword_monologue
+    monologueText: The salty soy sauce flavor has soaked nicely into the broth. In
+      the end this kind of dish is all about the basics.
   - category: 1
     root: {fileID: 1567892030}
     button: {fileID: 2114670546}
     selectedHighlight: {fileID: 942048418}
     nameText: {fileID: 2073538452}
     categoryText: {fileID: 1749630747}
-    monologueText: "\uAD50\uC790. \uB9DB\uC788\uB2E4. \uC601\uAC10\uC774 \uB5A0\uC624\uB978\uB2E4."
+    monologueTextKey: restaurant_menu_gun_monologue
+    monologueText: Crisp on the outside and hot inside. Let your guard down and your
+      tongue takes the first hit.
   - category: 2
     root: {fileID: 225178837}
     button: {fileID: 1543355420}
     selectedHighlight: {fileID: 594185980}
     nameText: {fileID: 832126671}
     categoryText: {fileID: 94415698}
-    monologueText: "\uB3C8\uCF54\uCE20 \uB77C\uBA58. \uB9DB\uC788\uB2E4. \uC601\uAC10\uC774
-      \uB5A0\uC624\uB978\uB2E4."
+    monologueTextKey: restaurant_menu_martial_monologue
+    monologueText: The rich pork bone broth fills the mouth with weight. When you
+      are hungry this is the right answer.
   - category: 3
     root: {fileID: 1822565381}
     button: {fileID: 955087565}
     selectedHighlight: {fileID: 1373207979}
     nameText: {fileID: 1261718820}
     categoryText: {fileID: 418894335}
-    monologueText: "\uBBF8\uC18C \uB77C\uBA58. \uB9DB\uC788\uB2E4. \uC601\uAC10\uC774
-      \uB5A0\uC624\uB978\uB2E4."
+    monologueTextKey: restaurant_menu_magic_monologue
+    monologueText: A savory sweetness lingers behind the salt. This kind of broth
+      is best enjoyed slowly.
   - category: 4
     root: {fileID: 1491677045}
     button: {fileID: 1026107960}
     selectedHighlight: {fileID: 1457259728}
     nameText: {fileID: 1193641848}
     categoryText: {fileID: 132211732}
-    monologueText: "\uD0C4\uD0C4\uBA58. \uB9DB\uC788\uB2E4. \uC601\uAC10\uC774 \uB5A0\uC624\uB978\uB2E4."
+    monologueTextKey: restaurant_menu_oni_monologue_format
+    monologueText: My tongue stings but the chopsticks will not stop. This is what
+      a dangerous flavor tastes like.
   skillChoiceRoot: {fileID: 152820644}
   evolutionChoiceViews:
   - root: {fileID: 2080697211}
@@ -3864,37 +3873,75 @@ MonoBehaviour:
     selectedHighlight: {fileID: 1998715612}
     rerollButton: {fileID: 946430970}
   confirmButton: {fileID: 2144002858}
+  confirmButtonText: {fileID: 455080255}
+  confirmButtonTextKey: btn_confirm
+  confirmButtonTextFallback: Confirm
   rankButton: {fileID: 1722218316}
   rankButtonImage: {fileID: 1722218317}
   rankBonusInfo: {fileID: 11400000, guid: 35226425a32b4834a9eb0d493b327988, type: 2}
   rankBonusPanel: {fileID: 91833046}
-  unlockedIntroText: "\uC5B4\uC11C\uC640! \uBA54\uB274\uB294 \uBB58\uB85C \uD560\uB798?"
-  lockedIntroText: "\uC5B4\uC11C\uC624\uC138\uC694! \uBB58\uB85C \uD558\uC2E4\uB798\uC694?"
-  selectEvolutionPromptText: "\uC9C4\uD654\uB97C \uC120\uD0DD\uD574 \uD6A8\uACFC\uB97C
-    \uD655\uC778\uD558\uC790."
-  noCandidateText: "\uB354 \uC774\uC0C1 \uC774 \uACC4\uC5F4\uC5D0\uC11C \uC9C4\uD654\uD560
-    \uC218 \uC788\uB294 \uC2A4\uD0AC\uC774 \uC5C6\uB2E4."
-  rerollFailedText: "\uB2E4\uB978 \uC9C4\uD654 \uD6C4\uBCF4\uAC00 \uC5C6\uB2E4."
-  applyEvolutionFailedText: "\uC9C4\uD654\uB97C \uC801\uC6A9\uD560 \uC218 \uC5C6\uB2E4."
-  unlockedFinishText: "\uB9E4\uBC88 \uACE0\uB9C8\uC6CC!"
-  lockedFinishText: "\uAC10\uC0AC\uD569\uB2C8\uB2E4!"
-  shoyuRamenName: "\uC1FC\uC720\uB77C\uBA58"
-  gyozaName: "\uAD50\uC790"
-  tonkotsuRamenName: "\uB3C8\uCF54\uCE20\uB77C\uBA58"
-  misoRamenName: "\uBBF8\uC18C\uB77C\uBA58"
-  tantanmenName: "\uD0C4\uD0C4\uBA58"
-  swordCategoryText: "\uAC80\uC220 \uACC4\uC5F4"
-  gunCategoryText: "\uC0AC\uACA9 \uACC4\uC5F4"
-  martialCategoryText: "\uD0C0\uACA9 \uACC4\uC5F4"
-  magicCategoryText: "\uC694\uC220 \uACC4\uC5F4"
-  oniCategoryText: "\uC624\uB2C8 \uACC4\uC5F4"
-  defaultMenuMonologueFormat: "{0}\uC744 \uBA39\uC5C8\uB2E4."
-  evolutionResultFormat: "{0}\uC774 {1}\uC73C\uB85C \uC9C4\uD654\uD588\uB2E4."
-  expGainFormat: "EXP\uB97C {0} \uD68D\uB4DD\uD588\uB2E4."
-  noCandidateExpGainFormat: "\uD6C4\uBCF4 \uC5C6\uC74C \uBCF4\uC0C1\uC73C\uB85C EXP\uB97C
-    {0} \uD68D\uB4DD\uD588\uB2E4."
-  facilityBonusExpGainFormat: "\uC2DC\uC124 \uBCF4\uB108\uC2A4\uB85C EXP\uB97C {0}
-    \uD68D\uB4DD\uD588\uB2E4."
+  unlockedIntroTextKey: restaurant_unlocked_intro
+  lockedIntroTextKey: restaurant_locked_intro
+  selectEvolutionPromptTextKey: restaurant_select_evolution_prompt
+  noCandidateTextKey: restaurant_no_candidate
+  rerollFailedTextKey: restaurant_reroll_failed
+  applyEvolutionFailedTextKey: restaurant_apply_evolution_failed
+  unlockedFinishTextKey: restaurant_unlocked_finish
+  lockedFinishTextKey: restaurant_locked_finish
+  unlockedIntroText: Everything on our menu is delicious! Pick whatever you want!
+  lockedIntroText: I will take your order!
+  selectEvolutionPromptText: Select evolution.
+  noCandidateText: No more skills can be evolved.
+  rerollFailedText: No other evolution candidates available.
+  applyEvolutionFailedText: Evolution cannot be applied.
+  unlockedFinishText: Come back anytime you are hungry! I will make sure you leave
+    full!
+  lockedFinishText: Did you enjoy your meal? Please come again next time!
+  shoyuRamenNameKey: restaurant_menu_shoyu_ramen
+  gyozaNameKey: restaurant_menu_gyoza
+  tonkotsuRamenNameKey: restaurant_menu_tonkotsu_ramen
+  misoRamenNameKey: restaurant_menu_miso_ramen
+  tantanmenNameKey: restaurant_menu_tantanmen
+  swordCategoryTextKey: gym_category_sword
+  gunCategoryTextKey: gym_category_gun
+  martialCategoryTextKey: gym_category_martial
+  magicCategoryTextKey: gym_category_magic
+  oniCategoryTextKey: gym_category_oni
+  swordMenuMonologueTextKey: restaurant_menu_sword_monologue
+  gunMenuMonologueTextKey: restaurant_menu_gun_monologue
+  martialMenuMonologueTextKey: restaurant_menu_martial_monologue
+  magicMenuMonologueTextKey: restaurant_menu_magic_monologue
+  oniMenuMonologueTextKey: restaurant_menu_oni_monologue
+  defaultMenuMonologueFormatKey: restaurant_default_menu_monologue_format
+  shoyuRamenName: Shoyu Ramen
+  gyozaName: Gyoza
+  tonkotsuRamenName: Tonkotsu Ramen
+  misoRamenName: Miso Ramen
+  tantanmenName: Tantanmen
+  swordCategoryText: Swordsmanship
+  gunCategoryText: Marksmanship
+  martialCategoryText: Martial Arts
+  magicCategoryText: Magic
+  oniCategoryText: Oni
+  defaultMenuMonologueFormat: Ate {0}.
+  evolutionResultFormatKey: restaurant_evolution_result_format
+  expGainFormatKey: restaurant_exp_gain_format
+  noCandidateExpGainFormatKey: restaurant_no_candidate_exp_gain_format
+  facilityBonusExpGainFormatKey: restaurant_facility_bonus_exp_gain_format
+  levelUpHeaderFormatKey: restaurant_level_up_header_format
+  hpStatNameKey: label_hp
+  maxBreakGaugeStatNameKey: label_break
+  breakResistanceStatNameKey: label_break_resistance
+  strengthShortStatNameKey: label_strength
+  defenseShortStatNameKey: label_defense
+  speedShortStatNameKey: label_speed
+  actionPointsShortStatNameKey: label_ap
+  luckShortStatNameKey: label_luck
+  evolutionResultFormat: '{0} evolved into {1}.'
+  expGainFormat: Gained {0} EXP.
+  noCandidateExpGainFormat: No skills available for evolution. Obtained {0} EXP instead.
+  facilityBonusExpGainFormat: No skills available for evolution. Obtained {0} EXP
+    instead.
   typeInterval: 0.03
 --- !u!1 &832126669
 GameObject:
@@ -4062,9 +4109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298b138403b54849b811d2c59fab45e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
+  bgmPlaylist: []
   bgmClip: {fileID: 8300000, guid: 544cf5b6aadd40b45b2d023b5c11cdfb, type: 3}
   fadeTime: 1
-  stopBgmIfClipIsEmpty: 0
+  stopBgmIfEmpty: 0
 --- !u!4 &834909673
 Transform:
   m_ObjectHideFlags: 0

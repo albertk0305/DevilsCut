@@ -14,6 +14,7 @@ public class FightClubCategoryView
     public GameObject selectedHighlight;
     public TMP_Text categoryText;
     public Image categoryImage;
+    public string selectedMonologueTextKey;
     [TextArea] public string selectedMonologueText;
 }
 
@@ -22,16 +23,33 @@ public class FightClubFacilityController : FacilitySceneControllerBase
     private enum FightClubState
     {
         Intro,
-        ChancePrompt,
         SelectingCategory,
-        VictoryMessage,
         Result
     }
 
-    private class FightClubStep
+    private enum FightClubMessageKind
     {
-        public string message;
-        public Action beforeShow;
+        None,
+        LockedIntro,
+        UnlockedIntro,
+        CategoryMonologue,
+        CategoryMaxed,
+        SkillLevelUp,
+        ReplacementStatGain,
+        RankBonusMonologue,
+        RankBonusStatGain,
+        LockedOutro,
+        UnlockedOutro
+    }
+
+    private struct FightClubMessageDescriptor
+    {
+        public FightClubMessageKind kind;
+        public SkillCategory category;
+        public SkillData skill;
+        public int oldLevel;
+        public int newLevel;
+        public StatGain statGain;
     }
 
     private struct StatGain
@@ -56,10 +74,8 @@ public class FightClubFacilityController : FacilitySceneControllerBase
     [Header("Character Sprites")]
     [SerializeField] private Sprite operatorDefaultSprite;
     [SerializeField] private Sprite operatorHappySprite;
-    [SerializeField] private Sprite baitoDefaultSprite;
-    [SerializeField] private Sprite baitoHappySprite;
+    [SerializeField] private string operatorDisplayNameKey = "gym_speaker_satan";
     [SerializeField] private string operatorDisplayName = "사탄";
-    [SerializeField] private string baitoDisplayName = "바이토";
 
     [Header("Dialogue UI")]
     [SerializeField] private Image characterImage;
@@ -72,11 +88,9 @@ public class FightClubFacilityController : FacilitySceneControllerBase
     [SerializeField] private GameObject categoryRoot;
     [SerializeField] private FightClubCategoryView[] categoryViews;
     [SerializeField] private Button confirmButton;
-
-    [Header("Cut In")]
-    [SerializeField] private GameObject cutInRoot;
-    [SerializeField] private Image cutInImage;
-    [SerializeField] private float cutInDuration = 0.6f;
+    [SerializeField] private TMP_Text confirmButtonText;
+    [SerializeField] private string confirmButtonTextKey = "";
+    [SerializeField] private string confirmButtonTextFallback = "Confirm";
 
     [Header("Rank Bonus")]
     [SerializeField] private Button rankButton;
@@ -85,21 +99,21 @@ public class FightClubFacilityController : FacilitySceneControllerBase
     [SerializeField] private FacilityRankBonusPanelController rankBonusPanel;
 
     [Header("Intro Text")]
+    [SerializeField] private string lockedIntroTextKey = "gym_locked_intro";
+    [SerializeField] private string unlockedIntroTextKey = "gym_unlocked_intro";
+    [SerializeField] private string lockedFinishTextKey = "gym_locked_outro";
+    [SerializeField] private string unlockedFinishTextKey = "gym_unlocked_outro";
     [SerializeField] private string lockedIntroText1 = "오늘의 도전자입니다! 셰리!";
-    [SerializeField] private string lockedIntroText2 = "준비하시고, 경기 시작합니다!";
-    [SerializeField] private string lockedIntroText3 = "양측 치열하게 전투합니다!";
-    [SerializeField] private string lockedIntroText4 = "셰리의 찬스!";
     [SerializeField] private string unlockedIntroText1 = "뒷골목의 해결사 셰리입니다!";
-    [SerializeField] private string unlockedIntroText2 = "화려하게 놀아봅시다!";
-    [SerializeField] private string unlockedIntroText3 = "분위기 달아오릅니다!";
-    [SerializeField] private string unlockedIntroText4 = "셰리 빈틈을 노립니다!";
-    [SerializeField] private string chancePromptText = "찬스다! 무슨 기술을 사용할까?";
-    [SerializeField] private string lockedVictoryText = "치명적인 일격! 오늘 밤의 승자는 셰리입니다!";
-    [SerializeField] private string unlockedVictoryText = "화려한 마무리! 승자는 셰리입니다!";
     [SerializeField] private string lockedFinishText = "수고하셨습니다! 또 방문해주세요!";
     [SerializeField] private string unlockedFinishText = "역시 내가 점찍어둔 챔피언이라니까!";
 
     [Header("Category Text")]
+    [SerializeField] private string swordCategoryTextKey = "gym_category_sword";
+    [SerializeField] private string gunCategoryTextKey = "gym_category_gun";
+    [SerializeField] private string martialCategoryTextKey = "gym_category_martial";
+    [SerializeField] private string magicCategoryTextKey = "gym_category_magic";
+    [SerializeField] private string oniCategoryTextKey = "gym_category_oni";
     [SerializeField] private string swordCategoryText = "검술";
     [SerializeField] private string gunCategoryText = "사격";
     [SerializeField] private string martialCategoryText = "타격";
@@ -107,6 +121,17 @@ public class FightClubFacilityController : FacilitySceneControllerBase
     [SerializeField] private string oniCategoryText = "오니";
 
     [Header("Result Text")]
+    [SerializeField] private string swordSelectedMonologueTextKey = "gym_category_sword_monologue";
+    [SerializeField] private string gunSelectedMonologueTextKey = "gym_category_gun_monologue";
+    [SerializeField] private string martialSelectedMonologueTextKey = "gym_category_martial_monologue";
+    [SerializeField] private string magicSelectedMonologueTextKey = "gym_category_magic_monologue";
+    [SerializeField] private string oniSelectedMonologueTextKey = "gym_category_oni_monologue";
+    [SerializeField] private string skillCategoryImprovedFormatKey = "gym_category_improved_format";
+    [SerializeField] private string skillCategoryMaxedFormatKey = "gym_category_maxed_format";
+    [SerializeField] private string skillLevelUpFormatKey = "gym_skill_level_up_format";
+    [SerializeField] private string replacementStatGainFormatKey = "gym_replacement_stat_gain_format";
+    [SerializeField] private string rankBonusMonologueTextKey = "gym_rank_bonus_monologue";
+    [SerializeField] private string statGainFormatKey = "gym_stat_gain_format";
     [SerializeField] private string skillCategoryImprovedFormat = "{0}이 능숙해졌다.";
     [SerializeField] private string skillCategoryMaxedFormat = "{0}은 이미 충분히 단련되어 있다.";
     [SerializeField] private string skillLevelUpFormat = "셰리의 {0}이 {1}에서 {2} 레벨로 상승했습니다.";
@@ -114,13 +139,23 @@ public class FightClubFacilityController : FacilitySceneControllerBase
     [SerializeField] private string rankBonusMonologueText = "훌륭한 운동이 된 것 같다.";
     [SerializeField] private string statGainFormat = "{0}이 {1}만큼 상승했습니다.";
 
+    [Header("Stat Names")]
+    [SerializeField] private string strengthStatNameKey = "stat_strength";
+    [SerializeField] private string defenseStatNameKey = "stat_defense";
+    [SerializeField] private string speedStatNameKey = "stat_speed";
+    [SerializeField] private string luckStatNameKey = "stat_luck";
+    [SerializeField] private string strengthStatNameFallback = "힘";
+    [SerializeField] private string defenseStatNameFallback = "방어";
+    [SerializeField] private string speedStatNameFallback = "속도";
+    [SerializeField] private string luckStatNameFallback = "행운";
+
     [Header("Typewriter")]
     [SerializeField] private float typeInterval = 0.03f;
 
-    private readonly Queue<FightClubStep> introSteps = new Queue<FightClubStep>();
-    private readonly List<string> resultLines = new List<string>();
+    private readonly List<FightClubMessageDescriptor> resultLines = new List<FightClubMessageDescriptor>();
     private Coroutine typingCoroutine;
     private string currentMessage = "";
+    private FightClubMessageDescriptor currentMessageDescriptor;
     private FightClubState currentState;
     private SkillCategory selectedCategory = SkillCategory.None;
     private bool hasSelectedCategory;
@@ -129,20 +164,75 @@ public class FightClubFacilityController : FacilitySceneControllerBase
     private bool isTextComplete;
     private bool isOperatorResolved;
     private int resultLineIndex = -1;
+    private FightClubResult lastResult;
+    private bool hasLastResult;
 
     protected override void Start()
     {
         base.Start();
 
+        SubscribeLocalizationChanged();
         BindButtons();
         SetupInitialUI();
-        BuildIntroSteps();
-        ShowNextIntroStep();
+        ShowIntroLine();
+    }
+
+    private void OnEnable()
+    {
+        SubscribeLocalizationChanged();
+    }
+
+    private void SubscribeLocalizationChanged()
+    {
+        if (LocalizationManager.Instance != null)
+        {
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+            LocalizationManager.Instance.OnLanguageChanged += OnLanguageChanged;
+        }
     }
 
     private void OnDisable()
     {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+
         StopTyping();
+    }
+
+    private void OnLanguageChanged()
+    {
+        RefreshLocalizedUI();
+    }
+
+    private void RefreshLocalizedUI()
+    {
+        RefreshCategoryViews();
+        RefreshConfirmButtonText();
+
+        bool wasTyping = isTyping;
+        bool wasIndicatorActive = textCompleteIndicator != null && textCompleteIndicator.activeSelf;
+        StopTyping();
+
+        if (currentState == FightClubState.Result && hasLastResult)
+            BuildResultLines(lastResult);
+
+        ApplyViewForMessage(currentMessageDescriptor);
+        currentMessage = RebuildMessage(currentMessageDescriptor);
+
+        if (dialogueText != null)
+            dialogueText.text = currentMessage;
+
+        if (wasTyping)
+        {
+            isTextComplete = true;
+
+            if (textCompleteIndicator != null)
+                textCompleteIndicator.SetActive(true);
+        }
+        else if (textCompleteIndicator != null)
+        {
+            textCompleteIndicator.SetActive(wasIndicatorActive);
+        }
     }
 
     private void BindButtons()
@@ -196,18 +286,14 @@ public class FightClubFacilityController : FacilitySceneControllerBase
             confirmButton.interactable = false;
             confirmButton.gameObject.SetActive(false);
         }
-
-        if (cutInRoot != null)
-            cutInRoot.SetActive(false);
-
-        if (cutInImage != null)
-            cutInImage.gameObject.SetActive(cutInImage.sprite != null);
+        RefreshConfirmButtonText();
 
         if (textCompleteIndicator != null)
             textCompleteIndicator.SetActive(false);
 
         hasSelectedCategory = false;
         hasUsedFightClub = false;
+        hasLastResult = false;
         ClearCategorySelection();
         RefreshCategoryViews();
     }
@@ -222,9 +308,13 @@ public class FightClubFacilityController : FacilitySceneControllerBase
 
     private void ApplyOperatorView(bool happy)
     {
-        Sprite sprite = isOperatorResolved
-            ? (happy && operatorHappySprite != null ? operatorHappySprite : operatorDefaultSprite)
-            : (happy && baitoHappySprite != null ? baitoHappySprite : baitoDefaultSprite);
+        if (!isOperatorResolved)
+        {
+            HideSpeakerAndCharacter();
+            return;
+        }
+
+        Sprite sprite = happy && operatorHappySprite != null ? operatorHappySprite : operatorDefaultSprite;
 
         if (characterImage != null)
         {
@@ -234,7 +324,7 @@ public class FightClubFacilityController : FacilitySceneControllerBase
 
         if (speakerNameText != null)
         {
-            speakerNameText.text = isOperatorResolved ? operatorDisplayName : baitoDisplayName;
+            speakerNameText.text = GetOperatorDisplayName();
             speakerNameText.gameObject.SetActive(true);
         }
     }
@@ -248,56 +338,33 @@ public class FightClubFacilityController : FacilitySceneControllerBase
         }
     }
 
-    private void BuildIntroSteps()
+    private void HideCharacterImage()
     {
-        introSteps.Clear();
-        introSteps.Enqueue(new FightClubStep { message = isOperatorResolved ? unlockedIntroText1 : lockedIntroText1 });
-        introSteps.Enqueue(new FightClubStep { message = isOperatorResolved ? unlockedIntroText2 : lockedIntroText2 });
-        introSteps.Enqueue(new FightClubStep { message = isOperatorResolved ? unlockedIntroText3 : lockedIntroText3 });
-        introSteps.Enqueue(new FightClubStep
+        if (characterImage != null)
         {
-            message = isOperatorResolved ? unlockedIntroText4 : lockedIntroText4,
-            beforeShow = () => ApplyOperatorView(true)
-        });
+            characterImage.sprite = null;
+            characterImage.gameObject.SetActive(false);
+        }
     }
 
-    private void ShowNextIntroStep()
+    private void HideSpeakerAndCharacter()
     {
-        if (introSteps.Count == 0)
-        {
-            StartCoroutine(PlayCutInThenPromptRoutine());
-            return;
-        }
-
-        FightClubStep step = introSteps.Dequeue();
-        step.beforeShow?.Invoke();
-        ShowMessage(step.message, FightClubState.Intro);
-    }
-
-    private IEnumerator PlayCutInThenPromptRoutine()
-    {
-        if (textCompleteIndicator != null)
-            textCompleteIndicator.SetActive(false);
-
-        if (cutInRoot != null)
-            cutInRoot.SetActive(true);
-
-        float elapsed = 0f;
-        float duration = Mathf.Max(0f, cutInDuration);
-        while (elapsed < duration)
-        {
-            while (IsRankBonusPanelOpen())
-                yield return null;
-
-            elapsed += Time.unscaledDeltaTime;
-            yield return null;
-        }
-
-        if (cutInRoot != null)
-            cutInRoot.SetActive(false);
-
         HideSpeakerName();
-        ShowMessage(chancePromptText, FightClubState.ChancePrompt);
+        HideCharacterImage();
+    }
+
+    private void HideSpeakerNameOnly()
+    {
+        HideSpeakerName();
+    }
+
+    private void ShowIntroLine()
+    {
+        FightClubMessageDescriptor descriptor = new FightClubMessageDescriptor
+        {
+            kind = isOperatorResolved ? FightClubMessageKind.UnlockedIntro : FightClubMessageKind.LockedIntro
+        };
+        ShowMessage(descriptor, FightClubState.Intro);
     }
 
     private void RefreshCategoryViews()
@@ -321,6 +388,16 @@ public class FightClubFacilityController : FacilitySceneControllerBase
         }
     }
 
+    private void RefreshConfirmButtonText()
+    {
+        TMP_Text targetText = confirmButtonText;
+        if (targetText == null && confirmButton != null)
+            targetText = confirmButton.GetComponentInChildren<TMP_Text>(true);
+
+        if (targetText != null)
+            targetText.text = GetLocalizedText(confirmButtonTextKey, confirmButtonTextFallback);
+    }
+
     private void ClearCategorySelection()
     {
         if (categoryViews == null)
@@ -333,13 +410,16 @@ public class FightClubFacilityController : FacilitySceneControllerBase
         }
     }
 
-    private void ShowMessage(string message, FightClubState nextState)
+    private void ShowMessage(FightClubMessageDescriptor descriptor, FightClubState nextState)
     {
         StopTyping();
 
         currentState = nextState;
-        currentMessage = message ?? "";
+        currentMessageDescriptor = descriptor;
+        currentMessage = RebuildMessage(descriptor);
         isTextComplete = false;
+
+        ApplyViewForMessage(descriptor);
 
         if (textCompleteIndicator != null)
             textCompleteIndicator.SetActive(false);
@@ -417,13 +497,7 @@ public class FightClubFacilityController : FacilitySceneControllerBase
         switch (currentState)
         {
             case FightClubState.Intro:
-                ShowNextIntroStep();
-                break;
-            case FightClubState.ChancePrompt:
                 ShowCategorySelection();
-                break;
-            case FightClubState.VictoryMessage:
-                BeginResultSequence();
                 break;
             case FightClubState.Result:
                 ShowNextResultLineOrReturn();
@@ -443,6 +517,7 @@ public class FightClubFacilityController : FacilitySceneControllerBase
             confirmButton.gameObject.SetActive(true);
             confirmButton.interactable = false;
         }
+        RefreshConfirmButtonText();
 
         if (textCompleteIndicator != null)
             textCompleteIndicator.SetActive(false);
@@ -488,9 +563,10 @@ public class FightClubFacilityController : FacilitySceneControllerBase
         }
 
         FightClubResult result = CalculateAndApplyResult();
+        lastResult = result;
+        hasLastResult = true;
         BuildResultLines(result);
-        ApplyOperatorView(true);
-        ShowMessage(isOperatorResolved ? unlockedVictoryText : lockedVictoryText, FightClubState.VictoryMessage);
+        BeginResultSequence();
     }
 
     private FightClubResult CalculateAndApplyResult()
@@ -605,44 +681,129 @@ public class FightClubFacilityController : FacilitySceneControllerBase
 
         if (result.skillLevelUp)
         {
-            resultLines.Add(BuildCategoryImprovedText());
-            resultLines.Add(string.Format(skillLevelUpFormat, GetSkillDisplayName(result.skill), result.oldLevel, result.newLevel));
+            resultLines.Add(new FightClubMessageDescriptor
+            {
+                kind = FightClubMessageKind.CategoryMonologue,
+                category = selectedCategory
+            });
+            resultLines.Add(new FightClubMessageDescriptor
+            {
+                kind = FightClubMessageKind.SkillLevelUp,
+                category = selectedCategory,
+                skill = result.skill,
+                oldLevel = result.oldLevel,
+                newLevel = result.newLevel
+            });
         }
         else
         {
-            resultLines.Add(string.Format(skillCategoryMaxedFormat, GetCategoryDisplayName(selectedCategory)));
+            resultLines.Add(new FightClubMessageDescriptor
+            {
+                kind = FightClubMessageKind.CategoryMaxed,
+                category = selectedCategory
+            });
             if (result.maxSkillReplacementGain.HasValue)
-                resultLines.Add(BuildStatGainText(replacementStatGainFormat, result.maxSkillReplacementGain.Value));
+            {
+                resultLines.Add(new FightClubMessageDescriptor
+                {
+                    kind = FightClubMessageKind.ReplacementStatGain,
+                    category = selectedCategory,
+                    statGain = result.maxSkillReplacementGain.Value
+                });
+            }
         }
 
         if (result.rankBonusGains != null && result.rankBonusGains.Count > 0)
         {
-            resultLines.Add(rankBonusMonologueText);
+            resultLines.Add(new FightClubMessageDescriptor { kind = FightClubMessageKind.RankBonusMonologue });
             foreach (StatGain gain in result.rankBonusGains)
-                resultLines.Add(BuildStatGainText(statGainFormat, gain));
+            {
+                resultLines.Add(new FightClubMessageDescriptor
+                {
+                    kind = FightClubMessageKind.RankBonusStatGain,
+                    statGain = gain
+                });
+            }
         }
 
-        resultLines.Add(isOperatorResolved ? unlockedFinishText : lockedFinishText);
+        resultLines.Add(new FightClubMessageDescriptor
+        {
+            kind = isOperatorResolved ? FightClubMessageKind.UnlockedOutro : FightClubMessageKind.LockedOutro
+        });
     }
 
-    private string BuildCategoryImprovedText()
+    private string BuildCategoryImprovedText(SkillCategory category)
     {
-        FightClubCategoryView categoryView = GetCategoryView(selectedCategory);
-        if (categoryView != null && !string.IsNullOrEmpty(categoryView.selectedMonologueText))
-            return categoryView.selectedMonologueText;
+        FightClubCategoryView categoryView = GetCategoryView(category);
+        if (categoryView != null)
+        {
+            string categoryViewText = GetLocalizedText(categoryView.selectedMonologueTextKey, "");
+            if (!string.IsNullOrEmpty(categoryViewText))
+                return categoryViewText;
+        }
 
-        return string.Format(skillCategoryImprovedFormat, GetCategoryDisplayName(selectedCategory));
+        string key = GetCategoryMonologueKey(category);
+        string fallback = categoryView != null && !string.IsNullOrEmpty(categoryView.selectedMonologueText)
+            ? categoryView.selectedMonologueText
+            : FormatLocalizedText(skillCategoryImprovedFormatKey, skillCategoryImprovedFormat, GetCategoryDisplayName(category));
+        return GetLocalizedText(key, fallback);
     }
 
-    private string BuildStatGainText(string format, StatGain gain)
+    private string BuildStatGainText(string formatKey, string fallbackFormat, StatGain gain)
     {
-        return string.Format(format, GetStatDisplayName(gain.statType), gain.amount);
+        return FormatLocalizedText(formatKey, fallbackFormat, GetStatDisplayName(gain.statType), gain.amount);
+    }
+
+    private string RebuildMessage(FightClubMessageDescriptor descriptor)
+    {
+        switch (descriptor.kind)
+        {
+            case FightClubMessageKind.LockedIntro:
+                return GetLocalizedText(lockedIntroTextKey, lockedIntroText1);
+            case FightClubMessageKind.UnlockedIntro:
+                return GetLocalizedText(unlockedIntroTextKey, unlockedIntroText1);
+            case FightClubMessageKind.CategoryMonologue:
+                return BuildCategoryImprovedText(descriptor.category);
+            case FightClubMessageKind.CategoryMaxed:
+                return FormatLocalizedText(skillCategoryMaxedFormatKey, skillCategoryMaxedFormat, GetCategoryDisplayName(descriptor.category));
+            case FightClubMessageKind.SkillLevelUp:
+                return FormatLocalizedText(skillLevelUpFormatKey, skillLevelUpFormat, GetSkillDisplayName(descriptor.skill), descriptor.oldLevel, descriptor.newLevel);
+            case FightClubMessageKind.ReplacementStatGain:
+                return BuildStatGainText(replacementStatGainFormatKey, replacementStatGainFormat, descriptor.statGain);
+            case FightClubMessageKind.RankBonusMonologue:
+                return GetLocalizedText(rankBonusMonologueTextKey, rankBonusMonologueText);
+            case FightClubMessageKind.RankBonusStatGain:
+                return BuildStatGainText(statGainFormatKey, statGainFormat, descriptor.statGain);
+            case FightClubMessageKind.LockedOutro:
+                return GetLocalizedText(lockedFinishTextKey, lockedFinishText);
+            case FightClubMessageKind.UnlockedOutro:
+                return GetLocalizedText(unlockedFinishTextKey, unlockedFinishText);
+            default:
+                return currentMessage;
+        }
+    }
+
+    private void ApplyViewForMessage(FightClubMessageDescriptor descriptor)
+    {
+        if (descriptor.kind == FightClubMessageKind.UnlockedIntro)
+        {
+            ApplyOperatorView(false);
+            return;
+        }
+
+        if (descriptor.kind == FightClubMessageKind.UnlockedOutro)
+        {
+            ApplyOperatorView(true);
+            return;
+        }
+
+        HideSpeakerNameOnly();
     }
 
     private void BeginResultSequence()
     {
         resultLineIndex = -1;
-        HideSpeakerName();
+        HideSpeakerNameOnly();
         ShowNextResultLineOrReturn();
     }
 
@@ -655,9 +816,6 @@ public class FightClubFacilityController : FacilitySceneControllerBase
             ReturnToExploration();
             return;
         }
-
-        if (resultLineIndex == resultLines.Count - 1)
-            ApplyOperatorView(true);
 
         ShowMessage(resultLines[resultLineIndex], FightClubState.Result);
     }
@@ -681,15 +839,32 @@ public class FightClubFacilityController : FacilitySceneControllerBase
         switch (category)
         {
             case SkillCategory.Gun:
-                return gunCategoryText;
+                return GetLocalizedText(gunCategoryTextKey, gunCategoryText);
             case SkillCategory.Martial:
-                return martialCategoryText;
+                return GetLocalizedText(martialCategoryTextKey, martialCategoryText);
             case SkillCategory.Magic:
-                return magicCategoryText;
+                return GetLocalizedText(magicCategoryTextKey, magicCategoryText);
             case SkillCategory.Oni:
-                return oniCategoryText;
+                return GetLocalizedText(oniCategoryTextKey, oniCategoryText);
             default:
-                return swordCategoryText;
+                return GetLocalizedText(swordCategoryTextKey, swordCategoryText);
+        }
+    }
+
+    private string GetCategoryMonologueKey(SkillCategory category)
+    {
+        switch (category)
+        {
+            case SkillCategory.Gun:
+                return gunSelectedMonologueTextKey;
+            case SkillCategory.Martial:
+                return martialSelectedMonologueTextKey;
+            case SkillCategory.Magic:
+                return magicSelectedMonologueTextKey;
+            case SkillCategory.Oni:
+                return oniSelectedMonologueTextKey;
+            default:
+                return swordSelectedMonologueTextKey;
         }
     }
 
@@ -698,10 +873,7 @@ public class FightClubFacilityController : FacilitySceneControllerBase
         if (skill == null)
             return "";
 
-        if (LocalizationManager.Instance != null)
-            return LocalizationManager.Instance.GetText(skill.skillNameKey);
-
-        return skill.skillNameKey;
+        return GetLocalizedText(skill.skillNameKey, skill.skillNameKey);
     }
 
     private string GetStatDisplayName(PermanentStatType statType)
@@ -709,14 +881,54 @@ public class FightClubFacilityController : FacilitySceneControllerBase
         switch (statType)
         {
             case PermanentStatType.Defense:
-                return "DEF";
+                return GetLocalizedText(defenseStatNameKey, defenseStatNameFallback);
             case PermanentStatType.Speed:
-                return "SPD";
+                return GetLocalizedText(speedStatNameKey, speedStatNameFallback);
             case PermanentStatType.Luck:
-                return "LUK";
+                return GetLocalizedText(luckStatNameKey, luckStatNameFallback);
             default:
-                return "STR";
+                return GetLocalizedText(strengthStatNameKey, strengthStatNameFallback);
         }
+    }
+
+    private string GetOperatorDisplayName()
+    {
+        return GetLocalizedText(operatorDisplayNameKey, operatorDisplayName);
+    }
+
+    private string FormatLocalizedText(string key, string fallback, params object[] args)
+    {
+        string format = GetLocalizedText(key, fallback);
+        try
+        {
+            return string.Format(format, args);
+        }
+        catch (FormatException)
+        {
+            try
+            {
+                return string.Format(fallback, args);
+            }
+            catch (FormatException)
+            {
+                return fallback ?? "";
+            }
+        }
+    }
+
+    private string GetLocalizedText(string key, string fallback)
+    {
+        if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
+        {
+            string localized = LocalizationManager.Instance.GetText(key);
+            if (!string.IsNullOrEmpty(localized) && localized != key)
+                return localized;
+        }
+
+        if (!string.IsNullOrEmpty(fallback))
+            return fallback;
+
+        return key ?? "";
     }
 
     private void ApplyRankButtonSprite()
