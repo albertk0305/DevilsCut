@@ -138,8 +138,7 @@ public class ExplorationUI : MonoBehaviour
                 if (randomRankTexts[i] != null) { randomRankTexts[i].gameObject.SetActive(true); randomRankTexts[i].text = currentRank.ToString(); }
                 if (randomOperatorImages[i] != null)
                 {
-                    randomOperatorImages[i].gameObject.SetActive(true);
-                    randomOperatorImages[i].sprite = (IsFacilityOperatorAvailable(facilityData) && facilityData.operatorImage != null) ? facilityData.operatorImage : baitoNormal;
+                    ApplyFacilityOperatorImage(randomOperatorImages[i], facilityData, false);
                 }
             }
             else if (data is BossSelectionNodeData bossData)
@@ -180,7 +179,7 @@ public class ExplorationUI : MonoBehaviour
 
         if (selectedData is FacilityData facilityData)
         {
-            randomOperatorImages[slotIndex].sprite = (IsFacilityOperatorAvailable(facilityData) && facilityData.operatorSmileImage != null) ? facilityData.operatorSmileImage : baitoSmile;
+            ApplyFacilityOperatorImage(randomOperatorImages[slotIndex], facilityData, true);
         }
         else if (selectedData is BossSelectionNodeData bossSelData)
         {
@@ -203,7 +202,7 @@ public class ExplorationUI : MonoBehaviour
 
         if (prevData is FacilityData facilityData)
         {
-            randomOperatorImages[selectedIndex].sprite = (IsFacilityOperatorAvailable(facilityData) && facilityData.operatorImage != null) ? facilityData.operatorImage : baitoNormal;
+            ApplyFacilityOperatorImage(randomOperatorImages[selectedIndex], facilityData, false);
         }
         else if (prevData is BossSelectionNodeData bossSelData)
         {
@@ -227,6 +226,48 @@ public class ExplorationUI : MonoBehaviour
             return false;
 
         return PlayerManager.Instance.IsSupporterChoiceResolved(facilityData.linkedSupporter);
+    }
+
+    private void ApplyFacilityOperatorImage(Image targetImage, FacilityData facilityData, bool selected)
+    {
+        if (targetImage == null)
+            return;
+
+        bool operatorAvailable = IsFacilityOperatorAvailable(facilityData);
+        Sprite operatorSprite = null;
+
+        if (operatorAvailable && facilityData != null)
+            operatorSprite = selected ? facilityData.operatorSmileImage : facilityData.operatorImage;
+
+        if (operatorSprite != null)
+        {
+            targetImage.gameObject.SetActive(true);
+            targetImage.sprite = operatorSprite;
+            return;
+        }
+
+        if (!operatorAvailable && ShouldUseEmptyImageWhenLockedFacility(facilityData != null ? facilityData.nodeID : ""))
+        {
+            targetImage.sprite = null;
+            targetImage.gameObject.SetActive(false);
+            return;
+        }
+
+        targetImage.gameObject.SetActive(true);
+        targetImage.sprite = selected ? baitoSmile : baitoNormal;
+    }
+
+    private bool ShouldUseEmptyImageWhenLockedFacility(string facilityId)
+    {
+        switch (facilityId)
+        {
+            case "livehouse":
+            case "casino":
+            case "fightclub":
+                return true;
+            default:
+                return false;
+        }
     }
 
     public void OnClickCancel()
