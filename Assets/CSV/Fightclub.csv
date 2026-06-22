@@ -15,8 +15,8 @@ gym_category_martial_monologue,맨손 싸움은 귀찮아. 변명할 도구가 �
 gym_category_magic_monologue,요술이라. 원리는 몰라도 편하면 됐지.,Magic huh. I do not need to know how it works if it makes things easier.
 gym_category_oni_monologue,아무것도 걸지 않으면 아무것도 얻을 수 없지.,"Nothing ventured, nothing gained."
 gym_category_improved_format,{0}실력이 향상되었다.,{0} skill increased.
-gym_category_maxed_format,{0}은 이미 충분히 단련되어 있다.,{0} is already fully mastered.
-gym_skill_level_up_format,{0}이(가) {1}레벨에서 {2} 레벨로 상승했습니다.,{0} has leveled up from Level {1} to Level {2}.
-gym_replacement_stat_gain_format,{0}이(가) {1}만큼 상승했습니다.,{0} increased by {1}.
+gym_category_maxed_format,{0:은는} 이미 충분히 단련되어 있다.,{0} is already fully mastered.
+gym_skill_level_up_format,{0:이가} {1}레벨에서 {2} 레벨로 상승했습니다.,{0} has leveled up from Level {1} to Level {2}.
+gym_replacement_stat_gain_format,{0:이가} {1}만큼 상승했습니다.,{0} increased by {1}.
 gym_rank_bonus_monologue,셰리의 움직임이 한층 날카로워졌다.,Sherry’s movements became noticeably sharper.
-gym_stat_gain_format,{0}이(가) {1}만큼 상승했습니다.,{0} increased by {1}.
+gym_stat_gain_format,{0:이가} {1}만큼 상승했습니다.,{0} increased by {1}.

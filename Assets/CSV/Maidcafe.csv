@@ -14,8 +14,8 @@ maid_cafe_default_max_skill_gift,조력자의 스킬은 최대로 강화되었�
 maid_cafe_unlocked_finish,아스모의 매력에 푹 빠지셨죠? 다음번에도 꼭 만나러 와주세요!,You fell head over heels for Asmo's charm right? Please come see me again next time!
 maid_cafe_locked_finish,즐거운 시간 되셨나요? 다음에도 꼭 들러주세요!,Did you have a good time? Please visit us again!
 maid_cafe_no_gift_available,받을 수 있는 선물이 없다.,There are no gifts available to receive.
-maid_cafe_skill_level_up_format,{0}의 {1} 레벨이 {2}에서 {3}(으)로 상승했다.,{0}'s {1} level has increased from {2} to {3}.
-maid_cafe_item_gain_format,{0}을 획득했다!,Obtained {0}!
+maid_cafe_skill_level_up_format,{0}의 {1} 레벨이 {2}에서 {3:으로로} 상승했다.,{0}'s {1} level has increased from {2} to {3}.
+maid_cafe_item_gain_format,{0:을를} 획득했다!,Obtained {0}!
 maid_cafe_facility_gift,보너스 선물을 받았다.,Received a bonus gift.
 maid_cafe_skill_passive,패시브 스킬,Passive Skill
 maid_cafe_skill_start,개전 스킬,Start Skill

@@ -901,13 +901,13 @@ public class FightClubFacilityController : FacilitySceneControllerBase
         string format = GetLocalizedText(key, fallback);
         try
         {
-            return string.Format(format, args);
+            return KoreanParticleFormatter.Format(format, args);
         }
         catch (FormatException)
         {
             try
             {
-                return string.Format(fallback, args);
+                return KoreanParticleFormatter.Format(fallback, args);
             }
             catch (FormatException)
             {

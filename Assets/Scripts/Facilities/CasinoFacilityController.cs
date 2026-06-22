@@ -869,11 +869,18 @@ public class CasinoFacilityController : FacilitySceneControllerBase
         string format = GetLocalizedText(key, fallback);
         try
         {
-            return string.Format(format, args);
+            return KoreanParticleFormatter.Format(format, args);
         }
         catch (FormatException)
         {
-            return string.Format(fallback, args);
+            try
+            {
+                return KoreanParticleFormatter.Format(fallback, args);
+            }
+            catch (FormatException)
+            {
+                return fallback ?? "";
+            }
         }
     }
 

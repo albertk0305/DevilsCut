@@ -8,12 +8,12 @@ bar_drink_defense_name,버번 위스키,Bourbon Whiskey
 bar_drink_speed_name,진,Gin
 bar_drink_luck_name,샴페인,Champagne
 bar_drink_devils_cut_name,데빌스 컷,Devil's Cut
-bar_drink_monologue_format,{0}을(를) 마셨다.,Drank {0}.
+bar_drink_monologue_format,{0:을를} 마셨다.,Drank {0}.
 ,,
-bar_result_stat_gain_format,{0}이(가) {1} 상승했다,{0} increased by {1}.
+bar_result_stat_gain_format,{0:이가} {1} 상승했다,{0} increased by {1}.
 ,,
 bar_result_hp_recovery,HP가 최대치까지 회복되었다,HP was fully recovered.
-bar_result_last_order_bonus_format,라스트 오더 보너스로 {0}이(가) {1} 상승했다,Last Order Bonus increased {0} by {1}.
+bar_result_last_order_bonus_format,라스트 오더 보너스로 {0:이가} {1} 상승했다,Last Order Bonus increased {0} by {1}.
 bar_drink_stat_format,{0} +{1},{0} +{1}
 bar_drink_devils_cut_stat_format,랜덤 +{0},Random +{0}
 stat_strength,힘,STR

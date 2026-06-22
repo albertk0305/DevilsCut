@@ -19,10 +19,10 @@ restaurant_menu_martial_monologue,진한 돼지뼈 국물이 입 안을 묵직�
 restaurant_menu_magic_monologue,짠맛 뒤에 구수한 단맛이 남네. 이런 국물은 천천히 마셔야 제맛이지.,A savory sweetness lingers behind the salt. This kind of broth is best enjoyed slowly.
 restaurant_menu_oni_monologue_format,혀는 따가운데 젓가락은 멈추질 않네. 위험한 맛이라는 건 이런 거지.,My tongue stings but the chopsticks will not stop. This is what a dangerous flavor tastes like.
 ,,
-restaurant_evolution_result_format,{0}이(가) {1}으로 진화했다.,{0} evolved into {1}.
+restaurant_evolution_result_format,{0:이가} {1:으로로} 진화했다.,{0} evolved into {1}.
 restaurant_exp_gain_format,EXP를 {0} 획득했다.,Gained {0} EXP.
 restaurant_no_candidate_exp_gain_format,진화할 스킬이 없다. 대신 경험치를 {0} 획득했다.,No skills available for evolution. Obtained {0} EXP instead.
 restaurant_facility_bonus_exp_gain_format,보너스로 경험치를 {0} 획득했다.,No skills available for evolution. Obtained {0} EXP instead.
 restaurant_level_up_header_format,레벨 업! Lv.{0} → Lv.{1},You have gained {0} bonus EXP.
 ,,
-restaurant_default_menu_monologue_format,{0}을 먹었다.,Ate {0}.
+restaurant_default_menu_monologue_format,{0:을를} 먹었다.,Ate {0}.
