@@ -76,6 +76,11 @@ public class BattleVisualizer : MonoBehaviour
         EnqueueVisual(CombatUIManager.Instance.TypeCommentary(text, autoProceed, delayAfter));
     }
 
+    public void EnqueueLocalizedCommentary(string key, string fallback, object[] args = null, bool autoProceed = true, float delayAfter = 1.0f)
+    {
+        EnqueueVisual(CombatUIManager.Instance.TypeLocalizedCommentary(key, fallback, args, autoProceed, delayAfter));
+    }
+
     public void EnqueueDelay(float seconds)
     {
         visualQueue.Enqueue(DelayRoutine(seconds));

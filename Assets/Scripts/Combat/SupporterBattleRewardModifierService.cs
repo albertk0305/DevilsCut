@@ -14,7 +14,11 @@ public class ModifiedBattleRewardResult
 
     public string BuildFinalRewardLine()
     {
-        return $"EXP {FormatRewardAmount(finalExp, expBonus)} / Gold {FormatRewardAmount(finalGold, goldBonus)} \uD68D\uB4DD!";
+        return FormatLocalizedText(
+            "combat_victory_reward_result_format",
+            "EXP {0} / Gold {1} 획득!",
+            FormatRewardAmount(finalExp, expBonus),
+            FormatRewardAmount(finalGold, goldBonus));
     }
 
     public string BuildBonusMessage()
@@ -41,6 +45,46 @@ public class ModifiedBattleRewardResult
 
         return amount.ToString();
     }
+
+    private static string GetLocalizedText(string key, string fallback)
+    {
+        if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
+        {
+            string localized = LocalizationManager.Instance.GetText(key);
+            if (!string.IsNullOrEmpty(localized) && localized != key)
+                return localized;
+        }
+
+        if (!string.IsNullOrEmpty(fallback))
+            return fallback;
+
+        return key ?? "";
+    }
+
+    public static string GetLocalizedRewardText(string key, string fallback)
+    {
+        return GetLocalizedText(key, fallback);
+    }
+
+    private static string FormatLocalizedText(string key, string fallback, params object[] args)
+    {
+        string format = GetLocalizedText(key, fallback);
+        try
+        {
+            return KoreanParticleFormatter.Format(format, args);
+        }
+        catch (System.FormatException)
+        {
+            try
+            {
+                return KoreanParticleFormatter.Format(fallback, args);
+            }
+            catch (System.FormatException)
+            {
+                return fallback ?? "";
+            }
+        }
+    }
 }
 
 public static class SupporterBattleRewardModifierService
@@ -62,10 +106,10 @@ public static class SupporterBattleRewardModifierService
         result.finalGold = result.baseGold + result.goldBonus;
 
         if (result.goldBonus > 0)
-            result.bonusMessages.Add("\uB9C8\uBAAC\uC758 \uD328\uC2DC\uBE0C\uB85C \uACE8\uB4DC \uBCF4\uC0C1 \uC99D\uAC00!");
+            result.bonusMessages.Add(ModifiedBattleRewardResult.GetLocalizedRewardText("combat_victory_mammon_gold_bonus", "마몬의 패시브로 골드 보상 증가!"));
 
         if (result.expBonus > 0)
-            result.bonusMessages.Add("\uC0AC\uD0C4\uC758 \uD328\uC2DC\uBE0C\uB85C \uACBD\uD5D8\uCE58 \uBCF4\uC0C1 \uC99D\uAC00!");
+            result.bonusMessages.Add(ModifiedBattleRewardResult.GetLocalizedRewardText("combat_victory_satan_exp_bonus", "사탄의 패시브로 경험치 보상 증가!"));
 
         return result;
     }

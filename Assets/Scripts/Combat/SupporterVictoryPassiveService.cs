@@ -90,19 +90,19 @@ public static class SupporterVictoryPassiveService
             case 0:
                 playerManager.stats.maxHp += hpGain;
                 playerManager.stats.currentHp += hpGain;
-                results.Add(new SupporterPassiveRewardResult($"\uC544\uC2A4\uBAA8\uB370\uC6B0\uC2A4\uC758 \uD328\uC2DC\uBE0C \uBC1C\uB3D9!\n\uCD5C\uB300 \uCCB4\uB825\uC774 {hpGain} \uC99D\uAC00\uD588\uC2B5\uB2C8\uB2E4."));
+                results.Add(new SupporterPassiveRewardResult(FormatLocalizedText("combat_victory_asmodeus_max_hp_gain_format", "아스모데우스의 패시브 발동!\n최대 체력이 {0} 증가했습니다.", hpGain)));
                 break;
             case 1:
                 playerManager.stats.breakResistance += statGain;
-                results.Add(new SupporterPassiveRewardResult($"\uC544\uC2A4\uBAA8\uB370\uC6B0\uC2A4\uC758 \uD328\uC2DC\uBE0C \uBC1C\uB3D9!\n\uBE0C\uB808\uC774\uD06C \uC800\uD56D\uC774 {statGain} \uC99D\uAC00\uD588\uC2B5\uB2C8\uB2E4."));
+                results.Add(new SupporterPassiveRewardResult(FormatLocalizedText("combat_victory_asmodeus_break_resistance_gain_format", "아스모데우스의 패시브 발동!\n브레이크 저항이 {0} 증가했습니다.", statGain)));
                 break;
             case 2:
                 playerManager.stats.maxBreakGauge += statGain;
-                results.Add(new SupporterPassiveRewardResult($"\uC544\uC2A4\uBAA8\uB370\uC6B0\uC2A4\uC758 \uD328\uC2DC\uBE0C \uBC1C\uB3D9!\n\uCD5C\uB300 \uBE0C\uB808\uC774\uD06C \uAC8C\uC774\uC9C0\uAC00 {statGain} \uC99D\uAC00\uD588\uC2B5\uB2C8\uB2E4."));
+                results.Add(new SupporterPassiveRewardResult(FormatLocalizedText("combat_victory_asmodeus_max_break_gain_format", "아스모데우스의 패시브 발동!\n최대 브레이크 게이지가 {0} 증가했습니다.", statGain)));
                 break;
             default:
                 playerManager.stats.ActionPoints += statGain;
-                results.Add(new SupporterPassiveRewardResult($"\uC544\uC2A4\uBAA8\uB370\uC6B0\uC2A4\uC758 \uD328\uC2DC\uBE0C \uBC1C\uB3D9!\nAP\uAC00 {statGain} \uC99D\uAC00\uD588\uC2B5\uB2C8\uB2E4."));
+                results.Add(new SupporterPassiveRewardResult(FormatLocalizedText("combat_victory_asmodeus_ap_gain_format", "아스모데우스의 패시브 발동!\nAP가 {0} 증가했습니다.", statGain)));
                 break;
         }
     }
@@ -147,7 +147,7 @@ public static class SupporterVictoryPassiveService
             return;
 
         playerManager.stats.currentHp = Mathf.Clamp(playerManager.stats.currentHp + actualHeal, 0, finalMaxHp);
-        results.Add(new SupporterPassiveRewardResult($"\uBC14\uC54C\uC81C\uBD91\uC758 \uD328\uC2DC\uBE0C \uBC1C\uB3D9!\n\uCCB4\uB825\uC774 {actualHeal} \uD68C\uBCF5\uB418\uC5C8\uC2B5\uB2C8\uB2E4."));
+        results.Add(new SupporterPassiveRewardResult(FormatLocalizedText("combat_victory_baalzebub_heal_format", "바알제붑의 패시브 발동!\n체력이 {0} 회복되었습니다.", actualHeal)));
     }
 
     private static float GetBeelzebubHealRatio(int passiveLevel)
@@ -182,19 +182,19 @@ public static class SupporterVictoryPassiveService
         {
             case 0:
                 playerManager.stats.strength += statGain;
-                results.Add(new SupporterPassiveRewardResult($"\uB8E8\uC2DC\uD37C\uC758 \uD328\uC2DC\uBE0C \uBC1C\uB3D9!\n\uD798\uC774 {statGain} \uC99D\uAC00\uD588\uC2B5\uB2C8\uB2E4."));
+                results.Add(new SupporterPassiveRewardResult(FormatLocalizedText("combat_victory_lucifer_strength_gain_format", "루시퍼의 패시브 발동!\n힘이 {0} 증가했습니다.", statGain)));
                 break;
             case 1:
                 playerManager.stats.defense += statGain;
-                results.Add(new SupporterPassiveRewardResult($"\uB8E8\uC2DC\uD37C\uC758 \uD328\uC2DC\uBE0C \uBC1C\uB3D9!\n\uBC29\uC5B4\uB825\uC774 {statGain} \uC99D\uAC00\uD588\uC2B5\uB2C8\uB2E4."));
+                results.Add(new SupporterPassiveRewardResult(FormatLocalizedText("combat_victory_lucifer_defense_gain_format", "루시퍼의 패시브 발동!\n방어력이 {0} 증가했습니다.", statGain)));
                 break;
             case 2:
                 playerManager.stats.speed += statGain;
-                results.Add(new SupporterPassiveRewardResult($"\uB8E8\uC2DC\uD37C\uC758 \uD328\uC2DC\uBE0C \uBC1C\uB3D9!\n\uC18D\uB3C4\uAC00 {statGain} \uC99D\uAC00\uD588\uC2B5\uB2C8\uB2E4."));
+                results.Add(new SupporterPassiveRewardResult(FormatLocalizedText("combat_victory_lucifer_speed_gain_format", "루시퍼의 패시브 발동!\n속도가 {0} 증가했습니다.", statGain)));
                 break;
             default:
                 playerManager.stats.luck += statGain;
-                results.Add(new SupporterPassiveRewardResult($"\uB8E8\uC2DC\uD37C\uC758 \uD328\uC2DC\uBE0C \uBC1C\uB3D9!\n\uC6B4\uC774 {statGain} \uC99D\uAC00\uD588\uC2B5\uB2C8\uB2E4."));
+                results.Add(new SupporterPassiveRewardResult(FormatLocalizedText("combat_victory_lucifer_luck_gain_format", "루시퍼의 패시브 발동!\n운이 {0} 증가했습니다.", statGain)));
                 break;
         }
     }
@@ -285,6 +285,41 @@ public static class SupporterVictoryPassiveService
                 return 0.15f;
             default:
                 return 0.25f;
+        }
+    }
+
+    private static string GetLocalizedText(string key, string fallback)
+    {
+        if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
+        {
+            string localized = LocalizationManager.Instance.GetText(key);
+            if (!string.IsNullOrEmpty(localized) && localized != key)
+                return localized;
+        }
+
+        if (!string.IsNullOrEmpty(fallback))
+            return fallback;
+
+        return key ?? "";
+    }
+
+    private static string FormatLocalizedText(string key, string fallback, params object[] args)
+    {
+        string format = GetLocalizedText(key, fallback);
+        try
+        {
+            return KoreanParticleFormatter.Format(format, args);
+        }
+        catch (System.FormatException)
+        {
+            try
+            {
+                return KoreanParticleFormatter.Format(fallback, args);
+            }
+            catch (System.FormatException)
+            {
+                return fallback ?? "";
+            }
         }
     }
 }

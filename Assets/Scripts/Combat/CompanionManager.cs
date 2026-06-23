@@ -60,8 +60,10 @@ public class CompanionManager : MonoBehaviour
         KarinItemData equippedItem = PlayerManager.Instance.equippedKarinItem;
         if (equippedItem == null)
         {
-            yield return StartCoroutine(CombatUIManager.Instance.TypeCommentary(
+            yield return StartCoroutine(CombatUIManager.Instance.TypeLocalizedCommentary(
+                "combat_comment_karin_no_usable_item",
                 "카린: \"어라? 쓸 수 있는 물건이 없네!\"",
+                null,
                 true,
                 CombatManager.Instance.Timing.companionActionCommentDelay));
             CombatManager.Instance.ResolveTurnEnd();
@@ -75,15 +77,17 @@ public class CompanionManager : MonoBehaviour
     {
         if (karinData != null && karinData.CutIn != null)
         {
-            CombatUIManager.Instance.InterruptAndTypeCommentary("카린의 차례입니다!");
+            CombatUIManager.Instance.InterruptAndTypeLocalizedCommentary("combat_comment_karin_turn", "카린의 차례입니다!");
             yield return StartCoroutine(CombatUIManager.Instance.ShowCutIn(karinData.CutIn));
         }
         if (karinData != null && karinData.battle != null)
             CombatUIManager.Instance.SetCasterImage(true, karinData.battle);
 
         string itemName = GetTranslatedText(item.itemName);
-        Coroutine textCoroutine = StartCoroutine(CombatUIManager.Instance.TypeCommentary(
-            $"카린이 {itemName}을(를) 사용했습니다!",
+        Coroutine textCoroutine = StartCoroutine(CombatUIManager.Instance.TypeLocalizedCommentary(
+            "combat_comment_karin_use_item_format",
+            "카린이 {0:을를} 사용했습니다!",
+            new object[] { itemName },
             true,
             CombatManager.Instance.Timing.companionActionCommentDelay));
 
@@ -146,17 +150,21 @@ public class CompanionManager : MonoBehaviour
         Sprite cutIn = (isStartSkill && supporter.startSkillCutIn != null) ? supporter.startSkillCutIn : supporter.CutIn;
         if (cutIn != null)
         {
-            string turnText = isStartSkill ? $"{supName}의 개전 지원!" : $"{supName}의 차례입니다!";
-            CombatUIManager.Instance.InterruptAndTypeCommentary(turnText);
+            string turnKey = isStartSkill ? "combat_comment_supporter_start_support_format" : "combat_comment_supporter_turn_format";
+            string turnFallback = isStartSkill ? "{0}의 개전 지원!" : "{0}의 차례입니다!";
+            CombatUIManager.Instance.InterruptAndTypeLocalizedCommentary(turnKey, turnFallback, supName);
             yield return StartCoroutine(CombatUIManager.Instance.ShowCutIn(cutIn));
         }
 
         Sprite actionImage = isStartSkill ? supporter.startSkillImage : supporter.battleSkillImage;
         if (actionImage != null) CombatUIManager.Instance.SetCasterImage(true, actionImage);
 
-        string skillType = isStartSkill ? "개전 스킬" : "전투 스킬";
-        Coroutine textCoroutine = StartCoroutine(CombatUIManager.Instance.TypeCommentary(
-            $"{supName}의 {skillType} 발동!",
+        string skillKey = isStartSkill ? "combat_comment_supporter_start_skill_format" : "combat_comment_supporter_battle_skill_format";
+        string skillFallback = isStartSkill ? "{0}의 개전 스킬 발동!" : "{0}의 전투 스킬 발동!";
+        Coroutine textCoroutine = StartCoroutine(CombatUIManager.Instance.TypeLocalizedCommentary(
+            skillKey,
+            skillFallback,
+            new object[] { supName },
             true,
             CombatManager.Instance.Timing.companionActionCommentDelay));
 

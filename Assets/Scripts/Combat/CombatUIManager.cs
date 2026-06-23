@@ -172,7 +172,9 @@ public class CombatUIManager : MonoBehaviour
     public void UpdateEnemyBreak(float breakValue) => enemyStatusUI.UpdateBreak(breakValue);
 
     public IEnumerator TypeCommentary(string message, bool autoProceed = true, float delayAfter = 1.5f) => visualUI.TypeCommentary(message, autoProceed, delayAfter);
+    public IEnumerator TypeLocalizedCommentary(string key, string fallback, object[] args, bool autoProceed = true, float delayAfter = 1.5f) => visualUI.TypeLocalizedCommentary(key, fallback, args, autoProceed, delayAfter);
     public void InterruptAndTypeCommentary(string message) => visualUI.InterruptAndTypeCommentary(message);
+    public void InterruptAndTypeLocalizedCommentary(string key, string fallback, params object[] args) => visualUI.InterruptAndTypeLocalizedCommentary(key, fallback, args);
     public IEnumerator ShowCutIn(Sprite cutInSprite) => visualUI.ShowCutIn(cutInSprite);
     public void SpawnDamageText(string text, bool isCrit, bool isPlayerTarget) => visualUI.SpawnDamageText(text, isCrit, isPlayerTarget);
     public IEnumerator ShowCritAlert() => visualUI.ShowCritAlert();

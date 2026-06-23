@@ -95,6 +95,9 @@ public class CombatVictoryUIController : MonoBehaviour
     private readonly List<ItemMergeResult> pendingMergeResults = new List<ItemMergeResult>();
     private Coroutine typingCoroutine;
     private string currentMessage = "";
+    private string currentMessageKey = "";
+    private string currentMessageFallback = "";
+    private object[] currentMessageArgs;
     private VictoryStep currentStep;
     private readonly List<EquipmentItemData> equipmentCandidates = new List<EquipmentItemData>();
     private readonly List<KarinItemData> karinItemCandidates = new List<KarinItemData>();
@@ -104,6 +107,8 @@ public class CombatVictoryUIController : MonoBehaviour
     private bool[] equipmentRerollUsed;
     private BattleType currentRewardBattleType;
     private int currentRewardPhase;
+    private string currentEnemyName = "";
+    private VictoryRewardGrantResult currentRewardResult;
     private bool isTyping;
     private bool isContinuing;
     private bool isWaitingForLeviathanGiftAdvance;
@@ -133,8 +138,20 @@ public class CombatVictoryUIController : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        if (LocalizationManager.Instance != null)
+        {
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+            LocalizationManager.Instance.OnLanguageChanged += OnLanguageChanged;
+        }
+    }
+
     private void OnDisable()
     {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+
         IsVictoryUIActive = false;
         selectedItem = null;
         selectedKarinItem = null;
@@ -143,11 +160,35 @@ public class CombatVictoryUIController : MonoBehaviour
         RestoreMergePresentationControls();
     }
 
+    private void OnLanguageChanged()
+    {
+        RefreshStaticLocalizedText();
+
+        if (!string.IsNullOrEmpty(currentMessageKey))
+        {
+            currentMessage = FormatLocalizedText(currentMessageKey, currentMessageFallback, currentMessageArgs);
+
+            if (typingCoroutine != null)
+            {
+                StopCoroutine(typingCoroutine);
+                typingCoroutine = null;
+            }
+
+            if (resultMessageText != null)
+                resultMessageText.text = currentMessage;
+
+            isTyping = false;
+            SetNextIndicatorActive(true);
+        }
+    }
+
     public void ShowVictory(string enemyName, VictoryRewardGrantResult rewardResult)
     {
         isContinuing = false;
         IsVictoryUIActive = true;
         currentStep = VictoryStep.ResultMessage;
+        currentEnemyName = enemyName;
+        currentRewardResult = rewardResult;
 
         if (victoryRoot != null)
             victoryRoot.SetActive(true);
@@ -163,9 +204,7 @@ public class CombatVictoryUIController : MonoBehaviour
         if (continueButton != null)
             continueButton.gameObject.SetActive(false);
 
-        string safeEnemyName = string.IsNullOrEmpty(enemyName) ? "\uC801" : enemyName;
-        SetImmediateText(titleText, $"{safeEnemyName}\uC744 \uACA9\uD30C\uD588\uC2B5\uB2C8\uB2E4!");
-        SetImmediateText(rewardText, BuildRewardText(rewardResult));
+        RefreshStaticLocalizedText();
 
         if (resultMessageText != null)
             resultMessageText.gameObject.SetActive(true);
@@ -185,6 +224,8 @@ public class CombatVictoryUIController : MonoBehaviour
         IsVictoryUIActive = false;
         selectedItem = null;
         selectedKarinItem = null;
+        currentEnemyName = "";
+        currentRewardResult = null;
         StopMergeAnimation();
         RestoreMergePresentationControls();
         HideAllStageGroups();
@@ -392,11 +433,11 @@ public class CombatVictoryUIController : MonoBehaviour
         int goldBonus = rewardResult != null && rewardResult.rewardModifierResult != null ? rewardResult.rewardModifierResult.goldBonus : 0;
 
         StringBuilder builder = new StringBuilder();
-        builder.AppendLine($"EXP: {FormatRewardAmount(exp, expBonus)}");
-        builder.AppendLine($"Gold: {FormatRewardAmount(gold, goldBonus)}");
+        builder.AppendLine(FormatLocalizedText("combat_victory_reward_exp_line", "EXP: {0}", FormatRewardAmount(exp, expBonus)));
+        builder.AppendLine(FormatLocalizedText("combat_victory_reward_gold_line", "Gold: {0}", FormatRewardAmount(gold, goldBonus)));
 
         if (keys > 0)
-            builder.AppendLine($"Key +{keys}");
+            builder.AppendLine(FormatLocalizedText("combat_victory_reward_key_line", "Key +{0}", keys));
 
         return builder.ToString().TrimEnd();
     }
@@ -407,16 +448,16 @@ public class CombatVictoryUIController : MonoBehaviour
 
         if (modifiedReward != null)
         {
-            string bonusMessage = modifiedReward.BuildBonusMessage();
+            string bonusMessage = BuildRewardModifierMessage(modifiedReward);
             if (!string.IsNullOrEmpty(bonusMessage))
                 return bonusMessage;
 
-            return modifiedReward.BuildFinalRewardLine();
+            return BuildFinalRewardLine(modifiedReward.finalExp, modifiedReward.expBonus, modifiedReward.finalGold, modifiedReward.goldBonus);
         }
 
         int exp = rewardResult != null ? rewardResult.expGranted : 0;
         int gold = rewardResult != null ? rewardResult.goldGranted : 0;
-        return $"EXP {exp} / Gold {gold} \uD68D\uB4DD!";
+        return BuildFinalRewardLine(exp, 0, gold, 0);
     }
 
     private string BuildLevelUpMessage(VictoryRewardGrantResult rewardResult)
@@ -429,7 +470,7 @@ public class CombatVictoryUIController : MonoBehaviour
         StringBuilder builder = new StringBuilder();
         StatGrowthSummary growth = levelUp.totalGrowth;
 
-        builder.AppendLine($"Level Up! Lv.{levelUp.oldLevel} \u2192 Lv.{levelUp.newLevel}");
+        builder.AppendLine(FormatLocalizedText("combat_victory_level_up_format", "Level Up! Lv.{0} -> Lv.{1}", levelUp.oldLevel, levelUp.newLevel));
 
         AppendGrowthLine(builder, ("HP", growth.maxHp), ("Max Break Gauge", growth.maxBreakGauge), ("Break Resistance", growth.breakResistance));
         AppendGrowthLine(builder, ("STR", growth.strength), ("DEF", growth.defense), ("SPD", growth.speed));
@@ -444,6 +485,42 @@ public class CombatVictoryUIController : MonoBehaviour
             return $"{amount} (+{bonus})";
 
         return amount.ToString();
+    }
+
+    private string BuildRewardModifierMessage(ModifiedBattleRewardResult modifiedReward)
+    {
+        if (modifiedReward == null)
+            return "";
+
+        StringBuilder builder = new StringBuilder();
+
+        if (modifiedReward.goldBonus > 0)
+            builder.AppendLine(GetLocalizedOrFallback("combat_victory_mammon_gold_bonus", "마몬의 패시브로 골드 보상 증가!"));
+
+        if (modifiedReward.expBonus > 0)
+            builder.AppendLine(GetLocalizedOrFallback("combat_victory_satan_exp_bonus", "사탄의 패시브로 경험치 보상 증가!"));
+
+        if (builder.Length == 0)
+            return "";
+
+        builder.Append(BuildFinalRewardLine(modifiedReward.finalExp, modifiedReward.expBonus, modifiedReward.finalGold, modifiedReward.goldBonus));
+        return builder.ToString();
+    }
+
+    private string BuildFinalRewardLine(int exp, int expBonus, int gold, int goldBonus)
+    {
+        return FormatLocalizedText(
+            "combat_victory_reward_result_format",
+            "EXP {0} / Gold {1} 획득!",
+            FormatRewardAmount(exp, expBonus),
+            FormatRewardAmount(gold, goldBonus));
+    }
+
+    private void RefreshStaticLocalizedText()
+    {
+        string safeEnemyName = string.IsNullOrEmpty(currentEnemyName) ? GetLocalizedOrFallback("combat_enemy_default_name", "적") : currentEnemyName;
+        SetImmediateText(titleText, FormatLocalizedText("combat_victory_title_format", "{0:을를} 격파했습니다!", safeEnemyName));
+        SetImmediateText(rewardText, BuildRewardText(currentRewardResult));
     }
 
     private void AppendGrowthLine(StringBuilder builder, params (string label, int amount)[] stats)
@@ -541,7 +618,7 @@ public class CombatVictoryUIController : MonoBehaviour
         currentStep = VictoryStep.KarinItemSelection;
         ShowEquipmentSelectionStage();
         SetupKarinItemRewardSlots();
-        StartSingleMessage("\uCE74\uB9B0\uC758 \uC7A5\uBE44\uB97C \uC120\uD0DD\uD558\uC138\uC694.");
+        StartSingleMessage("combat_victory_select_karin_item", "카린의 장비를 선택하세요.");
     }
 
     private bool ShouldShowKarinItemReward()
@@ -632,12 +709,12 @@ public class CombatVictoryUIController : MonoBehaviour
             HideEquipmentRewardUI();
             currentStep = VictoryStep.NoEquipmentReward;
             ShowNoEquipmentRewardStage();
-            StartSingleMessage("\uD68D\uB4DD \uAC00\uB2A5\uD55C \uC544\uC774\uD15C\uC774 \uC5C6\uC2B5\uB2C8\uB2E4.");
+            StartSingleMessage("combat_victory_no_equipment_reward", "획득 가능한 아이템이 없습니다.");
             return;
         }
 
         SetupEquipmentRewardSlots();
-        StartSingleMessage("\uD68D\uB4DD\uD560 \uC7A5\uBE44 \uC544\uC774\uD15C\uC744 \uC120\uD0DD\uD574\uC8FC\uC138\uC694.");
+        StartSingleMessage("combat_victory_select_equipment", "획득할 장비 아이템을 선택해주세요.");
     }
 
     private List<EquipmentItemData> GenerateEquipmentRewardCandidates(int count)
@@ -994,13 +1071,16 @@ public class CombatVictoryUIController : MonoBehaviour
         {
             DevLog.LogWarning($"[VictoryReward] No reroll candidate available. slot={slotIndex}");
             SetupEquipmentRewardSlots();
-            StartSingleMessage("No reroll candidate available.");
+            StartSingleMessage("combat_victory_no_reroll_candidate", "No reroll candidate available.");
             return;
         }
 
         equipmentCandidates[slotIndex] = newItem;
         SetupEquipmentRewardSlots();
-        StartSingleMessage(belphegorApplied ? "\uBCA8\uD398\uACE0\uB974\uC758 \uD328\uC2DC\uBE0C \uBC1C\uB3D9!" : BuildEquipmentRerollMessage(newItem));
+        if (belphegorApplied)
+            StartSingleMessage("combat_victory_belphegor_passive", "벨페고르의 패시브 발동!");
+        else
+            StartSingleMessage(BuildEquipmentRerollMessage(newItem));
     }
 
     private bool TryGenerateBelphegorRerollUpgrade(EquipmentItemData currentItem, HashSet<string> excludedItemIds, out EquipmentItemData upgradedItem)
@@ -1123,8 +1203,7 @@ public class CombatVictoryUIController : MonoBehaviour
         if (!string.IsNullOrEmpty(bonusText))
             builder.AppendLine(bonusText);
 
-        // TODO: Move confirmation prompts to localization keys with the next reward UI text pass.
-        builder.Append("\uC774 \uC544\uC774\uD15C\uC744 \uD68D\uB4DD\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?");
+        builder.Append(GetLocalizedOrFallback("combat_victory_confirm_equipment", "이 아이템을 획득하시겠습니까?"));
         return builder.ToString();
     }
 
@@ -1141,8 +1220,7 @@ public class CombatVictoryUIController : MonoBehaviour
         if (!string.IsNullOrEmpty(description))
             builder.AppendLine(description);
 
-        // TODO: Move confirmation prompts to localization keys with the next reward UI text pass.
-        builder.Append("\uC774 \uCE74\uB9B0 \uC7A5\uBE44\uB97C \uD68D\uB4DD\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?");
+        builder.Append(GetLocalizedOrFallback("combat_victory_confirm_karin_item", "이 카린 장비를 획득하시겠습니까?"));
         return builder.ToString();
     }
 
@@ -1153,7 +1231,7 @@ public class CombatVictoryUIController : MonoBehaviour
         if (string.IsNullOrEmpty(itemName))
             itemName = "Item";
 
-        return $"{itemName}\nItem changed.";
+        return FormatLocalizedText("combat_victory_reroll_changed_format", "{0}\nItem changed.", itemName);
     }
 
     private string BuildLeviathanGiftMessage(EquipmentItemData item)
@@ -1163,7 +1241,7 @@ public class CombatVictoryUIController : MonoBehaviour
         if (string.IsNullOrEmpty(itemName))
             itemName = "Item";
 
-        return $"\uB808\uBE44\uC544\uD0C4\uC758 \uD328\uC2DC\uBE0C \uBC1C\uB3D9!\n{itemName} \uD68D\uB4DD!";
+        return FormatLocalizedText("combat_victory_leviathan_gift_format", "레비아탄의 패시브 발동!\n{0:을를} 획득!", itemName);
     }
 
     private string GetItemDisplayName(EquipmentItemData item)
@@ -1176,11 +1254,31 @@ public class CombatVictoryUIController : MonoBehaviour
         if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
         {
             string localized = LocalizationManager.Instance.GetText(key);
-            if (!string.IsNullOrEmpty(localized))
+            if (!string.IsNullOrEmpty(localized) && localized != key)
                 return localized;
         }
 
         return fallback;
+    }
+
+    private string FormatLocalizedText(string key, string fallback, params object[] args)
+    {
+        string format = GetLocalizedOrFallback(key, fallback);
+        try
+        {
+            return KoreanParticleFormatter.Format(format, args);
+        }
+        catch (System.FormatException)
+        {
+            try
+            {
+                return KoreanParticleFormatter.Format(fallback, args);
+            }
+            catch (System.FormatException)
+            {
+                return fallback ?? "";
+            }
+        }
     }
 
     private Sprite GetClassIcon(ItemClass itemClass)
@@ -1371,8 +1469,26 @@ public class CombatVictoryUIController : MonoBehaviour
 
     private void StartSingleMessage(string message)
     {
+        currentMessageKey = "";
+        currentMessageFallback = message ?? "";
+        currentMessageArgs = null;
         messageQueue.Clear();
         currentMessage = message ?? "";
+
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        if (resultMessageText != null)
+            typingCoroutine = StartCoroutine(TypeMessageRoutine(currentMessage));
+    }
+
+    private void StartSingleMessage(string key, string fallback, params object[] args)
+    {
+        currentMessageKey = key ?? "";
+        currentMessageFallback = fallback ?? "";
+        currentMessageArgs = args;
+        messageQueue.Clear();
+        currentMessage = FormatLocalizedText(currentMessageKey, currentMessageFallback, currentMessageArgs);
 
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
@@ -1390,6 +1506,9 @@ public class CombatVictoryUIController : MonoBehaviour
             StopCoroutine(typingCoroutine);
 
         currentMessage = messageQueue.Count > 0 ? messageQueue.Dequeue() : "";
+        currentMessageKey = "";
+        currentMessageFallback = currentMessage;
+        currentMessageArgs = null;
         typingCoroutine = StartCoroutine(TypeMessageRoutine(currentMessage));
     }
 

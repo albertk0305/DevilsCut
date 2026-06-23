@@ -51,6 +51,9 @@ public class ItemMergePresentationController : MonoBehaviour
     private bool isWaitingForAdvance;
     private bool controlsLocked;
     private bool objectsHidden;
+    private string currentMessageKey = "";
+    private string currentMessageFallback = "";
+    private object[] currentMessageArgs;
 
     public bool IsPlaying { get; private set; }
 
@@ -87,6 +90,31 @@ public class ItemMergePresentationController : MonoBehaviour
             panelButton.onClick.RemoveListener(HandleAdvance);
             panelButton.onClick.AddListener(HandleAdvance);
         }
+    }
+
+    private void OnEnable()
+    {
+        if (LocalizationManager.Instance != null)
+        {
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+            LocalizationManager.Instance.OnLanguageChanged += OnLanguageChanged;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged()
+    {
+        if (string.IsNullOrEmpty(currentMessageKey))
+            return;
+
+        currentMessage = FormatLocalizedText(currentMessageKey, currentMessageFallback, currentMessageArgs);
+        if (mergeMessageText != null)
+            mergeMessageText.text = currentMessage;
     }
 
     public void Configure(
@@ -309,7 +337,10 @@ public class ItemMergePresentationController : MonoBehaviour
         SetupMergeAnimationImages(result);
 
         string itemName = GetItemDisplayName(result.itemData);
-        StartSingleMessage($"{itemName}\uC774 3\uAC1C \uBAA8\uC784!");
+        StartSingleMessage(
+            "item_merge_three_collected_format",
+            "{0:이가} 3개 모였습니다.",
+            itemName);
 
         while (isTyping)
             yield return null;
@@ -317,7 +348,11 @@ public class ItemMergePresentationController : MonoBehaviour
         yield return MoveMergeItemsToCenterRoutine();
 
         SetMergeStarsActive(result.resultStarLevel);
-        StartSingleMessage($"{itemName} {result.resultStarLevel}\uC131\uC73C\uB85C \uAC15\uD654!");
+        StartSingleMessage(
+            "item_merge_star_up_format",
+            "{0:이가} {1}성으로 강화됐습니다.",
+            itemName,
+            result.resultStarLevel);
 
         while (isTyping)
             yield return null;
@@ -524,7 +559,23 @@ public class ItemMergePresentationController : MonoBehaviour
 
     private void StartSingleMessage(string message)
     {
+        currentMessageKey = "";
+        currentMessageFallback = message ?? "";
+        currentMessageArgs = null;
         currentMessage = message ?? "";
+
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        typingCoroutine = StartCoroutine(TypeMessageRoutine(currentMessage));
+    }
+
+    private void StartSingleMessage(string key, string fallback, params object[] args)
+    {
+        currentMessageKey = key ?? "";
+        currentMessageFallback = fallback ?? "";
+        currentMessageArgs = args;
+        currentMessage = FormatLocalizedText(currentMessageKey, currentMessageFallback, currentMessageArgs);
 
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
@@ -578,11 +629,31 @@ public class ItemMergePresentationController : MonoBehaviour
         if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
         {
             string localized = LocalizationManager.Instance.GetText(key);
-            if (!string.IsNullOrEmpty(localized))
+            if (!string.IsNullOrEmpty(localized) && localized != key)
                 return localized;
         }
 
         return fallback;
+    }
+
+    private string FormatLocalizedText(string key, string fallback, params object[] args)
+    {
+        string format = GetLocalizedOrFallback(key, fallback);
+        try
+        {
+            return KoreanParticleFormatter.Format(format, args);
+        }
+        catch (FormatException)
+        {
+            try
+            {
+                return KoreanParticleFormatter.Format(fallback, args);
+            }
+            catch (FormatException)
+            {
+                return fallback ?? "";
+            }
+        }
     }
 
     private void HideObjectsDuringMerge()

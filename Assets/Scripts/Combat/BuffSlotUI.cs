@@ -29,6 +29,7 @@ public class BuffSlotUI : MonoBehaviour
         int stackCount = myStacks.Count;
 
         StringBuilder sb = new StringBuilder();
+        string effectName = GetLocalizedText(data != null ? data.effectName : null, data != null ? data.effectName : "");
 
         float displayTotal = totalValue;
 
@@ -49,7 +50,7 @@ public class BuffSlotUI : MonoBehaviour
 
         if (stackCount > 0 && data.showStackDetails)
         {
-            sb.Append($"{data.effectName} [Active Stacks: {stackCount}]");
+            sb.Append(FormatLocalizedText("combat_buff_active_stacks_format", "{0} [Active Stacks: {1}]", effectName, stackCount));
             sb.Append("\n");
 
             for (int i = 0; i < myStacks.Count; i++)
@@ -71,24 +72,24 @@ public class BuffSlotUI : MonoBehaviour
         }
         else if (data.isPermanentPassive)
         {
-            sb.Append($"{data.effectName} [Permanent Effect]");
+            sb.Append(FormatLocalizedText("combat_buff_permanent_effect_format", "{0} [Permanent Effect]", effectName));
 
             if (hasDisplayValue)
             {
-                sb.Append($" (Current Value: {formattedDisplayValue})");
+                sb.Append(FormatLocalizedText("combat_buff_current_value_suffix_format", " (Current Value: {0})", formattedDisplayValue));
             }
         }
         else
         {
             int minTurn = int.MaxValue;
             foreach (var stack in myStacks) if (stack.turnsLeft < minTurn) minTurn = stack.turnsLeft;
-            string durationText = minTurn != int.MaxValue ? GetDurationText(data, minTurn) : "0 turns";
+            string durationText = minTurn != int.MaxValue ? GetDurationText(data, minTurn) : FormatLocalizedText("combat_buff_turns_format", "{0} turns", 0);
 
-            sb.Append(data.effectName);
+            sb.Append(effectName);
 
             if (hasDisplayValue)
             {
-                sb.Append($" (Current Value: {formattedDisplayValue} / {durationText})");
+                sb.Append(FormatLocalizedText("combat_buff_current_value_duration_suffix_format", " (Current Value: {0} / {1})", formattedDisplayValue, durationText));
             }
             else
             {
@@ -112,9 +113,11 @@ public class BuffSlotUI : MonoBehaviour
 
     private string GetDurationText(StatusEffectData data, int turnsLeft)
     {
-        if (data != null && data.isPermanentPassive) return "Permanent";
-        if (turnsLeft >= 999) return "Permanent";
-        return turnsLeft == 1 ? "1 turn" : $"{turnsLeft} turns";
+        if (data != null && data.isPermanentPassive) return GetLocalizedText("combat_buff_permanent", "Permanent");
+        if (turnsLeft >= 999) return GetLocalizedText("combat_buff_permanent", "Permanent");
+        return turnsLeft == 1
+            ? GetLocalizedText("combat_buff_one_turn", "1 turn")
+            : FormatLocalizedText("combat_buff_turns_format", "{0} turns", turnsLeft);
     }
 
     private bool ShouldDisplayAsPercentage(StatusEffectData data)
@@ -171,6 +174,41 @@ public class BuffSlotUI : MonoBehaviour
         if (CombatUIManager.Instance != null)
         {
             CombatUIManager.Instance.InterruptAndTypeCommentary(clickMessage);
+        }
+    }
+
+    private string GetLocalizedText(string key, string fallback)
+    {
+        if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
+        {
+            string localized = LocalizationManager.Instance.GetText(key);
+            if (!string.IsNullOrEmpty(localized) && localized != key)
+                return localized;
+        }
+
+        if (!string.IsNullOrEmpty(fallback))
+            return fallback;
+
+        return key ?? "";
+    }
+
+    private string FormatLocalizedText(string key, string fallback, params object[] args)
+    {
+        string format = GetLocalizedText(key, fallback);
+        try
+        {
+            return KoreanParticleFormatter.Format(format, args);
+        }
+        catch (System.FormatException)
+        {
+            try
+            {
+                return KoreanParticleFormatter.Format(fallback, args);
+            }
+            catch (System.FormatException)
+            {
+                return fallback ?? "";
+            }
         }
     }
 }

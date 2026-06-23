@@ -1,0 +1,75 @@
+Key,Korean,English
+combat_comment_select_skill_prompt,사용할 스킬을 선택해주세요.,Choose a skill to use.
+combat_comment_karin_no_usable_item,카린이 사용할 수 있는 장비가 없습니다.,Karin has no usable item.
+combat_comment_karin_turn,카린의 턴입니다.,It is Karin's turn.
+combat_comment_karin_use_item_format,카린이 {0:을를} 사용했습니다.,Karin used {0}.
+combat_comment_supporter_start_support_format,{0:이가} 전투를 지원합니다.,{0} joins the fight.
+combat_comment_supporter_turn_format,{0}의 턴입니다.,It is {0}'s turn.
+combat_comment_supporter_start_skill_format,{0}의 개전 스킬이 발동했습니다.,{0}'s opening skill activated.
+combat_comment_supporter_battle_skill_format,{0}의 전투 스킬이 발동했습니다.,{0}'s battle skill activated.
+combat_comment_skill_utility_format,{0:이가} {1:을를} 시전합니다.,{0} casts {1}.
+combat_comment_skill_miss_format,{0}의 {1:이가} 빗나갔습니다.,{0}'s {1} missed.
+combat_comment_skill_crit_format,{0}의 {1:이가} 치명타로 적중했습니다.,{0}'s {1} landed a critical hit.
+combat_comment_skill_hit_format,{0}의 {1:이가} 적중했습니다.,{0}'s {1} hit.
+combat_comment_ultimate_format,{0}의 필살기입니다.,{0}'s ultimate skill.
+combat_comment_uriel_counter_format,우리엘이 셔터로 반격해 {0}의 특수 피해를 입혔습니다.,Uriel countered with Shutter for {0} special damage.
+combat_comment_pati_counter_format,파티가 반격해 {0}의 특수 피해를 입혔습니다.,Pati countered for {0} special damage.
+item_merge_three_collected_format,{0:이가} 3개 모였습니다.,Collected 3 copies of {0}.
+item_merge_star_up_format,{0:이가} {1}성으로 강화됐습니다.,{0} upgraded to {1} stars.
+combat_defeat_message,패배했습니다...,You were defeated...
+combat_defeat_give_up_confirm,정말로 포기하시겠습니까?,Are you sure you want to give up?
+combat_defeat_give_up_final,정말로 포기하시겠습니까? 지금까지의 기록이 삭제됩니다.,Are you sure you want to give up? Your progress so far will be deleted.
+combat_defeat_restart_button,전투 재시작,Restart the Fight
+combat_defeat_give_up_button,포기하기,Give Up
+ui_yes,예,Yes
+ui_no,아니오,No
+combat_victory_title_format,{0:을를} 격파했습니다!,Defeated {0}!
+combat_enemy_default_name,적,Enemy
+combat_victory_reward_exp_line,EXP: {0},EXP: {0}
+combat_victory_reward_gold_line,Gold: {0},Gold: {0}
+combat_victory_reward_key_line,Key +{0},Key +{0}
+combat_victory_reward_result_format,EXP {0} / Gold {1} 획득!,Gained EXP {0} / Gold {1}!
+combat_victory_level_up_format,Level Up! Lv.{0} -> Lv.{1},Level Up! Lv.{0} -> Lv.{1}
+combat_victory_select_karin_item,카린의 장비를 선택하세요.,Choose Karin equipment.
+combat_victory_select_equipment,획득할 장비 아이템을 선택해주세요.,Choose an equipment item to obtain.
+combat_victory_no_equipment_reward,획득 가능한 아이템이 없습니다.,There are no available items.
+combat_victory_confirm_equipment,이 아이템을 획득하시겠습니까?,Do you want to take this item?
+combat_victory_confirm_karin_item,이 카린 장비를 획득하시겠습니까?,Do you want to take this Karin equipment?
+combat_victory_no_reroll_candidate,변경 가능한 아이템이 없습니다.,No reroll candidate available.
+combat_victory_belphegor_passive,벨페고르의 패시브 발동!,Belphegor's passive activated!
+combat_victory_reroll_changed_format,{0} 변경 완료.,{0} changed.
+combat_victory_leviathan_gift_format,레비아탄의 패시브 발동! {0:을를} 획득!,Leviathan's passive activated! Obtained {0}!
+combat_victory_mammon_gold_bonus,마몬의 패시브로 골드 보상 증가!,Mammon's passive increased the gold reward!
+combat_victory_satan_exp_bonus,사탄의 패시브로 경험치 보상 증가!,Satan's passive increased the EXP reward!
+combat_victory_asmodeus_max_hp_gain_format,아스모데우스의 패시브 발동! 최대 체력이 {0} 증가했습니다.,Asmodeus's passive activated! Max HP increased by {0}.
+combat_victory_asmodeus_break_resistance_gain_format,아스모데우스의 패시브 발동! 브레이크 저항이 {0} 증가했습니다.,Asmodeus's passive activated! Break Resistance increased by {0}.
+combat_victory_asmodeus_max_break_gain_format,아스모데우스의 패시브 발동! 최대 브레이크 게이지가 {0} 증가했습니다.,Asmodeus's passive activated! Max Break Gauge increased by {0}.
+combat_victory_asmodeus_ap_gain_format,아스모데우스의 패시브 발동! AP가 {0} 증가했습니다.,Asmodeus's passive activated! AP increased by {0}.
+combat_victory_baalzebub_heal_format,바알제붑의 패시브 발동! 체력이 {0} 회복되었습니다.,Baalzebub's passive activated! Recovered {0} HP.
+combat_victory_lucifer_strength_gain_format,루시퍼의 패시브 발동! 힘이 {0} 증가했습니다.,Lucifer's passive activated! Strength increased by {0}.
+combat_victory_lucifer_defense_gain_format,루시퍼의 패시브 발동! 방어력이 {0} 증가했습니다.,Lucifer's passive activated! Defense increased by {0}.
+combat_victory_lucifer_speed_gain_format,루시퍼의 패시브 발동! 속도가 {0} 증가했습니다.,Lucifer's passive activated! Speed increased by {0}.
+combat_victory_lucifer_luck_gain_format,루시퍼의 패시브 발동! 운이 {0} 증가했습니다.,Lucifer's passive activated! Luck increased by {0}.
+combat_comment_encounter_format,{0} 조우!,Encountered {0}!
+combat_comment_stun_skip_format,{0:은는} 스턴 효과로 행동할 수 없습니다!,{0} cannot act due to stun!
+combat_comment_infinite_void_skip_format,{0:은는} 무량공처의 효과로 행동할 수 없습니다!,{0} cannot act due to Infinite Void!
+combat_comment_player_bleed_dot_format,셰리가 {0}의 출혈 지속 피해를 입습니다.,Sherry takes {0} bleed damage.
+combat_comment_enemy_bleed_dot_format,심연의 출혈! {0:이가} {1}의 지속 피해를 입습니다.,Abyssal Bleed! {0} takes {1} damage over time.
+combat_comment_enemy_burn_dot_format,지옥의 플람베! {0:이가} {1}의 화상 피해를 입습니다.,Hell Flambe! {0} takes {1} burn damage.
+combat_comment_last_train_home,라스트 트레인 홈 발동!!,Last Train Home activated!!
+combat_comment_break_recover_format,{0:이가} 그로기 상태에서 정신을 차렸습니다.,{0} recovered from groggy state.
+combat_comment_enemy_turn_format,{0}의 차례입니다!,It is {0}'s turn!
+combat_comment_charge_release_format,{0:이가} 모아둔 기를 방출합니다!,{0} releases stored energy!
+combat_comment_player_action_prompt_format,{0} 어떤 공격을 할까요?,{0} what attack will you use?
+combat_comment_charge_start_format,{0:이가} 기를 모으기 시작합니다!,{0} starts gathering energy!
+combat_comment_reflect_format,[인과율 발동!] 튕겨낸 힘으로 적에게 {0}의 고정 피해를 반사합니다!,Causality activated! Reflected {0} fixed damage to the enemy!
+combat_comment_regen_trigger_format,{0}의 지속 회복 효과 발동!,{0}'s regeneration effect activated!
+combat_comment_overheat_trigger,과열(Overheat) 디버프 발동!!,Overheat debuff activated!!
+combat_comment_let_you_down_trigger,렛 유 다운(Let You Down) 추가 피해 발동!,Let You Down bonus damage activated!
+combat_buff_active_stacks_format,{0} [활성 스택: {1}],{0} [Active Stacks: {1}]
+combat_buff_permanent_effect_format,{0} [영구 효과],{0} [Permanent Effect]
+combat_buff_current_value_suffix_format, (현재 값: {0}), (Current Value: {0})
+combat_buff_current_value_duration_suffix_format, (현재 값: {0} / {1}), (Current Value: {0} / {1})
+combat_buff_permanent,영구,Permanent
+combat_buff_one_turn,1턴,1 turn
+combat_buff_turns_format,{0}턴,{0} turns

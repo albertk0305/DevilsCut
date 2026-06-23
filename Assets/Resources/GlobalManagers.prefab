@@ -64,6 +64,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: a52001c9d11f8724b96313e6e646f1a6, type: 3}
   - {fileID: 4900000, guid: aab31fbcfda4bda4ba7ab739655385bc, type: 3}
   - {fileID: 4900000, guid: 5e99a6eda9056204887c07bf94ee320c, type: 3}
+  - {fileID: 4900000, guid: 6db2ab5a985f4af4bb0ed52a8cb25d1e, type: 3}
   currentLanguage: 0
 --- !u!114 &2952436123089374904
 MonoBehaviour:

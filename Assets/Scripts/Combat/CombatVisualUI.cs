@@ -19,26 +19,81 @@ public class CombatVisualUI : MonoBehaviour
 
     private Coroutine currentCommentaryCoroutine;
     private Coroutine innerTypingCoroutine;
+    private string currentCommentary = "";
+    private string currentCommentaryKey = "";
+    private string currentCommentaryFallback = "";
+    private object[] currentCommentaryArgs;
 
     [Header("판타스틱 드리머 연출 프리팹")]
     public FantasticDreamerDiceUI diceVisualPrefab;
 
     private FantasticDreamerDiceUI currentDiceInstance;
 
+    private void OnEnable()
+    {
+        if (LocalizationManager.Instance != null)
+        {
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+            LocalizationManager.Instance.OnLanguageChanged += OnLanguageChanged;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged()
+    {
+        if (!string.IsNullOrEmpty(currentCommentaryKey))
+            currentCommentary = FormatLocalizedText(currentCommentaryKey, currentCommentaryFallback, currentCommentaryArgs);
+
+        if (commentaryText != null)
+            commentaryText.text = currentCommentary;
+    }
+
     public IEnumerator TypeCommentary(string message, bool autoProceed = true, float delayAfter = 1.5f)
     {
+        currentCommentaryKey = "";
+        currentCommentaryFallback = message ?? "";
+        currentCommentaryArgs = null;
+        currentCommentary = message ?? "";
         StopTypingCoroutines();
         if (commentaryText != null) commentaryText.text = "";
-        innerTypingCoroutine = StartCoroutine(TypewriterUtility.Instance.TypeText(commentaryText, message, autoProceed, delayAfter));
+        innerTypingCoroutine = StartCoroutine(TypewriterUtility.Instance.TypeText(commentaryText, currentCommentary, autoProceed, delayAfter));
+        yield return innerTypingCoroutine;
+    }
+
+    public IEnumerator TypeLocalizedCommentary(string key, string fallback, object[] args, bool autoProceed = true, float delayAfter = 1.5f)
+    {
+        currentCommentaryKey = key ?? "";
+        currentCommentaryFallback = fallback ?? "";
+        currentCommentaryArgs = args;
+        currentCommentary = FormatLocalizedText(currentCommentaryKey, currentCommentaryFallback, currentCommentaryArgs);
+        StopTypingCoroutines();
+        if (commentaryText != null) commentaryText.text = "";
+        innerTypingCoroutine = StartCoroutine(TypewriterUtility.Instance.TypeText(commentaryText, currentCommentary, autoProceed, delayAfter));
         yield return innerTypingCoroutine;
     }
 
     public void InterruptAndTypeCommentary(string message)
     {
+        currentCommentaryKey = "";
+        currentCommentaryFallback = message ?? "";
+        currentCommentaryArgs = null;
         if (currentCommentaryCoroutine != null) StopCoroutine(currentCommentaryCoroutine);
         StopTypingCoroutines();
         if (commentaryText != null) commentaryText.text = "";
         currentCommentaryCoroutine = StartCoroutine(TypeCommentary(message, false, 0f));
+    }
+
+    public void InterruptAndTypeLocalizedCommentary(string key, string fallback, params object[] args)
+    {
+        if (currentCommentaryCoroutine != null) StopCoroutine(currentCommentaryCoroutine);
+        StopTypingCoroutines();
+        if (commentaryText != null) commentaryText.text = "";
+        currentCommentaryCoroutine = StartCoroutine(TypeLocalizedCommentary(key, fallback, args, false, 0f));
     }
 
     private void StopTypingCoroutines()
@@ -146,6 +201,42 @@ public class CombatVisualUI : MonoBehaviour
         {
             Destroy(currentDiceInstance.gameObject);
             currentDiceInstance = null;
+        }
+    }
+
+    private string GetLocalizedText(string key, string fallback)
+    {
+        if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
+        {
+            string localized = LocalizationManager.Instance.GetText(key);
+            if (!string.IsNullOrEmpty(localized) && localized != key)
+                return localized;
+        }
+
+        if (!string.IsNullOrEmpty(fallback))
+            return fallback;
+
+        return key ?? "";
+    }
+
+    private string FormatLocalizedText(string key, string fallback, params object[] args)
+    {
+        args = args ?? System.Array.Empty<object>();
+        string format = GetLocalizedText(key, fallback);
+        try
+        {
+            return KoreanParticleFormatter.Format(format, args);
+        }
+        catch (System.FormatException)
+        {
+            try
+            {
+                return KoreanParticleFormatter.Format(fallback, args);
+            }
+            catch (System.FormatException)
+            {
+                return fallback ?? "";
+            }
         }
     }
 }

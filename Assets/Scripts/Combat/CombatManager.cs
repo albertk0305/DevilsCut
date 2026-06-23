@@ -107,6 +107,9 @@ public class CombatManager : MonoBehaviour
         public string attackerName;
         public string skillName;
         public string commentary;
+        public string commentaryKey;
+        public string commentaryFallback;
+        public object[] commentaryArgs;
     }
 
     private struct SkillCastPresentationContext
@@ -115,6 +118,9 @@ public class CombatManager : MonoBehaviour
         public bool isPlayerAttacking;
         public SkillResult skillResult;
         public string commentary;
+        public string commentaryKey;
+        public string commentaryFallback;
+        public object[] commentaryArgs;
         public bool isPureUtility;
         public Sprite reactionSprite;
         public bool showCritAlert;
@@ -255,7 +261,7 @@ public class CombatManager : MonoBehaviour
     {
         string eName = currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "적";
 
-        yield return CombatUIManager.Instance.TypeCommentary($"{eName} 조우!", true, timing.encounterCommentDelay);
+        yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_encounter_format", "{0} 조우!", new object[] { eName }, true, timing.encounterCommentDelay);
         yield return new WaitForSeconds(timing.encounterCommentDelay);
 
         SupporterData activeSup = PlayerManager.Instance.activeSupporter;
@@ -421,12 +427,13 @@ public class CombatManager : MonoBehaviour
             ? (playerData != null ? GetTranslatedText(playerData.playerNamekey) : "주인공")
             : (currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "적");
 
-        string commentary = isPlayerTarget
-            ? $"{targetName}은(는) 스턴 효과로 행동할 수 없습니다!"
-            : $"{targetName}은(는) 무량공처의 효과로 행동할 수 없습니다!";
+        string commentaryKey = isPlayerTarget ? "combat_comment_stun_skip_format" : "combat_comment_infinite_void_skip_format";
+        string commentaryFallback = isPlayerTarget
+            ? "{0:은는} 스턴 효과로 행동할 수 없습니다!"
+            : "{0:은는} 무량공처의 효과로 행동할 수 없습니다!";
 
         if (CombatUIManager.Instance != null)
-            yield return CombatUIManager.Instance.TypeCommentary(commentary, true, timing.turnSkipCommentDelay);
+            yield return CombatUIManager.Instance.TypeLocalizedCommentary(commentaryKey, commentaryFallback, new object[] { targetName }, true, timing.turnSkipCommentDelay);
 
         ResolveTurnEnd();
         onComplete?.Invoke(true);
@@ -486,7 +493,7 @@ public class CombatManager : MonoBehaviour
                 CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
                 CombatUIManager.Instance.SpawnDamageText("★" + bleedDamage.ToString(), false, true);
 
-                yield return CombatUIManager.Instance.TypeCommentary($"셰리가 {bleedDamage}의 출혈 지속 피해를 입습니다.", true, timing.dotCommentDelay);
+                yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_player_bleed_dot_format", "셰리가 {0}의 출혈 지속 피해를 입습니다.", new object[] { bleedDamage }, true, timing.dotCommentDelay);
 
                 yield return new WaitForSeconds(timing.dotHitHold);
                 CombatUIManager.Instance.ResetDefenderImage(true);
@@ -510,7 +517,7 @@ public class CombatManager : MonoBehaviour
                 CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit);
                 CombatUIManager.Instance.SpawnDamageText("★" + bleedDmg.ToString(), false, false);
 
-                yield return CombatUIManager.Instance.TypeCommentary($"심연의 출혈! {eName}이(가) {bleedDmg}의 지속 피해를 입습니다.", true, timing.dotCommentDelay);
+                yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_enemy_bleed_dot_format", "심연의 출혈! {0:이가} {1}의 지속 피해를 입습니다.", new object[] { eName, bleedDmg }, true, timing.dotCommentDelay);
 
                 yield return new WaitForSeconds(timing.dotHitHold);
                 CombatUIManager.Instance.ResetDefenderImage(false);
@@ -528,7 +535,7 @@ public class CombatManager : MonoBehaviour
                 CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit);
                 CombatUIManager.Instance.SpawnDamageText("★" + burnDmg.ToString(), false, false);
 
-                yield return CombatUIManager.Instance.TypeCommentary($"지옥의 플람베! {eName}이(가) {burnDmg}의 화상 피해를 입습니다.", true, timing.dotCommentDelay);
+                yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_enemy_burn_dot_format", "지옥의 플람베! {0:이가} {1}의 화상 피해를 입습니다.", new object[] { eName, burnDmg }, true, timing.dotCommentDelay);
 
                 yield return new WaitForSeconds(timing.dotHitHold);
                 CombatUIManager.Instance.ResetDefenderImage(false);
@@ -545,7 +552,7 @@ public class CombatManager : MonoBehaviour
 
                 CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit);
 
-                yield return CombatUIManager.Instance.TypeCommentary("라스트 트레인 홈 발동!!", true, timing.dotCommentDelay);
+                yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_last_train_home", "라스트 트레인 홈 발동!!", null, true, timing.dotCommentDelay);
 
                 ApplyDamageToEntity(false, currentState.savedBombDamage);
                 CombatUIManager.Instance.SpawnDamageText("★" + currentState.savedBombDamage.ToString(), false, false);
@@ -569,14 +576,14 @@ public class CombatManager : MonoBehaviour
 
         if (BreakManager.Instance.IsBroken(false))
         {
-            yield return CombatUIManager.Instance.TypeCommentary($"{eName}이(가) 그로기 상태에서 정신을 차렸습니다.");
+            yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_break_recover_format", "{0:이가} 그로기 상태에서 정신을 차렸습니다.", new object[] { eName });
             BreakManager.Instance.WakeUpFromBreak(false);
             CombatUIManager.Instance.ResetDefenderImage(false);
             ResolveTurnEnd();
             yield break;
         }
 
-        yield return CombatUIManager.Instance.TypeCommentary($"{eName}의 차례입니다!", true, timing.enemyTurnCommentDelay);
+        yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_enemy_turn_format", "{0}의 차례입니다!", new object[] { eName }, true, timing.enemyTurnCommentDelay);
         yield return EnemyTurnRoutine();
     }
 
@@ -589,7 +596,7 @@ public class CombatManager : MonoBehaviour
 
         if (BreakManager.Instance.IsBroken(true))
         {
-            yield return CombatUIManager.Instance.TypeCommentary($"{pName}이(가) 그로기 상태에서 정신을 차렸습니다.");
+            yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_break_recover_format", "{0:이가} 그로기 상태에서 정신을 차렸습니다.", new object[] { pName });
             BreakManager.Instance.WakeUpFromBreak(true);
             CombatUIManager.Instance.ResetDefenderImage(true);
             CombatUIManager.Instance.ResetCasterImage(true);
@@ -601,7 +608,7 @@ public class CombatManager : MonoBehaviour
         {
             currentState.isPlayerCharging = false;
             currentState.isUnleashingCharge = true;
-            yield return CombatUIManager.Instance.TypeCommentary($"{pName}이(가) 모아둔 기를 방출합니다!", true, 1.0f);
+            yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_charge_release_format", "{0:이가} 모아둔 기를 방출합니다!", new object[] { pName }, true, 1.0f);
             DevLog.Log("[원기옥] 모은 기를 발사합니다!");
             PerformSkillRoutine(currentState.chargingSkill, true);
         }
@@ -609,7 +616,7 @@ public class CombatManager : MonoBehaviour
         {
             CombatUIManager.Instance.SetWaitingPanelActive(false);
             ShowCategoryMenu();
-            yield return CombatUIManager.Instance.TypeCommentary($"{pName}, 무슨 공격을 할까요?", false);
+            yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_select_skill_prompt", "사용할 스킬을 선택해주세요.", null, false);
         }
     }
 
@@ -730,7 +737,7 @@ public class CombatManager : MonoBehaviour
             ? GetTranslatedText(playerData.playerNamekey)
             : "주인공";
 
-        StartCoroutine(CombatUIManager.Instance.TypeCommentary($"{pName}이(가) 기를 모으기 시작합니다!"));
+        StartCoroutine(CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_charge_start_format", "{0:이가} 기를 모으기 시작합니다!", new object[] { pName }));
         ResolveTurnEnd();
 
         return true;
@@ -745,8 +752,11 @@ public class CombatManager : MonoBehaviour
         bool isPlayerAttacking = context.isPlayerAttacking;
         SkillResult castResult = context.result;
         string castCommentary = context.presentation.commentary;
+        string castCommentaryKey = context.presentation.commentaryKey;
+        string castCommentaryFallback = context.presentation.commentaryFallback;
+        object[] castCommentaryArgs = context.presentation.commentaryArgs;
         bool castIsPureUtility = context.presentation.isPureUtility;
-        BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, castResult, castCommentary, castIsPureUtility));
+        BattleVisualizer.Instance.EnqueueAction(() => ApplySkillCastUI(skill, isPlayerAttacking, castResult, castCommentary, castCommentaryKey, castCommentaryFallback, castCommentaryArgs, castIsPureUtility));
 
         // Immediate defense outcome
         ApplyImmediateDefenseOutcome(context);
@@ -857,15 +867,14 @@ public class CombatManager : MonoBehaviour
 
         EnsurePresentationDirector();
 
+        string commentaryKey;
+        string commentaryFallback;
+        ResolveSkillCommentaryDescriptor(skillResult, isPureUtility, out commentaryKey, out commentaryFallback);
+        object[] commentaryArgs = new object[] { attackerName, skillName };
+
         string commentary = presentationDirector != null
             ? presentationDirector.BuildSkillCommentary(attackerName, skillName, skillResult, isPureUtility)
-            : isPureUtility
-                ? $"{attackerName}이(가) {skillName}을(를) 시전합니다!"
-                : !skillResult.anyHit
-                    ? $"{attackerName}의 {skillName}이(가) 빗나갔습니다!"
-                    : skillResult.anyCrit
-                        ? $"{attackerName}의 {skillName} 치명적으로 적중!"
-                        : $"{attackerName}의 {skillName} 적중!";
+            : BuildSkillCommentaryFallback(attackerName, skillName, skillResult, isPureUtility);
 
         return new SkillPresentationContext
         {
@@ -873,7 +882,10 @@ public class CombatManager : MonoBehaviour
             isPureUtility = isPureUtility,
             attackerName = attackerName,
             skillName = skillName,
-            commentary = commentary
+            commentary = commentary,
+            commentaryKey = commentaryKey,
+            commentaryFallback = commentaryFallback,
+            commentaryArgs = commentaryArgs
         };
     }
 
@@ -1135,7 +1147,15 @@ public class CombatManager : MonoBehaviour
     }
 
     // 스킬 시전 초기 연출 (이미지, 대사, 코스트 지불 등)
-    private void ApplySkillCastUI(SkillData skill, bool isPlayerAttacking, SkillResult skillResult, string commentary, bool isPureUtility)
+    private void ApplySkillCastUI(
+        SkillData skill,
+        bool isPlayerAttacking,
+        SkillResult skillResult,
+        string commentary,
+        string commentaryKey,
+        string commentaryFallback,
+        object[] commentaryArgs,
+        bool isPureUtility)
     {
         EnsurePresentationDirector();
 
@@ -1153,6 +1173,9 @@ public class CombatManager : MonoBehaviour
             isPlayerAttacking = isPlayerAttacking,
             skillResult = skillResult,
             commentary = commentary,
+            commentaryKey = commentaryKey,
+            commentaryFallback = commentaryFallback,
+            commentaryArgs = commentaryArgs,
             isPureUtility = isPureUtility,
             reactionSprite = reactionSprite,
             showCritAlert = skillResult.anyCrit && !isPureUtility
@@ -1180,7 +1203,10 @@ public class CombatManager : MonoBehaviour
             !context.isPlayerAttacking,
             context.reactionSprite,
             context.commentary,
-            context.showCritAlert);
+            context.showCritAlert,
+            context.commentaryKey,
+            context.commentaryFallback,
+            context.commentaryArgs);
     }
 
     private CompanionManager.Emotion ResolveCompanionEmotionAfterSkillCast(
@@ -1416,7 +1442,7 @@ public class CombatManager : MonoBehaviour
         if (isReflect)
         {
             CombatUIManager.Instance.SpawnDamageText("★" + damage.ToString(), false, false);
-            CombatUIManager.Instance.InterruptAndTypeCommentary($"[인과율 발동!] 튕겨낸 힘으로 적에게 {damage}의 고정 피해를 반사합니다!");
+            CombatUIManager.Instance.InterruptAndTypeLocalizedCommentary("combat_comment_reflect_format", "[인과율 발동!] 튕겨낸 힘으로 적에게 {0}의 고정 피해를 반사합니다!", damage);
         }
         else
         {
@@ -1562,7 +1588,12 @@ public class CombatManager : MonoBehaviour
             if (BreakManager.Instance.AddBreakDamage(true, counterAI.GetCounterBreakDamage())) UpdateTurnOrderUI();
         }
 
-        CombatUIManager.Instance.InterruptAndTypeCommentary(counterAI.GetCounterMessage(counterDamage));
+        string counterMessageKey = GetEnemyCounterMessageKey(counterAI);
+        string counterMessageFallback = counterAI.GetCounterMessage(counterDamage);
+        if (!string.IsNullOrEmpty(counterMessageKey))
+            CombatUIManager.Instance.InterruptAndTypeLocalizedCommentary(counterMessageKey, counterMessageFallback, counterDamage);
+        else
+            CombatUIManager.Instance.InterruptAndTypeCommentary(counterMessageFallback);
         DevLog.Log($"[Enemy Counter] Counter damage {counterDamage}.");
     }
 
@@ -1742,7 +1773,7 @@ public class CombatManager : MonoBehaviour
                 string targetName = isPlayerTurn ? (playerData != null ? GetTranslatedText(playerData.playerNamekey) : "셰리") : "적";
 
                 // 1. 회복 알림 텍스트 출력 (0.5초간 타자 치듯 출력)
-                yield return CombatUIManager.Instance.TypeCommentary($"{targetName}의 지속 회복 효과 발동!", true, timing.specialExpireCommentDelay);
+                yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_regen_trigger_format", "{0}의 지속 회복 효과 발동!", new object[] { targetName }, true, timing.specialExpireCommentDelay);
 
                 // 2. 실제 회복 수치 연산 및 데미지 텍스트 팝업
                 if (hpRegenRate > 0f)
@@ -1816,7 +1847,7 @@ public class CombatManager : MonoBehaviour
                 // 1. [진화 A] 과열 폭발 (주인공 피격)
                 if (e.effectData.specialType == SpecialEffectType.Overheat)
                 {
-                    yield return CombatUIManager.Instance.TypeCommentary("과열(Overheat) 디버프 발동!!", true, timing.specialExpireCommentDelay);
+                    yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_overheat_trigger", "과열(Overheat) 디버프 발동!!", null, true, timing.specialExpireCommentDelay);
 
                     int selfDamage = Mathf.RoundToInt(currentPlayerStats.currentHp * 0.4f);
                     ApplyDamageToEntity(true, selfDamage);
@@ -1832,7 +1863,7 @@ public class CombatManager : MonoBehaviour
                 // 2. [진화 B] 피해 누적 폭발 (적 피격)
                 if (e.effectData.specialType == SpecialEffectType.DamageAccumulator)
                 {
-                    yield return CombatUIManager.Instance.TypeCommentary("렛 유 다운(Let You Down) 추가 피해 발동!", true, timing.specialExpireCommentDelay);
+                    yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_let_you_down_trigger", "렛 유 다운(Let You Down) 추가 피해 발동!", null, true, timing.specialExpireCommentDelay);
 
                     // 기록된 피해의 50%를 추가로 입힘
                     int extraDmg = Mathf.RoundToInt(currentState.accumulatedDamage * 0.5f);
@@ -1863,6 +1894,97 @@ public class CombatManager : MonoBehaviour
         if (string.IsNullOrEmpty(key)) return "";
         if (LocalizationManager.Instance != null) return LocalizationManager.Instance.GetText(key);
         return key;
+    }
+
+    private string BuildSkillCommentaryFallback(
+        string attackerName,
+        string skillName,
+        SkillResult result,
+        bool isPureUtility)
+    {
+        if (isPureUtility)
+            return FormatLocalizedText("combat_comment_skill_utility_format", "{0:이가} {1:을를} 시전합니다.", attackerName, skillName);
+
+        if (!result.anyHit)
+            return FormatLocalizedText("combat_comment_skill_miss_format", "{0}의 {1:이가} 빗나갔습니다!", attackerName, skillName);
+
+        if (result.anyCrit)
+            return FormatLocalizedText("combat_comment_skill_crit_format", "{0}의 {1} 치명적으로 적중!", attackerName, skillName);
+
+        return FormatLocalizedText("combat_comment_skill_hit_format", "{0}의 {1} 적중!", attackerName, skillName);
+    }
+
+    private void ResolveSkillCommentaryDescriptor(
+        SkillResult result,
+        bool isPureUtility,
+        out string key,
+        out string fallback)
+    {
+        if (isPureUtility)
+        {
+            key = "combat_comment_skill_utility_format";
+            fallback = "{0:이가} {1:을를} 시전합니다.";
+            return;
+        }
+
+        if (!result.anyHit)
+        {
+            key = "combat_comment_skill_miss_format";
+            fallback = "{0}의 {1:이가} 빗나갔습니다!";
+            return;
+        }
+
+        if (result.anyCrit)
+        {
+            key = "combat_comment_skill_crit_format";
+            fallback = "{0}의 {1} 치명적으로 적중!";
+            return;
+        }
+
+        key = "combat_comment_skill_hit_format";
+        fallback = "{0}의 {1} 적중!";
+    }
+
+    private string GetLocalizedText(string key, string fallback)
+    {
+        if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
+        {
+            string localized = LocalizationManager.Instance.GetText(key);
+            if (!string.IsNullOrEmpty(localized) && localized != key)
+                return localized;
+        }
+
+        if (!string.IsNullOrEmpty(fallback))
+            return fallback;
+
+        return key ?? "";
+    }
+
+    private string FormatLocalizedText(string key, string fallback, params object[] args)
+    {
+        string format = GetLocalizedText(key, fallback);
+        try
+        {
+            return KoreanParticleFormatter.Format(format, args);
+        }
+        catch (System.FormatException)
+        {
+            try
+            {
+                return KoreanParticleFormatter.Format(fallback, args);
+            }
+            catch (System.FormatException)
+            {
+                return fallback ?? "";
+            }
+        }
+    }
+
+    private string GetEnemyCounterMessageKey(IEnemySkillDamageCounter counterAI)
+    {
+        if (counterAI is EnemyAI_Uriel) return "combat_comment_uriel_counter_format";
+        if (counterAI is EnemyAI_Pati) return "combat_comment_pati_counter_format";
+        return null;
     }
 
     public void RestoreDefenderImage(bool isPlayerTarget)

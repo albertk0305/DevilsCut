@@ -11,6 +11,7 @@ public class KoreanParticleFormatter : IFormatProvider, ICustomFormatter
         if (format == null)
             return "";
 
+        args = args ?? Array.Empty<object>();
         return string.Format(Instance, format, args);
     }
 
