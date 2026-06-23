@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7276edcc921fbc34782f1c9a6ff0c13f
+guid: 49bd2ffbf3e920c40b50e842561dbea4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3622797030541402383
-    second: MichaelSmile2_0
+      213: 8534915032626002216
+    second: MichaelPerplexed_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,11 +109,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MichaelSmile2_0
+      name: MichaelPerplexed_0
       rect:
         serializedVersion: 2
         x: 206
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1fe5d3d8b4d39bdc0800000000000000
-      internalID: -3622797030541402383
+      spriteID: 82970d3900c127670800000000000000
+      internalID: 8534915032626002216
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MichaelSmile2_0: -3622797030541402383
+      MichaelPerplexed_0: 8534915032626002216
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

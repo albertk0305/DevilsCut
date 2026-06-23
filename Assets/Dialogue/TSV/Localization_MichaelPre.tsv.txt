@@ -1,0 +1,29 @@
+Key	Korean	English
+name_michael	미카엘	Michael
+name_lucifer	루시퍼	Lucifer
+michael_pre_001	겸손의 회랑. 검은 성당처럼 어둡고 음침한 공간에 낡은 촛불이 낮게 흔들리고 있었다.	The Corridor of Humility. Old candles flickered low in a dark, gloomy space like a black cathedral.
+michael_pre_002	으하하~ 인생이란 말이야... 잔이 비면 끝난 줄 알지? 아니야! 또 따르면 돼!	Ahaha~ Life is like this... You think it is over when the glass is empty? Nope! Just pour another!
+michael_pre_003	죄송합니다... 죄송합니다... 저 같은 회랑 구석의 먼지에게도 조언을 해주시다니...	I am sorry... I am so sorry... To think you would give advice to dust in the corner of this corridor like me...
+michael_pre_004	에이, 고개 들라니까! 너 귀엽게 생겼어~ 분위기는 좀 장례식 같지만!	Come on, lift your head! You look cute~ The mood is a little funeral-like though!
+michael_pre_005	저 같은 쓰레기에게 그런 과분한 칭찬을... 지금 죽어서 사죄하겠습니다...	Such excessive praise for trash like me... I will die right now to apologize...
+michael_pre_006	죽지 마! 세상엔 잊어버리는 쪽이 행복한 것도 있다구! 술의 힘으로 말이지~	Do not die! Some things in life are happier when you forget them! With the power of booze~
+michael_pre_007	셰리와 카린이 촛불에 흔들리는 그림자를 밟고 회랑 안쪽으로 들어선다.	Sherry and Karin step deeper into the corridor, treading over shadows trembling in the candlelight.
+michael_pre_008	셰리! 구하러 왔구나! 나 좀 꺼내줘! 여긴 칙칙해서 영 술맛이 안 나~	Sherry! You came to save me! Get me out of here! This gloomy place kills the taste of booze~
+michael_pre_009	꼬맹이. 우리는 아무것도 못 본 거야.	Kid. We saw nothing.
+michael_pre_010	셰리. 저쪽에 계신 분이 도움을 요청하고 있습니다.	Sherry. The person over there is requesting help.
+michael_pre_011	저런 취객은 몰라.	I do not know that drunk.
+michael_pre_012	너무해! 내가 바에서 서비스도 줬잖아! 외상도 해줬는데~	So mean! I gave you service at the bar! I even let you run a tab~
+michael_pre_013	그래서 더 모르는 척하고 싶은데...	That makes me want to pretend even harder...
+michael_pre_014	저... 저 따위가 감히 지나가는 길을 막아서 죄송합니다... 하지만 여긴 더 이상 들어가시면 안 됩니다...	I... I am sorry someone like me dares to block your path... But you must not go any farther...
+michael_pre_015	셰리, 자기평가가 비정상적으로 낮은 분입니다.	Sherry, this person's self-evaluation is abnormally low.
+michael_pre_016	그럼 협상은 쉽겠네. 열쇠 조각만 받고 갈게.	Then negotiation should be easy. I will just take the key fragment and go.
+michael_pre_017	열쇠...	The key...
+michael_pre_018	미카엘의 떨리던 손이 전기톱의 손잡이를 붙든다.	Michael's trembling hand grips the handle of the chainsaw.
+michael_pre_019	죄송합니다. 히비키 님께서 맡겨주신 임무입니다.	I am sorry. This is a mission Lady Hibiki entrusted to me.
+michael_pre_020	히비키 님을 실망시킬 수는 없습니다. 이곳을 지나가시려면 저를 쓰러뜨리셔야만 할 겁니다.	I cannot disappoint Lady Hibiki. If you wish to pass through here, you will have to defeat me.
+michael_pre_021	러브 앤 피스. 열쇠만 넘기면 서로 피 안 보고 퇴근이야.	Love and peace. Hand over the key and we can all clock out without spilling blood.
+michael_pre_022	고결한 시야를 더럽혀 죄송합니다. 하지만 히비키 님의 명령이라, 열쇠를 노리신다면 여기서 죽어주셔야겠습니다!	I am sorry for staining your noble sight. But by Lady Hibiki's order, if you seek the key, you must die here!
+michael_pre_023	자신감 방향이 틀렸잖아.	That confidence is pointing the wrong way.
+michael_pre_024	셰리, 대화가 통하지 않을 것 같습니다.	Sherry, dialogue does not appear to be working.
+michael_pre_025	참회의 시간입니다!	It is time for repentance!
+michael_pre_026	얘들아아아! 나도 아직 여기 있어! 무시하지 마아아!	Heeey! I am still here too! Do not ignore meee!

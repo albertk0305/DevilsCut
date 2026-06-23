@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2ae8ef447da692d489f41df53f9c4916
+guid: 2fbdf2c5a25022e4bb155e5142d3aee1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7641853793456375633
-    second: MichaelSurprise_0
+      213: -2747036317203534974
+    second: MichaelSerious_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,16 +109,29 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MichaelSurprise_0
+      name: MichaelSerious_0
       rect:
         serializedVersion: 2
         x: 206
         y: 0
-        width: 611
+        width: 612
         height: 994
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fa8bf8f867ea2f590800000000000000
-      internalID: -7641853793456375633
+      spriteID: 28b6cff160190e9d0800000000000000
+      internalID: -2747036317203534974
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MichaelSurprise_0: -7641853793456375633
+      MichaelSerious_0: -2747036317203534974
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

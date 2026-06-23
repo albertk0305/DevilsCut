@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f9679e2efacaa824084aab82eac3c871
+guid: 89ac46544a3e5ee408432d6137d792ac
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6488900246895950697
-    second: MichaelNervous3_0
+      213: 6026934967330485775
+    second: LuciferDrinkPerplex_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MichaelNervous3_0
+      name: LuciferDrinkPerplex_0
       rect:
         serializedVersion: 2
-        x: 206
+        x: 166
         y: 0
-        width: 612
-        height: 994
+        width: 689
+        height: 1012
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 96b7d2715643d0a50800000000000000
-      internalID: 6488900246895950697
+      spriteID: f063d14bb69f3a350800000000000000
+      internalID: 6026934967330485775
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MichaelNervous3_0: 6488900246895950697
+      LuciferDrinkPerplex_0: 6026934967330485775
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

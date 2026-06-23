@@ -27,6 +27,10 @@ MonoBehaviour:
     speakerNameKey: name_asmodeus
   - speakerID: gabriel
     speakerNameKey: name_gabriel
+  - speakerID: michael
+    speakerNameKey: name_michael
+  - speakerID: lucifer
+    speakerNameKey: name_lucifer
   portraits:
   - actorID: patrol_robot
     expressionID: normal
@@ -172,3 +176,36 @@ MonoBehaviour:
   - actorID: gabriel
     expressionID: delusion
     portraitSprite: {fileID: 21300000, guid: e9a971767c929a84f9e25177e249724f, type: 3}
+  - actorID: lucifer
+    expressionID: drunk
+    portraitSprite: {fileID: 21300000, guid: c61647ae0a584b7458f518df6368f409, type: 3}
+  - actorID: lucifer
+    expressionID: drunkSmile
+    portraitSprite: {fileID: 21300000, guid: be150377faf34494bbd2527accc78884, type: 3}
+  - actorID: lucifer
+    expressionID: drunkWave
+    portraitSprite: {fileID: 21300000, guid: 70c125aea0ad1a547be6271d75417671, type: 3}
+  - actorID: lucifer
+    expressionID: drunkPerplexed
+    portraitSprite: {fileID: 21300000, guid: 89ac46544a3e5ee408432d6137d792ac, type: 3}
+  - actorID: michael
+    expressionID: timid
+    portraitSprite: {fileID: 21300000, guid: 158f1447f0987a3438aa27d29b12740e, type: 3}
+  - actorID: michael
+    expressionID: perplexed
+    portraitSprite: {fileID: 21300000, guid: 49bd2ffbf3e920c40b50e842561dbea4, type: 3}
+  - actorID: michael
+    expressionID: nervous
+    portraitSprite: {fileID: 21300000, guid: 7320a6c1b9edbe040a278d332eb24cd9, type: 3}
+  - actorID: michael
+    expressionID: panic
+    portraitSprite: {fileID: 21300000, guid: 9ff898ec28b82f542a598b30739f558d, type: 3}
+  - actorID: michael
+    expressionID: serious
+    portraitSprite: {fileID: 21300000, guid: 2fbdf2c5a25022e4bb155e5142d3aee1, type: 3}
+  - actorID: michael
+    expressionID: smirk
+    portraitSprite: {fileID: 21300000, guid: 66860fbfefd0b1045861d3b491ae7e11, type: 3}
+  - actorID: michael
+    expressionID: smile
+    portraitSprite: {fileID: 21300000, guid: 4aaf28389dbfe754996b0bd89586de5c, type: 3}

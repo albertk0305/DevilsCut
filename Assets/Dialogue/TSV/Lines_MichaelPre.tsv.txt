@@ -1,0 +1,27 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+michael_pre_001							michael_pre_001	None		Gothic			FALSE	FALSE	FALSE								
+michael_pre_002	lucifer	michael	lucifer	timid	drunk	name_lucifer	michael_pre_002	None					FALSE	FALSE	FALSE								
+michael_pre_003	michael	michael	lucifer	timid	drunk	name_michael	michael_pre_003	None					FALSE	FALSE	FALSE								
+michael_pre_004	lucifer	michael	lucifer	timid	drunkSmile	name_lucifer	michael_pre_004	None					FALSE	FALSE	FALSE								
+michael_pre_005	michael	michael	lucifer	perplexed	drunkSmile	name_michael	michael_pre_005	None					FALSE	FALSE	FALSE								
+michael_pre_006	lucifer	michael	lucifer	perplexed	drunk	name_lucifer	michael_pre_006	None					FALSE	FALSE	FALSE								
+michael_pre_007							michael_pre_007	None					FALSE	FALSE	FALSE								
+michael_pre_008	lucifer	michael	lucifer	perplexed	drunkWave	name_lucifer	michael_pre_008	None					FALSE	FALSE	FALSE								
+michael_pre_009	sherry	sherry	lucifer	hassle	drunkWave	name_sherry	michael_pre_009	None					FALSE	FALSE	FALSE								
+michael_pre_010	karin	sherry	karin	hassle	worry	name_karin	michael_pre_010	None					FALSE	FALSE	FALSE								
+michael_pre_011	sherry	sherry	karin	annoyed	worry	name_sherry	michael_pre_011	None					FALSE	FALSE	FALSE								
+michael_pre_012	lucifer	sherry	lucifer	annoyed	drunkPerplexed	name_lucifer	michael_pre_012	None					FALSE	FALSE	FALSE								
+michael_pre_013	sherry	sherry	lucifer	perplexed	drunkPerplexed	name_sherry	michael_pre_013	None					FALSE	FALSE	FALSE								
+michael_pre_014	michael	sherry	michael	perplexed	nervous	name_michael	michael_pre_014	None					FALSE	FALSE	FALSE								
+michael_pre_015	karin	karin	michael	tired	nervous	name_karin	michael_pre_015	None					FALSE	FALSE	FALSE								
+michael_pre_016	sherry	sherry	michael	easy	nervous	name_sherry	michael_pre_016	None					FALSE	FALSE	FALSE								
+michael_pre_017	michael	sherry	michael	easy	panic	name_michael	michael_pre_017	None					FALSE	FALSE	FALSE								
+michael_pre_018							michael_pre_018	None					FALSE	FALSE	FALSE								
+michael_pre_019	michael	sherry	michael	smirk	serious	name_michael	michael_pre_019	None					FALSE	FALSE	FALSE								
+michael_pre_020	michael	sherry	michael	smirk	serious	name_michael	michael_pre_020	None					FALSE	FALSE	FALSE								
+michael_pre_021	sherry	sherry	michael	mock	serious	name_sherry	michael_pre_021	None					FALSE	FALSE	FALSE								
+michael_pre_022	michael	sherry	michael	mock	smirk	name_michael	michael_pre_022	None					FALSE	FALSE	FALSE								
+michael_pre_023	sherry	sherry	michael	awkward	smirk	name_sherry	michael_pre_023	None					FALSE	FALSE	FALSE								
+michael_pre_024	karin	karin	michael	tired	smirk	name_karin	michael_pre_024	None					FALSE	FALSE	FALSE								
+michael_pre_025	michael	karin	michael	tired	smile	name_michael	michael_pre_025	None					FALSE	FALSE	FALSE								
+michael_pre_026	lucifer	lucifer	michael	drunkPerplexed	smile	name_lucifer	michael_pre_026	LoadNextScene					FALSE	FALSE	FALSE								

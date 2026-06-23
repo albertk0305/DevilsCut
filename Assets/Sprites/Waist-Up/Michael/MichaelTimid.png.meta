@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 10795b22d4a0fb3409441e288918a5f1
+guid: 158f1447f0987a3438aa27d29b12740e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5232181997830761617
-    second: MichaelNervous2_0
+      213: 6429597979497984167
+    second: MichaelTimid_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MichaelNervous2_0
+      name: MichaelTimid_0
       rect:
         serializedVersion: 2
-        x: 207
+        x: 0
         y: 0
-        width: 610
-        height: 993
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f639a1bb13e8367b0800000000000000
-      internalID: -5232181997830761617
+      spriteID: 7a0fb800c458a3950800000000000000
+      internalID: 6429597979497984167
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MichaelNervous2_0: -5232181997830761617
+      MichaelTimid_0: 6429597979497984167
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
