@@ -16,7 +16,19 @@ MonoBehaviour:
   defaultSprite: {fileID: 21300000, guid: ef12907a59b06424b8bacdcbcd229534, type: 3}
   happySprite: {fileID: 21300000, guid: 856ee14d7696f0846a2e0ba058841b34, type: 3}
   embarrassedSprite: {fileID: 21300000, guid: bbc69a4dd2be85c488c2f72ebae1ead7, type: 3}
-  selectedText: levi select
-  giftText: levi gift
-  maxSkillGiftText: levi max
-  farewellText: levi farewell
+  selectedExpression: 0
+  selectedTextKey: maid_leviathan_partner_intro
+  selectedText: Lady Sherry is this close... My heart will not stop racing... Leviathan
+    is so happy right now...
+  giftExpression: 0
+  giftTextKey: maid_leviathan_partner_gift
+  giftText: I prepared this while thinking of you Lady Sherry... If you accept it
+    Leviathan will be happy with that alone...
+  maxSkillGiftExpression: 0
+  maxSkillGiftTextKey: maid_leviathan_partner_extra_gift
+  maxSkillGiftText: There is one more... Leviathan's feelings for Lady Sherry simply
+    will not stop...
+  farewellExpression: 0
+  farewellTextKey: maid_leviathan_partner_finish
+  farewellText: Today was the greatest gift Leviathan could ask for... Could we be
+    together again next time...?

@@ -76,3 +76,38 @@ supporter_battle_layer_cake,Layer Cake: 9개의 효과 중 무작위로 3개를 
 supporter_passive_wo_ai_ni,워 아이 니: 전투 종료마다 획득하는 경험치가 (10%/20%/35%)만큼 증가합니다,Wo Ai Ni: EXP gained after battle increases by (10%/20%/35%).
 supporter_start_lock_on,록온: 3턴 동안 셰리의 힘과 방어가 (15%/25%/35%)만큼 증가합니다,Lock On: Increases Sherry's Strength and Defense by (15%/25%/35%) for 3 turns.
 supporter_battle_dont_make_me_a_shrew,말괄량이로 만들지 마: 적에게 5타 다단 히트 피해를 입힙니다. 각 타격이 적중할 때마다 (15%/20%/30%) 확률로 적이 보유 중인 디버프 1개의 지속 시간을 1턴 연장합니다,Don't Make Me a Wild Girl: Deals 5 hit multi hit damage to the enemy. Each successful hit has a (15%/20%/30%) chance to extend the duration of 1 enemy debuff by 1 turn.
+,,
+maid_asmodeus_partner_intro,주인님이랑 이렇게 같이 앉아 있으니까... 아스모 조금 두근거릴지도요...,Sitting here together with Master like this... Asmo might be getting a little nervous.
+maid_asmodeus_partner_gift,주인님을 위한 선물이에요! 아스모한테 더 반해버려도 책임 못 져요!,This gift is for Master! Asmo is not responsible if you fall for her even more!
+maid_asmodeus_partner_extra_gift,짜잔! 추가 선물이에요! 이렇게 챙겨주는 메이드 흔치 않다구요!,Ta-da! An extra gift! A maid who takes care of you this well is hard to find!
+maid_asmodeus_partner_finish,주인님 오늘 아스모한테 꽤 빠지셨죠? 오늘 아스모랑 보낸 시간 잊으면 안 돼요!,Master fell pretty hard for Asmo today right? Do not forget the time you spent with Asmo today!
+,,
+maid_baalzebub_partner_intro,불러줘서 고맙다! 모처럼 같이 왔으니 편하게 즐겨보자고!,Thanks for calling me! Since we came together let us relax and enjoy this!
+maid_baalzebub_partner_gift,도움이 될 만한 걸 챙겨왔다! 필요할 때 써라!,I brought something that might help! Use it when you need it!
+maid_baalzebub_partner_extra_gift,하나 더 받아라! 이런 건 많을수록 든든한 법이지!,Take one more! The more of these you have the better!
+maid_baalzebub_partner_finish,오늘 재밌었다! 다음에 또 보자!,That was fun today! See you next time!
+,,
+maid_belphegor_partner_intro,하아암... 불러줘서 고마워... 앉아서 쉬는 코스라면 나도 자신 있어...,Yaaawn... Thanks for calling me... If this is a course where we sit and rest then I am confident...
+maid_belphegor_partner_gift,선물... 준비해왔어... 운이 조금 붙어있을지도 몰라...,I brought... a gift... It might have a little luck stuck to it...
+maid_belphegor_partner_extra_gift,음냐... 하나 더 있었네... 많으면 확률도 조금은 올라가겠지...,Mnya... There was one more... The more you have the better the odds get...
+maid_belphegor_partner_finish,오늘은 편해서 좋았어... 다음에도 같이 쉬러 오자...,Today was nice and comfortable... Let us come rest together again next time...
+,,
+maid_leviathan_partner_intro,셰리 님이 이렇게 가까이에... 심장소리가 멈추지 않아요... 레비아탄은 지금 너무 행복합니다...,Lady Sherry is this close... My heart will not stop racing... Leviathan is so happy right now...
+maid_leviathan_partner_gift,셰리 님을 생각하며 준비했습니다... 받아주신다면 레비아탄은 그것만으로 행복합니다...,I prepared this while thinking of you Lady Sherry... If you accept it Leviathan will be happy with that alone...
+maid_leviathan_partner_extra_gift,하나 더 있습니다... 셰리 님을 향한 레비아탄의 마음이 멈추지 않아서요...,There is one more... Leviathan's feelings for Lady Sherry simply will not stop...
+maid_leviathan_partner_finish,오늘 하루는 레비아탄에게 최고의 선물이었어요... 다음에도 또 함께할 수 있을까요...?,Today was the greatest gift Leviathan could ask for... Could we be together again next time...?
+,,
+maid_lucifer_partner_intro,저... 저를 초대해주셔서 감사합니다... 정말 저로 괜찮으신가요...?,U-Um... Thank you for inviting me... Are you really okay with me...?
+maid_lucifer_partner_gift,도움이 되었으면 해서 준비해봤어요... 마음에 들지 않으면 어쩌죠...,I prepared this hoping it might help... What if you do not like it...?
+maid_lucifer_partner_extra_gift,혹시 몰라서 하나 더 준비했어요... 이... 이것도 받아주실 수 있나요...?,I prepared one more just in case... W-Would you accept this too...?
+maid_lucifer_partner_finish,셰리 씨만 괜찮으시다면... 다음번에도 함께할 수 있을까요...?,If you are okay with it Sherry... Could we spend time together again next time...?
+,,
+maid_mammon_partner_intro,카캇! 초대 고마워요! 다음에 제 가게에 오시면 더 좋은 물건으로 보답할게요!,Kakak! Thanks for the invitation! Next time you visit my shop I will repay you with even better goods!
+maid_mammon_partner_gift,자 선물이에요! 절대 안 팔리는 재고 처리 같은 거 아니니까 오해하지 마세요!,Here is a gift! This is absolutely not unsold stock so please do not misunderstand!
+maid_mammon_partner_extra_gift,카캇! 특별 서비스예요! 이런 기회 흔치 않다구요!,Kakak! This is a special service! You do not get chances like this often!
+maid_mammon_partner_finish,오늘 즐거웠어요! 다음에도 초대 부탁해요!,I had fun today! Please invite me again next time!
+,,
+maid_satan_partner_intro,셰리의 데이트 초대! 나 기쁘다!,A date invitation from Sherry! I am happy!
+maid_satan_partner_gift,셰리! 이거 받으면 나랑 사귀는 거다! 무르기 없다!,Sherry! If you take this then we are dating! No taking it back!
+maid_satan_partner_extra_gift,셰리! 이것도 내 마음이다!,Sherry! This is my heart too!
+maid_satan_partner_finish,셰리! 오늘 즐거웠다! 다음 데이트도 나다! 약속이다!,Sherry! Today was fun! The next date is with me too! Promise!

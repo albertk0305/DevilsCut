@@ -16,7 +16,16 @@ MonoBehaviour:
   defaultSprite: {fileID: 21300000, guid: 379e6871635899941a0ca8b2242fb357, type: 3}
   happySprite: {fileID: 21300000, guid: 0c9ac23088833864089f886dd2e7847e, type: 3}
   embarrassedSprite: {fileID: 21300000, guid: 9f60352bf272b134cbd54a2616b791eb, type: 3}
-  selectedText: baal select
-  giftText: baal gift
-  maxSkillGiftText: baal max
-  farewellText: baal farewell
+  selectedExpression: 0
+  selectedTextKey: maid_baalzebub_partner_intro
+  selectedText: Thanks for calling me! Since we came together let us relax and enjoy
+    this!
+  giftExpression: 0
+  giftTextKey: maid_baalzebub_partner_gift
+  giftText: I brought something that might help! Use it when you need it!
+  maxSkillGiftExpression: 0
+  maxSkillGiftTextKey: maid_baalzebub_partner_extra_gift
+  maxSkillGiftText: Take one more! The more of these you have the better!
+  farewellExpression: 0
+  farewellTextKey: maid_baalzebub_partner_finish
+  farewellText: That was fun today! See you next time!

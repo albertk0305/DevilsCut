@@ -1,0 +1,35 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+gabriel_post_001							gabriel_post_001	None		School	Key		FALSE	FALSE	FALSE								
+gabriel_post_002	gabriel	gabriel	sherry	defeated	easy	name_gabriel	gabriel_post_002	None					FALSE	FALSE	FALSE								
+gabriel_post_003	sherry	gabriel	sherry	defeated	perplexed	name_sherry	gabriel_post_003	None					FALSE	FALSE	FALSE								
+gabriel_post_004	gabriel	gabriel	sherry	delusion	perplexed	name_gabriel	gabriel_post_004	None					FALSE	FALSE	FALSE								
+gabriel_post_005	sherry	gabriel	sherry	delusion	perplexed	name_sherry	gabriel_post_005	None					FALSE	FALSE	FALSE								
+gabriel_post_006	gabriel	gabriel	sherry	delusion	perplexed	name_gabriel	gabriel_post_006	None					FALSE	FALSE	FALSE								
+gabriel_post_007	karin	karin	sherry	curious	perplexed	name_karin	gabriel_post_007	None					FALSE	FALSE	FALSE								
+gabriel_post_008	sherry	karin	sherry	curious	hassle	name_sherry	gabriel_post_008	None					FALSE	FALSE	FALSE								
+gabriel_post_009	asmodeus	asmodeus	sherry	happy	hassle	name_asmodeus	gabriel_post_009	None					FALSE	FALSE	FALSE								
+gabriel_post_010	sherry	asmodeus	sherry	happy	smirk	name_sherry	gabriel_post_010	None					FALSE	FALSE	FALSE								
+gabriel_post_011	asmodeus	asmodeus	sherry	awkward	smirk	name_asmodeus	gabriel_post_011	None					FALSE	FALSE	FALSE								
+gabriel_post_012	sherry	asmodeus	sherry	awkward	smirk	name_sherry	gabriel_post_012	None					FALSE	FALSE	FALSE								
+gabriel_post_013	asmodeus	asmodeus	sherry	embarrassed	smirk	name_asmodeus	gabriel_post_013	None					FALSE	FALSE	FALSE								
+gabriel_post_014	sherry	asmodeus	sherry	embarrassed	smile	name_sherry	gabriel_post_014	None					FALSE	FALSE	FALSE								
+gabriel_post_015	asmodeus	asmodeus	sherry	pout	smile	name_asmodeus	gabriel_post_015	None					FALSE	FALSE	FALSE								
+gabriel_post_016	sherry	asmodeus	sherry	pout	wink	name_sherry	gabriel_post_016	None					FALSE	FALSE	FALSE								
+gabriel_post_017	asmodeus	asmodeus	sherry	neutral	wink	name_asmodeus	gabriel_post_017	None					FALSE	FALSE	FALSE								
+gabriel_post_018	karin	karin	sherry	curious	wink	name_karin	gabriel_post_018	None					FALSE	FALSE	FALSE								
+gabriel_post_019	asmodeus	asmodeus	sherry	charming	wink	name_asmodeus	gabriel_post_019	None					FALSE	FALSE	FALSE								
+gabriel_post_choice							gabriel_post_choice	None				gabriel_post_choice	FALSE	FALSE	TRUE	gabriel_post_choice_yes	gabriel_post_choice_no	RecruitPendingSupporter	RejectPendingSupporter			gabriel_post_yes_001	gabriel_post_no_001
+gabriel_post_yes_001	asmodeus	asmodeus	sherry	happy	smile	name_asmodeus	gabriel_post_yes_001	None					FALSE	FALSE	FALSE								
+gabriel_post_yes_002	sherry	asmodeus	sherry	happy	mock	name_sherry	gabriel_post_yes_002	None					FALSE	FALSE	FALSE								
+gabriel_post_yes_003	asmodeus	asmodeus	sherry	embarrassed	mock	name_asmodeus	gabriel_post_yes_003	None					FALSE	FALSE	FALSE								
+gabriel_post_yes_004	sherry	asmodeus	sherry	embarrassed	wink	name_sherry	gabriel_post_yes_004	None					FALSE	FALSE	FALSE								
+gabriel_post_yes_005	asmodeus	asmodeus	sherry	pout	wink	name_asmodeus	gabriel_post_yes_005	None					FALSE	FALSE	FALSE								
+gabriel_post_yes_006	karin	karin	sherry	happy	wink	name_karin	gabriel_post_yes_006	None					FALSE	FALSE	FALSE								
+gabriel_post_yes_007	asmodeus	asmodeus	sherry	charming	wink	name_asmodeus	gabriel_post_yes_007	None					FALSE	FALSE	FALSE								
+gabriel_post_yes_008	sherry	asmodeus	sherry	charming	yareyare	name_sherry	gabriel_post_yes_008	LoadNextScene					FALSE	FALSE	FALSE								
+gabriel_post_no_001	sherry	asmodeus	sherry	neutral	easy	name_sherry	gabriel_post_no_001	None					FALSE	FALSE	FALSE								
+gabriel_post_no_002	asmodeus	asmodeus	sherry	disappointed	serious	name_asmodeus	gabriel_post_no_002	None					FALSE	FALSE	FALSE								
+gabriel_post_no_003	karin	asmodeus	karin	disappointed	sorry	name_karin	gabriel_post_no_003	None					FALSE	FALSE	FALSE								
+gabriel_post_no_004	asmodeus	asmodeus	karin	neutral	sorry	name_asmodeus	gabriel_post_no_004	None					FALSE	FALSE	FALSE								
+gabriel_post_no_005	sherry	asmodeus	sherry	neutral	smile	name_sherry	gabriel_post_no_005	None					FALSE	FALSE	FALSE								
+gabriel_post_no_006	asmodeus	asmodeus	sherry	happy	smile	name_asmodeus	gabriel_post_no_006	LoadNextScene					FALSE	FALSE	FALSE								

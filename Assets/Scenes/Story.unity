@@ -1253,9 +1253,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298b138403b54849b811d2c59fab45e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
+  bgmPlaylist: []
   bgmClip: {fileID: 8300000, guid: a1b7a502d2dc4984ba970a64b1e824ab, type: 3}
   fadeTime: 1
-  stopBgmIfClipIsEmpty: 0
+  stopBgmIfEmpty: 0
 --- !u!4 &528077240
 Transform:
   m_ObjectHideFlags: 0
@@ -1743,6 +1744,8 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 4e978a7c07e7aee4f866912204aa471d, type: 3}
   - {fileID: 4900000, guid: a72a61a495eb17c46aeab40d9b7a7155, type: 3}
   - {fileID: 4900000, guid: e9ef01a0b828e7b4ea1cea3e4615c299, type: 3}
+  - {fileID: 4900000, guid: 130b2f05e7a4eae49a8dc978631b64f5, type: 3}
+  - {fileID: 4900000, guid: be5cbce2b34e00c4cbe504755230e740, type: 3}
 --- !u!4 &755815050
 Transform:
   m_ObjectHideFlags: 0

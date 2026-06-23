@@ -9978,7 +9978,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &855200907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12557,7 +12557,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 2b13d45322677f14dafd3baa82f90506, type: 3}
   - itemClass: 9
     icon: {fileID: 21300000, guid: 6e94fb0499ff0504f8454e44f3bb62b6, type: 3}
-  itemMergePresentation: {fileID: 0}
+  itemMergePresentation: {fileID: 1112197773}
   itemAddupGroup: {fileID: 1112197771}
   bonusItemImage: {fileID: 981016324}
   mergeItemImageLeft: {fileID: 1409555836}
@@ -12574,7 +12574,7 @@ MonoBehaviour:
   - {fileID: 150014122}
   explorationSceneName: Exploration
   dialogueSceneName: Story
-  dialogueDataDatabase: {fileID: 0}
+  dialogueDataDatabase: {fileID: 11400000, guid: 0bb3dd23896e4fa19d1063d3842f62e6, type: 2}
   resultBgmPlayer: {fileID: 0}
 --- !u!1 &1024095176
 GameObject:
@@ -13280,6 +13280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1112197772}
+  - component: {fileID: 1112197773}
   m_Layer: 5
   m_Name: ItemAddup
   m_TagString: Untagged
@@ -13310,6 +13311,34 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1112197773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112197771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5ca13d5860465f9b1da89abf5783fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemMergePresentationController
+  mergeRoot: {fileID: 1112197771}
+  mergeItemImageLeft: {fileID: 1409555836}
+  mergeItemImageCenter: {fileID: 861775415}
+  mergeItemImageRight: {fileID: 164189823}
+  mergeStarImages:
+  - {fileID: 1199806377}
+  - {fileID: 1678006217}
+  - {fileID: 156782112}
+  mergeMessageText: {fileID: 702718227}
+  textCompleteIndicator: {fileID: 1162943609}
+  messageTypeInterval: 0.02
+  panelButton: {fileID: 186638391}
+  registerPanelButton: 0
+  mergeMoveDuration: 0.6
+  buttonsDisabledDuringMerge: []
+  objectsHiddenDuringMerge: []
 --- !u!1 &1114055741
 GameObject:
   m_ObjectHideFlags: 0
@@ -22210,8 +22239,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 85, y: -325}
-  m_SizeDelta: {x: 1220, y: 145}
+  m_AnchoredPosition: {x: 0, y: -325}
+  m_SizeDelta: {x: 1390, y: 145}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2027828307
 MonoBehaviour:

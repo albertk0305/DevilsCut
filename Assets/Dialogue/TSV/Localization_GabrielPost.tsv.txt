@@ -1,0 +1,37 @@
+Key	Korean	English
+gabriel_post_001	가브리엘을 쓰러뜨리고 열쇠 조각을 획득했다.	Gabriel was defeated and the key fragment was obtained.
+gabriel_post_002	패배했습니다... 풍기위원장인 제가 이런 파렴치한 자들에게...	I have been defeated... A discipline chair defeated by such shameless people...
+gabriel_post_003	파렴치한 건 아직 아무것도 안 했는데.	We have not done anything shameless yet.
+gabriel_post_004	아뇨. 압니다. 패자인 제게 굴욕적인 요구를 하려는 거겠죠.	No. I know. You intend to make humiliating demands of your defeated opponent.
+gabriel_post_005	열쇠 받았고. 딱히 관심 없어.	I got the key. Not really interested.
+gabriel_post_006	그렇게 말하고 속으로는 제 마음을 굴복시키기 위한 계획을 짜고 있겠죠! 비록 몸은 패배했을지언정 제 마음은 꺾이지 않을 겁니다!	You say that while secretly plotting to break my spirit! My body may have lost but my heart will not yield!
+gabriel_post_007	셰리. 가브리엘 씨의 상상 회로가 풍기 문란 상태인 것 같습니다.	Sherry. Gabriel's imagination circuit appears to be in a public indecency state.
+gabriel_post_008	놔둬. 저런 거 보고 배우면 안 돼.	Leave her. Do not learn from that.
+gabriel_post_009	주인님! 아스모를 구해주셨네요! 역시 멋져요!	Master! You saved Asmo! You really are amazing!
+gabriel_post_010	그러고 보니 약속한 특별 서비스가 있었지.	Now that you mention it. There was a promised special service.
+gabriel_post_011	에?	Huh?
+gabriel_post_012	보수는 정확하게 챙겨야 하는 성격이라.	I am the type who collects payment properly.
+gabriel_post_013	아... 아스모의 특별 서비스는 그러니까... 마음의 준비랑 절차랑 분위기가...	A... Asmo's special service needs... mental preparation and procedure and atmosphere...
+gabriel_post_014	농담이야. 허세만 앞선 메이드를 잘못 놀리면 윤리적으로 위험해지거든.	Kidding. Teasing a maid who is all bluff can get ethically dangerous.
+gabriel_post_015	우으... 아스모를 놀린 거예요?	Uuugh... You were teasing Asmo?
+gabriel_post_016	반응이 좋길래.	You had a good reaction.
+gabriel_post_017	그래도 아스모는 답례하고 싶어요. 주인님의 도움이 되고 싶어요!	Still. Asmo wants to repay you. Asmo wants to help you Master!
+gabriel_post_018	어떻게 하시나요, 셰리?	What will you do Sherry?
+gabriel_post_019	맡겨주세요! 아스모의 매력으로 적도 아군도 전부 두근거리게 만들 테니까요!	Leave it to Asmo! Asmo's charm will make enemies and allies all fall head over heels!
+gabriel_post_choice	아스모데우스를 조력자로 받아들입니까?	Accept Asmodeus as a supporter?
+gabriel_post_choice_yes	받아들인다	Accept
+gabriel_post_choice_no	거절한다	Decline
+gabriel_post_yes_001	좋아요! 오늘부터 아스모가 주인님의 전속 메이드예요!	Great! Starting today Asmo is your personal maid Master!
+gabriel_post_yes_002	내가 네 매력에 푹 빠져버리면 책임져 줄 수 있어?	Can you take responsibility if I fall completely for your charm?
+gabriel_post_yes_003	그... 그건... 서로 충분히 알아간 후에...	Th... that is... after we get to know each other better...
+gabriel_post_yes_004	장난이야.	Just kidding.
+gabriel_post_yes_005	저... 정말 놀리지 마세요!	P... please stop teasing me!
+gabriel_post_yes_006	카린은 새로운 협력자를 환영합니다!	Karin welcomes our new ally!
+gabriel_post_yes_007	앞으로 아스모의 매력을 충분히 느끼게 해드릴게요. 각오하세요, 주인님!	From now on Asmo will make sure you feel all of her charm. Prepare yourself Master!
+gabriel_post_yes_008	이런이런. 각오가 필요한 메이드는 처음인데.	Well now. This is my first maid who comes with a warning.
+gabriel_post_no_001	마음만 받을게. 이 일은 좀 위험해.	I will accept the thought. This job is a little dangerous.
+gabriel_post_no_002	에이... 아스모도 꽤 도움 되는데...	Aww... Asmo can be pretty useful too...
+gabriel_post_no_003	죄송합니다. 하지만 아스모데우스 씨의 안전을 위해서예요.	Karin is sorry. But this is for your safety Asmodeus.
+gabriel_post_no_004	알겠어요. 대신 메이드 카페에 방문하시면 아스모가 정성껏 모셔드릴게요!	Okay. Then when you visit the maid cafe Asmo will serve you with all her heart!
+gabriel_post_no_005	그래. 시간 나면 한 번 들르도록 할게.	Sure. I will drop by when I have time.
+gabriel_post_no_006	네! 기다리고 있겠습니다!	Yes! Asmo will be waiting!

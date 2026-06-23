@@ -64,6 +64,7 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
         public MaidCafeMessageKind kind;
         public SupporterData supporter;
         public MaidCafeSupporterDialogueData dialogue;
+        public MaidCafeSupporterExpression supporterExpression;
         public SupporterSkillType skillType;
         public int oldLevel;
         public int newLevel;
@@ -248,6 +249,9 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
         RefreshCurrentSpeakerName();
         currentMessage = RebuildMessage(currentMessageDescriptor);
 
+        if (currentState != MaidCafeState.WaitingMerge)
+            ApplySupporterView(currentMessageDescriptor);
+
         if (dialogueText != null)
             dialogueText.text = currentMessage;
 
@@ -405,7 +409,10 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
     private void ApplySupporterView(SupporterData supporter, Sprite spriteOverride = null)
     {
         if (supporter == null)
+        {
+            HideCharacterAndName();
             return;
+        }
 
         Sprite sprite = spriteOverride != null ? spriteOverride : supporter.mainImage;
 
@@ -420,6 +427,29 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
             speakerNameText.text = GetSupporterDisplayName(supporter);
             speakerNameText.gameObject.SetActive(true);
         }
+    }
+
+    private void ApplySupporterView(MaidCafeMessageDescriptor descriptor)
+    {
+        if (!IsSupporterExpressionMessage(descriptor) || descriptor.supporterExpression == MaidCafeSupporterExpression.Auto)
+            return;
+
+        SupporterData supporter = descriptor.supporter != null ? descriptor.supporter : selectedSupporter;
+        ApplySupporterView(supporter, GetSupporterSprite(supporter, descriptor.dialogue, descriptor.supporterExpression));
+    }
+
+    private void ApplySupporterView(SupporterData supporter, MaidCafeSupporterExpression expression)
+    {
+        if (supporter == null)
+        {
+            HideCharacterAndName();
+            return;
+        }
+
+        if (expression == MaidCafeSupporterExpression.Auto)
+            return;
+
+        ApplySupporterView(supporter, GetSupporterSprite(supporter, expression));
     }
 
     private void HideCharacterAndName()
@@ -575,6 +605,7 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
         currentMessageDescriptor = message;
         currentMessage = RebuildMessage(message);
         isTextComplete = false;
+        ApplySupporterView(message);
 
         if (textCompleteIndicator != null)
             textCompleteIndicator.SetActive(false);
@@ -777,8 +808,9 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
         {
             kind = MaidCafeMessageKind.SupporterSelected,
             supporter = selectedSupporter,
-            dialogue = selectedDialogue
-        }, () => ApplySupporterView(selectedSupporter, GetSupporterSprite(selectedDialogue, false, false)));
+            dialogue = selectedDialogue,
+            supporterExpression = ResolveSupporterExpression(MaidCafeMessageKind.SupporterSelected, selectedDialogue)
+        });
 
         if (TryUpgradeRandomSupporterSkill(selectedSupporter, out SupporterSkillType skillType, out int oldLevel, out int newLevel))
         {
@@ -849,11 +881,7 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
         MaidCafeMessageDescriptor giftMessage = GetGiftDialogueMessage(reason);
         if (includeGiftDialogue && !string.IsNullOrEmpty(RebuildMessage(giftMessage)))
         {
-            Action beforeShow = reason == GiftReason.MaxSkillBonus
-                ? () => ApplySupporterView(selectedSupporter, GetSupporterSprite(selectedDialogue, false, true))
-                : null;
-
-            EnqueueMessage(giftMessage, beforeShow);
+            EnqueueMessage(giftMessage);
         }
 
         sequenceSteps.Enqueue(new MaidCafeStep
@@ -874,7 +902,7 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
 
         if (selectedSupporter != null)
         {
-            string farewellText = GetLocalizedText(selectedDialogue != null ? selectedDialogue.farewellTextKey : null, selectedDialogue != null ? selectedDialogue.farewellText : "");
+            string farewellText = GetFarewellText(selectedDialogue);
 
             if (!string.IsNullOrEmpty(farewellText))
             {
@@ -882,8 +910,9 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
                 {
                     kind = MaidCafeMessageKind.CustomSupporterFarewell,
                     supporter = selectedSupporter,
-                    dialogue = selectedDialogue
-                }, () => ApplySupporterView(selectedSupporter, GetSupporterSprite(selectedDialogue, true, false)));
+                    dialogue = selectedDialogue,
+                    supporterExpression = ResolveSupporterExpression(MaidCafeMessageKind.CustomSupporterFarewell, selectedDialogue)
+                });
                 return;
             }
         }
@@ -1064,7 +1093,8 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
                         kind = MaidCafeMessageKind.GiftDialogue,
                         supporter = selectedSupporter,
                         dialogue = selectedDialogue,
-                        giftReason = reason
+                        giftReason = reason,
+                        supporterExpression = ResolveSupporterExpression(MaidCafeMessageKind.GiftDialogue, selectedDialogue)
                     };
                 }
 
@@ -1075,7 +1105,8 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
                     kind = MaidCafeMessageKind.MaxSkillGift,
                     supporter = selectedSupporter,
                     dialogue = selectedDialogue,
-                    giftReason = reason
+                    giftReason = reason,
+                    supporterExpression = ResolveSupporterExpression(MaidCafeMessageKind.MaxSkillGift, selectedDialogue)
                 };
             case GiftReason.Pity:
                 return new MaidCafeMessageDescriptor { kind = isOperatorResolved ? MaidCafeMessageKind.UnlockedPityGift : MaidCafeMessageKind.LockedPityGift, giftReason = reason };
@@ -1086,26 +1117,52 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
 
     private string GetSelectedSupporterText(MaidCafeSupporterDialogueData dialogue)
     {
-        if (dialogue != null)
-        {
-            string selectedText = GetLocalizedText(dialogue.selectedTextKey, dialogue.selectedText);
-            if (!string.IsNullOrEmpty(selectedText))
-                return selectedText;
-        }
+        return GetSupporterDialogueText(
+            dialogue != null ? dialogue.selectedTextKey : null,
+            dialogue != null ? dialogue.selectedText : null,
+            defaultSupporterSelectedTextKey,
+            defaultSupporterSelectedText);
+    }
 
-        return GetLocalizedText(defaultSupporterSelectedTextKey, defaultSupporterSelectedText);
+    private string GetGiftDialogueText(MaidCafeSupporterDialogueData dialogue)
+    {
+        return GetSupporterDialogueText(
+            dialogue != null ? dialogue.giftTextKey : null,
+            dialogue != null ? dialogue.giftText : null,
+            defaultGiftTextKey,
+            defaultGiftText);
     }
 
     private string GetMaxSkillGiftText(MaidCafeSupporterDialogueData dialogue)
     {
-        if (dialogue != null)
-        {
-            string maxSkillGiftText = GetLocalizedText(dialogue.maxSkillGiftTextKey, dialogue.maxSkillGiftText);
-            if (!string.IsNullOrEmpty(maxSkillGiftText))
-                return maxSkillGiftText;
-        }
+        return GetSupporterDialogueText(
+            dialogue != null ? dialogue.maxSkillGiftTextKey : null,
+            dialogue != null ? dialogue.maxSkillGiftText : null,
+            defaultMaxSkillGiftTextKey,
+            defaultMaxSkillGiftText);
+    }
 
-        return GetLocalizedText(defaultMaxSkillGiftTextKey, defaultMaxSkillGiftText);
+    private string GetFarewellText(MaidCafeSupporterDialogueData dialogue)
+    {
+        return GetSupporterDialogueText(
+            dialogue != null ? dialogue.farewellTextKey : null,
+            dialogue != null ? dialogue.farewellText : null,
+            null,
+            "");
+    }
+
+    private string GetSupporterDialogueText(string key, string fallback, string defaultKey, string defaultFallback)
+    {
+        if (TryGetLocalizedText(key, out string localized))
+            return localized;
+
+        if (!string.IsNullOrEmpty(fallback))
+            return fallback;
+
+        if (TryGetLocalizedText(defaultKey, out string defaultLocalized))
+            return defaultLocalized;
+
+        return defaultFallback ?? "";
     }
 
     private string RebuildMessage(MaidCafeMessageDescriptor descriptor)
@@ -1143,13 +1200,7 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
                     descriptor.oldLevel,
                     descriptor.newLevel);
             case MaidCafeMessageKind.GiftDialogue:
-                if (descriptor.dialogue != null)
-                {
-                    string giftText = GetLocalizedText(descriptor.dialogue.giftTextKey, descriptor.dialogue.giftText);
-                    if (!string.IsNullOrEmpty(giftText))
-                        return giftText;
-                }
-                return GetLocalizedText(defaultGiftTextKey, defaultGiftText);
+                return GetGiftDialogueText(descriptor.dialogue);
             case MaidCafeMessageKind.ItemGain:
                 return FormatLocalizedText(itemGainFormatKey, itemGainFormat, GetItemDisplayName(descriptor.item));
             case MaidCafeMessageKind.NoGiftAvailable:
@@ -1163,7 +1214,7 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
                     ? GetLocalizedText(unlockedFinishTextKey, unlockedFinishText)
                     : GetLocalizedText(lockedFinishTextKey, lockedFinishText);
             case MaidCafeMessageKind.CustomSupporterFarewell:
-                return GetLocalizedText(descriptor.dialogue != null ? descriptor.dialogue.farewellTextKey : null, descriptor.dialogue != null ? descriptor.dialogue.farewellText : "");
+                return GetFarewellText(descriptor.dialogue);
             default:
                 return currentMessage;
         }
@@ -1191,21 +1242,71 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
             || descriptor.kind == MaidCafeMessageKind.Finish;
     }
 
-    private Sprite GetSupporterSprite(MaidCafeSupporterDialogueData dialogue, bool happy, bool embarrassed)
+    private bool IsSupporterExpressionMessage(MaidCafeMessageDescriptor descriptor)
     {
+        return descriptor.kind == MaidCafeMessageKind.SupporterSelected
+            || descriptor.kind == MaidCafeMessageKind.GiftDialogue
+            || descriptor.kind == MaidCafeMessageKind.CustomSupporterFarewell
+            || descriptor.kind == MaidCafeMessageKind.MaxSkillGift;
+    }
+
+    private MaidCafeSupporterExpression ResolveSupporterExpression(MaidCafeMessageKind kind, MaidCafeSupporterDialogueData dialogue)
+    {
+        switch (kind)
+        {
+            case MaidCafeMessageKind.SupporterSelected:
+                return ResolveSupporterExpression(dialogue != null ? dialogue.selectedExpression : MaidCafeSupporterExpression.Auto, MaidCafeSupporterExpression.Default);
+            case MaidCafeMessageKind.GiftDialogue:
+                return ResolveSupporterExpression(dialogue != null ? dialogue.giftExpression : MaidCafeSupporterExpression.Auto, MaidCafeSupporterExpression.Auto);
+            case MaidCafeMessageKind.MaxSkillGift:
+                return ResolveSupporterExpression(dialogue != null ? dialogue.maxSkillGiftExpression : MaidCafeSupporterExpression.Auto, MaidCafeSupporterExpression.Embarrassed);
+            case MaidCafeMessageKind.CustomSupporterFarewell:
+                return ResolveSupporterExpression(dialogue != null ? dialogue.farewellExpression : MaidCafeSupporterExpression.Auto, MaidCafeSupporterExpression.Happy);
+            default:
+                return MaidCafeSupporterExpression.Auto;
+        }
+    }
+
+    private MaidCafeSupporterExpression ResolveSupporterExpression(MaidCafeSupporterExpression configuredExpression, MaidCafeSupporterExpression autoFallback)
+    {
+        return configuredExpression == MaidCafeSupporterExpression.Auto ? autoFallback : configuredExpression;
+    }
+
+    private Sprite GetSupporterSprite(SupporterData supporter, MaidCafeSupporterExpression expression)
+    {
+        MaidCafeSupporterDialogueData dialogue = FindSupporterDialogue(supporter);
+        Sprite defaultSprite = dialogue != null && dialogue.defaultSprite != null ? dialogue.defaultSprite : (supporter != null ? supporter.mainImage : null);
+
         if (dialogue == null)
-            return selectedSupporter != null ? selectedSupporter.mainImage : null;
+            return defaultSprite;
 
-        if (embarrassed && dialogue.embarrassedSprite != null)
-            return dialogue.embarrassedSprite;
+        switch (expression)
+        {
+            case MaidCafeSupporterExpression.Happy:
+                return dialogue.happySprite != null ? dialogue.happySprite : defaultSprite;
+            case MaidCafeSupporterExpression.Embarrassed:
+                return dialogue.embarrassedSprite != null ? dialogue.embarrassedSprite : defaultSprite;
+            default:
+                return defaultSprite;
+        }
+    }
 
-        if (happy && dialogue.happySprite != null)
-            return dialogue.happySprite;
+    private Sprite GetSupporterSprite(SupporterData supporter, MaidCafeSupporterDialogueData dialogue, MaidCafeSupporterExpression expression)
+    {
+        Sprite defaultSprite = dialogue != null && dialogue.defaultSprite != null ? dialogue.defaultSprite : (supporter != null ? supporter.mainImage : null);
 
-        if (dialogue.defaultSprite != null)
-            return dialogue.defaultSprite;
+        if (dialogue == null)
+            return defaultSprite;
 
-        return selectedSupporter != null ? selectedSupporter.mainImage : null;
+        switch (expression)
+        {
+            case MaidCafeSupporterExpression.Happy:
+                return dialogue.happySprite != null ? dialogue.happySprite : defaultSprite;
+            case MaidCafeSupporterExpression.Embarrassed:
+                return dialogue.embarrassedSprite != null ? dialogue.embarrassedSprite : defaultSprite;
+            default:
+                return defaultSprite;
+        }
     }
 
     private MaidCafeSupporterDialogueData FindSupporterDialogue(SupporterData supporter)
@@ -1306,17 +1407,25 @@ public class MaidCafeFacilityController : FacilitySceneControllerBase
 
     private string GetLocalizedText(string key, string fallback)
     {
-        if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
-        {
-            string localized = LocalizationManager.Instance.GetText(key);
-            if (!string.IsNullOrEmpty(localized) && localized != key)
-                return localized;
-        }
+        if (TryGetLocalizedText(key, out string localized))
+            return localized;
 
         if (!string.IsNullOrEmpty(fallback))
             return fallback;
 
         return key ?? "";
+    }
+
+    private bool TryGetLocalizedText(string key, out string localized)
+    {
+        localized = "";
+
+        if (string.IsNullOrWhiteSpace(key) || LocalizationManager.Instance == null)
+            return false;
+
+        string trimmedKey = key.Trim();
+        localized = LocalizationManager.Instance.GetText(trimmedKey);
+        return !string.IsNullOrEmpty(localized) && localized != trimmedKey;
     }
 
     private void OnClickRankButton()

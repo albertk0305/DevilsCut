@@ -2855,7 +2855,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0510bba5566c3e449988d77a65541805, type: 2}
   lastVisitedFacility: {fileID: 0}
   lastVisitedNodeImage: {fileID: 0}
-  currentPhase: 1
+  currentPhase: 3
   currentCycle: 1
   currentTurnInPhase: 0
   currentKeys: 0
@@ -2870,7 +2870,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f964aeca8bc9b61489ac034e53915db4, type: 2}
   finalBoss: {fileID: 11400000, guid: 192190b9551cbff4c848293d78575f8b, type: 2}
   trueFinalBoss: {fileID: 11400000, guid: 2fd74834f772af842940fc981481e673, type: 2}
-  currentTargetBoss: {fileID: 11400000, guid: 6d98e6415c3f2184da047fe403cc673d, type: 2}
+  currentTargetBoss: {fileID: 11400000, guid: e85faee9f42677d4ab2fd90fea94e782, type: 2}
 --- !u!4 &1223019333
 Transform:
   m_ObjectHideFlags: 0
@@ -3787,7 +3787,7 @@ MonoBehaviour:
   statusCanvas: {fileID: 368076949}
   settingsCanvas: {fileID: 1369678688}
   dialogueSceneName: Story
-  dialogueDataDatabase: {fileID: 0}
+  dialogueDataDatabase: {fileID: 11400000, guid: 0bb3dd23896e4fa19d1063d3842f62e6, type: 2}
   encounterBuilder: {fileID: 1223019334}
 --- !u!1 &1610099446
 GameObject:

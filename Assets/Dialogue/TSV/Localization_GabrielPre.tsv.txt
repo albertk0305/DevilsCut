@@ -1,0 +1,17 @@
+Key	Korean	English
+name_gabriel	가브리엘	Gabriel
+name_asmodeus	아스모데우스	Asmodeus
+gabriel_pre_001	정결의 회랑. 청량한 교실 같은 공간에 숨 막히는 단정함이 깔려 있었다.	The Corridor of Purity. A classroom-like space carried a suffocating neatness.
+gabriel_pre_002	풍기 문란. 복장 불량. 과도한 애교. 아스모데우스, 당신은 교정 대상입니다.	Public indecency. Improper attire. Excessive charm. Asmodeus, you require correction.
+gabriel_pre_003	우와. 언니 아스모 관찰 엄청 했네? 혹시 아스모한테 반했다던가?	Wow. You really watched Asmo closely huh? Did you maybe fall for Asmo?
+gabriel_pre_004	반... 반하다니요! 이건 전부 질서와 정결을 위한...!	F... fall for you? This is all for order and purity...!
+gabriel_pre_005	셰리와 카린이 단정한 복도를 지나 한 교실에 다다른다.	Sherry and Karin passed through the orderly hall and reached a classroom.
+gabriel_pre_006	아가씨들. 청춘의 한 장면을 방해해서 미안한데 열쇠 조각 좀 받을 수 있을까?	Ladies. Sorry to interrupt this youthful moment, but can I have the key fragment?
+gabriel_pre_007	수배 안드로이드 카린. 경찰 폭행범 셰리.	Wanted android Karin. Officer assault suspect Sherry.
+gabriel_pre_008	추가로 풀어헤친 단추도 복장 불량입니다.	Also, those loose buttons count as improper attire.
+gabriel_pre_009	이건 어른의 멋이라고 하는 거지.	This is what adults call style.
+gabriel_pre_010	카린도 어른의 멋에 관심 있습니다.	Karin is also interested in adult style.
+gabriel_pre_011	꼬맹이는 아직 일러. 어른의 멋은 술값을 직접 낼 수 있을 때부터야.	Too early for you, kid. Adult style starts when you can pay for your own drink.
+gabriel_pre_012	주인님! 아스모 구해주면 특별 서비스예요!	Master! Save Asmo and you get special service!
+gabriel_pre_013	방금 의뢰 보수가 하나 더 늘었네.	Looks like the job just got another reward.
+gabriel_pre_014	무... 무슨! 야한 건 안 됩니다! 전원 교정!	W... what! No lewdness allowed! Everyone will be corrected!

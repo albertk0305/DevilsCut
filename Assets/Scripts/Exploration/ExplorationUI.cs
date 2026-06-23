@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -216,16 +217,26 @@ public class ExplorationUI : MonoBehaviour
 
     private bool IsFacilityOperatorAvailable(FacilityData facilityData)
     {
-        if (facilityData == null)
-            return false;
+        SupporterChoiceState state = GetFacilityOperatorChoiceState(facilityData);
+        return state == SupporterChoiceState.Recruited || state == SupporterChoiceState.Rejected;
+    }
 
-        if (facilityData.linkedSupporter == null)
-            return false;
+    private SupporterChoiceState GetFacilityOperatorChoiceState(FacilityData facilityData)
+    {
+        if (facilityData == null || facilityData.linkedSupporter == null || PlayerManager.Instance == null)
+            return SupporterChoiceState.Undecided;
 
-        if (PlayerManager.Instance == null)
-            return false;
+        string supporterID = facilityData.linkedSupporter.supporterID;
+        if (string.IsNullOrEmpty(supporterID) || PlayerManager.Instance.supporterChoiceRecords == null)
+            return SupporterChoiceState.Undecided;
 
-        return PlayerManager.Instance.IsSupporterChoiceResolved(facilityData.linkedSupporter);
+        foreach (SupporterChoiceRecord record in PlayerManager.Instance.supporterChoiceRecords)
+        {
+            if (record != null && record.supporterID == supporterID)
+                return record.state;
+        }
+
+        return SupporterChoiceState.Undecided;
     }
 
     private void ApplyFacilityOperatorImage(Image targetImage, FacilityData facilityData, bool selected)
@@ -328,30 +339,29 @@ public class ExplorationUI : MonoBehaviour
             {
                 int rank = ExplorationManager.Instance.GetFacilityRank(facility.nodeID);
 
-                if (rank > 0)
+                if (IsFacilityOperatorAvailable(facility))
                 {
-                    string fmt = LocalizationManager.Instance.GetText("msg_facility_status");
-                    string opName = LocalizationManager.Instance.GetText(facility.operatorName);
-                    karinDialogueText.text = string.Format(fmt, opName, rank);
+                    string opName = GetLocalizedText(facility.operatorName, facility.operatorName);
+                    karinDialogueText.text = FormatLocalizedText("msg_facility_status", "{0} is at the facility and its rank is {1}.", opName, rank);
                 }
                 else
                 {
-                    karinDialogueText.text = LocalizationManager.Instance.GetText("msg_facility_owned_by_baito");
+                    karinDialogueText.text = GetLocalizedText("msg_facility_owned_by_baito", "There is no operator for this facility.");
                 }
             }
             else if (data is BossSelectionNodeData)
             {
-                karinDialogueText.text = LocalizationManager.Instance.GetText("msg_confirm_next_destination");
+                karinDialogueText.text = GetLocalizedText("msg_confirm_next_destination", "Set this as your next target?");
             }
             else if (data is PhaseBattleNodeData pBattle)
             {
                 if (pBattle.isBossBattle)
                 {
-                    karinDialogueText.text = LocalizationManager.Instance.GetText("msg_strong_enemy_warning");
+                    karinDialogueText.text = GetLocalizedText("msg_strong_enemy_warning", "A powerful enemy awaits! Prepare yourself!");
                 }
                 else
                 {
-                    karinDialogueText.text = LocalizationManager.Instance.GetText("msg_enemy_warning");
+                    karinDialogueText.text = GetLocalizedText("msg_enemy_warning", "Enemy ahead! Prepare yourself!");
                 }
             }
         }
@@ -611,6 +621,41 @@ public class ExplorationUI : MonoBehaviour
                     if (battleProgressIcons[i] != null)
                         battleProgressIcons[i].SetActive(i < activeCount);
                 }
+            }
+        }
+    }
+
+    private string GetLocalizedText(string key, string fallback)
+    {
+        if (!string.IsNullOrEmpty(key) && LocalizationManager.Instance != null)
+        {
+            string localized = LocalizationManager.Instance.GetText(key);
+            if (!string.IsNullOrEmpty(localized) && localized != key)
+                return localized;
+        }
+
+        if (!string.IsNullOrEmpty(fallback))
+            return fallback;
+
+        return key ?? "";
+    }
+
+    private string FormatLocalizedText(string key, string fallback, params object[] args)
+    {
+        string format = GetLocalizedText(key, fallback);
+        try
+        {
+            return KoreanParticleFormatter.Format(format, args);
+        }
+        catch (FormatException)
+        {
+            try
+            {
+                return KoreanParticleFormatter.Format(fallback, args);
+            }
+            catch (FormatException)
+            {
+                return fallback ?? "";
             }
         }
     }

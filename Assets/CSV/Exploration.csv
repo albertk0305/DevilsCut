@@ -4,8 +4,8 @@ menu_skill,스킬,Skills
 btn_showtime,쇼타임,Showtime
 btn_wait,잠깐,Wait
 msg_select_destination,어디로 이동할까요?,Where would you like to go?
-msg_facility_status,그 시설은 {0}이(가) 운영 중이고 시설 랭크는 {1}입니다.,That facility is run by {0} and its facility rank is {1}.
-msg_facility_owned_by_baito,해당 시설은 바이토씨가 운영중이네요.,That facility is run by Baito.
+msg_facility_status,그 시설에는 {0:이가}  있고 시설 랭크는 {1}입니다.,{0} is at the facility and its rank is {1}.
+msg_facility_owned_by_baito,해당 시설에는 운영자가 없네요.,There is no operator for this facility.
 msg_confirm_next_destination,다음 목표로 확정할까요?,Set this as your next target?
 msg_strong_enemy_warning,강적입니다! 준비해주세요!,A powerful enemy awaits! Prepare yourself!
 msg_enemy_warning,적입니다! 준비해주세요!,Enemy ahead! Prepare yourself!

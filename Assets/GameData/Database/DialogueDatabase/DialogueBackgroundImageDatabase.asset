@@ -25,8 +25,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 956807d680ad81a4f97b8006162a697f, type: 3}
   - backgroundID: DayStreet
     sprite: {fileID: 21300000, guid: 85f27a0a3ee6a2445aa49b3ce8dbf262, type: 3}
-  - backgroundID: FightClub
-    sprite: {fileID: 21300000, guid: a68e39693b45a344a9edfd11dad79891, type: 3}
+  - backgroundID: Gym
+    sprite: {fileID: 21300000, guid: 46ad3b31d000a9d48bca13b911a36f57, type: 3}
   - backgroundID: Gothic
     sprite: {fileID: 21300000, guid: 8a981d27570dc3e42a545bedd509f49f, type: 3}
   - backgroundID: Idol

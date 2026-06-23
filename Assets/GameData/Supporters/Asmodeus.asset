@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SupporterData
   supporterID: asmodeus
   supporterName: asmodeus
-  mainImage: {fileID: 21300000, guid: 9310ea1addd46bf4686f793a13674af4, type: 3}
+  mainImage: {fileID: 21300000, guid: 318b3b32fee948a4ebcdf02edec9fd53, type: 3}
   iconImage: {fileID: 21300000, guid: e591bdb9608cb634481a4bb2e950e547, type: 3}
   worriedSDImage: {fileID: 21300000, guid: 802e1665804a3d444a041e548372e8f1, type: 3}
   readySDImage: {fileID: 21300000, guid: 1b77c03cdae53ab41bf54ffa8748f742, type: 3}
@@ -24,7 +24,7 @@ MonoBehaviour:
   startSkillImage: {fileID: 21300000, guid: 212ca758facb9494fad29cc0c197bc16, type: 3}
   battleSkillImage: {fileID: 21300000, guid: 8b063434cafb3bb42b30161bfc606075, type: 3}
   worried: {fileID: 21300000, guid: d7e610e128ea5e642acd9e11d940c49e, type: 3}
-  happy: {fileID: 21300000, guid: 70b485d0a6158374ebcef76937f93bd4, type: 3}
+  happy: {fileID: 21300000, guid: 4d411491b3fc867419e5d15bc5186548, type: 3}
   passiveSkillDesc: supporter_passive_fluffy_time
   startSkillDesc: supporter_start_met_an_angel
   battleSkillDesc: supporter_battle_pure_pure_heart
@@ -32,7 +32,7 @@ MonoBehaviour:
   joinMessage: support_asmodeus_join
   linkedFacilityID: maidcafe
   passiveLevel: 2
-  startSkillLevel: 2
+  startSkillLevel: 3
   battleSkillLevel: 2
   startSkillLogic: {fileID: 11400000, guid: 4689145c7eb13af449e8f452c19a5c8c, type: 2}
   battleSkillLogic: {fileID: 11400000, guid: a02aafce9899a6e478b1cdcf8a287a66, type: 2}
