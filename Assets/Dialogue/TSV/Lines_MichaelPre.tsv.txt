@@ -17,11 +17,11 @@ michael_pre_015	karin	karin	michael	tired	nervous	name_karin	michael_pre_015	Non
 michael_pre_016	sherry	sherry	michael	easy	nervous	name_sherry	michael_pre_016	None					FALSE	FALSE	FALSE								
 michael_pre_017	michael	sherry	michael	easy	panic	name_michael	michael_pre_017	None					FALSE	FALSE	FALSE								
 michael_pre_018							michael_pre_018	None					FALSE	FALSE	FALSE								
-michael_pre_019	michael	sherry	michael	smirk	serious	name_michael	michael_pre_019	None					FALSE	FALSE	FALSE								
-michael_pre_020	michael	sherry	michael	smirk	serious	name_michael	michael_pre_020	None					FALSE	FALSE	FALSE								
+michael_pre_019	michael	sherry	michael	easy	serious	name_michael	michael_pre_019	None					FALSE	FALSE	FALSE								
+michael_pre_020	michael	sherry	michael	easy	serious	name_michael	michael_pre_020	None					FALSE	FALSE	FALSE								
 michael_pre_021	sherry	sherry	michael	mock	serious	name_sherry	michael_pre_021	None					FALSE	FALSE	FALSE								
 michael_pre_022	michael	sherry	michael	mock	smirk	name_michael	michael_pre_022	None					FALSE	FALSE	FALSE								
 michael_pre_023	sherry	sherry	michael	awkward	smirk	name_sherry	michael_pre_023	None					FALSE	FALSE	FALSE								
 michael_pre_024	karin	karin	michael	tired	smirk	name_karin	michael_pre_024	None					FALSE	FALSE	FALSE								
-michael_pre_025	michael	karin	michael	tired	smile	name_michael	michael_pre_025	None					FALSE	FALSE	FALSE								
-michael_pre_026	lucifer	lucifer	michael	drunkPerplexed	smile	name_lucifer	michael_pre_026	LoadNextScene					FALSE	FALSE	FALSE								
+michael_pre_025	michael	karin	michael	tired	serious	name_michael	michael_pre_025	None					FALSE	FALSE	FALSE								
+michael_pre_026	lucifer	lucifer	michael	drunkPerplexed	serious	name_lucifer	michael_pre_026	LoadNextScene					FALSE	FALSE	FALSE								

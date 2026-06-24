@@ -1,0 +1,28 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+raguel_pre_001							raguel_pre_001	None		Base			FALSE	FALSE	FALSE								
+raguel_pre_002	leviathan	leviathan	raguel	annoyed	neutral	name_leviathan	raguel_pre_002	None					FALSE	FALSE	FALSE								
+raguel_pre_003	raguel	leviathan	raguel	annoyed	neutral	name_raguel	raguel_pre_003	None					FALSE	FALSE	FALSE								
+raguel_pre_004	leviathan	leviathan	raguel	annoyed	neutral	name_leviathan	raguel_pre_004	None					FALSE	FALSE	FALSE								
+raguel_pre_005	raguel	leviathan	raguel	annoyed	neutral	name_raguel	raguel_pre_005	None					FALSE	FALSE	FALSE								
+raguel_pre_006	leviathan	leviathan	raguel	annoyed	neutral	name_leviathan	raguel_pre_006	None					FALSE	FALSE	FALSE								
+raguel_pre_007	raguel	leviathan	raguel	annoyed	neutral	name_raguel	raguel_pre_007	None					FALSE	FALSE	FALSE								
+raguel_pre_008	leviathan	leviathan	raguel	angry	neutral	name_leviathan	raguel_pre_008	None					FALSE	FALSE	FALSE								
+raguel_pre_009	raguel	leviathan	raguel	angry	neutral	name_raguel	raguel_pre_009	None					FALSE	FALSE	FALSE								
+raguel_pre_010							raguel_pre_010	None					FALSE	FALSE	FALSE								
+raguel_pre_011	sherry	sherry	raguel	hassle	neutral	name_sherry	raguel_pre_011	None					FALSE	FALSE	FALSE								
+raguel_pre_012	raguel	sherry	raguel	hassle	neutral	name_raguel	raguel_pre_012	None					FALSE	FALSE	FALSE								
+raguel_pre_013	sherry	sherry	raguel	perplexed	neutral	name_sherry	raguel_pre_013	None					FALSE	FALSE	FALSE								
+raguel_pre_014	raguel	sherry	raguel	perplexed	neutral	name_raguel	raguel_pre_014	None					FALSE	FALSE	FALSE								
+raguel_pre_015	sherry	sherry	raguel	mock	neutral	name_sherry	raguel_pre_015	None					FALSE	FALSE	FALSE								
+raguel_pre_016	raguel	sherry	raguel	mock	neutral	name_raguel	raguel_pre_016	None					FALSE	FALSE	FALSE								
+raguel_pre_017	sherry	sherry	raguel	annoyed	neutral	name_sherry	raguel_pre_017	None					FALSE	FALSE	FALSE								
+raguel_pre_018	karin	karin	raguel	proud	neutral	name_karin	raguel_pre_018	None					FALSE	FALSE	FALSE								
+raguel_pre_019	karin	karin	raguel	doya	neutral	name_karin	raguel_pre_019	None					FALSE	FALSE	FALSE								
+raguel_pre_020	raguel	karin	raguel	doya	neutral	name_raguel	raguel_pre_020	None					FALSE	FALSE	FALSE								
+raguel_pre_021	karin	karin	raguel	suspicious	neutral	name_karin	raguel_pre_021	None					FALSE	FALSE	FALSE								
+raguel_pre_022	raguel	karin	raguel	suspicious	neutral	name_raguel	raguel_pre_022	None					FALSE	FALSE	FALSE								
+raguel_pre_023	sherry	sherry	raguel	annoyed	neutral	name_sherry	raguel_pre_023	None					FALSE	FALSE	FALSE								
+raguel_pre_024	raguel	sherry	raguel	annoyed	neutral	name_raguel	raguel_pre_024	None					FALSE	FALSE	FALSE								
+raguel_pre_025	raguel	sherry	raguel	annoyed	neutral	name_raguel	raguel_pre_025	None					FALSE	FALSE	FALSE								
+raguel_pre_026	sherry	sherry	raguel	yareyare	neutral	name_sherry	raguel_pre_026	None					FALSE	FALSE	FALSE								
+raguel_pre_027	raguel	sherry	raguel	yareyare	neutral	name_raguel	raguel_pre_027	LoadNextScene					FALSE	FALSE	FALSE								

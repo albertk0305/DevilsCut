@@ -1,0 +1,36 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+raguel_post_001	narration					speaker_narration	raguel_post_001_body			Base	Key		FALSE	FALSE	FALSE								
+raguel_post_002	narration					speaker_narration	raguel_post_002_body						FALSE	FALSE	FALSE								
+raguel_post_003	sherry	sherry	raguel	easy	confused	speaker_sherry	raguel_post_003_body						FALSE	FALSE	FALSE								
+raguel_post_004	raguel	sherry	raguel	easy	confused	speaker_raguel	raguel_post_004_body						FALSE	FALSE	FALSE								
+raguel_post_005	sherry	sherry	raguel	curious	confused	speaker_sherry	raguel_post_005_body						FALSE	FALSE	FALSE								
+raguel_post_006	raguel	sherry	raguel	curious	sad	speaker_raguel	raguel_post_006_body						FALSE	FALSE	FALSE								
+raguel_post_007	sherry	sherry	raguel	mock	sad	speaker_sherry	raguel_post_007_body						FALSE	FALSE	FALSE								
+raguel_post_008	raguel	sherry	raguel	mock	sad	speaker_raguel	raguel_post_008_body						FALSE	FALSE	FALSE								
+raguel_post_009	sherry	sherry	raguel	yareyare	sad	speaker_sherry	raguel_post_009_body						FALSE	FALSE	FALSE								
+raguel_post_010	raguel	sherry	raguel	yareyare	cry	speaker_raguel	raguel_post_010_body						FALSE	FALSE	FALSE								
+raguel_post_011	sherry	sherry	raguel	easy	cry	speaker_sherry	raguel_post_011_body						FALSE	FALSE	FALSE								
+raguel_post_012	raguel	sherry	raguel	easy	cry	speaker_raguel	raguel_post_012_body						FALSE	FALSE	FALSE								
+raguel_post_013	sherry	sherry	raguel	smile	cry	speaker_sherry	raguel_post_013_body						FALSE	FALSE	FALSE								
+raguel_post_014	raguel	sherry	raguel	smile	crySmile	speaker_raguel	raguel_post_014_body						FALSE	FALSE	FALSE								
+raguel_post_015	karin	sherry	karin	smile	glum	speaker_karin	raguel_post_015_body						FALSE	FALSE	FALSE								
+raguel_post_016	sherry	sherry	karin	curious	glum	speaker_sherry	raguel_post_016_body						FALSE	FALSE	FALSE								
+raguel_post_017	leviathan	sherry	leviathan	curious	smile	speaker_leviathan	raguel_post_017_body						FALSE	FALSE	FALSE								
+raguel_post_018	sherry	sherry	leviathan	wink	smile	speaker_sherry	raguel_post_018_body						FALSE	FALSE	FALSE								
+raguel_post_019	leviathan	sherry	leviathan	wink	love3	speaker_leviathan	raguel_post_019_body						FALSE	FALSE	FALSE								
+raguel_post_020	leviathan	sherry	leviathan	wink	love3	speaker_leviathan	raguel_post_020_body						FALSE	FALSE	FALSE								
+raguel_post_021	sherry	sherry	leviathan	urgent	love3	speaker_sherry	raguel_post_021_body						FALSE	FALSE	FALSE								
+raguel_post_022	leviathan	sherry	leviathan	urgent	love	speaker_leviathan	raguel_post_022_body						FALSE	FALSE	FALSE								
+raguel_post_choice_001		sherry	leviathan				raguel_post_choice_body					raguel_post_choice_001	FALSE	FALSE	TRUE	raguel_post_choice_yes	raguel_post_choice_no	RecruitPendingSupporter	RejectPendingSupporter			raguel_post_yes_001	raguel_post_no_001
+raguel_post_yes_001	sherry	sherry	leviathan	smile	love	speaker_sherry	raguel_post_yes_001_body						FALSE	FALSE	FALSE								
+raguel_post_yes_002	leviathan	sherry	leviathan	smile	love3	speaker_leviathan	raguel_post_yes_002_body						FALSE	FALSE	FALSE								
+raguel_post_yes_003	leviathan	sherry	leviathan	smile	love3	speaker_leviathan	raguel_post_yes_003_body						FALSE	FALSE	FALSE								
+raguel_post_yes_004	leviathan	sherry	leviathan	smile	love2	speaker_leviathan	raguel_post_yes_004_body						FALSE	FALSE	FALSE								
+raguel_post_yes_005	karin	karin	leviathan	happy	love2	speaker_karin	raguel_post_yes_005_body	LoadNextScene					FALSE	FALSE	FALSE								
+raguel_post_no_001	sherry	sherry	leviathan	wink	love	speaker_sherry	raguel_post_no_001_body						FALSE	FALSE	FALSE								
+raguel_post_no_002	leviathan	sherry	leviathan	wink	love3	speaker_leviathan	raguel_post_no_002_body						FALSE	FALSE	FALSE								
+raguel_post_no_003	leviathan	sherry	leviathan	wink	love3	speaker_leviathan	raguel_post_no_003_body						FALSE	FALSE	FALSE								
+raguel_post_no_004	sherry	sherry	leviathan	easy	love3	speaker_sherry	raguel_post_no_004_body						FALSE	FALSE	FALSE								
+raguel_post_no_005	leviathan	sherry	leviathan	easy	happy	speaker_leviathan	raguel_post_no_005_body						FALSE	FALSE	FALSE								
+raguel_post_no_006	leviathan	sherry	leviathan	easy	happy	speaker_leviathan	raguel_post_no_006_body						FALSE	FALSE	FALSE								
+raguel_post_no_007	sherry	sherry	leviathan	perplexed	happy	speaker_sherry	raguel_post_no_007_body	LoadNextScene					FALSE	FALSE	FALSE								

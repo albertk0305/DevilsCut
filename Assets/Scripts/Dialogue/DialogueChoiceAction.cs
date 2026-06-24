@@ -5,5 +5,6 @@
     RecruitPendingSupporter,
     RejectPendingSupporter,
     UpgradePendingFacilityRank,
-    GameClear
+    GameClear,
+    JumpToLine
 }

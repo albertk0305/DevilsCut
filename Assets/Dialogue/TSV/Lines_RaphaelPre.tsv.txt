@@ -1,0 +1,32 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+raphael_pre_001	narration					speaker_narration	raphael_pre_001_body			Monk			FALSE	FALSE	FALSE								
+raphael_pre_002	raphael	baalzebub	raphael	neutral	strict	speaker_raphael	raphael_pre_002_body						FALSE	FALSE	FALSE								
+raphael_pre_003	baalzebub	baalzebub	raphael	happy	strict	speaker_baalzebub	raphael_pre_003_body						FALSE	FALSE	FALSE								
+raphael_pre_004	raphael	baalzebub	raphael	happy	mad	speaker_raphael	raphael_pre_004_body						FALSE	FALSE	FALSE								
+raphael_pre_005	raphael	baalzebub	raphael	happy	strict	speaker_raphael	raphael_pre_005_body						FALSE	FALSE	FALSE								
+raphael_pre_006	raphael	baalzebub	raphael	happy	strict	speaker_raphael	raphael_pre_006_body						FALSE	FALSE	FALSE								
+raphael_pre_007	baalzebub	baalzebub	raphael	laugh	strict	speaker_baalzebub	raphael_pre_007_body						FALSE	FALSE	FALSE								
+raphael_pre_008	baalzebub	baalzebub	raphael	laugh	strict	speaker_baalzebub	raphael_pre_008_body						FALSE	FALSE	FALSE								
+raphael_pre_009	raphael	baalzebub	raphael	laugh	refuse	speaker_raphael	raphael_pre_009_body						FALSE	FALSE	FALSE								
+raphael_pre_010	baalzebub	baalzebub	raphael	tease	refuse	speaker_baalzebub	raphael_pre_010_body						FALSE	FALSE	FALSE								
+raphael_pre_011	raphael	baalzebub	raphael	tease	embarrassed	speaker_raphael	raphael_pre_011_body						FALSE	FALSE	FALSE								
+raphael_pre_012	baalzebub	baalzebub	raphael	tease	embarrassed	speaker_baalzebub	raphael_pre_012_body						FALSE	FALSE	FALSE								
+raphael_pre_013	narration					speaker_narration	raphael_pre_013_body						FALSE	FALSE	FALSE								
+raphael_pre_014	karin	sherry	karin	easy	smile	speaker_karin	raphael_pre_014_body						FALSE	FALSE	FALSE								
+raphael_pre_015	sherry	sherry	raphael	excited	strict	speaker_sherry	raphael_pre_015_body						FALSE	FALSE	FALSE								
+raphael_pre_016	raphael	sherry	raphael	excited	mad	speaker_raphael	raphael_pre_016_body						FALSE	FALSE	FALSE								
+raphael_pre_017	sherry	sherry	raphael	yareyare	mad	speaker_sherry	raphael_pre_017_body						FALSE	FALSE	FALSE								
+raphael_pre_018	raphael	sherry	raphael	yareyare	strict	speaker_raphael	raphael_pre_018_body						FALSE	FALSE	FALSE								
+raphael_pre_019	sherry	sherry	raphael	smile	strict	speaker_sherry	raphael_pre_019_body						FALSE	FALSE	FALSE								
+raphael_pre_020	raphael	sherry	raphael	smile	excited	speaker_raphael	raphael_pre_020_body						FALSE	FALSE	FALSE								
+raphael_pre_021	raphael	sherry	raphael	smile	refuse	speaker_raphael	raphael_pre_021_body						FALSE	FALSE	FALSE								
+raphael_pre_022	karin	karin	raphael	happy	refuse	speaker_karin	raphael_pre_022_body						FALSE	FALSE	FALSE								
+raphael_pre_023	raphael	karin	raphael	happy	excited	speaker_raphael	raphael_pre_023_body						FALSE	FALSE	FALSE								
+raphael_pre_024	raphael	karin	raphael	happy	refuse	speaker_raphael	raphael_pre_024_body						FALSE	FALSE	FALSE								
+raphael_pre_025	karin	karin	raphael	persuade	refuse	speaker_karin	raphael_pre_025_body						FALSE	FALSE	FALSE								
+raphael_pre_026	raphael	karin	raphael	persuade	strict	speaker_raphael	raphael_pre_026_body						FALSE	FALSE	FALSE								
+raphael_pre_027	raphael	karin	raphael	persuade	strict	speaker_raphael	raphael_pre_027_body						FALSE	FALSE	FALSE								
+raphael_pre_028	baalzebub	baalzebub	raphael	tease	strict	speaker_baalzebub	raphael_pre_028_body						FALSE	FALSE	FALSE								
+raphael_pre_029	raphael	baalzebub	raphael	tease	embarrassed	speaker_raphael	raphael_pre_029_body						FALSE	FALSE	FALSE								
+raphael_pre_030	sherry	sherry	raphael	easy	embarrassed	speaker_sherry	raphael_pre_030_body						FALSE	FALSE	FALSE								
+raphael_pre_031	raphael	sherry	raphael	easy	doya	speaker_raphael	raphael_pre_031_body	LoadNextScene					FALSE	FALSE	FALSE								

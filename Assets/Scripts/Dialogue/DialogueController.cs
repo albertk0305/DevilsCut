@@ -9,6 +9,13 @@ public class DialogueController : MonoBehaviour
 {
     private const int MaxStorySkipResolveDepth = 64;
 
+    private enum LineEndActionResult
+    {
+        None,
+        Handled,
+        Stop
+    }
+
     [Header("Data")]
     [SerializeField] private DialogueData fallbackDialogueData;
     [SerializeField] private DialogueDataDatabase dialogueDataDatabase;
@@ -265,7 +272,7 @@ public class DialogueController : MonoBehaviour
             return;
         }
 
-        if (TryHandleCurrentLineEndAction())
+        if (TryHandleCurrentLineEndAction() != LineEndActionResult.None)
             return;
 
         ShowNextLine();
@@ -292,10 +299,15 @@ public class DialogueController : MonoBehaviour
                 CompleteCurrentLineText();
             else if (CurrentLineHasChoice())
                 break;
-            else if (TryHandleCurrentLineEndAction())
-                break;
             else
-                ShowNextLine(true);
+            {
+                LineEndActionResult lineEndActionResult = TryHandleCurrentLineEndAction(true);
+                if (lineEndActionResult == LineEndActionResult.Stop)
+                    break;
+
+                if (lineEndActionResult == LineEndActionResult.None)
+                    ShowNextLine(true);
+            }
 
             if (isChoiceActive || IsDialogueFinished())
                 break;
@@ -493,23 +505,30 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-    private bool TryHandleCurrentLineEndAction()
+    private LineEndActionResult TryHandleCurrentLineEndAction(bool instantJumpText = false)
     {
         DialogueLine line = GetCurrentLine();
         if (line == null || line.lineEndAction == DialogueChoiceAction.None)
-            return false;
+            return LineEndActionResult.None;
+
+        if (line.lineEndAction == DialogueChoiceAction.JumpToLine)
+        {
+            return JumpToLine(line.lineEndActionValue, instantJumpText)
+                ? LineEndActionResult.Handled
+                : LineEndActionResult.None;
+        }
 
         bool endsDialogue = HandleChoiceAction(line.lineEndAction, line.lineEndActionValue);
         if (endsDialogue)
-            return true;
+            return LineEndActionResult.Stop;
 
         if (line.lineEndAction == DialogueChoiceAction.RecruitPendingSupporter || line.lineEndAction == DialogueChoiceAction.RejectPendingSupporter)
         {
             LoadNextSceneOrWarn();
-            return true;
+            return LineEndActionResult.Stop;
         }
 
-        return false;
+        return LineEndActionResult.None;
     }
 
     private void HandleGameClear(string endingID)
@@ -714,30 +733,41 @@ public class DialogueController : MonoBehaviour
         for (int i = 0; i < currentLines.Count; i++)
         {
             DialogueLine line = currentLines[i];
-            if (line == null || string.IsNullOrEmpty(line.lineID))
+            if (line == null)
                 continue;
 
-            if (lineIndexByID.ContainsKey(line.lineID))
+            string lineID = line.lineID.Trim();
+            if (string.IsNullOrEmpty(lineID))
+                continue;
+
+            if (lineIndexByID.ContainsKey(lineID))
             {
-                DevLog.LogWarning($"[Dialogue] Duplicate lineID ignored: {line.lineID}");
+                DevLog.LogWarning($"[Dialogue] Duplicate lineID ignored: {lineID}");
                 continue;
             }
 
-            lineIndexByID[line.lineID] = i;
+            lineIndexByID[lineID] = i;
         }
     }
 
-    private void JumpToLine(string lineID)
+    private bool JumpToLine(string lineID, bool instantText = false)
     {
-        if (!lineIndexByID.TryGetValue(lineID, out int lineIndex))
+        string targetLineID = lineID != null ? lineID.Trim() : "";
+        if (string.IsNullOrEmpty(targetLineID))
         {
-            DevLog.LogWarning($"[Dialogue] lineID not found: {lineID}");
-            ShowNextLine();
-            return;
+            DevLog.LogWarning("[Dialogue] JumpToLine target lineID is empty.");
+            return false;
+        }
+
+        if (!lineIndexByID.TryGetValue(targetLineID, out int lineIndex))
+        {
+            DevLog.LogWarning($"[Dialogue] lineID not found: {targetLineID}");
+            return false;
         }
 
         currentLineIndex = lineIndex - 1;
-        ShowNextLine();
+        ShowNextLine(instantText);
+        return true;
     }
 
     private void ApplyLineVisuals(DialogueLine line)

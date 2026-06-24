@@ -1,0 +1,39 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_raphael	라파엘	Raphael
+speaker_baalzebub	바알제붑	Baalzebub
+raphael_post_001_body	라파엘을 쓰러뜨리고 열쇠 조각을 획득했다.	Raphael was defeated and the key fragment was obtained.
+raphael_post_002_body	이 정도 번뇌도 봉인하지 못하다니... 수행이... 부족했습니다.	To think I could not even seal this much worldly desire... My training... was insufficient.
+raphael_post_003_body	꽤 하던데. 조금 더 자라서 오면 내가 질지도 모르겠네.	You were pretty good. Grow a little more and I might lose next time.
+raphael_post_004_body	그, 그런가요?	R-really?
+raphael_post_005_body	앗! 아닙니다. 말 한마디에 일희일비하지 않습니다.	Ah! No. I do not get swayed by a single compliment.
+raphael_post_006_body	들었지, 꼬마야? 강해지고 싶으면 일단 잘 먹는 게 중요하다구.	Hear that, kid? If you want to get stronger, eating well comes first.
+raphael_post_007_body	하지만... 한 그릇을 원하면 두 그릇도 원하게 되고, 그러면 번뇌가...	But... if I want one bowl, I may start wanting two bowls, and then worldly desire will...
+raphael_post_008_body	아니, 배가 든든해야 주먹도 마음도 안 흔들린다.	Nope. A full stomach keeps both your fists and your heart steady.
+raphael_post_009_body	빈속으로 버티는 건 절제가 아니라 객기야. 잘 먹고, 잘 자고, 잘 수련해.	Enduring on an empty stomach is not temperance. It is stubbornness. Eat well, sleep well, and train well.
+raphael_post_010_body	카린도 맛있는 것을 먹으면 기운이 납니다! 자고 일어나면 기분도 좋아집니다!	Karin gets energy from eating tasty food too! Waking up after sleep also feels nice!
+raphael_post_011_body	그렇다면... 저는 무럭무럭 자라 거대 괴수만큼 커질 겁니다!	In that case... I will grow big and strong until I am as huge as a giant monster!
+raphael_post_012_body	방향은 좀 이상한데. 뭐... 기운 차렸으면 됐나.	That goal is a little weird. Well... at least you have your spirit back.
+raphael_post_013_body	다음번엔 셰리 님이 저를 올려다보게 될 겁니다!	Next time, Ms. Sherry, you will be looking up at me!
+raphael_post_014_body	하하하! 좋아! 내 가게로 와라, 꼬마야. 든든하게 먹여주마!	Hahaha! Good! Come to my place, kid. I will feed you properly!
+raphael_post_015_body	이, 이건 어디까지나 수행의 일환입니다! 욕구의 충족이 아닙니다!	Th-this is strictly part of my training! It is not the satisfaction of desire!
+raphael_post_016_body	카린도 가고 싶습니다!	Karin wants to go too!
+raphael_post_017_body	그래! 꼬마도 와라! 교자 한 접시 더 얹어줄게!	Sure! You come too, kid! I will throw in an extra plate of gyoza!
+raphael_post_018_body	와아! 바알제붑 씨는 좋은 분입니다!	Wow! Ms. Baalzebub is a good person!
+raphael_post_019_body	하하하! 그리고 셰리. 네 싸움, 내 요리만큼 뜨거웠다.	Hahaha! And Sherry. Your fight was as hot as my cooking.
+raphael_post_020_body	이런 인연을 그냥 흘려버리긴 아깝지. 나도 함께해도 될까?	It would be a waste to let a bond like this slip away. Mind if I come with you?
+raphael_post_choice_body	바알제붑을 조력자로 받아들입니까?	Accept Baalzebub as a supporter?
+raphael_post_choice_yes	받아들인다	Accept
+raphael_post_choice_no	마음만 받는다	Decline
+raphael_post_yes_001_body	물론이지. 화력은 많을수록 좋아.	Of course. The more firepower, the better.
+raphael_post_yes_002_body	하하하! 맡겨둬라! 네 싸움판에 불맛을 제대로 얹어주마!	Hahaha! Leave it to me! I will add some real fire to your battlefield!
+raphael_post_yes_003_body	든든한 조력자가 생겼습니다!	We have gained a reliable supporter!
+raphael_post_yes_004_body	좋아! 전투 끝나면 전부 견반점이다! 배 터질 각오하고 와라!	Good! Once the fight is over, everyone is coming to Kyeonhanten! Come ready to burst!
+raphael_post_no_001_body	마음은 고맙지만, 이 길은 위험해.	I appreciate it, but this road is dangerous.
+raphael_post_no_002_body	아쉽네. 그렇다면 어쩔 수 없지.	That is a shame. But if that is your answer, so be it.
+raphael_post_no_003_body	대신 견반점에 오면 반드시 만족시켜주마. 배도 마음도 꽉 채워서 보내주지!	Then come to Kyeonhanten instead and I guarantee you will leave satisfied. I will fill both your stomach and your heart!
+raphael_post_no_004_body	카린은 벌써 교자 맛을 상상하고 있습니다!	Karin is already imagining the taste of gyoza!
+raphael_post_no_005_body	그래. 배고파지면 들를게. 곁들일 술은 내가 가져가지.	Yeah. I will stop by when I get hungry. I will bring the drink to go with it.
+raphael_post_no_006_body	하하하! 좋다! 그럼 안주는 내가 책임진다!	Hahaha! Good! Then I will handle the food!

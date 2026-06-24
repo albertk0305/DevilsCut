@@ -1,0 +1,32 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+raphael_post_001	narration					speaker_narration	raphael_post_001_body			Monk	Key		FALSE	FALSE	FALSE								
+raphael_post_002	raphael	sherry	raphael	easy	sad	speaker_raphael	raphael_post_002_body						FALSE	FALSE	FALSE								
+raphael_post_003	sherry	sherry	raphael	smile	sad	speaker_sherry	raphael_post_003_body						FALSE	FALSE	FALSE								
+raphael_post_004	raphael	sherry	raphael	smile	excited	speaker_raphael	raphael_post_004_body						FALSE	FALSE	FALSE								
+raphael_post_005	raphael	sherry	raphael	smile	refuse	speaker_raphael	raphael_post_005_body						FALSE	FALSE	FALSE								
+raphael_post_006	baalzebub	baalzebub	raphael	happy	refuse	speaker_baalzebub	raphael_post_006_body						FALSE	FALSE	FALSE								
+raphael_post_007	raphael	baalzebub	raphael	happy	embarrassed	speaker_raphael	raphael_post_007_body						FALSE	FALSE	FALSE								
+raphael_post_008	baalzebub	baalzebub	raphael	smile	embarrassed	speaker_baalzebub	raphael_post_008_body						FALSE	FALSE	FALSE								
+raphael_post_009	sherry	sherry	raphael	wink	embarrassed	speaker_sherry	raphael_post_009_body						FALSE	FALSE	FALSE								
+raphael_post_010	karin	karin	raphael	happy	embarrassed	speaker_karin	raphael_post_010_body						FALSE	FALSE	FALSE								
+raphael_post_011	raphael	karin	raphael	happy	proud	speaker_raphael	raphael_post_011_body						FALSE	FALSE	FALSE								
+raphael_post_012	sherry	sherry	raphael	perplexed	proud	speaker_sherry	raphael_post_012_body						FALSE	FALSE	FALSE								
+raphael_post_013	raphael	sherry	raphael	perplexed	doya	speaker_raphael	raphael_post_013_body						FALSE	FALSE	FALSE								
+raphael_post_014	baalzebub	baalzebub	raphael	laugh	doya	speaker_baalzebub	raphael_post_014_body						FALSE	FALSE	FALSE								
+raphael_post_015	raphael	baalzebub	raphael	laugh	embarrassed	speaker_raphael	raphael_post_015_body						FALSE	FALSE	FALSE								
+raphael_post_016	karin	karin	raphael	smile	embarrassed	speaker_karin	raphael_post_016_body						FALSE	FALSE	FALSE								
+raphael_post_017	baalzebub	karin	baalzebub	smile	happy	speaker_baalzebub	raphael_post_017_body						FALSE	FALSE	FALSE								
+raphael_post_018	karin	karin	baalzebub	happy	happy	speaker_karin	raphael_post_018_body						FALSE	FALSE	FALSE								
+raphael_post_019	baalzebub	sherry	baalzebub	easy	neutral	speaker_baalzebub	raphael_post_019_body						FALSE	FALSE	FALSE								
+raphael_post_020	baalzebub	sherry	baalzebub	easy	neutral	speaker_baalzebub	raphael_post_020_body						FALSE	FALSE	FALSE								
+raphael_post_choice_001		sherry	baalzebub				raphael_post_choice_body					raphael_post_choice_001	FALSE	FALSE	TRUE	raphael_post_choice_yes	raphael_post_choice_no	RecruitPendingSupporter	RejectPendingSupporter			raphael_post_yes_001	raphael_post_no_001
+raphael_post_yes_001	sherry	sherry	baalzebub	smirk	neutral	speaker_sherry	raphael_post_yes_001_body						FALSE	FALSE	FALSE								
+raphael_post_yes_002	baalzebub	sherry	baalzebub	smirk	laugh	speaker_baalzebub	raphael_post_yes_002_body						FALSE	FALSE	FALSE								
+raphael_post_yes_003	karin	karin	baalzebub	happy	laugh	speaker_karin	raphael_post_yes_003_body						FALSE	FALSE	FALSE								
+raphael_post_yes_004	baalzebub	karin	baalzebub	happy	laugh	speaker_baalzebub	raphael_post_yes_004_body	LoadNextScene					FALSE	FALSE	FALSE								
+raphael_post_no_001	sherry	sherry	baalzebub	worry	neutral	speaker_sherry	raphael_post_no_001_body						FALSE	FALSE	FALSE								
+raphael_post_no_002	baalzebub	sherry	baalzebub	worry	disappointed	speaker_baalzebub	raphael_post_no_002_body						FALSE	FALSE	FALSE								
+raphael_post_no_003	baalzebub	sherry	baalzebub	worry	happy	speaker_baalzebub	raphael_post_no_003_body						FALSE	FALSE	FALSE								
+raphael_post_no_004	karin	karin	baalzebub	amazed	happy	speaker_karin	raphael_post_no_004_body						FALSE	FALSE	FALSE								
+raphael_post_no_005	sherry	sherry	baalzebub	excited	happy	speaker_sherry	raphael_post_no_005_body						FALSE	FALSE	FALSE								
+raphael_post_no_006	baalzebub	sherry	baalzebub	excited	laugh	speaker_baalzebub	raphael_post_no_006_body	LoadNextScene					FALSE	FALSE	FALSE								

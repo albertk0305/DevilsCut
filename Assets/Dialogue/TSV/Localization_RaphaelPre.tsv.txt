@@ -1,0 +1,37 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_raphael	라파엘	Raphael
+speaker_baalzebub	바알제붑	Baalzebub
+raphael_pre_001_body	절제의 회랑은 소리조차 스스로를 억누르는 듯 고요했다.	The Corridor of Temperance was so quiet that even sound seemed to restrain itself.
+raphael_pre_002_body	바알제붑 님. 최근 견반점 단골들의 건강 기록을 확인했습니다.	Ms. Baalzebub. I have reviewed the recent health records of Kyeonhanten's regulars.
+raphael_pre_003_body	오. 내 단골들 기록까지 챙겨주냐? 기특하네, 꼬마야!	Oh? You even check on my regulars? That is sweet of you, kid!
+raphael_pre_004_body	꼬마가 아닙니다. 그리고 이 또한 절제의 회랑 책임자로서의 책무입니다.	I am not a kid. And this too is my duty as the caretaker of the Corridor of Temperance.
+raphael_pre_005_body	고혈압, 비만, 당뇨... 콜라스테롤... 아무튼 그런 수치들이 전부 높습니다.	High blood pressure, obesity, diabetes... colasterol... anyway, all those numbers are too high.
+raphael_pre_006_body	폭식은 번뇌입니다. 그리고 번뇌의 근원은 바알제붑 님의 음식입니다.	Gluttony is a worldly desire. And the source of that desire is your food, Ms. Baalzebub.
+raphael_pre_007_body	하하하! 내 음식이 끝내주게 맛있다는 증거지!	Hahaha! That just proves my food is ridiculously good!
+raphael_pre_008_body	너도 한번 먹어보면 바로 빠져들걸?	Try one bite and you will be hooked too!
+raphael_pre_009_body	저는 수행 중인 몸. 절 유혹하려 해도 소용없습니다!	I am in the middle of training. Your temptation will not work on me!
+raphael_pre_010_body	방금 배에서 소리 난 것 같은데?	Pretty sure your stomach just growled.
+raphael_pre_011_body	이... 이건 배가 고픈 게 아니라 기가 요동친 것입니다!	Th-this is not hunger. My inner energy is merely surging!
+raphael_pre_012_body	그래그래. 꼬마 수행자님이 그렇다는데 그런 거겠지.	Sure, sure. If the little monk says so, then it must be true.
+raphael_pre_013_body	그때, 셰리와 카린이 은은한 향 사이로 모습을 드러냈다.	Just then, Sherry and Karin appeared through the soft haze of incense.
+raphael_pre_014_body	셰리. 이곳은 매우 정갈합니다. 카린은 발소리를 작게 내겠습니다.	Sherry. This place is very tidy. Karin will keep her footsteps quiet.
+raphael_pre_015_body	오, 댕기머리 꼬마야. 혹시 열쇠 봤니?	Hey, braided kid. Have you seen a key around here?
+raphael_pre_016_body	꼬마가 아닙니다!	I am not a kid!
+raphael_pre_017_body	우리 쪽 꼬맹이도 그 부분을 부정하더라고.	Our little one says the same thing.
+raphael_pre_018_body	저는 절제의 회랑을 맡은 라파엘입니다. 엄연한 책임자입니다.	I am Raphael, caretaker of the Corridor of Temperance. I am a proper authority here.
+raphael_pre_019_body	꼬마 손에 무거운 짐을 쥐여놨네. 고생 많았다.	They put a heavy burden in a kid's hands. You have had it rough.
+raphael_pre_020_body	가... 감사합니다...	Th-thank you...
+raphael_pre_021_body	앗! 아닙니다! 수행자는 칭찬에 흔들리지 않습니다!	Ah! No! A monk must not be swayed by praise!
+raphael_pre_022_body	라파엘 씨. 혹시 카린과 친구하지 않을래요?	Ms. Raphael. Would you like to be friends with Karin?
+raphael_pre_023_body	정말요? 저도 늘 친구가...	Really? I have always wanted a friend...
+raphael_pre_024_body	앗! 수, 수행자에게 사적인 친목은 필요 없습니다.	Ah! A-a monk has no need for private friendships.
+raphael_pre_025_body	에에~ 하지만 방금 조금 기뻐 보였습니다.	Aww~ But you looked a little happy just now.
+raphael_pre_026_body	크흠, 두 분은 아레테의 수배 대상입니다. 더 이상 회랑 깊숙이 들일 수 없습니다.	Ahem. You two are wanted by Arete. I cannot allow you deeper into this corridor.
+raphael_pre_027_body	열쇠 역시 욕망에 휘둘리는 자에게 맡길 수 없습니다.	And I cannot entrust the key to those ruled by desire.
+raphael_pre_028_body	꼬마야. 싸울 거면 뭐라도 먹고 해라. 배고프면 손 떨린다.	Kid. If you are going to fight, eat something first. Empty stomachs make hands shake.
+raphael_pre_029_body	흔들린 건 제 의지가 아닙니다! 석장이 잠시 번뇌한 것입니다!	My resolve did not waver! My staff merely suffered a moment of worldly desire!
+raphael_pre_030_body	살살 할게. 힘들면 언제든 말해.	I will go easy. Tell me anytime it gets too hard.
+raphael_pre_031_body	절제의 라파엘! 두 분의 번뇌를 봉인하겠습니다!	Raphael of Temperance! I shall seal away both of your worldly desires!

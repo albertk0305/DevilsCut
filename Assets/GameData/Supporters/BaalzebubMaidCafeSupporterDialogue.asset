@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BaalzebubMaidCafeSupporterDialogue
   m_EditorClassIdentifier: Assembly-CSharp::MaidCafeSupporterDialogueData
   supporter: {fileID: 11400000, guid: 9725619daf76abb45848508807a510f2, type: 2}
-  defaultSprite: {fileID: 21300000, guid: 379e6871635899941a0ca8b2242fb357, type: 3}
+  defaultSprite: {fileID: 21300000, guid: d6d4e8451137c6043ad132bc33589621, type: 3}
   happySprite: {fileID: 21300000, guid: 0c9ac23088833864089f886dd2e7847e, type: 3}
   embarrassedSprite: {fileID: 21300000, guid: 9f60352bf272b134cbd54a2616b791eb, type: 3}
   selectedExpression: 0

@@ -1,0 +1,52 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+michael_post_001							michael_post_001	None		Gothic	Key		FALSE	FALSE	FALSE								
+michael_post_002	michael	sherry	michael	easy	despair	name_michael	michael_post_002	None					FALSE	FALSE	FALSE								
+michael_post_003	sherry	sherry	michael	surprise	despair	name_sherry	michael_post_003	None					FALSE	FALSE	FALSE								
+michael_post_004	karin	karin	michael	worry	despair	name_karin	michael_post_004	None					FALSE	FALSE	FALSE								
+michael_post_005	michael	karin	michael	worry	perplexed	name_michael	michael_post_005	None					FALSE	FALSE	FALSE								
+michael_post_006	sherry	sherry	michael	persuade	perplexed	name_sherry	michael_post_006	None					FALSE	FALSE	FALSE								
+michael_post_007	karin	karin	michael	persuade	perplexed	name_karin	michael_post_007	None					FALSE	FALSE	FALSE								
+michael_post_008	michael	karin	michael	persuade	smile	name_michael	michael_post_008	None					FALSE	FALSE	FALSE								
+michael_post_009	sherry	sherry	michael	persuade	smile	name_sherry	michael_post_009	None					FALSE	FALSE	FALSE								
+michael_post_010	karin	sherry	karin	persuade	suspicious	name_karin	michael_post_010	None					FALSE	FALSE	FALSE								
+michael_post_011	sherry	sherry	karin	urgent	suspicious	name_sherry	michael_post_011	None					FALSE	FALSE	FALSE								
+michael_post_012	karin	sherry	karin	urgent	worry	name_karin	michael_post_012	None					FALSE	FALSE	FALSE								
+michael_post_013	sherry	sherry	karin	perplexed	worry	name_sherry	michael_post_013	None					FALSE	FALSE	FALSE								
+michael_post_014							michael_post_014	None					FALSE	FALSE	FALSE								
+michael_post_015	michael	sherry	michael	perplexed	timid	name_michael	michael_post_015	None					FALSE	FALSE	FALSE								
+michael_post_016	lucifer	sherry	lucifer	perplexed	headache	name_lucifer	michael_post_016	None					FALSE	FALSE	FALSE								
+michael_post_017	lucifer	sherry	lucifer	perplexed	nervous	name_lucifer	michael_post_017	None					FALSE	FALSE	FALSE								
+michael_post_018	sherry	sherry	lucifer	mock	nervous	name_sherry	michael_post_018	None					FALSE	FALSE	FALSE								
+michael_post_019	lucifer	sherry	lucifer	mock	surprise	name_lucifer	michael_post_019	None					FALSE	FALSE	FALSE								
+michael_post_020	sherry	sherry	lucifer	easy	surprise	name_sherry	michael_post_020	None					FALSE	FALSE	FALSE								
+michael_post_021	lucifer	sherry	lucifer	easy	embarassed	name_lucifer	michael_post_021	None					FALSE	FALSE	FALSE								
+michael_post_022	lucifer	sherry	lucifer	easy	neutral	name_lucifer	michael_post_022	None					FALSE	FALSE	FALSE								
+michael_post_023							michael_post_023	None				choice_recruit_lucifer	FALSE	FALSE	TRUE	michael_post_yes_text	michael_post_no_text	RecruitPendingSupporter	RejectPendingSupporter			michael_post_yes_001	michael_post_no_001
+michael_post_yes_001	lucifer	sherry	lucifer	easy	embarassed	name_lucifer	michael_post_yes_001	None					FALSE	FALSE	FALSE								
+michael_post_yes_002	sherry	sherry	lucifer	wink	embarassed	name_sherry	michael_post_yes_002	None					FALSE	FALSE	FALSE								
+michael_post_yes_003	lucifer	sherry	lucifer	wink	happy	name_lucifer	michael_post_yes_003	None					FALSE	FALSE	FALSE								
+michael_post_yes_004	karin	sherry	karin	wink	curious	name_karin	michael_post_yes_004	None					FALSE	FALSE	FALSE								
+michael_post_yes_005	sherry	sherry	karin	smile	curious	name_sherry	michael_post_yes_005	None					FALSE	FALSE	FALSE								
+michael_post_yes_006	sherry	sherry	karin	yareyare	curious	name_sherry	michael_post_yes_006	JumpToLine	michael_post_common_001				FALSE	FALSE	FALSE								
+michael_post_no_001	sherry	sherry	lucifer	worry	neutral	name_sherry	michael_post_no_001	None					FALSE	FALSE	FALSE								
+michael_post_no_002	lucifer	sherry	lucifer	worry	embarassed	name_lucifer	michael_post_no_002	None					FALSE	FALSE	FALSE								
+michael_post_no_003	karin	karin	lucifer	sorry	embarassed	name_karin	michael_post_no_003	None					FALSE	FALSE	FALSE								
+michael_post_no_004	lucifer	karin	lucifer	sorry	neutral	name_lucifer	michael_post_no_004	None					FALSE	FALSE	FALSE								
+michael_post_common_001	michael	sherry	michael	perplexed	drunk	name_michael	michael_post_common_001	None					FALSE	FALSE	FALSE								
+michael_post_common_002	sherry	sherry	michael	perplexed	drunk	name_sherry	michael_post_common_002	None					FALSE	FALSE	FALSE								
+michael_post_common_003	lucifer	sherry	lucifer	perplexed	nervous	name_lucifer	michael_post_common_003	None					FALSE	FALSE	FALSE								
+michael_post_common_004	sherry	sherry	lucifer	smile	nervous	name_sherry	michael_post_common_004	None					FALSE	FALSE	FALSE								
+michael_post_common_005	lucifer	sherry	lucifer	smile	nervous	name_lucifer	michael_post_common_005	None					FALSE	FALSE	FALSE								
+michael_post_common_006	karin	karin	lucifer	suspicious	nervous	name_karin	michael_post_common_006	None					FALSE	FALSE	FALSE								
+michael_post_common_007	lucifer	karin	lucifer	suspicious	nervous	name_lucifer	michael_post_common_007	None					FALSE	FALSE	FALSE								
+michael_post_common_008	sherry	sherry	lucifer	perplexed	nervous	name_sherry	michael_post_common_008	None					FALSE	FALSE	FALSE								
+michael_post_common_009	michael	sherry	michael	perplexed	drunk	name_michael	michael_post_common_009	None					FALSE	FALSE	FALSE								
+michael_post_common_010	sherry	sherry	michael	annoyed	drunk	name_sherry	michael_post_common_010	None					FALSE	FALSE	FALSE								
+michael_post_common_011	lucifer	sherry	lucifer	annoyed	surprise	name_lucifer	michael_post_common_011	None					FALSE	FALSE	FALSE								
+michael_post_common_012	karin	sherry	karin	annoyed	tired	name_karin	michael_post_common_012	None					FALSE	FALSE	FALSE								
+michael_post_common_013	sherry	sherry	karin	urgent	tired	name_sherry	michael_post_common_013	None					FALSE	FALSE	FALSE								
+michael_post_common_014	lucifer	sherry	lucifer	urgent	embarassed	name_lucifer	michael_post_common_014	None					FALSE	FALSE	FALSE								
+michael_post_common_015	michael	michael	lucifer	drunk	embarassed	name_michael	michael_post_common_015	None					FALSE	FALSE	FALSE								
+michael_post_common_016	sherry	michael	sherry	drunk	mock	name_sherry	michael_post_common_016	None					FALSE	FALSE	FALSE								
+michael_post_common_017	michael	michael	sherry	drunk	mock	name_michael	michael_post_common_017	None					FALSE	FALSE	FALSE								
+michael_post_common_018							michael_post_common_018	LoadNextScene					FALSE	FALSE	FALSE								

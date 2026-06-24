@@ -1,0 +1,43 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_raguel	라구엘	Raguel
+speaker_karin	카린	Karin
+speaker_leviathan	레비아탄	Leviathan
+raguel_post_001_body	라구엘을 쓰러뜨리고 열쇠 조각을 획득했다.	Raguel was defeated and the key fragment was obtained.
+raguel_post_002_body	부서진 로봇의 잔해 아래, 깨진 가면을 벗은 라구엘이 처음으로 자신의 표정을 드러냈다.	Beneath the wreckage of the broken robot, Raguel, freed from her shattered mask, revealed her expression for the first time.
+raguel_post_003_body	역시 그 갑갑한 가면 없는 쪽이 보기 좋네.	Thought so. You look better without that stuffy mask.
+raguel_post_004_body	이상합니다.	This is strange.
+raguel_post_005_body	어디 부러졌어?	Something broken?
+raguel_post_006_body	아닙니다. 가슴이 뜨겁습니다. 숨이 흔들립니다. 눈 안쪽이 젖어갑니다. 안에서 무언가 넘치고 있는데... 무엇인지 모르겠습니다.	No. My chest is hot. My breathing is shaking. The inside of my eyes is growing wet. Something is overflowing from inside me... but I do not know what it is.
+raguel_post_007_body	감정이란 놈은 독한 술 같아. 뜨겁고, 쓰고, 뒤끝도 지독하지.	Emotions are like hard liquor. Hot, bitter, and the aftertaste hits hard.
+raguel_post_008_body	이것이... 감정...	This is... emotion...
+raguel_post_009_body	그렇지만 그 지독한 맛 때문에 살아있다는 걸 알게 되거든.	But that nasty taste is how you know you are alive.
+raguel_post_010_body	눈물이 멈추지 않습니다. 그런데... 조금 후련합니다.	My tears will not stop. And yet... I feel a little lighter.
+raguel_post_011_body	그 가면 밑에 아직 네가 남아 있었다니 다행이네.	Good to know there was still some you left under that mask.
+raguel_post_012_body	이럴 때는 어떤 표정을 지어야 합니까?	What expression should I make at a time like this?
+raguel_post_013_body	웃으면 된다고 생각해.	Smile. That is what I would do.
+raguel_post_014_body	감정 제어가 필요한 상태입니다. 하지만 지금은... 조금만 더 이대로 있고 싶습니다.	This state requires emotional regulation. But right now... I want to remain like this a little longer.
+raguel_post_015_body	라구엘 씨는... 사람인데도 기계처럼 보였습니다. 그럼 카린은...	Ms. Raguel was human... but she looked like a machine. Then Karin is...
+raguel_post_016_body	꼬맹이. 뭘 그렇게 심각하게 고민해? 원래 네 나이 때는 감수성이 넘친다지만...	Kid, why so serious? I know kids your age are overflowing with sensitivity, but...
+raguel_post_017_body	셰리 님. 정말 감사합니다. 레비아탄은 이 은혜를 어떻게 갚아야 할지 모르겠습니다.	Ms. Sherry. Thank you so much. Leviathan does not know how to repay this kindness.
+raguel_post_018_body	신경 쓰지 마. 우연히 지나가던 길이었을 뿐이야.	Do not worry about it. We just happened to be passing through.
+raguel_post_019_body	우연... 하얀 회랑. 깨진 가면. 구속에서 풀려난 레비아탄. 그리고 그 앞에 선 셰리 님.	A coincidence... The white corridor. The shattered mask. Leviathan freed from her bonds. And Ms. Sherry standing before her.
+raguel_post_020_body	이것은 운명입니다.	This is fate.
+raguel_post_021_body	운명까지 갈 거 없어. 그냥 길 잘못 든 해결사야.	No need to jump to fate. I am just a fixer who took a wrong turn.
+raguel_post_022_body	셰리 님. 레비아탄은 함께하고 싶습니다. 레비아탄이 셰리 님의 곁에 있어도 될까요?	Ms. Sherry. Leviathan wishes to be with you. May Leviathan stay by your side?
+raguel_post_choice_body	레비아탄을 조력자로 받아들입니까?	Accept Leviathan as a supporter?
+raguel_post_choice_yes	받아들인다	Accept
+raguel_post_choice_no	마음만 받는다	Decline
+raguel_post_yes_001_body	그래. 따라와. 등 뒤는 맡길게.	Fine. Come with me. I will leave my back to you.
+raguel_post_yes_002_body	하아아... 셰리 님이 레비아탄에게 등 뒤를...	Ahhh... Ms. Sherry is entrusting her back to Leviathan...
+raguel_post_yes_003_body	맡겨 주세요. 셰리 님에게 접근하는 적들은 레비아탄이 처리할게요.	Leave it to Leviathan. Leviathan will handle any enemies who approach you.
+raguel_post_yes_004_body	특히 불순한 목적을 가진 벌레들은 반드시...	Especially those insects with impure intentions. They will certainly...
+raguel_post_yes_005_body	든든한 조력자가 생겼습니다!	We have gained a reliable supporter!
+raguel_post_no_001_body	마음만 받을게. 네가 다치는 걸 보고 싶진 않아.	I will accept the thought. I do not want to see you get hurt.
+raguel_post_no_002_body	셰리 님이... 레비아탄을 걱정해 주셨어요.	Ms. Sherry... you are worried about Leviathan.
+raguel_post_no_003_body	거절조차 이렇게 따뜻하다니. 레비아탄은 행복해요.	Even your rejection is this warm. Leviathan is happy.
+raguel_post_no_004_body	나중에 나한테 실망해도 책임 못 진다.	If you end up disappointed in me later, do not blame me.
+raguel_post_no_005_body	셰리 님. 함께하지 못하는 대신 레비아탄의 공연에 와 주세요.	Ms. Sherry. Since Leviathan cannot accompany you, please come to Leviathan's performance instead.
+raguel_post_no_006_body	셰리 님이 오시는 날을 기다리고 있겠습니다. 언제까지라도요.	Leviathan will wait for the day you come. For as long as it takes.
+raguel_post_no_007_body	가지 않으면 위험한 일이 벌어질 것 같은데...	Feels like something dangerous might happen if I do not go...
