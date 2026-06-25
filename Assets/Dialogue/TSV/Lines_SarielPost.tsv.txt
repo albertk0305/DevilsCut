@@ -1,0 +1,37 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+sariel_post_001	narration					speaker_narration	sariel_post_001_body			Church	Key		FALSE	FALSE	FALSE								
+sariel_post_002	sariel	sherry	sariel	serious	sad	speaker_sariel	sariel_post_002_body						FALSE	FALSE	FALSE								
+sariel_post_003	sherry	sherry	sariel	worry	sad	speaker_sherry	sariel_post_003_body						FALSE	FALSE	FALSE								
+sariel_post_004	sariel	sherry	sariel	worry	nervous	speaker_sariel	sariel_post_004_body						FALSE	FALSE	FALSE								
+sariel_post_005	sherry	sherry	sariel	curious	nervous	speaker_sherry	sariel_post_005_body						FALSE	FALSE	FALSE								
+sariel_post_006	sariel	sherry	sariel	curious	speak	speaker_sariel	sariel_post_006_body						FALSE	FALSE	FALSE								
+sariel_post_007	sherry	sherry	sariel	worry	speak	speaker_sherry	sariel_post_007_body						FALSE	FALSE	FALSE								
+sariel_post_008	karin	karin	sariel	persuade	speak	speaker_karin	sariel_post_008_body						FALSE	FALSE	FALSE								
+sariel_post_009	sariel	karin	sariel	persuade	neutral	speaker_sariel	sariel_post_009_body						FALSE	FALSE	FALSE								
+sariel_post_010	mammon	mammon	sariel	urgent	neutral	speaker_mammon	sariel_post_010_body						FALSE	FALSE	FALSE								
+sariel_post_011	sariel	mammon	sariel	urgent	nervous	speaker_sariel	sariel_post_011_body						FALSE	FALSE	FALSE								
+sariel_post_012	sherry	sherry	sariel	serious	nervous	speaker_sherry	sariel_post_012_body						FALSE	FALSE	FALSE								
+sariel_post_013	mammon	mammon	sariel	happy	nervous	speaker_mammon	sariel_post_013_body						FALSE	FALSE	FALSE								
+sariel_post_014	sariel	mammon	sariel	happy	speak	speaker_sariel	sariel_post_014_body						FALSE	FALSE	FALSE								
+sariel_post_015	mammon	mammon	sariel	smile	speak	speaker_mammon	sariel_post_015_body						FALSE	FALSE	FALSE								
+sariel_post_016	sariel	mammon	sariel	smile	smile	speaker_sariel	sariel_post_016_body						FALSE	FALSE	FALSE								
+sariel_post_017	mammon	mammon	sariel	anxious	smile	speaker_mammon	sariel_post_017_body						FALSE	FALSE	FALSE								
+sariel_post_018	sherry	sherry	mammon	easy	anxious	speaker_sherry	sariel_post_018_body						FALSE	FALSE	FALSE								
+sariel_post_019	mammon	sherry	mammon	easy	smile	speaker_mammon	sariel_post_019_body						FALSE	FALSE	FALSE								
+sariel_post_020	sherry	sherry	mammon	awkward	smile	speaker_sherry	sariel_post_020_body						FALSE	FALSE	FALSE								
+sariel_post_021	mammon	sherry	mammon	awkward	happy	speaker_mammon	sariel_post_021_body						FALSE	FALSE	FALSE								
+sariel_post_022	sherry	sherry	mammon	perplexed	happy	speaker_sherry	sariel_post_022_body						FALSE	FALSE	FALSE								
+sariel_post_023	mammon	sherry	mammon	perplexed	gold	speaker_mammon	sariel_post_023_body						FALSE	FALSE	FALSE								
+sariel_post_024	mammon	sherry	mammon	perplexed	gold	speaker_mammon	sariel_post_024_body						FALSE	FALSE	FALSE								
+sariel_post_choice_001		sherry	mammon				sariel_post_choice_body					sariel_post_choice_001	FALSE	FALSE	TRUE	sariel_post_choice_yes	sariel_post_choice_no	RecruitPendingSupporter	RejectPendingSupporter			sariel_post_yes_001	sariel_post_no_001
+sariel_post_yes_001	sherry	sherry	mammon	excited	gold	speaker_sherry	sariel_post_yes_001_body						FALSE	FALSE	FALSE								
+sariel_post_yes_002	mammon	sherry	mammon	excited	happy	speaker_mammon	sariel_post_yes_002_body						FALSE	FALSE	FALSE								
+sariel_post_yes_003	sherry	sherry	mammon	perplexed	laugh	speaker_sherry	sariel_post_yes_003_body						FALSE	FALSE	FALSE								
+sariel_post_yes_004	karin	sherry	karin	perplexed	amazed	speaker_karin	sariel_post_yes_004_body	LoadNextScene					FALSE	FALSE	FALSE								
+sariel_post_no_001	sherry	sherry	karin	worry	gold	speaker_sherry	sariel_post_no_001_body						FALSE	FALSE	FALSE								
+sariel_post_no_002	mammon	sherry	mammon	worry	sadAct	speaker_mammon	sariel_post_no_002_body						FALSE	FALSE	FALSE								
+sariel_post_no_003	sherry	sherry	mammon	urgent	sadAct	speaker_sherry	sariel_post_no_003_body						FALSE	FALSE	FALSE								
+sariel_post_no_004	mammon	sherry	mammon	urgent	sadAct	speaker_mammon	sariel_post_no_004_body						FALSE	FALSE	FALSE								
+sariel_post_no_005	sherry	sherry	mammon	smile	sadAct	speaker_sherry	sariel_post_no_005_body						FALSE	FALSE	FALSE								
+sariel_post_no_006	mammon	sherry	mammon	smile	happy	speaker_mammon	sariel_post_no_006_body						FALSE	FALSE	FALSE								
+sariel_post_no_007	sherry	sherry	mammon	yareyare	happy	speaker_sherry	sariel_post_no_007_body	LoadNextScene					FALSE	FALSE	FALSE								

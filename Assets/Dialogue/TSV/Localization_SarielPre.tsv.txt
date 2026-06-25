@@ -1,0 +1,28 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_sariel	사리엘	Sariel
+speaker_mammon	마몬	Mammon
+sariel_pre_001_body	자선의 회랑에는 따스한 빛이 내려앉아 있었다.	Warm light settled over the Hall of Charity.
+sariel_pre_002_body	마몬 님. 당신의 영혼이 너무 무겁습니다.	Ms. Mammon. Your soul is far too heavy.
+sariel_pre_003_body	당신의 무거운 재산을 내려놓으세요. 그러면 한결 가벼워질 겁니다.	Lay down that heavy wealth of yours. You will feel much lighter.
+sariel_pre_004_body	제가 피땀 흘려 번 돈을 왜 모르는 사람들한테 뿌려요! 이건 제 돈이라구요!	Why should I throw the money I worked myself to the bone for at strangers? This is my money!
+sariel_pre_005_body	저런... 아직 물질의 속박에서 벗어나지 못하셨군요. 괜찮습니다. 제가 직접 비워드리겠습니다.	Oh dear... You have not yet escaped the bondage of material things. Do not worry. I will empty it for you myself.
+sariel_pre_006_body	이건 자선이 아니라 강도잖아요!	This is not charity. It is robbery!
+sariel_pre_007_body	아닙니다. 구원입니다.	No. It is salvation.
+sariel_pre_008_body	강도들도 가게 털 때는 꼭 좋은 말부터 꺼내요!	Robbers always start with pretty words before they clean out a shop!
+sariel_pre_009_body	성당의 낡은 바닥을 가로지르는 발자국 소리와 함께, 셰리와 카린이 모습을 드러냈다.	Along with the sound of footsteps echoing across the old cathedral floor, Sherry and Karin made their appearance.
+sariel_pre_010_body	어서 오세요. 셰리 자매님. 카린 자매님. 여러분도 나눔에 동참하러 오셨나요?	Welcome, Sister Sherry. Sister Karin. Have you come to join the joy of sharing?
+sariel_pre_011_body	받는 쪽이면 생각해볼게. 마침 술값 외상이 좀 밀렸거든.	If I am on the receiving end, I will think about it. My bar tab is a little overdue.
+sariel_pre_012_body	저런. 당신에게도 구원이 필요하군요. 받으려는 마음도 결국 소유의 굴레랍니다.	Oh dear. You need salvation as well. The desire to receive is also a chain of possession.
+sariel_pre_013_body	애 하나 딸린 해결사 사정도 좀 봐줘. 요즘 애 키우는 데 돈 많이 든다구.	Have some mercy on a fixer with a kid to raise. Children are expensive these days.
+sariel_pre_014_body	카린은 연료 효율이 좋은 편입니다!	Karin is fairly fuel efficient!
+sariel_pre_015_body	두 분 모두 구원이 필요하시군요. 물질의 굴레를 너무 단단히 끌어안고 계세요.	Both of you need salvation. You are clinging far too tightly to the chains of material things.
+sariel_pre_016_body	해결사님! 저 날강도 성녀 좀 막아주세요!	Fixer! Please stop that robber saint!
+sariel_pre_017_body	보상은?	What is the reward?
+sariel_pre_018_body	파시오네식 특별 보상입니다! 현금은 어렵지만 가치는 있습니다!	A special Passione-style reward! Cash is difficult, but it has value!
+sariel_pre_019_body	네 의뢰, 확실히 접수했다.	Your request is officially accepted.
+sariel_pre_020_body	셰리! 방금 눈빛이 달라졌습니다!	Sherry! Your eyes just changed!
+sariel_pre_021_body	보수는 좋은 조명이지.	Payment makes for good lighting.
+sariel_pre_022_body	안타깝군요. 자발적인 나눔이 어렵다면, 제가 직접 비워드리겠습니다.	How unfortunate. If voluntary sharing is difficult, I will empty you myself.

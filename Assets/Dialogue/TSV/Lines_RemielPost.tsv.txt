@@ -1,0 +1,31 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+remiel_post_001						speaker_narration	remiel_post_001_body			Office	Key		FALSE	FALSE	FALSE								
+remiel_post_002	remiel	sherry	remiel	easy	annoyed	speaker_remiel	remiel_post_002_body						FALSE	FALSE	FALSE								
+remiel_post_003	sherry	sherry	remiel	easy	annoyed	speaker_sherry	remiel_post_003_body						FALSE	FALSE	FALSE								
+remiel_post_004	remiel	sherry	remiel	easy	sigh	speaker_remiel	remiel_post_004_body						FALSE	FALSE	FALSE								
+remiel_post_005		sherry	remiel	easy	sleep	speaker_narration	remiel_post_005_body						FALSE	FALSE	FALSE								
+remiel_post_006	sherry	sherry	remiel	yareyare	sleep	speaker_sherry	remiel_post_006_body						FALSE	FALSE	FALSE								
+remiel_post_007	karin	sherry	karin	yareyare	suspicious	speaker_karin	remiel_post_007_body						FALSE	FALSE	FALSE								
+remiel_post_008	sherry	sherry	karin	surprise	suspicious	speaker_sherry	remiel_post_008_body						FALSE	FALSE	FALSE								
+remiel_post_009	belphegor	sherry	belphegor	surprise	sleep	speaker_belphegor	remiel_post_009_body						FALSE	FALSE	FALSE								
+remiel_post_010	sherry	sherry	belphegor	mock	sleep	speaker_sherry	remiel_post_010_body						FALSE	FALSE	FALSE								
+remiel_post_011	belphegor	sherry	belphegor	mock	yawn	speaker_belphegor	remiel_post_011_body						FALSE	FALSE	FALSE								
+remiel_post_012	sherry	sherry	belphegor	easy	yawn	speaker_sherry	remiel_post_012_body						FALSE	FALSE	FALSE								
+remiel_post_013	belphegor	sherry	belphegor	easy	smile	speaker_belphegor	remiel_post_013_body						FALSE	FALSE	FALSE								
+remiel_post_014	sherry	sherry	belphegor	awkward	smile	speaker_sherry	remiel_post_014_body						FALSE	FALSE	FALSE								
+remiel_post_015	belphegor	sherry	belphegor	awkward	lazy	speaker_belphegor	remiel_post_015_body						FALSE	FALSE	FALSE								
+remiel_post_016	sherry	sherry	belphegor	perplexed	lazy	speaker_sherry	remiel_post_016_body						FALSE	FALSE	FALSE								
+remiel_post_choice_001		sherry	belphegor				remiel_post_choice_body					remiel_post_choice_001	FALSE	FALSE	TRUE	remiel_post_choice_yes	remiel_post_choice_no	RecruitPendingSupporter	RejectPendingSupporter			remiel_post_yes_001	remiel_post_no_001
+remiel_post_yes_001	sherry	sherry	belphegor	smile	lazy	speaker_sherry	remiel_post_yes_001_body						FALSE	FALSE	FALSE								
+remiel_post_yes_002	belphegor	sherry	belphegor	smile	happy	speaker_belphegor	remiel_post_yes_002_body						FALSE	FALSE	FALSE								
+remiel_post_yes_003	sherry	sherry	belphegor	perplexed	happy	speaker_sherry	remiel_post_yes_003_body						FALSE	FALSE	FALSE								
+remiel_post_yes_004	karin	karin	belphegor	smile	happy	speaker_karin	remiel_post_yes_004_body						FALSE	FALSE	FALSE								
+remiel_post_yes_005	belphegor	karin	belphegor	smile	smile	speaker_belphegor	remiel_post_yes_005_body						FALSE	FALSE	FALSE								
+remiel_post_yes_006	sherry	sherry	belphegor	yareyare	smile	speaker_sherry	remiel_post_yes_006_body	LoadNextScene					FALSE	FALSE	FALSE								
+remiel_post_no_001	sherry	sherry	belphegor	worry	lazy	speaker_sherry	remiel_post_no_001_body						FALSE	FALSE	FALSE								
+remiel_post_no_002	belphegor	sherry	belphegor	worry	disappointed	speaker_belphegor	remiel_post_no_002_body						FALSE	FALSE	FALSE								
+remiel_post_no_003	belphegor	sherry	belphegor	worry	lazy	speaker_belphegor	remiel_post_no_003_body						FALSE	FALSE	FALSE								
+remiel_post_no_004	sherry	sherry	belphegor	excited	lazy	speaker_sherry	remiel_post_no_004_body						FALSE	FALSE	FALSE								
+remiel_post_no_005	karin	sherry	karin	excited	panic	speaker_karin	remiel_post_no_005_body						FALSE	FALSE	FALSE								
+remiel_post_no_006	sherry	sherry	karin	yareyare	panic	speaker_sherry	remiel_post_no_006_body						FALSE	FALSE	FALSE								
+remiel_post_no_007	belphegor	sherry	belphegor	yareyare	yawn	speaker_belphegor	remiel_post_no_007_body	LoadNextScene					FALSE	FALSE	FALSE								

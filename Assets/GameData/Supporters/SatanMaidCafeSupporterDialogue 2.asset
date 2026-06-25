@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: SatanMaidCafeSupporterDialogue 2
   m_EditorClassIdentifier: Assembly-CSharp::MaidCafeSupporterDialogueData
   supporter: {fileID: 11400000, guid: af7d8462d6487cd42bee89ce9f4cb076, type: 2}
-  defaultSprite: {fileID: 21300000, guid: d226f0eb6ae16814493023dbf9e9acb8, type: 3}
-  happySprite: {fileID: 21300000, guid: 18b87f4f152a26b449db2415acb3baca, type: 3}
-  embarrassedSprite: {fileID: 21300000, guid: ab9c526afb77e35458ae1d1ce13e0d21, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 03ade7f2cd0ce2548a8c48fe5f1e055b, type: 3}
+  happySprite: {fileID: 21300000, guid: ef1fcafee1614cd428610d233f27ac60, type: 3}
+  embarrassedSprite: {fileID: 21300000, guid: fcbbcd210aeb6f54fbecdbaf58bbbefb, type: 3}
   selectedExpression: 0
   selectedTextKey: maid_satan_partner_intro
   selectedText: A date invitation from Sherry! I am happy!

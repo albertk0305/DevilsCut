@@ -1,0 +1,36 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_remiel	레미엘	Remiel
+speaker_belphegor	벨페고르	Belphegor
+remiel_pre_001_body	근면의 회랑은 어둠 속에 잠겨 있었다.	The Hall of Diligence was swallowed by darkness.
+remiel_pre_002_body	빛나는 것은 끝없이 늘어선 모니터들 중 몇 개와 희미한 전등뿐이었다.	All that glowed were a few monitors among endless rows of screens and faint lights.
+remiel_pre_003_body	벨페고르 씨.	Ms. Belphegor.
+remiel_pre_004_body	매일 도박과 낮잠에 절여져 있으면, 평범한 기쁨에는 아무것도 느끼지 못하는 폐인이 됩니다.	If you soak yourself in gambling and naps every day, you become a wreck who can no longer feel ordinary joy.
+remiel_pre_005_body	화려한 당첨음이 울리지 않으면 웃지 못하고, 이불이 없으면 존재 의의도 잃어버리는 가여운 생물.	A pitiful creature who cannot smile unless a flashy jackpot sound plays, and loses all purpose without a blanket.
+remiel_pre_006_body	네. 지금의 당신이네요.	Yes. That is you right now.
+remiel_pre_007_body	하아암...	Yaaawn...
+remiel_pre_008_body	노동은 인류의 적이야...	Labor is the enemy of humanity...
+remiel_pre_009_body	나태를 신념처럼 포장하는 능력만큼은 인상적이군요.	Your ability to dress laziness up as a belief is impressive at least.
+remiel_pre_010_body	근면의 회랑에 반면교사로 전시할 가치는 있겠습니다.	You may have value as a cautionary exhibit in the Hall of Diligence.
+remiel_pre_011_body	으으음... 전시 각도는... 수평으로 부탁해...	Mmm... For the exhibit angle... horizontal, please...
+remiel_pre_012_body	당신은 사회의 일원이라기보다, 사무실 구석에 방치된 쓰레기에 가깝습니다.	You are less a member of society and more like trash left in the corner of an office.
+remiel_pre_013_body	실례. 쓰레기는 적어도 한때 생산성에 기여한 적이 있죠.	My apologies. Trash at least contributed to productivity at some point.
+remiel_pre_014_body	나쁘지 않네... 바닥에 누워 있을 수 있고... 일 안 해도 되고...	Not bad... You can lie on the floor... and you do not have to work...
+remiel_pre_015_body	제 소중한 시간을 할애하여, 폐기 직전의 당신을 갱생시켜드리겠습니다.	I will spend my valuable time rehabilitating you before you are ready for disposal.
+remiel_pre_016_body	오해하지 마시죠. 언젠가 당신을 치워야 할 누군가의 불행을, 제가 미리 수거하는 것뿐입니다.	Do not misunderstand. I am merely collecting in advance the misfortune of whoever would one day have to clean you up.
+remiel_pre_017_body	그때, 회랑 입구 쪽에서 서류 더미가 흔들렸다. 셰리와 카린은 산처럼 쌓인 보고서 사이를 헤치며 모습을 드러냈다.	Then a pile of documents near the corridor entrance began to shift. Sherry and Karin emerged through a mountain of reports.
+remiel_pre_018_body	여기서 일하다간 수명이 줄겠는데. 누가 봐도 블랙기업이잖아.	Work here and your lifespan will shrink. This is obviously a sweatshop.
+remiel_pre_019_body	어머, 노동의 아름다움을 이해하신 신규 입사 희망자인가요?	Oh my, are you new applicants who understand the beauty of labor?
+remiel_pre_020_body	꼬맹이.	Kid.
+remiel_pre_021_body	취업은 해결됐네. 번듯한 대기업이야.	Your employment problem is solved. It is a respectable corporation.
+remiel_pre_022_body	카린은 꿈과 희망이 넘치는 밝은 미래를 원했습니다!	Karin wanted a bright future full of dreams and hope!
+remiel_pre_023_body	이곳의 빛은 모니터 화면뿐입니다!	The only light here is from monitor screens!
+remiel_pre_024_body	근면의 회랑은 우수한 근무 환경을 제공합니다.	The Hall of Diligence provides an excellent working environment.
+remiel_pre_025_body	직원들은 출근을 손꼽아 기다리고, 원하는 만큼 오래 일할 수 있습니다.	Employees eagerly await their commute and can work for as long as they wish.
+remiel_pre_026_body	휴일 같은 비생산성은 존재하지 않습니다. 모두가 회사를 너무 사랑해서 집에 돌아가지 않죠.	Nonproductive things like days off do not exist. Everyone loves the company so much that they never go home.
+remiel_pre_027_body	카린, 퇴사하겠습니다!	Karin resigns!
+remiel_pre_028_body	안타깝군요.	How unfortunate.
+remiel_pre_029_body	무능을 취향으로, 게으름을 개성으로 착각하는 분들이라니.	To think you mistake incompetence for taste and laziness for personality.
+remiel_pre_030_body	걱정하지 마세요. 제가 직접 갱생시켜드리죠.	Do not worry. I will personally rehabilitate you.

@@ -1,0 +1,23 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+sariel_pre_001	narration					speaker_narration	sariel_pre_001_body			Church			FALSE	FALSE	FALSE								
+sariel_pre_002	sariel	mammon	sariel	anxious	neutral	speaker_sariel	sariel_pre_002_body						FALSE	FALSE	FALSE								
+sariel_pre_003	sariel	mammon	sariel	anxious	neutral	speaker_sariel	sariel_pre_003_body						FALSE	FALSE	FALSE								
+sariel_pre_004	mammon	mammon	sariel	complain	neutral	speaker_mammon	sariel_pre_004_body						FALSE	FALSE	FALSE								
+sariel_pre_005	sariel	mammon	sariel	complain	speak	speaker_sariel	sariel_pre_005_body						FALSE	FALSE	FALSE								
+sariel_pre_006	mammon	mammon	sariel	anxious	speak	speaker_mammon	sariel_pre_006_body						FALSE	FALSE	FALSE								
+sariel_pre_007	sariel	mammon	sariel	anxious	smile	speaker_sariel	sariel_pre_007_body						FALSE	FALSE	FALSE								
+sariel_pre_008	mammon	mammon	sariel	urgent	smile	speaker_mammon	sariel_pre_008_body						FALSE	FALSE	FALSE								
+sariel_pre_009	narration					speaker_narration	sariel_pre_009_body						FALSE	FALSE	FALSE								
+sariel_pre_010	sariel	sherry	sariel	easy	speak	speaker_sariel	sariel_pre_010_body						FALSE	FALSE	FALSE								
+sariel_pre_011	sherry	sherry	sariel	mock	speak	speaker_sherry	sariel_pre_011_body						FALSE	FALSE	FALSE								
+sariel_pre_012	sariel	sherry	sariel	mock	neutral	speaker_sariel	sariel_pre_012_body						FALSE	FALSE	FALSE								
+sariel_pre_013	sherry	sherry	sariel	yareyare	neutral	speaker_sherry	sariel_pre_013_body						FALSE	FALSE	FALSE								
+sariel_pre_014	karin	sherry	karin	yareyare	persuade	speaker_karin	sariel_pre_014_body						FALSE	FALSE	FALSE								
+sariel_pre_015	sariel	sherry	sariel	yareyare	smile	speaker_sariel	sariel_pre_015_body						FALSE	FALSE	FALSE								
+sariel_pre_016	mammon	sherry	mammon	yareyare	urgent	speaker_mammon	sariel_pre_016_body						FALSE	FALSE	FALSE								
+sariel_pre_017	sherry	sherry	mammon	easy	urgent	speaker_sherry	sariel_pre_017_body						FALSE	FALSE	FALSE								
+sariel_pre_018	mammon	sherry	mammon	easy	anxious	speaker_mammon	sariel_pre_018_body						FALSE	FALSE	FALSE								
+sariel_pre_019	sherry	sherry	mammon	smirk	anxious	speaker_sherry	sariel_pre_019_body						FALSE	FALSE	FALSE								
+sariel_pre_020	karin	sherry	karin	smirk	amazed	speaker_karin	sariel_pre_020_body						FALSE	FALSE	FALSE								
+sariel_pre_021	sherry	sherry	karin	excited	amazed	speaker_sherry	sariel_pre_021_body						FALSE	FALSE	FALSE								
+sariel_pre_022	sariel	sherry	sariel	excited	wink	speaker_sariel	sariel_pre_022_body	LoadNextScene					FALSE	FALSE	FALSE								

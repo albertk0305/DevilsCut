@@ -1,0 +1,20 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+uriel_pre_001	narration					speaker_narration	uriel_pre_001_body			Police			FALSE	FALSE	FALSE								
+uriel_pre_002	satan	satan	uriel	angry	serious	speaker_satan	uriel_pre_002_body						FALSE	FALSE	FALSE								
+uriel_pre_003	satan	satan	uriel	angry	serious	speaker_satan	uriel_pre_003_body						FALSE	FALSE	FALSE								
+uriel_pre_004	satan	satan	uriel	annoyed	serious	speaker_satan	uriel_pre_004_body						FALSE	FALSE	FALSE								
+uriel_pre_005	uriel	satan	uriel	annoyed	speak	speaker_uriel	uriel_pre_005_body						FALSE	FALSE	FALSE								
+uriel_pre_006	satan	satan	uriel	hassle	speak	speaker_satan	uriel_pre_006_body						FALSE	FALSE	FALSE								
+uriel_pre_007	narration					speaker_narration	uriel_pre_007_body						FALSE	FALSE	FALSE								
+uriel_pre_008	sherry	sherry	karin	awkward	neurtral	speaker_sherry	uriel_pre_008_body						FALSE	FALSE	FALSE								
+uriel_pre_009	karin	sherry	karin	awkward	proud	speaker_karin	uriel_pre_009_body						FALSE	FALSE	FALSE								
+uriel_pre_010	sherry	sherry	karin	perplexed	proud	speaker_sherry	uriel_pre_010_body						FALSE	FALSE	FALSE								
+uriel_pre_011	uriel	sherry	uriel	perplexed	speak	speaker_uriel	uriel_pre_011_body						FALSE	FALSE	FALSE								
+uriel_pre_012	sherry	sherry	uriel	mock	speak	speaker_sherry	uriel_pre_012_body						FALSE	FALSE	FALSE								
+uriel_pre_013	uriel	sherry	uriel	mock	speak	speaker_uriel	uriel_pre_013_body						FALSE	FALSE	FALSE								
+uriel_pre_014	sherry	sherry	uriel	smirk	speak	speaker_sherry	uriel_pre_014_body						FALSE	FALSE	FALSE								
+uriel_pre_015	uriel	sherry	uriel	smirk	serious	speaker_uriel	uriel_pre_015_body						FALSE	FALSE	FALSE								
+uriel_pre_016	sherry	sherry	uriel	easy	serious	speaker_sherry	uriel_pre_016_body						FALSE	FALSE	FALSE								
+uriel_pre_017	uriel	sherry	uriel	easy	speak	speaker_uriel	uriel_pre_017_body						FALSE	FALSE	FALSE								
+uriel_pre_018	sherry	sherry	uriel	mock	speak	speaker_sherry	uriel_pre_018_body						FALSE	FALSE	FALSE								
+uriel_pre_019	uriel	sherry	uriel	mock	serious	speaker_uriel	uriel_pre_019_body	LoadNextScene					FALSE	FALSE	FALSE								

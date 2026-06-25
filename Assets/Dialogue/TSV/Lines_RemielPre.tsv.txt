@@ -1,0 +1,31 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+remiel_pre_001	narration					speaker_narration	remiel_pre_001_body			Office			FALSE	FALSE	FALSE								
+remiel_pre_002	narration					speaker_narration	remiel_pre_002_body						FALSE	FALSE	FALSE								
+remiel_pre_003	remiel	remiel	belphegor	sigh	neutral	speaker_remiel	remiel_pre_003_body						FALSE	FALSE	FALSE								
+remiel_pre_004	remiel	remiel	belphegor	sigh	neutral	speaker_remiel	remiel_pre_004_body						FALSE	FALSE	FALSE								
+remiel_pre_005	remiel	remiel	belphegor	sigh	neutral	speaker_remiel	remiel_pre_005_body						FALSE	FALSE	FALSE								
+remiel_pre_006	remiel	remiel	belphegor	glare	neutral	speaker_remiel	remiel_pre_006_body						FALSE	FALSE	FALSE								
+remiel_pre_007	belphegor	remiel	belphegor	glare	yawn	speaker_belphegor	remiel_pre_007_body						FALSE	FALSE	FALSE								
+remiel_pre_008	belphegor	remiel	belphegor	glare	yawn	speaker_belphegor	remiel_pre_008_body						FALSE	FALSE	FALSE								
+remiel_pre_009	remiel	remiel	belphegor	sigh	yawn	speaker_remiel	remiel_pre_009_body						FALSE	FALSE	FALSE								
+remiel_pre_010	remiel	remiel	belphegor	sigh	yawn	speaker_remiel	remiel_pre_010_body						FALSE	FALSE	FALSE								
+remiel_pre_011	belphegor	remiel	belphegor	sigh	lazy	speaker_belphegor	remiel_pre_011_body						FALSE	FALSE	FALSE								
+remiel_pre_012	remiel	remiel	belphegor	glare	lazy	speaker_remiel	remiel_pre_012_body						FALSE	FALSE	FALSE								
+remiel_pre_013	remiel	remiel	belphegor	annoyed	lazy	speaker_remiel	remiel_pre_013_body						FALSE	FALSE	FALSE								
+remiel_pre_014	belphegor	remiel	belphegor	annoyed	smile	speaker_belphegor	remiel_pre_014_body						FALSE	FALSE	FALSE								
+remiel_pre_015	remiel	remiel	belphegor	sigh	smile	speaker_remiel	remiel_pre_015_body						FALSE	FALSE	FALSE								
+remiel_pre_016	remiel	remiel	belphegor	annoyed	smile	speaker_remiel	remiel_pre_016_body						FALSE	FALSE	FALSE								
+remiel_pre_017	narration					speaker_narration	remiel_pre_017_body						FALSE	FALSE	FALSE								
+remiel_pre_018	sherry	sherry	remiel	hassle	neutral	speaker_sherry	remiel_pre_018_body						FALSE	FALSE	FALSE								
+remiel_pre_019	remiel	sherry	remiel	hassle	smile	speaker_remiel	remiel_pre_019_body						FALSE	FALSE	FALSE								
+remiel_pre_020	sherry	sherry	remiel	smirk	smile	speaker_sherry	remiel_pre_020_body						FALSE	FALSE	FALSE								
+remiel_pre_021	sherry	sherry	remiel	smirk	smile	speaker_sherry	remiel_pre_021_body						FALSE	FALSE	FALSE								
+remiel_pre_022	karin	karin	remiel	tired	smile	speaker_karin	remiel_pre_022_body						FALSE	FALSE	FALSE								
+remiel_pre_023	karin	karin	remiel	tired	smile	speaker_karin	remiel_pre_023_body						FALSE	FALSE	FALSE								
+remiel_pre_024	remiel	karin	remiel	tired	evil	speaker_remiel	remiel_pre_024_body						FALSE	FALSE	FALSE								
+remiel_pre_025	remiel	karin	remiel	tired	evil	speaker_remiel	remiel_pre_025_body						FALSE	FALSE	FALSE								
+remiel_pre_026	remiel	karin	remiel	tired	evil	speaker_remiel	remiel_pre_026_body						FALSE	FALSE	FALSE								
+remiel_pre_027	karin	karin	remiel	panic	evil	speaker_karin	remiel_pre_027_body						FALSE	FALSE	FALSE								
+remiel_pre_028	remiel	karin	remiel	panic	sigh	speaker_remiel	remiel_pre_028_body						FALSE	FALSE	FALSE								
+remiel_pre_029	remiel	karin	remiel	panic	annoyed	speaker_remiel	remiel_pre_029_body						FALSE	FALSE	FALSE								
+remiel_pre_030	remiel	karin	remiel	panic	glare	speaker_remiel	remiel_pre_030_body	LoadNextScene					FALSE	FALSE	FALSE								

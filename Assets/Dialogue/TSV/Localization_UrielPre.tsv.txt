@@ -1,0 +1,25 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_uriel	우리엘	Uriel
+speaker_satan	사탄	Satan
+uriel_pre_001_body	인내의 회랑을 가득 메운 건 촘촘한 사건 기록들이었다. 층층이 쌓인 자료들이 내뿜는 위압감이 복도의 공기를 무겁게 짓누르고 있었다.	The Corridor of Patience was filled to the brim with dense case files. The sheer weight of the stacked records pressed down on the air, suffocating the hallway.
+uriel_pre_002_body	내보내라 해! 나는 아직 덜 싸웠다 해!	Let me out, I say! I am not done fighting yet!
+uriel_pre_003_body	여기는 숨 막힌다 해! 주먹도 꼬리도 전부 심심하다 해!	This place suffocates, I say! My fists and tail are bored!
+uriel_pre_004_body	경찰 여자! 듣고 있냐 해!	Police woman! Are you listening, I say!
+uriel_pre_005_body	더 잘해봐.	Try harder.
+uriel_pre_006_body	그게 대답이냐 해!	That is your answer, I say?!
+uriel_pre_007_body	그때, 감시등 아래로 두 개의 발소리가 끼어들었다. 셰리와 카린이었다.	Then, two sets of footsteps cut in beneath the watchlights. Sherry and Karin.
+uriel_pre_008_body	수배자 신분으로 이런 데 어슬렁거려도 되는 건가...	Is it okay for a wanted woman to wander around a place like this...
+uriel_pre_009_body	셰리! 들키지 않으면 범죄가 아닙니다!	Sherry! If we are not caught, it is not a crime!
+uriel_pre_010_body	그 말은 꽤 위험한데.	That is a pretty dangerous thing to say.
+uriel_pre_011_body	여긴 일방통행이다. 출구는 너희가 온 방향이지.	This is a one-way road. The exit is the way you came.
+uriel_pre_012_body	잃어버린 물건 찾으러 왔을 뿐인데.	I am only here to find something I lost.
+uriel_pre_013_body	너희에게 선택권이 있다고 생각하나?	Do you think you have a choice?
+uriel_pre_014_body	열쇠 조각 찾으러 왔어. 그거 없이는 못 돌아가.	I came for the key fragment. I cannot leave without it.
+uriel_pre_015_body	……	......
+uriel_pre_016_body	그 침묵, 거절로 받아들이면 되나?	Should I take that silence as a no?
+uriel_pre_017_body	열쇠는 이곳에 남는다.	The key stays here.
+uriel_pre_018_body	한 번 눈독 들인 물건은 잘 안 놓쳐서 말이야.	Once I set my eyes on something, I do not let it go.
+uriel_pre_019_body	와서 가져가라.	Come and take it.

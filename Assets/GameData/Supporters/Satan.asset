@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SupporterData
   supporterID: satan
   supporterName: satan
-  mainImage: {fileID: 21300000, guid: d226f0eb6ae16814493023dbf9e9acb8, type: 3}
+  mainImage: {fileID: 21300000, guid: 03ade7f2cd0ce2548a8c48fe5f1e055b, type: 3}
   iconImage: {fileID: 21300000, guid: 8631ec2f121d2c84f9d553ca7f7aaa21, type: 3}
   worriedSDImage: {fileID: 21300000, guid: b881a0bdcb77b3547a65e16cc201efd1, type: 3}
   readySDImage: {fileID: 21300000, guid: 7369eac1b0acc9a4da3ee0c98a2e690d, type: 3}
@@ -24,7 +24,7 @@ MonoBehaviour:
   startSkillImage: {fileID: 21300000, guid: 75138d98c34228c49abd4eec9b9714d5, type: 3}
   battleSkillImage: {fileID: 21300000, guid: 381c95b741a98f944b29054cd6e11ae1, type: 3}
   worried: {fileID: 21300000, guid: c85df1601804cea44993e143c9fde055, type: 3}
-  happy: {fileID: 21300000, guid: 18b87f4f152a26b449db2415acb3baca, type: 3}
+  happy: {fileID: 21300000, guid: ef1fcafee1614cd428610d233f27ac60, type: 3}
   passiveSkillDesc: supporter_passive_wo_ai_ni
   startSkillDesc: supporter_start_lock_on
   battleSkillDesc: supporter_battle_dont_make_me_a_shrew

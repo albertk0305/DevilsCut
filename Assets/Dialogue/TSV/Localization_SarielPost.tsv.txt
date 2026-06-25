@@ -1,0 +1,44 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_sariel	사리엘	Sariel
+speaker_mammon	마몬	Mammon
+sariel_post_001_body	사리엘을 쓰러뜨리고 열쇠 조각을 획득했다.	Sariel was defeated and the key fragment was obtained.
+sariel_post_002_body	제가... 아직 스스로를 충분히 비우지 못했군요.	I... have not emptied myself enough yet.
+sariel_post_003_body	기적은 됐고. 너부터 좀 보자. 방금 싸우는 내내 쓰러질 것 같던데.	Forget the miracle. Let us look at you first. You looked like you were about to collapse that whole fight.
+sariel_post_004_body	저를... 말씀이신가요?	You mean... me?
+sariel_post_005_body	밥은 제대로 챙겨 먹고 다니는 거야?	Do you actually eat proper meals?
+sariel_post_006_body	아마... 며칠 전이 마지막이었네요. 남은 빵은 도움이 필요한 분들께 드렸거든요.	I think... the last time was a few days ago. I gave the remaining bread to those in need.
+sariel_post_007_body	빈속으로 구원 운운하면 오래 못 가. 독주도 안주 없이 마시면 속 버리는 법이야.	You will not last long talking salvation on an empty stomach. Even hard liquor ruins you without something to eat.
+sariel_post_008_body	사리엘 씨. 옷 곳곳에 수선 흔적이 있습니다. 매우 오래 입은 옷으로 보입니다!	Ms. Sariel. There are repair marks all over your clothes. It appears you have worn them for a very long time!
+sariel_post_009_body	이 옷은 제가 처음 자선의 회랑을 맡았을 때부터 입던 것입니다.	I have worn these clothes since I first took charge of the Hall of Charity.
+sariel_post_010_body	그 정도면 중고업자도 안 받아줘요! 박물관에 기증해야 할 유물이라고요!	At that point even a secondhand dealer would refuse it! That is a relic for museum donation!
+sariel_post_011_body	하지만 새 옷을 살 돈이 있다면 더 필요한 분들께...	But if I had money for new clothes, I could give it to those who need it more...
+sariel_post_012_body	도움이 필요한 사람은 바로 너야. 밥 먹고 옷 사는 건 사치가 아니야. 생존이지.	The person who needs help is you. Eating meals and buying clothes is not luxury. It is survival.
+sariel_post_013_body	맞아요! 돈은 자신을 위해 쓸 때 가장 기쁜 법이죠!	Exactly! Money is happiest when you spend it on yourself!
+sariel_post_014_body	자신을 돌보는 것... 제가 쓰러져서는 구원도 이어갈 수 없겠네요.	Taking care of myself... If I collapse, I cannot continue salvation either.
+sariel_post_015_body	그럼요! 선행도 본인부터 챙겨야 할 수 있는 거예요!	Of course! You can only do good deeds after taking care of yourself first!
+sariel_post_016_body	그렇다면 마몬 님. 이번에는 저를 위해 작은 자선을 부탁드려도 될까요?	Then, Ms. Mammon. May I ask for a small act of charity for myself this time?
+sariel_post_017_body	네? 그건 좀 봐주세요!	What? Please spare me that!
+sariel_post_018_body	좋은 얘기는 여기까지. 이제 내 몫 얘기를 해볼까.	That is enough nice talk. Let us discuss my share now.
+sariel_post_019_body	물론입니다! 셰리 고객님께는 파시오네 특별 V.I.P. 대우를 약속드리죠! 일반 고객에게는 절대 보여주지 않는 물건도 보여드리겠습니다!	Of course! I promise you special Passione V.I.P. treatment, dear customer Sherry! I will even show you goods that ordinary customers never get to see!
+sariel_post_020_body	어째 보상이 아니라 영업 같은데.	That sounds less like a reward and more like a sales pitch.
+sariel_post_021_body	카캇! 절대 실망하지 않으실 겁니다, 고객님!	Kaka! You absolutely will not be disappointed, dear customer!
+sariel_post_022_body	부정은 안 하는군.	You are not denying it.
+sariel_post_023_body	그리고 고객님 곁에는 좋은 계약이 굴러들어올 것 같은 예감이 듭니다. 장사꾼의 감입니다!	And I have a feeling good contracts will roll in around you. It is a merchant's instinct!
+sariel_post_024_body	그러니 저도 함께하게 해주세요. 분명 큰돈... 아니, 큰 도움이 될 겁니다!	So please let me come with you. I am sure I will be a great profit... I mean, a great help!
+sariel_post_choice_body	마몬을 조력자로 받아들입니까?	Accept Mammon as a supporter?
+sariel_post_choice_yes	받아들인다	Accept
+sariel_post_choice_no	마음만 받는다	Decline
+sariel_post_yes_001_body	좋아. 잘 풀리면 내 몫도 좀 나눠달라고.	Fine. If this goes well, share a little of my cut too.
+sariel_post_yes_002_body	카캇! 이제 큰돈 벌 일만 남았습니다! 고객님도 저도 완전 이득이에요!	Kaka! Now all that is left is to make big money! This is a total win for both of us, dear customer!
+sariel_post_yes_003_body	왜 벌써 손해 본 기분이지.	Why do I already feel like I lost money?
+sariel_post_yes_004_body	와아! 카린도 부자가 되고 싶습니다!	Wow! Karin wants to be rich too!
+sariel_post_no_001_body	마음은 고맙지만, 너무 위험해.	I appreciate it, but it is too dangerous.
+sariel_post_no_002_body	흑흑... 너무합니다. 제 진심이 이렇게 반품되다니...	Sob sob... How cruel. My sincere feelings have been returned like unwanted goods...
+sariel_post_no_003_body	야, 울지는 마. 대신 가게에는 꼭 들를게.	Hey, do not cry. I will come by your shop instead.
+sariel_post_no_004_body	훌쩍... 정말이죠?	Sniff... Really?
+sariel_post_no_005_body	그래. 약속할게.	Yeah. I promise.
+sariel_post_no_006_body	카캇! 감사합니다 고객님! 실망시키지 않겠습니다!	Kaka! Thank you, dear customer! I will not disappoint you!
+sariel_post_no_007_body	이런이런, 이 녀석은 당해낼 수가 없네.	Good grief. There is no winning against this one.

@@ -1,0 +1,38 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_remiel	레미엘	Remiel
+speaker_belphegor	벨페고르	Belphegor
+remiel_post_001_body	레미엘을 쓰러뜨리고 열쇠 조각을 획득했다.	Remiel was defeated and the key fragment was obtained.
+remiel_post_002_body	제가... 불성실한 분들에게 패배하다니... 아무래도 여러분의 나태함이 옮아버린 모양이군요.	To think I lost to such undisciplined people... It seems your laziness has infected me.
+remiel_post_003_body	이제 퇴근 시간이야. 눈 좀 붙여.	It is quitting time. Get some sleep.
+remiel_post_004_body	걱정은 불필요합니다. 저는 아직... 더... 일할...	Your concern is unnecessary. I can still... keep... working...
+remiel_post_005_body	레미엘은 말을 끝맺지 못하고 조용히 잠들었다.	Remiel could not finish her sentence and quietly fell asleep.
+remiel_post_006_body	잠은 빚이야. 밀리면 이자가 붙지.	Sleep is a debt. Fall behind and it comes back with interest.
+remiel_post_007_body	셰리! 저쪽에 잠들어 계신 분이 있습니다!	Sherry! There is someone sleeping over there!
+remiel_post_008_body	화약 냄새 맡으며 잔다고? 대단한 배짱이네.	Sleeping through the smell of gunpowder? That takes nerve.
+remiel_post_009_body	음냐... 잭팟... 으헤헤...	Mmn... jackpot... ehehe...
+remiel_post_010_body	일어나, 공주님. 여기서 자면 꿈자리 안 좋아.	Wake up, princess. Sleeping here will give you bad dreams.
+remiel_post_011_body	음냐... 구하러 와준 왕자님이야...?	Mmn... are you the prince who came to save me...?
+remiel_post_012_body	아니. 술값 받고 움직이는 글러먹은 어른이지.	No. Just a washed-up adult who moves when there is drink money involved.
+remiel_post_013_body	으으음... 강해 보이네... 그럼 특별히... 나를 데리고 갈 권리를 줄게...	Mmm... you look strong... Then specially... I will give you the right to take me with you...
+remiel_post_014_body	그거 받으면 내 쪽이 손해 같은데.	That sounds like a losing deal for me.
+remiel_post_015_body	운은 좋아... 데리고 다니면... 행운이 있을지도...	I am lucky... If you take me along... luck might follow...
+remiel_post_016_body	행운의 여신인지, 짐덩이인지. 결국 데려가 봐야 안다는 거네.	A goddess of luck or dead weight. Guess I will only know if I take you along.
+remiel_post_choice_body	벨페고르를 조력자로 받아들입니까?	Accept Belphegor as a supporter?
+remiel_post_choice_yes	받아들인다	Accept
+remiel_post_choice_no	거절한다	Decline
+remiel_post_yes_001_body	좋아. 잘 부탁한다, 행운의 여신.	Fine. I am counting on you, Lady Luck.
+remiel_post_yes_002_body	와아... 그럼 나... 부드러운 베개랑... 따뜻한 담요가 필요해... 그리고 가끔 단 거랑... 깨우지 않는 친절도...	Waa... Then I need... a soft pillow... a warm blanket... And sometimes sweets... and the kindness not to wake me...
+remiel_post_yes_003_body	무르기는 안 되겠지...? 아니. 이미 늦었나.	I should not go soft on her...? No. Too late for that.
+remiel_post_yes_004_body	깨어 있을 때는 든든한 조력자가 생겼습니다!	We have gained a reliable supporter when she is awake!
+remiel_post_yes_005_body	자는 동안에도... 운은 일해...	Even while I sleep... luck keeps working...
+remiel_post_yes_006_body	좋네. 주인보다 성실한 재능이라니.	Nice. A talent more hardworking than its owner.
+remiel_post_no_001_body	미안. 이 길은 너무 위험해.	Sorry. This road is too dangerous.
+remiel_post_no_002_body	으으음... 아쉽지만 어쩔 수 없지.	Mmm... That is a shame, but I guess it cannot be helped.
+remiel_post_no_003_body	돈이 부족해지면 카지노로 와... 잭팟 잘 나오는 자리... 알려줄게...	Come to the casino when you run short on money... I will show you a good jackpot spot...
+remiel_post_no_004_body	그거 잘 풀리면 해결사 때려치우고 은퇴해도 되겠는데.	If that works out, I could quit being a fixer and retire.
+remiel_post_no_005_body	셰리! 의뢰를 잊지 말아주세요!	Sherry! Please do not forget the job!
+remiel_post_no_006_body	알아. 잠시 깨고 싶지 않은 꿈을 꾸었을 뿐이야.	I know. I was just dreaming a dream I did not want to wake from.
+remiel_post_no_007_body	하아암... 달콤한 꿈은 좋아...	Haaam... Sweet dreams are nice...

@@ -19,5 +19,6 @@ MonoBehaviour:
   nodeIcon: {fileID: 21300000, guid: b4e9439e6e33b384b98d63d3b566dd84, type: 3}
   defaultSD: {fileID: 21300000, guid: d2e08b0dc53c02644941d4bf4a757f05, type: 3}
   readySD: {fileID: 21300000, guid: a8ecb4856f03a2c49bda269c13f623f1, type: 3}
+  preBossDialogue: {fileID: 11400000, guid: 413b890e6fb6e7b49a5c4b9e18132f2b, type: 2}
   imprisonedSupporter: {fileID: 11400000, guid: 324e8b7827f679846a1984c00523c40e, type: 2}
-  postBossDialogue: {fileID: 11400000, guid: a0ba14e96f3a9634697d99e15ba2d139, type: 2}
+  postBossDialogue: {fileID: 11400000, guid: 7f63a2f537cd0bb41b3574d2110cda8f, type: 2}
