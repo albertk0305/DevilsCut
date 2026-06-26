@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2581863fb532a564ca9ad11c40d4425e
+guid: 473b102a878095d4492650cc538c5731
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3051561906974228345
-    second: SatanDef_0
+      213: 1826980045164405723
+    second: SatanNervous_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SatanDef_0
+      name: SatanNervous_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 78000bc0d9ca6a5d0800000000000000
-      internalID: -3051561906974228345
+      spriteID: bd360cbdbacba5910800000000000000
+      internalID: 1826980045164405723
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SatanDef_0: -3051561906974228345
+      SatanNervous_0: 1826980045164405723
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

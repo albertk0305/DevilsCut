@@ -1,0 +1,22 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_satan	사탄	Satan
+satan_affinity_02_001_body	셰리! 오늘은 가문에 전해 내려오는 비전 묘약을 가져왔다 해!	Sherry! Today I brought a secret potion passed down through my family!
+satan_affinity_02_002_body	그 병 색깔부터 이미 수상한데.	The color of that bottle already looks suspicious.
+satan_affinity_02_003_body	마시면 강해진다! 몸도 마음도 뜨거워진다 해!	Drink it and you will get stronger! Your body and heart will both heat up!
+satan_affinity_02_004_body	카린은 섭취 전 성분 분석을 권장합니다!	Karin recommends analyzing the ingredients before consumption!
+satan_affinity_02_005_body	위험한 거 아니다 해! 할머니가 직접 주신 거다!	It is not dangerous! My grandmother gave it to me herself!
+satan_affinity_02_006_body	할머니표라... 그건 좀 반칙인데. 한 모금만 마셔 볼게.	Grandma-made... That is kind of unfair. I will try one sip.
+satan_affinity_02_007_body	......	......
+satan_affinity_02_008_body	어떠냐 해? 몸이 뜨거워지고 심장이 뛰냐?	How is it? Is your body getting hot? Is your heart racing?
+satan_affinity_02_009_body	이거 술인데. 그것도 꽤 오래 숙성된 거.	This is alcohol. Pretty well-aged alcohol too.
+satan_affinity_02_010_body	그럴 리 없다 해! 이건 분명 사랑의 묘약... 아, 아니다!	That cannot be! This is definitely a love potion... Ah, no!
+satan_affinity_02_011_body	강해지는 묘약이라며.	I thought it was a potion that makes you stronger.
+satan_affinity_02_012_body	그, 그러니까 마음이 강해지는 쪽이다 해!	Th-that means it makes your heart stronger!
+satan_affinity_02_013_body	성분 분석 결과 알코올, 과일 향, 설탕, 향신료입니다. 그 외의 특이 성분은 검출되지 않았습니다.	Ingredient analysis result: alcohol, fruit aroma, sugar, and spices. No other unusual components were detected.
+satan_affinity_02_014_body	효과가 아주 없는 건 아니지. 확실히 취하면 상대가 더 매력적으로 보이긴 하거든.	It is not completely ineffective. When you are drunk, people do tend to look more attractive.
+satan_affinity_02_015_body	그럼... 지금 나 보면 가슴이 좀 뛰냐 해?	Then... when you look at me right now, does your heart race a little?
+satan_affinity_02_016_body	글쎄. 어떠려나. 내가 술은 좀 센 편이라.	Hard to say. I wonder. I do have a pretty high tolerance.
+satan_affinity_02_017_body	언체인의 시설 랭크가 상승했다!	Unchain's facility rank has increased!

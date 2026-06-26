@@ -1,0 +1,13 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+satan_affinity_01_001	satan	sherry	satan	smile	happy	speaker_satan	satan_affinity_01_001_body			Gym			FALSE	FALSE	FALSE								
+satan_affinity_01_002	sherry	sherry	satan	smile	happy	speaker_sherry	satan_affinity_01_002_body						FALSE	FALSE	FALSE								
+satan_affinity_01_003	satan	sherry	satan	smile	excited	speaker_satan	satan_affinity_01_003_body						FALSE	FALSE	FALSE								
+satan_affinity_01_004	sherry	sherry	satan	awkward	excited	speaker_sherry	satan_affinity_01_004_body						FALSE	FALSE	FALSE								
+satan_affinity_01_005	satan	sherry	satan	awkward	excited	speaker_satan	satan_affinity_01_005_body						FALSE	FALSE	FALSE								
+satan_affinity_01_006	karin	sherry	karin	awkward	suspicious	speaker_karin	satan_affinity_01_006_body						FALSE	FALSE	FALSE								
+satan_affinity_01_007	satan	sherry	satan	awkward	excited	speaker_satan	satan_affinity_01_007_body						FALSE	FALSE	FALSE								
+satan_affinity_01_008	sherry	sherry	satan	surprise	excited	speaker_sherry	satan_affinity_01_008_body						FALSE	FALSE	FALSE								
+satan_affinity_01_009	satan	sherry	satan	surprise	cool	speaker_satan	satan_affinity_01_009_body						FALSE	FALSE	FALSE								
+satan_affinity_01_010	satan	sherry	satan	surprise	excited	speaker_satan	satan_affinity_01_010_body						FALSE	FALSE	FALSE								
+satan_affinity_01_011	sherry	sherry	satan	perplexed	excited	speaker_sherry	satan_affinity_01_011_body						FALSE	FALSE	FALSE								
+satan_affinity_01_012	narration					speaker_narration	satan_affinity_01_012_body	UpgradePendingFacilityRank					FALSE	FALSE	FALSE								

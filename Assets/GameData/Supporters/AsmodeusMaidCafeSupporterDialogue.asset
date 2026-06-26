@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: AsmodeusMaidCafeSupporterDialogue
   m_EditorClassIdentifier: Assembly-CSharp::MaidCafeSupporterDialogueData
   supporter: {fileID: 11400000, guid: 8f7a108444158544399cf83ab876c34c, type: 2}
-  defaultSprite: {fileID: 21300000, guid: 318b3b32fee948a4ebcdf02edec9fd53, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 5f096722683f20245a530860f35cfe9f, type: 3}
   happySprite: {fileID: 21300000, guid: 4d411491b3fc867419e5d15bc5186548, type: 3}
   embarrassedSprite: {fileID: 21300000, guid: 5cddedbcc1844c4419f1c3864bcdb96d, type: 3}
   selectedExpression: 3
   selectedTextKey: maid_asmodeus_partner_intro
   selectedText: Sitting here together with Master like this... Asmo might be getting
     a little nervous.
-  giftExpression: 1
+  giftExpression: 2
   giftTextKey: maid_asmodeus_partner_gift
   giftText: This gift is for Master! Asmo is not responsible if you fall for her
     even more!
-  maxSkillGiftExpression: 1
+  maxSkillGiftExpression: 2
   maxSkillGiftTextKey: maid_asmodeus_partner_extra_gift
   maxSkillGiftText: Ta-da! An extra gift! A maid who takes care of you this well
     is hard to find!
-  farewellExpression: 2
+  farewellExpression: 1
   farewellTextKey: maid_asmodeus_partner_finish
   farewellText: Master fell pretty hard for Asmo today right? Do not forget the time
     you spent with Asmo today!

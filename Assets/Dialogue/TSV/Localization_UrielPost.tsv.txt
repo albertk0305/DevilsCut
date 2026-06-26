@@ -1,0 +1,38 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_uriel	우리엘	Uriel
+speaker_satan	사탄	Satan
+uriel_post_001_body	우리엘을 쓰러뜨리고 열쇠 조각을 획득했다.	Uriel was defeated and the key fragment was obtained.
+uriel_post_002_body	여기까지인가.	So this is as far as I go.
+uriel_post_003_body	단단한 녀석이네. 아직 안 부서졌으면 언젠가 다시 쫓아와봐.	You are a tough one. If you are not broken yet, come chase me again someday.
+uriel_post_004_body	난 더 나아질 거다.	I will become better.
+uriel_post_005_body	기대하지. 실망시키지 말라고.	I will be waiting. Do not disappoint me.
+uriel_post_006_body	길은 열렸다. 가라.	The path is open. Go.
+uriel_post_007_body	셰리! 구금 구역의 잠금이 해제되었습니다!	Sherry! The detention area's lock has been released!
+uriel_post_008_body	정말 고맙다 해! 너, 강하다. 내가 본 사람 중 제일 강하다 해!	Thank you, I say! You are strong. The strongest I have ever seen!
+uriel_post_009_body	나보다 강하다 해. 그래서 마음에 들었다! 이름이 뭐냐 해?	You are stronger than me, I say. That is why I like you! What is your name?
+uriel_post_010_body	셰리. 돈 되는 일만 받는 뒷골목 해결사야.	Sherry. A back-alley fixer who only takes paying jobs.
+uriel_post_011_body	셰리는 카린이 믿고 의뢰한 최고의 해결사입니다!	Sherry is the best fixer Karin trusted with her request!
+uriel_post_012_body	깡통, 너는 셰리 옆에서 물러나라 해.	Tin can, step away from Sherry, I say.
+uriel_post_013_body	셰리, 나랑 다니는 건 어떠냐? 깡통 꼬마보다 내가 더 뜨겁고 즐겁게 해준다 해!	Sherry, how about traveling with me? I will make things hotter and more fun than that little tin can, I say!
+uriel_post_014_body	안 됩니다! 셰리는 카린의 의뢰를 진행 중입니다!	No! Sherry is currently working on Karin's request!
+uriel_post_015_body	그래. 여기서 그만두면 지금까지 고생한 값도 못 받아.	Right. If I quit now, I will not even get paid for all this trouble.
+uriel_post_016_body	그럼 나도 데려가라! 같이 다니면 셰리는 분명 내 매력에 빠질 거다 해!	Then take me with you! If we travel together, Sherry will surely fall for my charm, I say!
+uriel_post_choice_body	사탄을 조력자로 받아들입니까?	Accept Satan as a supporter?
+uriel_post_choice_yes	받아들인다	Accept
+uriel_post_choice_no	마음만 받는다	Decline
+uriel_post_yes_001_body	좋아. 대신 꼬마랑 사이좋게 지내.	Fine. But get along with the kid.
+uriel_post_yes_002_body	흠... 걱정 마라. 꼬마랑 같이 다녀준다 해. 지금은.	Hmm... Do not worry. I will travel with the kid, I say. For now.
+uriel_post_yes_003_body	지금은?	For now?
+uriel_post_yes_004_body	같이 다니다 보면 셰리는 반드시 나한테 넘어온다. 승부는 이미 정해졌다 해!	If we travel together, Sherry will definitely come over to me. The match is already decided, I say!
+uriel_post_yes_005_body	셰리! 카린도 성장형 안드로이드입니다! 잠재력은 충분합니다!	Sherry! Karin is also a growth-type android! Karin has plenty of potential!
+uriel_post_yes_006_body	죄 많은 여자네, 난...	What a sinful woman I am...
+uriel_post_no_001_body	마음은 고맙지만, 이 길은 위험해.	I appreciate it, but this road is dangerous.
+uriel_post_no_002_body	아쉽다. 하지만 셰리 말이면 어쩔 수 없다 해.	Too bad. But if Sherry says so, it cannot be helped, I say.
+uriel_post_no_003_body	대신 강해지고 싶으면 언체인으로 와라. 내가 직접 단련시켜준다 해!	Instead, if you want to get stronger, come to Unchain. I will train you myself, I say!
+uriel_post_no_004_body	셰리! 사탄 씨가 순순히 물러났습니다!	Sherry! Ms. Satan backed down without a fight!
+uriel_post_no_005_body	고철, 안심하지 마라. 셰리 옆은 언젠가 내가 차지한다 해!	Scrap metal, do not relax. One day I will take the place beside Sherry, I say!
+uriel_post_no_006_body	카린도 쉽게 물러나지 않겠습니다!	Karin will not back down so easily either!
+uriel_post_no_007_body	인기 있는 삶도 꽤 피곤하네.	A popular life is pretty tiring too.

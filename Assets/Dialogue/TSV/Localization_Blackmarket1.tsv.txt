@@ -1,0 +1,24 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_mammon	마몬	Mammon
+mammon_affinity_01_001_body	카캇! 셰리 고객님! 오늘은 제가 아끼는 고객님께만 드리는 파시오네 특별 V.I.P. 혜택을 적용해드리겠습니다!	Kaka! Dear customer Sherry! Today I will apply the special Passione V.I.P. benefits reserved only for my cherished customers!
+mammon_affinity_01_002_body	흐음... 일단 들어는 볼까.	Hmm... I will at least hear you out.
+mammon_affinity_01_003_body	첫 번째! 특별 할인입니다! 일부 품목을 아주 특별한 가격으로 제공해드리죠!	First! A special discount! I will offer certain items at a very special price!
+mammon_affinity_01_004_body	일부 품목이라면 어디까지 포함되는데?	When you say certain items, what exactly is included?
+mammon_affinity_01_005_body	신상품 제외! 인기 상품 제외! 희귀 상품 제외! 주문 제작품 제외! 계절 상품 제외입니다!	New items excluded! Popular items excluded! Rare items excluded! Custom orders excluded! Seasonal items excluded!
+mammon_affinity_01_006_body	그럼 남는 건?	Then what is left?
+mammon_affinity_01_007_body	창고 깊은 곳에서 오랜 시간을 견딘... 개성 있는 상품들이 남습니다!	Items with personality that have endured a long time deep in the warehouse remain!
+mammon_affinity_01_008_body	보통 그걸 악성 재고라고 부르지 않나.	Is that not usually called dead stock?
+mammon_affinity_01_009_body	마니아층을 위한 빈티지 상품입니다 고객님!	They are vintage items for dedicated enthusiasts, dear customer!
+mammon_affinity_01_010_body	와아... 숨겨진 보물을 찾는 기분입니다!	Wow... It feels like searching for hidden treasure!
+mammon_affinity_01_011_body	두 번째 혜택도 있습니다! 무료 사은품 증정!	There is a second benefit too! Free gifts included!
+mammon_affinity_01_012_body	무료는 정의입니다! 카린은 무료가 좋습니다!	Free is justice! Karin likes free things!
+mammon_affinity_01_013_body	별로 기대되지는 않는데.	I am not expecting much.
+mammon_affinity_01_014_body	구매 금액에 따라 파시오네 특제 장식품, 오래된 열쇠고리, 정체불명의 부품을 드립니다!	Depending on your purchase amount, you will receive a Passione special ornament, an old keychain, or an unidentified part!
+mammon_affinity_01_015_body	버리기 애매한 물건 모음이네.	That is a collection of things too awkward to throw away.
+mammon_affinity_01_016_body	버리기 아까운 물건 모음입니다!	It is a collection of things too precious to throw away!
+mammon_affinity_01_017_body	카캇! 아직 혜택은 더 많습니다! 더 들어보실래요?	Kaka! There are still more benefits! Would you like to hear more?
+mammon_affinity_01_018_body	사양할게. 이미 충분히 들은 것 같아.	I will pass. I think I have heard enough already.
+mammon_affinity_01_019_body	파시오네의 시설 랭크가 상승했다!	Passione's facility rank has increased!

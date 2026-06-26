@@ -56,7 +56,7 @@ MonoBehaviour:
   portraits:
   - actorID: patrol_robot
     expressionID: normal
-    portraitSprite: {fileID: 21300000, guid: db55a842b62519a4fbb9b0a0d5bf3dcd, type: 3}
+    portraitSprite: {fileID: 21300000, guid: 5e0f07548d4b8e64fb89bf3eef2bebd9, type: 3}
   - actorID: arete
     expressionID: neutral
     portraitSprite: {fileID: 21300000, guid: 3b7a20f4ebd8aeb449e4fc418581728f, type: 3}
@@ -129,6 +129,9 @@ MonoBehaviour:
   - actorID: karin
     expressionID: glum
     portraitSprite: {fileID: 21300000, guid: 6e737aca233a6de458a79c1a8f94ec48, type: 3}
+  - actorID: karin
+    expressionID: drunk
+    portraitSprite: {fileID: 21300000, guid: 0ffbc644c3d6ee44cb922f9239bc792c, type: 3}
   - actorID: sherry
     expressionID: mock
     portraitSprite: {fileID: 21300000, guid: 4a3f583516dce03478d1edabcf81fe88, type: 3}
@@ -186,6 +189,9 @@ MonoBehaviour:
   - actorID: sherry
     expressionID: serious
     portraitSprite: {fileID: 21300000, guid: 888db432ced623f49bc2f3961404790e, type: 3}
+  - actorID: sherry
+    expressionID: smug
+    portraitSprite: {fileID: 21300000, guid: f57c03547ed720f47aad75e395321c28, type: 3}
   - actorID: asmodeus
     expressionID: bored
     portraitSprite: {fileID: 21300000, guid: 8be49b6042000764684285d551a5e4f1, type: 3}
@@ -438,12 +444,24 @@ MonoBehaviour:
   - actorID: mammon
     expressionID: sadAct
     portraitSprite: {fileID: 21300000, guid: 1b0933c2f3937e043975703a2a490511, type: 3}
+  - actorID: mammon
+    expressionID: giggling
+    portraitSprite: {fileID: 21300000, guid: 77224ee94f33b7242b9695455c4884f9, type: 3}
+  - actorID: mammon
+    expressionID: serious
+    portraitSprite: {fileID: 21300000, guid: 0c889ec935871cb48913fadd6d6dfcc8, type: 3}
   - actorID: uriel
     expressionID: serious
     portraitSprite: {fileID: 21300000, guid: 93a388af3d8c8e14d84dc3c5f4829b89, type: 3}
   - actorID: uriel
     expressionID: speak
     portraitSprite: {fileID: 21300000, guid: 78819f2733b0b9b4aaff1423d3c07bc4, type: 3}
+  - actorID: uriel
+    expressionID: disappointed
+    portraitSprite: {fileID: 21300000, guid: b3c8e37f8f9e7ba4ab2024b4c5b49f5d, type: 3}
+  - actorID: uriel
+    expressionID: cool
+    portraitSprite: {fileID: 21300000, guid: ecb53f978f0b536499275c37ca453e62, type: 3}
   - actorID: satan
     expressionID: angry
     portraitSprite: {fileID: 21300000, guid: ba66f66cee5b01c4c81b37a6dbbc10cd, type: 3}
@@ -453,3 +471,33 @@ MonoBehaviour:
   - actorID: satan
     expressionID: hassle
     portraitSprite: {fileID: 21300000, guid: 97e4c9ee0c7d28941835db4b3a73b543, type: 3}
+  - actorID: satan
+    expressionID: happy
+    portraitSprite: {fileID: 21300000, guid: ef1fcafee1614cd428610d233f27ac60, type: 3}
+  - actorID: satan
+    expressionID: excited
+    portraitSprite: {fileID: 21300000, guid: 85a1ae871466b9a45bd0d921712812e5, type: 3}
+  - actorID: satan
+    expressionID: mischievous
+    portraitSprite: {fileID: 21300000, guid: a0caa4992648c5e47a36deac2d0515d2, type: 3}
+  - actorID: satan
+    expressionID: cool
+    portraitSprite: {fileID: 21300000, guid: 8e0edf48719772c4289ba400673df5a0, type: 3}
+  - actorID: satan
+    expressionID: disappointed
+    portraitSprite: {fileID: 21300000, guid: e43cfcbe6622d1043975f58736a55b6a, type: 3}
+  - actorID: satan
+    expressionID: smile
+    portraitSprite: {fileID: 21300000, guid: 03ade7f2cd0ce2548a8c48fe5f1e055b, type: 3}
+  - actorID: satan
+    expressionID: cry
+    portraitSprite: {fileID: 21300000, guid: aa7c2d7f9abb7064f93059f02acbb4c4, type: 3}
+  - actorID: satan
+    expressionID: sad
+    portraitSprite: {fileID: 21300000, guid: c85df1601804cea44993e143c9fde055, type: 3}
+  - actorID: satan
+    expressionID: nervous
+    portraitSprite: {fileID: 21300000, guid: 473b102a878095d4492650cc538c5731, type: 3}
+  - actorID: satan
+    expressionID: panic
+    portraitSprite: {fileID: 21300000, guid: 1221fd2f0fd684040933e3b3f918a83b, type: 3}

@@ -1,0 +1,24 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_mammon	마몬	Mammon
+mammon_affinity_02_001_body	마몬. 여기 매입도 해?	Mammon. Do you buy things here too?
+mammon_affinity_02_002_body	카캇! 물론입니다 고객님! 파시오네는 팔기도 하고 사기도 하고, 가끔은 사는 척하며 팔기도 합니다!	Kaka! Of course, dear customer! Passione sells, buys, and sometimes sells while pretending to buy!
+mammon_affinity_02_003_body	마지막 말은 못 들은 걸로 할게.	I will pretend I did not hear that last part.
+mammon_affinity_02_004_body	셰리. 무엇을 파는 겁니까?	Sherry. What are you selling?
+mammon_affinity_02_005_body	예전에 쓰던 권총. 나랑은 묘하게 안 맞더라고. 총도 주인을 잘 만나야지.	A handgun I used to use. It never quite suited me. A gun needs the right owner too.
+mammon_affinity_02_006_body	흐음... 사용감이 꽤 있군요. 흠집도 많고, 관리도 완벽하진 않고...	Hmm... It has seen quite a bit of use. Plenty of scratches, and the maintenance is not perfect...
+mammon_affinity_02_007_body	감상평은 됐고. 그래서 얼마 쳐줄 건데?	That is enough commentary. So how much will you give me for it?
+mammon_affinity_02_008_body	마몬 씨의 집중도가 급상승했습니다. 전문가 모드로 전환된 것 같습니다!	Ms. Mammon's focus has risen sharply. It appears she has switched to expert mode!
+mammon_affinity_02_009_body	그냥 중고 권총으로 팔면 평범한 가격입니다. 하지만 여기에 고객님의 사진을 끼워 넣고, 사용 인증서를 붙이면 이야기가 달라지죠!	If we sell it as an ordinary used handgun, it will fetch an ordinary price. But if we include your photo and attach a certificate of use, the story changes!
+mammon_affinity_02_010_body	사진?	A photo?
+mammon_affinity_02_011_body	네! 뒷골목 해결사 셰리가 실제로 사용한 권총! 단 한 점뿐인 실사용 인증품!	Yes! A handgun actually used by Sherry, the back-alley fixer! A one-of-a-kind certified used item!
+mammon_affinity_02_012_body	그게 돈이 돼?	Does that make money?
+mammon_affinity_02_013_body	고객님이 모를 뿐입니다! 뒷골목의 이름난 해결사에게 마음을 빼앗긴 고객이 있을지도 모르죠!	You simply may not know it, dear customer! There may be customers whose hearts have been stolen by a famous back-alley fixer!
+mammon_affinity_02_014_body	셰리의 팬클럽이 생기는 겁니까?	Will Sherry get a fan club?
+mammon_affinity_02_015_body	그건 좀 무서운데.	That is a little scary.
+mammon_affinity_02_016_body	밑져야 본전입니다 고객님! 시도할 가치는 충분합니다!	There is nothing to lose, dear customer! It is well worth trying!
+mammon_affinity_02_017_body	좋아. 팔리면 내 몫은 제대로 챙겨.	Fine. If it sells, make sure I get my proper share.
+mammon_affinity_02_018_body	물론입니다! 돈이 오가는 일만큼은 파시오네가 가장 철저합니다!	Of course! When it comes to money changing hands, Passione is the most thorough!
+mammon_affinity_02_019_body	파시오네의 시설 랭크가 상승했다!	Passione's facility rank has increased!

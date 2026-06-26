@@ -1,0 +1,30 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_mammon	마몬	Mammon
+mammon_affinity_03_001_body	카캇! 감사합니다 고객님! 다음에도 파시오네를 찾아주세요!	Kaka! Thank you, dear customer! Please visit Passione again!
+mammon_affinity_03_002_body	거래를 마친 손님들이 하나둘 파시오네를 나섰다.	The customers finished their purchases and left Passione one by one.
+mammon_affinity_03_003_body	마몬 씨. 방금 손님마다 같은 물건의 가격이 달랐습니다.	Ms. Mammon. The same item had a different price for each customer just now.
+mammon_affinity_03_004_body	눈치채셨군요! 훌륭합니다! 손님마다 지갑 사정도 다르고, 마음의 문이 열리는 가격도 다르기 때문이죠!	You noticed! Excellent! Every customer has a different wallet situation, and every heart opens at a different price!
+mammon_affinity_03_005_body	마음의 문은 가격으로 열립니까?	Does the door to the heart open with price?
+mammon_affinity_03_006_body	대부분은 그렇습니다!	Most of the time, yes!
+mammon_affinity_03_007_body	이런 걸 애한테 가르쳐도 되나.	Should you really teach this to a kid?
+mammon_affinity_03_008_body	장사 기술은 조기교육이 중요합니다! 자, 첫 번째 기술입니다!	Business techniques require early education! Now, the first technique!
+mammon_affinity_03_009_body	학습 준비 완료입니다!	Learning preparation complete!
+mammon_affinity_03_010_body	처음 가격은 목표보다 조금 높게 부릅니다. 그리고 고객님께만 특별히 깎아드리는 척하는 겁니다!	Start by naming a price a little higher than your target. Then pretend you are giving a special discount just for that customer!
+mammon_affinity_03_011_body	그러면 실제 목표 가격은 할인 후 가격입니까?	Then the actual target price is the price after the discount?
+mammon_affinity_03_012_body	카캇! 정답입니다! 이 아이는 장부를 읽을 재능이 있군요!	Kaka! Correct! This child has a talent for reading ledgers!
+mammon_affinity_03_013_body	가격은 고정값이 아니라 조정 가능한 변수입니다. 카린은 기억했습니다.	Price is not a fixed value, but an adjustable variable. Karin has memorized it.
+mammon_affinity_03_014_body	두 번째 기술입니다! 선택지는 주되, 사지 않는 선택지는 주지 않는 겁니다!	The second technique! Give choices, but do not give the choice not to buy!
+mammon_affinity_03_015_body	사지 않는 선택지가 사라지는 겁니까?	The choice not to buy disappears?
+mammon_affinity_03_016_body	맞습니다! 예를 들어 “사시겠습니까?”라고 묻지 않습니다. “검은색으로 하시겠습니까, 빨간색으로 하시겠습니까?”라고 묻는 겁니다!	Exactly! For example, you do not ask, “Would you like to buy it?” You ask, “Would you like it in black or red?”
+mammon_affinity_03_017_body	두 선택지 모두 구매로 이어집니다!	Both choices lead to a purchase!
+mammon_affinity_03_018_body	카캇! 핵심을 바로 파악하셨군요!	Kaka! You understood the core of it right away!
+mammon_affinity_03_019_body	애들은 배우는 게 빠르다더니.	They do say kids learn fast.
+mammon_affinity_03_020_body	셰리. 외상을 오늘 갚으시겠습니까, 아니면 내일 아침에 갚으시겠습니까?	Sherry. Will you pay your tab today, or tomorrow morning?
+mammon_affinity_03_021_body	바로 실전 투입이라니. 무서운 아이구나.	Straight into field practice. What a scary child.
+mammon_affinity_03_022_body	훌륭합니다! 응용력까지 있습니다! 이 아이는 부자가 될 재능이 있습니다!	Excellent! She even has applied skills! This child has the talent to become rich!
+mammon_affinity_03_023_body	카린은 부자가 되면 셰리의 외상부터 해결하겠습니다!	When Karin becomes rich, Karin will settle Sherry's tab first!
+mammon_affinity_03_024_body	기특하네. 이 맛에 애 키우나 봐.	How admirable. Maybe this is why people raise kids.
+mammon_affinity_03_025_body	파시오네의 시설 랭크가 상승했다!	Passione's facility rank has increased!

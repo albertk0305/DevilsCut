@@ -1,0 +1,18 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_lucifer	루시퍼	Lucifer
+lucifer_affinity_02_001_body	셰리. 진열된 병이 너무 많습니다. 색도 이름도 전부 다릅니다.	Sherry. There are so many bottles on display. The colors and names are all different.
+lucifer_affinity_02_002_body	많지. 아직 내 간이 맛보지 못한 술이 세상엔 너무 많아.	There are. There are still too many drinks in this world my liver has not tasted yet.
+lucifer_affinity_02_003_body	셰리는 어떤 술을 가장 좋아합니까?	What kind of alcohol do you like the most, Sherry?
+lucifer_affinity_02_004_body	도수 높은 버번 위스키 쪽이 좋아. 거칠고 달고, 뒤끝이 길거든.	I like high-proof bourbon whiskey. It is rough, sweet, and the finish lingers.
+lucifer_affinity_02_005_body	술은 전부 다른 방식으로 만들어지는 겁니까? 카린은 알고 싶습니다.	Is every kind of alcohol made in a different way? Karin wants to know.
+lucifer_affinity_02_006_body	아... 그건... 난 만드는 쪽보다는 마시는 쪽이라...	Ah... well... I am more on the drinking side than the making side...
+lucifer_affinity_02_007_body	버번은... 주로 옥수수 비율이 높은 원액을 증류해서, 안쪽을 태운 새 오크통에 숙성합니다...	Bourbon is... distilled from a mash with a high corn ratio, then aged in new oak barrels that are charred on the inside...
+lucifer_affinity_02_008_body	그래서 바닐라나 캐러멜 같은 단 향이 나기 쉽고... 높은 도수일수록 향도 맛도 더 선명하게 느껴질 수 있습니다...	That makes it easier to get sweet notes like vanilla or caramel... and the higher the proof, the more clearly the aroma and flavor can come through...
+lucifer_affinity_02_009_body	와아! 루시퍼 씨. 술에 관해서는 뭐든지 아시나 봅니다!	Wow! Lucifer, you seem to know everything about alcohol!
+lucifer_affinity_02_010_body	아, 아닙니다... 제가 감히 뭐든지 안다니요... 저는 아는 것밖에 모릅니다...	N-no... How could I dare know everything... I only know the things I know...
+lucifer_affinity_02_011_body	이래 봬도 프로야. 본인만 빼고 다 믿을 만하지.	He may not look it, but he is a pro. You can trust everything except him trusting himself.
+lucifer_affinity_02_012_body	그... 그 부분은 죄송합니다...	I... I am sorry about that part...
+lucifer_affinity_02_013_body	슬러프의 시설 랭크가 상승했다!	Slough's facility rank has increased!

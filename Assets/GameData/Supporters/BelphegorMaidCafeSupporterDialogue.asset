@@ -15,19 +15,19 @@ MonoBehaviour:
   supporter: {fileID: 11400000, guid: 324e8b7827f679846a1984c00523c40e, type: 2}
   defaultSprite: {fileID: 21300000, guid: 5cf653c126459a046b8e4c2b07135472, type: 3}
   happySprite: {fileID: 21300000, guid: 4088168e32151394b8766079952945fc, type: 3}
-  embarrassedSprite: {fileID: 21300000, guid: 86be4492c39b0d54083449e8ff4a2615, type: 3}
-  selectedExpression: 0
+  embarrassedSprite: {fileID: 21300000, guid: 82bed3154b110b4468995e1bed1bb386, type: 3}
+  selectedExpression: 3
   selectedTextKey: maid_belphegor_partner_intro
   selectedText: Yaaawn... Thanks for calling me... If this is a course where we sit
     and rest then I am confident...
-  giftExpression: 0
+  giftExpression: 1
   giftTextKey: maid_belphegor_partner_gift
   giftText: I brought... a gift... It might have a little luck stuck to it...
-  maxSkillGiftExpression: 0
+  maxSkillGiftExpression: 1
   maxSkillGiftTextKey: maid_belphegor_partner_extra_gift
   maxSkillGiftText: Mnya... There was one more... The more you have the better the
     odds get...
-  farewellExpression: 0
+  farewellExpression: 2
   farewellTextKey: maid_belphegor_partner_finish
   farewellText: Today was nice and comfortable... Let us come rest together again
     next time...

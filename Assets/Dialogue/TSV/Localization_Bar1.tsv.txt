@@ -1,0 +1,20 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_lucifer	루시퍼	Lucifer
+lucifer_affinity_01_001_body	셰리 씨... 오늘은 꼭 보여드리고 싶은 것이 있습니다...	Sherry... There is something I really want to show you today...
+lucifer_affinity_01_002_body	그 말, 기대해도 되는 쪽이야?	Is that something I am allowed to look forward to?
+lucifer_affinity_01_003_body	구해주신 은혜를 갚고 싶어서... 신메뉴를 만들었습니다...	I wanted to repay you for saving me... so I made a new menu item...
+lucifer_affinity_01_004_body	이름은... 데빌스 컷입니다... 셰리 씨의 사무소 이름을 따서...	Its name is... Devil's Cut... Taken from the name of your office...
+lucifer_affinity_01_005_body	와아! 사무소 이름이 칵테일이 되었습니다! 멋집니다!	Wow! The office name became a cocktail! That is wonderful!
+lucifer_affinity_01_006_body	솔직히 말하면 이런 거 하나쯤 갖는 게 소원이긴 했어.	To be honest, having one of these was kind of a dream of mine.
+lucifer_affinity_01_007_body	어느 네온 도시에서는... 전설이 된 사람들의 이름을 칵테일로 남긴다고 들어서...	I heard that in a certain neon city... they preserve the names of legends as cocktails...
+lucifer_affinity_01_008_body	잠깐. 그거 보통 죽고 나서 붙는 거 아니야?	Hold on. Is that not usually something that happens after you die?
+lucifer_affinity_01_009_body	죄... 죄송합니다! 제가 제대로 알아보지 않은 탓에...	I... I am sorry! This is because I failed to research it properly...
+lucifer_affinity_01_010_body	그럼 메뉴판에서 빼겠습니다... 아니, 메뉴판도 저처럼 사라지는 편이...	Then I will remove it from the menu... No, perhaps the menu itself should disappear like me...
+lucifer_affinity_01_011_body	진정해. 일단 맛은 보자고.	Calm down. Let me taste it first.
+lucifer_affinity_01_012_body	도수는 제법 있는데 목 넘김은 부드럽네. 끝에 남는 쓴맛도 나쁘지 않아.	It has a decent kick, but it goes down smoothly. The bitterness at the end is not bad either.
+lucifer_affinity_01_013_body	그, 그럼 계속 메뉴에 올려도 괜찮을까요...?	Th-then may I keep it on the menu...?
+lucifer_affinity_01_014_body	그래. 누가 이거 마시고 이름을 기억하면, 다음 의뢰가 우리 사무소로 올지도 모르잖아.	Sure. If someone drinks this and remembers the name, their next job might come to our office.
+lucifer_affinity_01_015_body	슬러프의 시설 랭크가 상승했다!	Slough's facility rank has increased!

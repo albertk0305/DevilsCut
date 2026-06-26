@@ -120,19 +120,19 @@ MonoBehaviour:
   unlockedSupporters: []
   supporterChoiceRecords:
   - supporterID: asmodeus
-    state: 0
+    state: 1
   - supporterID: lucifer
-    state: 0
+    state: 1
   - supporterID: baalzebub
-    state: 0
+    state: 1
   - supporterID: belphegor
-    state: 0
+    state: 1
   - supporterID: mammon
-    state: 0
+    state: 1
   - supporterID: satan
-    state: 0
+    state: 1
   - supporterID: leviathan
-    state: 0
+    state: 1
   activeSupporter: {fileID: 0}
   supporterDatabase: {fileID: 11400000, guid: 51dd2413502c8f641a2cacd0d2de3478, type: 2}
   ownedKarinItems:

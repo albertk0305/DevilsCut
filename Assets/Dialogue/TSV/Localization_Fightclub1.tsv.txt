@@ -1,0 +1,17 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_satan	사탄	Satan
+satan_affinity_01_001_body	셰리! 오늘은 언체인에 전해 내려오는 비기를 전수한다 해!	Sherry! Today I will teach you the secret technique passed down through Unchain!
+satan_affinity_01_002_body	비기라. 한 번 믿어볼까.	A secret technique. Maybe I will give it a chance.
+satan_affinity_01_003_body	먼저 자세다. 어깨는 이렇게 펴고, 허리는 이렇게 세우면 된다 해!	First is your stance. Open your shoulders like this and straighten your waist like this!
+satan_affinity_01_004_body	방금 터치는 필수적인 부분이야?	Was that touch really necessary?
+satan_affinity_01_005_body	당연하다 해! 이 비기는 몸으로 익혀야 한다!	Of course it was! This secret technique must be learned with the body!
+satan_affinity_01_006_body	신체 접촉이 필요 이상으로 많습니다.	There is more physical contact than necessary.
+satan_affinity_01_007_body	필요한 접촉이다 해! 셰리한테만 전수하는 특별 비기다!	It is necessary contact! This is a special technique I only teach to Sherry!
+satan_affinity_01_008_body	신기하네. 확실히 움직임은 좀 가벼워졌어.	Strange. My movement really does feel a little lighter.
+satan_affinity_01_009_body	봤냐! 효과 확실하다 해!	See! The effect is certain!
+satan_affinity_01_010_body	셰리, 아직 전수할 비기는 많이 남았다 해!	Sherry, there are still many secret techniques left for me to teach you!
+satan_affinity_01_011_body	이거 괜찮은 거겠지...?	This is fine... right?
+satan_affinity_01_012_body	언체인의 시설 랭크가 상승했다!	Unchain's facility rank has increased!

@@ -1,0 +1,31 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+uriel_post_001	narration					speaker_narration	uriel_post_001_body			Police	Key		FALSE	FALSE	FALSE								
+uriel_post_002	uriel	sherry	uriel	easy	disappointed	speaker_uriel	uriel_post_002_body						FALSE	FALSE	FALSE								
+uriel_post_003	sherry	sherry	uriel	mock	disappointed	speaker_sherry	uriel_post_003_body						FALSE	FALSE	FALSE								
+uriel_post_004	uriel	sherry	uriel	mock	cool	speaker_uriel	uriel_post_004_body						FALSE	FALSE	FALSE								
+uriel_post_005	sherry	sherry	uriel	smirk	cool	speaker_sherry	uriel_post_005_body						FALSE	FALSE	FALSE								
+uriel_post_006	uriel	sherry	uriel	smirk	cool	speaker_uriel	uriel_post_006_body						FALSE	FALSE	FALSE								
+uriel_post_007	karin	sherry	karin	easy	amazed	speaker_karin	uriel_post_007_body						FALSE	FALSE	FALSE								
+uriel_post_008	satan	sherry	satan	smile	happy	speaker_satan	uriel_post_008_body						FALSE	FALSE	FALSE								
+uriel_post_009	satan	sherry	satan	smile	excited	speaker_satan	uriel_post_009_body						FALSE	FALSE	FALSE								
+uriel_post_010	sherry	sherry	satan	easy	excited	speaker_sherry	uriel_post_010_body						FALSE	FALSE	FALSE								
+uriel_post_011	karin	sherry	karin	easy	proud	speaker_karin	uriel_post_011_body						FALSE	FALSE	FALSE								
+uriel_post_012	satan	sherry	satan	perplexed	mischievous	speaker_satan	uriel_post_012_body						FALSE	FALSE	FALSE								
+uriel_post_013	satan	sherry	satan	perplexed	happy	speaker_satan	uriel_post_013_body						FALSE	FALSE	FALSE								
+uriel_post_014	karin	karin	satan	persuade	hassle	speaker_karin	uriel_post_014_body						FALSE	FALSE	FALSE								
+uriel_post_015	sherry	sherry	satan	perplexed	disappointed	speaker_sherry	uriel_post_015_body						FALSE	FALSE	FALSE								
+uriel_post_016	satan	sherry	satan	perplexed	excited	speaker_satan	uriel_post_016_body						FALSE	FALSE	FALSE								
+uriel_post_choice_001		sherry	satan				uriel_post_choice_body					uriel_post_choice_001	FALSE	FALSE	TRUE	uriel_post_choice_yes	uriel_post_choice_no	RecruitPendingSupporter	RejectPendingSupporter			uriel_post_yes_001	uriel_post_no_001
+uriel_post_yes_001	sherry	sherry	satan	smile	happy	speaker_sherry	uriel_post_yes_001_body						FALSE	FALSE	FALSE								
+uriel_post_yes_002	satan	sherry	satan	smile	cool	speaker_satan	uriel_post_yes_002_body						FALSE	FALSE	FALSE								
+uriel_post_yes_003	karin	karin	satan	suspicious	cool	speaker_karin	uriel_post_yes_003_body						FALSE	FALSE	FALSE								
+uriel_post_yes_004	satan	karin	satan	suspicious	excited	speaker_satan	uriel_post_yes_004_body						FALSE	FALSE	FALSE								
+uriel_post_yes_005	karin	karin	satan	panic	excited	speaker_karin	uriel_post_yes_005_body						FALSE	FALSE	FALSE								
+uriel_post_yes_006	sherry	sherry	satan	yareyare	excited	speaker_sherry	uriel_post_yes_006_body	LoadNextScene					FALSE	FALSE	FALSE								
+uriel_post_no_001	sherry	sherry	satan	worry	excited	speaker_sherry	uriel_post_no_001_body						FALSE	FALSE	FALSE								
+uriel_post_no_002	satan	sherry	satan	worry	disappointed	speaker_satan	uriel_post_no_002_body						FALSE	FALSE	FALSE								
+uriel_post_no_003	satan	sherry	satan	worry	excited	speaker_satan	uriel_post_no_003_body						FALSE	FALSE	FALSE								
+uriel_post_no_004	karin	karin	satan	smile	excited	speaker_karin	uriel_post_no_004_body						FALSE	FALSE	FALSE								
+uriel_post_no_005	satan	karin	satan	smile	mischievous	speaker_satan	uriel_post_no_005_body						FALSE	FALSE	FALSE								
+uriel_post_no_006	karin	karin	satan	confront	mischievous	speaker_karin	uriel_post_no_006_body						FALSE	FALSE	FALSE								
+uriel_post_no_007	sherry	sherry	satan	yareyare	mischievous	speaker_sherry	uriel_post_no_007_body	LoadNextScene					FALSE	FALSE	FALSE								

@@ -46,8 +46,8 @@ support_lucifer_join,히... 힘내보겠습니다!,I-I will do my best!
 support_mammon_select,"카캇! 내 몸값은 꽤 비싸다구요, 고객님?","Kakak! My price is pretty high, dear customer."
 support_mammon_join,V.I.P.의 부탁이니 이번만 특별 서비스예요!,"Since it is a V.I.P. request, this one is a special service!"
 ,,
-support_satan_select,"셰리 부르면 나, 바로 간다!","If Sherry calls, I come running!"
-support_satan_join,"셰리 옆, 내 자리다!","By Sherry's side, that is my place!"
+support_satan_select,셰리가 부르면 어디든 간다 해! 싸움이든 데이트든 상관없다!,If Sherry calls I go anywhere! Fight or date it does not matter!
+support_satan_join,셰리 옆은 내 자리다. 누구도 못 빼앗는다 해!,The place beside Sherry is mine. No one can take it from me I say!
 ,,
 supporter_passive_fluffy_time,푹신푹신 타임: 전투 종료마다 (10%/15%/25%) 확률로 체력/브레이크 최대치/브레이크 저항/행동력 중 하나의 스탯이 영구적으로 (1/2/3)만큼 상승합니다. 체력은 (91/182/273)만큼 상승합니다,Fuwa Fuwa Time: At the end of each battle there is a (10%/15%/25%) chance to permanently increase one stat from HP/Max Break/Break Resistance/AP by (1/2/3). HP increases by (91/182/273).
 supporter_start_met_an_angel,천사를 만났어: 적의 힘을 (10%/15%/20%)만큼 3턴간 감소시키고 셰리의 스타일 랭크를 한 단계 상승시킵니다,Tenshi ni Fureta yo!: Decreases enemy Strength by (10%/15%/20%) for 3 turns and raises Sherry's Style Rank by 1 level.
@@ -107,7 +107,7 @@ maid_mammon_partner_gift,자 선물이에요! 절대 안 팔리는 재고 처리
 maid_mammon_partner_extra_gift,카캇! 특별 서비스예요! 이런 기회 흔치 않다구요!,Kakak! This is a special service! You do not get chances like this often!
 maid_mammon_partner_finish,오늘 즐거웠어요! 다음에도 초대 부탁해요!,I had fun today! Please invite me again next time!
 ,,
-maid_satan_partner_intro,셰리의 데이트 초대! 나 기쁘다!,A date invitation from Sherry! I am happy!
-maid_satan_partner_gift,셰리! 이거 받으면 나랑 사귀는 거다! 무르기 없다!,Sherry! If you take this then we are dating! No taking it back!
-maid_satan_partner_extra_gift,셰리! 이것도 내 마음이다!,Sherry! This is my heart too!
-maid_satan_partner_finish,셰리! 오늘 즐거웠다! 다음 데이트도 나다! 약속이다!,Sherry! Today was fun! The next date is with me too! Promise!
+maid_satan_partner_intro,셰리의 데이트 초대! 나 지금 엄청 두근거린다 해!,Sherry asked me on a date! My heart is beating like crazy I say!
+maid_satan_partner_gift,셰리! 이거 받으면 나랑 사귀는 거다 해! 무르기 없다!,Sherry! If you accept this you are dating me I say! No taking it back!
+maid_satan_partner_extra_gift,셰리! 이것도 내 마음이다 해!,Sherry! This is my heart too I say!
+maid_satan_partner_finish,셰리! 오늘 즐거웠다! 다음 데이트도 나다 해! 한눈팔면 안 된다!,Sherry! Today was fun! I am your next date too I say! No looking at anyone else!

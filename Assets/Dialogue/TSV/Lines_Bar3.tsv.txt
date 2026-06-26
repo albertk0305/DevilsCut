@@ -1,0 +1,20 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+lucifer_affinity_03_001	karin	sherry	karin	easy	curious	speaker_karin	lucifer_affinity_03_001_body			Bar			FALSE	FALSE	FALSE								
+lucifer_affinity_03_002	sherry	sherry	karin	easy	curious	speaker_sherry	lucifer_affinity_03_002_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_003	karin	sherry	karin	easy	confront	speaker_karin	lucifer_affinity_03_003_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_004	sherry	sherry	karin	perplexed	confront	speaker_sherry	lucifer_affinity_03_004_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_005	lucifer	sherry	lucifer	perplexed	neutral	speaker_lucifer	lucifer_affinity_03_005_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_006	karin	karin	lucifer	happy	neutral	speaker_karin	lucifer_affinity_03_006_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_007	sherry	sherry	lucifer	perplexed	neutral	speaker_sherry	lucifer_affinity_03_007_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_008	karin	sherry	karin	perplexed	drunk	speaker_karin	lucifer_affinity_03_008_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_009	sherry	sherry	karin	shadow	drunk	speaker_sherry	lucifer_affinity_03_009_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_010	lucifer	sherry	lucifer	shadow	nervous	speaker_lucifer	lucifer_affinity_03_010_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_011	sherry	sherry	lucifer	perplexed	nervous	speaker_sherry	lucifer_affinity_03_011_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_012	lucifer	sherry	lucifer	perplexed	surprise	speaker_lucifer	lucifer_affinity_03_012_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_013	karin	sherry	karin	perplexed	drunk	speaker_karin	lucifer_affinity_03_013_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_014	sherry	sherry	karin	awkward	drunk	speaker_sherry	lucifer_affinity_03_014_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_015	karin	sherry	karin	awkward	drunk	speaker_karin	lucifer_affinity_03_015_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_016	sherry	sherry	karin	perplexed	drunk	speaker_sherry	lucifer_affinity_03_016_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_017	lucifer	sherry	lucifer	perplexed	surprise	speaker_lucifer	lucifer_affinity_03_017_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_018	karin	sherry	karin	perplexed	drunk	speaker_karin	lucifer_affinity_03_018_body						FALSE	FALSE	FALSE								
+lucifer_affinity_03_019	narration					speaker_narration	lucifer_affinity_03_019_body	UpgradePendingFacilityRank					FALSE	FALSE	FALSE								

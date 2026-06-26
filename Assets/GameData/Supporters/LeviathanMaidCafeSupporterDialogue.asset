@@ -13,22 +13,22 @@ MonoBehaviour:
   m_Name: LeviathanMaidCafeSupporterDialogue
   m_EditorClassIdentifier: Assembly-CSharp::MaidCafeSupporterDialogueData
   supporter: {fileID: 11400000, guid: 393f560ec2c52ed45bbb5f5324003c40, type: 2}
-  defaultSprite: {fileID: 21300000, guid: ef12907a59b06424b8bacdcbcd229534, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 02de2da66a5ac0e4b862b00770b82e0e, type: 3}
   happySprite: {fileID: 21300000, guid: 856ee14d7696f0846a2e0ba058841b34, type: 3}
-  embarrassedSprite: {fileID: 21300000, guid: bbc69a4dd2be85c488c2f72ebae1ead7, type: 3}
-  selectedExpression: 0
+  embarrassedSprite: {fileID: 21300000, guid: 9d3e4072bcdbcd04c9cc98f2e47088f8, type: 3}
+  selectedExpression: 1
   selectedTextKey: maid_leviathan_partner_intro
   selectedText: Lady Sherry is this close... My heart will not stop racing... Leviathan
     is so happy right now...
-  giftExpression: 0
+  giftExpression: 2
   giftTextKey: maid_leviathan_partner_gift
   giftText: I prepared this while thinking of you Lady Sherry... If you accept it
     Leviathan will be happy with that alone...
-  maxSkillGiftExpression: 0
+  maxSkillGiftExpression: 2
   maxSkillGiftTextKey: maid_leviathan_partner_extra_gift
   maxSkillGiftText: There is one more... Leviathan's feelings for Lady Sherry simply
     will not stop...
-  farewellExpression: 0
+  farewellExpression: 3
   farewellTextKey: maid_leviathan_partner_finish
   farewellText: Today was the greatest gift Leviathan could ask for... Could we be
     together again next time...?

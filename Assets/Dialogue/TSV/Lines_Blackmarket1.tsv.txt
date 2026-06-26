@@ -1,0 +1,20 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+mammon_affinity_01_001	mammon	sherry	mammon	smile	happy	speaker_mammon	mammon_affinity_01_001_body			BlackMarket			FALSE	FALSE	FALSE								
+mammon_affinity_01_002	sherry	sherry	mammon	smug	happy	speaker_sherry	mammon_affinity_01_002_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_003	mammon	sherry	mammon	smug	smile	speaker_mammon	mammon_affinity_01_003_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_004	sherry	sherry	mammon	curious	smile	speaker_sherry	mammon_affinity_01_004_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_005	mammon	sherry	mammon	curious	happy	speaker_mammon	mammon_affinity_01_005_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_006	sherry	sherry	mammon	awkward	happy	speaker_sherry	mammon_affinity_01_006_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_007	mammon	sherry	mammon	awkward	smile	speaker_mammon	mammon_affinity_01_007_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_008	sherry	sherry	mammon	perplexed	smile	speaker_sherry	mammon_affinity_01_008_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_009	mammon	sherry	mammon	perplexed	giggling	speaker_mammon	mammon_affinity_01_009_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_010	karin	karin	mammon	smile	giggling	speaker_karin	mammon_affinity_01_010_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_011	mammon	karin	mammon	smile	smile	speaker_mammon	mammon_affinity_01_011_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_012	karin	karin	mammon	amazed	smile	speaker_karin	mammon_affinity_01_012_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_013	sherry	sherry	mammon	hassle	smile	speaker_sherry	mammon_affinity_01_013_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_014	mammon	sherry	mammon	hassle	happy	speaker_mammon	mammon_affinity_01_014_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_015	sherry	sherry	mammon	smug	happy	speaker_sherry	mammon_affinity_01_015_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_016	mammon	sherry	mammon	smug	giggling	speaker_mammon	mammon_affinity_01_016_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_017	mammon	sherry	mammon	perplexed	happy	speaker_mammon	mammon_affinity_01_017_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_018	sherry	sherry	mammon	perplexed	happy	speaker_sherry	mammon_affinity_01_018_body						FALSE	FALSE	FALSE								
+mammon_affinity_01_019	narration					speaker_narration	mammon_affinity_01_019_body	UpgradePendingFacilityRank					FALSE	FALSE	FALSE								

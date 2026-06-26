@@ -1,0 +1,23 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_satan	사탄	Satan
+satan_affinity_03_001_body	셰리! 오늘 훈련 끝나면 나랑 데이트 간다 해!	Sherry! When training ends today, you are going on a date with me!
+satan_affinity_03_002_body	미안, 오늘은 피곤해서.	Sorry, I am tired today.
+satan_affinity_03_003_body	그럼 내일 간다 해!	Then we go tomorrow!
+satan_affinity_03_004_body	내일은 좀 바쁜데.	Tomorrow is kind of busy.
+satan_affinity_03_005_body	그럼 모레다!	Then the day after tomorrow!
+satan_affinity_03_006_body	모레는 세상이 어떻게 될지 모르지.	Who knows what the world will look like by then.
+satan_affinity_03_007_body	역시...	I knew it...
+satan_affinity_03_008_body	......?	......?
+satan_affinity_03_009_body	역시... 셰리... 나랑 데이트하기 싫은 거다 해...	I knew it... Sherry... You do not want to date me...
+satan_affinity_03_010_body	아니, 잠깐. 잠깐만. 그렇게 울면 내가 나쁜 사람이 되잖아.	No, wait. Hold on. If you cry like that, I look like the bad one.
+satan_affinity_03_011_body	흐에에엥...	Waaah...
+satan_affinity_03_012_body	울지 마. 알았어. 내일 일정이 일찍 끝나면... 잠깐 정도는 같이 가줄게. 딱 잠깐이야.	Do not cry. Fine. If my schedule ends early tomorrow... I can go with you for a little while. Just a little.
+satan_affinity_03_013_body	정말이냐 해...?	Really...?
+satan_affinity_03_014_body	그래. 네가 가고 싶은 곳으로 가자.	Yes. Let us go wherever you want.
+satan_affinity_03_015_body	좋다 해! 코스는 이미 정했다! 여기도 가고 싶고, 저기도 가고 싶고... 아, 이것도 같이 먹어보고 싶다 해!	Good! I already decided the route! I want to go here, and there... Ah, I want to try eating this with you too!
+satan_affinity_03_016_body	셰리! 눈물에 약한 것으로 보입니다!	Sherry! You appear to be weak against tears!
+satan_affinity_03_017_body	여자의 눈물은 총알보다 빠르네. 피할 틈도 없었어.	A woman's tears are faster than bullets. I did not even have time to dodge.
+satan_affinity_03_018_body	언체인의 시설 랭크가 상승했다!	Unchain's facility rank has increased!

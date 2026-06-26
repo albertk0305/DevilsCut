@@ -1,0 +1,18 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+satan_affinity_02_001	satan	sherry	satan	smile	happy	speaker_satan	satan_affinity_02_001_body			Gym			FALSE	FALSE	FALSE								
+satan_affinity_02_002	sherry	sherry	satan	perplexed	happy	speaker_sherry	satan_affinity_02_002_body						FALSE	FALSE	FALSE								
+satan_affinity_02_003	satan	sherry	satan	perplexed	excited	speaker_satan	satan_affinity_02_003_body						FALSE	FALSE	FALSE								
+satan_affinity_02_004	karin	karin	satan	suspicious	excited	speaker_karin	satan_affinity_02_004_body						FALSE	FALSE	FALSE								
+satan_affinity_02_005	satan	karin	satan	suspicious	nervous	speaker_satan	satan_affinity_02_005_body						FALSE	FALSE	FALSE								
+satan_affinity_02_006	sherry	sherry	satan	awkward	nervous	speaker_sherry	satan_affinity_02_006_body						FALSE	FALSE	FALSE								
+satan_affinity_02_007	sherry	sherry	satan	shadow	nervous	speaker_sherry	satan_affinity_02_007_body						FALSE	FALSE	FALSE								
+satan_affinity_02_008	satan	sherry	satan	shadow	happy	speaker_satan	satan_affinity_02_008_body						FALSE	FALSE	FALSE								
+satan_affinity_02_009	sherry	sherry	satan	curious	happy	speaker_sherry	satan_affinity_02_009_body						FALSE	FALSE	FALSE								
+satan_affinity_02_010	satan	sherry	satan	curious	panic	speaker_satan	satan_affinity_02_010_body						FALSE	FALSE	FALSE								
+satan_affinity_02_011	sherry	sherry	satan	perplexed	panic	speaker_sherry	satan_affinity_02_011_body						FALSE	FALSE	FALSE								
+satan_affinity_02_012	satan	sherry	satan	perplexed	nervous	speaker_satan	satan_affinity_02_012_body						FALSE	FALSE	FALSE								
+satan_affinity_02_013	karin	karin	satan	confront	nervous	speaker_karin	satan_affinity_02_013_body						FALSE	FALSE	FALSE								
+satan_affinity_02_014	sherry	sherry	satan	mock	nervous	speaker_sherry	satan_affinity_02_014_body						FALSE	FALSE	FALSE								
+satan_affinity_02_015	satan	sherry	satan	mock	happy	speaker_satan	satan_affinity_02_015_body						FALSE	FALSE	FALSE								
+satan_affinity_02_016	sherry	sherry	satan	wink	happy	speaker_sherry	satan_affinity_02_016_body						FALSE	FALSE	FALSE								
+satan_affinity_02_017	narration					speaker_narration	satan_affinity_02_017_body	UpgradePendingFacilityRank					FALSE	FALSE	FALSE								

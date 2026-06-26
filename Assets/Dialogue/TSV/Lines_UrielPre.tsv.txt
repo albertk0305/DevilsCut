@@ -17,4 +17,4 @@ uriel_pre_015	uriel	sherry	uriel	smirk	serious	speaker_uriel	uriel_pre_015_body	
 uriel_pre_016	sherry	sherry	uriel	easy	serious	speaker_sherry	uriel_pre_016_body						FALSE	FALSE	FALSE								
 uriel_pre_017	uriel	sherry	uriel	easy	speak	speaker_uriel	uriel_pre_017_body						FALSE	FALSE	FALSE								
 uriel_pre_018	sherry	sherry	uriel	mock	speak	speaker_sherry	uriel_pre_018_body						FALSE	FALSE	FALSE								
-uriel_pre_019	uriel	sherry	uriel	mock	serious	speaker_uriel	uriel_pre_019_body	LoadNextScene					FALSE	FALSE	FALSE								
+uriel_pre_019	uriel	sherry	uriel	mock	cool	speaker_uriel	uriel_pre_019_body	LoadNextScene					FALSE	FALSE	FALSE								
