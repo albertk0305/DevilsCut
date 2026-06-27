@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 56fb9533f1e6c2d42a35a245842a2d99
+guid: a9f568748297e4e4bb9d101455f59a5d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3140967490047306488
-    second: LeviYan2_0
+      213: -3790214840061892714
+    second: LeviNeutral_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LeviYan2_0
+      name: LeviNeutral_0
       rect:
         serializedVersion: 2
-        x: 186
+        x: 0
         y: 0
-        width: 660
-        height: 1005
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8fae1576a45f69b20800000000000000
-      internalID: 3140967490047306488
+      spriteID: 69762b33fa3766bc0800000000000000
+      internalID: -3790214840061892714
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LeviYan2_0: 3140967490047306488
+      LeviNeutral_0: -3790214840061892714
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

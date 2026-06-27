@@ -1,0 +1,30 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+leviathan_affinity_02_001	narration					speaker_narration	leviathan_affinity_02_001_body			Idol			FALSE	FALSE	FALSE								
+leviathan_affinity_02_002	leviathan	karin	leviathan	default	neutral	speaker_leviathan	leviathan_affinity_02_002_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_003	karin	karin	leviathan	happy	neutral	speaker_karin	leviathan_affinity_02_003_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_004	leviathan	karin	leviathan	happy	smile	speaker_leviathan	leviathan_affinity_02_004_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_005	karin	karin	leviathan	smile	smile	speaker_karin	leviathan_affinity_02_005_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_006	leviathan	karin	leviathan	smile	love	speaker_leviathan	leviathan_affinity_02_006_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_007	karin	karin	leviathan	default	love	speaker_karin	leviathan_affinity_02_007_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_008	leviathan	leviathan	leviathan	default	love2	speaker_leviathan	leviathan_affinity_02_008_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_009	karin	karin	leviathan	smile	love2	speaker_karin	leviathan_affinity_02_009_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_010	leviathan	leviathan	leviathan	smile	love3	speaker_leviathan	leviathan_affinity_02_010_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_011	leviathan	leviathan	leviathan	smile	love3	speaker_leviathan	leviathan_affinity_02_011_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_012	sherry	sherry	leviathan	smile	love3	speaker_sherry	leviathan_affinity_02_012_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_013	leviathan	sherry	leviathan	smile	embarassed	speaker_leviathan	leviathan_affinity_02_013_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_014	sherry	sherry	leviathan	curious	embarassed	speaker_sherry	leviathan_affinity_02_014_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_015	leviathan	sherry	leviathan	curious	embarassed	speaker_leviathan	leviathan_affinity_02_015_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_016	karin	sherry	karin	curious	smile	speaker_karin	leviathan_affinity_02_016_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_017	sherry	sherry	karin	perplexed	smile	speaker_sherry	leviathan_affinity_02_017_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_018	leviathan	sherry	leviathan	perplexed	sad	speaker_leviathan	leviathan_affinity_02_018_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_019	leviathan	sherry	leviathan	perplexed	cry	speaker_leviathan	leviathan_affinity_02_019_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_020	sherry	sherry	leviathan	smile	cry	speaker_sherry	leviathan_affinity_02_020_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_021	leviathan	sherry	leviathan	smile	cry	speaker_leviathan	leviathan_affinity_02_021_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_022	sherry	sherry	leviathan	soft	cry	speaker_sherry	leviathan_affinity_02_022_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_023	leviathan	sherry	leviathan	soft	sad	speaker_leviathan	leviathan_affinity_02_023_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_024	sherry	sherry	leviathan	smile	sad	speaker_sherry	leviathan_affinity_02_024_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_025	leviathan	sherry	leviathan	smile	embarassed	speaker_leviathan	leviathan_affinity_02_025_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_026	sherry	sherry	leviathan	nervous	embarassed	speaker_sherry	leviathan_affinity_02_026_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_027	karin	sherry	karin	nervous	happy	speaker_karin	leviathan_affinity_02_027_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_028	sherry	sherry	karin	embarassed	happy	speaker_sherry	leviathan_affinity_02_028_body						FALSE	FALSE	FALSE								
+leviathan_affinity_02_029	narration					speaker_narration	leviathan_affinity_02_029_body	UpgradePendingFacilityRank					FALSE	FALSE	FALSE								

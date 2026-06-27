@@ -1,0 +1,27 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_belphegor	벨페고르	Belphegor
+belphegor_affinity_02_001_body	벨페고르 씨. 슬롯을 돌리고 계십니까?	Ms. Belphegor. Are you playing the slots?
+belphegor_affinity_02_002_body	응... 생활비가 떨어져서...	Yeah... I ran out of living expenses...
+belphegor_affinity_02_003_body	생활비를 카지노에서 마련한다는 발상부터 꽤 위험한데.	The idea of earning living expenses at a casino is already pretty dangerous.
+belphegor_affinity_02_004_body	슬롯머신의 구조를 분석했습니다. 장기적으로 수익을 얻을 확률은 낮습니다.	I analyzed the structure of slot machines. The chance of earning profit in the long term is low.
+belphegor_affinity_02_005_body	음냐... 잘 봐... 성실하게 사는 건 어렵지만, 레버를 당기는 건 쉽거든...	Mnya... Watch closely... Living honestly is hard, but pulling a lever is easy...
+belphegor_affinity_02_006_body	꼬맹아. 저런 어른이 되면 안 돼.	Kid. Do not grow up to be that kind of adult.
+belphegor_affinity_02_007_body	벨페고르가 느릿하게 레버를 당겼다.	Belphegor slowly pulled the lever.
+belphegor_affinity_02_008_body	소액 당첨입니다.	It is a small win.
+belphegor_affinity_02_009_body	응... 간식비...	Yeah... snack money...
+belphegor_affinity_02_010_body	벨페고르가 다시 레버를 당겼다.	Belphegor pulled the lever again.
+belphegor_affinity_02_011_body	또 당첨입니다.	Another win.
+belphegor_affinity_02_012_body	저 정도면 진짜 저걸로 먹고살 수 있겠는데.	At that rate, she really could make a living from that.
+belphegor_affinity_02_013_body	응... 저녁값...	Yeah... dinner money...
+belphegor_affinity_02_014_body	화려한 불빛과 함께 슬롯머신이 요란한 소리를 냈다.	The slot machine made a loud noise with a burst of brilliant lights.
+belphegor_affinity_02_015_body	잭팟입니다...!	It is a jackpot...!
+belphegor_affinity_02_016_body	어이, 거짓말이지...?	Hey, you are kidding, right...?
+belphegor_affinity_02_017_body	음냐... 이번 달은 걱정 없겠네...	Mnya... This month is covered...
+belphegor_affinity_02_018_body	이해할 수 없습니다. 이 결과는 수학적으로 설명하기 어렵습니다.	I cannot understand this. This result is difficult to explain mathematically.
+belphegor_affinity_02_019_body	확률적으로는... 셰리가 술을 끊을 확률과 비슷합니다.	Statistically... it is similar to the chance of Sherry quitting alcohol.
+belphegor_affinity_02_020_body	그건 확률 문제가 아니라 내 캐릭터성의 붕괴야.	That is not a probability issue. That is the collapse of my character identity.
+belphegor_affinity_02_021_body	음냐... 그럼 잭팟 쪽이 더 현실적이네...	Mnya... Then the jackpot is more realistic...
+belphegor_affinity_02_022_body	카지노의 시설 랭크가 상승했다!	The casino's facility rank has increased!

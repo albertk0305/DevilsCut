@@ -132,6 +132,15 @@ MonoBehaviour:
   - actorID: karin
     expressionID: drunk
     portraitSprite: {fileID: 21300000, guid: 0ffbc644c3d6ee44cb922f9239bc792c, type: 3}
+  - actorID: karin
+    expressionID: default
+    portraitSprite: {fileID: 21300000, guid: 5495409932e0ce64db58fd26722c1481, type: 3}
+  - actorID: karin
+    expressionID: aha
+    portraitSprite: {fileID: 21300000, guid: 2a6d724fa7170bc47af0e97717c02d77, type: 3}
+  - actorID: karin
+    expressionID: remember
+    portraitSprite: {fileID: 21300000, guid: 5d52e3cf0fd6cf548bd22740077c8870, type: 3}
   - actorID: sherry
     expressionID: mock
     portraitSprite: {fileID: 21300000, guid: 4a3f583516dce03478d1edabcf81fe88, type: 3}
@@ -192,6 +201,24 @@ MonoBehaviour:
   - actorID: sherry
     expressionID: smug
     portraitSprite: {fileID: 21300000, guid: f57c03547ed720f47aad75e395321c28, type: 3}
+  - actorID: sherry
+    expressionID: nervous
+    portraitSprite: {fileID: 21300000, guid: 8a6da487ee75d8c4fab864b49532a198, type: 3}
+  - actorID: sherry
+    expressionID: embarassed
+    portraitSprite: {fileID: 21300000, guid: 340124d07fbfd7845ab08e97e5069fbd, type: 3}
+  - actorID: sherry
+    expressionID: soft
+    portraitSprite: {fileID: 21300000, guid: c08ad0e4fa7996e4c92bfe7a6d083c96, type: 3}
+  - actorID: sherry
+    expressionID: confront
+    portraitSprite: {fileID: 21300000, guid: 29fcb8c80957e054b9c703b62a69fb9d, type: 3}
+  - actorID: sherry
+    expressionID: panic
+    portraitSprite: {fileID: 21300000, guid: 73f5e332d85385248b6750c86d677e2e, type: 3}
+  - actorID: sherry
+    expressionID: greasy
+    portraitSprite: {fileID: 21300000, guid: c5c2a1fff177c7541af2c3575516bb98, type: 3}
   - actorID: asmodeus
     expressionID: bored
     portraitSprite: {fileID: 21300000, guid: 8be49b6042000764684285d551a5e4f1, type: 3}
@@ -309,6 +336,36 @@ MonoBehaviour:
   - actorID: leviathan
     expressionID: love3
     portraitSprite: {fileID: 21300000, guid: 02de2da66a5ac0e4b862b00770b82e0e, type: 3}
+  - actorID: leviathan
+    expressionID: neutral
+    portraitSprite: {fileID: 21300000, guid: a9f568748297e4e4bb9d101455f59a5d, type: 3}
+  - actorID: leviathan
+    expressionID: yanNeutral
+    portraitSprite: {fileID: 21300000, guid: 1de85a1438bc3674bb09be23a479f603, type: 3}
+  - actorID: leviathan
+    expressionID: yanJealous
+    portraitSprite: {fileID: 21300000, guid: e63389c8a08fa434d8c910c82ac286bc, type: 3}
+  - actorID: leviathan
+    expressionID: yanSerious
+    portraitSprite: {fileID: 21300000, guid: 41e060a637a92a94f8adfd3f9fb0ee04, type: 3}
+  - actorID: leviathan
+    expressionID: yanShock
+    portraitSprite: {fileID: 21300000, guid: 263f0a8ad1224c24191b0ab7ebd4cffa, type: 3}
+  - actorID: leviathan
+    expressionID: yanSmile
+    portraitSprite: {fileID: 21300000, guid: d78e47281abfa2d42aae1edd1c45693f, type: 3}
+  - actorID: leviathan
+    expressionID: embarassed
+    portraitSprite: {fileID: 21300000, guid: bbc69a4dd2be85c488c2f72ebae1ead7, type: 3}
+  - actorID: leviathan
+    expressionID: sad
+    portraitSprite: {fileID: 21300000, guid: de4c065c319156f44968b8e5382250b7, type: 3}
+  - actorID: leviathan
+    expressionID: cry
+    portraitSprite: {fileID: 21300000, guid: d49d30243acace74991f6290479c55b8, type: 3}
+  - actorID: leviathan
+    expressionID: yanCry
+    portraitSprite: {fileID: 21300000, guid: 3e6dc5576e57d47479d1d17c3d49e26c, type: 3}
   - actorID: raguel
     expressionID: neutral
     portraitSprite: {fileID: 21300000, guid: e2408fe9b1c57ab42853a3c519163ef7, type: 3}
@@ -339,6 +396,9 @@ MonoBehaviour:
   - actorID: baalzebub
     expressionID: disappointed
     portraitSprite: {fileID: 21300000, guid: cac059d3a2e16474d844c05ede64ca91, type: 3}
+  - actorID: baalzebub
+    expressionID: panic
+    portraitSprite: {fileID: 21300000, guid: 218701bfe1a762a4da7949fd859f24ae, type: 3}
   - actorID: raphael
     expressionID: strict
     portraitSprite: {fileID: 21300000, guid: 4c4560c5b87b0c240a88a329b5c00d07, type: 3}

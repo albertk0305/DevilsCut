@@ -1,0 +1,18 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_belphegor	벨페고르	Belphegor
+belphegor_affinity_01_001_body	셰리. 질문이 있습니다.	Sherry. I have a question.
+belphegor_affinity_01_002_body	또 꼬맹이 머릿속에서 물음표가 굴러다니나 보네.	Looks like question marks are rolling around in that little head of yours again.
+belphegor_affinity_01_003_body	도박은 확률적으로 손해가 발생하기 쉬운 구조입니다. 그런데 왜 사람들은 자발적으로 참여합니까?	Gambling is structured so that losses are statistically likely. Then why do people participate voluntarily?
+belphegor_affinity_01_004_body	꿈을 사는 거지. 당첨되면 돈이 되고, 빗나가면 수업료가 돼.	They are buying a dream. If it hits, it becomes money. If it misses, it becomes tuition.
+belphegor_affinity_01_005_body	꿈은 돈으로 살 수 있는 겁니까?	Can dreams be bought with money?
+belphegor_affinity_01_006_body	카지노에서는 그렇게 믿게 만들지.	Casinos make you believe they can.
+belphegor_affinity_01_007_body	음냐... 일해서 버는 돈은 피곤하잖아... 레버 한 번으로 버는 돈은 가볍고...	Mnya... Money earned by working is tiring... Money earned with one pull of a lever feels light...
+belphegor_affinity_01_008_body	글러먹은 어른의 완성형이네.	You are the perfected form of a hopeless adult.
+belphegor_affinity_01_009_body	세상은 너무 부지런하니까... 나 하나쯤은 느려도 괜찮아...	The world is too diligent... So it is fine if one person like me is slow...
+belphegor_affinity_01_010_body	도박은 결과보다 결과가 나오기 전의 기대감을 소비하는 행위입니까?	Is gambling an act of consuming anticipation before the result more than the result itself?
+belphegor_affinity_01_011_body	정확해. 무서운 건 대부분 그걸 알면서도 한다는 거야.	Exactly. The scary part is that most people know that and still do it.
+belphegor_affinity_01_012_body	음냐... 기대감은 가볍고 따뜻하거든... 잃기 전까지는 내 거야...	Mnya... Anticipation is light and warm... Until I lose it, it is mine...
+belphegor_affinity_01_013_body	카지노의 시설 랭크가 상승했다!	The casino's facility rank has increased!

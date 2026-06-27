@@ -1,0 +1,39 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+leviathan_affinity_03_001	leviathan	sherry	leviathan	smile	neutral	speaker_leviathan	leviathan_affinity_03_001_body			Idol			FALSE	FALSE	FALSE								
+leviathan_affinity_03_002	sherry	sherry	leviathan	worry	neutral	speaker_sherry	leviathan_affinity_03_002_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_003	leviathan	sherry	leviathan	worry	yanNeutral	speaker_leviathan	leviathan_affinity_03_003_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_004	leviathan	sherry	leviathan	worry	yanJealous	speaker_leviathan	leviathan_affinity_03_004_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_005	sherry	sherry	leviathan	confront	yanJealous	speaker_sherry	leviathan_affinity_03_005_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_006	leviathan	sherry	leviathan	confront	yanCry	speaker_leviathan	leviathan_affinity_03_006_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_007	leviathan	sherry	leviathan	confront	yanCry	speaker_leviathan	leviathan_affinity_03_007_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_008	sherry	sherry	leviathan	panic	yanCry	speaker_sherry	leviathan_affinity_03_008_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_009	karin	sherry	karin	panic	default	speaker_karin	leviathan_affinity_03_009_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_010	sherry	sherry	karin	yareyare	default	speaker_sherry	leviathan_affinity_03_010_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_011	karin	sherry	karin	yareyare	aha	speaker_karin	leviathan_affinity_03_011_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_012	leviathan	sherry	leviathan	yareyare	yanShock	speaker_leviathan	leviathan_affinity_03_012_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_013	sherry	sherry	leviathan	confront	yanShock	speaker_sherry	leviathan_affinity_03_013_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_014	karin	sherry	karin	confront	remember	speaker_karin	leviathan_affinity_03_014_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_015	leviathan	sherry	leviathan	confront	yanSmile	speaker_leviathan	leviathan_affinity_03_015_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_016	leviathan	sherry	leviathan	confront	yanSmile	speaker_leviathan	leviathan_affinity_03_016_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_017	leviathan	sherry	leviathan	confront	yanSerious	speaker_leviathan	leviathan_affinity_03_017_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_018	leviathan	sherry	leviathan	confront	yanNeutral	speaker_leviathan	leviathan_affinity_03_018_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_019	leviathan	sherry	leviathan	confront	yanJealous	speaker_leviathan	leviathan_affinity_03_019_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_020	sherry	sherry	leviathan	panic	yanJealous	speaker_sherry	leviathan_affinity_03_020_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_021	karin	sherry	karin	panic	desperate	speaker_karin	leviathan_affinity_03_021_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_022	karin	sherry	karin	panic	desperate	speaker_karin	leviathan_affinity_03_022_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_023	karin	sherry	karin	panic	persuade	speaker_karin	leviathan_affinity_03_023_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_024	karin	sherry	karin	panic	persuade	speaker_karin	leviathan_affinity_03_024_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_025	karin	sherry	karin	panic	persuade	speaker_karin	leviathan_affinity_03_025_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_026	sherry	sherry	karin	yareyare	persuade	speaker_sherry	leviathan_affinity_03_026_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_027	leviathan	sherry	leviathan	yareyare	sad	speaker_leviathan	leviathan_affinity_03_027_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_028	leviathan	sherry	leviathan	yareyare	cry	speaker_leviathan	leviathan_affinity_03_028_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_029	sherry	sherry	leviathan	perplexed	cry	speaker_sherry	leviathan_affinity_03_029_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_030	leviathan	sherry	leviathan	perplexed	sad	speaker_leviathan	leviathan_affinity_03_030_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_031	sherry	sherry	leviathan	soft	sad	speaker_sherry	leviathan_affinity_03_031_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_032	leviathan	sherry	leviathan	soft	neutral	speaker_leviathan	leviathan_affinity_03_032_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_033	leviathan	sherry	leviathan	soft	love3	speaker_leviathan	leviathan_affinity_03_033_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_034	sherry	sherry	leviathan	awkward	love3	speaker_sherry	leviathan_affinity_03_034_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_035	leviathan	sherry	leviathan	awkward	love2	speaker_leviathan	leviathan_affinity_03_035_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_036	leviathan	sherry	leviathan	awkward	love2	speaker_leviathan	leviathan_affinity_03_036_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_037	sherry	sherry	leviathan	perplexed	love2	speaker_sherry	leviathan_affinity_03_037_body						FALSE	FALSE	FALSE								
+leviathan_affinity_03_038	narration					speaker_narration	leviathan_affinity_03_038_body	UpgradePendingFacilityRank					FALSE	FALSE	FALSE								

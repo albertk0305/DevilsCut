@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: db1f4e2f9a4dcb3409de38939f51aae2
+guid: e63389c8a08fa434d8c910c82ac286bc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2918810156955799622
-    second: LeviYan1_0
+      213: -6428029071158788759
+    second: LeviYanJealous_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,17 +109,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LeviYan1_0
+      name: LeviYanJealous_0
       rect:
         serializedVersion: 2
-        x: 133
+        x: 0
         y: 0
-        width: 766
-        height: 1005
+        width: 1024
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: abfe8d370ad4e77d0800000000000000
-      internalID: -2918810156955799622
+      spriteID: 96d32bfed9d0bc6a0800000000000000
+      internalID: -6428029071158788759
       vertices: []
       indices: 
       edges: []
@@ -148,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      LeviYan1_0: -2918810156955799622
+      LeviYanJealous_0: -6428029071158788759
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,0 +1,33 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_leviathan	레비아탄	Leviathan
+leviathan_affinity_01_001_body	레비아탄의 공연이 끝나고, 라이브하우스 한쪽에 작은 팬미팅 자리가 마련되었다.	After Leviathan's performance ended, a small fan meeting area was set up in one corner of the live house.
+leviathan_affinity_01_002_body	다음 분 들어와 주세요... 아.	Next person, please come in... Ah.
+leviathan_affinity_01_003_body	셰리 님...?	Sherry...?
+leviathan_affinity_01_004_body	공연 잘 봤어. 무대 위의 너, 꽤 멋지더라. 빛나고 있었어.	I enjoyed the show. You looked pretty cool up there on stage. You were shining.
+leviathan_affinity_01_005_body	하아... 하아... 셰리 님이... 레비아탄을... 빛나고 있었다고...	Hah... hah... Sherry said... Leviathan was... shining...
+leviathan_affinity_01_006_body	기뻐요... 너무 기뻐요... 이 순간이 영원했으면 좋겠어요...	I'm happy... so happy... I wish this moment could last forever...
+leviathan_affinity_01_007_body	내일이 안 오는 건 곤란한데, 칭찬 정도라면 언제든 해줄 수 있어.	It would be a problem if tomorrow never came, but I can praise you anytime.
+leviathan_affinity_01_008_body	카린도 즐거웠습니다! 무대 위의 레비아탄 씨가 반짝반짝했습니다!	Karin enjoyed it too! Ms. Leviathan was sparkling on stage!
+leviathan_affinity_01_009_body	아, 악수회 시간이군요. 셰리 님. 손을...	Ah, it is time for the handshake event. Sherry. Your hand...
+leviathan_affinity_01_010_body	오늘의 스타께서 직접 악수까지 해주시다니, 이거 영광인데.	The star of the day is giving me a handshake herself. What an honor.
+leviathan_affinity_01_011_body	......	......
+leviathan_affinity_01_012_body	음... 이거 좀 길지 않아?	Hmm... isn't this going on a little long?
+leviathan_affinity_01_013_body	죄송합니다... 하지만 셰리 님의 손 온도를 영혼에 새기는 중이라...	I'm sorry... But I am engraving the warmth of Sherry's hand into my soul...
+leviathan_affinity_01_014_body	그 마음은 고맙지만, 손만 붙잡고 있으면 사진을 못 찍잖아. 오늘의 스타랑 기념사진도 남겨야지.	I appreciate the feeling, but if you keep holding my hand, we cannot take the photo. I want to leave a commemorative photo with today's star too.
+leviathan_affinity_01_015_body	죄, 죄송합니다... 사진 촬영으로 넘어가죠.	I, I'm sorry... Let us move on to the photo session.
+leviathan_affinity_01_016_body	카린도 같이 찍고 싶습니다!	Karin wants to take one together too!
+leviathan_affinity_01_017_body	물론이지. 셋이 찍자.	Of course. Let's take it together, the three of us.
+leviathan_affinity_01_018_body	가족사진...	A family photo...
+leviathan_affinity_01_019_body	방금 네 머릿속에서 몇 단계를 건너뛴 거야?	How many steps did your mind just skip?
+leviathan_affinity_01_020_body	찰칵 소리와 함께 사진이 찍혔다.	With a click, the photo was taken.
+leviathan_affinity_01_021_body	이 사진은 레비아탄 가문의 가보로 삼겠습니다.	I will make this photo an heirloom of the Leviathan family.
+leviathan_affinity_01_022_body	내 얼굴이 대대로 전해진다니. 영광이긴 한데, 좀 민망하네...	My face will be passed down through generations. It is an honor, but it is a little embarrassing...
+leviathan_affinity_01_023_body	와아! 셰리의 얼굴이 영구 보존되는 겁니까?	Wow! Will Sherry's face be preserved forever?
+leviathan_affinity_01_024_body	셰리 님... 오늘 정말 행복했습니다.	Sherry... I was truly happy today.
+leviathan_affinity_01_025_body	레비아탄은 셰리 님의 팬으로서, 다음 공연에서도 기다리고 있을게요.	As Sherry's fan, Leviathan will be waiting at the next performance too.
+leviathan_affinity_01_026_body	아이돌이 팬을 기다린다니, 뭔가 역전된 것 같은데...	An idol waiting for a fan. Feels like something got reversed...
+leviathan_affinity_01_027_body	내 팬이 기다린다는데, 실망시킬 수는 없지. 다음에 또 올게.	If my fan is waiting, I cannot disappoint her. I will come again next time.
+leviathan_affinity_01_028_body	라이브하우스의 시설 랭크가 상승했다!	The live house's facility rank has increased!

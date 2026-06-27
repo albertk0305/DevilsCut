@@ -1,0 +1,14 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+belphegor_affinity_01_001	karin	sherry	karin	smile	curious	speaker_karin	belphegor_affinity_01_001_body			Casino			FALSE	FALSE	FALSE								
+belphegor_affinity_01_002	sherry	sherry	karin	smug	curious	speaker_sherry	belphegor_affinity_01_002_body						FALSE	FALSE	FALSE								
+belphegor_affinity_01_003	karin	sherry	karin	smug	suspicious	speaker_karin	belphegor_affinity_01_003_body						FALSE	FALSE	FALSE								
+belphegor_affinity_01_004	sherry	sherry	karin	easy	suspicious	speaker_sherry	belphegor_affinity_01_004_body						FALSE	FALSE	FALSE								
+belphegor_affinity_01_005	karin	sherry	karin	easy	curious	speaker_karin	belphegor_affinity_01_005_body						FALSE	FALSE	FALSE								
+belphegor_affinity_01_006	sherry	sherry	karin	mock	curious	speaker_sherry	belphegor_affinity_01_006_body						FALSE	FALSE	FALSE								
+belphegor_affinity_01_007	belphegor	sherry	belphegor	mock	lazy	speaker_belphegor	belphegor_affinity_01_007_body						FALSE	FALSE	FALSE								
+belphegor_affinity_01_008	sherry	sherry	belphegor	yareyare	lazy	speaker_sherry	belphegor_affinity_01_008_body						FALSE	FALSE	FALSE								
+belphegor_affinity_01_009	belphegor	sherry	belphegor	yareyare	smile	speaker_belphegor	belphegor_affinity_01_009_body						FALSE	FALSE	FALSE								
+belphegor_affinity_01_010	karin	karin	belphegor	suspicious	smile	speaker_karin	belphegor_affinity_01_010_body						FALSE	FALSE	FALSE								
+belphegor_affinity_01_011	sherry	sherry	belphegor	smug	smile	speaker_sherry	belphegor_affinity_01_011_body						FALSE	FALSE	FALSE								
+belphegor_affinity_01_012	belphegor	sherry	belphegor	smug	lazy	speaker_belphegor	belphegor_affinity_01_012_body						FALSE	FALSE	FALSE								
+belphegor_affinity_01_013	narration					speaker_narration	belphegor_affinity_01_013_body	UpgradePendingFacilityRank					FALSE	FALSE	FALSE								

@@ -1,0 +1,43 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_leviathan	레비아탄	Leviathan
+leviathan_affinity_03_001_body	셰리 님... 어젯밤은 즐거우셨나요?	Sherry... Did you enjoy yourself last night?
+leviathan_affinity_03_002_body	어젯밤? 술 마신 것까진 기억나는데, 그 뒤는 영 흐릿하네.	Last night? I remember drinking, but after that it is all pretty hazy.
+leviathan_affinity_03_003_body	레비아탄은 봤습니다. 셰리 님이 다른 분에게 기대어 계신 것을.	Leviathan saw it. Sherry was leaning on someone else.
+leviathan_affinity_03_004_body	눈을 감고, 몸을 맡기고, 아주 편안한 얼굴로.	With her eyes closed, entrusting herself to them, looking so very comfortable.
+leviathan_affinity_03_005_body	잠깐. 그건 네가 생각하는 그런 게 아닐 가능성이 높아.	Hold on. There is a good chance it was not what you think it was.
+leviathan_affinity_03_006_body	레비아탄으로는 부족했나요? 셰리 님이 레비아탄만 봐주셨으면 하는 건... 그렇게 큰 욕심이었나요?	Was Leviathan not enough? Was wanting Sherry to look only at Leviathan... such a greedy wish?
+leviathan_affinity_03_007_body	마음에 들지 않는 부분이 있다면 전부 고치겠습니다. 그러니까... 레비아탄에게서 눈을 돌리지 말아주세요.	If there is anything you dislike, I will fix all of it. So please... do not turn your eyes away from Leviathan.
+leviathan_affinity_03_008_body	난 결백해. 아마도. 카린, 네 기억 장치에 내 무죄가 걸려 있어. 변호를 부탁한다.	I am innocent. Probably. Karin, my innocence depends on your memory drive. I request a defense.
+leviathan_affinity_03_009_body	알겠습니다. 셰리는 혼자 서 있기 어려운 상태였습니다.	Understood. Sherry was in a state where standing alone was difficult.
+leviathan_affinity_03_010_body	역시 카린이야. 믿고 있었다고.	That is my Karin. I knew I could trust you.
+leviathan_affinity_03_011_body	그래서 그분에게 몸을 맡겼을 뿐입니다.	So she merely entrusted her body to that person.
+leviathan_affinity_03_012_body	몸을... 맡겼다...	Entrusted... her body...
+leviathan_affinity_03_013_body	이의 있음! 증인에게 추가 증언을 요청한다. 이대로면 유죄 확정이야.	Objection! I request additional testimony from the witness. At this rate, the guilty verdict is guaranteed.
+leviathan_affinity_03_014_body	아. 그분은 셰리의 입술을 적셔 주었습니다.	Ah. That person moistened Sherry's lips.
+leviathan_affinity_03_015_body	이해했습니다. 전부 이해했습니다.	I understand. I understand everything.
+leviathan_affinity_03_016_body	셰리 님이 레비아탄이 아닌 다른 사람에게 마음을 줄 리 없어요.	There is no way Sherry would give her heart to anyone but Leviathan.
+leviathan_affinity_03_017_body	그렇다면 답은 하나뿐이에요. 그 사람이 셰리 님을 속인 거예요. 취해서 약해진 셰리 님의 틈을 파고든 거예요.	Then there is only one answer. That person deceived Sherry. They slipped in when Sherry was drunk and vulnerable.
+leviathan_affinity_03_018_body	셰리 님, 괜찮습니다. 레비아탄이 바로잡을게요.	It is all right, Sherry. Leviathan will set this right.
+leviathan_affinity_03_019_body	셰리 님이 그 사람을 만날 일은 없을 거예요. 두 번 다시는.	Sherry will never have to meet that person again. Never again.
+leviathan_affinity_03_020_body	어이, 범행 예고는 그만두라고!	Hey, stop announcing a crime!
+leviathan_affinity_03_021_body	잠깐만요! 기억 로그 재구성이 완료되었습니다. 지금까지의 증언은 파편화된 데이터였습니다.	Please wait! Memory log reconstruction is complete. The testimony so far was fragmented data.
+leviathan_affinity_03_022_body	이제 사건의 전체 흐름을 설명하겠습니다.	I will now explain the full sequence of events.
+leviathan_affinity_03_023_body	셰리는 취기로 인해 혼자 몸을 가누기 어려운 상태였습니다.	Due to intoxication, Sherry had difficulty keeping herself upright alone.
+leviathan_affinity_03_024_body	그분은 셰리를 부축하여 안전한 장소까지 이동시켰고, 물을 제공했습니다.	That person supported Sherry, moved her to a safe place, and provided water.
+leviathan_affinity_03_025_body	이 과정에서 불필요한 신체 접촉은 확인되지 않았습니다. 이후 그분은 즉시 자리를 떠났습니다.	No unnecessary physical contact was detected during this process. Afterward, that person left immediately.
+leviathan_affinity_03_026_body	휴, 훌륭한 역전극이었어. 위험했다고. 몇 초만 늦었으면 내 유죄 판결이 확정될 뻔했잖아.	Whew, that was a fine reversal. That was dangerous. A few seconds later and my guilty verdict would have been sealed.
+leviathan_affinity_03_027_body	그렇다면... 레비아탄이 오해한 것이군요.	Then... Leviathan misunderstood.
+leviathan_affinity_03_028_body	죄송합니다... 셰리 님을 의심하다니... 레비아탄은 팬으로서도, 신도로서도 실격이에요...	I am sorry... To think I doubted Sherry... Leviathan is a failure as a fan and as a believer...
+leviathan_affinity_03_029_body	내가 종교를 운영한 기억은 없는데. 아무튼 오해가 풀렸으면 됐어.	I do not remember running a religion. Anyway, as long as the misunderstanding is cleared up, it is fine.
+leviathan_affinity_03_030_body	용서해 주시는 건가요...?	Are you forgiving me...?
+leviathan_affinity_03_031_body	그래. 울지 마. 애초에 과음한 내 책임도 있으니까.	Yeah. Do not cry. I am partly responsible for drinking too much in the first place.
+leviathan_affinity_03_032_body	그럼 앞으로는 셰리 님이 약해지실 때, 반드시 레비아탄에게 의지해 주세요.	Then from now on, whenever Sherry feels weak, please rely on Leviathan.
+leviathan_affinity_03_033_body	술에 취한 밤도, 잠들기 전의 숨소리도, 눈을 뜨기 전의 고요함도... 레비아탄이 전부 지켜드릴게요.	On drunken nights, in the breathing before sleep, in the silence before you open your eyes... Leviathan will watch over all of it.
+leviathan_affinity_03_034_body	고맙긴 한데, 사랑이 너무 무겁네.	I appreciate it, but that love is way too heavy.
+leviathan_affinity_03_035_body	셰리 님이 다른 사람의 어깨를 빌려야 하는 상황 자체를 만들고 싶지 않아요.	I do not want a situation to exist where Sherry has to borrow someone else's shoulder.
+leviathan_affinity_03_036_body	그러니까 앞으로는 레비아탄이 항상 곁에 있을게요. 셰리 님이 부르기 전부터요.	So from now on, Leviathan will always be by your side. Even before Sherry calls.
+leviathan_affinity_03_037_body	이상하네. 무죄 판결을 받은 줄 알았는데 보호관찰이 시작됐어.	That is strange. I thought I had been found innocent, but now probation has started.
+leviathan_affinity_03_038_body	라이브하우스의 시설 랭크가 상승했다!	The live house's facility rank has increased!

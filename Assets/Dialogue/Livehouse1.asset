@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad7aaf49fceb9ee48a54b62876f0b420, type: 3}
-  m_Name: Blackmarket3
+  m_Name: Livehouse1
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  dialogueID: Blackmarket3
+  dialogueID: Livehouse1
   nextDialogueID: 
-  nextSceneName: BlackMarket
+  nextSceneName: LiveHouse
   storySkipPolicy: 1
   bgmPlaylist: []
   bgmClip: {fileID: 0}
   bgmFadeTime: 0.5
   stopBgmIfEmpty: 0
-  initialBackgroundID: BlackMarket
+  initialBackgroundID: Idol
   useLineTSV: 1
-  lineTSV: {fileID: 4900000, guid: 33d6e80a1d07d6240a2cec05800e2250, type: 3}
+  lineTSV: {fileID: 4900000, guid: 22ae1ee5c03b0294f8aa47d195a6b129, type: 3}
   lines: []

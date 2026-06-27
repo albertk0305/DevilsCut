@@ -1,0 +1,34 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_leviathan	레비아탄	Leviathan
+leviathan_affinity_02_001_body	라이브하우스 백스테이지, 음향 장비가 쌓인 구석에서 카린과 레비아탄이 은밀히 마주섰다.	Backstage at the live house, Karin and Leviathan stood together in a corner stacked with sound equipment, hidden from prying eyes.
+leviathan_affinity_02_002_body	카린 님... 제가 부탁드린 물건은...	Karin... The item I asked you for...
+leviathan_affinity_02_003_body	가져왔습니다! 오늘은 세 장입니다!	I brought it! Today there are three!
+leviathan_affinity_02_004_body	세 장이나...!	Three of them...!
+leviathan_affinity_02_005_body	첫 번째입니다. 셰리가 의자에서 졸고 있는 사진입니다.	This is the first one. It is a photo of Sherry dozing off in a chair.
+leviathan_affinity_02_006_body	무방비한 셰리 님... 감긴 눈꺼풀... 느슨해진 입가... 평소보다 조금 부드러운 얼굴...	Defenseless Sherry... closed eyelids... relaxed lips... a face a little softer than usual...
+leviathan_affinity_02_007_body	두 번째입니다. 셰리가 취한 채 술잔을 들고 멍하니 있는 사진입니다.	This is the second one. It is a photo of Sherry holding a glass while tipsy and staring into space.
+leviathan_affinity_02_008_body	취기로 살짝 붉어진 뺨... 잔을 감싼 손가락... 셰리 님의 밤이 담겨 있어요...	Her cheeks slightly flushed from the alcohol... her fingers wrapped around the glass... Sherry's night is captured in this...
+leviathan_affinity_02_009_body	세 번째입니다. 셰리가 머리카락을 정리하다가 카메라를 본 사진입니다.	This is the third one. It is a photo of Sherry looking at the camera while fixing her hair.
+leviathan_affinity_02_010_body	아름다운 머릿결... 무심한 시선... 방금 저를 본 것 같은 착각까지... 심장이 멈출 것 같아요...	Her beautiful hair... that indifferent gaze... even the illusion that she is looking right at me... I feel like my heart is going to stop...
+leviathan_affinity_02_011_body	당장 살게요!	I will buy them right now!
+leviathan_affinity_02_012_body	뭘 당장 사는데?	What are you buying right now?
+leviathan_affinity_02_013_body	셰, 셰리 님...?	Sh, Sherry...?
+leviathan_affinity_02_014_body	응? 이거 내 사진이잖아.	Huh? These are photos of me.
+leviathan_affinity_02_015_body	이... 이건... 그러니까...	Th, this is... um...
+leviathan_affinity_02_016_body	셰리의 사진을 드리면 레비아탄 씨가 돈을 줍니다. 레비아탄 씨는 좋은 사람입니다!	When I give Ms. Leviathan photos of Sherry, she gives me money. Ms. Leviathan is a good person!
+leviathan_affinity_02_017_body	꼬맹아. 내 사진으로 용돈벌이하지 마.	Kid. Do not use my photos to earn pocket money.
+leviathan_affinity_02_018_body	시, 싫어하지 말아주세요...! 레비아탄은 그저 셰리 님을 더 알고 싶었을 뿐이에요...	P, please do not hate me...! Leviathan only wanted to know more about Sherry...
+leviathan_affinity_02_019_body	셰리 님이 절 떠난다면 저는...	If Sherry were to leave me, I would...
+leviathan_affinity_02_020_body	떠난 적 없어. 지금 네 앞에 있잖아.	I never left. I am standing right in front of you.
+leviathan_affinity_02_021_body	그치만...	But...
+leviathan_affinity_02_022_body	이런 걸로 싫어하게 될 리 없잖아. 놀라긴 했지. 조금은.	I would not hate you over something like this. I was surprised, though. A little.
+leviathan_affinity_02_023_body	정말인가요...?	Really...?
+leviathan_affinity_02_024_body	사진 정도야 줄 수 있지. 그렇게 어려운 일도 아니고.	I can give you a photo or two. It is not that hard.
+leviathan_affinity_02_025_body	그럼... 혹시... 셰리 님의 어릴 때 사진도 가능할까요?	Then... perhaps... could I have a photo of Sherry when she was little?
+leviathan_affinity_02_026_body	그... 그건...	Th... that is...
+leviathan_affinity_02_027_body	유년기 셰리는 희귀 매물입니다! 프리미엄 가격을 기대할 수 있습니다!	Childhood Sherry is a rare item! A premium price can be expected!
+leviathan_affinity_02_028_body	내 과거를 프리미엄 상품으로 만들지 마.	Do not turn my past into a premium product.
+leviathan_affinity_02_029_body	라이브하우스의 시설 랭크가 상승했다!	The live house's facility rank has increased!
