@@ -15,4 +15,4 @@ belphegor_affinity_01_009_body	세상은 너무 부지런하니까... 나 하나
 belphegor_affinity_01_010_body	도박은 결과보다 결과가 나오기 전의 기대감을 소비하는 행위입니까?	Is gambling an act of consuming anticipation before the result more than the result itself?
 belphegor_affinity_01_011_body	정확해. 무서운 건 대부분 그걸 알면서도 한다는 거야.	Exactly. The scary part is that most people know that and still do it.
 belphegor_affinity_01_012_body	음냐... 기대감은 가볍고 따뜻하거든... 잃기 전까지는 내 거야...	Mnya... Anticipation is light and warm... Until I lose it, it is mine...
-belphegor_affinity_01_013_body	카지노의 시설 랭크가 상승했다!	The casino's facility rank has increased!
+belphegor_affinity_01_013_body	벨벳 소서의 시설 랭크가 상승했다!	Velvet Saucer's facility rank has increased!

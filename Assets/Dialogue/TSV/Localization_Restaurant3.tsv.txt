@@ -1,0 +1,44 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_beelzebub	바알제붑	Beelzebub
+beelzebub_affinity_03_001_body	의뢰와 외상 빚에 얽매이지 않고, 행복하게 공복을 채울 때 나는 자유로워진다.	When I am free from jobs and unpaid tabs and fill my empty stomach with happiness, I become free.
+beelzebub_affinity_03_002_body	오늘은 뭘로 할까.	What should I have today?
+beelzebub_affinity_03_003_body	미소라멘. 짭조름한 깊이와 부드러운 여운. 오늘 같은 날엔 나쁘지 않아.	Miso ramen. Salty depth and a gentle aftertaste. Not bad for a day like this.
+beelzebub_affinity_03_004_body	하지만 돈코츠도 걸린다. 진한 국물이 속을 꽉 채워주는 그 느낌. 그것도 버리기 어렵지.	But the tonkotsu is tempting too. That feeling of rich broth filling the stomach. Hard to pass up.
+beelzebub_affinity_03_005_body	셰리. 메뉴는 결정했습니까?	Sherry. Have you decided on a menu item?
+beelzebub_affinity_03_006_body	잠깐. 저 메뉴는 뭐지? 신경 쓰이는데.	Wait. What is that menu item? Now I am curious.
+beelzebub_affinity_03_007_body	블랙라멘. 검은 국물. 이름부터 수상하고, 수상한 만큼 신경 쓰인다.	Black ramen. Black broth. The name sounds suspicious, and that makes it even more intriguing.
+beelzebub_affinity_03_008_body	좋아. 이걸로 가자.	All right. I will go with this.
+beelzebub_affinity_03_009_body	그런데 저쪽 테이블은 뭐지? 블랙라멘에 교자 세트.	But what is going on at that table? Black ramen with a gyoza set.
+beelzebub_affinity_03_010_body	반대쪽은 면 추가에 차항. 그런 방식도 있었군.	And over there, extra noodles with fried rice. So that path exists too.
+beelzebub_affinity_03_011_body	셰리. 메뉴판과 대화하고 있는 겁니까?	Sherry. Are you conversing with the menu?
+beelzebub_affinity_03_012_body	라멘 한 그릇에도 길은 여러 갈래. 다른 사람이 고른 길을 보고, 오늘의 내 길을 정한다.	Even one bowl of ramen has many paths. By watching the paths others choose, I decide my path for today.
+beelzebub_affinity_03_013_body	실례합니다.	Excuse me.
+beelzebub_affinity_03_014_body	오냐. 주문 정했냐?	Yeah. Ready to order?
+beelzebub_affinity_03_015_body	블랙라멘. 교자 세트. 그리고 생맥주.	Black ramen. Gyoza set. And draft beer.
+beelzebub_affinity_03_016_body	잠시 후, 블랙라멘과 교자, 차가운 생맥주가 셰리 앞에 놓였다.	A short while later, black ramen, gyoza, and a cold draft beer were placed in front of Sherry.
+beelzebub_affinity_03_017_body	잘 먹겠습니다.	Thank you for the meal.
+beelzebub_affinity_03_018_body	먼저 국물.	First, the broth.
+beelzebub_affinity_03_019_body	크으, 맛있군. 첫맛은 감칠맛이 먼저 깔리고, 바로 짠맛이 치고 들어온다.	Ahh, that is good. The first taste lays down umami, then the saltiness hits right away.
+beelzebub_affinity_03_020_body	꽤 세다. 그냥 짠 게 아니라, 입안을 붙잡고 놓아주지 않는 짠맛이야.	It is pretty strong. Not just salty, but a saltiness that grabs the mouth and refuses to let go.
+beelzebub_affinity_03_021_body	그리고 뒤에서 후추 향이 확 올라오는군. 어둡고 거친데, 이상하게 다음 한 모금이 궁금해지는 맛이야.	Then the pepper aroma surges up from behind. Dark and rough, yet somehow it makes me curious about the next sip.
+beelzebub_affinity_03_022_body	다음은 면.	Next, the noodles.
+beelzebub_affinity_03_023_body	좋아. 이 굵기다. 강한 국물에는 그걸 받아낼 면이 필요하지.	Good. This thickness is right. A strong broth needs noodles that can stand up to it.
+beelzebub_affinity_03_024_body	그래그래. 이 맛이야. 이런 게 기쁜 거라고. 젓가락이 멈추지 않아.	Yes, yes. This is the flavor. This is the kind of thing that makes me happy. My chopsticks will not stop.
+beelzebub_affinity_03_025_body	여기서 교자.	Now, the gyoza.
+beelzebub_affinity_03_026_body	바닥은 바삭하고, 속은 뜨겁다. 한입 베어 물면 육즙이 천천히 올라오고, 마늘 향이 뒤따라온다.	The bottom is crispy, and the inside is hot. When I bite in, the meat juices rise slowly, followed by the aroma of garlic.
+beelzebub_affinity_03_027_body	라멘 옆에 이런 걸 두면 반칙이지. 조연인 척하면서 판을 흔들고 있어.	Putting this next to ramen is unfair. It pretends to be a side dish while shaking up the whole stage.
+beelzebub_affinity_03_028_body	그리고 생맥주.	And now, draft beer.
+beelzebub_affinity_03_029_body	차갑다. 좋네. 입안의 기름기와 짠맛을 한 번 씻어내고, 다시 국물 쪽으로 등을 떠민다.	It is cold. Nice. It washes away the oil and saltiness in my mouth, then pushes me back toward the broth.
+beelzebub_affinity_03_030_body	끝났다고 생각했는데 처음으로 돌아가게 만드는 맛. 이런 순환은 꽤 위험해.	Just when I thought it was over, it sends me back to the start. This kind of loop is dangerous.
+beelzebub_affinity_03_031_body	셰리 녀석, 오늘따라 장르가 다르지 않냐?	Sherry seems like she is in a different genre today, does she not?
+beelzebub_affinity_03_032_body	최근 어떤 미식 프로그램을 즐겁게 시청한 영향으로 추정됩니다.	I estimate that this is the influence of a gourmet program she recently enjoyed watching.
+beelzebub_affinity_03_033_body	뭐야. 그런 거였냐.	What? So that is what this was.
+beelzebub_affinity_03_034_body	오해하지 마.	Do not misunderstand.
+beelzebub_affinity_03_035_body	나는 그저 현대인에게 평등하게 주어진 최고의 힐링, 미식을 추구하고 있을 뿐이야.	I am simply pursuing gourmet dining, the greatest healing granted equally to modern people.
+beelzebub_affinity_03_036_body	셰리. 방금도 그 프로그램을 따라 한 것 아닙니까?	Sherry. Were you not imitating that program just now as well?
+beelzebub_affinity_03_037_body	크흠. 꼭 따라 했다기보단... 참고한 거지. 아주 조금.	Ahem. It was not exactly imitating... It was a reference. A very small one.
+beelzebub_affinity_03_038_body	하하! 됐다. 그렇게 맛있게 먹어주면 만든 보람이 있지.	Ha ha! Good enough. When you eat it that happily, it is worth making.
+beelzebub_affinity_03_039_body	견반점의 시설 랭크가 상승했다!	Kyeonhanten's facility rank has increased!

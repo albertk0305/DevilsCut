@@ -1,0 +1,37 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_beelzebub	바알제붑	Beelzebub
+beelzebub_affinity_01_001_body	자, 기다리던 쇼유라멘 나왔다. 뜨거울 때 먹어라.	Here it is, the shoyu ramen you were waiting for. Eat it while it is hot.
+beelzebub_affinity_01_002_body	질문이 있습니다. 라멘은 어떤 순서로 섭취하는 것이 가장 합리적입니까?	I have a question. What is the most rational order for consuming ramen?
+beelzebub_affinity_01_003_body	좋은 질문이네. 내가 오래된 깨달음 하나를 나눠줄 때가 왔군.	Good question. It seems the time has come for me to share an old realization.
+beelzebub_affinity_01_004_body	오. 셰리. 뭘 좀 아는 얼굴이군.	Oh. Sherry. That is the face of someone who knows a thing or two.
+beelzebub_affinity_01_005_body	예, 스승님. 카린에게 라멘의 길을 전수해 주세요!	Yes, Master. Please pass the path of ramen on to Karin!
+beelzebub_affinity_01_006_body	첫 수는 국물 한 모금이야. 국물은 그릇의 첫인상이거든.	The first move is one sip of broth. The broth is the bowl's first impression.
+beelzebub_affinity_01_007_body	그래. 국물은 주방장의 명함이다. 대충 끓인 국물은 첫 모금에서 바로 들통나지.	Right. The broth is the chef's calling card. A careless broth is exposed on the very first sip.
+beelzebub_affinity_01_008_body	그렇다면 국물부터 섭취하겠습니다.	Then I will consume the broth first.
+beelzebub_affinity_01_009_body	잠깐. 한 모금이다. 전부 마시라는 뜻이 아니야.	Wait. One sip. That does not mean drink all of it.
+beelzebub_affinity_01_010_body	국물이 맛있어서 정지 명령이 늦었습니다.	The broth was delicious, so the stop command was delayed.
+beelzebub_affinity_01_011_body	그건 이해해. 좋은 국물 앞에선 누구나 브레이크가 밀리거든.	I understand. In front of good broth, anyone's brakes can slip.
+beelzebub_affinity_01_012_body	하지만 라멘은 아직 끝나지 않았어. 다음은 면이다.	But the ramen is not over yet. Next is the noodles.
+beelzebub_affinity_01_013_body	면에는 어떤 의미가 있습니까?	What meaning do the noodles have?
+beelzebub_affinity_01_014_body	면은 시간과의 승부야. 국물이 붙어 있을 때 바로 잡아야 해.	Noodles are a battle against time. You have to catch them while the broth still clings to them.
+beelzebub_affinity_01_015_body	맞다. 면은 국물을 데리고 오는 길이다. 길이 무너지기 전에 걸어야 하지.	Exactly. Noodles are the road that brings the broth along. You walk it before the road collapses.
+beelzebub_affinity_01_016_body	길이 무너집니까?	The road collapses?
+beelzebub_affinity_01_017_body	쉽게 말하면 불어버린다는 뜻이야.	Simply put, it means the noodles get soggy.
+beelzebub_affinity_01_018_body	이해했습니다. 면은 시간 제한이 있는 식재료입니다. 그럼 즉시 섭취하겠습니다.	Understood. Noodles are a time-limited ingredient. Then I will consume them immediately.
+beelzebub_affinity_01_019_body	빠르게 먹어. 하지만 대충 먹지는 마. 면이 살아 있을 때, 제대로 음미하는 거야.	Eat quickly. But do not eat carelessly. You savor the noodles properly while they are still alive.
+beelzebub_affinity_01_020_body	좋은 말이다. 면은 기다려주지 않지만, 함부로 다뤄도 되는 놈은 아니지.	Well said. Noodles do not wait for you, but they are not something to treat carelessly either.
+beelzebub_affinity_01_021_body	그리고 다음이 제일 중요해. 생맥주.	And the next step is the most important. Draft beer.
+beelzebub_affinity_01_022_body	라멘 섭취 순서에 맥주가 포함됩니까?	Is beer included in the ramen consumption order?
+beelzebub_affinity_01_023_body	역시 결국 그렇게 되는군.	So that is where this ends up after all.
+beelzebub_affinity_01_024_body	입안을 정리해야 다음 젓가락이 살아나거든.	You have to reset your mouth so the next bite comes alive.
+beelzebub_affinity_01_025_body	셰리의 라멘 이론은 술을 중심으로 재구성되고 있습니다.	Sherry's ramen theory is being reconstructed around alcohol.
+beelzebub_affinity_01_026_body	하하! 됐다. 국물부터든 면부터든 맥주부터든, 자기 방식으로 맛있게 먹으면 그게 정답이다.	Ha ha! Fine. Broth first, noodles first, even beer first, if you enjoy it your own way, that is the right answer.
+beelzebub_affinity_01_027_body	주방장은 최선을 다해 끓이고, 굽고, 담아낸다. 하지만 그걸 완성하는 건 손님 몫이지.	A chef does their best to simmer, grill, and plate it. But the one who completes it is the guest.
+beelzebub_affinity_01_028_body	한 그릇 비우고 웃으면 충분하다. 주방장한텐 그보다 고마운 칭찬이 없으니까.	If they empty the bowl and smile, that is enough. For a chef, there is no praise more welcome than that.
+beelzebub_affinity_01_029_body	역시 뭘 좀 아네. 그럼 칭찬의 의미로 생맥주랑 교자 한 접시 더.	You really do know your stuff. Then as praise, one more draft beer and a plate of gyoza.
+beelzebub_affinity_01_030_body	셰리. 방금 칭찬을 빌미로 추가 주문했습니다.	Sherry. You just used praise as a pretext for an additional order.
+beelzebub_affinity_01_031_body	하하! 좋아. 그렇게 맛있게 먹어주면 주방장 입장에선 대환영이지.	Ha ha! Good. When someone eats that happily, any chef would welcome it.
+beelzebub_affinity_01_032_body	견반점의 시설 랭크가 상승했다!	Kyeonhanten's facility rank has increased!

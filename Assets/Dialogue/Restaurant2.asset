@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad7aaf49fceb9ee48a54b62876f0b420, type: 3}
-  m_Name: DemoFacility
+  m_Name: Restaurant2
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
-  dialogueID: DemoFacility
+  dialogueID: Restaurant2
   nextDialogueID: 
-  nextSceneName: Exploration
+  nextSceneName: Restaurant
   storySkipPolicy: 1
   bgmPlaylist: []
   bgmClip: {fileID: 0}
   bgmFadeTime: 0.5
   stopBgmIfEmpty: 0
-  initialBackgroundID: DayStreet
+  initialBackgroundID: Restaurant
   useLineTSV: 1
-  lineTSV: {fileID: 4900000, guid: 7fa9421561873c64f8b0260a9753409a, type: 3}
+  lineTSV: {fileID: 4900000, guid: fb612f6eae45e3c4e8aa10a994fdf527, type: 3}
   lines: []

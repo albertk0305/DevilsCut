@@ -39,8 +39,6 @@ MonoBehaviour:
     speakerNameKey: speaker_raphael
   - speakerID: baalzebub
     speakerNameKey: speaker_baalzebub
-  - speakerID: baalzebub
-    speakerNameKey: speaker_baalzebub
   - speakerID: remiel
     speakerNameKey: speaker_remiel
   - speakerID: belphegor
@@ -219,6 +217,24 @@ MonoBehaviour:
   - actorID: sherry
     expressionID: greasy
     portraitSprite: {fileID: 21300000, guid: c5c2a1fff177c7541af2c3575516bb98, type: 3}
+  - actorID: sherry
+    expressionID: consider
+    portraitSprite: {fileID: 21300000, guid: 8463bad0e1116d3488bbdebdaa106ff7, type: 3}
+  - actorID: sherry
+    expressionID: thinking
+    portraitSprite: {fileID: 21300000, guid: 2a088779d9f973a40ba09a43c97ee6ca, type: 3}
+  - actorID: sherry
+    expressionID: content
+    portraitSprite: {fileID: 21300000, guid: 652b7e1e7c6beaf48b0261936c53ef37, type: 3}
+  - actorID: sherry
+    expressionID: mumble
+    portraitSprite: {fileID: 21300000, guid: f6fc58696afdeac42b6f9530b206a76e, type: 3}
+  - actorID: sherry
+    expressionID: blush
+    portraitSprite: {fileID: 21300000, guid: 85a64006ac5601b4db6594123bf42752, type: 3}
+  - actorID: sherry
+    expressionID: exEmbarassed
+    portraitSprite: {fileID: 21300000, guid: 7b3a72a401827c34f9c31596336c2edb, type: 3}
   - actorID: asmodeus
     expressionID: bored
     portraitSprite: {fileID: 21300000, guid: 8be49b6042000764684285d551a5e4f1, type: 3}
@@ -246,6 +262,27 @@ MonoBehaviour:
   - actorID: asmodeus
     expressionID: awkward
     portraitSprite: {fileID: 21300000, guid: 4fbc17142af503c47b1ce88af9ba6d38, type: 3}
+  - actorID: asmodeus
+    expressionID: ehh
+    portraitSprite: {fileID: 21300000, guid: 1fb40773ddb1c7e4282fc9198106c6a9, type: 3}
+  - actorID: asmodeus
+    expressionID: cheerful
+    portraitSprite: {fileID: 21300000, guid: 9e392b925c3f673449578169e3e754c7, type: 3}
+  - actorID: asmodeus
+    expressionID: shame
+    portraitSprite: {fileID: 21300000, guid: 85fe479fa7ec17644b464362cbaaed23, type: 3}
+  - actorID: asmodeus
+    expressionID: nervous
+    portraitSprite: {fileID: 21300000, guid: 152abc636b6ee1047a514320addf7593, type: 3}
+  - actorID: asmodeus
+    expressionID: soft
+    portraitSprite: {fileID: 21300000, guid: 3a2e654ee576ff24781a531019a107e9, type: 3}
+  - actorID: asmodeus
+    expressionID: smile
+    portraitSprite: {fileID: 21300000, guid: f4ed024bcd5ec4e4990a52485c57d743, type: 3}
+  - actorID: asmodeus
+    expressionID: blush
+    portraitSprite: {fileID: 21300000, guid: 21a3ba7622b518841b47663f2f258197, type: 3}
   - actorID: gabriel
     expressionID: strict
     portraitSprite: {fileID: 21300000, guid: 9d93994b658565e4d8e0b277e9714afb, type: 3}

@@ -30,4 +30,4 @@ leviathan_affinity_01_024_body	셰리 님... 오늘 정말 행복했습니다.	S
 leviathan_affinity_01_025_body	레비아탄은 셰리 님의 팬으로서, 다음 공연에서도 기다리고 있을게요.	As Sherry's fan, Leviathan will be waiting at the next performance too.
 leviathan_affinity_01_026_body	아이돌이 팬을 기다린다니, 뭔가 역전된 것 같은데...	An idol waiting for a fan. Feels like something got reversed...
 leviathan_affinity_01_027_body	내 팬이 기다린다는데, 실망시킬 수는 없지. 다음에 또 올게.	If my fan is waiting, I cannot disappoint her. I will come again next time.
-leviathan_affinity_01_028_body	라이브하우스의 시설 랭크가 상승했다!	The live house's facility rank has increased!
+leviathan_affinity_01_028_body	스트레이의 시설 랭크가 상승했다!	Stray's facility rank has increased!

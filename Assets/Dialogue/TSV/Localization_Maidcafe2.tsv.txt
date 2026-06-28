@@ -1,0 +1,46 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_asmodeus	아스모데우스	Asmodeus
+asmodeus_affinity_02_001_body	셰리. 저쪽 테이블에서 특이한 의식이 진행 중입니다.	Sherry. A peculiar ritual is taking place at that table.
+asmodeus_affinity_02_002_body	의식?	A ritual?
+asmodeus_affinity_02_003_body	후와후와~ 퓨어퓨어! 미라크르~ 뀽~ 오므라이스 씨~ 맛있어져라~	Fluffy fluffy~ Pure pure! Miracle~ Kyung~ Mister omurice~ become delicious~
+asmodeus_affinity_02_004_body	아스모데우스가 양손으로 하트를 만들자, 테이블의 손님들이 기쁜 얼굴로 박수를 쳤다.	When Asmodeus made a heart with both hands, the guests at the table clapped with delighted faces.
+asmodeus_affinity_02_005_body	아아, 저건 의식이 아니라 주문이야.	Ah, that is not a ritual. It is a charm.
+asmodeus_affinity_02_006_body	질문이 있습니다. 저 주문은 실제로 맛에 영향을 줍니까?	Karin has a question. Does that charm actually affect the taste?
+asmodeus_affinity_02_007_body	그럴지도 모르지. 같은 음식도 어떤 기분으로 먹느냐에 따라 맛이 달라지거든.	Maybe it does. The same food can taste different depending on the mood you eat it in.
+asmodeus_affinity_02_008_body	정답이에요! 그리고 아스모의 주문은 진짜로 효과 있답니다!	Correct! And Asmo's charm really does work!
+asmodeus_affinity_02_009_body	깜짝이야. 등장 타이밍 좋네.	You startled me. Nice entrance timing.
+asmodeus_affinity_02_010_body	기다리셨습니다! 사랑 듬뿍 오므라이스 나왔어요!	Thank you for waiting! Your omurice full of love is here!
+asmodeus_affinity_02_011_body	아스모데우스 씨. 카린도 주문이 걸린 오므라이스가 먹고 싶습니다!	Asmodeus. Karin wants to eat omurice with a charm on it too!
+asmodeus_affinity_02_012_body	물론이죠! 같이 하면 사랑도 귀여움도 배가 되거든요!	Of course! When we do it together, both the love and the cuteness multiply!
+asmodeus_affinity_02_013_body	와아. 기대됩니다!	Wow. Karin is excited!
+asmodeus_affinity_02_014_body	귀엽네. 열심히 해봐.	Cute. Give it your best.
+asmodeus_affinity_02_015_body	무슨 소리예요, 주인님도 같이 해야죠!	What are you talking about, Master? You have to join in too!
+asmodeus_affinity_02_016_body	나... 나도?	M... me too?
+asmodeus_affinity_02_017_body	당연하죠! 셋이서 해야 효과가 제일 좋다고요!	Of course! It works best when all three of us do it!
+asmodeus_affinity_02_018_body	카린은 셰리가 같이 주문을 걸어준 오므라이스가 먹고 싶습니다.	Karin wants to eat omurice that Sherry helped charm.
+asmodeus_affinity_02_019_body	윽. 그렇게 나오면 어쩔 수 없잖아.	Ugh. When you put it like that, I do not have a choice.
+asmodeus_affinity_02_020_body	자, 따라 하세요! 손은 하트! 표정은 귀엽게!	Now, repeat after me! Hands in a heart! Make your face cute!
+asmodeus_affinity_02_021_body	손은 하트. 표정은 귀엽게.	Hands in a heart. Face cute.
+asmodeus_affinity_02_022_body	표정 지시까지 들어가나...	It even comes with facial expression instructions...
+asmodeus_affinity_02_023_body	갑니다! 후와후와~ 퓨어퓨어!	Here we go! Fluffy fluffy~ Pure pure!
+asmodeus_affinity_02_024_body	후와후와~ 퓨어퓨어!	Fluffy fluffy~ Pure pure!
+asmodeus_affinity_02_025_body	후와후와... 퓨어... 퓨어...	Fluffy fluffy... pure... pure...
+asmodeus_affinity_02_026_body	미라크르~ 뀽~	Miracle~ kyung~
+asmodeus_affinity_02_027_body	미라크르~ 뀽~	Miracle~ kyung~
+asmodeus_affinity_02_028_body	미라... 크르... 뀽...	Mira... cle... kyung...
+asmodeus_affinity_02_029_body	오므라이스 씨~ 맛있어져라~	Mister omurice~ become delicious~
+asmodeus_affinity_02_030_body	오므라이스 씨~ 맛있어져라~	Mister omurice~ become delicious~
+asmodeus_affinity_02_031_body	오므라이스 씨... 맛있어져라...	Mister omurice... become delicious...
+asmodeus_affinity_02_032_body	네! 주문 완료입니다! 자, 이제 맛을 봐주세요!	Okay! Charm complete! Now, please taste it!
+asmodeus_affinity_02_033_body	맛있습니다! 달콤한 맛이 더 느껴지는 것 같습니다.	It is delicious! Karin feels like the sweetness is stronger now.
+asmodeus_affinity_02_034_body	뭐... 맛있어진 것 같기도 하네.	Well... it does kind of feel tastier.
+asmodeus_affinity_02_035_body	그리고 주인님, 방금 엄청 귀여웠어요! 지금 알바 시작하면 바로 인기 메이드 확정이에요!	And Master, you were super cute just now! If you started working here now, you would definitely become a popular maid!
+asmodeus_affinity_02_036_body	농담으로라도 그런 말은 하지 마.	Do not say that even as a joke.
+asmodeus_affinity_02_037_body	농담 아닌데요? 아스모는 진심이에요!	It is not a joke. Asmo is serious!
+asmodeus_affinity_02_038_body	카린도 동의합니다. 셰리가 주문을 걸어줘서 그런지, 오므라이스가 훨씬 맛있게 느껴집니다.	Karin agrees. Maybe because Sherry helped with the charm, the omurice tastes much better.
+asmodeus_affinity_02_039_body	봤죠? 주인님한테는 메이드의 재능이 있다니까요!	See? I told you Master has maid talent!
+asmodeus_affinity_02_040_body	그것만은 봐줘. 해결사 인생에서 이렇게 어려운 의뢰는 처음이야.	Please spare me that one. In my whole career as a fixer, I have never had a job this difficult.
+asmodeus_affinity_02_041_body	카페 메이러스트의 시설 랭크가 상승했다!	Cafe Mailust's facility rank has increased!

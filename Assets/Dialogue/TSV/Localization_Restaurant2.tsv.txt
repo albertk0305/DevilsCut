@@ -1,0 +1,29 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_beelzebub	바알제붑	Beelzebub
+beelzebub_affinity_02_001_body	바알제붑 씨. 교자는 신기합니다.	Beelzebub. Gyoza is fascinating.
+beelzebub_affinity_02_002_body	오냐. 어떤 부분이 신기하냐?	Oh yeah? What part of it fascinates you?
+beelzebub_affinity_02_003_body	아래쪽은 바삭하고, 위쪽은 촉촉합니다. 서로 반대되는 상태가 동시에 존재합니다.	The bottom is crispy, while the top is moist. Opposite states exist at the same time.
+beelzebub_affinity_02_004_body	교자란 원래 그런 모순을 품고 사는 음식이지.	Gyoza is a food that lives with that kind of contradiction.
+beelzebub_affinity_02_005_body	셰리 말이 맞다. 교자는 아래로 버티고 위로 감싼다.	Sherry is right. Gyoza holds firm below and wraps gently above.
+beelzebub_affinity_02_006_body	아래로 버티고 위로 감쌉니다. 구조적 안정성과 수분 보존의 조합입니까?	It holds firm below and wraps above. Is it a combination of structural stability and moisture retention?
+beelzebub_affinity_02_007_body	그렇다고도 할 수 있지.	You could put it that way.
+beelzebub_affinity_02_008_body	그리고 그 조합은 생맥주와 함께 완성되지.	And that combination is completed with draft beer.
+beelzebub_affinity_02_009_body	비법을 알고 싶습니다. 어떻게 하면 아래는 바삭하고 위는 촉촉하게 유지됩니까?	I want to know the secret. How do you keep the bottom crispy and the top moist?
+beelzebub_affinity_02_010_body	먼저 굽는 거다. 바닥에 색을 입히는 거다. 너무 약하면 흐물거리고, 너무 세면 쓴맛이 난다.	First, you grill it. You give color to the bottom. Too weak and it gets limp, too strong and it turns bitter.
+beelzebub_affinity_02_011_body	불 조절이 핵심입니까?	Is heat control the key?
+beelzebub_affinity_02_012_body	그렇지. 불은 겁내면 안 되지만, 얕보면 더 안 된다.	Right. You must not fear fire, but you must never underestimate it either.
+beelzebub_affinity_02_013_body	좋은 말이네. 술도 그래.	Good words. Alcohol is the same.
+beelzebub_affinity_02_014_body	그 다음 단계는 무엇입니까?	What is the next step?
+beelzebub_affinity_02_015_body	물을 붓고 뚜껑을 덮는다. 바닥은 이미 버틸 준비를 마쳤고, 속은 이제 익어야 하니까.	You pour in water and cover it with a lid. The bottom is already ready to hold firm, and now the inside needs to cook.
+beelzebub_affinity_02_016_body	굽기와 찌기를 병행합니다.	You combine grilling and steaming.
+beelzebub_affinity_02_017_body	그래. 교자는 한 가지 방식으로 끝나는 음식이 아니다. 밀어붙일 때와 기다릴 때를 알아야 해.	Exactly. Gyoza is not a food that ends with one method. You need to know when to push and when to wait.
+beelzebub_affinity_02_018_body	카린은 이해했습니다. 교자는 바삭함과 촉촉함 사이에서 줄다리기를 하는 음식입니다.	Karin understands. Gyoza is a food that plays tug-of-war between crispiness and moisture.
+beelzebub_affinity_02_019_body	하하! 마음에 드는 말이다.	Ha ha! I like that.
+beelzebub_affinity_02_020_body	줄다리기라... 맥주도 그래. 한 잔 더 마실지 말지, 아직 내 안에서 치열한 승부가 벌어지고 있어.	Tug-of-war... Beer is the same. Whether to have one more glass or not, a fierce match is still raging inside me.
+beelzebub_affinity_02_021_body	넌 결국 무슨 얘기든 술로 돌아오는구나.	No matter what we talk about, you always end up back at alcohol.
+beelzebub_affinity_02_022_body	난 목마른 철학가일 뿐이야.	I am only a thirsty philosopher.
+beelzebub_affinity_02_023_body	분석 결과, 승부는 이미 난 것 같습니다. 셰리의 얼굴이 붉게 익었습니다.	Analysis result, the match appears to be already decided. Sherry's face has cooked red.
+beelzebub_affinity_02_024_body	견반점의 시설 랭크가 상승했다!	Kyeonhanten's facility rank has increased!

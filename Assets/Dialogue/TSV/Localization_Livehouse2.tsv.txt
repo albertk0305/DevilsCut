@@ -31,4 +31,4 @@ leviathan_affinity_02_025_body	그럼... 혹시... 셰리 님의 어릴 때 사�
 leviathan_affinity_02_026_body	그... 그건...	Th... that is...
 leviathan_affinity_02_027_body	유년기 셰리는 희귀 매물입니다! 프리미엄 가격을 기대할 수 있습니다!	Childhood Sherry is a rare item! A premium price can be expected!
 leviathan_affinity_02_028_body	내 과거를 프리미엄 상품으로 만들지 마.	Do not turn my past into a premium product.
-leviathan_affinity_02_029_body	라이브하우스의 시설 랭크가 상승했다!	The live house's facility rank has increased!
+leviathan_affinity_02_029_body	스트레이의 시설 랭크가 상승했다!	Stray's facility rank has increased!

@@ -24,4 +24,4 @@ belphegor_affinity_02_018_body	이해할 수 없습니다. 이 결과는 수학�
 belphegor_affinity_02_019_body	확률적으로는... 셰리가 술을 끊을 확률과 비슷합니다.	Statistically... it is similar to the chance of Sherry quitting alcohol.
 belphegor_affinity_02_020_body	그건 확률 문제가 아니라 내 캐릭터성의 붕괴야.	That is not a probability issue. That is the collapse of my character identity.
 belphegor_affinity_02_021_body	음냐... 그럼 잭팟 쪽이 더 현실적이네...	Mnya... Then the jackpot is more realistic...
-belphegor_affinity_02_022_body	카지노의 시설 랭크가 상승했다!	The casino's facility rank has increased!
+belphegor_affinity_02_022_body	벨벳 소서의 시설 랭크가 상승했다!	Velvet Saucer's facility rank has increased!

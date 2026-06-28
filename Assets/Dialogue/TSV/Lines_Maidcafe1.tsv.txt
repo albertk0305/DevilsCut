@@ -1,0 +1,22 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+asmodeus_affinity_01_001	sherry	sherry	asmodeus	curious	neutral	speaker_sherry	asmodeus_affinity_01_001_body			MaidCafe			FALSE	FALSE	FALSE								
+asmodeus_affinity_01_002	asmodeus	sherry	asmodeus	curious	charming	speaker_asmodeus	asmodeus_affinity_01_002_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_003	sherry	sherry	asmodeus	greasy	charming	speaker_sherry	asmodeus_affinity_01_003_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_004	asmodeus	sherry	asmodeus	greasy	cheerful	speaker_asmodeus	asmodeus_affinity_01_004_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_005	karin	karin	asmodeus	smile	cheerful	speaker_karin	asmodeus_affinity_01_005_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_006	sherry	sherry	asmodeus	smug	cheerful	speaker_sherry	asmodeus_affinity_01_006_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_007	asmodeus	sherry	asmodeus	smug	neutral	speaker_asmodeus	asmodeus_affinity_01_007_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_008	sherry	sherry	asmodeus	consider	neutral	speaker_sherry	asmodeus_affinity_01_008_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_009	sherry	sherry	asmodeus	thinking	neutral	speaker_sherry	asmodeus_affinity_01_009_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_010	sherry	sherry	asmodeus	content	neutral	speaker_sherry	asmodeus_affinity_01_010_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_011	sherry	sherry	asmodeus	greasy	neutral	speaker_sherry	asmodeus_affinity_01_011_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_012	karin	sherry	karin	greasy	amazed	speaker_karin	asmodeus_affinity_01_012_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_013	asmodeus	sherry	asmodeus	greasy	cheerful	speaker_asmodeus	asmodeus_affinity_01_013_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_014	sherry	sherry	asmodeus	yareyare	cheerful	speaker_sherry	asmodeus_affinity_01_014_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_015	karin	sherry	karin	yareyare	persuade	speaker_karin	asmodeus_affinity_01_015_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_016	asmodeus	sherry	asmodeus	yareyare	ehh	speaker_asmodeus	asmodeus_affinity_01_016_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_017	sherry	sherry	asmodeus	smug	ehh	speaker_sherry	asmodeus_affinity_01_017_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_018	karin	sherry	karin	smug	sorry	speaker_karin	asmodeus_affinity_01_018_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_019	sherry	sherry	karin	wink	sorry	speaker_sherry	asmodeus_affinity_01_019_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_020	asmodeus	sherry	asmodeus	wink	shame	speaker_asmodeus	asmodeus_affinity_01_020_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_01_021							asmodeus_affinity_01_021_body	UpgradePendingFacilityRank					FALSE	FALSE	FALSE								

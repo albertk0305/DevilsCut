@@ -40,4 +40,4 @@ leviathan_affinity_03_034_body	고맙긴 한데, 사랑이 너무 무겁네.	I a
 leviathan_affinity_03_035_body	셰리 님이 다른 사람의 어깨를 빌려야 하는 상황 자체를 만들고 싶지 않아요.	I do not want a situation to exist where Sherry has to borrow someone else's shoulder.
 leviathan_affinity_03_036_body	그러니까 앞으로는 레비아탄이 항상 곁에 있을게요. 셰리 님이 부르기 전부터요.	So from now on, Leviathan will always be by your side. Even before Sherry calls.
 leviathan_affinity_03_037_body	이상하네. 무죄 판결을 받은 줄 알았는데 보호관찰이 시작됐어.	That is strange. I thought I had been found innocent, but now probation has started.
-leviathan_affinity_03_038_body	라이브하우스의 시설 랭크가 상승했다!	The live house's facility rank has increased!
+leviathan_affinity_03_038_body	스트레이의 시설 랭크가 상승했다!	Stray's facility rank has increased!

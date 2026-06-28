@@ -23,4 +23,4 @@ belphegor_affinity_03_017_body	허상을 쫓는 눈이겠지. 말리는 걸 도�
 belphegor_affinity_03_018_body	셰리. 슬롯머신이 카린에게 속삭이고 있습니다. 다음엔 잭팟이라고!	Sherry. The slot machine is whispering to Karin. It says the next one will be a jackpot!
 belphegor_affinity_03_019_body	너... 그런 기능도 있었냐...? 아니, 있다 해도 그건 위험한 속삭임이야. 악마의 유혹이라고.	You... had that function too...? No, even if you do, that is a dangerous whisper. A devil's temptation.
 belphegor_affinity_03_020_body	음냐... 나도 가끔 들어... 레버를 많이 당기다 보면 점점 선명해져...	Mnya... I hear it sometimes too... The more you pull the lever, the clearer it gets...
-belphegor_affinity_03_021_body	카지노의 시설 랭크가 상승했다!	The casino's facility rank has increased!
+belphegor_affinity_03_021_body	벨벳 소서의 시설 랭크가 상승했다!	Velvet Saucer's facility rank has increased!

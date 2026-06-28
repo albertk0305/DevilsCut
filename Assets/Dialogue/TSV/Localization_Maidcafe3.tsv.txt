@@ -1,0 +1,37 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_asmodeus	아스모데우스	Asmodeus
+asmodeus_affinity_03_001_body	주인님! 주문하신 딸기 파르페 나왔습니다! 오늘 하루도 반짝반짝하게 만들어드릴게요!	Master! Your strawberry parfait is here! I will make your day sparkle too!
+asmodeus_affinity_03_002_body	아스모데우스 씨. 괜찮습니까? 조금 피곤해 보입니다.	Asmodeus. Are you all right? You look a little tired.
+asmodeus_affinity_03_003_body	에? 전혀요! 아스모는 오늘도 완전 반짝반짝한데요?	Huh? Not at all! Asmo is totally sparkling today too!
+asmodeus_affinity_03_004_body	아니. 카린 말이 맞아. 목소리도 조금 쉬었고, 발걸음도 무거워.	No. Karin is right. Your voice is a little hoarse, and your steps are heavy.
+asmodeus_affinity_03_005_body	그, 그렇게 티 났어요? 으으... 이래서는 메이드 실격인데요.	W-was it that obvious? Ugh... At this rate I have failed as a maid.
+asmodeus_affinity_03_006_body	시급 때문이면 그렇게까지 안 해도 되잖아. 적당히 웃고, 적당히 주문 받고, 적당히 귀여운 척해도 손님은 모를걸.	If it is just for the hourly wage, you do not have to go that far. Smile just enough, take orders just enough, act cute just enough, and the customers probably will not know.
+asmodeus_affinity_03_007_body	주인님. 그건 안 돼요.	Master. I cannot do that.
+asmodeus_affinity_03_008_body	왜?	Why?
+asmodeus_affinity_03_009_body	시급은 중요하죠. 완전 중요해요.	The hourly wage is important. Very important.
+asmodeus_affinity_03_010_body	하지만 주인님들은 그냥 밥만 먹으러 오는 게 아니에요.	But masters do not come here just to eat.
+asmodeus_affinity_03_011_body	하루가 힘들었던 주인님도 있고, 엉망이었던 기분을 잠깐 잊고 싶어서 오는 주인님도 있어요.	Some masters had a hard day, and some come here because they want to forget a terrible mood for a little while.
+asmodeus_affinity_03_012_body	그런 주인님들이 여기서 보낸 시간을, 오늘 하루에서 제일 따뜻한 기억으로 가져갔으면 좋겠어요.	I want those masters to take the time they spend here as the warmest memory of their day.
+asmodeus_affinity_03_013_body	그래서 아스모는 최선을 다해서 웃고 싶어요. 아스모가 반짝반짝 웃어야, 주인님들도 웃을 수 있으니까요.	That is why Asmo wants to smile with everything she has. If Asmo sparkles with a smile, the masters can smile too.
+asmodeus_affinity_03_014_body	이런이런. 겉만 반짝이는 메이드인 줄 알았는데, 속까지 제대로 반짝이고 있었네.	Well now. I thought you were a maid who only sparkled on the outside, but you sparkle properly on the inside too.
+asmodeus_affinity_03_015_body	주, 주인님. 갑자기 그렇게 칭찬하면 반칙이에요.	M-Master. Praising me like that out of nowhere is against the rules.
+asmodeus_affinity_03_016_body	카린도 동의합니다. 아스모데우스 씨는 훌륭한 메이드입니다.	Karin agrees. Asmodeus is a wonderful maid.
+asmodeus_affinity_03_017_body	에헤헤... 그렇게 말하면 아스모 진짜 부끄러워지는데요.	Ehehe... If you say that, Asmo will get really embarrassed.
+asmodeus_affinity_03_018_body	아, 그리고 하나 더요.	Oh, and one more thing.
+asmodeus_affinity_03_019_body	뭔데?	What?
+asmodeus_affinity_03_020_body	아스모는 귀여운 척하는 게 아니라, 원래 귀엽다구요!	Asmo is not acting cute. Asmo is naturally cute!
+asmodeus_affinity_03_021_body	그래 그래. 귀여운 메이드 씨.	Sure, sure. Miss Cute Maid.
+asmodeus_affinity_03_022_body	에헤헤. 인정이 빠르네요.	Ehehe. You accepted that quickly.
+asmodeus_affinity_03_023_body	하지만 네가 이대로 무리하면, 널 보러 온 주인님들이 오히려 걱정할걸. 프로라면 웃는 법만큼 쉬는 법도 알아야지.	But if you push yourself like this, the masters who came to see you will worry instead. A pro needs to know how to rest as much as how to smile.
+asmodeus_affinity_03_024_body	으으... 확실히 그렇네요.	Ugh... That is true.
+asmodeus_affinity_03_025_body	그럼 주인님들 앞에서 최고로 반짝반짝 웃을 수 있도록, 아스모 잠깐 충전하고 올게요.	Then Asmo will recharge for a little while so she can smile her sparkliest in front of the masters.
+asmodeus_affinity_03_026_body	셰리. 저희는 충분히 쉰 것 같습니다. 이제 의뢰를 마저 진행합니까?	Sherry. It appears that we have rested enough. Shall we continue the job now?
+asmodeus_affinity_03_027_body	아직이야. 나도 반짝반짝 충전 중이거든.	Not yet. I am still charging my sparkle too.
+asmodeus_affinity_03_028_body	셰리에게도 반짝반짝 모드가 존재합니까?	Does Sherry also have a sparkle mode?
+asmodeus_affinity_03_029_body	가끔 나와. 아주 드물게.	It comes out sometimes. Very rarely.
+asmodeus_affinity_03_030_body	카린은 아직 본 적 없습니다.	Karin has not seen it yet.
+asmodeus_affinity_03_031_body	음~ 충전이 부족했으려나. 내 반짝반짝 모드는 전력 소모가 크거든.	Hmm~ Maybe I have not charged enough. My sparkle mode uses a lot of power.
+asmodeus_affinity_03_032_body	카페 메이러스트의 시설 랭크가 상승했다!	Cafe Mailust's facility rank has increased!

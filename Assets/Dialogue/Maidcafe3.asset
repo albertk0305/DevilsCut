@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7aaf49fceb9ee48a54b62876f0b420, type: 3}
+  m_Name: Maidcafe3
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  dialogueID: Maidcafe3
+  nextDialogueID: 
+  nextSceneName: MaidCafe
+  storySkipPolicy: 1
+  bgmPlaylist: []
+  bgmClip: {fileID: 0}
+  bgmFadeTime: 0.5
+  stopBgmIfEmpty: 0
+  initialBackgroundID: MaidCafe
+  useLineTSV: 1
+  lineTSV: {fileID: 4900000, guid: 9a45b3b65ab2c9a429fbaa31b26a0508, type: 3}
+  lines: []

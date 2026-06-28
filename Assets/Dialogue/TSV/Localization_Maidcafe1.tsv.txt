@@ -1,0 +1,25 @@
+Key	Korean	English
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_asmodeus	아스모데우스	Asmodeus
+asmodeus_affinity_01_001_body	그러고 보니, 아스모데우스는 왜 여기서 알바하는 거야?	Come to think of it, Asmodeus, why do you work here?
+asmodeus_affinity_01_002_body	시급이 높거든요!	Because the hourly wage is high!
+asmodeus_affinity_01_003_body	망설임이 없네.	No hesitation there.
+asmodeus_affinity_01_004_body	그리고 유니폼 귀엽고, 주인님들이 아스모 귀엽다고 해주고, 퇴근하면 디저트 할인도 돼요!	And the uniform is cute, the masters tell Asmo she is cute, and I get dessert discounts after work!
+asmodeus_affinity_01_005_body	매우 현실적인 동기입니다.	That is a very realistic motive.
+asmodeus_affinity_01_006_body	좋네. 욕망에 충실한 건 나쁜 게 아니지.	Good. Being true to your desires is not a bad thing.
+asmodeus_affinity_01_007_body	그럼 주인님은요? 왜 해결사 일을 하세요?	Then what about you, Master? Why do you work as a fixer?
+asmodeus_affinity_01_008_body	음... 글쎄다. 과거의 망령에게는 선택지가 많지 않았거든.	Hmm... hard to say. Ghosts of the past did not have many choices.
+asmodeus_affinity_01_009_body	시대가 바뀌었고, 도시는 나 같은 부류를 더는 필요로 하지 않게 됐어.	Times changed, and the city no longer needed people like me.
+asmodeus_affinity_01_010_body	좋은 일이야. 세상이 그만큼 얌전해졌다는 뜻이니까.	That is a good thing. It means the world became that much quieter.
+asmodeus_affinity_01_011_body	다만 망령은 성불하지 못하면 골목을 떠돌게 되지. 그래서 해결사야.	But if a ghost cannot pass on, it ends up wandering the alleys. That is why I am a fixer.
+asmodeus_affinity_01_012_body	카린은 다음 이야기가 궁금합니다. 지금 매우 두근두근합니다.	Karin is curious about the next part. Karin is very excited right now.
+asmodeus_affinity_01_013_body	맞아요! 지금 엄청 중요한 과거 이야기 시작되는 분위기였어요!	Exactly! It felt like a very important past story was about to begin!
+asmodeus_affinity_01_014_body	들어봤자 재미없어. 술안주 역할도 못 할 만큼 오래되고 지루한 얘기야.	It is not worth hearing. It is so old and boring it could not even serve as a drinking snack.
+asmodeus_affinity_01_015_body	카린은 지루한 이야기도 좋아합니다!	Karin also likes boring stories!
+asmodeus_affinity_01_016_body	아스모도요! 여기서 끊으면 반칙이에요!	Asmo too! Stopping there is against the rules!
+asmodeus_affinity_01_017_body	이야기란 건 기다렸다 들을수록 맛이 나는 법이야.	Stories taste better the longer you wait to hear them.
+asmodeus_affinity_01_018_body	하지만 카린은 지금 듣고 싶습니다.	But Karin wants to hear it now.
+asmodeus_affinity_01_019_body	아직 병을 따기엔 일러.	It is still too early to uncork the bottle.
+asmodeus_affinity_01_020_body	에이, 치사해요! 그렇게 중요한 데서 끊으면 손님 만족도 떨어진다고요!	Aww, that is not fair! Cutting off at such an important part hurts customer satisfaction!
+asmodeus_affinity_01_021_body	카페 메이러스트의 시설 랭크가 상승했다!	Cafe Mailust's facility rank has increased!

@@ -1,0 +1,40 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+beelzebub_affinity_03_001	sherry	sherry	karin	smug	neutral	speaker_sherry	beelzebub_affinity_03_001_body			Restaurant			FALSE	FALSE	FALSE								
+beelzebub_affinity_03_002	sherry	sherry	karin	consider	neutral	speaker_sherry	beelzebub_affinity_03_002_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_003	sherry	sherry	karin	thinking	neutral	speaker_sherry	beelzebub_affinity_03_003_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_004	sherry	sherry	karin	content	neutral	speaker_sherry	beelzebub_affinity_03_004_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_005	karin	sherry	karin	content	curious	speaker_karin	beelzebub_affinity_03_005_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_006	sherry	sherry	karin	curious	curious	speaker_sherry	beelzebub_affinity_03_006_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_007	sherry	sherry	karin	thinking	curious	speaker_sherry	beelzebub_affinity_03_007_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_008	sherry	sherry	karin	easy	curious	speaker_sherry	beelzebub_affinity_03_008_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_009	sherry	sherry	karin	curious	curious	speaker_sherry	beelzebub_affinity_03_009_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_010	sherry	sherry	karin	consider	curious	speaker_sherry	beelzebub_affinity_03_010_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_011	karin	sherry	karin	consider	suspicious	speaker_karin	beelzebub_affinity_03_011_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_012	sherry	sherry	karin	easy	suspicious	speaker_sherry	beelzebub_affinity_03_012_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_013	sherry	sherry	karin	smile	suspicious	speaker_sherry	beelzebub_affinity_03_013_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_014	beelzebub	sherry	beelzebub	smile	happy	speaker_beelzebub	beelzebub_affinity_03_014_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_015	sherry	sherry	beelzebub	easy	happy	speaker_sherry	beelzebub_affinity_03_015_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_016	narration					speaker_narration	beelzebub_affinity_03_016_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_017	sherry	sherry	beelzebub	content	happy	speaker_sherry	beelzebub_affinity_03_017_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_018	sherry	sherry	beelzebub	easy	happy	speaker_sherry	beelzebub_affinity_03_018_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_019	sherry	sherry	beelzebub	excited	happy	speaker_sherry	beelzebub_affinity_03_019_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_020	sherry	sherry	beelzebub	content	happy	speaker_sherry	beelzebub_affinity_03_020_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_021	sherry	sherry	beelzebub	yareyare	happy	speaker_sherry	beelzebub_affinity_03_021_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_022	sherry	sherry	beelzebub	easy	happy	speaker_sherry	beelzebub_affinity_03_022_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_023	sherry	sherry	beelzebub	soft	happy	speaker_sherry	beelzebub_affinity_03_023_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_024	sherry	sherry	beelzebub	excited	happy	speaker_sherry	beelzebub_affinity_03_024_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_025	sherry	sherry	beelzebub	smile	happy	speaker_sherry	beelzebub_affinity_03_025_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_026	sherry	sherry	beelzebub	content	happy	speaker_sherry	beelzebub_affinity_03_026_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_027	sherry	sherry	beelzebub	soft	happy	speaker_sherry	beelzebub_affinity_03_027_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_028	sherry	sherry	beelzebub	easy	happy	speaker_sherry	beelzebub_affinity_03_028_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_029	sherry	sherry	beelzebub	soft	happy	speaker_sherry	beelzebub_affinity_03_029_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_030	sherry	sherry	beelzebub	content	happy	speaker_sherry	beelzebub_affinity_03_030_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_031	beelzebub	sherry	beelzebub	content	neutral	speaker_beelzebub	beelzebub_affinity_03_031_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_032	karin	karin	beelzebub	suspicous	neutral	speaker_karin	beelzebub_affinity_03_032_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_033	beelzebub	karin	beelzebub	suspicous	tease	speaker_beelzebub	beelzebub_affinity_03_033_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_034	sherry	sherry	beelzebub	mumble	tease	speaker_sherry	beelzebub_affinity_03_034_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_035	sherry	sherry	beelzebub	smug	tease	speaker_sherry	beelzebub_affinity_03_035_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_036	karin	sherry	karin	smug	confront	speaker_karin	beelzebub_affinity_03_036_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_037	sherry	sherry	karin	awkward	confront	speaker_sherry	beelzebub_affinity_03_037_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_038	beelzebub	sherry	beelzebub	awkward	smile	speaker_beelzebub	beelzebub_affinity_03_038_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_039	narration					speaker_narration	beelzebub_affinity_03_039_body	UpgradePendingFacilityRank					FALSE	FALSE	FALSE								
