@@ -1,0 +1,41 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+karin_reward_001	narration	sherry	karin	smile	default	speaker_narration	karin_reward_001_body			Lab			FALSE	FALSE	FALSE								
+karin_reward_002	karin	sherry	karin	smile	default	speaker_karin	karin_reward_002_body				Whiskey		FALSE	FALSE	FALSE								
+karin_reward_003	sherry	sherry	karin	greasy	default	speaker_sherry	karin_reward_003_body						FALSE	FALSE	FALSE								
+karin_reward_004	karin	sherry	karin	greasy	lonely	speaker_karin	karin_reward_004_body						FALSE	FALSE	FALSE								
+karin_reward_005	sherry	sherry	karin	mumble	lonely	speaker_sherry	karin_reward_005_body						FALSE	FALSE	FALSE								
+karin_reward_006	karin	sherry	karin	mumble	sadSmile	speaker_karin	karin_reward_006_body						FALSE	FALSE	FALSE								
+karin_reward_007	sherry	sherry	karin	awkward	sadSmile	speaker_sherry	karin_reward_007_body						FALSE	FALSE	FALSE								
+karin_reward_008	karin	sherry	karin	awkward	sorry	speaker_karin	karin_reward_008_body						FALSE	FALSE	FALSE								
+karin_reward_009	sherry	sherry	karin	urgent	sorry	speaker_sherry	karin_reward_009_body						FALSE	FALSE	FALSE								
+karin_reward_010	karin	sherry	karin	urgent	lonely	speaker_karin	karin_reward_010_body						FALSE	FALSE	FALSE								
+karin_reward_011	sherry	sherry	karin	mumble	lonely	speaker_sherry	karin_reward_011_body						FALSE	FALSE	FALSE								
+karin_reward_012	karin	sherry	karin	mumble	sorry	speaker_karin	karin_reward_012_body						FALSE	FALSE	FALSE								
+karin_reward_013	karin	sherry	karin	mumble	lonely	speaker_karin	karin_reward_013_body						FALSE	FALSE	FALSE								
+karin_reward_014	sherry	sherry	karin	nervous	lonely	speaker_sherry	karin_reward_014_body						FALSE	FALSE	FALSE								
+karin_reward_015	karin	sherry	karin	nervous	sadSmile	speaker_karin	karin_reward_015_body						FALSE	FALSE	FALSE								
+karin_reward_016	sherry	sherry	karin	awkward	sadSmile	speaker_sherry	karin_reward_016_body						FALSE	FALSE	FALSE								
+karin_reward_017	karin	sherry	karin	awkward	sorry	speaker_karin	karin_reward_017_body						FALSE	FALSE	FALSE								
+karin_reward_018	sherry	sherry	karin	mumble	sorry	speaker_sherry	karin_reward_018_body						FALSE	FALSE	FALSE								
+karin_reward_019	karin	sherry	karin	mumble	curious	speaker_karin	karin_reward_019_body						FALSE	FALSE	FALSE								
+karin_reward_020	sherry	sherry	karin	content	curious	speaker_sherry	karin_reward_020_body						FALSE	FALSE	FALSE								
+karin_reward_021	sherry	sherry	karin	consider	curious	speaker_sherry	karin_reward_021_body						FALSE	FALSE	FALSE								
+karin_reward_022	sherry	sherry	karin	thinking	curious	speaker_sherry	karin_reward_022_body						FALSE	FALSE	FALSE								
+karin_reward_023	sherry	sherry	karin	greasy	curious	speaker_sherry	karin_reward_023_body						FALSE	FALSE	FALSE								
+karin_reward_024	karin	sherry	karin	greasy	default	speaker_karin	karin_reward_024_body						FALSE	FALSE	FALSE								
+karin_reward_025	sherry	sherry	karin	mumble	default	speaker_sherry	karin_reward_025_body						FALSE	FALSE	FALSE								
+karin_reward_026	karin	sherry	karin	mumble	smile	speaker_karin	karin_reward_026_body						FALSE	FALSE	FALSE								
+karin_reward_027	sherry	sherry	karin	embarassed	smile	speaker_sherry	karin_reward_027_body						FALSE	FALSE	FALSE								
+karin_reward_028	karin	sherry	karin	embarassed	default	speaker_karin	karin_reward_028_body						FALSE	FALSE	FALSE								
+karin_reward_029	sherry	sherry	karin	blush	default	speaker_sherry	karin_reward_029_body						FALSE	FALSE	FALSE								
+karin_reward_030	karin	sherry	karin	blush	happy	speaker_karin	karin_reward_030_body						FALSE	FALSE	FALSE								
+karin_reward_031	sherry	sherry	karin	blush	happy	speaker_sherry	karin_reward_031_body						FALSE	FALSE	FALSE								
+karin_reward_032	karin	sherry	karin	blush	default	speaker_karin	karin_reward_032_body						FALSE	FALSE	FALSE								
+karin_reward_033	sherry	sherry	karin	embarassed	default	speaker_sherry	karin_reward_033_body						FALSE	FALSE	FALSE								
+karin_reward_034	karin	sherry	karin	embarassed	happy	speaker_karin	karin_reward_034_body						FALSE	FALSE	FALSE								
+karin_reward_035	sherry	sherry	karin	exEmbarassed	happy	speaker_sherry	karin_reward_035_body						FALSE	FALSE	FALSE								
+karin_reward_036	karin	sherry	karin	exEmbarassed	smile	speaker_karin	karin_reward_036_body						FALSE	FALSE	FALSE								
+karin_reward_037	sherry	sherry	karin	exEmbarassed	smile	speaker_sherry	karin_reward_037_body						FALSE	FALSE	FALSE								
+karin_reward_038	karin	sherry	karin	exEmbarassed	default	speaker_karin	karin_reward_038_body						FALSE	FALSE	FALSE								
+karin_reward_039	sherry	sherry	karin	mumble	default	speaker_sherry	karin_reward_039_body						FALSE	FALSE	FALSE								
+karin_reward_040	sherry	sherry	karin	soft	default	speaker_sherry	karin_reward_040_body						FALSE	FALSE	FALSE								

@@ -1,0 +1,44 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_karin	카린	Karin
+speaker_sherry	셰리	Sherry
+karin_reward_001_body	아레테가 정지한 뒤, 카린은 약속했던 보수를 주기 위해 셰리를 연구소로 안내했다.	After Arete shut down, Karin guided Sherry to the laboratory to give her the promised payment.
+karin_reward_002_body	셰리. 약속했던 보수입니다.	Sherry. This is the payment I promised.
+karin_reward_003_body	이야. 드디어 보수네... 생각보다 오래 걸렸어.	Well. Finally, the payment... Took longer than I expected.
+karin_reward_004_body	이것으로 의뢰는 완료되었습니다.	With this, the request is complete.
+karin_reward_005_body	그래. 정산 끝났네.	Yeah. Account settled.
+karin_reward_006_body	이제 셰리가 카린과 함께할 이유는 없습니다.	Now Sherry has no reason to stay with Karin.
+karin_reward_007_body	...	...
+karin_reward_008_body	...	...
+karin_reward_009_body	그래서.	So.
+karin_reward_010_body	네?	Yes?
+karin_reward_011_body	넌 이제 어떻게 할 건데.	What are you going to do now?
+karin_reward_012_body	잘 모르겠습니다.	I do not know.
+karin_reward_013_body	카린은 지금까지 아레테를 정지시키는 것만 보고 왔습니다. 그 뒤에 무엇을 해야 하는지는... 아직 정하지 못했습니다.	Karin has only looked toward stopping Arete until now. What to do after that... I have not decided yet.
+karin_reward_014_body	그렇군.	I see.
+karin_reward_015_body	네.	Yes.
+karin_reward_016_body	...	...
+karin_reward_017_body	...	...
+karin_reward_018_body	그러고 보니, 내가 요즘 조수를 좀 구하고 있는데 말이야.	Come to think of it, I have been looking for an assistant lately.
+karin_reward_019_body	조수 말입니까?	An assistant?
+karin_reward_020_body	그래. 조건이 좀 까다로워.	Yeah. The conditions are pretty specific.
+karin_reward_021_body	해킹에 능숙하고, 쓸데없이 성실하고, 말 많은 꼬맹이.	Good at hacking, pointlessly diligent, and a talkative kid.
+karin_reward_022_body	위험한 의뢰에 데려가도 의외로 잘 버티는 녀석.	Someone who holds up surprisingly well even on dangerous jobs.
+karin_reward_023_body	가끔 사람 속을 너무 정확히 들여다보는 버릇이 있으면 더 좋고.	Even better if they sometimes read people a little too well.
+karin_reward_024_body	그 조건은 카린과 상당히 일치합니다.	Those conditions match Karin quite closely.
+karin_reward_025_body	그, 그래? 우연이네.	O-oh yeah? What a coincidence.
+karin_reward_026_body	셰리는 카린과 헤어지는 것이 쓸쓸한 것입니까?	Are you sad to part with Karin, Sherry?
+karin_reward_027_body	무, 무슨 소리야?	W-what are you talking about?
+karin_reward_028_body	셰리는 보수를 받고도 아직 떠나지 않았습니다.	You received the payment, but you still have not left.
+karin_reward_029_body	위스키 병 상태를 확인하는 중일 뿐이야.	I am just checking the condition of the whiskey bottle.
+karin_reward_030_body	역시 셰리는 카린이 없으면 안 되겠네요!	As expected, Sherry cannot do without Karin!
+karin_reward_031_body	그냥 내버려두는 게 걱정될 뿐이야.	I am just worried about leaving you on your own.
+karin_reward_032_body	셰리는 솔직하지 못합니다. 이른바, 츤데레입니다.	Sherry is not honest with herself. This is what they call tsundere.
+karin_reward_033_body	너 그런 말은 또 어디서 배웠어?	Where did you learn that one?
+karin_reward_034_body	사람들에게 배웠습니다.	I learned it from people.
+karin_reward_035_body	하아. 사람 다 됐네, 정말.	Hah. You really have become a person.
+karin_reward_036_body	칭찬으로 받아들이겠습니다.	Karin will take that as a compliment.
+karin_reward_037_body	시끄러워. 할 거야, 말 거야?	Quiet. Are you taking the job or not?
+karin_reward_038_body	앞으로도 잘 부탁드립니다, 셰리.	I look forward to working with you, Sherry.
+karin_reward_039_body	그래. 잘 부탁한다...	Yeah. Same here...
+karin_reward_040_body	조수.	Assistant.

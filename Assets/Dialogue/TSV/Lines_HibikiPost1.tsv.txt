@@ -1,0 +1,36 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+hibiki_post_001	narration	sherry	hibiki	serious	serious	speaker_narration	hibiki_post_001_body			Shrine			FALSE	FALSE	FALSE								
+hibiki_post_002	hibiki	sherry	hibiki	serious	shiny	speaker_hibiki	hibiki_post_002_body						FALSE	FALSE	FALSE								
+hibiki_post_003	sherry	sherry	hibiki	seriousSpeak	shiny	speaker_sherry	hibiki_post_003_body						FALSE	FALSE	FALSE								
+hibiki_post_004	hibiki	sherry	hibiki	seriousSpeak	shiny	speaker_hibiki	hibiki_post_004_body						FALSE	FALSE	FALSE								
+hibiki_post_005	hibiki	sherry	hibiki	seriousSpeak	sad	speaker_hibiki	hibiki_post_005_body						FALSE	FALSE	FALSE								
+hibiki_post_006	karin	karin	hibiki	worry	sad	speaker_karin	hibiki_post_006_body						FALSE	FALSE	FALSE								
+hibiki_post_007	hibiki	karin	hibiki	worry	wavering	speaker_hibiki	hibiki_post_007_body						FALSE	FALSE	FALSE								
+hibiki_post_008	karin	karin	hibiki	confidentSpeak	wavering	speaker_karin	hibiki_post_008_body						FALSE	FALSE	FALSE								
+hibiki_post_009	sherry	sherry	hibiki	softSpeak	wavering	speaker_sherry	hibiki_post_009_body						FALSE	FALSE	FALSE								
+hibiki_post_010	karin	karin	hibiki	default	wavering	speaker_karin	hibiki_post_010_body						FALSE	FALSE	FALSE								
+hibiki_post_011	hibiki	karin	hibiki	default	worry	speaker_hibiki	hibiki_post_011_body						FALSE	FALSE	FALSE								
+hibiki_post_012	karin	karin	hibiki	smile	worry	speaker_karin	hibiki_post_012_body						FALSE	FALSE	FALSE								
+hibiki_post_013	hibiki	karin	hibiki	smile	wavering	speaker_hibiki	hibiki_post_013_body						FALSE	FALSE	FALSE								
+hibiki_post_014	karin	karin	hibiki	confidentHappy	wavering	speaker_karin	hibiki_post_014_body						FALSE	FALSE	FALSE								
+hibiki_post_015	sherry	sherry	hibiki	seriousSpeak	wavering	speaker_sherry	hibiki_post_015_body						FALSE	FALSE	FALSE								
+hibiki_post_016	sherry	sherry	hibiki	softSpeak	wavering	speaker_sherry	hibiki_post_016_body						FALSE	FALSE	FALSE								
+hibiki_post_017	hibiki	sherry	hibiki	softSpeak	worry	speaker_hibiki	hibiki_post_017_body						FALSE	FALSE	FALSE								
+hibiki_post_018	hibiki	sherry	hibiki	softSpeak	determined	speaker_hibiki	hibiki_post_018_body						FALSE	FALSE	FALSE								
+hibiki_post_019	hibiki	sherry	hibiki	softSpeak	determined	speaker_hibiki	hibiki_post_019_body						FALSE	FALSE	FALSE								
+hibiki_post_020	hibiki	sherry	hibiki	softSpeak	resolved	speaker_hibiki	hibiki_post_020_body						FALSE	FALSE	FALSE								
+hibiki_post_021	arete	arete	hibiki	neutral	resolved	speaker_arete	hibiki_post_021_body						FALSE	FALSE	FALSE								
+hibiki_post_022	sherry	arete	sherry	neutral	perplexed	speaker_sherry	hibiki_post_022_body						FALSE	FALSE	FALSE								
+hibiki_post_023	karin	karin	sherry	speechless	perplexed	speaker_karin	hibiki_post_023_body						FALSE	FALSE	FALSE								
+hibiki_post_024	hibiki	karin	hibiki	speechless	shocked	speaker_hibiki	hibiki_post_024_body						FALSE	FALSE	FALSE								
+hibiki_post_025	arete	arete	hibiki	neutral	shocked	speaker_arete	hibiki_post_025_body						FALSE	FALSE	FALSE								
+hibiki_post_026	arete	arete	hibiki	neutral	shocked	speaker_arete	hibiki_post_026_body						FALSE	FALSE	FALSE								
+hibiki_post_027	arete	arete	hibiki	neutral	shocked	speaker_arete	hibiki_post_027_body						FALSE	FALSE	FALSE								
+hibiki_post_028	narration	arete	hibiki	neutral	shocked	speaker_narration	hibiki_post_028_body						FALSE	FALSE	FALSE								
+hibiki_post_029	karin	karin	hibiki	desperate	shocked	speaker_karin	hibiki_post_029_body						FALSE	FALSE	FALSE								
+hibiki_post_030	sherry	karin	sherry	desperate	alert	speaker_sherry	hibiki_post_030_body						FALSE	FALSE	FALSE								
+hibiki_post_031	hibiki	karin	hibiki	desperate	shocked	speaker_hibiki	hibiki_post_031_body						FALSE	FALSE	FALSE								
+hibiki_post_032	arete	arete	hibiki	neutral	shocked	speaker_arete	hibiki_post_032_body						FALSE	FALSE	FALSE								
+hibiki_post_033	arete	arete	hibiki	neutral	shocked	speaker_arete	hibiki_post_033_body						FALSE	FALSE	FALSE								
+hibiki_post_034	arete	arete	hibiki	neutral	shocked	speaker_arete	hibiki_post_034_body						FALSE	FALSE	FALSE								
+hibiki_post_035	narration	arete	hibiki	neutral	shocked	speaker_narration	hibiki_post_035_body						FALSE	FALSE	FALSE								

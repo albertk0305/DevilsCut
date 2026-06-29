@@ -1,0 +1,22 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_karin	카린	Karin
+speaker_sherry	셰리	Sherry
+cookie_epilogue_001_body	데빌스 컷 사무소.	Devil's Cut office.
+cookie_epilogue_002_body	셰리.	Sherry.
+cookie_epilogue_003_body	왜.	What.
+cookie_epilogue_004_body	카린의 월급이 밀렸습니다.	Karin's salary is overdue.
+cookie_epilogue_005_body	밀린 게 아니야.	It is not overdue.
+cookie_epilogue_006_body	지급 타이밍을 신중하게 고르는 중이지.	I am carefully choosing the timing of payment.
+cookie_epilogue_007_body	카린은 월급을 받으면 도넛을 먹으러 갈 계획이었습니다.	Karin planned to go eat donuts when she received her salary.
+cookie_epilogue_008_body	도넛?	Donuts?
+cookie_epilogue_009_body	사람들은 월급날에 맛있는 것을 먹으러 간다고 들었습니다.	I heard that people go eat something tasty on payday.
+cookie_epilogue_010_body	성장기 어린이는 더 영양가 높은 걸 먹어야지.	Growing children should eat something more nutritious.
+cookie_epilogue_011_body	그때, 사무소 문을 두드리는 소리가 들렸다.	Just then, there was a knock on the office door.
+cookie_epilogue_012_body	네. 데빌스 컷입니다.	Yes. This is Devil's Cut.
+cookie_epilogue_013_body	...	...
+cookie_epilogue_014_body	셰리.	Sherry.
+cookie_epilogue_015_body	의뢰입니다!	It's a request!
+cookie_epilogue_016_body	좋아.	Good.
+cookie_epilogue_017_body	일할 시간이네.	Time to work.
+cookie_epilogue_018_body	See you, moonshine fixer...	See you, moonshine fixer...

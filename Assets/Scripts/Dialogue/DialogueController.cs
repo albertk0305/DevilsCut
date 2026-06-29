@@ -883,9 +883,21 @@ public class DialogueController : MonoBehaviour
             || currentLineIndex >= currentLines.Count;
     }
 
+    private static bool IsNarrationSpeaker(DialogueLine line)
+    {
+        return line != null
+            && string.Equals(
+                line.speakerID?.Trim(),
+                "narration",
+                System.StringComparison.OrdinalIgnoreCase);
+    }
+
     private string GetSpeakerNameKey(DialogueLine line)
     {
         if (line == null)
+            return "";
+
+        if (IsNarrationSpeaker(line))
             return "";
 
         if (!string.IsNullOrEmpty(line.speakerNameKey))

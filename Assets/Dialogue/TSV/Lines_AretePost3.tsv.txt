@@ -1,0 +1,28 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+council_epilogue_001	narration	sherry		smile		speaker_narration	council_epilogue_001_body			DayStreet			FALSE	FALSE	FALSE								
+council_epilogue_002	sherry	sherry		smile		speaker_sherry	council_epilogue_002_body						FALSE	FALSE	FALSE								
+council_epilogue_003	sherry	sherry		smug		speaker_sherry	council_epilogue_003_body						FALSE	FALSE	FALSE								
+council_epilogue_004	sherry	sherry		greasy		speaker_sherry	council_epilogue_004_body						FALSE	FALSE	FALSE								
+council_epilogue_005	mammon	sherry	mammon	greasy	complain	speaker_mammon	council_epilogue_005_body						FALSE	FALSE	FALSE								
+council_epilogue_006	sherry	sherry	mammon	perplexed	complain	speaker_sherry	council_epilogue_006_body						FALSE	FALSE	FALSE								
+council_epilogue_007	sherry	sherry	mammon	consider	complain	speaker_sherry	council_epilogue_007_body						FALSE	FALSE	FALSE								
+council_epilogue_008	hibiki	sherry	hibiki	consider	shocked	speaker_hibiki	council_epilogue_008_body			Council			FALSE	FALSE	FALSE								
+council_epilogue_009	mammon	mammon	hibiki	complain	shocked	speaker_mammon	council_epilogue_009_body						FALSE	FALSE	FALSE								
+council_epilogue_010	sariel	mammon	sariel	complain	smile	speaker_sariel	council_epilogue_010_body						FALSE	FALSE	FALSE								
+council_epilogue_011	lucifer	lucifer	sariel	embarassed	smile	speaker_lucifer	council_epilogue_011_body						FALSE	FALSE	FALSE								
+council_epilogue_012	gabriel	lucifer	gabriel	embarassed	strict	speaker_gabriel	council_epilogue_012_body						FALSE	FALSE	FALSE								
+council_epilogue_013	asmodeus	asmodeus	gabriel	charming	strict	speaker_asmodeus	council_epilogue_013_body						FALSE	FALSE	FALSE								
+council_epilogue_014	baalzebub	asmodeus	baalzebub	charming	smile	speaker_baalzebub	council_epilogue_014_body						FALSE	FALSE	FALSE								
+council_epilogue_015	belphegor	belphegor	baalzebub	yawn	smile	speaker_belphegor	council_epilogue_015_body						FALSE	FALSE	FALSE								
+council_epilogue_016	leviathan	belphegor	leviathan	yawn	love2	speaker_leviathan	council_epilogue_016_body						FALSE	FALSE	FALSE								
+council_epilogue_017	raguel	raguel	leviathan	smile	love2	speaker_raguel	council_epilogue_017_body						FALSE	FALSE	FALSE								
+council_epilogue_018	michael	raguel	michael	smile	nervous	speaker_michael	council_epilogue_018_body						FALSE	FALSE	FALSE								
+council_epilogue_019	uriel	uriel	michael	cool	nervous	speaker_uriel	council_epilogue_019_body						FALSE	FALSE	FALSE								
+council_epilogue_020	raphael	uriel	raphael	cool	doya	speaker_raphael	council_epilogue_020_body						FALSE	FALSE	FALSE								
+council_epilogue_021	remiel	remiel	raphael	annoyed	doya	speaker_remiel	council_epilogue_021_body						FALSE	FALSE	FALSE								
+council_epilogue_022	satan	remiel	satan	annoyed	happy	speaker_satan	council_epilogue_022_body						FALSE	FALSE	FALSE								
+council_epilogue_023	hibiki	hibiki	satan	shocked	happy	speaker_hibiki	council_epilogue_023_body						FALSE	FALSE	FALSE								
+council_epilogue_024	sherry	hibiki	sherry	shocked	yareyare	speaker_sherry	council_epilogue_024_body						FALSE	FALSE	FALSE								
+council_epilogue_025	sherry	hibiki	sherry	shocked	thinking	speaker_sherry	council_epilogue_025_body						FALSE	FALSE	FALSE								
+council_epilogue_026	sherry	hibiki	sherry	shocked	greasy	speaker_sherry	council_epilogue_026_body						FALSE	FALSE	FALSE								
+council_epilogue_027	sherry	hibiki	sherry	shocked	smile	speaker_sherry	council_epilogue_027_body	LoadNextScene	DevilsCutOfficeScene				FALSE	FALSE	FALSE								

@@ -97,15 +97,15 @@ MonoBehaviour:
     level: 1
     maxExp: 100
     currentExp: 0
-    maxHp: 10000
-    currentHp: 10000
-    ActionPoints: 10
+    maxHp: 100000
+    currentHp: 100000
+    ActionPoints: 200
     breakResistance: 200
     maxBreakGauge: 200
-    strength: 1000
-    defense: 10
-    speed: 10
-    luck: 10
+    strength: 10000
+    defense: 200
+    speed: 200
+    luck: 200
     currentGold: 100000
     rejectedSupporterCount: 0
     finalDamageAmp: 0

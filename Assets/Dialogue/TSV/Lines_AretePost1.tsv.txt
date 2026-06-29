@@ -1,0 +1,13 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+arete_final_post_001	narration	karin	arete	seriousSpeak	damaged	speaker_narration	arete_final_post_001_body			AreteFinal			FALSE	FALSE	FALSE								
+arete_final_post_002	karin	karin	arete	seriousSpeak	damaged	speaker_karin	arete_final_post_002_body						FALSE	FALSE	FALSE								
+arete_final_post_003	arete	karin	arete	seriousSpeak	damaged	speaker_arete	arete_final_post_003_body						FALSE	FALSE	FALSE								
+arete_final_post_004	arete	karin	arete	seriousSpeak	damaged	speaker_arete	arete_final_post_004_body						FALSE	FALSE	FALSE								
+arete_final_post_005	sherry	sherry	arete	greasy	damaged	speaker_sherry	arete_final_post_005_body						FALSE	FALSE	FALSE								
+arete_final_post_006	sherry	sherry	arete	mock	damaged	speaker_sherry	arete_final_post_006_body						FALSE	FALSE	FALSE								
+arete_final_post_007	karin	karin	arete	seriousSpeak	damaged	speaker_karin	arete_final_post_007_body						FALSE	FALSE	FALSE								
+arete_final_post_008	arete	karin	arete	seriousSpeak	damaged	speaker_arete	arete_final_post_008_body						FALSE	FALSE	FALSE								
+arete_final_post_009	sherry	sherry	arete	smirk	damaged	speaker_sherry	arete_final_post_009_body						FALSE	FALSE	FALSE								
+arete_final_post_010	narration	sherry	arete	smirk	damaged	speaker_narration	arete_final_post_010_body						FALSE	FALSE	FALSE								
+arete_final_post_011	narration	sherry	arete	smirk	stopped	speaker_narration	arete_final_post_011_body						FALSE	FALSE	FALSE								
+arete_final_post_012	narration	sherry	arete	smirk	stopped	speaker_narration	arete_final_post_012_body						FALSE	FALSE	FALSE								

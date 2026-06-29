@@ -1,0 +1,19 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+cookie_epilogue_001	narration	sherry	karin	smile	default	speaker_narration	cookie_epilogue_001_body			DevilsCut			FALSE	FALSE	FALSE								
+cookie_epilogue_002	karin	sherry	karin	smile	default	speaker_karin	cookie_epilogue_002_body						FALSE	FALSE	FALSE								
+cookie_epilogue_003	sherry	sherry	karin	smile	default	speaker_sherry	cookie_epilogue_003_body						FALSE	FALSE	FALSE								
+cookie_epilogue_004	karin	sherry	karin	smile	persuade	speaker_karin	cookie_epilogue_004_body						FALSE	FALSE	FALSE								
+cookie_epilogue_005	sherry	sherry	karin	mumble	persuade	speaker_sherry	cookie_epilogue_005_body						FALSE	FALSE	FALSE								
+cookie_epilogue_006	sherry	sherry	karin	mumble	persuade	speaker_sherry	cookie_epilogue_006_body						FALSE	FALSE	FALSE								
+cookie_epilogue_007	karin	sherry	karin	mumble	panic	speaker_karin	cookie_epilogue_007_body						FALSE	FALSE	FALSE								
+cookie_epilogue_008	sherry	sherry	karin	curious	panic	speaker_sherry	cookie_epilogue_008_body						FALSE	FALSE	FALSE								
+cookie_epilogue_009	karin	sherry	karin	curious	default	speaker_karin	cookie_epilogue_009_body						FALSE	FALSE	FALSE								
+cookie_epilogue_010	sherry	sherry	karin	greasy	default	speaker_sherry	cookie_epilogue_010_body						FALSE	FALSE	FALSE								
+cookie_epilogue_011	narration	sherry	karin	greasy	default	speaker_narration	cookie_epilogue_011_body						FALSE	FALSE	FALSE								
+cookie_epilogue_012	karin	sherry	karin	greasy	smile	speaker_karin	cookie_epilogue_012_body						FALSE	FALSE	FALSE								
+cookie_epilogue_013	karin	sherry	karin	greasy	default	speaker_karin	cookie_epilogue_013_body						FALSE	FALSE	FALSE								
+cookie_epilogue_014	karin	sherry	karin	greasy	smile	speaker_karin	cookie_epilogue_014_body						FALSE	FALSE	FALSE								
+cookie_epilogue_015	karin	sherry	karin	greasy	happy	speaker_karin	cookie_epilogue_015_body						FALSE	FALSE	FALSE								
+cookie_epilogue_016	sherry	sherry	karin	easy	happy	speaker_sherry	cookie_epilogue_016_body						FALSE	FALSE	FALSE								
+cookie_epilogue_017	sherry	sherry	karin	smirk	happy	speaker_sherry	cookie_epilogue_017_body						FALSE	FALSE	FALSE								
+cookie_epilogue_018						speaker_narration	cookie_epilogue_018_body	GameClear		BlackInk			FALSE	FALSE	FALSE								

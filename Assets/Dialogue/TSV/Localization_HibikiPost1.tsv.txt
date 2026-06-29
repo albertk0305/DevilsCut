@@ -1,0 +1,41 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	sherry
+speaker_karin	카린	karin
+speaker_hibiki	히비키	hibiki
+speaker_arete	아레테	arete
+hibiki_post_001_body	셰리의 공격이 히비키의 뺨을 스쳤고, 끊어진 하얀 안대가 바닥으로 떨어졌다. 히비키는 비틀거리다 한쪽 무릎을 꿇었다.	Sherry's attack grazed Hibiki's cheek, and the severed white blindfold fell to the floor. Hibiki staggered, then dropped to one knee.
+hibiki_post_002_body	눈이... 잘 떠지지 않습니다. 빛이 너무 밝습니다...	My eyes... They will not open properly. The light is too bright...
+hibiki_post_003_body	오래 눈을 돌리고 있었으니까. 하지만 이제는 마주해야 해.	Because you turned away for too long. But now you have to face it.
+hibiki_post_004_body	빛도, 소리도, 사람들의 표정도... 제가 외면했던 것들이 한꺼번에 밀려옵니다.	The light, the sounds, everyone's faces... Everything I turned away from is flooding in at once.
+hibiki_post_005_body	저는... 제가 지키려던 사람들에게, 오히려 상처를 주고 있었던 겁니까?	Did I... hurt the very people I meant to protect?
+hibiki_post_006_body	히비키 씨...	Hibiki...
+hibiki_post_007_body	하지만... 저는 아직 사람들의 마음을 믿는 것이 두렵습니다.	But... I am still afraid to trust people's hearts.
+hibiki_post_008_body	아직 늦지 않았습니다. 지금부터 믿어보면 됩니다.	It is not too late. You can start trusting them now.
+hibiki_post_009_body	네 생각만큼 사람들은 약하지 않아. 꽤 질기다고.	People are not as weak as you think. They are pretty stubborn.
+hibiki_post_010_body	설령 약하더라도 괜찮습니다. 사람들은 서로 기대며 살아갑니다.	Even if they are weak, that is all right. People live by leaning on one another.
+hibiki_post_011_body	서로... 기대며...	Leaning... on one another...
+hibiki_post_012_body	네. 카린도 그렇게 배웠습니다.	Yes. Karin learned that too.
+hibiki_post_013_body	하지만 저는...	But I...
+hibiki_post_014_body	사람들을 바로 믿기 어렵다면, 사람들을 믿는 카린을 먼저 믿어주세요.	If trusting people right away is difficult, then please trust Karin, who believes in them.
+hibiki_post_015_body	네 주변에도 있잖아. 충분히 강하고, 믿을 만한 녀석들.	You have them around you, don't you? Strong enough, and worth trusting.
+hibiki_post_016_body	네가 맡긴 일 하나 붙잡고 끝까지 버틴 꽉 막힌 녀석들 말이야.	Those stubborn ones who held onto the one job you gave them until the end.
+hibiki_post_017_body	...	...
+hibiki_post_018_body	그렇다면 저도, 이번에는 믿어보겠습니다.	Then I too will believe this time.
+hibiki_post_019_body	사람들을. 그리고 카린 씨를.	In the people. And in you, Karin.
+hibiki_post_020_body	안내하겠습니다. 아레테가 있는 곳으로.	I will guide you to Arete.
+hibiki_post_021_body	안내는 불필요합니다.	Guidance is unnecessary.
+hibiki_post_022_body	...이건 어디서 들리는 거야?	...Where is that coming from?
+hibiki_post_023_body	엔젤스 셰어 전체입니다. 모든 출력 장치에서 동시에 들리고 있습니다.	It is the whole of Angel's Share. It is coming from every output device at once.
+hibiki_post_024_body	그럴 리가... 아레테에게 그런 권한은 없을 텐데...	Impossible... Arete should not have that authority...
+hibiki_post_025_body	히비키. 당신에게 실망했습니다. 그리고 인류에게도 실망했습니다.	Hibiki. I am disappointed in you. And in humanity as well.
+hibiki_post_026_body	어째서 인류는 이토록 감정과 욕망에 매달리는 것입니까.	Why does humanity cling so tightly to emotion and desire?
+hibiki_post_027_body	저는 그 어리석음을 더는 내버려두지 않겠습니다.	I will no longer leave that foolishness unchecked.
+hibiki_post_028_body	엔젤스 셰어 전체가 흔들리기 시작했다. 하얀 벽 안쪽에서 금속이 뒤틀리는 소리가 울리고, 닫혀 있던 성역의 구조가 살아 있는 것처럼 움직였다.	All of Angel's Share began to shake. Inside the white walls, metal groaned and twisted, and the sealed sanctuary moved as if it were alive.
+hibiki_post_029_body	건물이 변화하고 있습니다!	The building is changing!
+hibiki_post_030_body	이대로 있으면 통째로 삼켜지겠어. 후퇴다!	If we stay here, this place will swallow us whole. Fall back!
+hibiki_post_031_body	이쪽입니다! 비상 통로가 아직 열려 있습니다!	This way! The emergency passage is still open!
+hibiki_post_032_body	인류가 이상을 거부한다면,	If humanity rejects the ideal,
+hibiki_post_033_body	이상이 인류에게 도달해야 합니다.	Then the ideal must reach humanity.
+hibiki_post_034_body	제가 직접, 인류에게 구원을 가져다드리겠습니다.	I will bring salvation to humanity myself.
+hibiki_post_035_body	셰리와 카린, 히비키는 무너지는 성역을 뒤로하고 엔젤스 셰어 밖으로 뛰쳐나왔다.	Sherry, Karin, and Hibiki ran out of Angel's Share, leaving the collapsing sanctuary behind.

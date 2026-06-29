@@ -1,103 +1,73 @@
 lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID	noNextLineID
 prologue_b_001							prologue_b_001	None		AreteRoom			FALSE	FALSE	FALSE									
-prologue_b_002							prologue_b_002	None					FALSE	FALSE	FALSE									
-prologue_b_003							prologue_b_003	None					FALSE	FALSE	FALSE									
-prologue_b_004	karin	karin		suspicious		name_karin	prologue_b_004	None					FALSE	FALSE	FALSE									
-prologue_b_005	karin	karin		suspicious		name_karin	prologue_b_005	None					FALSE	FALSE	FALSE									
-prologue_b_006	karin	karin		happy		name_karin	prologue_b_006	None					FALSE	FALSE	FALSE									
-prologue_b_007	arete	karin	arete	happy	neutral	name_arete	prologue_b_007	None					FALSE	FALSE	FALSE									
-prologue_b_008	karin	karin		serious		name_karin	prologue_b_008	None					FALSE	FALSE	FALSE									
-prologue_b_009	arete	karin	arete	serious	neutral	name_arete	prologue_b_009	None					FALSE	FALSE	FALSE									
-prologue_b_010	arete	karin	arete	serious	neutral	name_arete	prologue_b_010	None					FALSE	FALSE	FALSE									
-prologue_b_011	karin	karin		confront		name_karin	prologue_b_011	None					FALSE	FALSE	FALSE									
-prologue_b_012	arete	karin	arete	confront	neutral	name_arete	prologue_b_012	None					FALSE	FALSE	FALSE									
-prologue_b_013	karin	karin		suspicious		name_karin	prologue_b_013	None					FALSE	FALSE	FALSE									
+prologue_b_002	karin	karin		suspicious		name_karin	prologue_b_002	None					FALSE	FALSE	FALSE									
+prologue_b_003	arete	karin	arete	suspicious	neutral	name_arete	prologue_b_003	None					FALSE	FALSE	FALSE									
+prologue_b_004	karin	karin	arete	serious	neutral	name_karin	prologue_b_004	None					FALSE	FALSE	FALSE									
+prologue_b_005	arete	karin	arete	serious	neutral	name_arete	prologue_b_005	None					FALSE	FALSE	FALSE									
+prologue_b_006	karin	karin	arete	confront	neutral	name_karin	prologue_b_006	None					FALSE	FALSE	FALSE									
+prologue_b_007	arete	karin	arete	confront	neutral	name_arete	prologue_b_007	None					FALSE	FALSE	FALSE									
+prologue_b_008	karin	karin	arete	suspicious	neutral	name_karin	prologue_b_008	None					FALSE	FALSE	FALSE									
+prologue_b_009	arete	karin	arete	suspicious	neutral	name_arete	prologue_b_009	None					FALSE	FALSE	FALSE									
+prologue_b_010	karin	karin	arete	serious	neutral	name_karin	prologue_b_010	None					FALSE	FALSE	FALSE									
+prologue_b_011	karin	karin	arete	serious	neutral	name_karin	prologue_b_011	None					FALSE	FALSE	FALSE									
+prologue_b_012	arete	karin	arete	serious	neutral	name_arete	prologue_b_012	None					FALSE	FALSE	FALSE									
+prologue_b_013	karin	karin	arete	suspicious	neutral	name_karin	prologue_b_013	None					FALSE	FALSE	FALSE									
 prologue_b_014	arete	karin	arete	suspicious	neutral	name_arete	prologue_b_014	None					FALSE	FALSE	FALSE									
-prologue_b_015	karin	karin		serious		name_karin	prologue_b_015	None					FALSE	FALSE	FALSE									
-prologue_b_016	karin	karin		serious		name_karin	prologue_b_016	None					FALSE	FALSE	FALSE									
-prologue_b_017	karin	karin		serious		name_karin	prologue_b_017	None					FALSE	FALSE	FALSE									
-prologue_b_018	arete	karin	arete	serious	neutral	name_arete	prologue_b_018	None					FALSE	FALSE	FALSE									
-prologue_b_019	arete	karin	arete	serious	neutral	name_arete	prologue_b_019	None					FALSE	FALSE	FALSE									
-prologue_b_020	karin	karin		suspicious		name_karin	prologue_b_020	None					FALSE	FALSE	FALSE									
-prologue_b_021	arete	karin	arete	suspicious	neutral	name_arete	prologue_b_021	None					FALSE	FALSE	FALSE									
-prologue_b_022	arete	karin	arete	suspicious	neutral	name_arete	prologue_b_022	None					FALSE	FALSE	FALSE									
-prologue_b_023	karin	karin		confront		name_karin	prologue_b_023	None					FALSE	FALSE	FALSE									
+prologue_b_015	karin	karin	arete	confront	neutral	name_karin	prologue_b_015	None					FALSE	FALSE	FALSE									
+prologue_b_016	arete	karin	arete	confront	neutral	name_arete	prologue_b_016	None					FALSE	FALSE	FALSE									
+prologue_b_017	arete	karin	arete	confront	neutral	name_arete	prologue_b_017	None					FALSE	FALSE	FALSE									
+prologue_b_018	arete	karin	arete	confront	neutral	name_arete	prologue_b_018	None					FALSE	FALSE	FALSE									
+prologue_b_019	karin	karin	arete	serious	neutral	name_karin	prologue_b_019	None					FALSE	FALSE	FALSE									
+prologue_b_020	arete	karin	arete	serious	neutral	name_arete	prologue_b_020	None					FALSE	FALSE	FALSE									
+prologue_b_021	karin	karin	arete	speechless	neutral	name_karin	prologue_b_021	None					FALSE	FALSE	FALSE									
+prologue_b_022	arete	karin	arete	speechless	neutral	name_arete	prologue_b_022	None					FALSE	FALSE	FALSE									
+prologue_b_023	karin	karin	arete	confront	neutral	name_karin	prologue_b_023	None					FALSE	FALSE	FALSE									
 prologue_b_024	arete	karin	arete	confront	neutral	name_arete	prologue_b_024	None					FALSE	FALSE	FALSE									
-prologue_b_025	arete	karin	arete	confront	neutral	name_arete	prologue_b_025	None					FALSE	FALSE	FALSE									
-prologue_b_026	arete	karin	arete	confront	neutral	name_arete	prologue_b_026	None					FALSE	FALSE	FALSE									
-prologue_b_027	arete	karin	arete	confront	neutral	name_arete	prologue_b_027	None					FALSE	FALSE	FALSE									
-prologue_b_028	arete	karin	arete	confront	neutral	name_arete	prologue_b_028	None					FALSE	FALSE	FALSE									
-prologue_b_029	karin	karin		serious		name_karin	prologue_b_029	None					FALSE	FALSE	FALSE									
-prologue_b_030	karin	karin		serious		name_karin	prologue_b_030	None					FALSE	FALSE	FALSE									
-prologue_b_031	arete	karin	arete	serious	neutral	name_arete	prologue_b_031	None					FALSE	FALSE	FALSE									
-prologue_b_032	karin	karin		speechless		name_karin	prologue_b_032	None					FALSE	FALSE	FALSE									
-prologue_b_033	karin	karin		speechless		name_karin	prologue_b_033	None					FALSE	FALSE	FALSE									
-prologue_b_034	arete	karin	arete	speechless	neutral	name_arete	prologue_b_034	None					FALSE	FALSE	FALSE									
-prologue_b_035	karin	karin		confront		name_karin	prologue_b_035	None					FALSE	FALSE	FALSE									
-prologue_b_036	karin	karin		confront		name_karin	prologue_b_036	None					FALSE	FALSE	FALSE									
-prologue_b_037	karin	karin		confront		name_karin	prologue_b_037	None					FALSE	FALSE	FALSE									
-prologue_b_038	arete	karin	arete	confront	neutral	name_arete	prologue_b_038	None					FALSE	FALSE	FALSE									
-prologue_b_039	karin	karin		speechless		name_karin	prologue_b_039	None					FALSE	FALSE	FALSE									
-prologue_b_040	karin	karin		confront		name_karin	prologue_b_040	None					FALSE	FALSE	FALSE									
-prologue_b_041	arete	karin	arete	confront	neutral	name_arete	prologue_b_041	None					FALSE	FALSE	FALSE									
-prologue_b_042	karin	karin		speechless		name_karin	prologue_b_042	None					FALSE	FALSE	FALSE									
-prologue_b_043	arete	karin	arete	speechless	neutral	name_arete	prologue_b_043	None					FALSE	FALSE	FALSE									
-prologue_b_044	karin	karin		speechless		name_karin	prologue_b_044	None					FALSE	FALSE	FALSE									
-prologue_b_045	karin	karin		serious		name_karin	prologue_b_045	None					FALSE	FALSE	FALSE									
-prologue_b_046	karin	karin		serious		name_karin	prologue_b_046	None					FALSE	FALSE	FALSE									
-prologue_b_047							prologue_b_047	None			Key		FALSE	TRUE	FALSE									
-prologue_b_048							prologue_b_048	None					FALSE	FALSE	FALSE									
-prologue_b_049	karin	karin		serious		name_karin	prologue_b_049	None					FALSE	FALSE	FALSE									
-prologue_b_050	arete	karin	arete	serious	neutral	name_arete	prologue_b_050	None					FALSE	FALSE	FALSE									
-prologue_b_051	arete	karin	arete	serious	neutral	name_arete	prologue_b_051	None					FALSE	FALSE	FALSE									
-prologue_b_052	hibiki	karin	hibiki	serious	neutral	name_hibiki	prologue_b_052	None					FALSE	FALSE	FALSE									
-prologue_b_053	karin	karin	hibiki	suspicious		name_karin	prologue_b_053	None					FALSE	FALSE	FALSE									
-prologue_b_054	hibiki	karin	hibiki	suspicious	neutral	name_hibiki	prologue_b_054	None					FALSE	FALSE	FALSE									
-prologue_b_055	hibiki	karin	hibiki	suspicious	neutral	name_hibiki	prologue_b_055	None					FALSE	FALSE	FALSE									
-prologue_b_056	karin	karin	hibiki	confront		name_karin	prologue_b_056	None					FALSE	FALSE	FALSE									
-prologue_b_057	karin	karin	hibiki	confront		name_karin	prologue_b_057	None					FALSE	FALSE	FALSE									
-prologue_b_058	hibiki	karin	hibiki	confront	neutral	name_hibiki	prologue_b_058	None					FALSE	FALSE	FALSE									
-prologue_b_059	karin	karin	hibiki	serious		name_karin	prologue_b_059	None					FALSE	FALSE	FALSE									
-prologue_b_060	hibiki	karin	hibiki	serious	neutral	name_hibiki	prologue_b_060	None					FALSE	FALSE	FALSE									
-prologue_b_061	hibiki	karin	hibiki	serious	neutral	name_hibiki	prologue_b_061	None					FALSE	FALSE	FALSE									
-prologue_b_062	hibiki	karin	hibiki	serious	neutral	name_hibiki	prologue_b_062	None					FALSE	FALSE	FALSE									
-prologue_b_063	arete	karin	arete	serious	neutral	name_arete	prologue_b_063	None					FALSE	FALSE	FALSE									
-prologue_b_064	hibiki	hibiki	arete	neutral	neutral	name_hibiki	prologue_b_064	None					FALSE	FALSE	FALSE									
-prologue_b_065	arete	hibiki	arete	neutral	neutral	name_arete	prologue_b_065	None					FALSE	FALSE	FALSE									
-prologue_b_066	hibiki	hibiki	arete	neutral	neutral	name_hibiki	prologue_b_066	None					FALSE	FALSE	FALSE									
-prologue_b_067	karin	karin	hibiki	desperate	neutral	name_karin	prologue_b_067	None					FALSE	FALSE	FALSE									
-prologue_b_068							prologue_b_068	None					FALSE	FALSE	FALSE									
-prologue_b_069							prologue_b_069	None					FALSE	FALSE	FALSE									
-prologue_b_070							prologue_b_070	None					FALSE	FALSE	FALSE									
-prologue_b_071	karin	karin		desperate		name_karin	prologue_b_071	None					FALSE	FALSE	FALSE									
-prologue_b_072	arete	karin	arete	desperate	neutral	name_arete	prologue_b_072	None					FALSE	FALSE	FALSE									
-prologue_b_073	arete	karin	arete	desperate	neutral	name_arete	prologue_b_073	None					FALSE	FALSE	FALSE									
-prologue_b_074	karin	karin	hibiki	desperateShout	neutral	name_karin	prologue_b_074	None					FALSE	FALSE	FALSE									
-prologue_b_075	hibiki	karin	hibiki	desperateShout	neutral	name_hibiki	prologue_b_075	None					FALSE	FALSE	FALSE									
-prologue_b_076	hibiki	karin	hibiki	desperateShout	neutral	name_hibiki	prologue_b_076	None					FALSE	FALSE	FALSE									
-prologue_b_077	karin	karin	hibiki	desperate	neutral	name_karin	prologue_b_077	None					FALSE	FALSE	FALSE									
-prologue_b_078	hibiki	karin	hibiki	desperate	neutral	name_hibiki	prologue_b_078	None					FALSE	FALSE	FALSE									
-prologue_b_079	hibiki	karin	hibiki	desperate	neutral	name_hibiki	prologue_b_079	None					FALSE	FALSE	FALSE									
-prologue_b_080	arete	hibiki	arete	neutral	neutral	name_arete	prologue_b_080	None					FALSE	FALSE	FALSE									
-prologue_b_081	arete	hibiki	arete	neutral	neutral	name_arete	prologue_b_081	None					FALSE	FALSE	FALSE									
-prologue_b_082	hibiki	hibiki	arete	neutral	neutral	name_hibiki	prologue_b_082	None					FALSE	FALSE	FALSE									
-prologue_b_083							prologue_b_083	None					FALSE	FALSE	FALSE									
-prologue_b_084							prologue_b_084	None					FALSE	FALSE	FALSE									
-prologue_b_085	karin	karin		despair		name_karin	prologue_b_085	None					FALSE	FALSE	FALSE									
-prologue_b_086	arete	karin	arete	despair	neutral	name_arete	prologue_b_086	None					FALSE	FALSE	FALSE									
-prologue_b_087	arete	karin	arete	despair	neutral	name_arete	prologue_b_087	None					FALSE	FALSE	FALSE									
-prologue_b_088	arete	karin	arete	despair	neutral	name_arete	prologue_b_088	None					FALSE	FALSE	FALSE									
-prologue_b_089	arete	karin	arete	despair	neutral	name_arete	prologue_b_089	None					FALSE	FALSE	FALSE									
-prologue_b_090	arete	karin	arete	despair	neutral	name_arete	prologue_b_090	None					FALSE	FALSE	FALSE									
-prologue_b_091	karin	karin		hope		name_karin	prologue_b_091	None					FALSE	FALSE	FALSE									
-prologue_b_092	karin	karin		hope		name_karin	prologue_b_092	None					FALSE	FALSE	FALSE									
-prologue_b_093							prologue_b_093	None					FALSE	FALSE	FALSE									
-prologue_b_094	hibiki	hibiki	arete	neutral	neutral	name_hibiki	prologue_b_094	None					FALSE	FALSE	FALSE									
-prologue_b_095	arete	hibiki	arete	neutral	neutral	name_arete	prologue_b_095	None					FALSE	FALSE	FALSE									
-prologue_b_096	hibiki	hibiki	arete	neutral	neutral	name_hibiki	prologue_b_096	None					FALSE	FALSE	FALSE									
-prologue_b_097	arete	hibiki	arete	neutral	neutral	name_arete	prologue_b_097	None					FALSE	FALSE	FALSE									
-prologue_b_098	hibiki	hibiki	arete	neutral	neutral	name_hibiki	prologue_b_098	None					FALSE	FALSE	FALSE									
-prologue_b_099	arete	hibiki	arete	neutral	neutral	name_arete	prologue_b_099	None					FALSE	FALSE	FALSE									
-prologue_b_100							prologue_b_100	None					FALSE	FALSE	FALSE									
-prologue_b_101							prologue_b_101	None					FALSE	FALSE	FALSE									
-prologue_b_102							prologue_b_102	None					FALSE	FALSE	FALSE									
+prologue_b_025	karin	karin	arete	serious	neutral	name_karin	prologue_b_025	None					FALSE	FALSE	FALSE									
+prologue_b_026	arete	karin	arete	serious	neutral	name_arete	prologue_b_026	None					FALSE	FALSE	FALSE									
+prologue_b_027	karin	karin	arete	speechless	neutral	name_karin	prologue_b_027	None					FALSE	FALSE	FALSE									
+prologue_b_028	arete	karin	arete	speechless	neutral	name_arete	prologue_b_028	None					FALSE	FALSE	FALSE									
+prologue_b_029	karin	karin	arete	speechless	neutral	name_karin	prologue_b_029	None					FALSE	FALSE	FALSE									
+prologue_b_030	karin	karin	arete	serious	neutral	name_karin	prologue_b_030	None					FALSE	FALSE	FALSE									
+prologue_b_031							prologue_b_031	None			Key		FALSE	TRUE	FALSE									
+prologue_b_032	karin	karin	arete	serious	neutral	name_karin	prologue_b_032	None					FALSE	FALSE	FALSE									
+prologue_b_033	arete	karin	arete	serious	neutral	name_arete	prologue_b_033	None					FALSE	FALSE	FALSE									
+prologue_b_034	arete	karin	arete	serious	neutral	name_arete	prologue_b_034	None					FALSE	FALSE	FALSE									
+prologue_b_035	hibiki	karin	hibiki	serious	neutral	name_hibiki	prologue_b_035	None					FALSE	FALSE	FALSE									
+prologue_b_036	karin	karin	hibiki	suspicious	neutral	name_karin	prologue_b_036	None					FALSE	FALSE	FALSE									
+prologue_b_037	hibiki	karin	hibiki	suspicious	neutral	name_hibiki	prologue_b_037	None					FALSE	FALSE	FALSE									
+prologue_b_038	karin	karin	hibiki	confront	neutral	name_karin	prologue_b_038	None					FALSE	FALSE	FALSE									
+prologue_b_039	hibiki	karin	hibiki	confront	neutral	name_hibiki	prologue_b_039	None					FALSE	FALSE	FALSE									
+prologue_b_040	karin	karin	hibiki	serious	neutral	name_karin	prologue_b_040	None					FALSE	FALSE	FALSE									
+prologue_b_041	hibiki	karin	hibiki	serious	neutral	name_hibiki	prologue_b_041	None					FALSE	FALSE	FALSE									
+prologue_b_042	hibiki	karin	hibiki	serious	neutral	name_hibiki	prologue_b_042	None					FALSE	FALSE	FALSE									
+prologue_b_043	hibiki	karin	hibiki	serious	neutral	name_hibiki	prologue_b_043	None					FALSE	FALSE	FALSE									
+prologue_b_044	arete	karin	arete	serious	neutral	name_arete	prologue_b_044	None					FALSE	FALSE	FALSE									
+prologue_b_045	hibiki	hibiki	arete	serious	neutral	name_hibiki	prologue_b_045	None					FALSE	FALSE	FALSE									
+prologue_b_046	arete	hibiki	arete	serious	neutral	name_arete	prologue_b_046	None					FALSE	FALSE	FALSE									
+prologue_b_047	hibiki	hibiki	arete	serious	neutral	name_hibiki	prologue_b_047	None					FALSE	FALSE	FALSE									
+prologue_b_048	karin	karin	hibiki	desperate	neutral	name_karin	prologue_b_048	None					FALSE	FALSE	FALSE									
+prologue_b_049							prologue_b_049	None					FALSE	FALSE	FALSE									
+prologue_b_050	karin	karin	hibiki	desperate	neutral	name_karin	prologue_b_050	None					FALSE	FALSE	FALSE									
+prologue_b_051	arete	karin	arete	desperate	neutral	name_arete	prologue_b_051	None					FALSE	FALSE	FALSE									
+prologue_b_052	karin	karin	hibiki	desperateShout	neutral	name_karin	prologue_b_052	None					FALSE	FALSE	FALSE									
+prologue_b_053	hibiki	karin	hibiki	desperateShout	neutral	name_hibiki	prologue_b_053	None					FALSE	FALSE	FALSE									
+prologue_b_054	karin	karin	hibiki	desperate	neutral	name_karin	prologue_b_054	None					FALSE	FALSE	FALSE									
+prologue_b_055	hibiki	karin	hibiki	desperate	neutral	name_hibiki	prologue_b_055	None					FALSE	FALSE	FALSE									
+prologue_b_056	arete	hibiki	arete	neutral	neutral	name_arete	prologue_b_056	None					FALSE	FALSE	FALSE									
+prologue_b_057	hibiki	hibiki	arete	neutral	neutral	name_hibiki	prologue_b_057	None					FALSE	FALSE	FALSE									
+prologue_b_058							prologue_b_058	None					FALSE	FALSE	FALSE									
+prologue_b_059	karin	karin	arete	despair	neutral	name_karin	prologue_b_059	None					FALSE	FALSE	FALSE									
+prologue_b_060	arete	karin	arete	despair	neutral	name_arete	prologue_b_060	None					FALSE	FALSE	FALSE									
+prologue_b_061	arete	karin	arete	despair	neutral	name_arete	prologue_b_061	None					FALSE	FALSE	FALSE									
+prologue_b_062	karin	karin	arete	hope	neutral	name_karin	prologue_b_062	None					FALSE	FALSE	FALSE									
+prologue_b_063	karin	karin	arete	hope	neutral	name_karin	prologue_b_063	None					FALSE	FALSE	FALSE									
+prologue_b_064							prologue_b_064	None					FALSE	FALSE	FALSE									
+prologue_b_065	hibiki	hibiki	arete	neutral	neutral	name_hibiki	prologue_b_065	None					FALSE	FALSE	FALSE									
+prologue_b_066	arete	hibiki	arete	neutral	neutral	name_arete	prologue_b_066	None					FALSE	FALSE	FALSE									
+prologue_b_067	hibiki	hibiki	arete	neutral	neutral	name_hibiki	prologue_b_067	None					FALSE	FALSE	FALSE									
+prologue_b_068	arete	hibiki	arete	neutral	neutral	name_arete	prologue_b_068	None					FALSE	FALSE	FALSE									
+prologue_b_069	hibiki	hibiki	arete	neutral	neutral	name_hibiki	prologue_b_069	None					FALSE	FALSE	FALSE									
+prologue_b_070	arete	hibiki	arete	neutral	neutral	name_arete	prologue_b_070	None					FALSE	FALSE	FALSE									
+prologue_b_071							prologue_b_071	None					FALSE	FALSE	FALSE									
+prologue_b_072							prologue_b_072	None					FALSE	FALSE	FALSE									

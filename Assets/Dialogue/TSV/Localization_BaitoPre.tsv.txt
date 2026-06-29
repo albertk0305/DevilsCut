@@ -1,0 +1,48 @@
+Key	Korean	English
+speaker_baito	바이토	Baito
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+hidden_baito_pre_001_body	실패했어요... 실패했어요... 실패했어요... 실패했어요... 실패했어요... 실패했어요... 실패했어요... 실패했어요...	I failed... I failed... I failed... I failed... I failed... I failed... I failed... I failed...
+hidden_baito_pre_002_body	바이토...?	Baito...?
+hidden_baito_pre_003_body	바이토의 상태가 평소와 다릅니다.	Baito's condition is different from usual.
+hidden_baito_pre_004_body	왜 그래. 문샤인 알바 자리 전부 날아갔어?	What is wrong. Did every part time job in Moonshine disappear?
+hidden_baito_pre_005_body	그런 문제가 아니에요... 셰리 언니. 전부 실패했어요.	That is not the problem... Sherry. Everything failed.
+hidden_baito_pre_006_body	처음부터 말해. 뭐가 실패했다는 건데.	Start from the beginning. What failed?
+hidden_baito_pre_007_body	저는... 이 시간 사람이 아니에요.	I am... not a person from this time.
+hidden_baito_pre_008_body	갑자기 이야기가 매우 흥미로워졌습니다.	This story suddenly became very interesting.
+hidden_baito_pre_009_body	저는 아레테가 도시를 지배한 미래에서 온 전사예요.	I am a warrior from a future where Arete rules the city.
+hidden_baito_pre_010_body	미래를 바꾸기 위해 이 시간대로 왔어요.	I came to this time to change the future.
+hidden_baito_pre_011_body	어쩐지 이상하더라.	I knew something was off.
+hidden_baito_pre_012_body	보통 알바가 그 많은 시설에서 혼자 대타 뛰고, 계산하고, 청소하고, 취객 말리고, 다음 가게로 뛰어가진 않거든.	A normal part timer does not cover that many shops alone, handle the register, clean, stop drunk customers, and then run to the next place.
+hidden_baito_pre_013_body	바이토의 노동 효율은 비정상적으로 높았습니다.	Baito's work efficiency was abnormally high.
+hidden_baito_pre_014_body	그건 미래에서 살아남기 위해 익힌 전투 감각이 몸에 남아 있었기 때문이에요.	That was because the combat instincts I learned to survive in the future remained in my body.
+hidden_baito_pre_015_body	전투 감각으로 서빙을 한 거야?	You served customers with combat instincts?
+hidden_baito_pre_016_body	네. 알바도 전장이니까요.	Yes. Part time work is a battlefield too.
+hidden_baito_pre_017_body	완전 알바 전사네.	You really are a part time warrior.
+hidden_baito_pre_018_body	웃을 일이 아니에요!	This is not funny!
+hidden_baito_pre_019_body	제 시간선에서 셰리 언니와 카린은 아레테에게 졌어요.	In my timeline, you and Karin lost to Arete.
+hidden_baito_pre_020_body	카린과 셰리가... 패배했습니까?	Karin and Sherry... were defeated?
+hidden_baito_pre_021_body	네, 셰리 언니는 끝까지 혼자 싸우려고 했어요. 아무도 곁에 두지 않고, 누구의 도움도 받지 않고요.	Yes. You tried to fight alone until the end. You kept no one beside you and accepted help from no one.
+hidden_baito_pre_022_body	그래서 저는 과거로 왔어요.	That is why I came to the past.
+hidden_baito_pre_023_body	셰리 언니가 혼자 싸우다 쓰러지는 미래를 바꾸려고요.	To change the future where you fell after fighting alone.
+hidden_baito_pre_024_body	그런데 넌 지금까지 알바만 뛰고 있었지.	But you were just working part time jobs until now.
+hidden_baito_pre_025_body	그게... 타임머신에 문제가 생겼어요. 도착하자마자 기억이 엉망이 됐고... 제가 왜 왔는지도 잊어버렸어요.	That is... because something went wrong with the time machine. My memories became a mess as soon as I arrived... and I even forgot why I came here.
+hidden_baito_pre_026_body	그래서 일단 생활비부터 벌어야 했어요. 기억은 잃어도 월세와 식비는 기다려주지 않으니까요.	So I had to earn living expenses first. Even if I lost my memories, rent and food costs would not wait.
+hidden_baito_pre_027_body	생활력 하나는 세계선을 넘어도 안 죽는군.	Your survival instincts stay alive even across timelines.
+hidden_baito_pre_028_body	하지만 지금 바이토는 기억을 되찾았습니다.	But Baito has regained her memories now.
+hidden_baito_pre_029_body	너무 늦었어요. 지금부터 조력자를 찾으러 가도, 아레테가 먼저 움직일 거예요.	It is too late. Even if we go looking for supporters now, Arete will move first.
+hidden_baito_pre_030_body	셰리 언니가 혼자 싸우다 쓰러지지 않게 과거를 바꿨어야 했는데...	I should have changed the past so you would not fall while fighting alone...
+hidden_baito_pre_031_body	아직 끝나지 않았어.	It is not over yet.
+hidden_baito_pre_032_body	네?	What?
+hidden_baito_pre_033_body	네 말대로라면 난 도움이 필요해. 그런데 지금 여기 있는 건 너잖아.	According to you, I need help. And you are the one standing here right now.
+hidden_baito_pre_034_body	저요?	Me?
+hidden_baito_pre_035_body	미래에서 온 알바 전사잖아?	You are a part time warrior from the future, right?
+hidden_baito_pre_036_body	제가 직접 도와드리는 건...	Helping you directly is...
+hidden_baito_pre_037_body	뭔가 사정이 있나 보네.	So there is a reason.
+hidden_baito_pre_038_body	네. 하지만 방법이 하나 있습니다. 제가 셰리 언니를 단련시키겠습니다.	Yes. But there is one way. I will train you, Sherry.
+hidden_baito_pre_039_body	네가 내 상대가 된다는 뜻이야?	You mean you will be my opponent?
+hidden_baito_pre_040_body	네.	Yes.
+hidden_baito_pre_041_body	정말 괜찮겠어? 나, 시작하면 진심으로 하거든.	Are you sure? Once I start, I do not hold back.
+hidden_baito_pre_042_body	걱정 마세요. 저, 엄청 강하거든요.	Do not worry. I am really strong.
+hidden_baito_pre_043_body	좋아. 그럼 한번 맡겨볼까.	All right. Then I will leave it to you.
+hidden_baito_pre_044_body	이번에야말로 사명을 완수하겠습니다!	This time, I will complete my mission!

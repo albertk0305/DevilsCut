@@ -1,2 +1,0 @@
-Key	Korean	English
-final_boss_001	강적을 쓰러뜨렸다.	Enemy Felled

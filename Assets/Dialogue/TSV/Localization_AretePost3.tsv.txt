@@ -1,0 +1,45 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_hibiki	히비키	Hibiki
+speaker_mammon	마몬	Mammon
+speaker_sariel	사리엘	Sariel
+speaker_lucifer	루시퍼	Lucifer
+speaker_gabriel	가브리엘	Gabriel
+speaker_asmodeus	아스모데우스	Asmodeus
+speaker_baalzebub	바알제붑	Baalzebub
+speaker_belphegor	벨페고르	Belphegor
+speaker_leviathan	레비아탄	Leviathan
+speaker_raguel	라구엘	Raguel
+speaker_michael	미카엘	Michael
+speaker_uriel	우리엘	Uriel
+speaker_raphael	라파엘	Raphael
+speaker_remiel	레미엘	Remiel
+speaker_satan	사탄	Satan
+council_epilogue_001_body	도시를 지배하던 절대적인 규율이 사라진 지 며칠이 지났다.	Several days had passed since the absolute rules that governed the city disappeared.
+council_epilogue_002_body	우유, 빵, 통조림... 싸구려 위스키.	Milk, bread, canned food... cheap whiskey.
+council_epilogue_003_body	이제 눈치 안 보고 살 수 있다니, 세상 참 좋아졌네.	The world sure got better if I can buy this without anyone glaring at me.
+council_epilogue_004_body	조수가 생기니 사야 할 것도 많아졌고.	And now that I have an assistant, there is more to buy.
+council_epilogue_005_body	거래 규제부터 풀어야죠! 계약서 안 읽고 손해 본 것까지 내 책임은 아니잖아요!	Trade regulations should be loosened first! It is not my fault if someone loses money after not reading the contract!
+council_epilogue_006_body	상당히 소란스럽네.	That is quite a racket.
+council_epilogue_007_body	확인해볼까.	Guess I will take a look.
+council_epilogue_008_body	차례대로 발언해 주십시오. 한 분씩입니다.	Please speak in order. One at a time.
+council_epilogue_009_body	그럼 수수료부터 낮춰주세요! 자유로운 거래에 수수료가 붙으면 그건 자유가 아니죠!	Then lower the fees first! If free trade comes with fees, that is not freedom!
+council_epilogue_010_body	부는 개인에게 머무르기보다 전체를 위해 순환해야 합니다. 그것이 더 많은 사람을 위한 선입니다.	Wealth should circulate for the whole rather than remain with individuals. That is the good that serves more people.
+council_epilogue_011_body	저는... 술에 대한 규제도 조금 완화되면 좋겠습니다. 모두가 책임 있게 마신다는 전제하에서요...	I would... appreciate a slight easing of alcohol regulations. Under the premise that everyone drinks responsibly...
+council_epilogue_012_body	복장 규정부터 재정비해야 합니다. 단추는 사회적 신뢰의 시작입니다!	We must reorganize the dress code first. Buttons are the beginning of social trust!
+council_epilogue_013_body	꾸밀 권리도 보장해야죠! 아름다움은 시민의 자유라고요!	The right to dress up should be protected too! Beauty is a citizen's freedom!
+council_epilogue_014_body	어려운 얘기는 밥 먹고 해라. 배가 비어 있으면 좋은 결론에도 못 닿는 법이야.	Talk about the hard stuff after eating. You cannot reach a good conclusion on an empty stomach.
+council_epilogue_015_body	하아암... 낮잠 복지도 필요해. 꿈꿀 틈도 없는 도시는 결국 악몽만 꾸게 되거든.	Yaaawn... We need nap welfare too. A city with no time to dream will only end up having nightmares.
+council_epilogue_016_body	사랑하는 사람을 지켜보는 것은 스토킹이 아닙니다. 권리입니다.	Watching over someone you love is not stalking. It is a right.
+council_epilogue_017_body	권리... 그런 형태의 사랑도 있었군요. 공부가 되었습니다.	A right... So that form of love exists as well. I have learned something.
+council_epilogue_018_body	제가 이 자리에 있어도 되는 걸까요. 죄송합니다... 책임을 다하지 못해서 죄송합니다...	Do I deserve to be here? I am sorry... I am sorry I failed to fulfill my duty...
+council_epilogue_019_body	고개 들어라. 너도 우리의 일원이다.	Raise your head. You are one of us too.
+council_epilogue_020_body	여러분. 자유로울수록 마음을 다스리는 법을 배워야 합니다!	Everyone. The freer we are, the more we must learn to control our hearts!
+council_epilogue_021_body	도시의 문제는 의외로 단순합니다. 시간을 낭비하는 데 재능이 있으신 분들께서 그 재능을 조금만 덜 발휘하시면 됩니다.	The city's problems are surprisingly simple. Those gifted at wasting time only need to exercise that talent a little less.
+council_epilogue_022_body	셰리 내 거다! 아무도 넘보면 안 된다 해!	Sherry is mine! Nobody is allowed to make a move on her!
+council_epilogue_023_body	그 안건은 의회 안건이 아닙니다!	That matter is not on the council agenda!
+council_epilogue_024_body	이런이런. 기운 넘치는 도시네.	Well, well. What a lively city.
+council_epilogue_025_body	그래도 뭐...	Still...
+council_epilogue_026_body	숨 막히게 조용하던 때보단 낫지.	It is better than when everything was suffocatingly quiet.
+council_epilogue_027_body	돌아가자. 조수가 기다리고 있어.	Time to head back. My assistant is waiting.

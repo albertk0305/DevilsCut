@@ -1,0 +1,19 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+arete_prepare_001	narration	sherry	karin	serious	worry	speaker_narration	arete_prepare_001_body			DevilsCut			FALSE	FALSE	FALSE								
+arete_prepare_002	karin	sherry	karin	serious	worry	speaker_karin	arete_prepare_002_body						FALSE	FALSE	FALSE								
+arete_prepare_003	sherry	sherry	karin	seriousSpeak	worry	speaker_sherry	arete_prepare_003_body						FALSE	FALSE	FALSE								
+arete_prepare_004	sherry	sherry	karin	softSpeak	worry	speaker_sherry	arete_prepare_004_body						FALSE	FALSE	FALSE								
+arete_prepare_005	sherry	sherry	karin	softSpeak	worry	speaker_sherry	arete_prepare_005_body						FALSE	FALSE	FALSE								
+arete_prepare_006	sherry	sherry	karin	seriousSpeak	worry	speaker_sherry	arete_prepare_006_body						FALSE	FALSE	FALSE								
+arete_prepare_007	karin	sherry	karin	seriousSpeak	confidentSpeak	speaker_karin	arete_prepare_007_body						FALSE	FALSE	FALSE								
+arete_prepare_008	sherry	sherry	karin	greasy	confidentSpeak	speaker_sherry	arete_prepare_008_body						FALSE	FALSE	FALSE								
+arete_prepare_009	karin	sherry	karin	greasy	seriousSpeak	speaker_karin	arete_prepare_009_body						FALSE	FALSE	FALSE								
+arete_prepare_010	sherry	sherry	karin	smug	seriousSpeak	speaker_sherry	arete_prepare_010_body						FALSE	FALSE	FALSE								
+arete_prepare_011	karin	sherry	karin	smug	glum	speaker_karin	arete_prepare_011_body						FALSE	FALSE	FALSE								
+arete_prepare_012	karin	sherry	karin	smug	glum	speaker_karin	arete_prepare_012_body						FALSE	FALSE	FALSE								
+arete_prepare_013	karin	sherry	karin	smug	sorry	speaker_karin	arete_prepare_013_body						FALSE	FALSE	FALSE								
+arete_prepare_014	sherry	sherry	karin	hassle	sorry	speaker_sherry	arete_prepare_014_body						FALSE	FALSE	FALSE								
+arete_prepare_015	karin	sherry	karin	hassle	confidentSpeak	speaker_karin	arete_prepare_015_body						FALSE	FALSE	FALSE								
+arete_prepare_016	karin	sherry	karin	hassle	seriousSpeak	speaker_karin	arete_prepare_016_body						FALSE	FALSE	FALSE								
+arete_prepare_017	sherry	sherry	karin	smug	seriousSpeak	speaker_sherry	arete_prepare_017_body						FALSE	FALSE	FALSE								
+arete_prepare_018	sherry	sherry	karin	smirk	seriousSpeak	speaker_sherry	arete_prepare_018_body	LoadNextScene					FALSE	FALSE	FALSE								

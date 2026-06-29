@@ -1,0 +1,21 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+hidden_baito_post_001	sherry	sherry	baito	easy	default	speaker_sherry	hidden_baito_post_001_body			DayStreet			FALSE	FALSE	FALSE								
+hidden_baito_post_002	baito	sherry	baito	easy	default	speaker_baito	hidden_baito_post_002_body						FALSE	FALSE	FALSE								
+hidden_baito_post_003	baito	sherry	baito	easy	smile	speaker_baito	hidden_baito_post_003_body						FALSE	FALSE	FALSE								
+hidden_baito_post_004	sherry	sherry	baito	greasy	smile	speaker_sherry	hidden_baito_post_004_body						FALSE	FALSE	FALSE								
+hidden_baito_post_005	baito	sherry	baito	greasy	worried	speaker_baito	hidden_baito_post_005_body						FALSE	FALSE	FALSE								
+hidden_baito_post_006	karin	karin	baito	curious	worried	speaker_karin	hidden_baito_post_006_body						FALSE	FALSE	FALSE								
+hidden_baito_post_007	baito	karin	baito	curious	worried	speaker_baito	hidden_baito_post_007_body						FALSE	FALSE	FALSE								
+hidden_baito_post_008	sherry	sherry	baito	greasy	worried	speaker_sherry	hidden_baito_post_008_body						FALSE	FALSE	FALSE								
+hidden_baito_post_009	baito	sherry	baito	greasy	sad	speaker_baito	hidden_baito_post_009_body						FALSE	FALSE	FALSE								
+hidden_baito_post_010	baito	sherry	baito	greasy	sad	speaker_baito	hidden_baito_post_010_body						FALSE	FALSE	FALSE								
+hidden_baito_post_011	sherry	sherry	baito	softSpeak	sad	speaker_sherry	hidden_baito_post_011_body						FALSE	FALSE	FALSE								
+hidden_baito_post_012	baito	sherry	baito	softSpeak	worried	speaker_baito	hidden_baito_post_012_body						FALSE	FALSE	FALSE								
+hidden_baito_post_013	baito	sherry	baito	softSpeak	confident	speaker_baito	hidden_baito_post_013_body						FALSE	FALSE	FALSE								
+hidden_baito_post_014	baito	sherry	baito	softSpeak	default	speaker_baito	hidden_baito_post_014_body						FALSE	FALSE	FALSE								
+hidden_baito_post_015	karin	karin	baito	confidentSpeak	default	speaker_karin	hidden_baito_post_015_body						FALSE	FALSE	FALSE								
+hidden_baito_post_016	sherry	sherry	baito	smug	smile	speaker_sherry	hidden_baito_post_016_body						FALSE	FALSE	FALSE								
+hidden_baito_post_017	baito	sherry	baito	smug	smile	speaker_baito	hidden_baito_post_017_body						FALSE	FALSE	FALSE								
+hidden_baito_post_018	narration	sherry	karin	smug	determined	speaker_narration	hidden_baito_post_018_body						FALSE	FALSE	FALSE								
+hidden_baito_post_019	karin	sherry	karin	confidentSmile	determined	speaker_karin	hidden_baito_post_019_body						FALSE	FALSE	FALSE								
+hidden_baito_post_020	sherry	sherry	karin	smirk	determined	speaker_sherry	hidden_baito_post_020_body	LoadNextScene					FALSE	FALSE	FALSE								

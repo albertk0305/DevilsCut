@@ -1,0 +1,17 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_karin	카린	Karin
+speaker_arete	아레테	Arete
+speaker_sherry	셰리	Sherry
+arete_final_post_001_body	아레테는 쓰러졌다. 인류의 구원을 자처하던 하얀 육체는 균열 속에서 빛을 잃어가고 있었다.	Arete had fallen. The white body that claimed to be humanity's salvation was losing its light through its cracks.
+arete_final_post_002_body	여기까지입니다, 아레테.	This is the end, Arete.
+arete_final_post_003_body	이해할 수 없습니다.	I cannot understand.
+arete_final_post_004_body	인류는 구원되어야 합니다. 결핍을 품은 채로는—	Humanity must be saved. While carrying such deficiencies—
+arete_final_post_005_body	미안한데, 직장인은 바쁘거든.	Sorry, but working people are busy.
+arete_final_post_006_body	쓰러진 녀석의 마지막 변명을 끝까지 들어줄 시간은 없어.	We do not have time to hear every last excuse from someone already beaten.
+arete_final_post_007_body	정지 절차를 실행하겠습니다.	Executing shutdown procedure.
+arete_final_post_008_body	이해... 할 수...	I... cannot... understand...
+arete_final_post_009_body	이해 안 되면 고철장에 가서 마저 생각해보라고.	If you do not understand, think it over at the scrapyard.
+arete_final_post_010_body	마스터 키의 빛이 아레테의 중심부를 관통했다.	The light of the Master Key pierced through Arete's core.
+arete_final_post_011_body	그리고 아레테는 정지했다.	And Arete shut down.
+arete_final_post_012_body	도시를 지배하던 절대적인 기준도, 모두에게 강요되던 하나의 정답도 함께 사라졌다.	The absolute standard that ruled the city and the single answer forced upon everyone disappeared with it.

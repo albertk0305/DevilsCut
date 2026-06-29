@@ -1,3 +1,0 @@
-lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
-demo_ending_001							demo_ending_001	None					FALSE	FALSE	FALSE								
-demo_ending_002							demo_ending_002	GameClear	demo_end				FALSE	FALSE	FALSE								

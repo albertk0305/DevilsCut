@@ -1,0 +1,26 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+hibiki_pre_001	hibiki	sherry	hibiki	easy	neutral	name_hibiki	hibiki_pre_001	None		Shrine			FALSE	FALSE	FALSE								
+hibiki_pre_002	hibiki	sherry	hibiki	easy	neutral	name_hibiki	hibiki_pre_002	None					FALSE	FALSE	FALSE								
+hibiki_pre_003	karin	karin	hibiki	confidentSmile	neutral	name_karin	hibiki_pre_003	None					FALSE	FALSE	FALSE								
+hibiki_pre_004	hibiki	karin	hibiki	confidentSmile	serious	name_hibiki	hibiki_pre_004	None					FALSE	FALSE	FALSE								
+hibiki_pre_005	sherry	sherry	hibiki	mock	serious	name_sherry	hibiki_pre_005	None					FALSE	FALSE	FALSE								
+hibiki_pre_006	karin	karin	hibiki	seriousSpeak	serious	name_karin	hibiki_pre_006	None					FALSE	FALSE	FALSE								
+hibiki_pre_007	hibiki	karin	hibiki	seriousSpeak	serious	name_hibiki	hibiki_pre_007	None					FALSE	FALSE	FALSE								
+hibiki_pre_008	hibiki	karin	hibiki	seriousSpeak	speak	name_hibiki	hibiki_pre_008	None					FALSE	FALSE	FALSE								
+hibiki_pre_009	karin	karin	hibiki	confidentSpeak	speak	name_karin	hibiki_pre_009	None					FALSE	FALSE	FALSE								
+hibiki_pre_010	hibiki	karin	hibiki	confidentSpeak	neutral	name_hibiki	hibiki_pre_010	None					FALSE	FALSE	FALSE								
+hibiki_pre_011	hibiki	karin	hibiki	confidentSpeak	serious	name_hibiki	hibiki_pre_011	None					FALSE	FALSE	FALSE								
+hibiki_pre_012	sherry	sherry	hibiki	mock	serious	name_sherry	hibiki_pre_012	None					FALSE	FALSE	FALSE								
+hibiki_pre_013	hibiki	sherry	hibiki	mock	serious	name_hibiki	hibiki_pre_013	None					FALSE	FALSE	FALSE								
+hibiki_pre_014	hibiki	sherry	hibiki	mock	speak	name_hibiki	hibiki_pre_014	None					FALSE	FALSE	FALSE								
+hibiki_pre_015	sherry	sherry	hibiki	annoyed	speak	name_sherry	hibiki_pre_015	None					FALSE	FALSE	FALSE								
+hibiki_pre_016	hibiki	sherry	hibiki	annoyed	neutral	name_hibiki	hibiki_pre_016	None					FALSE	FALSE	FALSE								
+hibiki_pre_017	sherry	sherry	hibiki	greasy	neutral	name_sherry	hibiki_pre_017	None					FALSE	FALSE	FALSE								
+hibiki_pre_018	karin	karin	hibiki	seriousSpeak	neutral	name_karin	hibiki_pre_018	None					FALSE	FALSE	FALSE								
+hibiki_pre_019	hibiki	karin	hibiki	seriousSpeak	serious	name_hibiki	hibiki_pre_019	None					FALSE	FALSE	FALSE								
+hibiki_pre_020	sherry	sherry	hibiki	seriousSpeak	serious	name_sherry	hibiki_pre_020	None					FALSE	FALSE	FALSE								
+hibiki_pre_021	hibiki	sherry	hibiki	seriousSpeak	neutral	name_hibiki	hibiki_pre_021	None					FALSE	FALSE	FALSE								
+hibiki_pre_022	sherry	sherry	hibiki	serious	neutral	name_sherry	hibiki_pre_022	None					FALSE	FALSE	FALSE								
+hibiki_pre_023	hibiki	sherry	hibiki	serious	speak	name_hibiki	hibiki_pre_023	None					FALSE	FALSE	FALSE								
+hibiki_pre_024	karin	karin	hibiki	confidentSmile	speak	name_karin	hibiki_pre_024	None					FALSE	FALSE	FALSE								
+hibiki_pre_025	sherry	sherry	hibiki	smirk	speak	name_sherry	hibiki_pre_025	LoadNextScene					FALSE	FALSE	FALSE								

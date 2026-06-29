@@ -1,0 +1,22 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+arete_prepare_001_body	엔젤스 셰어에서 가까스로 빠져나온 뒤, 셰리와 카린은 데빌스 컷으로 돌아왔다.	After narrowly escaping Angel's Share, Sherry and Karin returned to Devil's Cut.
+arete_prepare_002_body	셰리. 히비키 씨를 현장에 남겨두고 와도 괜찮았을까요?	Sherry. Was it all right to leave Hibiki at the scene?
+arete_prepare_003_body	괜찮을 거야. 그 녀석도 이제 자기 눈으로 보겠다고 정했으니까.	She will be fine. She decided she would see things with her own eyes now.
+arete_prepare_004_body	남아서 현장을 수습하는 건, 무녀님 나름대로 책임을 지는 방식이겠지.	Staying behind to handle the scene is probably the High Priestess's way of taking responsibility.
+arete_prepare_005_body	그러니 우린 우리가 할 수 있는 걸 하자.	So we do what we can.
+arete_prepare_006_body	카린. 엔젤스 셰어에서 정확히 무슨 일이 벌어진 거야?	Karin. What exactly happened at Angel's Share?
+arete_prepare_007_body	분석 결과, 아레테가 엔젤스 셰어를 장악했습니다. 그리고 자신의 위치를 중심으로 건물 구조를 변형하여, 스스로를 외부와 격리한 상태입니다.	Analysis shows that Arete has seized control of Angel's Share. It reshaped the building around its own location and isolated itself from the outside.
+arete_prepare_008_body	그러니까 건물이 통째로 아레테의 껍데기가 됐다는 거네. 그런데 왜 스스로를 가둔 거지?	So the whole building turned into Arete's shell. But why lock itself inside?
+arete_prepare_009_body	시간을 벌기 위해서입니다. 현재 아레테는 엔젤스 셰어 내부에서 육체를 얻기 위한 구축 작업을 진행하고 있습니다.	To buy time. Arete is currently carrying out construction inside Angel's Share to obtain a body.
+arete_prepare_010_body	그럼 당장 쳐들어가서 멈추는 건?	Then what about breaking in right now and stopping it?
+arete_prepare_011_body	현실적으로 어렵습니다.	Realistically, that would be difficult.
+arete_prepare_012_body	물리적으로 접근할 길이 없고, 외부 해킹도 차단되었습니다. 아레테를 정지시키려면 직접 접근해 마스터 키를 사용하는 방법뿐입니다.	There is no physical route in, and outside hacking has been blocked. The only way to stop Arete is to approach it directly and use the Master Key.
+arete_prepare_013_body	하지만 현재로서는 그 접근 자체가 불가능합니다.	But for now, that access itself is impossible.
+arete_prepare_014_body	답답하네. 그럼 녀석이 제 발로 나오는 순간을 기다릴 수밖에 없다는 거야?	Frustrating. So we have no choice but to wait for it to walk out on its own?
+arete_prepare_015_body	네. 아레테의 육체가 완성되면, 분명 도시를 지배하기 위해 밖으로 나올 것입니다.	Yes. Once Arete's body is complete, it will surely come out to rule the city.
+arete_prepare_016_body	그 순간을 노려야 합니다. 현재로서는 그때가 유일한 기회입니다.	We must strike at that moment. For now, that is our only chance.
+arete_prepare_017_body	좋아. 그럼 기다리는 동안 준비 좀 해야겠네.	All right. Then we had better prepare while we wait.
+arete_prepare_018_body	녀석을 최상의 상태로 맞이해주자고.	Let's welcome that thing in our best condition.

@@ -1,0 +1,25 @@
+Key	Korean	English
+speaker_sherry	셰리	Sherry
+speaker_baito	바이토	Baito
+speaker_karin	카린	Karin
+speaker_narration	나레이션	Narration
+hidden_baito_post_001_body	역시 알바 전사네. 지금까지 만난 상대 중에 제일 강했어.	You really are a part time warrior. You were the strongest opponent I have ever faced.
+hidden_baito_post_002_body	셰리 언니도 대단했어요. 싸우는 동안에도 계속 강해졌어요.	You were amazing too, Sherry. You kept getting stronger even while we fought.
+hidden_baito_post_003_body	이제는... 확실히 제 시간선의 셰리 언니보다 훨씬 강해요.	Now... you are definitely much stronger than the Sherry from my timeline.
+hidden_baito_post_004_body	너 말이야. 그 정도로 강하면 네가 직접 아레테랑 싸워도 되는 거 아니야?	You know. If you are that strong, could you not just fight Arete yourself?
+hidden_baito_post_005_body	그게... 저는 곧 원래 시간선으로 돌아가야 해요.	The thing is... I have to return to my original timeline soon.
+hidden_baito_post_006_body	시간 여행에 제한 시간이 있는 것입니까?	Does time travel have a time limit?
+hidden_baito_post_007_body	네. 타임머신의 귀환 시간이 그렇게 설정되어 있어요.	Yes. The time machine's return time is set that way.
+hidden_baito_post_008_body	참 까다로운 타임머신이네.	That is one picky time machine.
+hidden_baito_post_009_body	아레테의 지배 아래에서 몰래 만든 거라서요.	It was built in secret under Arete's rule.
+hidden_baito_post_010_body	솔직히 말하면, 시간 여행이 성공한 것 자체가 기적이었어요.	Honestly, the fact that time travel succeeded at all was a miracle.
+hidden_baito_post_011_body	그 기적을 여기까지 끌고 온 건 너야.	You are the one who carried that miracle this far.
+hidden_baito_post_012_body	셰리 언니...	Sherry...
+hidden_baito_post_013_body	지금의 셰리 언니와 카린이라면 분명 이길 수 있어요.	The Sherry and Karin of now can definitely win.
+hidden_baito_post_014_body	그러니 부탁드릴게요. 제가 본 결과를 바꿔주세요.	So please. Change the outcome I saw.
+hidden_baito_post_015_body	맡겨주세요, 바이토 씨!	Leave it to us, Baito!
+hidden_baito_post_016_body	네가 돌아갈 미래에선, 아레테를 박물관 전시품으로 보게 해줄게.	In the future you return to, I will make sure Arete is something you see as a museum exhibit.
+hidden_baito_post_017_body	네. 믿을게요. 셰리 언니. 그리고 카린. 건투를 빌어요.	Yes. I believe in you. Sherry. And Karin. I wish you luck.
+hidden_baito_post_018_body	바이토는 씩씩하게 고개를 숙이고, 골목 너머로 달려가 시야에서 사라졌다.	Baito gave a spirited bow, then ran beyond the alley and disappeared from view.
+hidden_baito_post_019_body	셰리. 더더욱 질 수 없겠네요.	Sherry. Now we really cannot lose.
+hidden_baito_post_020_body	그래. 미래의 의뢰인을 실망시킬 수는 없으니까.	Yeah. Can't disappoint a client from the future.

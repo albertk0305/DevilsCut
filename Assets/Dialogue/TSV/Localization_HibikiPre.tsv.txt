@@ -1,0 +1,29 @@
+Key	Korean	English
+name_sherry	셰리	Sherry
+name_karin	카린	Karin
+name_hibiki	히비키	Hibiki
+hibiki_pre_001	기다리고 있었습니다, 카린 씨. 그리고 셰리 씨.	I was waiting for you, Ms. Karin. And Ms. Sherry.
+hibiki_pre_002	카린 씨, 솔직히 말씀드리면 당신이 열쇠와 함께 다시 이곳까지 도달하리라고는 생각하지 못했습니다.	Ms. Karin, to be honest, I did not think you would return here with the key.
+hibiki_pre_003	카린은 돌아왔습니다. 그리고 이번에는 혼자가 아닙니다.	Karin has returned. And this time, Karin is not alone.
+hibiki_pre_004	훌륭한 여정이었습니다. 하지만 안타깝게도 여기까지입니다. 마스터 키를 내려놓고 물러나십시오.	It was an admirable journey. But I am afraid it ends here. Put down the master key and step back.
+hibiki_pre_005	미안한데, 돌아가기엔 너무 멀리 왔어. 빈손으로 돌아가면 완전 적자라고.	Sorry, but we came too far to turn back. Going home empty handed would put me deep in the red.
+hibiki_pre_006	히비키 씨. 카린은 이제 확실히 깨달았습니다. 아레테가 정지되어야 하는 이유를.	Ms. Hibiki. Karin understands it clearly now. The reason A.R.E.T.E. must be stopped.
+hibiki_pre_007	과연... 이번에는 망설이지 않으시는군요.	I see... This time, you do not hesitate.
+hibiki_pre_008	저 역시 아레테가 무결하다고 생각하지는 않습니다.	I do not believe A.R.E.T.E. is flawless either.
+hibiki_pre_009	그렇다면 어째서 카린을 막는 것입니까?	Then why are you stopping Karin?
+hibiki_pre_010	그럼에도 아레테가 최선이라고 믿기 때문입니다. 사람은 너무 쉽게 상처받고, 그 상처로 다시 누군가를 상처 입힙니다.	Because I still believe A.R.E.T.E. is the best path. People are hurt too easily, and with that pain, they hurt others in turn.
+hibiki_pre_011	저는 그 모습을 더는 볼 수 없었습니다.	I could no longer bear to watch it.
+hibiki_pre_012	최선이라. 그 말은 가끔 꽤 편리하지. 더 찾아볼 생각을 그만둬도 되거든.	The best path, huh. That word can be pretty convenient. It lets you stop looking for another one.
+hibiki_pre_013	부정하지 않겠습니다. 저는 이보다 나은 길을 찾지 못했습니다.	I will not deny that. I could not find a better path.
+hibiki_pre_014	그래서 제가 할 수 있는 최선은 지금의 질서를 무너뜨리지 않는 것입니다.	So the best I can do is keep the current order from collapsing.
+hibiki_pre_015	하아. 답답하네. 그 안대로 가린 게 눈뿐이긴 해?	Hah. How suffocating. Are you sure your eyes are the only thing that blindfold covers?
+hibiki_pre_016	염려 감사합니다, 셰리 씨. 하지만 제 시야에는 문제가 없습니다. 이 안대를 통해 아레테는 제게 보아야 할 것을 보여줍니다. 판단해야 할 것까지도.	Thank you for your concern, Ms. Sherry. But there is nothing wrong with my sight. Through this blindfold, A.R.E.T.E. shows me what I must see. Even what I must judge.
+hibiki_pre_017	보기와 달리 최첨단이네.	More high tech than it looks.
+hibiki_pre_018	하지만 히비키 씨. 아레테가 정말 모든 것을 보여주고 있습니까?	But Ms. Hibiki. Are you certain A.R.E.T.E. is showing you everything?
+hibiki_pre_019	모든 것을 직접 보면 판단은 흐려집니다.	If I see everything directly, my judgment will cloud.
+hibiki_pre_020	아니. 넌 그냥 도망치고 있는 거야. 그리고 그 끝에 낙원 같은 건 없어.	No. You are just running away. And there is no paradise waiting at the end.
+hibiki_pre_021	그럴지도 모릅니다. 하지만 저는 의심만으로 멈출 수도, 두려움만으로 물러설 수도 없습니다. 이 도시 사람들의 평온이 제게 달려 있습니다.	Perhaps. But I cannot stop on doubt alone, nor can I step back out of fear. The peace of this city depends on me.
+hibiki_pre_022	서로 물러날 생각은 없는 모양이네.	Looks like neither of us is backing down.
+hibiki_pre_023	대무녀 히비키의 이름으로 명합니다. 마스터 키를 반환하고 물러나십시오.	In the name of High Priestess Hibiki, I command you. Return the master key and step back.
+hibiki_pre_024	카린은 이제 도망치지 않습니다!	Karin will not run away anymore!
+hibiki_pre_025	좋아. 새하얀 꿈에서 깰 시간이야, 무녀님.	Good. Time to wake up from that pure white dream, priestess.

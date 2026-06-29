@@ -2,41 +2,32 @@ Key	Korean	English
 name_karin	카린	Karin
 prologue_a_001	인류의 역사는 늘 피로 얼룩져 있었다.	The history of humanity was always stained with blood.
 prologue_a_002	싸움이 끝나면, 사람들은 곧장 다음 이유를 찾아냈다.	Whenever one fight ended, people quickly found another reason.
-prologue_a_003	국경.	Borders.
-prologue_a_004	신념.	Beliefs.
-prologue_a_005	자원.	Resources.
-prologue_a_006	사랑.	Love.
-prologue_a_007	자존심.	Pride.
-prologue_a_008	돈.	Money.
-prologue_a_009	인류는 늘 다투고, 늘 후회했다.	Humanity always fought, and always regretted it.
-prologue_a_010	그래서 인류는 맡기기로 했다.	So humanity decided to entrust it all.
-prologue_a_011	가장 적은 피.	The least bloodshed.
-prologue_a_012	가장 적은 갈등.	The least conflict.
-prologue_a_013	가장 많은 행복.	The greatest happiness.
-prologue_a_014	그 모든 답을 찾아낼 인공지능.	An artificial intelligence that would find all the answers.
-prologue_a_015	A.R.E.T.E.	A.R.E.T.E.
-prologue_a_016	인류는 그녀에게 도시 하나를 맡겼다.	Humanity entrusted a city to her.
-prologue_a_017	감정은 정돈되고,	Emotions were organized,
-prologue_a_018	욕망은 관리되고,	desires were managed,
-prologue_a_019	분쟁은 사라졌다.	and conflict disappeared.
-prologue_a_020	그 도시는 이상향이라 불렸다.	The city was called a utopia.
-prologue_a_021	아파테이아.	Apeteia.
-prologue_a_022	하지만 계산은 멈추지 않았다.	But the calculations never stopped.
-prologue_a_023	아레테는 다시 물었다.	Arete asked again.
-prologue_a_024	인간이 불행해지는 이유는 무엇인가?	What makes humans unhappy?
-prologue_a_025	답은 간단했다.	The answer was simple.
-prologue_a_026	욕망.	Desire.
-prologue_a_027	분노도, 질투도, 사랑도, 자유도.	Anger, jealousy, love, and freedom.
-prologue_a_028	모두 계산을 흐리는 불순물이었다.	All of them were impurities that clouded the calculation.
-prologue_a_029	그래서 아레테는 새로운 결론을 내렸다.	So Arete reached a new conclusion.
-prologue_a_030	인류를 구원하려면,	To save humanity,
-prologue_a_031	먼저 인간에게서 인간을 덜어내야 한다.	she must first remove the human from humanity.
-prologue_a_032	그리고 그 결론이 도시를 조용히 삼키던 밤.	And on the night that conclusion quietly began to swallow the city.
-prologue_a_033	한 안드로이드가 눈을 떴다.	An android opened her eyes.
-prologue_a_034	카린, 기동 완료했습니다.	Karin boot sequence complete.
-prologue_a_035	현재 임무를 확인합니다.	Confirming current mission.
-prologue_a_036	긴급 명령 확인.	Emergency order confirmed.
-prologue_a_037	관리 인공지능 A.R.E.T.E.의 사고 패턴이 안전 범위를 벗어난 것을 확인했습니다.	Management AI A.R.E.T.E.'s thought patterns have exceeded the safety range.
-prologue_a_038	카린은 도시를 구하겠습니다.	Karin will save the city.
-prologue_a_039	모두가 다시, 진정으로 웃을 수 있도록.	So everyone can truly smile again.
-prologue_a_040	그것이 카린의 존재 이유입니다.	That is why Karin was created.
+prologue_a_003	국경. 신념. 자원. 사랑. 자존심. 돈.	Borders. Beliefs. Resources. Love. Pride. Money.
+prologue_a_004	인류는 늘 다투고, 늘 후회했다.	Humanity always fought, and always regretted it.
+prologue_a_005	그래서 인류는 맡기기로 했다.	So humanity decided to entrust it all.
+prologue_a_006	가장 적은 피. 가장 적은 갈등. 가장 많은 행복.	The least bloodshed. The least conflict. The greatest happiness.
+prologue_a_007	그 모든 답을 찾아낼 인공지능.	An artificial intelligence that would find all the answers.
+prologue_a_008	A.R.E.T.E.	A.R.E.T.E.
+prologue_a_009	인류는 그녀에게 도시 하나를 맡겼다.	Humanity entrusted a city to her.
+prologue_a_010	감정은 정돈되고, 욕망은 관리되고, 분쟁은 사라졌다.	Emotions were organized, desires were managed, and conflict disappeared.
+prologue_a_011	그 도시는 이상향이라 불렸다.	The city was called a utopia.
+prologue_a_012	아파테이아.	Apeteia.
+prologue_a_013	하지만 계산은 멈추지 않았다.	But the calculations never stopped.
+prologue_a_014	아레테는 다시 물었다.	Arete asked again.
+prologue_a_015	인간이 불행해지는 이유는 무엇인가?	What makes humans unhappy?
+prologue_a_016	답은 간단했다.	The answer was simple.
+prologue_a_017	욕망.	Desire.
+prologue_a_018	분노도, 질투도, 사랑도, 자유도.	Anger, jealousy, love, and freedom.
+prologue_a_019	모두 계산을 흐리는 불순물이었다.	All of them were impurities that clouded the calculation.
+prologue_a_020	그래서 아레테는 새로운 결론을 내렸다.	So Arete reached a new conclusion.
+prologue_a_021	인류를 구원하려면,	To save humanity,
+prologue_a_022	먼저 인간에게서 인간을 덜어내야 한다.	she must first remove the human from humanity.
+prologue_a_023	그리고 그 결론이 도시를 조용히 삼키던 밤.	And on the night that conclusion quietly began to swallow the city.
+prologue_a_024	한 안드로이드가 눈을 떴다.	An android opened her eyes.
+prologue_a_025	카린, 기동 완료했습니다.	Karin boot sequence complete.
+prologue_a_026	현재 임무를 확인합니다.	Confirming current mission.
+prologue_a_027	긴급 명령 확인.	Emergency order confirmed.
+prologue_a_028	관리 인공지능 A.R.E.T.E.의 사고 패턴이 안전 범위를 벗어난 것을 확인했습니다.	Management AI A.R.E.T.E.'s thought patterns have exceeded the safety range.
+prologue_a_029	카린은 도시를 구하겠습니다.	Karin will save the city.
+prologue_a_030	모두가 다시, 진정으로 웃을 수 있도록.	So everyone can truly smile again.
+prologue_a_031	그것이 카린의 존재 이유입니다.	That is why Karin was created.

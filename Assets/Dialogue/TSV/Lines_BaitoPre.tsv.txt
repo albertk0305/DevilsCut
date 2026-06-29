@@ -1,0 +1,45 @@
+lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
+hidden_baito_pre_001	baito	sherry	baito	smile	broken	speaker_baito	hidden_baito_pre_001_body			DayStreet			FALSE	FALSE	FALSE								
+hidden_baito_pre_002	sherry	sherry	baito	curious	broken	speaker_sherry	hidden_baito_pre_002_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_003	karin	karin	baito	curious	broken	speaker_karin	hidden_baito_pre_003_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_004	sherry	sherry	baito	greasy	broken	speaker_sherry	hidden_baito_pre_004_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_005	baito	sherry	baito	greasy	sad	speaker_baito	hidden_baito_pre_005_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_006	sherry	sherry	baito	curious	sad	speaker_sherry	hidden_baito_pre_006_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_007	baito	sherry	baito	curious	determined	speaker_baito	hidden_baito_pre_007_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_008	karin	karin	baito	amazed	determined	speaker_karin	hidden_baito_pre_008_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_009	baito	karin	baito	amazed	determinedSpeak	speaker_baito	hidden_baito_pre_009_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_010	baito	karin	baito	amazed	determinedSpeak	speaker_baito	hidden_baito_pre_010_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_011	sherry	sherry	baito	consider	determinedSpeak	speaker_sherry	hidden_baito_pre_011_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_012	sherry	sherry	baito	thinking	determinedSpeak	speaker_sherry	hidden_baito_pre_012_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_013	karin	karin	baito	default	determinedSpeak	speaker_karin	hidden_baito_pre_013_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_014	baito	karin	baito	default	determined	speaker_baito	hidden_baito_pre_014_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_015	sherry	sherry	baito	surprise	determined	speaker_sherry	hidden_baito_pre_015_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_016	baito	sherry	baito	surprise	determinedSpeak	speaker_baito	hidden_baito_pre_016_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_017	sherry	sherry	baito	greasy	determinedSpeak	speaker_sherry	hidden_baito_pre_017_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_018	baito	sherry	baito	greasy	worried	speaker_baito	hidden_baito_pre_018_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_019	baito	sherry	baito	greasy	sad	speaker_baito	hidden_baito_pre_019_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_020	karin	karin	baito	speechless	sad	speaker_karin	hidden_baito_pre_020_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_021	baito	karin	baito	speechless	determined	speaker_baito	hidden_baito_pre_021_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_022	baito	karin	baito	speechless	determinedSpeak	speaker_baito	hidden_baito_pre_022_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_023	baito	karin	baito	speechless	determinedSpeak	speaker_baito	hidden_baito_pre_023_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_024	sherry	sherry	baito	softSpeak	determinedSpeak	speaker_sherry	hidden_baito_pre_024_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_025	baito	sherry	baito	softSpeak	worried	speaker_baito	hidden_baito_pre_025_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_026	baito	sherry	baito	softSpeak	sad	speaker_baito	hidden_baito_pre_026_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_027	sherry	sherry	baito	softSpeak	sad	speaker_sherry	hidden_baito_pre_027_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_028	karin	karin	baito	confidentSpeak	sad	speaker_karin	hidden_baito_pre_028_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_029	baito	karin	baito	confidentSpeak	broken	speaker_baito	hidden_baito_pre_029_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_030	baito	karin	baito	confidentSpeak	broken	speaker_baito	hidden_baito_pre_030_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_031	sherry	sherry	baito	serious	broken	speaker_sherry	hidden_baito_pre_031_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_032	baito	sherry	baito	serious	surprised	speaker_baito	hidden_baito_pre_032_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_033	sherry	sherry	baito	seriousSpeak	surprised	speaker_sherry	hidden_baito_pre_033_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_034	baito	sherry	baito	seriousSpeak	surprised	speaker_baito	hidden_baito_pre_034_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_035	sherry	sherry	baito	smug	surprised	speaker_sherry	hidden_baito_pre_035_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_036	baito	sherry	baito	smug	worried	speaker_baito	hidden_baito_pre_036_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_037	sherry	sherry	baito	softSpeak	worried	speaker_sherry	hidden_baito_pre_037_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_038	baito	sherry	baito	softSpeak	determinedSpeak	speaker_baito	hidden_baito_pre_038_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_039	sherry	sherry	baito	smug	determinedSpeak	speaker_sherry	hidden_baito_pre_039_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_040	baito	sherry	baito	smug	determined	speaker_baito	hidden_baito_pre_040_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_041	sherry	sherry	baito	greasy	determined	speaker_sherry	hidden_baito_pre_041_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_042	baito	sherry	baito	greasy	confidentSmile	speaker_baito	hidden_baito_pre_042_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_043	sherry	sherry	baito	easy	confidentSmile	speaker_sherry	hidden_baito_pre_043_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_044	baito	sherry	baito	easy	confident	speaker_baito	hidden_baito_pre_044_body	LoadNextScene					FALSE	FALSE	FALSE								

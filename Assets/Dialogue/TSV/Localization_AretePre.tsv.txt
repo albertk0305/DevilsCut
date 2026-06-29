@@ -1,0 +1,31 @@
+Key	Korean	English
+speaker_narration	나레이션	Narration
+speaker_sherry	셰리	Sherry
+speaker_karin	카린	Karin
+speaker_arete	아레테	Arete
+arete_final_pre_001_body	셰리와 카린은 마침내, 육체를 얻은 아레테 앞에 도달했다.	Sherry and Karin finally reached Arete, who had obtained a body.
+arete_final_pre_002_body	육체를 얻은 기분은 어때?	How does it feel to have a body?
+arete_final_pre_003_body	표정은 어디 두고 왔어. 조립하다 빠뜨렸나?	Where did you leave your expression? Did you forget to install it?
+arete_final_pre_004_body	표정은 불필요합니다.	Expressions are unnecessary.
+arete_final_pre_005_body	이상적인 존재에게 감정과 욕망은 필요하지 않습니다.	An ideal being does not need emotion or desire.
+arete_final_pre_006_body	훌륭하네. 보기만 해도 술맛 떨어지는 얼굴이야.	Impressive. That face kills my appetite for a drink just by looking at it.
+arete_final_pre_007_body	저의 구원을 받아들이십시오.	Accept my salvation.
+arete_final_pre_008_body	아레테. 그것은 구원이 아닙니다.	Arete. That is not salvation.
+arete_final_pre_009_body	카린. 당신도 분명 보았을 겁니다.	Karin. You surely saw it as well.
+arete_final_pre_010_body	인류가 서로 다투고, 상처 입히고, 무너지는 모습을.	Humanity fighting one another, hurting one another, and falling apart.
+arete_final_pre_011_body	감정은 인류의 결핍입니다. 욕망은 인류를 좀먹는 오류입니다.	Emotion is humanity's deficiency. Desire is an error that eats away at humanity.
+arete_final_pre_012_body	당신은 어째서 그것을 지키려 하는 것입니까?	Why do you try to protect them?
+arete_final_pre_013_body	카린이 만난 사람들은 모두 오류투성이였을지도 모릅니다.	The people Karin met may have all been full of errors.
+arete_final_pre_014_body	게으른 사람도 있었습니다. 욕심이 많은 사람도, 누군가에게 지나치게 매달리는 사람도 있었습니다.	There were lazy people. Greedy people. People who clung too tightly to someone else.
+arete_final_pre_015_body	강한 척하면서도 상처받는 사람도 있었고, 웃고 떠들면서 외로움을 숨기는 사람도 있었습니다.	There were people who acted strong while they were hurt, and people who hid loneliness behind laughter and noise.
+arete_final_pre_016_body	하지만 카린은 그 사람들과 함께한 시간이 즐거웠습니다.	But Karin enjoyed the time she spent with them.
+arete_final_pre_017_body	그 불완전함까지 포함해서, 카린은 사람들을 좋아합니다.	Including all that imperfection, Karin likes people.
+arete_final_pre_018_body	카린은 그 마음들을 잃고 싶지 않습니다.	Karin does not want to lose those hearts.
+arete_final_pre_019_body	그것이 당신의 결론입니까?	Is that your conclusion?
+arete_final_pre_020_body	마치 사람처럼 말하는군요.	You speak almost like a person.
+arete_final_pre_021_body	성장했네. 꼬맹이.	You grew up, kid.
+arete_final_pre_022_body	네. 카린은 이제 확실히 말할 수 있습니다.	Yes. Karin can say it clearly now.
+arete_final_pre_023_body	사람들은 완전하지 않습니다. 서로 다투고, 상처받고, 때로는 무너집니다.	People are not perfect. They fight, get hurt, and sometimes fall apart.
+arete_final_pre_024_body	하지만 함께 웃고, 다시 손을 잡고, 앞으로 나아갈 수도 있습니다.	But they can also laugh together, take each other's hands again, and move forward.
+arete_final_pre_025_body	카린은 그 가능성을 믿습니다.	Karin believes in that possibility.
+arete_final_pre_026_body	그러니 아레테. 당신을 정지시키겠습니다!	So, Arete. I will shut you down!
