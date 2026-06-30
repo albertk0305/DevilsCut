@@ -11,6 +11,12 @@ public class SoundManager : MonoBehaviour
     [Range(0f, 1f)]
     public float masterVolume = 1f;
 
+    [Range(0f, 1f)]
+    public float musicVolume = 1f;
+
+    [Range(0f, 1f)]
+    public float sfxVolume = 1f;
+
     [Header("BGM")]
     [SerializeField] private AudioSource bgmSource;
     [SerializeField, Range(0f, 1f)] private float bgmVolume = 1f;
@@ -21,6 +27,13 @@ public class SoundManager : MonoBehaviour
     private AudioClip currentBgm;
     private Coroutine bgmFadeCoroutine;
     private Coroutine bgmPlaylistCoroutine;
+
+    private const string LegacyMasterVolumeKey = "MasterVolume";
+    private const string MusicVolumeKey = "MusicVolume";
+    private const string SfxVolumeKey = "SfxVolume";
+
+    public float MusicVolume => musicVolume;
+    public float SfxVolume => sfxVolume;
 
     private void Awake()
     {
@@ -37,11 +50,27 @@ public class SoundManager : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        masterVolume = volume;
-        // 오디오 소스들의 볼륨을 조절하는 로직이 여기에 들어감
-        AudioListener.volume = masterVolume;
+        SetMusicVolume(volume);
+    }
 
-        PlayerPrefs.SetFloat("MasterVolume", masterVolume);
+    public void SetMusicVolume(float volume)
+    {
+        musicVolume = Mathf.Clamp01(volume);
+        masterVolume = musicVolume;
+        AudioListener.volume = 1f;
+
+        PlayerPrefs.SetFloat(MusicVolumeKey, musicVolume);
+        PlayerPrefs.Save();
+
+        ApplyMusicVolumeToBgm();
+    }
+
+    public void SetSfxVolume(float volume)
+    {
+        sfxVolume = Mathf.Clamp01(volume);
+        AudioListener.volume = 1f;
+
+        PlayerPrefs.SetFloat(SfxVolumeKey, sfxVolume);
         PlayerPrefs.Save();
     }
 
@@ -120,13 +149,19 @@ public class SoundManager : MonoBehaviour
         InitializeSfxSource();
         if (sfxSource == null) return;
 
-        sfxSource.PlayOneShot(clip, Mathf.Clamp01(volume));
+        sfxSource.PlayOneShot(clip, Mathf.Clamp01(volume) * sfxVolume);
     }
 
     private void LoadVolume()
     {
-        masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1f);
-        AudioListener.volume = masterVolume;
+        float legacyVolume = PlayerPrefs.GetFloat(LegacyMasterVolumeKey, 1f);
+
+        musicVolume = Mathf.Clamp01(PlayerPrefs.GetFloat(MusicVolumeKey, legacyVolume));
+        sfxVolume = Mathf.Clamp01(PlayerPrefs.GetFloat(SfxVolumeKey, 1f));
+        masterVolume = musicVolume;
+        AudioListener.volume = 1f;
+
+        ApplyMusicVolumeToBgm();
     }
 
     private void InitializeBgmSource()
@@ -141,7 +176,7 @@ public class SoundManager : MonoBehaviour
         bgmSource.playOnAwake = false;
 
         if (!bgmSource.isPlaying && bgmSource.clip == null)
-            bgmSource.volume = bgmVolume;
+            bgmSource.volume = GetBgmTargetVolume();
     }
 
     private void InitializeSfxSource()
@@ -156,7 +191,7 @@ public class SoundManager : MonoBehaviour
     private void PlayBgmImmediate(AudioClip clip)
     {
         bgmSource.clip = clip;
-        bgmSource.volume = bgmVolume;
+        bgmSource.volume = GetBgmTargetVolume();
         bgmSource.loop = false;
         bgmSource.Play();
         currentBgm = clip;
@@ -181,9 +216,9 @@ public class SoundManager : MonoBehaviour
         bgmSource.Play();
         currentBgm = clip;
 
-        yield return FadeBgmVolume(0f, bgmVolume, fadeTime);
+        yield return FadeBgmVolume(0f, GetBgmTargetVolume(), fadeTime, true);
 
-        bgmSource.volume = bgmVolume;
+        bgmSource.volume = GetBgmTargetVolume();
         bgmFadeCoroutine = null;
     }
 
@@ -194,7 +229,7 @@ public class SoundManager : MonoBehaviour
         bgmFadeCoroutine = null;
     }
 
-    private IEnumerator FadeBgmVolume(float from, float to, float fadeTime)
+    private IEnumerator FadeBgmVolume(float from, float to, float fadeTime, bool followMusicVolumeTarget = false)
     {
         float elapsed = 0f;
 
@@ -202,11 +237,26 @@ public class SoundManager : MonoBehaviour
         {
             elapsed += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(elapsed / fadeTime);
-            bgmSource.volume = Mathf.Lerp(from, to, t);
+            float targetVolume = followMusicVolumeTarget ? GetBgmTargetVolume() : to;
+            bgmSource.volume = Mathf.Lerp(from, targetVolume, t);
             yield return null;
         }
 
-        bgmSource.volume = to;
+        bgmSource.volume = followMusicVolumeTarget ? GetBgmTargetVolume() : to;
+    }
+
+    private float GetBgmTargetVolume()
+    {
+        return Mathf.Clamp01(bgmVolume * musicVolume);
+    }
+
+    private void ApplyMusicVolumeToBgm()
+    {
+        if (bgmSource == null)
+            return;
+
+        if (bgmSource.isPlaying || bgmSource.clip != null)
+            bgmSource.volume = GetBgmTargetVolume();
     }
 
     private List<AudioClip> CreateValidPlaylist(IList<AudioClip> playlist, AudioClip legacyClip)
@@ -257,9 +307,9 @@ public class SoundManager : MonoBehaviour
             currentBgm = clip;
 
             if (effectiveFadeTime > 0f)
-                yield return FadeBgmVolume(0f, bgmVolume, effectiveFadeTime);
+                yield return FadeBgmVolume(0f, GetBgmTargetVolume(), effectiveFadeTime, true);
             else
-                bgmSource.volume = bgmVolume;
+                bgmSource.volume = GetBgmTargetVolume();
 
             float waitTime = Mathf.Max(0f, clip.length - (effectiveFadeTime * 2f));
             float elapsed = 0f;

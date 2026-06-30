@@ -5,9 +5,16 @@ using TMPro;
 [RequireComponent(typeof(Slider))]
 public class VolumeUI : MonoBehaviour
 {
+    private enum VolumeType
+    {
+        Music,
+        Sfx
+    }
+
     private Slider volumeSlider;
 
     [Header("UI 연결")]
+    [SerializeField] private VolumeType volumeType = VolumeType.Music;
     public TextMeshProUGUI volumeText;
 
     void Start()
@@ -16,7 +23,7 @@ public class VolumeUI : MonoBehaviour
 
         if (SoundManager.Instance != null)
         {
-            volumeSlider.value = SoundManager.Instance.masterVolume;
+            volumeSlider.SetValueWithoutNotify(GetCurrentVolume());
         }
 
         UpdateVolumeText(volumeSlider.value);
@@ -28,7 +35,10 @@ public class VolumeUI : MonoBehaviour
     {
         if (SoundManager.Instance != null)
         {
-            SoundManager.Instance.SetVolume(value);
+            if (volumeType == VolumeType.Sfx)
+                SoundManager.Instance.SetSfxVolume(value);
+            else
+                SoundManager.Instance.SetMusicVolume(value);
         }
 
         UpdateVolumeText(value);
@@ -42,5 +52,15 @@ public class VolumeUI : MonoBehaviour
 
             volumeText.text = volumePercent.ToString();
         }
+    }
+
+    private float GetCurrentVolume()
+    {
+        if (SoundManager.Instance == null)
+            return volumeSlider != null ? volumeSlider.value : 1f;
+
+        return volumeType == VolumeType.Sfx
+            ? SoundManager.Instance.SfxVolume
+            : SoundManager.Instance.MusicVolume;
     }
 }

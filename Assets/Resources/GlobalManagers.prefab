@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6879955947631341113}
   - component: {fileID: 4950642224689884447}
   - component: {fileID: -3324259339741228890}
+  - component: {fileID: 2481397779692056841}
   m_Layer: 0
   m_Name: GlobalManagers
   m_TagString: Untagged
@@ -79,8 +80,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   masterVolume: 1
+  musicVolume: 1
+  sfxVolume: 1
   bgmSource: {fileID: 0}
   bgmVolume: 1
+  sfxSource: {fileID: 0}
 --- !u!114 &6879955947631341113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,3 +303,17 @@ MonoBehaviour:
   bossDatabase: {fileID: 11400000, guid: 2f67c6993d4dcb044ba42abfb6d0d490, type: 2}
   supporterDatabase: {fileID: 11400000, guid: 51dd2413502c8f641a2cacd0d2de3478, type: 2}
   explorationNodeDatabase: {fileID: 11400000, guid: 26ae2e9ee15b9434d87c9f75f4411ab4, type: 2}
+--- !u!114 &2481397779692056841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7079399663421639093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e6b4902a1d957b4cbd8e134902e8f03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UISfxController
+  buttonClickClip: {fileID: 8300000, guid: 5855e047bc7d7a84194b254100e465af, type: 3}
+  buttonClickVolume: 0.7
