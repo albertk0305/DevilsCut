@@ -19,6 +19,7 @@ public class ItemMergePresentationController : MonoBehaviour
     [Header("Text")]
     [SerializeField] private TMP_Text mergeMessageText;
     [SerializeField] private GameObject textCompleteIndicator;
+    [SerializeField] private bool useTypewriterText = false;
     [SerializeField] private float messageTypeInterval = 0.02f;
 
     [Header("Input")]
@@ -113,8 +114,19 @@ public class ItemMergePresentationController : MonoBehaviour
             return;
 
         currentMessage = FormatLocalizedText(currentMessageKey, currentMessageFallback, currentMessageArgs);
+
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+
+        isTyping = false;
+
         if (mergeMessageText != null)
             mergeMessageText.text = currentMessage;
+
+        SetTextCompleteIndicatorActive(true);
     }
 
     public void Configure(
@@ -564,10 +576,7 @@ public class ItemMergePresentationController : MonoBehaviour
         currentMessageArgs = null;
         currentMessage = message ?? "";
 
-        if (typingCoroutine != null)
-            StopCoroutine(typingCoroutine);
-
-        typingCoroutine = StartCoroutine(TypeMessageRoutine(currentMessage));
+        StartCurrentMessageDisplay();
     }
 
     private void StartSingleMessage(string key, string fallback, params object[] args)
@@ -577,10 +586,33 @@ public class ItemMergePresentationController : MonoBehaviour
         currentMessageArgs = args;
         currentMessage = FormatLocalizedText(currentMessageKey, currentMessageFallback, currentMessageArgs);
 
-        if (typingCoroutine != null)
-            StopCoroutine(typingCoroutine);
+        StartCurrentMessageDisplay();
+    }
 
-        typingCoroutine = StartCoroutine(TypeMessageRoutine(currentMessage));
+    private void StartCurrentMessageDisplay()
+    {
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+
+        isTyping = false;
+
+        if (mergeMessageText == null)
+        {
+            SetTextCompleteIndicatorActive(true);
+            return;
+        }
+
+        if (useTypewriterText)
+        {
+            typingCoroutine = StartCoroutine(TypeMessageRoutine(currentMessage));
+            return;
+        }
+
+        mergeMessageText.text = currentMessage;
+        SetTextCompleteIndicatorActive(true);
     }
 
     private IEnumerator TypeMessageRoutine(string message)

@@ -34,6 +34,8 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private Image storyImage;
     [SerializeField] private GameObject nextIndicator;
     [SerializeField] private bool keepPreviousCharacterImageWhenLineImageIsNull = true;
+    [SerializeField] private Color activeActorColor = Color.white;
+    [SerializeField] private Color inactiveActorColor = new Color(0.55f, 0.55f, 0.55f, 1f);
 
     [Header("Input")]
     [SerializeField] private Button storyTextPanelButton;
@@ -775,6 +777,7 @@ public class DialogueController : MonoBehaviour
         if (line == null)
         {
             SetStoryImageActive(false);
+            ApplyActorSpeakingState(line);
             return;
         }
 
@@ -789,6 +792,7 @@ public class DialogueController : MonoBehaviour
 
         ApplyCharacterImage(leftCharacterImage, leftSprite);
         ApplyCharacterImage(rightCharacterImage, rightSprite);
+        ApplyActorSpeakingState(line);
 
         ApplyBackgroundForLine(line);
         ApplyStoryImage(line);
@@ -890,6 +894,41 @@ public class DialogueController : MonoBehaviour
                 line.speakerID?.Trim(),
                 "narration",
                 System.StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool IsNarrationSpeaker(string speakerID)
+    {
+        return string.IsNullOrWhiteSpace(speakerID)
+            || string.Equals(speakerID.Trim(), "narration", System.StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static bool IsSameActorID(string a, string b)
+    {
+        return !string.IsNullOrWhiteSpace(a)
+            && !string.IsNullOrWhiteSpace(b)
+            && string.Equals(a.Trim(), b.Trim(), System.StringComparison.OrdinalIgnoreCase);
+    }
+
+    private void ApplyActorSpeakingState(DialogueLine line)
+    {
+        string speakerID = line != null ? line.speakerID : null;
+        string leftActorID = line != null ? line.leftActorID : null;
+        string rightActorID = line != null ? line.rightActorID : null;
+        bool isNarration = IsNarrationSpeaker(speakerID);
+
+        bool leftActive = !isNarration && IsSameActorID(speakerID, leftActorID);
+        bool rightActive = !isNarration && IsSameActorID(speakerID, rightActorID);
+
+        SetActorImageColor(leftCharacterImage, leftActive);
+        SetActorImageColor(rightCharacterImage, rightActive);
+    }
+
+    private void SetActorImageColor(Image targetImage, bool isActive)
+    {
+        if (targetImage == null || targetImage.sprite == null || !targetImage.gameObject.activeInHierarchy)
+            return;
+
+        targetImage.color = isActive ? activeActorColor : inactiveActorColor;
     }
 
     private string GetSpeakerNameKey(DialogueLine line)

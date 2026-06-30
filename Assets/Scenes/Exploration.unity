@@ -2856,7 +2856,7 @@ MonoBehaviour:
   lastVisitedFacility: {fileID: 0}
   lastVisitedNodeImage: {fileID: 0}
   currentPhase: 3
-  currentCycle: 9
+  currentCycle: 1
   currentTurnInPhase: 0
   currentKeys: 0
   bossSelectionEventIcon: {fileID: 21300000, guid: a290edb1d6fb15046af8721e77ae9ba0, type: 3}
@@ -2870,7 +2870,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f964aeca8bc9b61489ac034e53915db4, type: 2}
   finalBoss: {fileID: 11400000, guid: 192190b9551cbff4c848293d78575f8b, type: 2}
   trueFinalBoss: {fileID: 11400000, guid: 2fd74834f772af842940fc981481e673, type: 2}
-  currentTargetBoss: {fileID: 11400000, guid: 2fd74834f772af842940fc981481e673, type: 2}
+  currentTargetBoss: {fileID: 11400000, guid: 859bb2941d360024e883050150eac840, type: 2}
 --- !u!4 &1223019333
 Transform:
   m_ObjectHideFlags: 0

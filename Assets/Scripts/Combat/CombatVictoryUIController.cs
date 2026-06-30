@@ -60,6 +60,7 @@ public class CombatVictoryUIController : MonoBehaviour
 
     [Header("Message")]
     [SerializeField] private GameObject nextIndicator;
+    [SerializeField] private bool useTypewriterText = false;
     [SerializeField] private float messageTypeInterval = 0.02f;
 
     [Header("Phase 2 Item UI")]
@@ -1475,11 +1476,7 @@ public class CombatVictoryUIController : MonoBehaviour
         messageQueue.Clear();
         currentMessage = message ?? "";
 
-        if (typingCoroutine != null)
-            StopCoroutine(typingCoroutine);
-
-        if (resultMessageText != null)
-            typingCoroutine = StartCoroutine(TypeMessageRoutine(currentMessage));
+        StartCurrentMessageDisplay();
     }
 
     private void StartSingleMessage(string key, string fallback, params object[] args)
@@ -1490,26 +1487,48 @@ public class CombatVictoryUIController : MonoBehaviour
         messageQueue.Clear();
         currentMessage = FormatLocalizedText(currentMessageKey, currentMessageFallback, currentMessageArgs);
 
-        if (typingCoroutine != null)
-            StopCoroutine(typingCoroutine);
-
-        if (resultMessageText != null)
-            typingCoroutine = StartCoroutine(TypeMessageRoutine(currentMessage));
+        StartCurrentMessageDisplay();
     }
 
     private void StartNextMessage()
     {
-        if (resultMessageText == null)
-            return;
-
         if (typingCoroutine != null)
+        {
             StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
 
         currentMessage = messageQueue.Count > 0 ? messageQueue.Dequeue() : "";
         currentMessageKey = "";
         currentMessageFallback = currentMessage;
         currentMessageArgs = null;
-        typingCoroutine = StartCoroutine(TypeMessageRoutine(currentMessage));
+        StartCurrentMessageDisplay();
+    }
+
+    private void StartCurrentMessageDisplay()
+    {
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+
+        isTyping = false;
+
+        if (resultMessageText == null)
+        {
+            SetNextIndicatorActive(true);
+            return;
+        }
+
+        if (useTypewriterText)
+        {
+            typingCoroutine = StartCoroutine(TypeMessageRoutine(currentMessage));
+            return;
+        }
+
+        resultMessageText.text = currentMessage;
+        SetNextIndicatorActive(true);
     }
 
     private IEnumerator TypeMessageRoutine(string message)
