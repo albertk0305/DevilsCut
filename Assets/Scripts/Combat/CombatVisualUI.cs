@@ -108,6 +108,7 @@ public class CombatVisualUI : MonoBehaviour
         {
             cutInImage.gameObject.SetActive(true);
             cutInImage.sprite = cutInSprite;
+            CombatSfxController.Instance?.PlayCutIn();
             yield return new WaitForSeconds(1.5f);
             cutInImage.gameObject.SetActive(false);
         }

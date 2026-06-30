@@ -44,8 +44,9 @@ public class BattleVisualizer : MonoBehaviour
 
     private void CompleteSequence()
     {
-        onSequenceComplete?.Invoke();
+        Action sequenceComplete = onSequenceComplete;
         onSequenceComplete = null;
+        sequenceComplete?.Invoke();
     }
 
     public void EnqueueVisual(IEnumerator visualRoutine)

@@ -173,3 +173,17 @@ enemy_skill_mass_destruction_name,Mass Destruction,Mass Destruction
 enemy_skill_mass_destruction_desc,적중한 타격마다 체력을 회복합니다,Recovers HP for each successful hit.
 enemy_skill_heartful_cry_name,Heartful Cry,Heartful Cry
 enemy_skill_heartful_cry_desc,적중한 타격마다 버프를 1개 제거합니다,Removes 1 buff for each successful hit.
+enemy_skill_hacking_to_the_gate_name,Hacking to the Gate,Hacking to the Gate
+enemy_skill_hacking_to_the_gate_desc,매 턴 스킬을 2개씩 사용합니다. 턴 시작 시 자신에게 디버프가 걸려 있다면 매 턴 첫 번째 스킬은 스카이클래드의 관측자입니다,Uses 2 skills each turn. If debuffed at the start of the turn the first skill each turn becomes Skyclad Observer.
+enemy_skill_lyra_name,Lyra,Lyra
+enemy_skill_lyra_desc,턴 시작 시 처음으로 체력이 50% 이하로 떨어진 상태라면 알바 전사 상태에 진입하며 체력을 전부 회복하고 모든 디버프를 해제합니다,At the start of the turn if HP has fallen to 50% or lower for the first time enters Part Time Warrior state. Fully recovers HP and removes all debuffs.
+enemy_skill_amadeus_name,Amadeus,Amadeus
+enemy_skill_amadeus_desc,턴 시작 시 처음으로 체력이 30% 이하로 떨어졌고 알바 전사 상태라면 조용한 살육자 상태에 진입하며 잃은 체력의 30%를 회복하고 모든 디버프를 해제합니다,At the start of the turn if HP has fallen to 30% or lower for the first time while in Part Time Warrior state enters Silent Killer state. Recovers 30% of missing HP and removes all debuffs.
+enemy_skill_fatima_name,Fatima,Fatima
+enemy_skill_fatima_desc,이 공격은 반드시 치명타가 발생합니다,This attack always lands as a critical hit.
+enemy_skill_another_heaven_name,Another Heaven,Another Heaven
+enemy_skill_another_heaven_desc,큰 그로기 피해를 줍니다,Deals heavy groggy damage.
+enemy_skill_skyclad_observer_name,스카이클래드의 관측자,Skyclad Observer
+enemy_skill_skyclad_observer_desc,자신에게 걸린 모든 디버프를 해제하고 잃은 체력의 30%를 회복합니다,Removes all debuffs from self and recovers 30% of missing HP.
+enemy_skill_gate_of_steiner_name,Gate of Steiner,Gate of Steiner
+enemy_skill_gate_of_steiner_desc,큰 방어 무시 고정 피해를 줍니다. 이 스킬은 반드시 명중합니다,Deals heavy fixed damage that ignores defense. This skill always hits.

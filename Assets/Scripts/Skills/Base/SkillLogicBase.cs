@@ -86,6 +86,16 @@ public class SkillLogicBase : ScriptableObject
         return 0f;
     }
 
+    public virtual bool AlwaysCrits(SkillData skill)
+    {
+        return false;
+    }
+
+    public virtual bool TreatAsAttackSkill(SkillData skill)
+    {
+        return false;
+    }
+
     public virtual Sprite GetCounterActionImage(SkillData skill)
     {
         // 기본적으로는 스킬의 일반 액션 이미지를 반환하여 하위 호환성을 유지합니다.

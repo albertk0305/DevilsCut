@@ -99,13 +99,13 @@ MonoBehaviour:
     currentExp: 0
     maxHp: 100000
     currentHp: 100000
-    ActionPoints: 200
-    breakResistance: 200
+    ActionPoints: 10
+    breakResistance: 10
     maxBreakGauge: 100
-    strength: 2002222
-    defense: 200
-    speed: 200
-    luck: 200
+    strength: 10
+    defense: 10
+    speed: 10
+    luck: 10
     currentGold: 100000
     rejectedSupporterCount: 0
     finalDamageAmp: 0

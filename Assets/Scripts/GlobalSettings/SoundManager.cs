@@ -15,6 +15,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource bgmSource;
     [SerializeField, Range(0f, 1f)] private float bgmVolume = 1f;
 
+    [Header("SFX")]
+    [SerializeField] private AudioSource sfxSource;
+
     private AudioClip currentBgm;
     private Coroutine bgmFadeCoroutine;
     private Coroutine bgmPlaylistCoroutine;
@@ -26,6 +29,7 @@ public class SoundManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             InitializeBgmSource();
+            InitializeSfxSource();
             LoadVolume();
         }
         else { Destroy(gameObject); }
@@ -109,6 +113,16 @@ public class SoundManager : MonoBehaviour
         bgmFadeCoroutine = StartCoroutine(FadeOutAndStopBgm(fadeTime));
     }
 
+    public void PlaySFX(AudioClip clip, float volume = 1f)
+    {
+        if (clip == null) return;
+
+        InitializeSfxSource();
+        if (sfxSource == null) return;
+
+        sfxSource.PlayOneShot(clip, Mathf.Clamp01(volume));
+    }
+
     private void LoadVolume()
     {
         masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1f);
@@ -128,6 +142,15 @@ public class SoundManager : MonoBehaviour
 
         if (!bgmSource.isPlaying && bgmSource.clip == null)
             bgmSource.volume = bgmVolume;
+    }
+
+    private void InitializeSfxSource()
+    {
+        if (sfxSource == null)
+            sfxSource = gameObject.AddComponent<AudioSource>();
+
+        sfxSource.loop = false;
+        sfxSource.playOnAwake = false;
     }
 
     private void PlayBgmImmediate(AudioClip clip)

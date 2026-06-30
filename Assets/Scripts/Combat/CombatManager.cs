@@ -76,6 +76,7 @@ public class CombatManager : MonoBehaviour
     private CombatPresentationDirector presentationDirector;
     private DamageResolutionService damageResolutionService;
     private TurnEffectResolver turnEffectResolver;
+    private readonly Queue<SkillData> pendingEnemySkillSequence = new Queue<SkillData>();
     [SerializeField] private CombatTimingSettings timing = new CombatTimingSettings();
     public CombatState currentState = new CombatState();
 
@@ -266,7 +267,6 @@ public class CombatManager : MonoBehaviour
         string eName = currentEnemyData != null ? GetTranslatedText(currentEnemyData.enemyNameKey) : "적";
 
         yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_encounter_format", "{0} 조우!", new object[] { eName }, true, timing.encounterCommentDelay);
-        yield return new WaitForSeconds(timing.encounterCommentDelay);
 
         SupporterData activeSup = PlayerManager.Instance.activeSupporter;
         if (activeSup != null && activeSup.startSkillLogic != null)
@@ -370,6 +370,7 @@ public class CombatManager : MonoBehaviour
     private IEnumerator ProcessTurnRoutine(TurnEntity currentTurnOwner)
     {
         ClearCurrentTurnDeathGuard();
+        ClearPendingEnemySkillSequence();
         currentActiveEntity = currentTurnOwner;
         playerHpAtTurnStart = currentPlayerStats.currentHp;
         enemyHpAtTurnStart = currentEnemyHp;
@@ -494,6 +495,7 @@ public class CombatManager : MonoBehaviour
 
                 int bleedDamage = Mathf.Max(1, Mathf.RoundToInt(enemyStr * totalBleedMultiplier));
                 ApplyDamageToEntity(true, bleedDamage);
+                PlayNormalHitSfxForResolvedDamage(bleedDamage);
 
                 CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
                 if (!ShouldSuppressDamageText(true))
@@ -519,6 +521,7 @@ public class CombatManager : MonoBehaviour
             {
                 int bleedDmg = Mathf.Max(1, Mathf.RoundToInt(currentPlayerStats.strength * bleedEffect.value));
                 ApplyDamageToEntity(false, bleedDmg);
+                PlayNormalHitSfxForResolvedDamage(bleedDmg);
 
                 CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit);
                 CombatUIManager.Instance.SpawnDamageText("★" + bleedDmg.ToString(), false, false);
@@ -537,6 +540,7 @@ public class CombatManager : MonoBehaviour
                 // 최대 체력에 비례한 고정 피해
                 int burnDmg = Mathf.Max(1, Mathf.RoundToInt(currentEnemyData.maxHp * burnEffect.value));
                 ApplyDamageToEntity(false, burnDmg);
+                PlayNormalHitSfxForResolvedDamage(burnDmg);
 
                 CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit);
                 CombatUIManager.Instance.SpawnDamageText("★" + burnDmg.ToString(), false, false);
@@ -561,6 +565,7 @@ public class CombatManager : MonoBehaviour
                 yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_last_train_home", "라스트 트레인 홈 발동!!", null, true, timing.dotCommentDelay);
 
                 ApplyDamageToEntity(false, currentState.savedBombDamage);
+                PlayNormalHitSfxForResolvedDamage(currentState.savedBombDamage);
                 CombatUIManager.Instance.SpawnDamageText("★" + currentState.savedBombDamage.ToString(), false, false);
                 DevLog.Log($"[라스트 트레인 홈] 적에게 {currentState.savedBombDamage}의 확정 피해를 입힙니다!");
 
@@ -655,16 +660,59 @@ public class CombatManager : MonoBehaviour
             enemyTurnCount++;
         }
 
+        SkillData firstSkill = PrepareEnemySkillSequence(intent);
+
         // 2. 계획서에 스킬이 정상적으로 들어있다면 실행합니다. (미카엘의 모든 행동)
-        if (intent != null && intent.skillToUse != null)
+        if (firstSkill != null)
         {
-            PerformSkillRoutine(intent.skillToUse, false, intent.skillToUse.isUltimate);
+            PerformSkillRoutine(firstSkill, false, firstSkill.isUltimate);
         }
         else
         {
             // AI가 없거나 깡통인 경우, 혹은 쉴 때 (대기)
             ResolveTurnEnd();
         }
+    }
+
+    private SkillData PrepareEnemySkillSequence(EnemyActionIntent intent)
+    {
+        ClearPendingEnemySkillSequence();
+
+        if (intent == null)
+            return null;
+
+        List<SkillData> validSequence = new List<SkillData>();
+
+        if (intent.skillSequence != null && intent.skillSequence.Count > 0)
+        {
+            for (int i = 0; i < intent.skillSequence.Count; i++)
+            {
+                SkillData skill = intent.skillSequence[i];
+                if (skill == null)
+                {
+                    DevLog.LogWarning($"[EnemySkillSequence] Null skill skipped at index {i}.");
+                    continue;
+                }
+
+                validSequence.Add(skill);
+            }
+        }
+
+        if (validSequence.Count == 0 && intent.skillToUse != null)
+            validSequence.Add(intent.skillToUse);
+
+        if (validSequence.Count == 0)
+            return null;
+
+        for (int i = 1; i < validSequence.Count; i++)
+            pendingEnemySkillSequence.Enqueue(validSequence[i]);
+
+        return validSequence[0];
+    }
+
+    private void ClearPendingEnemySkillSequence()
+    {
+        pendingEnemySkillSequence.Clear();
     }
 
     public void ShowCategoryMenu()
@@ -1138,7 +1186,49 @@ public class CombatManager : MonoBehaviour
         if (CheckAndHandleBattleEnd())
             return;
 
+        if (!isPlayerAttacking && TryExecuteNextPendingEnemySkill())
+            return;
+
         ResolveTurnEnd();
+    }
+
+    private bool TryExecuteNextPendingEnemySkill()
+    {
+        if (pendingEnemySkillSequence.Count == 0)
+            return false;
+
+        if (combatEnded)
+        {
+            ClearPendingEnemySkillSequence();
+            return false;
+        }
+
+        if (currentEnemyData == null || currentEnemyHp <= 0 || currentPlayerStats == null || currentPlayerStats.currentHp <= 0)
+        {
+            ClearPendingEnemySkillSequence();
+            return false;
+        }
+
+        if (currentActiveEntity == null || currentActiveEntity.type != EntityType.Enemy)
+        {
+            ClearPendingEnemySkillSequence();
+            return false;
+        }
+
+        while (pendingEnemySkillSequence.Count > 0)
+        {
+            SkillData nextSkill = pendingEnemySkillSequence.Dequeue();
+            if (nextSkill == null)
+            {
+                DevLog.LogWarning("[EnemySkillSequence] Null pending skill skipped.");
+                continue;
+            }
+
+            PerformSkillRoutine(nextSkill, false, nextSkill.isUltimate);
+            return true;
+        }
+
+        return false;
     }
 
     private void ClearCurrentTurnDeathGuard()
@@ -1279,6 +1369,7 @@ public class CombatManager : MonoBehaviour
 
         Sprite evadeSprite = isPlayerDefending ? playerData?.evade : currentEnemyData?.evade;
         CombatUIManager.Instance.SetDefenderImage(!isPlayerAttacking, evadeSprite);
+        CombatSfxController.Instance?.PlayDodge();
     }
 
     // 단일 타격 성공(명중) 연출
@@ -1303,6 +1394,7 @@ public class CombatManager : MonoBehaviour
     private void ProcessPlayerSuccessfulHit(HitResult hit, SkillData skill)
     {
         ApplyDamageToEntity(false, hit.damage);
+        PlaySkillHitSfxForResolvedDamage(hit.damage, hit.isCrit);
         AccumulatePlayerHitDamageIfBombInactive(hit);
         ApplyPlayerLifestealAfterHit(hit, skill);
     }
@@ -1311,6 +1403,7 @@ public class CombatManager : MonoBehaviour
     {
         // 1. 일반 타격 데미지 적용 (단 한 번만!)
         ApplyDamageToEntity(true, hit.damage);
+        PlaySkillHitSfxForResolvedDamage(hit.damage, hit.isCrit);
 
         // 2. 적군 흡혈 로직
         ApplyEnemyLifestealAfterHit(hit, skill);
@@ -1420,12 +1513,29 @@ public class CombatManager : MonoBehaviour
 
     private void ProcessEnemySpecialHitEffect(SkillData skill)
     {
+        if (skill == null)
+        {
+            DevLog.LogWarning("[EnemySpecialHitEffect] Skill is null. Special hit effect skipped.");
+            return;
+        }
+
+        if (skill.skillLogic == null)
+            return;
+
+        if (currentEnemyData == null)
+        {
+            string skillName = string.IsNullOrEmpty(skill.skillNameKey) ? skill.name : skill.skillNameKey;
+            DevLog.LogWarning($"[EnemySpecialHitEffect] Current enemy data is null. Skill={skillName}");
+            return;
+        }
+
         int explosionDamage = skill.skillLogic.TryProcessHitEffect(currentEnemyData);
 
         if (explosionDamage > 0)
         {
             // 특수 피해 적용 (이미 일반 데미지는 위에서 들어갔으므로 이것만 추가로 들어감)
             CombatManager.Instance.ApplyDamageToEntity(true, explosionDamage);
+            PlayNormalHitSfxForResolvedDamage(explosionDamage);
 
             // 연출: 피격 이미지 + 보라색 데미지 텍스트
             CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
@@ -1452,6 +1562,7 @@ public class CombatManager : MonoBehaviour
         CombatUIManager.Instance.SetDefenderImage(true, defenderImage);
         CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData?.hit);
         ApplyDamageToEntity(false, damage);
+        PlayNormalHitSfxForResolvedDamage(damage);
 
         if (isReflect)
         {
@@ -1595,6 +1706,7 @@ public class CombatManager : MonoBehaviour
 
         CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
         ApplyDamageToEntity(true, counterDamage);
+        PlayNormalHitSfxForResolvedDamage(counterDamage);
         if (!ShouldSuppressDamageText(true))
             CombatUIManager.Instance.SpawnDamageText("★" + counterDamage.ToString(), false, true);
 
@@ -1638,6 +1750,27 @@ public class CombatManager : MonoBehaviour
     private bool ShouldSuppressDamageText(bool isPlayerTarget)
     {
         return isPlayerTarget && DamageResolver.LastResult.showEndureText;
+    }
+
+    private void PlaySkillHitSfxForResolvedDamage(int attemptedDamage, bool isCritical)
+    {
+        if (!ShouldPlayImpactSfx(attemptedDamage))
+            return;
+
+        CombatSfxController.Instance?.PlaySkillHit(isCritical);
+    }
+
+    private void PlayNormalHitSfxForResolvedDamage(int attemptedDamage)
+    {
+        if (!ShouldPlayImpactSfx(attemptedDamage))
+            return;
+
+        CombatSfxController.Instance?.PlayNormalHit();
+    }
+
+    private bool ShouldPlayImpactSfx(int attemptedDamage)
+    {
+        return attemptedDamage > 0 || DamageResolver.LastResult.wasEndured;
     }
 
     public void SetPlayerHpToOneForScriptedEffect()
@@ -1879,6 +2012,7 @@ public class CombatManager : MonoBehaviour
 
                     int selfDamage = Mathf.RoundToInt(currentPlayerStats.currentHp * 0.4f);
                     ApplyDamageToEntity(true, selfDamage);
+                    PlayNormalHitSfxForResolvedDamage(selfDamage);
 
                     CombatUIManager.Instance.SetDefenderImage(true, playerData.hit); // 주인공 피격 이미지
                     if (!ShouldSuppressDamageText(true))
@@ -1897,6 +2031,7 @@ public class CombatManager : MonoBehaviour
                     // 기록된 피해의 50%를 추가로 입힘
                     int extraDmg = Mathf.RoundToInt(currentState.accumulatedDamage * 0.5f);
                     ApplyDamageToEntity(false, extraDmg);
+                    PlayNormalHitSfxForResolvedDamage(extraDmg);
 
                     CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData.hit); // 적 피격 이미지
                     CombatUIManager.Instance.SpawnDamageText("★" + extraDmg.ToString(), false, false);

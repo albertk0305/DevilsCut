@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8851df52087790a4ab302cb17f6e77ee, type: 3}
+  m_Name: BaitoGateOfSteiner
+  m_EditorClassIdentifier: Assembly-CSharp::SkillData
+  skillID: GateOfSteiner
+  skillLogic: {fileID: 11400000, guid: e5e1c8b259e4b3f4c9fe061c41707712, type: 2}
+  skillNameKey: enemy_skill_hacking_to_the_gate_name
+  skillDescKey: enemy_skill_hacking_to_the_gate_desc
+  evolutionANameKey: 
+  evolutionADescKey: 
+  evolutionBNameKey: 
+  evolutionBDescKey: 
+  evolutionCNameKey: 
+  evolutionCDescKey: 
+  category: 0
+  skillLevel: 1
+  skillActionImage: {fileID: 21300000, guid: f6459efd44a022444b2ad069a6fe9dfd, type: 3}
+  damageMultipliers:
+  - 1
+  breakPowers:
+  - 0
+  bonusCritRates:
+  - -9999
+  bonusAccuracyRates:
+  - 0
+  baseAccuracy: 100
+  isUltimate: 1
+  forceHitReaction: 0
+  hitCounts: 01000000
+  currentEvolution: 0
+  evolutionA_Multipliers:
+  - 0.5
+  - 0.75
+  - 1
+  evolutionB_Multipliers:
+  - 0.4
+  - 0.5
+  - 0.6
+  evolutionC_DamageMultipliers:
+  - 15
+  - 20
+  - 25
+  evolutionC_BreakPowers:
+  - 25
+  - 30
+  - 35

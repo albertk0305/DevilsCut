@@ -117,6 +117,7 @@ public class CompanionManager : MonoBehaviour
             CombatUIManager.Instance.SpawnDamageText(finalDamage.ToString(), false, isPlayerDefending);
 
             bool isDead = CombatManager.Instance.ApplyDamageToEnemy(finalDamage);
+            CombatSfxController.Instance?.PlayNormalHit();
 
             if (isDead)
             {
@@ -221,6 +222,7 @@ public class CompanionManager : MonoBehaviour
 
                 // 타격마다 즉시 적 체력 차감
                 bool isDead = CombatManager.Instance.ApplyDamageToEnemy(currentDamage);
+                CombatSfxController.Instance?.PlayNormalHit();
 
                 if (isDead)
                 {

@@ -61,6 +61,7 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
             case 1: // Snake Eyes
                 textToDisplay = "MUCK";
                 CombatManager.Instance.ApplyDamageToEntity(false, 1);
+                CombatSfxController.Instance?.PlayNormalHit();
                 if (CombatUIManager.Instance != null)
                 {
                     CombatUIManager.Instance.SpawnDamageText("1", false, false);
@@ -73,6 +74,7 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
                 textToDisplay = "SMALL BLIND"; ;
                 int lowRawDmg = Mathf.Max(1, Mathf.RoundToInt(pStats.strength * lowBetMultipliers[index]));
                 CombatManager.Instance.ApplyMitigatedDamageToEnemy(lowRawDmg, "Supporter:Belphegor:LowBet", out int lowDmg);
+                if (lowDmg > 0) CombatSfxController.Instance?.PlayNormalHit();
                 CombatUIManager.Instance.SpawnDamageText(lowDmg.ToString(), false, false);
                 isBrokenNow = BreakManager.Instance.AddBreakDamage(false, smallBlindBreak[index]);
                 break;
@@ -113,6 +115,7 @@ public class SupporterLogic_Belphegor_Battle : SupporterLogicBase
                 int luckStat = StatManager.Instance.GetEffectiveStat(true, TargetStat.Luck);
                 int jackpotRawDmg = Mathf.Max(1, luckStat * jackpotMultipliers[index]);
                 CombatManager.Instance.ApplyMitigatedDamageToEnemy(jackpotRawDmg, "Supporter:Belphegor:Jackpot", out int jackpotDmg);
+                if (jackpotDmg > 0) CombatSfxController.Instance?.PlaySkillHit(true);
                 CombatUIManager.Instance.SpawnDamageText(jackpotDmg.ToString(), true, false);
                 isBrokenNow = BreakManager.Instance.AddBreakDamage(false, jackpotBreak[index]);
                 StyleRankManager.Instance.IncreaseRank(7);

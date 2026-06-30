@@ -87,9 +87,10 @@ public static class BattleCalculator
 
                 float baseMult = skill.GetCurrentDamageMultiplier();
                 float logicMult = skill.skillLogic != null ? skill.skillLogic.GetDamageMultiplier(skill, pStats, eData, isPlayerAttacking) : 1f;
+                bool forceAttackSkill = skill.skillLogic != null && skill.skillLogic.TreatAsAttackSkill(skill);
 
                 // Utility skills become attacks when their logic provides a real damage multiplier.
-                bool isAttackSkill = baseMult > 0f || (baseMult <= 0f && logicMult > 0f && logicMult != 1.0f);
+                bool isAttackSkill = forceAttackSkill || baseMult > 0f || (baseMult <= 0f && logicMult > 0f && logicMult != 1.0f);
 
                 if (baseMult <= 0f && isAttackSkill) baseMult = 1.0f;
 
@@ -135,7 +136,9 @@ public static class BattleCalculator
                             if (eff.effectData != null && eff.effectData.specialType == SpecialEffectType.CritRateUp) totalCritRateBonus += eff.value;
                     }
 
-                    hit.isCrit = CombatMath.CheckCriticalSuccess(totalCritRateBonus, attackerLuck);
+                    hit.isCrit = skill.skillLogic != null && skill.skillLogic.AlwaysCrits(skill)
+                        ? true
+                        : CombatMath.CheckCriticalSuccess(totalCritRateBonus, attackerLuck);
                     if (hit.isCrit)
                     {
                         float baseCritMult = skill.skillLogic != null ? skill.skillLogic.GetCritDamageMultiplier(skill) : 1.5f;
