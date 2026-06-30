@@ -1720,9 +1720,17 @@ public class CombatManager : MonoBehaviour
                     playerManager.currentBattleReward
                 );
 
-                playerManager.pendingAdvanceBattleTurn = true;
-                playerManager.pendingBattleType = playerManager.currentBattleType;
-                playerManager.pendingBattlePhase = playerManager.currentBattlePhase;
+                if (!playerManager.suppressPendingBattleProgress)
+                {
+                    playerManager.pendingAdvanceBattleTurn = true;
+                    playerManager.pendingBattleType = playerManager.currentBattleType;
+                    playerManager.pendingBattlePhase = playerManager.currentBattlePhase;
+                }
+                else
+                {
+                    playerManager.pendingAdvanceBattleTurn = false;
+                    DevLog.Log($"[HiddenBoss] Suppressed normal battle progress. hiddenBossID={playerManager.currentHiddenBossID}");
+                }
             }
             else
             {

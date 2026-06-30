@@ -120,19 +120,19 @@ MonoBehaviour:
   unlockedSupporters: []
   supporterChoiceRecords:
   - supporterID: asmodeus
-    state: 1
+    state: 2
   - supporterID: lucifer
-    state: 1
+    state: 2
   - supporterID: baalzebub
-    state: 1
+    state: 2
   - supporterID: belphegor
-    state: 1
+    state: 2
   - supporterID: mammon
-    state: 1
+    state: 2
   - supporterID: satan
-    state: 1
+    state: 2
   - supporterID: leviathan
-    state: 1
+    state: 2
   activeSupporter: {fileID: 0}
   supporterDatabase: {fileID: 11400000, guid: 51dd2413502c8f641a2cacd0d2de3478, type: 2}
   ownedKarinItems:
@@ -196,6 +196,10 @@ MonoBehaviour:
     keys: 0
   currentBattleType: 0
   currentBattlePhase: 0
+  currentBattleIsHiddenBoss: 0
+  currentHiddenBossID: 
+  currentHiddenBossEncounter: {fileID: 0}
+  suppressPendingBattleProgress: 0
   pendingAdvanceBattleTurn: 0
   pendingBattleType: 0
   pendingBattlePhase: 0
@@ -262,6 +266,7 @@ MonoBehaviour:
   savedLastVisitedNodeImage: {fileID: 0}
   savedLastVisitedFacility: {fileID: 0}
   savedFacilityRanks: []
+  clearedHiddenBossIDs: []
   debugFacilityID: bar
   debugFacilityRank: 3
 --- !u!114 &4950642224689884447

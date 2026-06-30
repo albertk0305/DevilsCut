@@ -16,7 +16,7 @@ hidden_baito_pre_014	baito	karin	baito	default	determined	speaker_baito	hidden_b
 hidden_baito_pre_015	sherry	sherry	baito	surprise	determined	speaker_sherry	hidden_baito_pre_015_body						FALSE	FALSE	FALSE								
 hidden_baito_pre_016	baito	sherry	baito	surprise	determinedSpeak	speaker_baito	hidden_baito_pre_016_body						FALSE	FALSE	FALSE								
 hidden_baito_pre_017	sherry	sherry	baito	greasy	determinedSpeak	speaker_sherry	hidden_baito_pre_017_body						FALSE	FALSE	FALSE								
-hidden_baito_pre_018	baito	sherry	baito	greasy	worried	speaker_baito	hidden_baito_pre_018_body						FALSE	FALSE	FALSE								
+hidden_baito_pre_018	baito	sherry	baito	greasy	sad	speaker_baito	hidden_baito_pre_018_body						FALSE	FALSE	FALSE								
 hidden_baito_pre_019	baito	sherry	baito	greasy	sad	speaker_baito	hidden_baito_pre_019_body						FALSE	FALSE	FALSE								
 hidden_baito_pre_020	karin	karin	baito	speechless	sad	speaker_karin	hidden_baito_pre_020_body						FALSE	FALSE	FALSE								
 hidden_baito_pre_021	baito	karin	baito	speechless	determined	speaker_baito	hidden_baito_pre_021_body						FALSE	FALSE	FALSE								

@@ -16,6 +16,6 @@ hidden_baito_post_014	baito	sherry	baito	softSpeak	default	speaker_baito	hidden_
 hidden_baito_post_015	karin	karin	baito	confidentSpeak	default	speaker_karin	hidden_baito_post_015_body						FALSE	FALSE	FALSE								
 hidden_baito_post_016	sherry	sherry	baito	smug	smile	speaker_sherry	hidden_baito_post_016_body						FALSE	FALSE	FALSE								
 hidden_baito_post_017	baito	sherry	baito	smug	smile	speaker_baito	hidden_baito_post_017_body						FALSE	FALSE	FALSE								
-hidden_baito_post_018	narration	sherry	karin	smug	determined	speaker_narration	hidden_baito_post_018_body						FALSE	FALSE	FALSE								
-hidden_baito_post_019	karin	sherry	karin	confidentSmile	determined	speaker_karin	hidden_baito_post_019_body						FALSE	FALSE	FALSE								
-hidden_baito_post_020	sherry	sherry	karin	smirk	determined	speaker_sherry	hidden_baito_post_020_body	LoadNextScene					FALSE	FALSE	FALSE								
+hidden_baito_post_018	narration	sherry	baito	smug	smile	speaker_narration	hidden_baito_post_018_body						FALSE	FALSE	FALSE								
+hidden_baito_post_019	karin	sherry	karin	confidentSmile	smile	speaker_karin	hidden_baito_post_019_body						FALSE	FALSE	FALSE								
+hidden_baito_post_020	sherry	sherry	karin	smirk	smile	speaker_sherry	hidden_baito_post_020_body	LoadNextScene					FALSE	FALSE	FALSE								

@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efd3669ee8af7e24c927d5508b5636aa, type: 3}
-  m_Name: Castus
+  m_Name: Baito
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyNameKey: Castus
-  enemyImage: {fileID: 21300000, guid: e7c1bd5a6a9ea454c98295ee1c0b2cf3, type: 3}
-  CutIn: {fileID: 21300000, guid: 8320c1491a3b2db43809b24de467e7d8, type: 3}
-  hit: {fileID: 21300000, guid: 82883c4f4ddbba54eab1cc5b37608519, type: 3}
-  evade: {fileID: 21300000, guid: 4b130afa66c08204093fae79211523bc, type: 3}
-  breakImage: {fileID: 21300000, guid: e0e09e3b025c6d04eb5e5f0b531f5399, type: 3}
+  enemyNameKey: Baito
+  enemyImage: {fileID: 21300000, guid: 2749d768a02399a49bfeb5e00cb37d4b, type: 3}
+  CutIn: {fileID: 21300000, guid: b4c2fa54df197c84cbf0db1421a56112, type: 3}
+  hit: {fileID: 21300000, guid: 9e80a14d7fd52894d8f02df05c3288ce, type: 3}
+  evade: {fileID: 21300000, guid: b38b4b8ccd2581640b7d5dd2f50785f0, type: 3}
+  breakImage: {fileID: 21300000, guid: 635d9fe85efe0954b983aaa6e6749419, type: 3}
   guardImage: {fileID: 0}
-  aiBrain: {fileID: 11400000, guid: ccfd89c5bb878624ea1a1cf32d84bc5e, type: 2}
+  aiBrain: {fileID: 11400000, guid: 04124f37a4c614d4e87dce0611bf7452, type: 2}
   statModifier:
     maxHpPercent: 0
     actionPointsPercent: 0
     breakResistancePercent: 0
     maxBreakGaugePercent: 0
     strengthPercent: 0
-    defensePercent: -0.25
-    speedPercent: 0.25
+    defensePercent: 0
+    speedPercent: 0
     luckPercent: 0
   level: 0
   maxHp: 0

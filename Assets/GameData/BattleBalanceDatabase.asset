@@ -367,8 +367,8 @@ MonoBehaviour:
       gold: 30000
       keys: 0
     finalBossReward:
-      exp: 1000000
-      gold: 30000
+      exp: 1048596
+      gold: 35100
       keys: 0
     generalEnemyStats:
       level: 97
@@ -392,11 +392,11 @@ MonoBehaviour:
       luck: 100
     finalBossStats:
       level: 120
-      maxHp: 850000
-      actionPoints: 110
-      breakResistance: 150
-      maxBreakGauge: 320
-      strength: 140
-      defense: 140
-      speed: 140
-      luck: 140
+      maxHp: 300000
+      actionPoints: 120
+      breakResistance: 100
+      maxBreakGauge: 200
+      strength: 120
+      defense: 120
+      speed: 120
+      luck: 120

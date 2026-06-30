@@ -6,6 +6,7 @@ public enum GamePhase { BossSelection, Exploration, GeneralBattle, BossBattle, G
 
 public class BossSelectionNodeData : ExplorationNodeData { public BossEncounterData bossData; }
 public class PhaseBattleNodeData : DangerNodeData { public BossEncounterData bossData; public bool isBossBattle; }
+public class HiddenBossNodeData : PhaseBattleNodeData { public string hiddenBossID; }
 
 public class ExplorationManager : MonoBehaviour
 {
@@ -133,8 +134,11 @@ public class ExplorationManager : MonoBehaviour
                 break;
 
             case GamePhase.Exploration:
-                var randoms = allNodes.OrderBy(x => Random.value).Take(3).ToList();
+                var randoms = allNodes != null
+                    ? allNodes.Where(x => x != null).OrderBy(x => Random.value).Take(3).ToList()
+                    : new List<ExplorationNodeData>();
                 for (int i = 0; i < randoms.Count; i++) options[i] = randoms[i];
+                TryInsertBaitoHiddenBossNode(options);
                 break;
 
             case GamePhase.GeneralBattle:
@@ -204,6 +208,60 @@ public class ExplorationManager : MonoBehaviour
         var node = ScriptableObject.CreateInstance<BossSelectionNodeData>();
         node.bossData = data;
         node.nodeImage = bossSelectionEventIcon != null ? bossSelectionEventIcon : data.nodeIcon;
+        return node;
+    }
+
+    private void TryInsertBaitoHiddenBossNode(List<ExplorationNodeData> options)
+    {
+        if (options == null || options.Count != 3)
+            return;
+
+        if (!ShouldShowBaitoHiddenBossNode())
+            return;
+
+        BossEncounterData baitoEncounter = GetBaitoHiddenBossEncounter();
+        if (baitoEncounter == null)
+        {
+            DevLog.LogWarning("[HiddenBoss] Baito encounter not found in BossDatabase.");
+            return;
+        }
+
+        int slotIndex = Random.Range(0, options.Count);
+        options[slotIndex] = CreateBaitoHiddenBossNode(baitoEncounter);
+    }
+
+    private bool ShouldShowBaitoHiddenBossNode()
+    {
+        if (currentCycle != HiddenBossConstants.BaitoPhase || currentPhase != GamePhase.Exploration)
+            return false;
+
+        PlayerManager playerManager = PlayerManager.Instance;
+        if (playerManager == null)
+            return false;
+
+        if (playerManager.IsHiddenBossCleared(HiddenBossConstants.BaitoHiddenBossID))
+            return false;
+
+        return playerManager.AreAllRequiredSupportersRejectedForHiddenBoss();
+    }
+
+    private BossEncounterData GetBaitoHiddenBossEncounter()
+    {
+        if (SaveManager.Instance == null || SaveManager.Instance.bossDatabase == null)
+            return null;
+
+        return SaveManager.Instance.bossDatabase.GetByID(HiddenBossConstants.BaitoHiddenBossID);
+    }
+
+    private HiddenBossNodeData CreateBaitoHiddenBossNode(BossEncounterData encounter)
+    {
+        HiddenBossNodeData node = ScriptableObject.CreateInstance<HiddenBossNodeData>();
+        node.hiddenBossID = HiddenBossConstants.BaitoHiddenBossID;
+        node.bossData = encounter;
+        node.isBossBattle = true;
+        node.enemyToSpawn = encounter != null ? encounter.bossEnemy : null;
+        node.nodeID = HiddenBossConstants.BaitoHiddenBossID;
+        node.nodeImage = encounter != null ? encounter.nodeIcon : null;
         return node;
     }
 
@@ -316,9 +374,11 @@ public class ExplorationManager : MonoBehaviour
             }
             else if (option is PhaseBattleNodeData battleData)
             {
-                saved.optionType = battleData.isBossBattle ? "BossBattle" : "GeneralBattle";
+                HiddenBossNodeData hiddenBoss = option as HiddenBossNodeData;
+                saved.optionType = hiddenBoss != null ? "HiddenBoss" : battleData.isBossBattle ? "BossBattle" : "GeneralBattle";
                 saved.bossID = battleData.bossData != null ? battleData.bossData.bossID : null;
-                saved.battleType = battleData.isBossBattle ? BattleType.Boss : BattleType.General;
+                saved.nodeID = hiddenBoss != null ? hiddenBoss.hiddenBossID : null;
+                saved.battleType = hiddenBoss != null ? BattleType.FinalBoss : battleData.isBossBattle ? BattleType.Boss : BattleType.General;
                 saved.isBossBattle = battleData.isBossBattle;
             }
 
@@ -411,10 +471,14 @@ public class ExplorationManager : MonoBehaviour
 
             case "GeneralBattle":
             case "BossBattle":
+            case "HiddenBoss":
             {
                 BossEncounterData boss = FindBossForSave(savedOption.bossID, bossDatabase);
                 if (boss == null)
                     return null;
+
+                if (savedOption.optionType == "HiddenBoss")
+                    return CreateBaitoHiddenBossNode(boss);
 
                 bool isBossBattle = savedOption.optionType == "BossBattle";
                 PhaseBattleNodeData battleNode = ScriptableObject.CreateInstance<PhaseBattleNodeData>();
@@ -552,7 +616,9 @@ public class ExplorationManager : MonoBehaviour
             return;
         }
 
-        List<BossEncounterData> allBosses = SaveManager.Instance.bossDatabase.allBosses;
+        List<BossEncounterData> allBosses = SaveManager.Instance.bossDatabase.allBosses
+            .Where(boss => boss != null && !IsHiddenBossEncounter(boss))
+            .ToList();
         int midBossCount = allBosses.Count > 7
             ? Mathf.Max(0, allBosses.Count - 2)
             : allBosses.Count;
@@ -678,6 +744,11 @@ public class ExplorationManager : MonoBehaviour
             return a.bossID == b.bossID;
 
         return a == b;
+    }
+
+    private bool IsHiddenBossEncounter(BossEncounterData boss)
+    {
+        return boss != null && boss.bossID == HiddenBossConstants.BaitoHiddenBossID;
     }
 
     private string BuildBossNameList(List<BossEncounterData> bosses)

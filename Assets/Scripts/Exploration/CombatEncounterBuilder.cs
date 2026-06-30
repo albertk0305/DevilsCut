@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CombatEncounterBuilder : MonoBehaviour
 {
@@ -41,6 +41,22 @@ public class CombatEncounterBuilder : MonoBehaviour
         playerManager.currentBattleType = battleType;
         playerManager.currentBattlePhase = phase;
 
+        return true;
+    }
+
+    public bool PrepareHiddenBossEncounter(BossEncounterData bossEncounter, string hiddenBossID)
+    {
+        if (bossEncounter == null)
+        {
+            Debug.LogError("CombatEncounterBuilder: hidden boss encounter is null.");
+            return false;
+        }
+
+        bool prepared = PrepareEncounter(bossEncounter.bossEnemy, BattleType.FinalBoss, HiddenBossConstants.BaitoPhase);
+        if (!prepared)
+            return false;
+
+        PlayerManager.Instance.BeginHiddenBossBattle(hiddenBossID, bossEncounter);
         return true;
     }
 }

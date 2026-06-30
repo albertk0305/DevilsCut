@@ -2,6 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 
+public static class HiddenBossConstants
+{
+    public const string BaitoHiddenBossID = "hidden_boss_baito";
+    public const int BaitoPhase = 9;
+
+    public static readonly string[] RequiredRejectedSupporterIDs =
+    {
+        "asmodeus",
+        "baalzebub",
+        "belphegor",
+        "leviathan",
+        "lucifer",
+        "mammon",
+        "satan"
+    };
+}
+
 [System.Serializable]
 public class PlayerStats
 {
@@ -128,6 +145,10 @@ public class PlayerManager : MonoBehaviour
     public BattleReward currentBattleReward;
     public BattleType currentBattleType;
     public int currentBattlePhase;
+    public bool currentBattleIsHiddenBoss;
+    public string currentHiddenBossID;
+    public BossEncounterData currentHiddenBossEncounter;
+    public bool suppressPendingBattleProgress;
 
     [Header("Pending Exploration Progress")]
     public bool pendingAdvanceBattleTurn;
@@ -165,6 +186,7 @@ public class PlayerManager : MonoBehaviour
     public Sprite savedLastVisitedNodeImage;
     public FacilityData savedLastVisitedFacility;
     public List<PlayerFacilityRankRecord> savedFacilityRanks = new List<PlayerFacilityRankRecord>();
+    public List<string> clearedHiddenBossIDs = new List<string>();
 
 #if UNITY_EDITOR
     [Header("Editor Debug")]
@@ -262,6 +284,7 @@ public class PlayerManager : MonoBehaviour
         currentBattleReward = new BattleReward();
         currentBattleType = default;
         currentBattlePhase = 0;
+        ClearCurrentHiddenBossBattleContext();
 
         pendingAdvanceBattleTurn = false;
         pendingBattleType = default;
@@ -282,6 +305,7 @@ public class PlayerManager : MonoBehaviour
         savedLastVisitedNodeImage = null;
         savedLastVisitedFacility = null;
         savedFacilityRanks.Clear();
+        clearedHiddenBossIDs.Clear();
 
         DevLog.Log("[PlayerManager] 새 게임 상태로 초기화했습니다.");
     }
@@ -384,6 +408,53 @@ public class PlayerManager : MonoBehaviour
     public bool IsSupporterChoiceResolved(SupporterData supporter)
     {
         return IsSupporterChoiceResolved(supporter != null ? supporter.supporterID : null);
+    }
+
+    public bool AreAllRequiredSupportersRejectedForHiddenBoss()
+    {
+        foreach (string supporterID in HiddenBossConstants.RequiredRejectedSupporterIDs)
+        {
+            if (GetSupporterChoiceState(supporterID) != SupporterChoiceState.Rejected)
+                return false;
+        }
+
+        return true;
+    }
+
+    public void BeginHiddenBossBattle(string hiddenBossID, BossEncounterData encounter)
+    {
+        currentBattleIsHiddenBoss = !string.IsNullOrEmpty(hiddenBossID);
+        currentHiddenBossID = hiddenBossID;
+        currentHiddenBossEncounter = encounter;
+        suppressPendingBattleProgress = currentBattleIsHiddenBoss;
+    }
+
+    public void ClearCurrentHiddenBossBattleContext()
+    {
+        currentBattleIsHiddenBoss = false;
+        currentHiddenBossID = "";
+        currentHiddenBossEncounter = null;
+        suppressPendingBattleProgress = false;
+    }
+
+    public bool IsHiddenBossCleared(string hiddenBossID)
+    {
+        if (string.IsNullOrEmpty(hiddenBossID) || clearedHiddenBossIDs == null)
+            return false;
+
+        return clearedHiddenBossIDs.Contains(hiddenBossID);
+    }
+
+    public void MarkHiddenBossCleared(string hiddenBossID)
+    {
+        if (string.IsNullOrEmpty(hiddenBossID))
+            return;
+
+        if (clearedHiddenBossIDs == null)
+            clearedHiddenBossIDs = new List<string>();
+
+        if (!clearedHiddenBossIDs.Contains(hiddenBossID))
+            clearedHiddenBossIDs.Add(hiddenBossID);
     }
 
     public bool RecruitSupporter(SupporterData supporter)

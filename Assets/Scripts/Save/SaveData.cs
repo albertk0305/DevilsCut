@@ -60,6 +60,7 @@ public class PlayerGrowthSaveData
     public List<SavedOwnedItem> inventory = new List<SavedOwnedItem>();
     public List<SavedSkillState> skills = new List<SavedSkillState>();
     public List<SavedSupporterState> supporters = new List<SavedSupporterState>();
+    public List<string> clearedHiddenBossIDs = new List<string>();
     public List<string> ownedKarinItemIDs = new List<string>();
     public string equippedKarinItemID;
 }

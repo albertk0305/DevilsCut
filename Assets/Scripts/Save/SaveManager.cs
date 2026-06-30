@@ -610,14 +610,21 @@ public class SaveManager : MonoBehaviour
         if (bossDatabase == null || bossDatabase.allBosses == null)
             return bossIDs;
 
-        int midBossCount = bossDatabase.allBosses.Count > 7
-            ? Mathf.Max(0, bossDatabase.allBosses.Count - 2)
-            : bossDatabase.allBosses.Count;
+        List<BossEncounterData> storyBosses = new List<BossEncounterData>();
+        foreach (BossEncounterData boss in bossDatabase.allBosses)
+        {
+            if (boss != null && boss.bossID != HiddenBossConstants.BaitoHiddenBossID)
+                storyBosses.Add(boss);
+        }
+
+        int midBossCount = storyBosses.Count > 7
+            ? Mathf.Max(0, storyBosses.Count - 2)
+            : storyBosses.Count;
         midBossCount = Mathf.Min(7, midBossCount);
 
         for (int i = 0; i < midBossCount; i++)
         {
-            BossEncounterData boss = bossDatabase.allBosses[i];
+            BossEncounterData boss = storyBosses[i];
             if (boss != null && !string.IsNullOrEmpty(boss.bossID))
                 bossIDs.Add(boss.bossID);
         }
@@ -759,6 +766,12 @@ public class SaveManager : MonoBehaviour
             });
         }
 
+        foreach (string hiddenBossID in playerManager.clearedHiddenBossIDs ?? new List<string>())
+        {
+            if (!string.IsNullOrEmpty(hiddenBossID) && !data.clearedHiddenBossIDs.Contains(hiddenBossID))
+                data.clearedHiddenBossIDs.Add(hiddenBossID);
+        }
+
         foreach (KarinItemData item in playerManager.ownedKarinItems)
         {
             if (item == null)
@@ -874,6 +887,7 @@ public class SaveManager : MonoBehaviour
         playerManager.unlockedSupporters.Clear();
         playerManager.supporterChoiceRecords.Clear();
         playerManager.activeSupporter = null;
+        playerManager.clearedHiddenBossIDs.Clear();
         foreach (SavedSupporterState savedSupporter in data.supporters ?? new List<SavedSupporterState>())
         {
             SupporterData supporter = supporterDatabase != null ? supporterDatabase.GetByID(savedSupporter.supporterID) : null;
@@ -900,6 +914,12 @@ public class SaveManager : MonoBehaviour
             playerManager.unlockedSupporters.Add(runtimeSupporter);
             if (savedSupporter.active)
                 playerManager.activeSupporter = runtimeSupporter;
+        }
+
+        foreach (string hiddenBossID in data.clearedHiddenBossIDs ?? new List<string>())
+        {
+            if (!string.IsNullOrEmpty(hiddenBossID))
+                playerManager.MarkHiddenBossCleared(hiddenBossID);
         }
 
         playerManager.ownedKarinItems.Clear();

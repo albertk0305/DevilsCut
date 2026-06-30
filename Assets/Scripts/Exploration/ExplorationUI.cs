@@ -182,6 +182,10 @@ public class ExplorationUI : MonoBehaviour
         {
             ApplyFacilityOperatorImage(randomOperatorImages[slotIndex], facilityData, true);
         }
+        else if (selectedData is HiddenBossNodeData hiddenBossData)
+        {
+            randomOperatorImages[slotIndex].sprite = hiddenBossData.bossData.readySD;
+        }
         else if (selectedData is BossSelectionNodeData bossSelData)
         {
             randomOperatorImages[slotIndex].sprite = bossSelData.bossData.readySD;
@@ -204,6 +208,10 @@ public class ExplorationUI : MonoBehaviour
         if (prevData is FacilityData facilityData)
         {
             ApplyFacilityOperatorImage(randomOperatorImages[selectedIndex], facilityData, false);
+        }
+        else if (prevData is HiddenBossNodeData hiddenBossData)
+        {
+            randomOperatorImages[selectedIndex].sprite = hiddenBossData.bossData.defaultSD;
         }
         else if (prevData is BossSelectionNodeData bossSelData)
         {
@@ -349,6 +357,10 @@ public class ExplorationUI : MonoBehaviour
                     karinDialogueText.text = GetLocalizedText("msg_facility_owned_by_baito", "There is no operator for this facility.");
                 }
             }
+            else if (data is HiddenBossNodeData)
+            {
+                karinDialogueText.text = GetLocalizedText("msg_strong_enemy_warning", "A powerful enemy awaits! Prepare yourself!");
+            }
             else if (data is BossSelectionNodeData)
             {
                 karinDialogueText.text = GetLocalizedText("msg_confirm_next_destination", "Set this as your next target?");
@@ -387,6 +399,10 @@ public class ExplorationUI : MonoBehaviour
         {
             ConfirmFacilitySelection(facility);
         }
+        else if (targetData is HiddenBossNodeData hiddenBoss)
+        {
+            ConfirmHiddenBossSelection(hiddenBoss);
+        }
         else if (targetData is PhaseBattleNodeData pBattle)
         {
             BattleType battleType = pBattle.isBossBattle ? BattleType.Boss : BattleType.General;
@@ -405,6 +421,29 @@ public class ExplorationUI : MonoBehaviour
             ExplorationManager.Instance.SaveStateToPlayerManager();
             TryStartPreBossDialogueOrBattle(pBattle);
         }
+    }
+
+    private void ConfirmHiddenBossSelection(HiddenBossNodeData hiddenBoss)
+    {
+        if (hiddenBoss == null || hiddenBoss.bossData == null)
+            return;
+
+        if (encounterBuilder == null)
+        {
+            Debug.LogError("ExplorationUI: CombatEncounterBuilder가 연결되지 않았습니다.");
+            return;
+        }
+
+        ExplorationManager.Instance.lastVisitedNodeImage = hiddenBoss.nodeImage;
+        ExplorationManager.Instance.AdvanceExplorationTurn();
+        selectedIndex = -1;
+
+        bool prepared = encounterBuilder.PrepareHiddenBossEncounter(hiddenBoss.bossData, hiddenBoss.hiddenBossID);
+        if (!prepared)
+            return;
+
+        ExplorationManager.Instance.SaveStateToPlayerManager();
+        TryStartPreBossDialogueOrBattle(hiddenBoss);
     }
 
     private void TryStartPreBossDialogueOrBattle(PhaseBattleNodeData battleNode)

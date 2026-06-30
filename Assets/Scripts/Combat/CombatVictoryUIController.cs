@@ -1826,7 +1826,10 @@ public class CombatVictoryUIController : MonoBehaviour
             return false;
         }
 
-        if (playerManager.currentBattleType != BattleType.Boss)
+        bool isHiddenBoss = playerManager.currentBattleIsHiddenBoss
+            && playerManager.currentHiddenBossID == HiddenBossConstants.BaitoHiddenBossID;
+
+        if (playerManager.currentBattleType != BattleType.Boss && !isHiddenBoss)
         {
             DevLog.Log("[VictoryReward] Post boss dialogue skipped: not boss battle.");
             return false;
@@ -1839,12 +1842,17 @@ public class CombatVictoryUIController : MonoBehaviour
             return false;
         }
 
-        BossEncounterData bossEncounter = playerManager.savedCurrentTargetBoss;
+        BossEncounterData bossEncounter = isHiddenBoss
+            ? playerManager.currentHiddenBossEncounter
+            : playerManager.savedCurrentTargetBoss;
         if (bossEncounter == null)
         {
             DevLog.LogWarning("[VictoryReward] Post boss dialogue skipped: savedCurrentTargetBoss null.");
+            FinalizeHiddenBossVictoryContextIfNeeded(playerManager, isHiddenBoss);
             return false;
         }
+
+        FinalizeHiddenBossVictoryContextIfNeeded(playerManager, isHiddenBoss);
 
         DialogueData postBossDialogue = bossEncounter.postBossDialogue;
         if (postBossDialogue == null)
@@ -1901,7 +1909,19 @@ public class CombatVictoryUIController : MonoBehaviour
         }
 
         DialogueRuntimeContext.SetPendingDialogueID(dialogueID, storySkipResult.action == StorySkipResolveAction.EnterStoryForcedFastForward);
+        if (isHiddenBoss && SaveManager.Instance != null)
+            SaveManager.Instance.SaveContinueDataForDialogue(dialogueSceneName, dialogueID);
         DevLog.Log($"[VictoryReward] Post boss dialogue prepared: {dialogueID}");
         return true;
+    }
+
+    private void FinalizeHiddenBossVictoryContextIfNeeded(PlayerManager playerManager, bool isHiddenBoss)
+    {
+        if (!isHiddenBoss || playerManager == null)
+            return;
+
+        playerManager.MarkHiddenBossCleared(HiddenBossConstants.BaitoHiddenBossID);
+        playerManager.ClearCurrentHiddenBossBattleContext();
+        DevLog.Log($"[HiddenBoss] Cleared hidden boss: {HiddenBossConstants.BaitoHiddenBossID}");
     }
 }
