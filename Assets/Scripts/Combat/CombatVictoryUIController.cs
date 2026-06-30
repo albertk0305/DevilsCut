@@ -112,6 +112,7 @@ public class CombatVictoryUIController : MonoBehaviour
     private VictoryRewardGrantResult currentRewardResult;
     private bool isTyping;
     private bool isContinuing;
+    private bool isReturningToExploration;
     private bool isWaitingForLeviathanGiftAdvance;
     private bool isWaitingForSupporterPassiveAdvance;
 
@@ -186,6 +187,7 @@ public class CombatVictoryUIController : MonoBehaviour
     public void ShowVictory(string enemyName, VictoryRewardGrantResult rewardResult)
     {
         isContinuing = false;
+        isReturningToExploration = false;
         IsVictoryUIActive = true;
         currentStep = VictoryStep.ResultMessage;
         currentEnemyName = enemyName;
@@ -223,6 +225,7 @@ public class CombatVictoryUIController : MonoBehaviour
     private void Hide()
     {
         IsVictoryUIActive = false;
+        isReturningToExploration = false;
         selectedItem = null;
         selectedKarinItem = null;
         currentEnemyName = "";
@@ -554,7 +557,7 @@ public class CombatVictoryUIController : MonoBehaviour
 
     public void OnClickMessageAdvance()
     {
-        if (isContinuing)
+        if (isContinuing || isReturningToExploration)
             return;
 
         if (isTyping)
@@ -1001,6 +1004,9 @@ public class CombatVictoryUIController : MonoBehaviour
 
     private void OnClickEquipmentRewardSlot(int slotIndex)
     {
+        if (isReturningToExploration)
+            return;
+
         if (currentStep != VictoryStep.EquipmentSelection)
             return;
 
@@ -1026,6 +1032,9 @@ public class CombatVictoryUIController : MonoBehaviour
 
     private void OnClickKarinItemRewardSlot(int slotIndex)
     {
+        if (isReturningToExploration)
+            return;
+
         if (currentStep != VictoryStep.KarinItemSelection)
             return;
 
@@ -1052,6 +1061,9 @@ public class CombatVictoryUIController : MonoBehaviour
 
     private void OnClickRerollEquipmentRewardSlot(int slotIndex)
     {
+        if (isReturningToExploration)
+            return;
+
         if (currentStep != VictoryStep.EquipmentSelection)
             return;
 
@@ -1298,6 +1310,9 @@ public class CombatVictoryUIController : MonoBehaviour
 
     private void OnClickConfirmEquipmentReward()
     {
+        if (isReturningToExploration)
+            return;
+
         if (currentStep == VictoryStep.KarinItemSelection)
         {
             OnClickConfirmKarinItemReward();
@@ -1321,13 +1336,15 @@ public class CombatVictoryUIController : MonoBehaviour
         }
 
         EquipmentItemData itemToAcquire = selectedItem;
-        HideEquipmentRewardUI();
         List<ItemMergeResult> mergeResults = playerManager.AcquireItemAndGetMergeResults(itemToAcquire);
         StartLeviathanGiftOrContinue(mergeResults);
     }
 
     private void OnClickConfirmKarinItemReward()
     {
+        if (isReturningToExploration)
+            return;
+
         if (selectedKarinItem == null)
             return;
 
@@ -1405,6 +1422,22 @@ public class CombatVictoryUIController : MonoBehaviour
         if (isWaitingForLeviathanGiftAdvance)
         {
             isWaitingForLeviathanGiftAdvance = false;
+
+            if (pendingMergeResults.Count == 0)
+            {
+                if (!TryPreparePostRewardPassiveResults())
+                {
+                    currentLeviathanGiftResult = null;
+                    ReturnToExploration();
+                    return;
+                }
+
+                SetBonusItemActive(false);
+                currentLeviathanGiftResult = null;
+                StartSupporterPassiveResultStage();
+                return;
+            }
+
             SetBonusItemActive(false);
             currentLeviathanGiftResult = null;
             ContinueAfterRewardItemAcquisition();
@@ -1580,18 +1613,39 @@ public class CombatVictoryUIController : MonoBehaviour
             return;
         }
 
-        itemMergePresentation.Play(mergeResults, StartPostRewardPassivesOrReturn);
+        itemMergePresentation.Play(mergeResults, HandleItemMergeAnimationsComplete, true);
     }
 
     private void StartPostRewardPassivesOrReturn()
     {
-        if (PlayerManager.Instance == null)
+        if (!TryPreparePostRewardPassiveResults())
         {
             ReturnToExploration();
             return;
         }
 
+        StartSupporterPassiveResultStage();
+    }
+
+    private void HandleItemMergeAnimationsComplete()
+    {
+        if (!TryPreparePostRewardPassiveResults())
+        {
+            ReturnToExploration();
+            return;
+        }
+
+        CleanupItemMergePresentationForNextStage();
+        StartSupporterPassiveResultStage();
+    }
+
+    private bool TryPreparePostRewardPassiveResults()
+    {
         supporterPassiveResultQueue.Clear();
+
+        if (PlayerManager.Instance == null)
+            return false;
+
         List<SupporterPassiveRewardResult> results = SupporterVictoryPassiveService.ResolvePostRewardPassives(PlayerManager.Instance);
 
         if (results != null)
@@ -1603,15 +1657,22 @@ public class CombatVictoryUIController : MonoBehaviour
             }
         }
 
-        if (supporterPassiveResultQueue.Count == 0)
-        {
-            ReturnToExploration();
-            return;
-        }
+        return supporterPassiveResultQueue.Count > 0;
+    }
 
+    private void StartSupporterPassiveResultStage()
+    {
         currentStep = VictoryStep.SupporterPassiveResult;
         ShowSupporterPassiveResultStage();
         PlayNextSupporterPassiveMessageOrReturn();
+    }
+
+    private void CleanupItemMergePresentationForNextStage()
+    {
+        if (itemMergePresentation != null)
+            itemMergePresentation.StopPresentation(true);
+
+        SetItemMergePresentationRootActive(false);
     }
 
     private void PlayNextSupporterPassiveMessageOrReturn()
@@ -1666,6 +1727,9 @@ public class CombatVictoryUIController : MonoBehaviour
 
     private void HandleMergeMessageAdvance()
     {
+        if (isReturningToExploration)
+            return;
+
         if (itemMergePresentation != null)
             itemMergePresentation.HandleAdvance();
     }
@@ -1732,13 +1796,13 @@ public class CombatVictoryUIController : MonoBehaviour
 
     private void ReturnToExploration()
     {
-        if (isContinuing)
+        if (isContinuing || isReturningToExploration)
             return;
 
         string nextSceneName = ResolvePostVictorySceneName();
+        isReturningToExploration = true;
         isContinuing = true;
         IsVictoryUIActive = false;
-        LockVictoryUIForSceneTransition();
 
         Time.timeScale = 1f;
         SceneLoader.LoadScene(nextSceneName);

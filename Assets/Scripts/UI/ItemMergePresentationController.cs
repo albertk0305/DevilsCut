@@ -52,6 +52,7 @@ public class ItemMergePresentationController : MonoBehaviour
     private bool isWaitingForAdvance;
     private bool controlsLocked;
     private bool objectsHidden;
+    private bool keepVisibleOnComplete;
     private string currentMessageKey = "";
     private string currentMessageFallback = "";
     private object[] currentMessageArgs;
@@ -167,10 +168,11 @@ public class ItemMergePresentationController : MonoBehaviour
         }
     }
 
-    public void Play(List<ItemMergeResult> mergeResults, Action onComplete)
+    public void Play(List<ItemMergeResult> mergeResults, Action onComplete, bool keepVisibleOnComplete = false)
     {
         StopPresentation(false);
         this.onComplete = onComplete;
+        this.keepVisibleOnComplete = keepVisibleOnComplete;
 
         if (mergeResults == null || mergeResults.Count == 0)
         {
@@ -260,6 +262,7 @@ public class ItemMergePresentationController : MonoBehaviour
         isWaitingForAdvance = false;
         IsPlaying = false;
         onComplete = null;
+        keepVisibleOnComplete = false;
 
         if (restoreControls)
             RestoreControls();
@@ -377,9 +380,15 @@ public class ItemMergePresentationController : MonoBehaviour
     private void CompletePresentation()
     {
         Action completeAction = onComplete;
-        StopPresentation(true);
-        SetRootActive(false);
-        SetTextCompleteIndicatorActive(false);
+        bool keepVisible = keepVisibleOnComplete;
+        StopPresentation(!keepVisible);
+
+        if (!keepVisible)
+        {
+            SetRootActive(false);
+            SetTextCompleteIndicatorActive(false);
+        }
+
         completeAction?.Invoke();
     }
 
