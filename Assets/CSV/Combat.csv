@@ -17,8 +17,8 @@ combat_comment_pati_counter_format,파티가 반격해 {0}의 특수 피해를 �
 item_merge_three_collected_format,{0:이가} 3개 모였습니다.,Collected 3 copies of {0}.
 item_merge_star_up_format,{0:이가} {1}성으로 강화됐습니다.,{0} upgraded to {1} stars.
 combat_defeat_message,패배했습니다...,You were defeated...
-combat_defeat_give_up_confirm,정말로 포기하시겠습니까?,Are you sure you want to give up?
-combat_defeat_give_up_final,정말로 포기하시겠습니까? 지금까지의 기록이 삭제됩니다.,Are you sure you want to give up? Your progress so far will be deleted.
+combat_defeat_give_up_confirm,정말로 포기하시겠습니까? 지금까지의 기록이 삭제됩니다.,Are you sure you want to give up? Your progress so far will be deleted.
+combat_defeat_give_up_final,현재 회차 데이터가 지워졌습니다.,Current run data has been wiped.
 combat_defeat_restart_button,전투 재시작,Restart the Fight
 combat_defeat_give_up_button,포기하기,Give Up
 ui_yes,예,Yes

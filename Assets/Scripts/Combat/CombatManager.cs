@@ -26,6 +26,8 @@ public class CombatState
     public int totalExcessHealThisSkill = 0;
 
     public bool hasResurrected = false;
+    public bool currentTurnDeathGuardActive = false;
+    public int currentTurnDeathGuardMinHp = 0;
 }
 
 public class CombatManager : MonoBehaviour
@@ -196,6 +198,8 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public DamageResolutionResult LastDamageResolutionResult => DamageResolver.LastResult;
+
     private TurnEffectResolver TurnEffects
     {
         get
@@ -365,6 +369,7 @@ public class CombatManager : MonoBehaviour
     // ==========================================================
     private IEnumerator ProcessTurnRoutine(TurnEntity currentTurnOwner)
     {
+        ClearCurrentTurnDeathGuard();
         currentActiveEntity = currentTurnOwner;
         playerHpAtTurnStart = currentPlayerStats.currentHp;
         enemyHpAtTurnStart = currentEnemyHp;
@@ -491,7 +496,8 @@ public class CombatManager : MonoBehaviour
                 ApplyDamageToEntity(true, bleedDamage);
 
                 CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
-                CombatUIManager.Instance.SpawnDamageText("★" + bleedDamage.ToString(), false, true);
+                if (!ShouldSuppressDamageText(true))
+                    CombatUIManager.Instance.SpawnDamageText("★" + bleedDamage.ToString(), false, true);
 
                 yield return CombatUIManager.Instance.TypeLocalizedCommentary("combat_comment_player_bleed_dot_format", "셰리가 {0}의 출혈 지속 피해를 입습니다.", new object[] { bleedDamage }, true, timing.dotCommentDelay);
 
@@ -1135,6 +1141,12 @@ public class CombatManager : MonoBehaviour
         ResolveTurnEnd();
     }
 
+    private void ClearCurrentTurnDeathGuard()
+    {
+        currentState.currentTurnDeathGuardActive = false;
+        currentState.currentTurnDeathGuardMinHp = 0;
+    }
+
     private bool CheckAndHandleBattleEnd()
     {
         if (currentEnemyHp <= 0 || currentPlayerStats.currentHp <= 0)
@@ -1284,7 +1296,8 @@ public class CombatManager : MonoBehaviour
 
         ApplyBreakDamageAfterHit(hit, isPlayerAttacking);
 
-        if (!isPureUtility) BattleEventSystem.CallDamageTaken(isPlayerDefending, hit.damage, hit.isCrit);
+        if (!isPureUtility && !ShouldSuppressDamageText(isPlayerDefending))
+            BattleEventSystem.CallDamageTaken(isPlayerDefending, hit.damage, hit.isCrit);
     }
 
     private void ProcessPlayerSuccessfulHit(HitResult hit, SkillData skill)
@@ -1416,7 +1429,8 @@ public class CombatManager : MonoBehaviour
 
             // 연출: 피격 이미지 + 보라색 데미지 텍스트
             CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
-            CombatUIManager.Instance.SpawnDamageText($"★{explosionDamage}", false, true);
+            if (!ShouldSuppressDamageText(true))
+                CombatUIManager.Instance.SpawnDamageText($"★{explosionDamage}", false, true);
 
             DevLog.Log($"[스킬 특수 효과] 특수 피해 {explosionDamage} 발생!");
         }
@@ -1581,7 +1595,8 @@ public class CombatManager : MonoBehaviour
 
         CombatUIManager.Instance.SetDefenderImage(true, playerData.hit);
         ApplyDamageToEntity(true, counterDamage);
-        CombatUIManager.Instance.SpawnDamageText("★" + counterDamage.ToString(), false, true);
+        if (!ShouldSuppressDamageText(true))
+            CombatUIManager.Instance.SpawnDamageText("★" + counterDamage.ToString(), false, true);
 
         if (BreakManager.Instance != null && !BreakManager.Instance.IsBroken(true))
         {
@@ -1618,6 +1633,11 @@ public class CombatManager : MonoBehaviour
             currentEnemyData,
             ref currentEnemyHp
         );
+    }
+
+    private bool ShouldSuppressDamageText(bool isPlayerTarget)
+    {
+        return isPlayerTarget && DamageResolver.LastResult.showEndureText;
     }
 
     public void SetPlayerHpToOneForScriptedEffect()
@@ -1853,7 +1873,8 @@ public class CombatManager : MonoBehaviour
                     ApplyDamageToEntity(true, selfDamage);
 
                     CombatUIManager.Instance.SetDefenderImage(true, playerData.hit); // 주인공 피격 이미지
-                    CombatUIManager.Instance.SpawnDamageText("★" + selfDamage.ToString(), false, true);
+                    if (!ShouldSuppressDamageText(true))
+                        CombatUIManager.Instance.SpawnDamageText("★" + selfDamage.ToString(), false, true);
                     BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
 
                     yield return new WaitForSeconds(timing.specialExpireHold);

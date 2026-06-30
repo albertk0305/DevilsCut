@@ -53,7 +53,8 @@ public class SkillLogic_Remiel_Snowdrop : SkillLogic_Remiel_Base
             CombatManager.Instance.ApplyDamageToEntity(true, explosionDamage);
         }
 
-        if (CombatUIManager.Instance != null)
+        if (CombatUIManager.Instance != null
+            && (CombatManager.Instance == null || !CombatManager.Instance.LastDamageResolutionResult.showEndureText))
         {
             CombatUIManager.Instance.SpawnDamageText("\u2605" + explosionDamage.ToString(), false, true);
         }

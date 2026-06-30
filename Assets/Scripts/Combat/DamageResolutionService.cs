@@ -1,9 +1,21 @@
 using System;
 using UnityEngine;
 
+public struct DamageResolutionResult
+{
+    public bool isDead;
+    public bool wasEndured;
+    public bool preventedByDeathGuard;
+    public bool showEndureText;
+
+    public static DamageResolutionResult None => new DamageResolutionResult();
+}
+
 public sealed class DamageResolutionService
 {
     private readonly Action refreshSpecialStatsProgressUI;
+
+    public DamageResolutionResult LastResult { get; private set; }
 
     public DamageResolutionService(Action refreshSpecialStatsProgressUI)
     {
@@ -19,12 +31,44 @@ public sealed class DamageResolutionService
         ref int currentEnemyHp)
     {
         bool isDead = false;
+        LastResult = DamageResolutionResult.None;
 
         if (isPlayerTarget)
         {
             int hpAfterDamage = currentPlayerStats.currentHp - damage;
 
-            if (hpAfterDamage <= 0 && PlayerManager.Instance != null && !currentState.hasResurrected)
+            if (damage > 0
+                && currentPlayerStats.currentHp > 0
+                && currentState != null
+                && currentState.currentTurnDeathGuardActive)
+            {
+                int minHp = Mathf.Max(1, currentState.currentTurnDeathGuardMinHp);
+                if (hpAfterDamage >= minHp)
+                {
+                    currentPlayerStats.currentHp = hpAfterDamage;
+                    BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
+                    refreshSpecialStatsProgressUI?.Invoke();
+                    return false;
+                }
+
+                currentPlayerStats.currentHp = minHp;
+                BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
+                refreshSpecialStatsProgressUI?.Invoke();
+                ShowEndureText();
+                LastResult = new DamageResolutionResult
+                {
+                    wasEndured = true,
+                    preventedByDeathGuard = true,
+                    showEndureText = true
+                };
+                return false;
+            }
+
+            if (hpAfterDamage <= 0
+                && currentPlayerStats.currentHp > 0
+                && PlayerManager.Instance != null
+                && currentState != null
+                && !currentState.hasResurrected)
             {
                 var syn = PlayerManager.Instance.GetCurrentSynergies();
                 var inventory = PlayerManager.Instance.inventory;
@@ -43,22 +87,29 @@ public sealed class DamageResolutionService
                 if (has6Point || hasLegendary)
                 {
                     currentState.hasResurrected = true;
+                    currentState.currentTurnDeathGuardActive = true;
 
                     if (has6Point && hasLegendary)
                     {
                         currentPlayerStats.currentHp = currentPlayerStats.maxHp;
-                        CombatUIManager.Instance.SpawnDamageText("<color=#00FF00>Resurrect!</color>", false, true);
                         DevLog.Log("[불굴의 투지+전설] 치명상을 입었으나, 최대 체력으로 부활합니다!");
                     }
                     else
                     {
                         currentPlayerStats.currentHp = 1;
-                        CombatUIManager.Instance.SpawnDamageText("<color=#FF0000>Endure!</color>", false, true);
                         DevLog.Log("[사신 거부] 치명상을 입었으나, 체력 1로 버텨냅니다!");
                     }
 
+                    currentState.currentTurnDeathGuardMinHp = currentPlayerStats.currentHp;
+
                     BattleEventSystem.CallHpChanged(true, currentPlayerStats.currentHp, currentPlayerStats.maxHp);
                     refreshSpecialStatsProgressUI?.Invoke();
+                    ShowEndureText();
+                    LastResult = new DamageResolutionResult
+                    {
+                        wasEndured = true,
+                        showEndureText = true
+                    };
                     return false;
                 }
             }
@@ -80,8 +131,32 @@ public sealed class DamageResolutionService
         }
 
         refreshSpecialStatsProgressUI?.Invoke();
+        LastResult = new DamageResolutionResult { isDead = isDead };
 
         return isDead;
+    }
+
+    private void ShowEndureText()
+    {
+        if (CombatUIManager.Instance == null)
+            return;
+
+        CombatUIManager.Instance.SpawnDamageText(GetEndureText(), false, true);
+    }
+
+    private string GetEndureText()
+    {
+        const string key = "combat_float_endure";
+        const string fallback = "<color=#FF0000>Endure!</color>";
+
+        if (LocalizationManager.Instance == null)
+            return fallback;
+
+        string localized = LocalizationManager.Instance.GetText(key);
+        if (string.IsNullOrEmpty(localized) || localized == key)
+            return fallback;
+
+        return localized;
     }
 
     public void HealEntity(
