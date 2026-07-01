@@ -16,7 +16,8 @@ MonoBehaviour:
   nextDialogueID: 
   nextSceneName: BlackMarket
   storySkipPolicy: 1
-  bgmPlaylist: []
+  bgmPlaylist:
+  - {fileID: 8300000, guid: 63bb2f869f750f1458a7ef189abf4cb7, type: 3}
   bgmClip: {fileID: 0}
   bgmFadeTime: 0.5
   stopBgmIfEmpty: 0

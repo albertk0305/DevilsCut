@@ -1247,7 +1247,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 075ef848b17e9f941aef4d80486fb963, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 69a0e4ba93e1e39418d011e83a293f88, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2540,6 +2540,7 @@ GameObject:
   - component: {fileID: 203536910}
   - component: {fileID: 203536912}
   - component: {fileID: 203536911}
+  - component: {fileID: 203536913}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2668,6 +2669,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203536909}
   m_CullTransparentMesh: 1
+--- !u!114 &203536913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203536909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: 'menu_party_setup '
 --- !u!1 &206724196
 GameObject:
   m_ObjectHideFlags: 0
@@ -12509,7 +12523,7 @@ MonoBehaviour:
   battleSceneName: Battle
   mainMenuSceneName: MainMenu
   typeInterval: 0.035
-  resultBgmPlayer: {fileID: 0}
+  resultBgmPlayer: {fileID: 1573971068}
 --- !u!114 &1018720935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12597,7 +12611,7 @@ MonoBehaviour:
   explorationSceneName: Exploration
   dialogueSceneName: Story
   dialogueDataDatabase: {fileID: 11400000, guid: 0bb3dd23896e4fa19d1063d3842f62e6, type: 2}
-  resultBgmPlayer: {fileID: 0}
+  resultBgmPlayer: {fileID: 1573971068}
 --- !u!1 &1024095176
 GameObject:
   m_ObjectHideFlags: 0
@@ -13744,6 +13758,7 @@ GameObject:
   - component: {fileID: 1147383656}
   - component: {fileID: 1147383658}
   - component: {fileID: 1147383657}
+  - component: {fileID: 1147383659}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -13870,6 +13885,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1147383655}
   m_CullTransparentMesh: 1
+--- !u!114 &1147383659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147383655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: 'menu_skill '
 --- !u!1 &1162943609
 GameObject:
   m_ObjectHideFlags: 0
@@ -18263,7 +18291,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298b138403b54849b811d2c59fab45e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
-  bgmPlaylist: []
+  bgmPlaylist:
+  - {fileID: 8300000, guid: da51e54e226d54c4eb540ba6a71378d7, type: 3}
+  - {fileID: 8300000, guid: 0f112e0011483274191e8d046db2c73c, type: 3}
+  - {fileID: 8300000, guid: 621ccb51bee779e42830c063a2b10cfb, type: 3}
+  - {fileID: 8300000, guid: 5485b6c24199cdd4db609da6e25ac961, type: 3}
+  - {fileID: 8300000, guid: 9b21525d8c7508a44b9234b4b01acdfd, type: 3}
+  - {fileID: 8300000, guid: 0d5207a6f46f2f440882e95c2c0e9501, type: 3}
   bgmClip: {fileID: 8300000, guid: bcb98e4be45fc694db2bb2ec4d917a66, type: 3}
   fadeTime: 1
   stopBgmIfEmpty: 0
@@ -18294,11 +18328,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f9d390ddc9b4d37ab3e75ad4a645978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombatResultBgmPlayer
-  victoryBgmClip: {fileID: 0}
+  victoryBgmClip: {fileID: 8300000, guid: 5df31c5c704e0c04e93b0a80b4cc0e9e, type: 3}
   victoryBgmPlaylist: []
   victoryFadeTime: 1
   stopBgmIfVictoryEmpty: 0
-  defeatBgmClip: {fileID: 0}
+  defeatBgmClip: {fileID: 8300000, guid: 005d9ceb90a79e849ac9de6c2d5a41f3, type: 3}
   defeatBgmPlaylist: []
   defeatFadeTime: 1
   stopBgmIfDefeatEmpty: 0

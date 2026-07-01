@@ -16,7 +16,8 @@ MonoBehaviour:
   nextDialogueID: 
   nextSceneName: MaidCafe
   storySkipPolicy: 1
-  bgmPlaylist: []
+  bgmPlaylist:
+  - {fileID: 8300000, guid: 24451afca4fdb084db6caf6c44e71361, type: 3}
   bgmClip: {fileID: 0}
   bgmFadeTime: 0.5
   stopBgmIfEmpty: 0

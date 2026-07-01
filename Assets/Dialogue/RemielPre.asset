@@ -16,7 +16,8 @@ MonoBehaviour:
   nextDialogueID: 
   nextSceneName: Battle
   storySkipPolicy: 0
-  bgmPlaylist: []
+  bgmPlaylist:
+  - {fileID: 8300000, guid: a590a9d4275b7c24b8c0dda7f9477c59, type: 3}
   bgmClip: {fileID: 0}
   bgmFadeTime: 0.5
   stopBgmIfEmpty: 0

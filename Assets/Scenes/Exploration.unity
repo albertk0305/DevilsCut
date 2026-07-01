@@ -2870,7 +2870,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f964aeca8bc9b61489ac034e53915db4, type: 2}
   finalBoss: {fileID: 11400000, guid: 192190b9551cbff4c848293d78575f8b, type: 2}
   trueFinalBoss: {fileID: 11400000, guid: 2fd74834f772af842940fc981481e673, type: 2}
-  currentTargetBoss: {fileID: 11400000, guid: 6d98e6415c3f2184da047fe403cc673d, type: 2}
+  currentTargetBoss: {fileID: 11400000, guid: 859bb2941d360024e883050150eac840, type: 2}
 --- !u!4 &1223019333
 Transform:
   m_ObjectHideFlags: 0
@@ -3579,7 +3579,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298b138403b54849b811d2c59fab45e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
-  bgmPlaylist: []
+  bgmPlaylist:
+  - {fileID: 8300000, guid: 316976628a414074294dac899cb7ba71, type: 3}
+  - {fileID: 8300000, guid: cb93439bb5ced1245ae6d1b2c2daa5d0, type: 3}
+  - {fileID: 8300000, guid: f6990fec10c1125428f2057284bad955, type: 3}
   bgmClip: {fileID: 8300000, guid: a1b7a502d2dc4984ba970a64b1e824ab, type: 3}
   fadeTime: 1
   stopBgmIfEmpty: 0

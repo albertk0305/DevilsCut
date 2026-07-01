@@ -16,7 +16,8 @@ MonoBehaviour:
   nextDialogueID: Prologue_C
   nextSceneName: 
   storySkipPolicy: 0
-  bgmPlaylist: []
+  bgmPlaylist:
+  - {fileID: 8300000, guid: 7ecbf4f32256a7d4b98c7a38b8f77aea, type: 3}
   bgmClip: {fileID: 0}
   bgmFadeTime: 0.5
   stopBgmIfEmpty: 0

@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   dialogueID: AretePost3
   nextDialogueID: 
-  nextSceneName: MainMenu
+  nextSceneName: Ending
   storySkipPolicy: 0
-  bgmPlaylist: []
+  bgmPlaylist:
+  - {fileID: 8300000, guid: af3c1062116408b4093bc819cf9e4dcf, type: 3}
   bgmClip: {fileID: 0}
   bgmFadeTime: 0.5
   stopBgmIfEmpty: 0

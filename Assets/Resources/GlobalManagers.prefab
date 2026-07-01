@@ -124,19 +124,19 @@ MonoBehaviour:
   unlockedSupporters: []
   supporterChoiceRecords:
   - supporterID: asmodeus
-    state: 2
+    state: 0
   - supporterID: lucifer
-    state: 2
+    state: 0
   - supporterID: baalzebub
-    state: 2
+    state: 0
   - supporterID: belphegor
-    state: 2
+    state: 0
   - supporterID: mammon
-    state: 2
+    state: 0
   - supporterID: satan
-    state: 2
+    state: 0
   - supporterID: leviathan
-    state: 2
+    state: 0
   activeSupporter: {fileID: 0}
   supporterDatabase: {fileID: 11400000, guid: 51dd2413502c8f641a2cacd0d2de3478, type: 2}
   ownedKarinItems:
@@ -315,5 +315,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e6b4902a1d957b4cbd8e134902e8f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UISfxController
-  buttonClickClip: {fileID: 8300000, guid: 5855e047bc7d7a84194b254100e465af, type: 3}
+  buttonClickClip: {fileID: 8300000, guid: d636c3d8b85c7cc409cf5a9fbf3708c5, type: 3}
   buttonClickVolume: 0.7

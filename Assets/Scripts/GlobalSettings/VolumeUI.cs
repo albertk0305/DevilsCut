@@ -7,6 +7,7 @@ public class VolumeUI : MonoBehaviour
 {
     private enum VolumeType
     {
+        Master,
         Music,
         Sfx
     }
@@ -35,10 +36,18 @@ public class VolumeUI : MonoBehaviour
     {
         if (SoundManager.Instance != null)
         {
-            if (volumeType == VolumeType.Sfx)
-                SoundManager.Instance.SetSfxVolume(value);
-            else
-                SoundManager.Instance.SetMusicVolume(value);
+            switch (volumeType)
+            {
+                case VolumeType.Master:
+                    SoundManager.Instance.SetMasterVolume(value);
+                    break;
+                case VolumeType.Sfx:
+                    SoundManager.Instance.SetSfxVolume(value);
+                    break;
+                default:
+                    SoundManager.Instance.SetMusicVolume(value);
+                    break;
+            }
         }
 
         UpdateVolumeText(value);
@@ -59,8 +68,14 @@ public class VolumeUI : MonoBehaviour
         if (SoundManager.Instance == null)
             return volumeSlider != null ? volumeSlider.value : 1f;
 
-        return volumeType == VolumeType.Sfx
-            ? SoundManager.Instance.SfxVolume
-            : SoundManager.Instance.MusicVolume;
+        switch (volumeType)
+        {
+            case VolumeType.Master:
+                return SoundManager.Instance.MasterVolume;
+            case VolumeType.Sfx:
+                return SoundManager.Instance.SfxVolume;
+            default:
+                return SoundManager.Instance.MusicVolume;
+        }
     }
 }

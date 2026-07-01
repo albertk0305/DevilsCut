@@ -1109,6 +1109,7 @@ GameObject:
   - component: {fileID: 157198669}
   - component: {fileID: 157198671}
   - component: {fileID: 157198670}
+  - component: {fileID: 157198672}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1235,6 +1236,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157198668}
   m_CullTransparentMesh: 1
+--- !u!114 &157198672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157198668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: menu_party_setup
 --- !u!1 &180310367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1981,6 +1995,7 @@ GameObject:
   - component: {fileID: 455080254}
   - component: {fileID: 455080256}
   - component: {fileID: 455080255}
+  - component: {fileID: 455080257}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2109,6 +2124,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455080253}
   m_CullTransparentMesh: 1
+--- !u!114 &455080257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455080253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: btn_confirm
 --- !u!1 &468763920
 GameObject:
   m_ObjectHideFlags: 0
@@ -2120,6 +2148,7 @@ GameObject:
   - component: {fileID: 468763921}
   - component: {fileID: 468763923}
   - component: {fileID: 468763922}
+  - component: {fileID: 468763924}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2246,6 +2275,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 468763920}
   m_CullTransparentMesh: 1
+--- !u!114 &468763924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468763920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: menu_skill
 --- !u!1 &481626242
 GameObject:
   m_ObjectHideFlags: 0
@@ -4109,7 +4151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298b138403b54849b811d2c59fab45e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
-  bgmPlaylist: []
+  bgmPlaylist:
+  - {fileID: 8300000, guid: c4e12e1274f6f9943bdc4579e5f4ac94, type: 3}
+  - {fileID: 8300000, guid: 8dd3b9632d7a406468f0360e682c8681, type: 3}
+  - {fileID: 8300000, guid: 9acf3911472f9f24987d321d68690cde, type: 3}
   bgmClip: {fileID: 8300000, guid: 544cf5b6aadd40b45b2d023b5c11cdfb, type: 3}
   fadeTime: 1
   stopBgmIfEmpty: 0

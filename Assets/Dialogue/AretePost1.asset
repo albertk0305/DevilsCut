@@ -16,7 +16,8 @@ MonoBehaviour:
   nextDialogueID: AretePost2
   nextSceneName: 
   storySkipPolicy: 0
-  bgmPlaylist: []
+  bgmPlaylist:
+  - {fileID: 8300000, guid: 4800e521c044de94791a5e51af11d2f4, type: 3}
   bgmClip: {fileID: 0}
   bgmFadeTime: 0.5
   stopBgmIfEmpty: 0

@@ -1,5 +1,5 @@
 Key,Korean,English
-sk_001_name,담력,Grit
+sk_001_name,용기,Guts
 sk_001_desc,적에게 피해를 주고 가드 상태에 돌입합니다. 가드 상태에서는 적에게 피격당했을 때 받는 피해가 감소합니다.,"Deals damage to an enemy and enters the Guard state. While in the Guard state, damage taken from enemy attacks is reduced."
 sk_001_evo_a_name,인과율,Causality
 sk_001_evo_a_desc,가드 상태에서 적의 공격을 받을 시 가드로 감소시킨 피해량의 일정량을 적에게 되돌려줍니다.,"When attacked while in the Guard state, reflects a portion of the damage mitigated by Guard back to the attacker."
@@ -15,7 +15,7 @@ sk_002_evo_b_name,Burn My Dread,Burn My Dread
 sk_002_evo_b_desc,스킬의 기본 피해 계수가 감소하는 대신 적의 누적된 브레이크 수치에 비례하여 스킬 피해량이 상승합니다.,Decreases the skill's base damage coefficient but increases skill damage proportional to the enemy's accumulated Break value.
 sk_002_evo_c_name,Full Moon Full Life,Full Moon Full Life
 sk_002_evo_c_desc,8타 다단 히트 스킬로 변경됩니다. 방어력 감소 디버프는 한 번만 적용되며 중첩되지 않습니다.,Changes the skill into an 8-hit multi-strike attack. The Defense reduction debuff applies only once and does not stack.
-sk_003_name,악귀멸살,Evil Slayer
+sk_003_name,악귀멸살,Demon Slayer
 sk_003_desc,적에게 큰 피해를 줍니다. 피해량의 일정 비율이 방어력 무시 고정 피해로 적용됩니다.,Deals massive damage to an enemy. A certain percentage of the damage is applied as defense-ignoring True Damage.
 sk_003_evo_a_name,내비치는 세계,Transparent World
 sk_003_evo_a_desc,적의 현재 체력이 최대 체력의 70% 이상일 때 추가 피해를 줍니다.,Deals additional damage when the enemy's current HP is 70% or higher of their maximum HP.

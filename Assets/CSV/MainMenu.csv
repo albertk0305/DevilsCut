@@ -7,7 +7,7 @@ menu_main_credits,제작진,Credits
 menu_main_quit,종료하기,Quit
 menu_main_title,메인화면,Main Menu
 btn_back,돌아가기,Return
-menu_opt_sound,소리,Sound
+menu_opt_sound,음악,Music
 menu_opt_language,언어,Language
 menu_opt_battle_speed,전투 2배속,Battle Speed 2X
 msg_confirm_main_menu,정말 메인화면으로 돌아가시겠습니까?,Are you sure you want to return to the main menu?
@@ -15,3 +15,8 @@ btn_yes,예,Yes
 btn_no,아니요,No
 btn_restart_battle,전투 재시작,Restart Battle
 menu_sfx,효과음,Sound Effect
+menu_master,소리,Sound
+menu_use,사용,Use
+menu_start,시작,Start
+btn_delete,삭제,Delete
+msg_delete_data,삭제된 기록은 복구할 수 없습니다. 정말 삭제하시겠습니까?,Deleted data cannot be restored. Are you sure you want to proceed?

@@ -28,10 +28,11 @@ public class SoundManager : MonoBehaviour
     private Coroutine bgmFadeCoroutine;
     private Coroutine bgmPlaylistCoroutine;
 
-    private const string LegacyMasterVolumeKey = "MasterVolume";
+    private const string MasterVolumeKey = "MasterVolume";
     private const string MusicVolumeKey = "MusicVolume";
     private const string SfxVolumeKey = "SfxVolume";
 
+    public float MasterVolume => masterVolume;
     public float MusicVolume => musicVolume;
     public float SfxVolume => sfxVolume;
 
@@ -50,19 +51,29 @@ public class SoundManager : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        SetMusicVolume(volume);
+        SetMasterVolume(volume);
+    }
+
+    public void SetMasterVolume(float volume)
+    {
+        masterVolume = Mathf.Clamp01(volume);
+        AudioListener.volume = 1f;
+
+        PlayerPrefs.SetFloat(MasterVolumeKey, masterVolume);
+        PlayerPrefs.Save();
+
+        ApplyVolumeToBgm();
     }
 
     public void SetMusicVolume(float volume)
     {
         musicVolume = Mathf.Clamp01(volume);
-        masterVolume = musicVolume;
         AudioListener.volume = 1f;
 
         PlayerPrefs.SetFloat(MusicVolumeKey, musicVolume);
         PlayerPrefs.Save();
 
-        ApplyMusicVolumeToBgm();
+        ApplyVolumeToBgm();
     }
 
     public void SetSfxVolume(float volume)
@@ -149,19 +160,17 @@ public class SoundManager : MonoBehaviour
         InitializeSfxSource();
         if (sfxSource == null) return;
 
-        sfxSource.PlayOneShot(clip, Mathf.Clamp01(volume) * sfxVolume);
+        sfxSource.PlayOneShot(clip, Mathf.Clamp01(volume) * sfxVolume * masterVolume);
     }
 
     private void LoadVolume()
     {
-        float legacyVolume = PlayerPrefs.GetFloat(LegacyMasterVolumeKey, 1f);
-
-        musicVolume = Mathf.Clamp01(PlayerPrefs.GetFloat(MusicVolumeKey, legacyVolume));
+        masterVolume = Mathf.Clamp01(PlayerPrefs.GetFloat(MasterVolumeKey, 1f));
+        musicVolume = Mathf.Clamp01(PlayerPrefs.GetFloat(MusicVolumeKey, 1f));
         sfxVolume = Mathf.Clamp01(PlayerPrefs.GetFloat(SfxVolumeKey, 1f));
-        masterVolume = musicVolume;
         AudioListener.volume = 1f;
 
-        ApplyMusicVolumeToBgm();
+        ApplyVolumeToBgm();
     }
 
     private void InitializeBgmSource()
@@ -247,10 +256,10 @@ public class SoundManager : MonoBehaviour
 
     private float GetBgmTargetVolume()
     {
-        return Mathf.Clamp01(bgmVolume * musicVolume);
+        return Mathf.Clamp01(bgmVolume * musicVolume * masterVolume);
     }
 
-    private void ApplyMusicVolumeToBgm()
+    private void ApplyVolumeToBgm()
     {
         if (bgmSource == null)
             return;

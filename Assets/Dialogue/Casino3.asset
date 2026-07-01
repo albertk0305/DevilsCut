@@ -16,7 +16,8 @@ MonoBehaviour:
   nextDialogueID: 
   nextSceneName: Casino
   storySkipPolicy: 2
-  bgmPlaylist: []
+  bgmPlaylist:
+  - {fileID: 8300000, guid: 66792f14cd7b5a44c8bc4a4555a9da9a, type: 3}
   bgmClip: {fileID: 0}
   bgmFadeTime: 0.5
   stopBgmIfEmpty: 0
