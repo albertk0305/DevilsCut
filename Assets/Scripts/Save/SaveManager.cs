@@ -30,6 +30,11 @@ public class SaveManager : MonoBehaviour
     private string ClearRecordsPath => Path.Combine(Application.persistentDataPath, "clear_records.json");
     private string TempClearRecordsPath => Path.Combine(Application.persistentDataPath, "clear_records.json.tmp");
     private string BackupClearRecordsPath => Path.Combine(Application.persistentDataPath, "clear_records.json.bak");
+    private string ClearDataDirectoryPath => Path.Combine(Application.persistentDataPath, "clear_data");
+    private string ClearDataRecordsDirectoryPath => Path.Combine(ClearDataDirectoryPath, "records");
+    private string ClearDataIndexPath => Path.Combine(ClearDataDirectoryPath, "clear_data_index.json");
+    private string TempClearDataIndexPath => Path.Combine(ClearDataDirectoryPath, "clear_data_index.json.tmp");
+    private string BackupClearDataIndexPath => Path.Combine(ClearDataDirectoryPath, "clear_data_index.json.bak");
 
     public bool IsAutoSaveSuppressed => isLoading || suppressAutoSave;
 
@@ -293,6 +298,80 @@ public class SaveManager : MonoBehaviour
         DevLog.Log($"[Save] Game clear handled. endingID={endingID}");
     }
 
+    public bool TrySaveGameClearRecord(out string clearId)
+    {
+        clearId = "";
+
+        if (PlayerManager.Instance == null)
+        {
+            DevLog.LogWarning("[Save] Game clear record save failed: PlayerManager missing.");
+            return false;
+        }
+
+        try
+        {
+            ClearDataIndex index = LoadClearDataIndex();
+            int clearNumber = Mathf.Max(1, index.nextClearNumber);
+            clearId = BuildClearId(clearNumber);
+            string clearedAt = DateTime.UtcNow.ToString("o");
+            PlayerGrowthSaveData playerGrowth = BuildPlayerGrowthSaveData(PlayerManager.Instance);
+            GameClearRecordData record = new GameClearRecordData
+            {
+                schemaVersion = 1,
+                clearNumber = clearNumber,
+                clearId = clearId,
+                clearedAt = clearedAt,
+                playerGrowth = playerGrowth
+            };
+
+            WriteGameClearRecord(record);
+
+            index.nextClearNumber = clearNumber + 1;
+            index.totalIssuedCount += 1;
+            index.totalClearCount = index.totalIssuedCount;
+            index.totalSavedCount += 1;
+            index.records.Add(BuildClearRecordSummary(record, playerGrowth));
+            WriteClearDataIndex(index);
+
+            DevLog.Log($"[Save] Game clear record saved: clearId={clearId}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            DevLog.LogWarning($"[Save] Game clear record save failed: {ex.Message}");
+            return false;
+        }
+    }
+
+    public bool TryDiscardGameClearRecord(out string clearId)
+    {
+        clearId = "";
+
+        try
+        {
+            ClearDataIndex index = LoadClearDataIndex();
+            int clearNumber = Mathf.Max(1, index.nextClearNumber);
+            clearId = BuildClearId(clearNumber);
+
+            index.nextClearNumber = clearNumber + 1;
+            index.totalIssuedCount += 1;
+            index.totalClearCount = index.totalIssuedCount;
+            if (index.discardedClearIds == null)
+                index.discardedClearIds = new List<string>();
+
+            index.discardedClearIds.Add(clearId);
+            WriteClearDataIndex(index);
+
+            DevLog.Log($"[Save] Game clear record discarded: clearId={clearId}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            DevLog.LogWarning($"[Save] Game clear discard failed: {ex.Message}");
+            return false;
+        }
+    }
+
     public List<ClearRecordSaveData> LoadClearRecords()
     {
         if (TryLoadClearRecordCollectionFromPath(ClearRecordsPath, out ClearRecordCollectionSaveData collection))
@@ -403,6 +482,138 @@ public class SaveManager : MonoBehaviour
         DevLog.Log("[Save] Clear records deleted.");
     }
 
+    private ClearDataIndex LoadClearDataIndex()
+    {
+        ClearDataIndex index = null;
+
+        if (File.Exists(ClearDataIndexPath))
+        {
+            try
+            {
+                string json = File.ReadAllText(ClearDataIndexPath);
+                index = JsonUtility.FromJson<ClearDataIndex>(json);
+            }
+            catch (Exception ex)
+            {
+                DevLog.LogWarning($"[Save] Failed to read clear data index. Trying backup. {ex.Message}");
+            }
+        }
+
+        if (index == null && File.Exists(BackupClearDataIndexPath))
+        {
+            try
+            {
+                string json = File.ReadAllText(BackupClearDataIndexPath);
+                index = JsonUtility.FromJson<ClearDataIndex>(json);
+                DevLog.LogWarning($"[Save] Backup clear data index loaded: {BackupClearDataIndexPath}");
+            }
+            catch (Exception ex)
+            {
+                DevLog.LogWarning($"[Save] Failed to read backup clear data index: {ex.Message}");
+            }
+        }
+
+        return NormalizeClearDataIndex(index);
+    }
+
+    private ClearDataIndex NormalizeClearDataIndex(ClearDataIndex index)
+    {
+        if (index == null)
+            index = new ClearDataIndex();
+
+        if (index.schemaVersion <= 0)
+            index.schemaVersion = 1;
+
+        if (index.records == null)
+            index.records = new List<ClearRecordSummary>();
+
+        if (index.discardedClearIds == null)
+            index.discardedClearIds = new List<string>();
+
+        int minimumNextClearNumber = Mathf.Max(1, index.totalIssuedCount + 1);
+        foreach (ClearRecordSummary summary in index.records)
+        {
+            if (summary != null)
+                minimumNextClearNumber = Mathf.Max(minimumNextClearNumber, summary.clearNumber + 1);
+        }
+
+        foreach (string discardedClearId in index.discardedClearIds)
+        {
+            if (TryParseClearNumber(discardedClearId, out int clearNumber))
+                minimumNextClearNumber = Mathf.Max(minimumNextClearNumber, clearNumber + 1);
+        }
+
+        if (index.nextClearNumber < minimumNextClearNumber)
+            index.nextClearNumber = minimumNextClearNumber;
+
+        index.totalSavedCount = Mathf.Max(index.totalSavedCount, index.records.Count);
+        index.totalIssuedCount = Mathf.Max(index.totalIssuedCount, index.nextClearNumber - 1);
+        index.totalClearCount = index.totalIssuedCount;
+        return index;
+    }
+
+    private void WriteGameClearRecord(GameClearRecordData record)
+    {
+        if (record == null)
+            throw new InvalidOperationException("Game clear record is null.");
+
+        string path = GetGameClearRecordPath(record.clearNumber);
+        string tempPath = path + ".tmp";
+        string backupPath = path + ".bak";
+        string json = JsonUtility.ToJson(record, true);
+        WriteFileSafely(json, path, tempPath, backupPath);
+    }
+
+    private void WriteClearDataIndex(ClearDataIndex index)
+    {
+        if (index == null)
+            throw new InvalidOperationException("Clear data index is null.");
+
+        string json = JsonUtility.ToJson(index, true);
+        WriteFileSafely(json, ClearDataIndexPath, TempClearDataIndexPath, BackupClearDataIndexPath);
+    }
+
+    private ClearRecordSummary BuildClearRecordSummary(GameClearRecordData record, PlayerGrowthSaveData playerGrowth)
+    {
+        return new ClearRecordSummary
+        {
+            clearNumber = record.clearNumber,
+            clearId = record.clearId,
+            clearedAt = record.clearedAt,
+            level = playerGrowth != null ? playerGrowth.level : 0,
+            maxHp = playerGrowth != null ? playerGrowth.maxHp : 0,
+            currentHp = playerGrowth != null ? playerGrowth.currentHp : 0,
+            actionPoints = playerGrowth != null ? playerGrowth.actionPoints : 0,
+            strength = playerGrowth != null ? playerGrowth.strength : 0,
+            defense = playerGrowth != null ? playerGrowth.defense : 0,
+            speed = playerGrowth != null ? playerGrowth.speed : 0,
+            luck = playerGrowth != null ? playerGrowth.luck : 0,
+            currentGold = playerGrowth != null ? playerGrowth.currentGold : 0,
+            rejectedSupporterCount = playerGrowth != null ? playerGrowth.rejectedSupporterCount : 0,
+            ownedSupporterCount = playerGrowth != null && playerGrowth.supporters != null ? playerGrowth.supporters.Count : 0,
+            ownedItemCount = playerGrowth != null && playerGrowth.inventory != null ? playerGrowth.inventory.Count : 0
+        };
+    }
+
+    private string GetGameClearRecordPath(int clearNumber)
+    {
+        return Path.Combine(ClearDataRecordsDirectoryPath, $"clear_record_{clearNumber:D6}.json");
+    }
+
+    private string BuildClearId(int clearNumber)
+    {
+        return $"clear_{clearNumber:D6}";
+    }
+
+    private bool TryParseClearNumber(string clearId, out int clearNumber)
+    {
+        clearNumber = 0;
+        if (string.IsNullOrEmpty(clearId) || !clearId.StartsWith("clear_"))
+            return false;
+
+        return int.TryParse(clearId.Substring("clear_".Length), out clearNumber);
+    }
+
     private void WriteContinueSaveSafely(string json)
     {
         WriteFileSafely(json, ContinueSavePath, TempSavePath, BackupSavePath);
@@ -410,7 +621,9 @@ public class SaveManager : MonoBehaviour
 
     private void WriteFileSafely(string json, string savePath, string tempPath, string backupPath)
     {
-        Directory.CreateDirectory(Application.persistentDataPath);
+        string directoryPath = Path.GetDirectoryName(savePath);
+        if (!string.IsNullOrEmpty(directoryPath))
+            Directory.CreateDirectory(directoryPath);
 
         if (File.Exists(tempPath))
             File.Delete(tempPath);

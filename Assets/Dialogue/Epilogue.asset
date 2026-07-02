@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogueID: Epilogue
   nextDialogueID: 
   nextSceneName: 
-  storySkipPolicy: 0
+  storySkipPolicy: 1
   bgmPlaylist:
   - {fileID: 8300000, guid: 1312f73e6dbafb341915ebc6d98d232d, type: 3}
   bgmClip: {fileID: 0}

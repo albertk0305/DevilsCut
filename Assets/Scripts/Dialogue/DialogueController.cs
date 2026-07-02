@@ -41,6 +41,9 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private Button storyTextPanelButton;
     [SerializeField] private Button skipButton;
 
+    [Header("Game Clear")]
+    [SerializeField] private GameClearCanvasController gameClearCanvasController;
+
     [Header("Choice")]
     [SerializeField] private GameObject choicePanel;
     [SerializeField] private Button yesButton;
@@ -65,6 +68,7 @@ public class DialogueController : MonoBehaviour
     private bool forcedFastForwardByStorySkip;
     private bool currentDialogueAllowsForcedStorySkip;
     private bool isChoiceActive;
+    private bool isGameClearActive;
     private bool isPlayingPendingDialogue;
     private bool isSubscribedToLanguageChanged;
     private bool isSubscribedToStorySkipChanged;
@@ -213,6 +217,7 @@ public class DialogueController : MonoBehaviour
         currentLines = ResolveLines(data);
         BuildLineIDLookup();
         currentLineIndex = -1;
+        isGameClearActive = false;
         isChoiceActive = false;
         SetChoicePanelActive(false);
         SetNextIndicatorActive(false);
@@ -265,6 +270,9 @@ public class DialogueController : MonoBehaviour
 
     public void OnClickStoryTextPanel()
     {
+        if (isGameClearActive)
+            return;
+
         if (isChoiceActive || isSkipping)
             return;
 
@@ -282,6 +290,9 @@ public class DialogueController : MonoBehaviour
 
     private void OnClickSkip()
     {
+        if (isGameClearActive)
+            return;
+
         if (isChoiceActive || isSkipping)
             return;
 
@@ -293,7 +304,7 @@ public class DialogueController : MonoBehaviour
     {
         isSkipping = true;
 
-        while (IsFastForwardActive && !isChoiceActive)
+        while (IsFastForwardActive && !isChoiceActive && !isGameClearActive)
         {
             if (currentLineIndex < 0)
                 ShowNextLine(true);
@@ -327,7 +338,7 @@ public class DialogueController : MonoBehaviour
 
     private void ShowNextLine(bool instantText = false)
     {
-        if (currentDialogueData == null)
+        if (currentDialogueData == null || isGameClearActive)
             return;
 
         currentLineIndex++;
@@ -501,7 +512,7 @@ public class DialogueController : MonoBehaviour
                 return false;
             case DialogueChoiceAction.GameClear:
                 HandleGameClear(actionValue);
-                return false;
+                return true;
             default:
                 return false;
         }
@@ -535,13 +546,21 @@ public class DialogueController : MonoBehaviour
 
     private void HandleGameClear(string endingID)
     {
-        if (SaveManager.Instance == null)
+        StopTyping();
+        StopSkipping();
+        ClearFastForwardRequests();
+        SetChoicePanelActive(false);
+        SetNextIndicatorActive(false);
+        isChoiceActive = false;
+        isGameClearActive = true;
+
+        if (gameClearCanvasController == null)
         {
-            DevLog.LogWarning("[Dialogue] GameClear requested but SaveManager.Instance is missing.");
+            DevLog.LogWarning("[Dialogue] GameClear requested but GameClearCanvasController is not assigned.");
             return;
         }
 
-        SaveManager.Instance.HandleGameClear(endingID);
+        gameClearCanvasController.Show();
     }
 
     private void FinishDialogue()
@@ -1036,7 +1055,7 @@ public class DialogueController : MonoBehaviour
 
     private void StartFastForwardIfNeeded()
     {
-        if (!IsFastForwardActive || isChoiceActive || skipCoroutine != null)
+        if (!IsFastForwardActive || isChoiceActive || isGameClearActive || skipCoroutine != null)
             return;
 
         skipCoroutine = StartCoroutine(SkipRoutine());

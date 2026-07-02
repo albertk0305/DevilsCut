@@ -41,6 +41,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MaidCafe.unity
     guid: 773a612ca62985f4fae4ea531e12c860
+  - enabled: 1
+    path: Assets/Scenes/Ending.unity
+    guid: eadb21b1c7c06e842ac7c5665b067bad
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

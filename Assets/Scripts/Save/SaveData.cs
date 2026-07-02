@@ -38,6 +38,48 @@ public class ClearRecordCollectionSaveData
 }
 
 [Serializable]
+public class ClearDataIndex
+{
+    public int schemaVersion;
+    public int nextClearNumber;
+    public int totalIssuedCount;
+    public int totalSavedCount;
+    public int totalClearCount;
+    public List<ClearRecordSummary> records = new List<ClearRecordSummary>();
+    public List<string> discardedClearIds = new List<string>();
+}
+
+[Serializable]
+public class ClearRecordSummary
+{
+    public int clearNumber;
+    public string clearId;
+    public string clearedAt;
+    public int level;
+    public int maxHp;
+    public int currentHp;
+    public int actionPoints;
+    public int strength;
+    public int defense;
+    public int speed;
+    public int luck;
+    public int currentGold;
+    public int rejectedSupporterCount;
+    public int ownedSupporterCount;
+    public int ownedItemCount;
+}
+
+[Serializable]
+public class GameClearRecordData
+{
+    public int schemaVersion;
+    public int clearNumber;
+    public string clearId;
+    public string clearedAt;
+    public PlayerGrowthSaveData playerGrowth;
+}
+
+[Serializable]
 public class PlayerGrowthSaveData
 {
     public string playerName;
