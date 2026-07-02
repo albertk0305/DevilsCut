@@ -9,12 +9,14 @@ public class CombatSfxController : MonoBehaviour
     [SerializeField] private AudioClip criticalHitClip;
     [SerializeField] private AudioClip dodgeClip;
     [SerializeField] private AudioClip cutInClip;
+    [SerializeField] private AudioClip groggyClip;
 
     [Header("Volumes")]
     [SerializeField, Range(0f, 1f)] private float normalHitVolume = 1f;
     [SerializeField, Range(0f, 1f)] private float criticalHitVolume = 1f;
     [SerializeField, Range(0f, 1f)] private float dodgeVolume = 1f;
     [SerializeField, Range(0f, 1f)] private float cutInVolume = 1f;
+    [SerializeField, Range(0f, 1f)] private float groggyVolume = 1f;
 
     private void Awake()
     {
@@ -51,6 +53,11 @@ public class CombatSfxController : MonoBehaviour
     public void PlayCutIn()
     {
         PlayClip(cutInClip, cutInVolume);
+    }
+
+    public void PlayGroggy()
+    {
+        PlayClip(groggyClip, groggyVolume);
     }
 
     private void PlayClip(AudioClip clip, float volume)

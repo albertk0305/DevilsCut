@@ -9050,11 +9050,13 @@ MonoBehaviour:
   normalHitClip: {fileID: 8300000, guid: 835502534146c6f4fabe4205cd1186ca, type: 3}
   criticalHitClip: {fileID: 8300000, guid: 890bd8ebe76c77e498dc4a085e996005, type: 3}
   dodgeClip: {fileID: 8300000, guid: 755575bac4a21e04b9d27cabbfd2e244, type: 3}
-  cutInClip: {fileID: 8300000, guid: 8cc28ffe10f6f584d9793d83dbe555b6, type: 3}
+  cutInClip: {fileID: 8300000, guid: 9e5fb9a69f851df4b9595afc8b74f20e, type: 3}
+  groggyClip: {fileID: 8300000, guid: ebe9deb48778f3143b7a26a97886a19b, type: 3}
   normalHitVolume: 1
   criticalHitVolume: 1
   dodgeVolume: 0.7
   cutInVolume: 0.7
+  groggyVolume: 1
 --- !u!1 &770525516
 GameObject:
   m_ObjectHideFlags: 0

@@ -316,4 +316,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UISfxController
   buttonClickClip: {fileID: 8300000, guid: d636c3d8b85c7cc409cf5a9fbf3708c5, type: 3}
-  buttonClickVolume: 0.7
+  buttonClickVolume: 0.5

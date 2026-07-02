@@ -70,6 +70,7 @@ public class BreakManager : MonoBehaviour
 
     private void TriggerBreak(bool isPlayerTarget)
     {
+        bool wasBroken = IsBroken(isPlayerTarget);
         float maxGauge = GetMaxGauge(isPlayerTarget);
 
         if (isPlayerTarget)
@@ -97,6 +98,9 @@ public class BreakManager : MonoBehaviour
             if (enemyData != null && enemyData.breakImage != null)
                 CombatUIManager.Instance.SetDefenderImage(false, enemyData.breakImage);
         }
+        if (!wasBroken && IsBroken(isPlayerTarget))
+            CombatSfxController.Instance?.PlayGroggy();
+
         DevLog.Log($"[브레이크 발동!] {(isPlayerTarget ? "아군" : "적")}이 그로기 상태에 빠졌습니다!");
     }
 
