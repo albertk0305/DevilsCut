@@ -748,13 +748,14 @@ GameObject:
   - component: {fileID: 88541615}
   - component: {fileID: 88541614}
   - component: {fileID: 88541613}
+  - component: {fileID: 88541617}
   m_Layer: 5
   m_Name: SaveCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &88541613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -845,6 +846,40 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &88541617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88541612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb69556c94a42d4d87b4098fd23b62c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClearDataSelectCanvasController
+  rootCanvas: {fileID: 88541612}
+  slotUIs:
+  - {fileID: 1098797884}
+  - {fileID: 777370901}
+  - {fileID: 891885256}
+  - {fileID: 786722112}
+  - {fileID: 758724224}
+  - {fileID: 1796016009}
+  - {fileID: 1490789578}
+  - {fileID: 1445661096}
+  - {fileID: 1966655309}
+  - {fileID: 2128563875}
+  upButton: {fileID: 515421848}
+  downButton: {fileID: 1869667949}
+  startButton: {fileID: 1453594696}
+  deleteButton: {fileID: 815720540}
+  exitButton: {fileID: 1475334221}
+  confirmationPanel: {fileID: 1778275015}
+  confirmYesButton: {fileID: 1540944652}
+  confirmNoButton: {fileID: 1217146711}
+  skillPreviewCanvas: {fileID: 1117305750}
+  skillDatabase: {fileID: 11400000, guid: 76290af8dc408464c97b9f79baacf39b, type: 2}
 --- !u!1 &144771339
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,11 +2617,23 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2334800513403878095, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3070027889833177174, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3230910166227175105, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
       propertyPath: m_Name
       value: StatusCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 3230910166227175105, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3881996710506764628, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -2668,6 +2715,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6296286641003165442, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7118859178360010756, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -8527,6 +8578,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 758724223}
+  - component: {fileID: 758724224}
   m_Layer: 5
   m_Name: Save (4)
   m_TagString: Untagged
@@ -8560,6 +8612,26 @@ RectTransform:
   m_AnchoredPosition: {x: -520, y: 90}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &758724224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758724222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a6f63bd6234ff4eaaeb5084878bb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClearDataSlotUI
+  root: {fileID: 758724222}
+  highlightBackground: {fileID: 1815110298}
+  normalBackground: {fileID: 1710382850}
+  clearNumberText: {fileID: 1913409802}
+  floorRecordText: {fileID: 1560512885}
+  partyButton: {fileID: 1629297374}
+  skillButton: {fileID: 1178416042}
+  useButton: {fileID: 1172739401}
 --- !u!1 &759356258
 GameObject:
   m_ObjectHideFlags: 0
@@ -8720,6 +8792,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 777370900}
+  - component: {fileID: 777370901}
   m_Layer: 5
   m_Name: Save (1)
   m_TagString: Untagged
@@ -8753,6 +8826,26 @@ RectTransform:
   m_AnchoredPosition: {x: 320, y: 430}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &777370901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777370899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a6f63bd6234ff4eaaeb5084878bb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClearDataSlotUI
+  root: {fileID: 777370899}
+  highlightBackground: {fileID: 1838816632}
+  normalBackground: {fileID: 327561220}
+  clearNumberText: {fileID: 1890308978}
+  floorRecordText: {fileID: 2093480299}
+  partyButton: {fileID: 416073155}
+  skillButton: {fileID: 1598715222}
+  useButton: {fileID: 1516536019}
 --- !u!1 &784383582
 GameObject:
   m_ObjectHideFlags: 0
@@ -8832,10 +8925,22 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 0
-  m_TargetGraphic: {fileID: 784383585}
+  m_TargetGraphic: {fileID: 292634000}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1808452306}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: OnClickInfiniteBattle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &784383585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9034,6 +9139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 786722111}
+  - component: {fileID: 786722112}
   m_Layer: 5
   m_Name: Save (3)
   m_TagString: Untagged
@@ -9067,6 +9173,26 @@ RectTransform:
   m_AnchoredPosition: {x: 320, y: 260}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &786722112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786722110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a6f63bd6234ff4eaaeb5084878bb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClearDataSlotUI
+  root: {fileID: 786722110}
+  highlightBackground: {fileID: 1628500583}
+  normalBackground: {fileID: 802236798}
+  clearNumberText: {fileID: 1245344000}
+  floorRecordText: {fileID: 574464197}
+  partyButton: {fileID: 1543655844}
+  skillButton: {fileID: 1098199875}
+  useButton: {fileID: 1255207978}
 --- !u!1 &802236798
 GameObject:
   m_ObjectHideFlags: 0
@@ -9946,6 +10072,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 891885255}
+  - component: {fileID: 891885256}
   m_Layer: 5
   m_Name: Save (2)
   m_TagString: Untagged
@@ -9979,6 +10106,26 @@ RectTransform:
   m_AnchoredPosition: {x: -520, y: 260}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &891885256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891885254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a6f63bd6234ff4eaaeb5084878bb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClearDataSlotUI
+  root: {fileID: 891885254}
+  highlightBackground: {fileID: 491564827}
+  normalBackground: {fileID: 2082510335}
+  clearNumberText: {fileID: 867472187}
+  floorRecordText: {fileID: 62222085}
+  partyButton: {fileID: 1053550794}
+  skillButton: {fileID: 2056865027}
+  useButton: {fileID: 301732053}
 --- !u!1 &903750010
 GameObject:
   m_ObjectHideFlags: 0
@@ -11550,6 +11697,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1098797883}
+  - component: {fileID: 1098797884}
   m_Layer: 5
   m_Name: Save
   m_TagString: Untagged
@@ -11583,6 +11731,26 @@ RectTransform:
   m_AnchoredPosition: {x: -520, y: 430}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1098797884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098797882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a6f63bd6234ff4eaaeb5084878bb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClearDataSlotUI
+  root: {fileID: 1098797882}
+  highlightBackground: {fileID: 2053957984}
+  normalBackground: {fileID: 594939538}
+  clearNumberText: {fileID: 158616938}
+  floorRecordText: {fileID: 1426965645}
+  partyButton: {fileID: 1262633022}
+  skillButton: {fileID: 1209173734}
+  useButton: {fileID: 838310063}
 --- !u!1001 &1117305749
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11591,6 +11759,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2436505270166328035, guid: 4c1fb0a5284126c4a921f91e064d8a9a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4932598464184908209, guid: 4c1fb0a5284126c4a921f91e064d8a9a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -11679,11 +11851,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7578297398202219985, guid: 4c1fb0a5284126c4a921f91e064d8a9a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c1fb0a5284126c4a921f91e064d8a9a, type: 3}
+--- !u!114 &1117305750 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8850656003081546844, guid: 4c1fb0a5284126c4a921f91e064d8a9a, type: 3}
+  m_PrefabInstance: {fileID: 1117305749}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 256754ac0e5eae94da2ca15ea53812a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillClassTabManager
 --- !u!1 &1158212362
 GameObject:
   m_ObjectHideFlags: 0
@@ -14948,6 +15135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1445661095}
+  - component: {fileID: 1445661096}
   m_Layer: 5
   m_Name: Save (7)
   m_TagString: Untagged
@@ -14981,6 +15169,26 @@ RectTransform:
   m_AnchoredPosition: {x: 320, y: -80}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1445661096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445661094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a6f63bd6234ff4eaaeb5084878bb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClearDataSlotUI
+  root: {fileID: 1445661094}
+  highlightBackground: {fileID: 2081687420}
+  normalBackground: {fileID: 514568031}
+  clearNumberText: {fileID: 383950188}
+  floorRecordText: {fileID: 297235534}
+  partyButton: {fileID: 694777474}
+  skillButton: {fileID: 1490805051}
+  useButton: {fileID: 1836331908}
 --- !u!1 &1453594694
 GameObject:
   m_ObjectHideFlags: 0
@@ -15375,6 +15583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1490789577}
+  - component: {fileID: 1490789578}
   m_Layer: 5
   m_Name: Save (6)
   m_TagString: Untagged
@@ -15408,6 +15617,26 @@ RectTransform:
   m_AnchoredPosition: {x: -520, y: -80}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1490789578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490789576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a6f63bd6234ff4eaaeb5084878bb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClearDataSlotUI
+  root: {fileID: 1490789576}
+  highlightBackground: {fileID: 873533688}
+  normalBackground: {fileID: 1626518546}
+  clearNumberText: {fileID: 1578855941}
+  floorRecordText: {fileID: 1434924088}
+  partyButton: {fileID: 302569469}
+  skillButton: {fileID: 1160366036}
+  useButton: {fileID: 397560650}
 --- !u!1 &1490805049
 GameObject:
   m_ObjectHideFlags: 0
@@ -18338,6 +18567,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1796016008}
+  - component: {fileID: 1796016009}
   m_Layer: 5
   m_Name: Save (5)
   m_TagString: Untagged
@@ -18371,6 +18601,26 @@ RectTransform:
   m_AnchoredPosition: {x: 320, y: 90}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1796016009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796016007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a6f63bd6234ff4eaaeb5084878bb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClearDataSlotUI
+  root: {fileID: 1796016007}
+  highlightBackground: {fileID: 144771339}
+  normalBackground: {fileID: 2121040425}
+  clearNumberText: {fileID: 447075259}
+  floorRecordText: {fileID: 256741450}
+  partyButton: {fileID: 1606758338}
+  skillButton: {fileID: 297830313}
+  useButton: {fileID: 672325432}
 --- !u!1 &1802133888
 GameObject:
   m_ObjectHideFlags: 0
@@ -18556,6 +18806,8 @@ MonoBehaviour:
   confirmNewGamePanel: {fileID: 389209194}
   confirmNewGameText: {fileID: 236541560}
   explorationSceneName: Exploration
+  infiniteBattleButton: {fileID: 784383584}
+  clearDataSelectCanvasController: {fileID: 88541617}
   dialogueDataDatabase: {fileID: 11400000, guid: 0bb3dd23896e4fa19d1063d3842f62e6, type: 2}
   newGameDialogueData: {fileID: 11400000, guid: 7e99686744f968e478b0580e620c6010, type: 2}
 --- !u!4 &1808452307
@@ -19957,6 +20209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1966655308}
+  - component: {fileID: 1966655309}
   m_Layer: 5
   m_Name: Save (8)
   m_TagString: Untagged
@@ -19990,6 +20243,26 @@ RectTransform:
   m_AnchoredPosition: {x: -520, y: -250}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1966655309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966655307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a6f63bd6234ff4eaaeb5084878bb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClearDataSlotUI
+  root: {fileID: 1966655307}
+  highlightBackground: {fileID: 979865595}
+  normalBackground: {fileID: 1932089652}
+  clearNumberText: {fileID: 2031814141}
+  floorRecordText: {fileID: 623724453}
+  partyButton: {fileID: 179857383}
+  skillButton: {fileID: 499655763}
+  useButton: {fileID: 220558319}
 --- !u!1 &1975833344
 GameObject:
   m_ObjectHideFlags: 0
@@ -21871,6 +22144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2128563874}
+  - component: {fileID: 2128563875}
   m_Layer: 5
   m_Name: Save (9)
   m_TagString: Untagged
@@ -21904,6 +22178,26 @@ RectTransform:
   m_AnchoredPosition: {x: 320, y: -250}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2128563875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128563873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a6f63bd6234ff4eaaeb5084878bb6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClearDataSlotUI
+  root: {fileID: 2128563873}
+  highlightBackground: {fileID: 81921709}
+  normalBackground: {fileID: 1316838900}
+  clearNumberText: {fileID: 1992571889}
+  floorRecordText: {fileID: 637269921}
+  partyButton: {fileID: 44638083}
+  skillButton: {fileID: 210496765}
+  useButton: {fileID: 1868991251}
 --- !u!1001 &1592598889856254406
 PrefabInstance:
   m_ObjectHideFlags: 0

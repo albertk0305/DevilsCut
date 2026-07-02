@@ -11,6 +11,8 @@ public class SynergyUI_Manager : MonoBehaviour
     public List<SynergyUI_Column> allColumns;
     public TextMeshProUGUI descriptionText;
 
+    private ClearRecordPlayerProfile previewProfile;
+
     private void OnEnable()
     {
         RefreshSynergyCanvas();
@@ -27,10 +29,15 @@ public class SynergyUI_Manager : MonoBehaviour
 
     public void RefreshSynergyCanvas()
     {
+        if (previewProfile != null)
+        {
+            RefreshPreviewSynergyCanvas();
+            return;
+        }
+
         if (PlayerManager.Instance == null) return;
 
         var syn = PlayerManager.Instance.GetCurrentSynergies();
-
         foreach (var column in allColumns)
         {
             int points = 0;
@@ -40,6 +47,43 @@ public class SynergyUI_Manager : MonoBehaviour
                 points = PlayerManager.Instance.stats.rejectedSupporterCount;
             }
             else if (syn.ContainsKey(column.myClass))
+            {
+                points = syn[column.myClass];
+            }
+
+            column.UpdateColumn(points, this);
+        }
+
+        SetDefaultPrompt();
+    }
+
+    public void SetPreviewProfile(ClearRecordPlayerProfile profile)
+    {
+        previewProfile = profile;
+
+        if (isActiveAndEnabled)
+            RefreshSynergyCanvas();
+    }
+
+    public void ClearPreviewProfile()
+    {
+        previewProfile = null;
+    }
+
+    private void RefreshPreviewSynergyCanvas()
+    {
+        Dictionary<ItemClass, int> syn = previewProfile.GetPreviewSynergies();
+        foreach (var column in allColumns)
+        {
+            if (column == null)
+                continue;
+
+            int points = 0;
+            if (column.myClass == ItemClass.LoneWolf)
+            {
+                points = previewProfile.GetRejectedSupporterCount();
+            }
+            else if (syn != null && syn.ContainsKey(column.myClass))
             {
                 points = syn[column.myClass];
             }

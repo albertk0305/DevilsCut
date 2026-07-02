@@ -15,7 +15,7 @@ MonoBehaviour:
   dialogueID: AretePre
   nextDialogueID: 
   nextSceneName: Battle
-  storySkipPolicy: 3
+  storySkipPolicy: 0
   bgmPlaylist:
   - {fileID: 8300000, guid: 4800e521c044de94791a5e51af11d2f4, type: 3}
   bgmClip: {fileID: 0}

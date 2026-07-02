@@ -12,6 +12,7 @@ public class SkillUI_Manager : MonoBehaviour
     public TextMeshProUGUI descriptionText;
 
     private const string SelectSkillPromptKey = "ui_select_skill_prompt";
+    private ClearRecordPlayerProfile previewProfile;
 
     // 카테고리 순서 고정 (검 -> 총 -> 격투 -> 마법 -> 오니)
     private readonly SkillCategory[] categoryOrder = new SkillCategory[]
@@ -40,14 +41,17 @@ public class SkillUI_Manager : MonoBehaviour
 
     public void RefreshSkillCanvas()
     {
-        if (PlayerManager.Instance == null || allSkillSlots.Count != 20) return;
+        if (allSkillSlots == null || allSkillSlots.Count != 20) return;
+        if (previewProfile == null && PlayerManager.Instance == null) return;
 
         int slotIndex = 0;
 
         // 카테고리 순서대로 스킬을 4개씩 가져와서 슬롯에 끼워 넣습니다.
         foreach (SkillCategory cat in categoryOrder)
         {
-            List<SkillData> catSkills = PlayerManager.Instance.GetSkillsByCategory(cat);
+            List<SkillData> catSkills = previewProfile != null
+                ? previewProfile.GetSkillsByCategory(cat)
+                : PlayerManager.Instance.GetSkillsByCategory(cat);
 
             for (int i = 0; i < 4; i++)
             {
@@ -62,6 +66,26 @@ public class SkillUI_Manager : MonoBehaviour
 
         // 창을 처음 열었을 때는 안내 문구 출력
         SetDefaultPrompt();
+    }
+
+    public void SetPreviewProfile(ClearRecordPlayerProfile profile)
+    {
+        if (previewProfile != null && previewProfile != profile)
+            previewProfile.Dispose();
+
+        previewProfile = profile;
+
+        if (isActiveAndEnabled)
+            RefreshSkillCanvas();
+    }
+
+    public void ClearPreviewProfile()
+    {
+        if (previewProfile != null)
+        {
+            previewProfile.Dispose();
+            previewProfile = null;
+        }
     }
 
     private void SetDefaultPrompt()

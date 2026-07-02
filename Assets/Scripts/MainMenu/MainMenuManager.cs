@@ -10,6 +10,8 @@ public class MainMenuManager : MonoBehaviour
     public GameObject confirmNewGamePanel;
     public TextMeshProUGUI confirmNewGameText;
     public string explorationSceneName = "Exploration";
+    [SerializeField] private Button infiniteBattleButton;
+    [SerializeField] private ClearDataSelectCanvasController clearDataSelectCanvasController;
     [SerializeField] private DialogueDataDatabase dialogueDataDatabase;
     [SerializeField] private DialogueData newGameDialogueData;
 
@@ -19,12 +21,15 @@ public class MainMenuManager : MonoBehaviour
     {
         if (settingsPanel != null) settingsPanel.SetActive(false);
         if (confirmNewGamePanel != null) confirmNewGamePanel.SetActive(false);
+        if (clearDataSelectCanvasController != null) clearDataSelectCanvasController.Hide();
         UpdateContinueButtonState();
+        UpdateInfiniteBattleButtonState();
     }
 
     private void OnEnable()
     {
         UpdateContinueButtonState();
+        UpdateInfiniteBattleButtonState();
     }
 
     private void UpdateContinueButtonState()
@@ -34,6 +39,15 @@ public class MainMenuManager : MonoBehaviour
 
         bool hasSave = SaveManager.Instance != null && SaveManager.Instance.HasContinueSave();
         continueButton.gameObject.SetActive(hasSave);
+    }
+
+    private void UpdateInfiniteBattleButtonState()
+    {
+        if (infiniteBattleButton == null)
+            return;
+
+        bool hasClearRecords = SaveManager.Instance != null && SaveManager.Instance.HasAnyClearRecords();
+        infiniteBattleButton.interactable = hasClearRecords;
     }
 
     public void OnClickStart()
@@ -97,6 +111,22 @@ public class MainMenuManager : MonoBehaviour
 
         DevLog.Log("[MainMenu] Loading continue data.");
         SceneLoader.LoadScene(string.IsNullOrEmpty(sceneName) ? explorationSceneName : sceneName);
+    }
+
+    public void OnClickInfiniteBattle()
+    {
+        UpdateInfiniteBattleButtonState();
+
+        if (infiniteBattleButton != null && !infiniteBattleButton.interactable)
+            return;
+
+        if (clearDataSelectCanvasController == null)
+        {
+            DevLog.LogWarning("[MainMenu] Clear data select canvas is not assigned.");
+            return;
+        }
+
+        clearDataSelectCanvasController.Show();
     }
 
     public void OnClickHelp()

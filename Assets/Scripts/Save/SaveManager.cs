@@ -372,6 +372,114 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    public List<ClearRecordSummary> LoadClearRecordSummaries()
+    {
+        ClearDataIndex index = LoadClearDataIndex();
+        List<ClearRecordSummary> summaries = new List<ClearRecordSummary>();
+        foreach (ClearRecordSummary summary in index.records)
+        {
+            if (summary != null && !string.IsNullOrEmpty(summary.clearId))
+                summaries.Add(summary);
+        }
+
+        return summaries;
+    }
+
+    public bool HasAnyClearRecords()
+    {
+        ClearDataIndex index = LoadClearDataIndex();
+        return index.records != null && index.records.Count > 0;
+    }
+
+    public GameClearRecordData LoadGameClearRecord(string clearId)
+    {
+        if (!TryParseClearNumber(clearId, out int clearNumber))
+            return null;
+
+        string path = GetGameClearRecordPath(clearNumber);
+        if (!File.Exists(path))
+            return null;
+
+        try
+        {
+            string json = File.ReadAllText(path);
+            return JsonUtility.FromJson<GameClearRecordData>(json);
+        }
+        catch (Exception ex)
+        {
+            DevLog.LogWarning($"[Save] Failed to read game clear record '{clearId}': {ex.Message}");
+            return null;
+        }
+    }
+
+    public bool UpdateGameClearRecord(GameClearRecordData record)
+    {
+        if (record == null || string.IsNullOrEmpty(record.clearId))
+            return false;
+
+        if (!TryParseClearNumber(record.clearId, out int clearNumber))
+            return false;
+
+        if (record.clearNumber != clearNumber)
+        {
+            DevLog.LogWarning($"[Save] Game clear record update failed: clearId and clearNumber mismatch. clearId={record.clearId}, clearNumber={record.clearNumber}");
+            return false;
+        }
+
+        try
+        {
+            WriteGameClearRecord(record);
+            DevLog.Log($"[Save] Game clear record updated: clearId={record.clearId}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            DevLog.LogWarning($"[Save] Game clear record update failed: clearId={record.clearId}, {ex.Message}");
+            return false;
+        }
+    }
+
+    public bool DeleteGameClearRecord(string clearId)
+    {
+        if (string.IsNullOrEmpty(clearId))
+            return false;
+
+        try
+        {
+            ClearDataIndex index = LoadClearDataIndex();
+            ClearRecordSummary summary = null;
+            for (int i = 0; i < index.records.Count; i++)
+            {
+                ClearRecordSummary candidate = index.records[i];
+                if (candidate != null && candidate.clearId == clearId)
+                {
+                    summary = candidate;
+                    index.records.RemoveAt(i);
+                    break;
+                }
+            }
+
+            if (summary == null)
+                return false;
+
+            index.totalSavedCount = Mathf.Max(0, index.records.Count);
+            WriteClearDataIndex(index);
+
+            string recordPath = GetGameClearRecordPath(summary.clearNumber);
+            DeleteFileIfExists(recordPath);
+            DeleteFileIfExists(recordPath + ".tmp");
+            DeleteFileIfExists(recordPath + ".bak");
+
+            DevLog.Log($"[Save] Game clear record deleted: clearId={clearId}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            DevLog.LogWarning($"[Save] Game clear record delete failed: clearId={clearId}, {ex.Message}");
+            return false;
+        }
+    }
+
     public List<ClearRecordSaveData> LoadClearRecords()
     {
         if (TryLoadClearRecordCollectionFromPath(ClearRecordsPath, out ClearRecordCollectionSaveData collection))

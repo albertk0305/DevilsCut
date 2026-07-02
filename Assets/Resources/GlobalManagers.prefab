@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
   stats:
-    level: 1
+    level: 3
     maxExp: 100
     currentExp: 0
     maxHp: 100000
@@ -107,9 +107,9 @@ MonoBehaviour:
     breakResistance: 200
     maxBreakGauge: 100
     strength: 100000
-    defense: 200
+    defense: 10
     speed: 200
-    luck: 200
+    luck: 10
     currentGold: 100000
     rejectedSupporterCount: 0
     finalDamageAmp: 0
