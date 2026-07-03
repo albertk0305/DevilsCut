@@ -15,8 +15,12 @@ public class SettingsUI : MonoBehaviour
     public string mainMenuSceneName = "MainMenu";
     public string battleSceneName = "Battle";
 
+    private bool isReturningToMainMenu;
+
     private void OnEnable()
     {
+        isReturningToMainMenu = false;
+
         string currentSceneName = SceneManager.GetActiveScene().name;
         if (currentSceneName == mainMenuSceneName)
         {
@@ -75,10 +79,18 @@ public class SettingsUI : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        if (isReturningToMainMenu)
+            return;
+
+        if (string.IsNullOrEmpty(mainMenuSceneName))
+        {
+            DevLog.LogWarning("[Settings] Return to main menu failed: main menu scene name is empty.");
+            return;
+        }
+
+        isReturningToMainMenu = true;
         DevLog.Log("[Settings] Returning to main menu.");
-        confirmationPopup.SetActive(false);
-        TimeScalePauseManager.ReleasePause(this);
-        gameObject.SetActive(false);
+        TimeScalePauseManager.ClearAllPauses();
         Time.timeScale = 1f;
         SceneLoader.LoadScene(mainMenuSceneName);
     }
