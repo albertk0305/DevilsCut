@@ -34,19 +34,24 @@ public class KarinEquipmentUI : MonoBehaviour
     private int currentRow = 0;
     private const int columns = 2;
     private const int visibleRows = 4;
+    private ClearRecordPlayerProfile previewProfile;
 
     private void OnEnable()
     {
+        if (previewProfile != null)
+        {
+            currentRow = 0;
+            RefreshPreview();
+            SubscribeLanguageChanged();
+            return;
+        }
+
         if (PlayerManager.Instance == null) return;
 
         currentRow = 0;
         RefreshInventory();
 
-        if (LocalizationManager.Instance != null)
-        {
-            LocalizationManager.Instance.OnLanguageChanged -= RefreshLanguage;
-            LocalizationManager.Instance.OnLanguageChanged += RefreshLanguage;
-        }
+        SubscribeLanguageChanged();
 
         // Wait one frame so the UI is ready before applying the preview.
         StartCoroutine(InitDelayedPreviewRoutine());
@@ -63,6 +68,9 @@ public class KarinEquipmentUI : MonoBehaviour
     {
         yield return null;
 
+        if (previewProfile != null)
+            yield break;
+
         if (PlayerManager.Instance != null)
         {
             KarinItemData equipped = PlayerManager.Instance.equippedKarinItem;
@@ -72,6 +80,13 @@ public class KarinEquipmentUI : MonoBehaviour
 
     private void RefreshLanguage()
     {
+        if (previewProfile != null)
+        {
+            bool previewEquipped = currentPreview != null && previewProfile.IsEquippedKarinItem(currentPreview.itemID);
+            ShowPreview(currentPreview, previewEquipped);
+            return;
+        }
+
         bool isEquipped = (currentPreview != null && currentPreview == PlayerManager.Instance.equippedKarinItem);
         ShowPreview(currentPreview, isEquipped);
     }
@@ -122,14 +137,21 @@ public class KarinEquipmentUI : MonoBehaviour
             if (karinFaceImage != null)
                 karinFaceImage.sprite = isEquippedState ? karinReady : karinNormal;
 
-            equipButton.interactable = !isEquippedState && isExploration;
-            removeButton.interactable = isEquippedState && isExploration;
+            bool canChangeEquipment = previewProfile != null || isExploration;
+            equipButton.interactable = !isEquippedState && canChangeEquipment;
+            removeButton.interactable = isEquippedState && canChangeEquipment;
             cancelButton.gameObject.SetActive(!isEquippedState);
         }
     }
 
     private void RefreshInventory()
     {
+        if (previewProfile != null)
+        {
+            RefreshPreviewInventory();
+            return;
+        }
+
         List<KarinItemData> ownedList = PlayerManager.Instance.ownedKarinItems;
         int startIndex = currentRow * columns;
 
@@ -154,6 +176,12 @@ public class KarinEquipmentUI : MonoBehaviour
 
     public void OnClickInventorySlot(int slotIndex)
     {
+        if (previewProfile != null)
+        {
+            OnClickPreviewInventorySlot(slotIndex);
+            return;
+        }
+
         int dataIndex = (currentRow * columns) + slotIndex;
         if (dataIndex < PlayerManager.Instance.ownedKarinItems.Count)
         {
@@ -174,6 +202,18 @@ public class KarinEquipmentUI : MonoBehaviour
 
     public void OnClickDownScroll()
     {
+        if (previewProfile != null)
+        {
+            int previewTotalRows = Mathf.CeilToInt((float)previewProfile.OwnedKarinItems.Count / columns);
+            if (currentRow + visibleRows < previewTotalRows)
+            {
+                currentRow++;
+                RefreshPreviewInventory();
+            }
+
+            return;
+        }
+
         List<KarinItemData> ownedList = PlayerManager.Instance.ownedKarinItems;
         int totalRows = Mathf.CeilToInt((float)ownedList.Count / columns);
 
@@ -187,6 +227,13 @@ public class KarinEquipmentUI : MonoBehaviour
     public void OnClickEquip()
     {
         if (currentPreview == null) return;
+
+        if (previewProfile != null)
+        {
+            EquipPreviewItem();
+            return;
+        }
+
         PlayerManager.Instance.equippedKarinItem = currentPreview;
         ShowPreview(currentPreview, isEquippedState: true);
         RefreshInventory();
@@ -194,6 +241,12 @@ public class KarinEquipmentUI : MonoBehaviour
 
     public void OnClickRemove()
     {
+        if (previewProfile != null)
+        {
+            RemovePreviewItem();
+            return;
+        }
+
         PlayerManager.Instance.equippedKarinItem = null;
         ShowPreview(null, isEquippedState: false);
         RefreshInventory();
@@ -201,6 +254,147 @@ public class KarinEquipmentUI : MonoBehaviour
 
     public void OnClickCancel()
     {
+        if (previewProfile != null)
+        {
+            ShowPreview(previewProfile.GetEquippedKarinItem(), isEquippedState: true);
+            return;
+        }
+
         ShowPreview(PlayerManager.Instance.equippedKarinItem, isEquippedState: true);
+    }
+
+    public void SetPreviewProfile(ClearRecordPlayerProfile profile)
+    {
+        previewProfile = profile;
+        currentRow = 0;
+
+        if (isActiveAndEnabled)
+            RefreshPreview();
+    }
+
+    public void ClearPreviewProfile()
+    {
+        previewProfile = null;
+    }
+
+    private void RefreshPreview()
+    {
+        if (previewProfile == null)
+            return;
+
+        RefreshPreviewInventory();
+        ShowPreview(previewProfile.GetEquippedKarinItem(), isEquippedState: true);
+    }
+
+    private void RefreshPreviewInventory()
+    {
+        IReadOnlyList<KarinItemData> ownedList = previewProfile.OwnedKarinItems;
+        int startIndex = currentRow * columns;
+
+        for (int i = 0; i < inventoryButtons.Length; i++)
+        {
+            int dataIndex = startIndex + i;
+            bool hasData = dataIndex < ownedList.Count;
+
+            inventoryButtons[i].image.enabled = hasData;
+            inventoryButtons[i].interactable = hasData;
+
+            if (hasData)
+                inventoryButtons[i].image.sprite = ownedList[dataIndex].itemIcon;
+        }
+
+        int totalRows = Mathf.CeilToInt((float)ownedList.Count / columns);
+        upScrollButton.interactable = currentRow > 0;
+        downScrollButton.interactable = currentRow + visibleRows < totalRows;
+    }
+
+    private void OnClickPreviewInventorySlot(int slotIndex)
+    {
+        int dataIndex = (currentRow * columns) + slotIndex;
+        if (dataIndex < previewProfile.OwnedKarinItems.Count)
+        {
+            KarinItemData clickedItem = previewProfile.OwnedKarinItems[dataIndex];
+            bool isAlreadyEquipped = clickedItem != null && previewProfile.IsEquippedKarinItem(clickedItem.itemID);
+            ShowPreview(clickedItem, isEquippedState: isAlreadyEquipped);
+        }
+    }
+
+    private void EquipPreviewItem()
+    {
+        string previousEquippedItemID = previewProfile.GetEquippedKarinItem() != null
+            ? previewProfile.GetEquippedKarinItem().itemID
+            : null;
+
+        if (!previewProfile.SetEquippedKarinItem(currentPreview.itemID))
+        {
+            DevLog.LogWarning($"[MainMenu] ClearRecord Karin equip failed: itemID={currentPreview.itemID}");
+            RefreshPreview();
+            return;
+        }
+
+        if (!SavePreviewRecord())
+        {
+            RestorePreviewEquippedItem(previousEquippedItemID);
+            RefreshPreview();
+            return;
+        }
+
+        ShowPreview(currentPreview, isEquippedState: true);
+        RefreshPreviewInventory();
+    }
+
+    private void RemovePreviewItem()
+    {
+        string previousEquippedItemID = previewProfile.GetEquippedKarinItem() != null
+            ? previewProfile.GetEquippedKarinItem().itemID
+            : null;
+
+        if (!previewProfile.ClearEquippedKarinItem())
+        {
+            RefreshPreview();
+            return;
+        }
+
+        if (!SavePreviewRecord())
+        {
+            RestorePreviewEquippedItem(previousEquippedItemID);
+            RefreshPreview();
+            return;
+        }
+
+        ShowPreview(null, isEquippedState: false);
+        RefreshPreviewInventory();
+    }
+
+    private bool SavePreviewRecord()
+    {
+        if (SaveManager.Instance == null || previewProfile == null || previewProfile.Record == null)
+        {
+            DevLog.LogWarning("[MainMenu] ClearRecord Karin preview save failed: SaveManager or record missing.");
+            return false;
+        }
+
+        bool saved = SaveManager.Instance.UpdateGameClearRecord(previewProfile.Record);
+        if (!saved)
+            DevLog.LogWarning($"[MainMenu] ClearRecord Karin preview save failed: clearId={previewProfile.ClearId}");
+
+        return saved;
+    }
+
+    private void RestorePreviewEquippedItem(string itemId)
+    {
+        if (string.IsNullOrEmpty(itemId))
+            previewProfile.ClearEquippedKarinItem();
+        else
+            previewProfile.SetEquippedKarinItem(itemId);
+    }
+
+    private void SubscribeLanguageChanged()
+    {
+        if (LocalizationManager.Instance != null)
+        {
+            LocalizationManager.Instance.OnLanguageChanged -= RefreshLanguage;
+            LocalizationManager.Instance.OnLanguageChanged += RefreshLanguage;
+        }
     }
 }

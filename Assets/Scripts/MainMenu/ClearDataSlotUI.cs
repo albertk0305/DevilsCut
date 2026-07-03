@@ -16,6 +16,7 @@ public class ClearDataSlotUI : MonoBehaviour
 
     private ClearRecordSummary boundSummary;
     private Action<ClearRecordSummary> onUse;
+    private Action<ClearRecordSummary> onPartyPreview;
     private Action<ClearRecordSummary> onSkillPreview;
 
     private void Awake()
@@ -55,10 +56,12 @@ public class ClearDataSlotUI : MonoBehaviour
         ClearRecordSummary summary,
         bool selected,
         Action<ClearRecordSummary> useCallback,
+        Action<ClearRecordSummary> partyPreviewCallback,
         Action<ClearRecordSummary> skillPreviewCallback)
     {
         boundSummary = summary;
         onUse = useCallback;
+        onPartyPreview = partyPreviewCallback;
         onSkillPreview = skillPreviewCallback;
 
         if (root != null)
@@ -82,7 +85,7 @@ public class ClearDataSlotUI : MonoBehaviour
             floorRecordText.text = "0";
 
         if (partyButton != null)
-            partyButton.interactable = false;
+            partyButton.interactable = true;
 
         if (skillButton != null)
             skillButton.interactable = true;
@@ -93,7 +96,7 @@ public class ClearDataSlotUI : MonoBehaviour
 
     public void Clear()
     {
-        Bind(null, false, null, null);
+        Bind(null, false, null, null, null);
     }
 
     public void SetSelected(bool selected)
@@ -116,7 +119,10 @@ public class ClearDataSlotUI : MonoBehaviour
 
     private void OnPartyClicked()
     {
-        DevLog.Log("[MainMenu] Clear data party preview is not implemented yet.");
+        if (boundSummary == null)
+            return;
+
+        onPartyPreview?.Invoke(boundSummary);
     }
 
     private void OnSkillClicked()

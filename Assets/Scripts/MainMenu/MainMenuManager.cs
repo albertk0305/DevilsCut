@@ -10,10 +10,15 @@ public class MainMenuManager : MonoBehaviour
     public GameObject confirmNewGamePanel;
     public TextMeshProUGUI confirmNewGameText;
     public string explorationSceneName = "Exploration";
+    [SerializeField] private TextMeshProUGUI continueButtonText;
     [SerializeField] private Button infiniteBattleButton;
+    [SerializeField] private TextMeshProUGUI infiniteBattleButtonText;
     [SerializeField] private ClearDataSelectCanvasController clearDataSelectCanvasController;
     [SerializeField] private DialogueDataDatabase dialogueDataDatabase;
     [SerializeField] private DialogueData newGameDialogueData;
+    [SerializeField] private float enabledTextAlpha = 1f;
+    [SerializeField] private float disabledTextAlpha = 0.4f;
+    [SerializeField] private bool disableTextButtonTransition = true;
 
     private const string NewGameOverwriteMessage = "저장된 진행 상황이 있습니다.\n새 게임을 시작하면 기존 이어하기 데이터가 삭제됩니다.\n정말 새로 시작하시겠습니까?";
 
@@ -38,7 +43,7 @@ public class MainMenuManager : MonoBehaviour
             return;
 
         bool hasSave = SaveManager.Instance != null && SaveManager.Instance.HasContinueSave();
-        continueButton.gameObject.SetActive(hasSave);
+        ApplyTextButtonState(continueButton, ref continueButtonText, hasSave, true);
     }
 
     private void UpdateInfiniteBattleButtonState()
@@ -47,7 +52,31 @@ public class MainMenuManager : MonoBehaviour
             return;
 
         bool hasClearRecords = SaveManager.Instance != null && SaveManager.Instance.HasAnyClearRecords();
-        infiniteBattleButton.interactable = hasClearRecords;
+        ApplyTextButtonState(infiniteBattleButton, ref infiniteBattleButtonText, hasClearRecords, false);
+    }
+
+    private void ApplyTextButtonState(Button button, ref TextMeshProUGUI label, bool interactable, bool keepActive)
+    {
+        if (button == null)
+            return;
+
+        if (keepActive)
+            button.gameObject.SetActive(true);
+
+        if (disableTextButtonTransition)
+            button.transition = Selectable.Transition.None;
+
+        button.interactable = interactable;
+
+        if (label == null)
+            label = button.GetComponentInChildren<TextMeshProUGUI>(true);
+
+        if (label == null)
+            return;
+
+        Color color = label.color;
+        color.a = interactable ? enabledTextAlpha : disabledTextAlpha;
+        label.color = color;
     }
 
     public void OnClickStart()

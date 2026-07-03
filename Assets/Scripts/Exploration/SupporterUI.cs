@@ -31,14 +31,21 @@ public class SupporterUI : MonoBehaviour
     private SupporterData currentPreview;
     private List<SupporterData> displayList = new List<SupporterData>();
     private int currentPage = 0;
+    private ClearRecordPlayerProfile previewProfile;
 
     private void OnEnable()
     {
+        if (previewProfile != null)
+        {
+            RefreshPreview();
+            SubscribeLanguageChanged();
+            return;
+        }
+
         ShowPreview(PlayerManager.Instance.activeSupporter, isJoinedState: true);
         RefreshRosterList();
 
-        if (LocalizationManager.Instance != null)
-            LocalizationManager.Instance.OnLanguageChanged += RefreshLanguage;
+        SubscribeLanguageChanged();
     }
 
     private void OnDisable()
@@ -49,7 +56,14 @@ public class SupporterUI : MonoBehaviour
 
     private void RefreshLanguage()
     {
-        bool isJoined = (currentPreview != null && currentPreview == PlayerManager.Instance.activeSupporter);
+        if (previewProfile != null)
+        {
+            bool isPreviewJoined = currentPreview != null && previewProfile.IsActiveSupporter(currentPreview.supporterID);
+            ShowPreview(currentPreview, isPreviewJoined);
+            return;
+        }
+
+        bool isJoined = (currentPreview != null && PlayerManager.Instance != null && currentPreview == PlayerManager.Instance.activeSupporter);
         ShowPreview(currentPreview, isJoined);
     }
 
@@ -89,8 +103,9 @@ public class SupporterUI : MonoBehaviour
             string dialogueKey = isJoinedState ? data.joinMessage : data.selectMessage;
             dialogueText.text = LocalizationManager.Instance.GetText(dialogueKey);
 
-            joinButton.interactable = !isJoinedState && isExploration;
-            leaveButton.interactable = isJoinedState && isExploration;
+            bool canChangeParty = previewProfile != null || isExploration;
+            joinButton.interactable = !isJoinedState && canChangeParty;
+            leaveButton.interactable = isJoinedState && canChangeParty;
             if (cancelButton != null) cancelButton.gameObject.SetActive(!isJoinedState);
         }
     }
@@ -117,6 +132,12 @@ public class SupporterUI : MonoBehaviour
 
     private void RefreshRosterList()
     {
+        if (previewProfile != null)
+        {
+            RefreshPreviewRosterList();
+            return;
+        }
+
         displayList = PlayerManager.Instance.unlockedSupporters
             .Where(s => s != PlayerManager.Instance.activeSupporter)
             .ToList();
@@ -180,6 +201,12 @@ public class SupporterUI : MonoBehaviour
     {
         if (currentPreview == null) return;
 
+        if (previewProfile != null)
+        {
+            JoinPreviewSupporter();
+            return;
+        }
+
         PlayerManager.Instance.activeSupporter = currentPreview;
 
         ShowPreview(currentPreview, isJoinedState: true);
@@ -189,6 +216,12 @@ public class SupporterUI : MonoBehaviour
 
     public void OnClickLeave()
     {
+        if (previewProfile != null)
+        {
+            LeavePreviewSupporter();
+            return;
+        }
+
         PlayerManager.Instance.activeSupporter = null;
         ShowPreview(null, isJoinedState: false);
         RefreshRosterList();
@@ -196,11 +229,148 @@ public class SupporterUI : MonoBehaviour
 
     public void OnClickCancel()
     {
+        if (previewProfile != null)
+        {
+            ShowPreview(previewProfile.GetActiveSupporter(), isJoinedState: true);
+            return;
+        }
+
         ShowPreview(PlayerManager.Instance.activeSupporter, isJoinedState: true);
     }
 
     private int GetTotalPages()
     {
         return Mathf.Max(1, Mathf.CeilToInt((float)displayList.Count / rosterButtons.Length));
+    }
+
+    public void SetPreviewProfile(ClearRecordPlayerProfile profile)
+    {
+        previewProfile = profile;
+        currentPage = 0;
+
+        if (isActiveAndEnabled)
+            RefreshPreview();
+    }
+
+    public void ClearPreviewProfile()
+    {
+        previewProfile = null;
+    }
+
+    private void RefreshPreview()
+    {
+        if (previewProfile == null)
+            return;
+
+        ShowPreview(previewProfile.GetActiveSupporter(), isJoinedState: true);
+        RefreshPreviewRosterList();
+    }
+
+    private void RefreshPreviewRosterList()
+    {
+        SupporterData activeSupporter = previewProfile.GetActiveSupporter();
+        displayList = previewProfile.UnlockedSupporters
+            .Where(s => s != null && (activeSupporter == null || s.supporterID != activeSupporter.supporterID))
+            .ToList();
+
+        int totalPages = GetTotalPages();
+        if (currentPage >= totalPages && currentPage > 0) currentPage = totalPages - 1;
+
+        int startIndex = currentPage * rosterButtons.Length;
+
+        for (int i = 0; i < rosterButtons.Length; i++)
+        {
+            int dataIndex = startIndex + i;
+            bool hasData = dataIndex < displayList.Count;
+
+            rosterButtons[i].gameObject.SetActive(hasData);
+            rosterButtons[i].interactable = hasData;
+
+            if (hasData)
+                rosterButtons[i].image.sprite = displayList[dataIndex].iconImage;
+
+            if (rosterBackgrounds.Length > i && rosterBackgrounds[i] != null)
+                rosterBackgrounds[i].SetActive(hasData);
+        }
+
+        bool hasMultiplePages = totalPages > 1;
+        leftArrow.SetActive(hasMultiplePages);
+        rightArrow.SetActive(hasMultiplePages);
+    }
+
+    private void JoinPreviewSupporter()
+    {
+        string previousActiveId = previewProfile.GetActiveSupporter() != null
+            ? previewProfile.GetActiveSupporter().supporterID
+            : null;
+
+        if (!previewProfile.SetActiveSupporter(currentPreview.supporterID))
+        {
+            DevLog.LogWarning($"[MainMenu] ClearRecord supporter join failed: supporterID={currentPreview.supporterID}");
+            RefreshPreview();
+            return;
+        }
+
+        if (!SavePreviewRecord())
+        {
+            RestorePreviewActiveSupporter(previousActiveId);
+            RefreshPreview();
+            return;
+        }
+
+        ShowPreview(currentPreview, isJoinedState: true);
+        RefreshPreviewRosterList();
+    }
+
+    private void LeavePreviewSupporter()
+    {
+        string previousActiveId = previewProfile.GetActiveSupporter() != null
+            ? previewProfile.GetActiveSupporter().supporterID
+            : null;
+
+        if (!previewProfile.ClearActiveSupporter())
+        {
+            RefreshPreview();
+            return;
+        }
+
+        if (!SavePreviewRecord())
+        {
+            RestorePreviewActiveSupporter(previousActiveId);
+            RefreshPreview();
+            return;
+        }
+
+        ShowPreview(null, isJoinedState: false);
+        RefreshPreviewRosterList();
+    }
+
+    private bool SavePreviewRecord()
+    {
+        if (SaveManager.Instance == null || previewProfile == null || previewProfile.Record == null)
+        {
+            DevLog.LogWarning("[MainMenu] ClearRecord supporter preview save failed: SaveManager or record missing.");
+            return false;
+        }
+
+        bool saved = SaveManager.Instance.UpdateGameClearRecord(previewProfile.Record);
+        if (!saved)
+            DevLog.LogWarning($"[MainMenu] ClearRecord supporter preview save failed: clearId={previewProfile.ClearId}");
+
+        return saved;
+    }
+
+    private void RestorePreviewActiveSupporter(string supporterId)
+    {
+        if (string.IsNullOrEmpty(supporterId))
+            previewProfile.ClearActiveSupporter();
+        else
+            previewProfile.SetActiveSupporter(supporterId);
+    }
+
+    private void SubscribeLanguageChanged()
+    {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged += RefreshLanguage;
     }
 }

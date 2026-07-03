@@ -29,15 +29,24 @@ public class EquipmentUI : MonoBehaviour
     private OwnedItem currentPreviewItem;
     private int currentRow = 0;
     private const int columns = 10;
+    private ClearRecordPlayerProfile previewProfile;
 
     private void OnEnable()
     {
+        if (previewProfile != null)
+        {
+            ShowPreview(null);
+            currentRow = 0;
+            RefreshPreviewInventory();
+            SubscribeLanguageChanged();
+            return;
+        }
+
         ShowPreview(null);
         currentRow = 0;
         RefreshInventory();
 
-        if (LocalizationManager.Instance != null)
-            LocalizationManager.Instance.OnLanguageChanged += RefreshLanguage;
+        SubscribeLanguageChanged();
     }
 
     private void OnDisable()
@@ -93,6 +102,12 @@ public class EquipmentUI : MonoBehaviour
 
     private void RefreshInventory()
     {
+        if (previewProfile != null)
+        {
+            RefreshPreviewInventory();
+            return;
+        }
+
         List<OwnedItem> ownedList = PlayerManager.Instance.inventory;
         int startIndex = currentRow * columns;
 
@@ -133,6 +148,12 @@ public class EquipmentUI : MonoBehaviour
 
     public void OnClickInventorySlot(int slotIndex)
     {
+        if (previewProfile != null)
+        {
+            OnClickPreviewInventorySlot(slotIndex);
+            return;
+        }
+
         int dataIndex = (currentRow * columns) + slotIndex;
 
         if (dataIndex < PlayerManager.Instance.inventory.Count)
@@ -152,6 +173,21 @@ public class EquipmentUI : MonoBehaviour
 
     public void OnClickDownScroll()
     {
+        if (previewProfile != null)
+        {
+            IReadOnlyList<OwnedItem> previewList = previewProfile.Inventory;
+            int previewTotalRows = Mathf.Max(1, Mathf.CeilToInt((float)previewList.Count / columns));
+            int previewVisibleRows = inventoryButtons.Length / columns;
+
+            if (currentRow + previewVisibleRows < previewTotalRows)
+            {
+                currentRow++;
+                RefreshPreviewInventory();
+            }
+
+            return;
+        }
+
         List<OwnedItem> ownedList = PlayerManager.Instance.inventory;
         int totalRows = Mathf.Max(1, Mathf.CeilToInt((float)ownedList.Count / columns));
         int visibleRows = inventoryButtons.Length / columns;
@@ -161,5 +197,79 @@ public class EquipmentUI : MonoBehaviour
             currentRow++;
             RefreshInventory();
         }
+    }
+
+    public void SetPreviewProfile(ClearRecordPlayerProfile profile)
+    {
+        previewProfile = profile;
+        currentRow = 0;
+
+        if (isActiveAndEnabled)
+        {
+            ShowPreview(null);
+            RefreshPreviewInventory();
+        }
+    }
+
+    public void ClearPreviewProfile()
+    {
+        previewProfile = null;
+    }
+
+    private void RefreshPreviewInventory()
+    {
+        IReadOnlyList<OwnedItem> ownedList = previewProfile != null ? previewProfile.Inventory : null;
+        int ownedCount = ownedList != null ? ownedList.Count : 0;
+        int startIndex = currentRow * columns;
+
+        for (int i = 0; i < inventoryButtons.Length; i++)
+        {
+            int dataIndex = startIndex + i;
+            bool hasData = dataIndex < ownedCount;
+
+            inventoryButtons[i].gameObject.SetActive(hasData);
+
+            if (inventoryBorders.Length > i && inventoryBorders[i] != null)
+                inventoryBorders[i].gameObject.SetActive(hasData);
+
+            if (hasData)
+            {
+                OwnedItem item = ownedList[dataIndex];
+                inventoryButtons[i].image.sprite = item != null && item.data != null ? item.data.itemIcon : null;
+
+                if (inventoryBorders.Length > i && inventoryBorders[i] != null)
+                {
+                    int star = item != null ? item.starLevel : 1;
+                    inventoryBorders[i].color = Color.white;
+
+                    if (star == 1) inventoryBorders[i].sprite = border1Star;
+                    else if (star == 2) inventoryBorders[i].sprite = border2Star;
+                    else if (star >= 3) inventoryBorders[i].sprite = border3Star;
+                }
+            }
+        }
+
+        int totalRows = Mathf.Max(1, Mathf.CeilToInt((float)ownedCount / columns));
+        int visibleRows = inventoryButtons.Length / columns;
+
+        upScrollButton.interactable = currentRow > 0;
+        downScrollButton.interactable = currentRow + visibleRows < totalRows;
+    }
+
+    private void OnClickPreviewInventorySlot(int slotIndex)
+    {
+        IReadOnlyList<OwnedItem> ownedList = previewProfile != null ? previewProfile.Inventory : null;
+        if (ownedList == null)
+            return;
+
+        int dataIndex = (currentRow * columns) + slotIndex;
+        if (dataIndex < ownedList.Count)
+            ShowPreview(ownedList[dataIndex]);
+    }
+
+    private void SubscribeLanguageChanged()
+    {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged += RefreshLanguage;
     }
 }

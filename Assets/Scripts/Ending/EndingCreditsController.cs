@@ -2,6 +2,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EndingCreditsController : MonoBehaviour
@@ -86,6 +87,12 @@ public class EndingCreditsController : MonoBehaviour
 
     private void Start()
     {
+        if (StorySkipSettings.IsEnabled)
+        {
+            LoadEpilogueStoryDirect();
+            return;
+        }
+
         InitializeVisualState();
         creditsRoutine = StartCoroutine(PlayCreditsRoutine());
     }
@@ -333,7 +340,7 @@ public class EndingCreditsController : MonoBehaviour
     {
         yield return FadeOutActiveText(textFadeDuration);
         yield return FadeImageAlpha(currentBackgroundImage, GetImageAlpha(currentBackgroundImage), 0f, Mathf.Max(0f, skipFadeOutDuration));
-        yield return HoldBlackThenLoadStory();
+        LoadEpilogueStoryDirect();
     }
 
     private void ShowSkipButton()
@@ -399,6 +406,11 @@ public class EndingCreditsController : MonoBehaviour
 
     private void LoadEpilogueStory()
     {
+        LoadEpilogueStoryDirect();
+    }
+
+    private void LoadEpilogueStoryDirect()
+    {
         if (!isTransitioningToStory)
             isTransitioningToStory = true;
 
@@ -406,7 +418,9 @@ public class EndingCreditsController : MonoBehaviour
         if (SaveManager.Instance != null)
             SaveManager.Instance.SaveContinueDataForDialogue(storySceneName, epilogueDialogueId);
 
-        SceneLoader.LoadScene(storySceneName);
+        TimeScalePauseManager.ClearAllPauses();
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(storySceneName);
     }
 
     private void InitializeVisualState()

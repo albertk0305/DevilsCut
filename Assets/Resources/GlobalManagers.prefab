@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
   stats:
-    level: 3
+    level: 10
     maxExp: 100
     currentExp: 0
     maxHp: 100000
@@ -107,9 +107,9 @@ MonoBehaviour:
     breakResistance: 200
     maxBreakGauge: 100
     strength: 100000
-    defense: 10
+    defense: 20
     speed: 200
-    luck: 10
+    luck: 20
     currentGold: 100000
     rejectedSupporterCount: 0
     finalDamageAmp: 0
@@ -121,26 +121,35 @@ MonoBehaviour:
     bonusAccuracy: 0
     bonusEvasion: 0
     healingReceivedAmp: 0
-  unlockedSupporters: []
+  unlockedSupporters:
+  - {fileID: 11400000, guid: 8f7a108444158544399cf83ab876c34c, type: 2}
+  - {fileID: 11400000, guid: 9725619daf76abb45848508807a510f2, type: 2}
+  - {fileID: 11400000, guid: 324e8b7827f679846a1984c00523c40e, type: 2}
+  - {fileID: 11400000, guid: 393f560ec2c52ed45bbb5f5324003c40, type: 2}
+  - {fileID: 11400000, guid: 2953981cd2e43c94c915f020e05321a7, type: 2}
+  - {fileID: 11400000, guid: bd08381fb5564414e8ed224539a6fe9c, type: 2}
+  - {fileID: 11400000, guid: af7d8462d6487cd42bee89ce9f4cb076, type: 2}
   supporterChoiceRecords:
   - supporterID: asmodeus
-    state: 0
+    state: 1
   - supporterID: lucifer
-    state: 0
+    state: 1
   - supporterID: baalzebub
-    state: 0
+    state: 1
   - supporterID: belphegor
-    state: 0
+    state: 1
   - supporterID: mammon
-    state: 0
+    state: 1
   - supporterID: satan
-    state: 0
+    state: 1
   - supporterID: leviathan
-    state: 0
-  activeSupporter: {fileID: 0}
+    state: 1
+  activeSupporter: {fileID: 11400000, guid: 8f7a108444158544399cf83ab876c34c, type: 2}
   supporterDatabase: {fileID: 11400000, guid: 51dd2413502c8f641a2cacd0d2de3478, type: 2}
   ownedKarinItems:
   - {fileID: 11400000, guid: 1f62c13dc91f5f34e8003534a0fe132f, type: 2}
+  - {fileID: 11400000, guid: b054c90722762c849b1e7315164d103b, type: 2}
+  - {fileID: 11400000, guid: 89dc7b1cb6e8101428049f81fd1ce5fc, type: 2}
   equippedKarinItem: {fileID: 11400000, guid: 1f62c13dc91f5f34e8003534a0fe132f, type: 2}
   inventory:
   - data: {fileID: 11400000, guid: bad34f1eb37c6f74a8deeca7efa03601, type: 2}

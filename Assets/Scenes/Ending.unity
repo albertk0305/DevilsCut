@@ -217,7 +217,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 1024
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -397,18 +397,118 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EndingCreditsController
   slides:
+  - image: {fileID: 21300000, guid: 4929847f865a60142b309d465af6894c, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 26f664a62f5a1b140bf27c8b36edb14c, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 19f325541f461b442b680db7d99217f4, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 00a33480e85b1c045bf03e3702af644c, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 134e36841fde6fc478af0954eb0777b1, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 5e9cd6588d75f724f8cdf96deb474d99, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: d1b92902268c00946bf8c082c85556f4, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: b288d1e012cdf004f9483888be3a0b04, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: ccc6902de7729d94694b702b2527ccf6, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 58f0ae7b80fd7954098489930a94f8a2, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 7aac75cea935f5b42b13eef00224a4f4, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: e186b9964785f694cb08a2e44f3584bc, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
   - image: {fileID: 21300000, guid: 5b831e373ca04634886acf25cef80b05, type: 3}
-    creditText: demo1
+    creditText: 
     textPosition: 0
     durationOverride: 0
   - image: {fileID: 21300000, guid: 1576b337552958b48adb2dbe117cb1b5, type: 3}
-    creditText: demo2
-    textPosition: 3
+    creditText: 
+    textPosition: 0
     durationOverride: 0
   - image: {fileID: 21300000, guid: 15750899b9b229d48adca024b783323f, type: 3}
-    creditText: demo3
-    textPosition: 1
+    creditText: 
+    textPosition: 0
     durationOverride: 0
+  - image: {fileID: 21300000, guid: a16da50a4aefd3549b24534ac776b98d, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: dd4e4a7cfb2ab664895e8f6a3f116743, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 23540ef646be590479414bdf990128d8, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: d227ecd0ea02380408487cc35cdd0da8, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: a12779bc1a02dd04d9a0bb2013956073, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 802c77af18abdc74ea1ff49856dcd6b5, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 9e74ac5d986f018428fe72db324974d5, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: b09a9a926e9968e4985ca6a8c12bb200, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 883ef722d7ab00042903a9f2d193977c, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: aa015c90f16eb744981bef60c7ad4ab6, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 67cb5684acf1c5d439e3bacc930ece36, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 84c4da419b137e149af03fbde3f476cb, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 159648add3aefcf4388318c9683a5dae, type: 3}
+    creditText: 
+    textPosition: 0
+    durationOverride: 12.5
   defaultSlideDuration: 10
   imageFadeDuration: 1.2
   textFadeDuration: 0.6
@@ -457,14 +557,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 528077238}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 298b138403b54849b811d2c59fab45e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
   bgmPlaylist:
   - {fileID: 8300000, guid: 37433d1abdb9bd447a73ecddbf44b2b1, type: 3}
-  bgmClip: {fileID: 8300000, guid: a1b7a502d2dc4984ba970a64b1e824ab, type: 3}
+  bgmClip: {fileID: 0}
   fadeTime: 1
   stopBgmIfEmpty: 0
 --- !u!4 &528077240
@@ -809,7 +909,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -1141,7 +1241,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -1466,7 +1566,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1

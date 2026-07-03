@@ -878,8 +878,12 @@ MonoBehaviour:
   confirmationPanel: {fileID: 1778275015}
   confirmYesButton: {fileID: 1540944652}
   confirmNoButton: {fileID: 1217146711}
+  statusPreviewCanvas: {fileID: 1051411280}
   skillPreviewCanvas: {fileID: 1117305750}
   skillDatabase: {fileID: 11400000, guid: 76290af8dc408464c97b9f79baacf39b, type: 2}
+  itemDatabase: {fileID: 11400000, guid: 73acb4d637906a84d9d2d487f62f2f25, type: 2}
+  supporterDatabase: {fileID: 11400000, guid: 51dd2413502c8f641a2cacd0d2de3478, type: 2}
+  karinItemDatabase: {fileID: 11400000, guid: fc4d3901e7bcedc4a8bc24b4e3cf490a, type: 2}
 --- !u!1 &144771339
 GameObject:
   m_ObjectHideFlags: 0
@@ -2721,11 +2725,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9040659826786730625, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
+      propertyPath: equipmentUI
+      value: 
+      objectReference: {fileID: 1271549068}
+    - target: {fileID: 9040659826786730625, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
+      propertyPath: supporterUI
+      value: 
+      objectReference: {fileID: 278349373}
+    - target: {fileID: 9040659826786730625, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
+      propertyPath: karinEquipmentUI
+      value: 
+      objectReference: {fileID: 1902340140}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
+--- !u!114 &278349373 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 85554219029480290, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
+  m_PrefabInstance: {fileID: 278349372}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f4c1acbb959398438614fe869c66b3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SupporterUI
 --- !u!1 &292633997
 GameObject:
   m_ObjectHideFlags: 0
@@ -8925,7 +8952,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 0
-  m_TargetGraphic: {fileID: 292634000}
+  m_TargetGraphic: {fileID: 784383585}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -9721,7 +9748,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 856692679}
   m_OnClick:
     m_PersistentCalls:
@@ -11156,6 +11183,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
   textKey: btn_exit
+--- !u!114 &1051411280 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9040659826786730625, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
+  m_PrefabInstance: {fileID: 278349372}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1655170fdd88a743b7190ab57cfa981, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuTabManager
 --- !u!1 &1053550792
 GameObject:
   m_ObjectHideFlags: 0
@@ -11855,6 +11893,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8850656003081546844, guid: 4c1fb0a5284126c4a921f91e064d8a9a, type: 3}
+      propertyPath: skillUIManager
+      value: 
+      objectReference: {fileID: 1117305752}
+    - target: {fileID: 8850656003081546844, guid: 4c1fb0a5284126c4a921f91e064d8a9a, type: 3}
+      propertyPath: synergyUIManager
+      value: 
+      objectReference: {fileID: 1117305751}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11871,6 +11917,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256754ac0e5eae94da2ca15ea53812a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillClassTabManager
+--- !u!114 &1117305751 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 970949602890609941, guid: 4c1fb0a5284126c4a921f91e064d8a9a, type: 3}
+  m_PrefabInstance: {fileID: 1117305749}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c51410cc279d341bf0fc03fbd9bcf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SynergyUI_Manager
+--- !u!114 &1117305752 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8861663715766453671, guid: 4c1fb0a5284126c4a921f91e064d8a9a, type: 3}
+  m_PrefabInstance: {fileID: 1117305749}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd4bfb54834e2649827f2480e94307c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillUI_Manager
 --- !u!1 &1158212362
 GameObject:
   m_ObjectHideFlags: 0
@@ -13858,6 +13926,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262633020}
   m_CullTransparentMesh: 1
+--- !u!114 &1271549068 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2933672122673331491, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
+  m_PrefabInstance: {fileID: 278349372}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 676a6cda958891f4fa55e8b7d24fe272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentUI
 --- !u!1 &1303477746
 GameObject:
   m_ObjectHideFlags: 0
@@ -18806,10 +18885,15 @@ MonoBehaviour:
   confirmNewGamePanel: {fileID: 389209194}
   confirmNewGameText: {fileID: 236541560}
   explorationSceneName: Exploration
+  continueButtonText: {fileID: 903750012}
   infiniteBattleButton: {fileID: 784383584}
+  infiniteBattleButtonText: {fileID: 292634000}
   clearDataSelectCanvasController: {fileID: 88541617}
   dialogueDataDatabase: {fileID: 11400000, guid: 0bb3dd23896e4fa19d1063d3842f62e6, type: 2}
   newGameDialogueData: {fileID: 11400000, guid: 7e99686744f968e478b0580e620c6010, type: 2}
+  enabledTextAlpha: 1
+  disabledTextAlpha: 0.4
+  disableTextButtonTransition: 1
 --- !u!4 &1808452307
 Transform:
   m_ObjectHideFlags: 0
@@ -19701,6 +19785,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890308976}
   m_CullTransparentMesh: 1
+--- !u!114 &1902340140 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5417586010616439814, guid: 80938ccc940cd82499f0ee9f8a0526ad, type: 3}
+  m_PrefabInstance: {fileID: 278349372}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4fa2f1bf4500c94d9d1fb453de08c02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KarinEquipmentUI
 --- !u!1 &1913409800
 GameObject:
   m_ObjectHideFlags: 0

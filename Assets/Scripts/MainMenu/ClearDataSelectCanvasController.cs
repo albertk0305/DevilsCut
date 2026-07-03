@@ -16,9 +16,12 @@ public class ClearDataSelectCanvasController : MonoBehaviour
     [SerializeField] private GameObject confirmationPanel;
     [SerializeField] private Button confirmYesButton;
     [SerializeField] private Button confirmNoButton;
+    [SerializeField] private MenuTabManager statusPreviewCanvas;
     [SerializeField] private SkillClassTabManager skillPreviewCanvas;
     [SerializeField] private SkillDatabase skillDatabase;
     [SerializeField] private ItemDatabase itemDatabase;
+    [SerializeField] private SupporterDatabase supporterDatabase;
+    [SerializeField] private KarinItemDatabase karinItemDatabase;
 
     private readonly List<ClearRecordSummary> records = new List<ClearRecordSummary>();
     private int pageIndex;
@@ -97,6 +100,7 @@ public class ClearDataSelectCanvasController : MonoBehaviour
 
     public void Show()
     {
+        InfiniteBattleRunContext.Clear();
         Root.SetActive(true);
         pageIndex = 0;
         HideConfirmation();
@@ -106,6 +110,7 @@ public class ClearDataSelectCanvasController : MonoBehaviour
 
     public void Hide()
     {
+        InfiniteBattleRunContext.Clear();
         HideConfirmation();
         ClearSelection();
         RefreshSlots();
@@ -159,7 +164,7 @@ public class ClearDataSelectCanvasController : MonoBehaviour
             {
                 ClearRecordSummary summary = records[recordIndex];
                 bool selected = summary != null && summary.clearId == selectedClearId;
-                slot.Bind(summary, selected, OnSlotUseClicked, OnSlotSkillPreviewClicked);
+                slot.Bind(summary, selected, OnSlotUseClicked, OnSlotPartyPreviewClicked, OnSlotSkillPreviewClicked);
             }
             else
             {
@@ -197,6 +202,47 @@ public class ClearDataSelectCanvasController : MonoBehaviour
         HideConfirmation();
         RefreshSlots();
         RefreshButtons();
+    }
+
+    private void OnSlotPartyPreviewClicked(ClearRecordSummary summary)
+    {
+        if (summary == null || string.IsNullOrEmpty(summary.clearId) || isDeleting)
+            return;
+
+        if (SaveManager.Instance == null)
+        {
+            DevLog.LogWarning("[MainMenu] Clear data status preview failed: SaveManager missing.");
+            return;
+        }
+
+        GameClearRecordData record = SaveManager.Instance.LoadGameClearRecord(summary.clearId);
+        if (record == null)
+        {
+            DevLog.LogWarning($"[MainMenu] Clear data status preview failed: record not found. clearId={summary.clearId}");
+            return;
+        }
+
+        if (statusPreviewCanvas == null)
+        {
+            DevLog.LogWarning("[MainMenu] Clear data status preview failed: StatusCanvas controller is not assigned.");
+            return;
+        }
+
+        ItemDatabase resolvedItemDatabase = ResolveItemDatabase();
+        if (resolvedItemDatabase == null)
+            DevLog.LogWarning("[MainMenu] Clear data status preview opened without ItemDatabase; equipment stat bonuses will be empty.");
+
+        SupporterDatabase resolvedSupporterDatabase = ResolveSupporterDatabase();
+        if (resolvedSupporterDatabase == null)
+            DevLog.LogWarning("[MainMenu] Clear data status preview opened without SupporterDatabase; supporter preview will be empty.");
+
+        KarinItemDatabase resolvedKarinItemDatabase = ResolveKarinItemDatabase();
+        if (resolvedKarinItemDatabase == null)
+            DevLog.LogWarning("[MainMenu] Clear data status preview opened without KarinItemDatabase; Karin preview will be empty.");
+
+        HideConfirmation();
+        ClearRecordPlayerProfile profile = new ClearRecordPlayerProfile(record, null, resolvedItemDatabase, resolvedSupporterDatabase, resolvedKarinItemDatabase);
+        statusPreviewCanvas.OpenPreview(profile);
     }
 
     private void OnSlotSkillPreviewClicked(ClearRecordSummary summary)
@@ -268,7 +314,47 @@ public class ClearDataSelectCanvasController : MonoBehaviour
         if (string.IsNullOrEmpty(selectedClearId) || isDeleting)
             return;
 
-        DevLog.Log($"[MainMenu] Infinite Battle start is not implemented yet. clearId={selectedClearId}, clearNumber={selectedClearNumber}");
+        if (SaveManager.Instance == null)
+        {
+            DevLog.LogWarning("[MainMenu] Infinite Battle context prepare failed: SaveManager missing.");
+            return;
+        }
+
+        GameClearRecordData record = SaveManager.Instance.LoadGameClearRecord(selectedClearId);
+        if (record == null)
+        {
+            DevLog.LogWarning($"[MainMenu] Infinite Battle context prepare failed: record not found. clearId={selectedClearId}");
+            return;
+        }
+
+        SkillDatabase resolvedSkillDatabase = ResolveSkillDatabase();
+        if (resolvedSkillDatabase == null)
+            DevLog.LogWarning("[MainMenu] Infinite Battle context prepared without SkillDatabase; skill preview data will be empty.");
+
+        ItemDatabase resolvedItemDatabase = ResolveItemDatabase();
+        if (resolvedItemDatabase == null)
+            DevLog.LogWarning("[MainMenu] Infinite Battle context prepared without ItemDatabase; equipment preview data will be empty.");
+
+        SupporterDatabase resolvedSupporterDatabase = ResolveSupporterDatabase();
+        if (resolvedSupporterDatabase == null)
+            DevLog.LogWarning("[MainMenu] Infinite Battle context prepared without SupporterDatabase; supporter preview data will be empty.");
+
+        KarinItemDatabase resolvedKarinItemDatabase = ResolveKarinItemDatabase();
+        if (resolvedKarinItemDatabase == null)
+            DevLog.LogWarning("[MainMenu] Infinite Battle context prepared without KarinItemDatabase; Karin preview data will be empty.");
+
+        ClearRecordPlayerProfile profile = new ClearRecordPlayerProfile(
+            record,
+            resolvedSkillDatabase,
+            resolvedItemDatabase,
+            resolvedSupporterDatabase,
+            resolvedKarinItemDatabase);
+
+        InfiniteBattleRunContext.Prepare(record, profile);
+
+        string activeSupporterId = GetActiveSupporterId(record);
+        string equippedKarinItemId = record.playerGrowth != null ? record.playerGrowth.equippedKarinItemID : "";
+        DevLog.Log($"[MainMenu] Infinite Battle context prepared: clearId={record.clearId}, clearNumber={record.clearNumber}, activeSupporter={FormatLogValue(activeSupporterId)}, equippedKarinItem={FormatLogValue(equippedKarinItemId)}");
     }
 
     private void OnDeleteClicked()
@@ -288,9 +374,12 @@ public class ClearDataSelectCanvasController : MonoBehaviour
         isDeleting = true;
         RefreshButtons();
 
-        bool deleted = SaveManager.Instance != null && SaveManager.Instance.DeleteGameClearRecord(selectedClearId);
+        string deletingClearId = selectedClearId;
+        bool deleted = SaveManager.Instance != null && SaveManager.Instance.DeleteGameClearRecord(deletingClearId);
         if (!deleted)
-            DevLog.LogWarning($"[MainMenu] Clear data delete failed: clearId={selectedClearId}");
+            DevLog.LogWarning($"[MainMenu] Clear data delete failed: clearId={deletingClearId}");
+        else if (InfiniteBattleRunContext.ClearId == deletingClearId)
+            InfiniteBattleRunContext.Clear();
 
         isDeleting = false;
         HideConfirmation();
@@ -339,5 +428,40 @@ public class ClearDataSelectCanvasController : MonoBehaviour
             return itemDatabase;
 
         return SaveManager.Instance != null ? SaveManager.Instance.itemDatabase : null;
+    }
+
+    private SupporterDatabase ResolveSupporterDatabase()
+    {
+        if (supporterDatabase != null)
+            return supporterDatabase;
+
+        return SaveManager.Instance != null ? SaveManager.Instance.supporterDatabase : null;
+    }
+
+    private KarinItemDatabase ResolveKarinItemDatabase()
+    {
+        if (karinItemDatabase != null)
+            return karinItemDatabase;
+
+        return SaveManager.Instance != null ? SaveManager.Instance.karinItemDatabase : null;
+    }
+
+    private string GetActiveSupporterId(GameClearRecordData record)
+    {
+        if (record == null || record.playerGrowth == null || record.playerGrowth.supporters == null)
+            return "";
+
+        foreach (SavedSupporterState supporter in record.playerGrowth.supporters)
+        {
+            if (supporter != null && supporter.active)
+                return supporter.supporterID;
+        }
+
+        return "";
+    }
+
+    private string FormatLogValue(string value)
+    {
+        return string.IsNullOrEmpty(value) ? "none" : value;
     }
 }

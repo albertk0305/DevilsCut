@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class DialogueController : MonoBehaviour
 {
     private const int MaxStorySkipResolveDepth = 64;
+    private const string EndingCreditsSceneAlias = "EndingCredits";
 
     private enum LineEndActionResult
     {
@@ -55,6 +56,11 @@ public class DialogueController : MonoBehaviour
     [SerializeField] private float typeInterval = 0.03f;
     [SerializeField] private float skipInterval = 0.02f;
 
+    [Header("Ending Credits")]
+    [SerializeField] private string endingCreditsSceneName = "EndingCredits";
+    [SerializeField] private string epilogueDialogueId = "Epilogue";
+    [SerializeField] private string storySceneName = "Story";
+
     private DialogueData currentDialogueData;
     private List<DialogueLine> currentLines = new List<DialogueLine>();
     private readonly Dictionary<string, int> lineIndexByID = new Dictionary<string, int>();
@@ -69,6 +75,7 @@ public class DialogueController : MonoBehaviour
     private bool currentDialogueAllowsForcedStorySkip;
     private bool isChoiceActive;
     private bool isGameClearActive;
+    private bool isSkippingEpilogueToGameClear;
     private bool isPlayingPendingDialogue;
     private bool isSubscribedToLanguageChanged;
     private bool isSubscribedToStorySkipChanged;
@@ -218,6 +225,7 @@ public class DialogueController : MonoBehaviour
         BuildLineIDLookup();
         currentLineIndex = -1;
         isGameClearActive = false;
+        isSkippingEpilogueToGameClear = false;
         isChoiceActive = false;
         SetChoicePanelActive(false);
         SetNextIndicatorActive(false);
@@ -238,6 +246,9 @@ public class DialogueController : MonoBehaviour
         {
             SetBackgroundImageByID(currentDialogueData.initialBackgroundID);
         }
+
+        if (TrySkipEpilogueToGameClear())
+            return;
 
         ShowNextLine(this.forcedFastForwardByStorySkip);
         StartFastForwardIfNeeded();
@@ -563,6 +574,28 @@ public class DialogueController : MonoBehaviour
         gameClearCanvasController.Show();
     }
 
+    private bool TrySkipEpilogueToGameClear()
+    {
+        if (isSkippingEpilogueToGameClear || isGameClearActive)
+            return true;
+
+        if (!StorySkipSettings.IsEnabled || !IsEpilogueDialogue(currentDialogueData))
+            return false;
+
+        isSkippingEpilogueToGameClear = true;
+        DevLog.Log("[Dialogue] Story Skip enabled: Epilogue skipped, opening GameClear confirmation.");
+        HandleGameClear("");
+        return true;
+    }
+
+    private bool IsEpilogueDialogue(DialogueData dialogueData)
+    {
+        return dialogueData != null
+            && !string.IsNullOrWhiteSpace(dialogueData.dialogueID)
+            && !string.IsNullOrWhiteSpace(epilogueDialogueId)
+            && string.Equals(dialogueData.dialogueID.Trim(), epilogueDialogueId.Trim(), System.StringComparison.OrdinalIgnoreCase);
+    }
+
     private void FinishDialogue()
     {
         StopTyping();
@@ -728,11 +761,51 @@ public class DialogueController : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(sceneName))
         {
+            if (TryBypassEndingCreditsForStorySkip(sceneName))
+                return;
+
             SceneLoader.LoadScene(sceneName);
             return;
         }
 
         DevLog.LogWarning("[Dialogue] nextSceneName is empty. Dialogue finished without scene transition.");
+    }
+
+    private bool TryBypassEndingCreditsForStorySkip(string sceneName)
+    {
+        if (!StorySkipSettings.IsEnabled)
+            return false;
+
+        if (!IsEndingCreditsScene(sceneName))
+            return false;
+
+        DialogueRuntimeContext.SetPendingDialogueID(epilogueDialogueId);
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.SaveContinueDataForDialogue(storySceneName, epilogueDialogueId);
+
+        TimeScalePauseManager.ClearAllPauses();
+        Time.timeScale = 1f;
+        DevLog.Log("[Dialogue] Story Skip enabled: EndingCredits skipped, loading Epilogue directly.");
+        SceneManager.LoadScene(storySceneName);
+        return true;
+    }
+
+    private bool IsEndingCreditsScene(string sceneName)
+    {
+        if (string.IsNullOrWhiteSpace(sceneName))
+            return false;
+
+        string normalizedSceneName = sceneName.Trim();
+        return IsSameSceneName(normalizedSceneName, endingCreditsSceneName)
+            || IsSameSceneName(normalizedSceneName, EndingCreditsSceneAlias)
+            || IsSameSceneName(normalizedSceneName, "Ending");
+    }
+
+    private bool IsSameSceneName(string sceneName, string expectedSceneName)
+    {
+        return !string.IsNullOrWhiteSpace(sceneName)
+            && !string.IsNullOrWhiteSpace(expectedSceneName)
+            && string.Equals(sceneName.Trim(), expectedSceneName.Trim(), System.StringComparison.OrdinalIgnoreCase);
     }
 
     private void ClearPendingDialogueIfNeeded()

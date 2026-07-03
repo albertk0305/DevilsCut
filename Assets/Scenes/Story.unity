@@ -3954,6 +3954,9 @@ MonoBehaviour:
   noButtonText: {fileID: 1725827347}
   typeInterval: 0.03
   skipInterval: 0.02
+  endingCreditsSceneName: Ending
+  epilogueDialogueId: Epilogue
+  storySceneName: Story
 --- !u!4 &1883367617
 Transform:
   m_ObjectHideFlags: 0

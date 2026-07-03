@@ -21,3 +21,4 @@ menu_start,시작,Start
 btn_delete,삭제,Delete
 msg_delete_data,삭제된 기록은 복구할 수 없습니다. 정말 삭제하시겠습니까?,Deleted data cannot be restored. Are you sure you want to proceed?
 menu_infinite_battle,무한 전투,Infinite Battle
+btn_analyze,분석,Analyze

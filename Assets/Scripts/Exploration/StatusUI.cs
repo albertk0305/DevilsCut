@@ -16,6 +16,8 @@ public class StatusUI : MonoBehaviour
 
     public TextMeshProUGUI maxBreakGaugeText;
 
+    private ClearRecordPlayerProfile previewProfile;
+
     private void OnEnable()
     {
         Refresh();
@@ -28,6 +30,12 @@ public class StatusUI : MonoBehaviour
 
     private void UpdateStatsUI()
     {
+        if (previewProfile != null)
+        {
+            UpdatePreviewStatsUI();
+            return;
+        }
+
         if (PlayerManager.Instance == null) return;
 
         bool isVictoryResult = CombatVictoryUIController.IsVictoryUIActive;
@@ -70,14 +78,69 @@ public class StatusUI : MonoBehaviour
         }
     }
 
+    public void SetPreviewProfile(ClearRecordPlayerProfile profile)
+    {
+        previewProfile = profile;
+
+        if (isActiveAndEnabled)
+            Refresh();
+    }
+
+    public void ClearPreviewProfile()
+    {
+        previewProfile = null;
+    }
+
+    private void UpdatePreviewStatsUI()
+    {
+        PlayerStats baseStats = previewProfile.GetBaseStats();
+        PlayerStats itemStats = previewProfile.GetItemModifiedStats();
+
+        strText.text = GetComprehensiveStatString("Str", TargetStat.Strength, baseStats.strength, itemStats.strength, false, previewProfile.Inventory, previewProfile.GetPreviewSynergies(), previewProfile.GetRejectedSupporterCount());
+        defText.text = GetComprehensiveStatString("Def", TargetStat.Defense, baseStats.defense, itemStats.defense, false, previewProfile.Inventory, previewProfile.GetPreviewSynergies(), previewProfile.GetRejectedSupporterCount());
+        spdText.text = GetComprehensiveStatString("Spd", TargetStat.Speed, baseStats.speed, itemStats.speed, false, previewProfile.Inventory, previewProfile.GetPreviewSynergies(), previewProfile.GetRejectedSupporterCount());
+        lukText.text = GetComprehensiveStatString("Luk", TargetStat.Luck, baseStats.luck, itemStats.luck, false, previewProfile.Inventory, previewProfile.GetPreviewSynergies(), previewProfile.GetRejectedSupporterCount());
+        breakResText.text = GetComprehensiveStatString("BR", TargetStat.BreakResistance, baseStats.breakResistance, itemStats.breakResistance, false, previewProfile.Inventory, previewProfile.GetPreviewSynergies(), previewProfile.GetRejectedSupporterCount());
+        if (maxBreakGaugeText != null) maxBreakGaugeText.text = $"{itemStats.maxBreakGauge}";
+
+        apText.text = GetComprehensiveStatString("AP", TargetStat.Strength, baseStats.ActionPoints, itemStats.ActionPoints, false, previewProfile.Inventory, previewProfile.GetPreviewSynergies(), previewProfile.GetRejectedSupporterCount());
+
+        int currentHp = Mathf.Clamp(baseStats.currentHp, 0, itemStats.maxHp);
+        int bonusHp = itemStats.maxHp - baseStats.maxHp;
+        string hpCalc = bonusHp > 0 ? $" <size=70%><color=#AAAAAA>[{baseStats.maxHp} <color=#00FF00>+ {bonusHp}</color>]</color></size>" : "";
+        string hpDisplay = $"{currentHp} / {itemStats.maxHp}{hpCalc}";
+        hpText.text = hpDisplay;
+
+        lvText.text = $"{baseStats.level} ({baseStats.currentExp} / {baseStats.maxExp})";
+    }
+
     // Builds the stat formula from item, synergy, and combat buff modifiers.
     private string GetComprehensiveStatString(string statType, TargetStat targetStat, int baseVal, int itemModifiedVal, bool isInCombat)
+    {
+        List<OwnedItem> inventory = PlayerManager.Instance != null ? PlayerManager.Instance.inventory : null;
+        Dictionary<ItemClass, int> synergies = PlayerManager.Instance != null ? PlayerManager.Instance.GetCurrentSynergies() : null;
+        int rejectedSupporterCount = PlayerManager.Instance != null ? PlayerManager.Instance.stats.rejectedSupporterCount : 0;
+        return GetComprehensiveStatString(statType, targetStat, baseVal, itemModifiedVal, isInCombat, inventory, synergies, rejectedSupporterCount);
+    }
+
+    private string GetComprehensiveStatString(
+        string statType,
+        TargetStat targetStat,
+        int baseVal,
+        int itemModifiedVal,
+        bool isInCombat,
+        IReadOnlyList<OwnedItem> inventory,
+        Dictionary<ItemClass, int> synergies,
+        int rejectedSupporterCount)
     {
         int flat = 0;
         float pct = 0f;
 
-        foreach (var item in PlayerManager.Instance.inventory)
+        foreach (var item in inventory ?? new List<OwnedItem>())
         {
+            if (item == null || item.data == null)
+                continue;
+
             int sl = item.starLevel;
             if (statType == "Str") { flat += item.data.GetFlatStr(sl); pct += item.data.GetPctStr(sl); }
             else if (statType == "Def") { flat += item.data.GetFlatDef(sl); pct += item.data.GetPctDef(sl); }
@@ -87,10 +150,10 @@ public class StatusUI : MonoBehaviour
             else if (statType == "BR") { flat += item.data.GetFlatBR(sl); }
         }
 
-        var syn = PlayerManager.Instance.GetCurrentSynergies();
+        Dictionary<ItemClass, int> syn = synergies ?? new Dictionary<ItemClass, int>();
 
         float[] loneWolfAmps = { 0f, 0.05f, 0.10f, 0.20f, 0.40f, 0.75f, 1.30f, 2.00f };
-        int rejectCount = Mathf.Clamp(PlayerManager.Instance.stats.rejectedSupporterCount, 0, 7);
+        int rejectCount = Mathf.Clamp(rejectedSupporterCount, 0, 7);
         pct += loneWolfAmps[rejectCount];
 
         if (statType == "Str" && syn.GetValueOrDefault(ItemClass.Saber) >= 2) pct += 0.15f;
