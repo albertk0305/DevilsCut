@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -90,8 +91,14 @@ public class SettingsUI : MonoBehaviour
 
         isReturningToMainMenu = true;
         DevLog.Log("[Settings] Returning to main menu.");
+        StartCoroutine(GoToMainMenuRoutine());
+    }
+
+    private IEnumerator GoToMainMenuRoutine()
+    {
         TimeScalePauseManager.ClearAllPauses();
         Time.timeScale = 1f;
+        yield return WebGLSaveSync.WaitForPendingSync();
         SceneLoader.LoadScene(mainMenuSceneName);
     }
 

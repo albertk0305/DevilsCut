@@ -665,7 +665,9 @@ public class SaveManager : MonoBehaviour
             }
         }
 
-        return NormalizeClearDataIndex(index);
+        bool rebuiltFromRecords = index == null;
+        index = NormalizeClearDataIndex(index);
+        return ReconcileClearDataIndex(index, rebuiltFromRecords);
     }
 
     private ClearDataIndex NormalizeClearDataIndex(ClearDataIndex index)
@@ -702,6 +704,210 @@ public class SaveManager : MonoBehaviour
         index.totalIssuedCount = Mathf.Max(index.totalIssuedCount, index.nextClearNumber - 1);
         index.totalClearCount = index.totalIssuedCount;
         return index;
+    }
+
+    private ClearDataIndex ReconcileClearDataIndex(ClearDataIndex index, bool rebuiltFromRecords)
+    {
+        bool changed = false;
+        int removedMissingCount = 0;
+        int removedDuplicateCount = 0;
+        int recoveredOrphanCount = 0;
+        int refreshedSummaryCount = 0;
+        int skippedCorruptCount = 0;
+        List<ClearRecordSummary> reconciledRecords = new List<ClearRecordSummary>();
+        HashSet<string> knownClearIds = new HashSet<string>();
+
+        foreach (ClearRecordSummary summary in index.records ?? new List<ClearRecordSummary>())
+        {
+            if (summary == null || string.IsNullOrEmpty(summary.clearId) || !TryParseClearNumber(summary.clearId, out int clearNumber))
+            {
+                changed = true;
+                removedMissingCount++;
+                continue;
+            }
+
+            if (knownClearIds.Contains(summary.clearId))
+            {
+                changed = true;
+                removedDuplicateCount++;
+                continue;
+            }
+
+            string recordPath = GetGameClearRecordPath(clearNumber);
+            if (!File.Exists(recordPath))
+            {
+                changed = true;
+                removedMissingCount++;
+                continue;
+            }
+
+            if (!TryLoadGameClearRecordFromPath(recordPath, out GameClearRecordData record))
+            {
+                changed = true;
+                skippedCorruptCount++;
+                continue;
+            }
+
+            ClearRecordSummary refreshedSummary = BuildClearRecordSummary(record, record.playerGrowth);
+            if (!AreClearRecordSummariesEqual(summary, refreshedSummary))
+            {
+                changed = true;
+                refreshedSummaryCount++;
+            }
+
+            reconciledRecords.Add(refreshedSummary);
+            knownClearIds.Add(refreshedSummary.clearId);
+        }
+
+        foreach (string recordPath in GetGameClearRecordFilePaths())
+        {
+            if (!TryLoadGameClearRecordFromPath(recordPath, out GameClearRecordData record))
+            {
+                skippedCorruptCount++;
+                continue;
+            }
+
+            if (knownClearIds.Contains(record.clearId))
+                continue;
+
+            reconciledRecords.Add(BuildClearRecordSummary(record, record.playerGrowth));
+            knownClearIds.Add(record.clearId);
+            recoveredOrphanCount++;
+            changed = true;
+        }
+
+        reconciledRecords.Sort((a, b) =>
+        {
+            int aNumber = a != null ? a.clearNumber : int.MaxValue;
+            int bNumber = b != null ? b.clearNumber : int.MaxValue;
+            return aNumber.CompareTo(bNumber);
+        });
+
+        if (!AreClearRecordSummaryListsEqual(index.records, reconciledRecords))
+            changed = true;
+
+        index.records = reconciledRecords;
+        index = NormalizeClearDataIndex(index);
+
+        if (changed)
+        {
+            DevLog.LogWarning(
+                $"[Save] Clear data index reconciled. rebuiltFromRecords={rebuiltFromRecords}, removedMissing={removedMissingCount}, removedDuplicate={removedDuplicateCount}, recoveredOrphan={recoveredOrphanCount}, refreshedSummary={refreshedSummaryCount}, skippedCorrupt={skippedCorruptCount}");
+
+            try
+            {
+                WriteClearDataIndex(index);
+            }
+            catch (Exception ex)
+            {
+                DevLog.LogWarning($"[Save] Failed to write reconciled clear data index: {ex.Message}");
+            }
+        }
+
+        return index;
+    }
+
+    private List<string> GetGameClearRecordFilePaths()
+    {
+        List<string> paths = new List<string>();
+        if (!Directory.Exists(ClearDataRecordsDirectoryPath))
+            return paths;
+
+        try
+        {
+            foreach (string path in Directory.GetFiles(ClearDataRecordsDirectoryPath, "clear_record_*.json"))
+            {
+                string fileName = Path.GetFileName(path);
+                if (!string.IsNullOrEmpty(fileName)
+                    && fileName.StartsWith("clear_record_")
+                    && Path.GetExtension(fileName) == ".json")
+                {
+                    paths.Add(path);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            DevLog.LogWarning($"[Save] Failed to scan clear record files: {ex.Message}");
+        }
+
+        return paths;
+    }
+
+    private bool TryLoadGameClearRecordFromPath(string path, out GameClearRecordData record)
+    {
+        record = null;
+        if (string.IsNullOrEmpty(path) || !File.Exists(path))
+            return false;
+
+        try
+        {
+            string json = File.ReadAllText(path);
+            record = JsonUtility.FromJson<GameClearRecordData>(json);
+            if (!IsValidGameClearRecord(record))
+            {
+                DevLog.LogWarning($"[Save] Invalid clear record skipped: {path}");
+                record = null;
+                return false;
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            DevLog.LogWarning($"[Save] Corrupt clear record skipped: {path}, {ex.Message}");
+            return false;
+        }
+    }
+
+    private bool IsValidGameClearRecord(GameClearRecordData record)
+    {
+        if (record == null || string.IsNullOrEmpty(record.clearId) || record.clearNumber <= 0)
+            return false;
+
+        if (!TryParseClearNumber(record.clearId, out int clearNumber))
+            return false;
+
+        return clearNumber == record.clearNumber;
+    }
+
+    private bool AreClearRecordSummaryListsEqual(List<ClearRecordSummary> left, List<ClearRecordSummary> right)
+    {
+        int leftCount = left != null ? left.Count : 0;
+        int rightCount = right != null ? right.Count : 0;
+        if (leftCount != rightCount)
+            return false;
+
+        for (int i = 0; i < leftCount; i++)
+        {
+            if (!AreClearRecordSummariesEqual(left[i], right[i]))
+                return false;
+        }
+
+        return true;
+    }
+
+    private bool AreClearRecordSummariesEqual(ClearRecordSummary left, ClearRecordSummary right)
+    {
+        if (left == null || right == null)
+            return left == right;
+
+        return left.clearNumber == right.clearNumber
+            && left.clearId == right.clearId
+            && left.clearedAt == right.clearedAt
+            && left.infiniteBattleBestFloor == right.infiniteBattleBestFloor
+            && left.level == right.level
+            && left.maxHp == right.maxHp
+            && left.currentHp == right.currentHp
+            && left.actionPoints == right.actionPoints
+            && left.strength == right.strength
+            && left.defense == right.defense
+            && left.speed == right.speed
+            && left.luck == right.luck
+            && left.currentGold == right.currentGold
+            && left.rejectedSupporterCount == right.rejectedSupporterCount
+            && left.ownedSupporterCount == right.ownedSupporterCount
+            && left.ownedItemCount == right.ownedItemCount;
     }
 
     private void WriteGameClearRecord(GameClearRecordData record)

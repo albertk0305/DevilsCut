@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -404,6 +405,11 @@ public class ClearDataSelectCanvasController : MonoBehaviour
         if (string.IsNullOrEmpty(selectedClearId) || isDeleting)
             return;
 
+        StartCoroutine(DeleteSelectedClearDataRoutine());
+    }
+
+    private IEnumerator DeleteSelectedClearDataRoutine()
+    {
         isDeleting = true;
         RefreshButtons();
 
@@ -413,6 +419,8 @@ public class ClearDataSelectCanvasController : MonoBehaviour
             DevLog.LogWarning($"[MainMenu] Clear data delete failed: clearId={deletingClearId}");
         else if (InfiniteBattleRunContext.ClearId == deletingClearId)
             InfiniteBattleRunContext.Clear();
+
+        yield return WebGLSaveSync.RequestAndWait("ClearData:DeleteRecord");
 
         isDeleting = false;
         HideConfirmation();

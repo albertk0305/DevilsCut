@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -122,6 +123,13 @@ public class InfiniteBattleResultUIController : MonoBehaviour
 
         isExiting = true;
         isShowingResult = false;
+        StartCoroutine(ExitToMainMenuRoutine());
+    }
+
+    private IEnumerator ExitToMainMenuRoutine()
+    {
+        yield return WebGLSaveSync.RequestAndWait("InfiniteBattle:ExitResult");
+
         InfiniteBattleRunContext.Clear();
         TimeScalePauseManager.ClearAllPauses();
         Time.timeScale = 1f;

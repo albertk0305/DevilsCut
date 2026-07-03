@@ -141,6 +141,7 @@ public class GameClearCanvasController : MonoBehaviour
 
         SaveManager.Instance.DeleteContinueSave();
         DevLog.Log($"[GameClear] Clear data saved and continue save deleted. clearId={clearId}");
+        yield return WebGLSaveSync.RequestAndWait("GameClear:SaveAndExit");
         yield return WaitAndLoadMainMenu();
     }
 
@@ -167,6 +168,7 @@ public class GameClearCanvasController : MonoBehaviour
 
         SaveManager.Instance.DeleteContinueSave();
         DevLog.Log($"[GameClear] Clear data discarded and continue save deleted. clearId={clearId}");
+        yield return WebGLSaveSync.RequestAndWait("GameClear:DiscardAndExit");
         yield return WaitAndLoadMainMenu();
     }
 

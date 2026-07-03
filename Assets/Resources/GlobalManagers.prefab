@@ -279,9 +279,11 @@ MonoBehaviour:
   savedRemainingMidBosses: []
   savedLastVisitedNodeImage: {fileID: 0}
   savedLastVisitedFacility: {fileID: 0}
-  savedFacilityRanks: []
+  savedFacilityRanks:
+  - facilityID: bar
+    rank: 3
   clearedHiddenBossIDs: []
-  debugFacilityID: bar
+  debugFacilityID: 
   debugFacilityRank: 3
 --- !u!114 &4950642224689884447
 MonoBehaviour:

@@ -261,6 +261,7 @@ public class CombatDefeatUIController : MonoBehaviour
         yield return TypeMessageRoutine(BuildMessage(currentMessageKind));
 
         yield return new WaitForSecondsRealtime(1.0f);
+        yield return WebGLSaveSync.RequestAndWait("CombatDefeat:GiveUpAndExit");
 
         Time.timeScale = 1f;
         SceneLoader.LoadScene(mainMenuSceneName);

@@ -119,12 +119,16 @@ public static class SafeArea16x9SelectedCanvasTool
 
         foreach (Transform child in childrenToMove)
         {
-            Undo.RecordObject(child, "Move UI Under SafeArea16x9Root");
+            RectTransformSnapshot snapshot = RectTransformSnapshot.Capture(child);
             Undo.SetTransformParent(child, safeAreaTransform, "Move UI Under SafeArea16x9Root");
-            child.SetParent(safeAreaTransform, false);
+            snapshot.Restore(child);
+            child.localScale = Vector3.one;
+            EditorUtility.SetDirty(child);
             movedObjects.Add(GetHierarchyPath(child));
         }
 
+        safeAreaTransform.localScale = Vector3.one;
+        EditorUtility.SetDirty(safeAreaTransform);
         EditorUtility.SetDirty(canvas.gameObject);
         EditorSceneManager.MarkSceneDirty(canvas.gameObject.scene);
         Undo.CollapseUndoOperations(undoGroup);
@@ -223,6 +227,185 @@ public static class SafeArea16x9SelectedCanvasTool
         {
             return "<null>";
         }
+
+        Stack<string> names = new Stack<string>();
+        Transform current = transform;
+        while (current != null)
+        {
+            names.Push(current.name);
+            current = current.parent;
+        }
+
+        return string.Join("/", names);
+    }
+
+    private struct RectTransformSnapshot
+    {
+        private readonly bool isRectTransform;
+        private readonly Vector3 localPosition;
+        private readonly Quaternion localRotation;
+        private readonly Vector2 anchorMin;
+        private readonly Vector2 anchorMax;
+        private readonly Vector2 anchoredPosition;
+        private readonly Vector2 sizeDelta;
+        private readonly Vector2 pivot;
+
+        private RectTransformSnapshot(Transform transform)
+        {
+            RectTransform rectTransform = transform as RectTransform;
+            isRectTransform = rectTransform != null;
+            localPosition = transform.localPosition;
+            localRotation = transform.localRotation;
+
+            if (rectTransform != null)
+            {
+                anchorMin = rectTransform.anchorMin;
+                anchorMax = rectTransform.anchorMax;
+                anchoredPosition = rectTransform.anchoredPosition;
+                sizeDelta = rectTransform.sizeDelta;
+                pivot = rectTransform.pivot;
+            }
+            else
+            {
+                anchorMin = Vector2.zero;
+                anchorMax = Vector2.zero;
+                anchoredPosition = Vector2.zero;
+                sizeDelta = Vector2.zero;
+                pivot = Vector2.zero;
+            }
+        }
+
+        public static RectTransformSnapshot Capture(Transform transform)
+        {
+            return new RectTransformSnapshot(transform);
+        }
+
+        public void Restore(Transform transform)
+        {
+            Undo.RecordObject(transform, "Restore UI Transform After SafeArea Reparent");
+
+            if (isRectTransform && transform is RectTransform rectTransform)
+            {
+                rectTransform.anchorMin = anchorMin;
+                rectTransform.anchorMax = anchorMax;
+                rectTransform.anchoredPosition = anchoredPosition;
+                rectTransform.sizeDelta = sizeDelta;
+                rectTransform.pivot = pivot;
+            }
+            else
+            {
+                transform.localPosition = localPosition;
+            }
+
+            transform.localRotation = localRotation;
+        }
+    }
+}
+
+public static class SafeArea16x9ScaleRepairTool
+{
+    private const string MenuPath = "Tools/DevilsCut/UI/Repair Selected SafeArea Zero Scale";
+
+    [MenuItem(MenuPath)]
+    public static void RepairSelectedZeroScale()
+    {
+        GameObject[] selectedObjects = Selection.gameObjects;
+        if (selectedObjects == null || selectedObjects.Length == 0)
+        {
+            Debug.LogWarning("[SafeArea16x9 Repair] 선택된 GameObject가 없습니다. FacilityLevelBonusCanvas 또는 SafeArea16x9Root를 선택한 뒤 다시 실행하세요.");
+            return;
+        }
+
+        Undo.IncrementCurrentGroup();
+        int undoGroup = Undo.GetCurrentGroup();
+        Undo.SetCurrentGroupName("Repair Selected SafeArea Zero Scale");
+
+        List<string> repairedObjects = new List<string>();
+        HashSet<Transform> visitedTransforms = new HashSet<Transform>();
+
+        foreach (GameObject selectedObject in selectedObjects)
+        {
+            if (selectedObject == null)
+                continue;
+
+            if (EditorUtility.IsPersistent(selectedObject))
+            {
+                Debug.LogWarning($"[SafeArea16x9 Repair] '{selectedObject.name}'은 Project asset이므로 건너뜁니다. 씬 Hierarchy의 오브젝트를 선택하세요.");
+                continue;
+            }
+
+            RepairRecursive(selectedObject.transform, visitedTransforms, repairedObjects);
+            EditorSceneManager.MarkSceneDirty(selectedObject.scene);
+        }
+
+        Undo.CollapseUndoOperations(undoGroup);
+        LogRepairResult(repairedObjects);
+    }
+
+    [MenuItem(MenuPath, true)]
+    private static bool ValidateRepairSelectedZeroScale()
+    {
+        GameObject[] selectedObjects = Selection.gameObjects;
+        if (selectedObjects == null || selectedObjects.Length == 0)
+            return false;
+
+        foreach (GameObject selectedObject in selectedObjects)
+        {
+            if (selectedObject != null && !EditorUtility.IsPersistent(selectedObject))
+                return true;
+        }
+
+        return false;
+    }
+
+    private static void RepairRecursive(Transform transform, HashSet<Transform> visitedTransforms, List<string> repairedObjects)
+    {
+        if (transform == null || !visitedTransforms.Add(transform))
+            return;
+
+        if (HasZeroScaleAxis(transform.localScale))
+        {
+            Undo.RecordObject(transform, "Repair SafeArea Zero Scale");
+            transform.localScale = Vector3.one;
+            EditorUtility.SetDirty(transform);
+            repairedObjects.Add(GetHierarchyPath(transform));
+        }
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            RepairRecursive(transform.GetChild(i), visitedTransforms, repairedObjects);
+        }
+    }
+
+    private static bool HasZeroScaleAxis(Vector3 scale)
+    {
+        return Mathf.Approximately(scale.x, 0f) || Mathf.Approximately(scale.y, 0f) || Mathf.Approximately(scale.z, 0f);
+    }
+
+    private static void LogRepairResult(List<string> repairedObjects)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.AppendLine($"[SafeArea16x9 Repair] zero scale 복구 완료: {repairedObjects.Count}개");
+
+        if (repairedObjects.Count == 0)
+        {
+            builder.AppendLine("- 복구할 zero scale 오브젝트가 없습니다.");
+        }
+        else
+        {
+            foreach (string path in repairedObjects)
+            {
+                builder.AppendLine($"- {path}");
+            }
+        }
+
+        Debug.Log(builder.ToString());
+    }
+
+    private static string GetHierarchyPath(Transform transform)
+    {
+        if (transform == null)
+            return "<null>";
 
         Stack<string> names = new Stack<string>();
         Transform current = transform;

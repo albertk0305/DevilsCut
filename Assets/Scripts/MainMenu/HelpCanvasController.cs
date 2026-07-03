@@ -23,6 +23,7 @@ public class HelpCanvasController : MonoBehaviour
     [SerializeField] private TMP_Text bodyText;
     [SerializeField] private ScrollRect bodyScrollRect;
     [SerializeField] private Scrollbar bodyScrollbar;
+    [SerializeField] private float bodyTextVerticalPadding = 24f;
     [SerializeField] private List<HelpTopic> topics = new List<HelpTopic>();
     [SerializeField] private int topicsPerPage = 4;
 
@@ -102,6 +103,7 @@ public class HelpCanvasController : MonoBehaviour
             if (bodyText != null)
                 bodyText.text = "";
 
+            RefreshBodyTextLayout();
             ResetBodyScrollToTop();
             RefreshTopicButtonVisuals();
             return;
@@ -114,6 +116,7 @@ public class HelpCanvasController : MonoBehaviour
             bodyText.text = GetLocalizedText(topic != null ? topic.bodyTextKey : "");
 
         RefreshTopicButtonVisuals();
+        RefreshBodyTextLayout();
         ResetBodyScrollToTop();
     }
 
@@ -126,6 +129,8 @@ public class HelpCanvasController : MonoBehaviour
             HelpTopic topic = topics[selectedTopicIndex];
             if (bodyText != null)
                 bodyText.text = GetLocalizedText(topic != null ? topic.bodyTextKey : "");
+
+            RefreshBodyTextLayout();
         }
     }
 
@@ -212,6 +217,7 @@ public class HelpCanvasController : MonoBehaviour
 
     private void ResetBodyScrollToTop()
     {
+        RefreshBodyTextLayout();
         Canvas.ForceUpdateCanvases();
 
         if (bodyScrollRect != null)
@@ -229,6 +235,7 @@ public class HelpCanvasController : MonoBehaviour
     private IEnumerator ResetBodyScrollToTopNextFrame()
     {
         yield return null;
+        RefreshBodyTextLayout();
         Canvas.ForceUpdateCanvases();
 
         if (bodyScrollRect != null)
@@ -238,6 +245,59 @@ public class HelpCanvasController : MonoBehaviour
             bodyScrollbar.value = 1f;
 
         resetScrollRoutine = null;
+    }
+
+    private void RefreshBodyTextLayout()
+    {
+        if (bodyText == null)
+            return;
+
+        RectTransform contentTransform = bodyText.rectTransform;
+        if (contentTransform == null)
+            return;
+
+        RectTransform viewportTransform = bodyScrollRect != null && bodyScrollRect.viewport != null
+            ? bodyScrollRect.viewport
+            : contentTransform.parent as RectTransform;
+
+        if (viewportTransform == null)
+            return;
+
+        Canvas.ForceUpdateCanvases();
+
+        contentTransform.anchorMin = new Vector2(0f, 1f);
+        contentTransform.anchorMax = new Vector2(1f, 1f);
+        contentTransform.pivot = new Vector2(0f, 1f);
+        contentTransform.anchoredPosition = Vector2.zero;
+        contentTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, viewportTransform.rect.width);
+
+        bodyText.ForceMeshUpdate();
+
+        float viewportHeight = Mathf.Max(0f, viewportTransform.rect.height);
+        float contentWidth = Mathf.Max(0f, contentTransform.rect.width);
+        float preferredHeight = bodyText.GetPreferredValues(bodyText.text, contentWidth, 0f).y;
+        float contentHeight = Mathf.Max(viewportHeight, preferredHeight + Mathf.Max(0f, bodyTextVerticalPadding));
+
+        contentTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, contentHeight);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(contentTransform);
+
+        if (bodyScrollRect != null)
+        {
+            bodyScrollRect.content = contentTransform;
+            if (bodyScrollRect.viewport == null)
+                bodyScrollRect.viewport = viewportTransform;
+
+            bodyScrollRect.horizontal = false;
+            bodyScrollRect.vertical = true;
+            bodyScrollRect.movementType = ScrollRect.MovementType.Clamped;
+            if (bodyScrollRect.scrollSensitivity <= 0f)
+                bodyScrollRect.scrollSensitivity = 20f;
+
+            bodyScrollRect.verticalNormalizedPosition = 1f;
+        }
+
+        if (bodyScrollbar != null)
+            bodyScrollbar.value = 1f;
     }
 
     private string GetLocalizedText(string key)
@@ -255,7 +315,10 @@ public class HelpCanvasController : MonoBehaviour
     private void OnLanguageChanged()
     {
         if (Root.activeInHierarchy)
+        {
             RefreshAll();
+            ResetBodyScrollToTop();
+        }
     }
 
     private void ResolveReferences()

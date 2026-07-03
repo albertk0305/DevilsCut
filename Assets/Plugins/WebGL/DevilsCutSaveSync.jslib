@@ -24,6 +24,7 @@
           Module.DevilsCutSaveSyncInProgress = false;
 
           if (error) {
+            Module.DevilsCutSaveSyncFailureCount = (Module.DevilsCutSaveSyncFailureCount || 0) + 1;
             console.error("[Save][WebGL] FS.syncfs failed.", error);
           }
 
@@ -37,9 +38,34 @@
     } catch (error) {
       if (typeof Module !== "undefined") {
         Module.DevilsCutSaveSyncInProgress = false;
+        Module.DevilsCutSaveSyncFailureCount = (Module.DevilsCutSaveSyncFailureCount || 0) + 1;
       }
 
       console.error("[Save][WebGL] FS.syncfs request threw an exception.", error);
     }
+  },
+
+  DevilsCut_IsFileSystemSyncInProgress: function () {
+    if (typeof Module === "undefined") {
+      return 0;
+    }
+
+    return Module.DevilsCutSaveSyncInProgress ? 1 : 0;
+  },
+
+  DevilsCut_HasPendingFileSystemSync: function () {
+    if (typeof Module === "undefined") {
+      return 0;
+    }
+
+    return Module.DevilsCutSaveSyncPending ? 1 : 0;
+  },
+
+  DevilsCut_GetFileSystemSyncFailureCount: function () {
+    if (typeof Module === "undefined") {
+      return 0;
+    }
+
+    return Module.DevilsCutSaveSyncFailureCount || 0;
   }
 });
