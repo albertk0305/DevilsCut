@@ -796,6 +796,8 @@ public class SaveManager : MonoBehaviour
 
         if (File.Exists(tempPath))
             File.Delete(tempPath);
+
+        RequestWebGLSaveSync(savePath);
     }
 
     private bool TryLoadFromPath(string path, out ContinueSaveData data)
@@ -1394,6 +1396,14 @@ public class SaveManager : MonoBehaviour
     private void DeleteFileIfExists(string path)
     {
         if (File.Exists(path))
+        {
             File.Delete(path);
+            RequestWebGLSaveSync(path);
+        }
+    }
+
+    private void RequestWebGLSaveSync(string reason)
+    {
+        WebGLSaveSync.RequestSync(reason);
     }
 }

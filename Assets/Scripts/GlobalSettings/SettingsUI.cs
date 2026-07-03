@@ -99,6 +99,7 @@ public class SettingsUI : MonoBehaviour
     {
         PlayerPrefs.SetInt("FastCombat", isOn ? 1 : 0);
         PlayerPrefs.Save();
+        WebGLSaveSync.RequestSync("PlayerPrefs:FastCombat");
 
         if (CombatManager.Instance != null)
         {

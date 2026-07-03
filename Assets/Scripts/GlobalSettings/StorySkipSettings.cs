@@ -22,6 +22,7 @@ public static class StorySkipSettings
 
         PlayerPrefs.SetInt(PlayerPrefsKey, enabled ? 1 : 0);
         PlayerPrefs.Save();
+        WebGLSaveSync.RequestSync("PlayerPrefs:StorySkip");
 
         OnStorySkipChanged?.Invoke(enabled);
     }

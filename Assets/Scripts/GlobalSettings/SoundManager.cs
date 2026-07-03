@@ -61,6 +61,7 @@ public class SoundManager : MonoBehaviour
 
         PlayerPrefs.SetFloat(MasterVolumeKey, masterVolume);
         PlayerPrefs.Save();
+        WebGLSaveSync.RequestSync("PlayerPrefs:MasterVolume");
 
         ApplyVolumeToBgm();
     }
@@ -72,6 +73,7 @@ public class SoundManager : MonoBehaviour
 
         PlayerPrefs.SetFloat(MusicVolumeKey, musicVolume);
         PlayerPrefs.Save();
+        WebGLSaveSync.RequestSync("PlayerPrefs:MusicVolume");
 
         ApplyVolumeToBgm();
     }
@@ -83,6 +85,7 @@ public class SoundManager : MonoBehaviour
 
         PlayerPrefs.SetFloat(SfxVolumeKey, sfxVolume);
         PlayerPrefs.Save();
+        WebGLSaveSync.RequestSync("PlayerPrefs:SfxVolume");
     }
 
     public void PlayBGM(AudioClip clip)

@@ -77,6 +77,7 @@ public class LocalizationManager : MonoBehaviour
         currentLanguage = Language.Korean;
         PlayerPrefs.SetInt("SelectedLanguage", 0); // 0을 저장
         PlayerPrefs.Save(); // 물리적 저장 장치에 기록
+        WebGLSaveSync.RequestSync("PlayerPrefs:SelectedLanguage");
         OnLanguageChanged?.Invoke();
     }
 
@@ -85,6 +86,7 @@ public class LocalizationManager : MonoBehaviour
         currentLanguage = Language.English;
         PlayerPrefs.SetInt("SelectedLanguage", 1); // 1을 저장
         PlayerPrefs.Save();
+        WebGLSaveSync.RequestSync("PlayerPrefs:SelectedLanguage");
         OnLanguageChanged?.Invoke();
     }
 
