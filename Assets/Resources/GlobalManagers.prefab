@@ -98,18 +98,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
   stats:
-    level: 10
+    level: 100
     maxExp: 100
     currentExp: 0
-    maxHp: 100000
-    currentHp: 100000
-    ActionPoints: 200
-    breakResistance: 200
+    maxHp: 10
+    currentHp: 10
+    ActionPoints: 100
+    breakResistance: 100
     maxBreakGauge: 100
-    strength: 100000
-    defense: 20
-    speed: 200
-    luck: 20
+    strength: 10000
+    defense: 100
+    speed: 100
+    luck: 100
     currentGold: 100000
     rejectedSupporterCount: 0
     finalDamageAmp: 0

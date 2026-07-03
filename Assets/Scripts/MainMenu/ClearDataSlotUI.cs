@@ -82,7 +82,7 @@ public class ClearDataSlotUI : MonoBehaviour
             clearNumberText.text = summary.clearNumber.ToString();
 
         if (floorRecordText != null)
-            floorRecordText.text = "0";
+            floorRecordText.text = Mathf.Max(0, summary.infiniteBattleBestFloor).ToString();
 
         if (partyButton != null)
             partyButton.interactable = true;

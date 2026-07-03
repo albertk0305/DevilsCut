@@ -55,6 +55,7 @@ public class ClearRecordSummary
     public int clearNumber;
     public string clearId;
     public string clearedAt;
+    public int infiniteBattleBestFloor;
     public int level;
     public int maxHp;
     public int currentHp;
@@ -76,6 +77,7 @@ public class GameClearRecordData
     public int clearNumber;
     public string clearId;
     public string clearedAt;
+    public int infiniteBattleBestFloor;
     public PlayerGrowthSaveData playerGrowth;
 }
 

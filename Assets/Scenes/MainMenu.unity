@@ -884,6 +884,7 @@ MonoBehaviour:
   itemDatabase: {fileID: 11400000, guid: 73acb4d637906a84d9d2d487f62f2f25, type: 2}
   supporterDatabase: {fileID: 11400000, guid: 51dd2413502c8f641a2cacd0d2de3478, type: 2}
   karinItemDatabase: {fileID: 11400000, guid: fc4d3901e7bcedc4a8bc24b4e3cf490a, type: 2}
+  infiniteBattleConfig: {fileID: 11400000, guid: 450dffcd04c701c4193a06dc27d4a927, type: 2}
 --- !u!1 &144771339
 GameObject:
   m_ObjectHideFlags: 0
@@ -22301,9 +22302,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 346539234406219768, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279677854004477832, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4050414901425619930, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
       propertyPath: m_Name
       value: SettingsPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4050414901425619930, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859958858999640849, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886312417213903449, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6220075386489131238, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
       propertyPath: m_Pivot.x
@@ -22383,6 +22404,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6220075386489131238, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931720874739012510, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386983778132090787, guid: 6741c35923cf9ff48878887b1a98a00f, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

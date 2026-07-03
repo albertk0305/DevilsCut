@@ -439,6 +439,50 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    public bool UpdateInfiniteBattleBestFloor(string clearId, int clearedFloorCount)
+    {
+        if (string.IsNullOrEmpty(clearId))
+            return false;
+
+        int normalizedFloor = Mathf.Max(0, clearedFloorCount);
+        GameClearRecordData record = LoadGameClearRecord(clearId);
+        if (record == null)
+            return false;
+
+        int bestFloor = Mathf.Max(record.infiniteBattleBestFloor, normalizedFloor);
+        bool shouldWriteRecord = bestFloor > record.infiniteBattleBestFloor;
+
+        record.infiniteBattleBestFloor = bestFloor;
+
+        try
+        {
+            if (shouldWriteRecord)
+                WriteGameClearRecord(record);
+
+            ClearDataIndex index = LoadClearDataIndex();
+            if (index.records != null)
+            {
+                foreach (ClearRecordSummary summary in index.records)
+                {
+                    if (summary != null && summary.clearId == clearId)
+                    {
+                        summary.infiniteBattleBestFloor = Mathf.Max(summary.infiniteBattleBestFloor, bestFloor);
+                        break;
+                    }
+                }
+            }
+
+            WriteClearDataIndex(index);
+            DevLog.Log($"[InfiniteBattle] Best floor updated. clearId={clearId}, bestFloor={bestFloor}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            DevLog.LogWarning($"[InfiniteBattle] Best floor update failed. clearId={clearId}, {ex.Message}");
+            return false;
+        }
+    }
+
     public bool DeleteGameClearRecord(string clearId)
     {
         if (string.IsNullOrEmpty(clearId))
@@ -688,6 +732,7 @@ public class SaveManager : MonoBehaviour
             clearNumber = record.clearNumber,
             clearId = record.clearId,
             clearedAt = record.clearedAt,
+            infiniteBattleBestFloor = record.infiniteBattleBestFloor,
             level = playerGrowth != null ? playerGrowth.level : 0,
             maxHp = playerGrowth != null ? playerGrowth.maxHp : 0,
             currentHp = playerGrowth != null ? playerGrowth.currentHp : 0,

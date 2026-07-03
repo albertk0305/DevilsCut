@@ -22,12 +22,14 @@ public class ClearDataSelectCanvasController : MonoBehaviour
     [SerializeField] private ItemDatabase itemDatabase;
     [SerializeField] private SupporterDatabase supporterDatabase;
     [SerializeField] private KarinItemDatabase karinItemDatabase;
+    [SerializeField] private InfiniteBattleConfig infiniteBattleConfig;
 
     private readonly List<ClearRecordSummary> records = new List<ClearRecordSummary>();
     private int pageIndex;
     private string selectedClearId;
     private int selectedClearNumber;
     private bool isDeleting;
+    private bool isStartingInfiniteBattle;
 
     private void Awake()
     {
@@ -100,6 +102,7 @@ public class ClearDataSelectCanvasController : MonoBehaviour
 
     public void Show()
     {
+        isStartingInfiniteBattle = false;
         InfiniteBattleRunContext.Clear();
         Root.SetActive(true);
         pageIndex = 0;
@@ -110,7 +113,9 @@ public class ClearDataSelectCanvasController : MonoBehaviour
 
     public void Hide()
     {
-        InfiniteBattleRunContext.Clear();
+        if (!isStartingInfiniteBattle)
+            InfiniteBattleRunContext.Clear();
+
         HideConfirmation();
         ClearSelection();
         RefreshSlots();
@@ -311,7 +316,7 @@ public class ClearDataSelectCanvasController : MonoBehaviour
 
     private void OnStartClicked()
     {
-        if (string.IsNullOrEmpty(selectedClearId) || isDeleting)
+        if (string.IsNullOrEmpty(selectedClearId) || isDeleting || isStartingInfiniteBattle)
             return;
 
         if (SaveManager.Instance == null)
@@ -350,11 +355,39 @@ public class ClearDataSelectCanvasController : MonoBehaviour
             resolvedSupporterDatabase,
             resolvedKarinItemDatabase);
 
-        InfiniteBattleRunContext.Prepare(record, profile);
+        InfiniteBattleConfig config = ResolveInfiniteBattleConfig();
+        if (config == null)
+        {
+            profile.Dispose();
+            DevLog.LogWarning("[MainMenu] Infinite Battle start failed: config missing.");
+            return;
+        }
+
+        config.WarnIfIncomplete();
+        InfiniteBattleRunContext.Prepare(record, profile, config);
 
         string activeSupporterId = GetActiveSupporterId(record);
         string equippedKarinItemId = record.playerGrowth != null ? record.playerGrowth.equippedKarinItemID : "";
         DevLog.Log($"[MainMenu] Infinite Battle context prepared: clearId={record.clearId}, clearNumber={record.clearNumber}, activeSupporter={FormatLogValue(activeSupporterId)}, equippedKarinItem={FormatLogValue(equippedKarinItemId)}");
+
+        if (!InfiniteBattlePlayerApplier.ApplyForNewRun(record, out int effectiveMaxHp))
+        {
+            InfiniteBattleRunContext.Clear();
+            DevLog.LogWarning("[MainMenu] Infinite Battle start failed: player apply failed.");
+            return;
+        }
+
+        InfiniteBattleRunContext.StartRunWithFullHeal(effectiveMaxHp);
+
+        if (!InfiniteBattleEncounterBuilder.PrepareCurrentFloorEncounter())
+        {
+            InfiniteBattleRunContext.Clear();
+            DevLog.LogWarning("[MainMenu] Infinite Battle start failed: encounter prepare failed.");
+            return;
+        }
+
+        isStartingInfiniteBattle = true;
+        SceneLoader.LoadScene(config.BattleSceneName);
     }
 
     private void OnDeleteClicked()
@@ -444,6 +477,20 @@ public class ClearDataSelectCanvasController : MonoBehaviour
             return karinItemDatabase;
 
         return SaveManager.Instance != null ? SaveManager.Instance.karinItemDatabase : null;
+    }
+
+    private InfiniteBattleConfig ResolveInfiniteBattleConfig()
+    {
+        if (infiniteBattleConfig != null)
+            return infiniteBattleConfig;
+
+        infiniteBattleConfig = Resources.Load<InfiniteBattleConfig>("InfiniteBattleConfig");
+        if (infiniteBattleConfig != null)
+            return infiniteBattleConfig;
+
+        BossDatabase bossDatabase = SaveManager.Instance != null ? SaveManager.Instance.bossDatabase : null;
+        infiniteBattleConfig = InfiniteBattleConfig.CreateRuntimeFallback(bossDatabase);
+        return infiniteBattleConfig;
     }
 
     private string GetActiveSupporterId(GameClearRecordData record)

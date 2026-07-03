@@ -56,6 +56,7 @@ public class CombatManager : MonoBehaviour
 
     [SerializeField] private CombatDefeatUIController defeatUIController;
     [SerializeField] private CombatVictoryUIController victoryUIController;
+    [SerializeField] private InfiniteBattleResultUIController infiniteBattleResultUI;
 
     private PlayerStats currentPlayerStats;
     public PlayerStats GetCurrentPlayerStats() => currentPlayerStats;
@@ -1837,6 +1838,12 @@ public class CombatManager : MonoBehaviour
 
         PlayerManager playerManager = PlayerManager.Instance;
 
+        if (InfiniteBattleRunContext.IsRunPrepared)
+        {
+            HandleInfiniteBattleEnd(isWin);
+            return;
+        }
+
         if (isWin)
         {
             VictoryRewardGrantResult rewardResult = null;
@@ -1885,6 +1892,155 @@ public class CombatManager : MonoBehaviour
         }
 
         ShowDefeatUI();
+    }
+
+    private void HandleInfiniteBattleEnd(bool isWin)
+    {
+        PlayerManager playerManager = PlayerManager.Instance;
+
+        if (playerManager != null && currentPlayerStats != null)
+            playerManager.stats.currentHp = Mathf.Max(0, currentPlayerStats.currentHp);
+
+        if (isWin)
+        {
+            if (currentPlayerStats == null || currentPlayerStats.currentHp <= 0)
+            {
+                ShowInfiniteBattleResult();
+                return;
+            }
+
+            InfiniteBattleRunContext.SetCurrentHpAfterBattle(currentPlayerStats.currentHp);
+            InfiniteBattleRunContext.MarkCurrentFloorCleared();
+            InfiniteBattleRunContext.AdvanceToNextFloor();
+            InfiniteBattlePlayerApplier.ApplyCurrentHp(InfiniteBattleRunContext.CurrentPlayerHp);
+
+            if (!InfiniteBattleEncounterBuilder.PrepareCurrentFloorEncounter())
+            {
+                DevLog.LogWarning("[InfiniteBattle] Next floor prepare failed. Showing result.");
+                ShowInfiniteBattleResult();
+                return;
+            }
+
+            Time.timeScale = 1f;
+            SceneLoader.LoadScene(InfiniteBattleRunContext.Config.BattleSceneName);
+            return;
+        }
+
+        ShowInfiniteBattleResult();
+    }
+
+    private void ShowInfiniteBattleResult()
+    {
+        int currentRecord = InfiniteBattleRunContext.ClearedFloorCount;
+        int previousBest = InfiniteBattleRunContext.BestFloorBeforeRun;
+        bool hasDirectReference = infiniteBattleResultUI != null;
+
+        DevLog.Log($"[InfiniteBattle] ShowInfiniteBattleResult entered. directReferenceNull={!hasDirectReference}");
+        if (hasDirectReference)
+        {
+            GameObject directObject = infiniteBattleResultUI.gameObject;
+            DevLog.Log($"[InfiniteBattle] Direct result UI reference: name={directObject.name}, activeSelf={directObject.activeSelf}, activeInHierarchy={directObject.activeInHierarchy}");
+        }
+
+        if (SaveManager.Instance != null)
+            SaveManager.Instance.UpdateInfiniteBattleBestFloor(InfiniteBattleRunContext.ClearId, currentRecord);
+
+        Time.timeScale = 0f;
+
+        InfiniteBattleResultUIController resultUI = ResolveInfiniteBattleResultUI(out bool usedDirectReference, out bool usedFallback, out string resolveSource);
+        DevLog.Log($"[InfiniteBattle] Result UI display requested. currentRecord={currentRecord}, previousBest={previousBest}, usedDirectReference={usedDirectReference}, usedFallback={usedFallback}, resolveSource={resolveSource}");
+        if (resultUI != null)
+        {
+            if (resultUI.ShowResult(currentRecord, previousBest))
+                return;
+
+            DevLog.LogWarning("[InfiniteBattle] Result UI ShowResult returned false. Returning to MainMenu.");
+        }
+
+        DevLog.LogWarning("[InfiniteBattle] Result UI missing. Returning to MainMenu.");
+        InfiniteBattleRunContext.Clear();
+        Time.timeScale = 1f;
+        SceneLoader.LoadScene("MainMenu");
+    }
+
+    private InfiniteBattleResultUIController ResolveInfiniteBattleResultUI(out bool usedDirectReference, out bool usedFallback, out string resolveSource)
+    {
+        usedDirectReference = false;
+        usedFallback = false;
+        resolveSource = "none";
+
+        if (infiniteBattleResultUI != null)
+        {
+            usedDirectReference = true;
+            resolveSource = "inspector";
+            return infiniteBattleResultUI;
+        }
+
+        usedFallback = true;
+        DevLog.LogWarning("[InfiniteBattle] CombatManager infiniteBattleResultUI is not assigned. Trying scene-local fallback search.");
+        infiniteBattleResultUI = ResolveInfiniteBattleResultUIInOwnScene();
+        if (infiniteBattleResultUI != null)
+        {
+            resolveSource = "combatManagerScene";
+            return infiniteBattleResultUI;
+        }
+
+        DevLog.LogWarning("[InfiniteBattle] Scene-local result UI fallback failed. Trying global inactive fallback search.");
+        infiniteBattleResultUI = InfiniteBattleResultUIController.GetOrCreate();
+        resolveSource = infiniteBattleResultUI != null ? "globalFallback" : "none";
+        return infiniteBattleResultUI;
+    }
+
+    private InfiniteBattleResultUIController ResolveInfiniteBattleResultUIInOwnScene()
+    {
+        UnityEngine.SceneManagement.Scene scene = gameObject.scene;
+        if (!scene.IsValid() || !scene.isLoaded)
+        {
+            DevLog.LogWarning("[InfiniteBattle] CombatManager scene is invalid or not loaded.");
+            return null;
+        }
+
+        GameObject[] rootObjects = scene.GetRootGameObjects();
+        foreach (GameObject rootObject in rootObjects)
+        {
+            if (rootObject == null)
+                continue;
+
+            InfiniteBattleResultUIController[] controllers = rootObject.GetComponentsInChildren<InfiniteBattleResultUIController>(true);
+            if (controllers != null && controllers.Length > 0)
+                return controllers[0];
+        }
+
+        foreach (GameObject rootObject in rootObjects)
+        {
+            GameObject canvas = FindChildGameObjectByName(rootObject, "InfiniteBattleCanvas");
+            if (canvas != null)
+            {
+                DevLog.LogWarning("[InfiniteBattle] InfiniteBattleCanvas found without InfiniteBattleResultUIController. Adding runtime controller.");
+                return canvas.AddComponent<InfiniteBattleResultUIController>();
+            }
+        }
+
+        return null;
+    }
+
+    private GameObject FindChildGameObjectByName(GameObject root, string objectName)
+    {
+        if (root == null || string.IsNullOrEmpty(objectName))
+            return null;
+
+        if (root.name == objectName)
+            return root;
+
+        Transform rootTransform = root.transform;
+        for (int i = 0; i < rootTransform.childCount; i++)
+        {
+            GameObject found = FindChildGameObjectByName(rootTransform.GetChild(i).gameObject, objectName);
+            if (found != null)
+                return found;
+        }
+
+        return null;
     }
     public void ResolveTurnEnd()
     {
