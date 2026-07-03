@@ -8055,7 +8055,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -65}
+  m_AnchoredPosition: {x: 0, y: -60}
   m_SizeDelta: {x: 1920, y: 950}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &734713284
@@ -8078,7 +8078,47 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: what i want to say
+  m_text: 'line1
+
+    2
+
+    3
+
+    4
+
+    5
+
+    6
+
+    7
+
+    8
+
+    9
+
+    10
+
+    11
+
+    12
+
+    13
+
+    14
+
+    15
+
+    16
+
+    17
+
+    18
+
+    19
+
+    20
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d24e63d45271de1409e59de13f1eec83, type: 2}
   m_sharedMaterial: {fileID: -6334644560201892364, guid: d24e63d45271de1409e59de13f1eec83, type: 2}
@@ -14016,7 +14056,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1303477749}
   m_OnClick:
     m_PersistentCalls:
@@ -18895,6 +18935,11 @@ MonoBehaviour:
   enabledTextAlpha: 1
   disabledTextAlpha: 0.4
   disableTextButtonTransition: 1
+  creditsButton: {fileID: 1303477748}
+  creditsCanvas: {fileID: 1834131228}
+  creditsExitButton: {fileID: 586594687}
+  creditText: {fileID: 734713284}
+  creditsTextKey: ui_credits_text
 --- !u!4 &1808452307
 Transform:
   m_ObjectHideFlags: 0
@@ -22101,7 +22146,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 2119110912}
   m_OnClick:
     m_PersistentCalls:

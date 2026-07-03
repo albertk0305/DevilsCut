@@ -41,15 +41,15 @@ public class SkillLogic_PaperMoon : SkillLogicBase
             // Path A rule.
             float costRatio = (skill.currentEvolution == SkillEvolution.PathA) ? 0.15f : 0.10f;
 
-            lastHpCost = Mathf.Max(1, Mathf.RoundToInt(pStats.currentHp * costRatio));
-            pStats.currentHp -= lastHpCost;
+            int calculatedCost = Mathf.Max(1, Mathf.RoundToInt(pStats.currentHp * costRatio));
+            lastHpCost = ApplyNonlethalHpCost(pStats, calculatedCost);
 
             DevLog.Log($"[페이퍼 문] 체력의 {costRatio * 100}%({lastHpCost})를 코스트로 지불했습니다.");
 
             BattleEventSystem.CallHpChanged(true, pStats.currentHp, pStats.maxHp);
 
             // HP cost/recovery rule.
-            if (CombatUIManager.Instance != null)
+            if (lastHpCost > 0 && CombatUIManager.Instance != null)
             {
                 CombatUIManager.Instance.SpawnDamageText($"-{lastHpCost}", false, true);
             }

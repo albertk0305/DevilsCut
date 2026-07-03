@@ -19,22 +19,45 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private float enabledTextAlpha = 1f;
     [SerializeField] private float disabledTextAlpha = 0.4f;
     [SerializeField] private bool disableTextButtonTransition = true;
+    [SerializeField] private Button creditsButton;
+    [SerializeField] private GameObject creditsCanvas;
+    [SerializeField] private Button creditsExitButton;
+    [SerializeField] private TextMeshProUGUI creditText;
+    [SerializeField] private string creditsTextKey = "ui_credits_text";
 
     private const string NewGameOverwriteMessage = "저장된 진행 상황이 있습니다.\n새 게임을 시작하면 기존 이어하기 데이터가 삭제됩니다.\n정말 새로 시작하시겠습니까?";
 
     void Start()
     {
+        ResolveCreditsReferences();
+        RegisterCreditsListeners();
+
         if (settingsPanel != null) settingsPanel.SetActive(false);
         if (confirmNewGamePanel != null) confirmNewGamePanel.SetActive(false);
         if (clearDataSelectCanvasController != null) clearDataSelectCanvasController.Hide();
+        if (creditsCanvas != null) creditsCanvas.SetActive(false);
         UpdateContinueButtonState();
         UpdateInfiniteBattleButtonState();
     }
 
     private void OnEnable()
     {
+        ResolveCreditsReferences();
+        RegisterCreditsListeners();
+        SubscribeLanguageChanged();
         UpdateContinueButtonState();
         UpdateInfiniteBattleButtonState();
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeLanguageChanged();
+    }
+
+    private void OnDestroy()
+    {
+        UnregisterCreditsListeners();
+        UnsubscribeLanguageChanged();
     }
 
     private void UpdateContinueButtonState()
@@ -165,7 +188,164 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickCredits()
     {
-        DevLog.Log("[MainMenu] Credits opened.");
+        ResolveCreditsReferences();
+        RefreshCreditText();
+
+        if (creditsCanvas != null)
+        {
+            creditsCanvas.SetActive(true);
+            DevLog.Log("[MainMenu] Credits opened.");
+            return;
+        }
+
+        DevLog.LogWarning("[MainMenu] CreditsCanvas is not assigned and could not be found.");
+    }
+
+    public void OnClickCreditsExit()
+    {
+        ResolveCreditsReferences();
+
+        if (creditsCanvas != null)
+            creditsCanvas.SetActive(false);
+    }
+
+    private void ResolveCreditsReferences()
+    {
+        if (creditsButton == null)
+            creditsButton = FindSceneComponentByName<Button>("CreditsButton");
+
+        if (creditsCanvas == null)
+            creditsCanvas = FindSceneGameObjectByName("CreditsCanvas");
+
+        GameObject searchRoot = creditsCanvas != null ? creditsCanvas : gameObject;
+
+        if (creditsExitButton == null)
+            creditsExitButton = FindChildComponentByName<Button>(searchRoot, "ExitButton");
+
+        if (creditText == null)
+            creditText = FindChildComponentByName<TextMeshProUGUI>(searchRoot, "CreditText");
+    }
+
+    private void RegisterCreditsListeners()
+    {
+        if (creditsButton != null)
+        {
+            creditsButton.onClick.RemoveListener(OnClickCredits);
+            creditsButton.onClick.AddListener(OnClickCredits);
+        }
+
+        if (creditsExitButton != null)
+        {
+            creditsExitButton.onClick.RemoveListener(OnClickCreditsExit);
+            creditsExitButton.onClick.AddListener(OnClickCreditsExit);
+        }
+    }
+
+    private void UnregisterCreditsListeners()
+    {
+        if (creditsButton != null)
+            creditsButton.onClick.RemoveListener(OnClickCredits);
+
+        if (creditsExitButton != null)
+            creditsExitButton.onClick.RemoveListener(OnClickCreditsExit);
+    }
+
+    private void RefreshCreditText()
+    {
+        if (creditText == null)
+            return;
+
+        LocalizedText localizedText = creditText.GetComponent<LocalizedText>();
+        if (localizedText != null)
+            localizedText.SetKey(creditsTextKey);
+        else if (LocalizationManager.Instance != null)
+            creditText.text = LocalizationManager.Instance.GetText(creditsTextKey);
+        else
+            creditText.text = creditsTextKey;
+
+        if (!string.IsNullOrEmpty(creditText.text))
+            creditText.text = creditText.text.Replace("\\n", "\n");
+    }
+
+    private void SubscribeLanguageChanged()
+    {
+        if (LocalizationManager.Instance == null)
+            return;
+
+        LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+        LocalizationManager.Instance.OnLanguageChanged += OnLanguageChanged;
+    }
+
+    private void UnsubscribeLanguageChanged()
+    {
+        if (LocalizationManager.Instance != null)
+            LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged()
+    {
+        if (creditsCanvas != null && creditsCanvas.activeInHierarchy)
+            RefreshCreditText();
+    }
+
+    private static T FindChildComponentByName<T>(GameObject root, string objectName) where T : Component
+    {
+        if (root == null || string.IsNullOrEmpty(objectName))
+            return null;
+
+        T[] components = root.GetComponentsInChildren<T>(true);
+        foreach (T component in components)
+        {
+            if (component != null && component.gameObject.name == objectName)
+                return component;
+        }
+
+        return null;
+    }
+
+    private static T FindSceneComponentByName<T>(string objectName) where T : Component
+    {
+        GameObject obj = FindSceneGameObjectByName(objectName);
+        return obj != null ? obj.GetComponent<T>() : null;
+    }
+
+    private static GameObject FindSceneGameObjectByName(string objectName)
+    {
+        if (string.IsNullOrEmpty(objectName))
+            return null;
+
+        Scene scene = SceneManager.GetActiveScene();
+        if (!scene.IsValid() || !scene.isLoaded)
+            return null;
+
+        GameObject[] roots = scene.GetRootGameObjects();
+        foreach (GameObject root in roots)
+        {
+            GameObject found = FindChildGameObjectByName(root, objectName);
+            if (found != null)
+                return found;
+        }
+
+        return null;
+    }
+
+    private static GameObject FindChildGameObjectByName(GameObject root, string objectName)
+    {
+        if (root == null || string.IsNullOrEmpty(objectName))
+            return null;
+
+        if (root.name == objectName)
+            return root;
+
+        Transform rootTransform = root.transform;
+        for (int i = 0; i < rootTransform.childCount; i++)
+        {
+            GameObject found = FindChildGameObjectByName(rootTransform.GetChild(i).gameObject, objectName);
+            if (found != null)
+                return found;
+        }
+
+        return null;
     }
 
     public void OnClickQuit()

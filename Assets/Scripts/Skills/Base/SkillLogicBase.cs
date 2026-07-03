@@ -61,6 +61,20 @@ public class SkillLogicBase : ScriptableObject
     {
     }
 
+    protected static int ApplyNonlethalHpCost(PlayerStats pStats, int calculatedCost)
+    {
+        if (pStats == null)
+            return 0;
+
+        int maxPayableHpCost = Mathf.Max(0, pStats.currentHp - 1);
+        int actualCost = Mathf.Clamp(calculatedCost, 0, maxPayableHpCost);
+
+        if (actualCost > 0)
+            pStats.currentHp = Mathf.Max(1, pStats.currentHp - actualCost);
+
+        return actualCost;
+    }
+
     public virtual float GetCritDamageMultiplier(SkillData skill)
     {
         return 1.5f;

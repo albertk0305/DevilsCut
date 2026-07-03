@@ -1139,6 +1139,9 @@ public class CombatManager : MonoBehaviour
 
         BattleVisualizer.Instance.EnqueueAction(() =>
         {
+            if (ShouldCancelPlayerCounterReaction())
+                return;
+
             StyleRankManager.Instance?.OnSupportActionUsed();
             BuffManager.Instance.ConsumeGuardEffect(true);
         });
@@ -1146,6 +1149,12 @@ public class CombatManager : MonoBehaviour
         if (!isPlayerDefending)
         {
             DevLog.Log("[IngaYul Debug] skipped: isPlayerDefending == false");
+            return;
+        }
+
+        if (ShouldCancelPlayerCounterReaction())
+        {
+            DevLog.Log("[IngaYul Debug] skipped: player counter reaction cancelled before enqueue.");
             return;
         }
 
@@ -1383,8 +1392,8 @@ public class CombatManager : MonoBehaviour
 
         if (isPlayerAttacking)
             ProcessPlayerSuccessfulHit(hit, skill);
-        else
-            ProcessEnemySuccessfulHit(hit, skill);
+        else if (!ProcessEnemySuccessfulHit(hit, skill))
+            return;
 
         ApplyBreakDamageAfterHit(hit, isPlayerAttacking);
 
@@ -1400,11 +1409,21 @@ public class CombatManager : MonoBehaviour
         ApplyPlayerLifestealAfterHit(hit, skill);
     }
 
-    private void ProcessEnemySuccessfulHit(HitResult hit, SkillData skill)
+    private bool ProcessEnemySuccessfulHit(HitResult hit, SkillData skill)
     {
         // 1. 일반 타격 데미지 적용 (단 한 번만!)
-        ApplyDamageToEntity(true, hit.damage);
+        bool isDead = ApplyDamageToEntity(true, hit.damage);
         PlaySkillHitSfxForResolvedDamage(hit.damage, hit.isCrit);
+
+        if (isDead || currentPlayerStats.currentHp <= 0)
+        {
+            if (!ShouldSuppressDamageText(true))
+                BattleEventSystem.CallDamageTaken(true, hit.damage, hit.isCrit);
+
+            CheckAndHandleBattleEnd();
+            BattleVisualizer.Instance?.ClearPendingVisuals();
+            return false;
+        }
 
         // 2. 적군 흡혈 로직
         ApplyEnemyLifestealAfterHit(hit, skill);
@@ -1415,6 +1434,7 @@ public class CombatManager : MonoBehaviour
 
         // 4. 기 모으기 파괴 로직
         CancelPlayerChargeIfInterrupted(hit);
+        return true;
     }
 
     private void RewardCriticalHitIfNeeded(HitResult hit, bool isPlayerAttacking)
@@ -1560,6 +1580,12 @@ public class CombatManager : MonoBehaviour
     // ==========================================================
     private void ApplyCounterAndReflectUI(int damage, Sprite defenderImage, bool isReflect)
     {
+        if (ShouldCancelPlayerCounterReaction())
+        {
+            CheckAndHandleBattleEnd();
+            return;
+        }
+
         CombatUIManager.Instance.SetDefenderImage(true, defenderImage);
         CombatUIManager.Instance.SetDefenderImage(false, currentEnemyData?.hit);
         ApplyDamageToEntity(false, damage);
@@ -1575,6 +1601,20 @@ public class CombatManager : MonoBehaviour
             CombatUIManager.Instance.SpawnDamageText("★" + damage.ToString(), false, false);
             DevLog.Log($"[새벽별:멸식] 카운터 발동! {damage} 피해");
         }
+    }
+
+    private bool ShouldCancelPlayerCounterReaction()
+    {
+        if (combatEnded)
+            return true;
+
+        if (currentPlayerStats == null || currentPlayerStats.currentHp <= 0)
+            return true;
+
+        if (currentEnemyData == null || currentEnemyHp <= 0)
+            return true;
+
+        return false;
     }
 
     // 화면 복구 (이펙트, 랭크, 이미지 초기화)

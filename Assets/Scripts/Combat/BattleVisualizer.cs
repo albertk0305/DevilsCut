@@ -54,6 +54,11 @@ public class BattleVisualizer : MonoBehaviour
         visualQueue.Enqueue(visualRoutine);
     }
 
+    public void ClearPendingVisuals()
+    {
+        visualQueue.Clear();
+    }
+
     // Runs gameplay logic at a specific point in the visual queue.
     public void EnqueueAction(Action logicAction)
     {

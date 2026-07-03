@@ -33,13 +33,13 @@ public class SkillLogic_Gi : SkillLogicBase, IChargeSkillLogic
     {
         if (isPlayerAttacking && skill.currentEvolution == SkillEvolution.PathB)
         {
-            int hpCost = Mathf.Max(1, Mathf.RoundToInt(pStats.currentHp * pathB_HpCostRatio));
-            pStats.currentHp -= hpCost;
+            int calculatedCost = Mathf.Max(1, Mathf.RoundToInt(pStats.currentHp * pathB_HpCostRatio));
+            int hpCost = ApplyNonlethalHpCost(pStats, calculatedCost);
 
             DevLog.Log($"[진화 B] 기공포! 체력 20%({hpCost})를 소모합니다.");
             BattleEventSystem.CallHpChanged(true, pStats.currentHp, pStats.maxHp);
 
-            if (CombatUIManager.Instance != null)
+            if (hpCost > 0 && CombatUIManager.Instance != null)
             {
                 CombatUIManager.Instance.SpawnDamageText($"-{hpCost}", false, true);
             }

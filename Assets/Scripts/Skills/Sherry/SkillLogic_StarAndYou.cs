@@ -101,10 +101,7 @@ public class SkillLogic_StarAndYou : SkillLogicBase
             // ---------------------------------------------------------
             if (skill.currentEvolution == SkillEvolution.PathC)
             {
-                hpCost = pStats.currentHp - 1;
-                if (hpCost < 0) hpCost = 0;
-
-                pStats.currentHp = 1;
+                hpCost = ApplyNonlethalHpCost(pStats, pStats.currentHp - 1);
                 DevLog.Log($"[진화 C] 언데드 발동! 생명력을 대가로 화력을 얻습니다. (소모 체력: {hpCost})");
             }
             // ---------------------------------------------------------
@@ -112,13 +109,13 @@ public class SkillLogic_StarAndYou : SkillLogicBase
             // ---------------------------------------------------------
             else
             {
-                hpCost = Mathf.Max(1, Mathf.RoundToInt(pStats.currentHp * 0.2f));
-                pStats.currentHp -= hpCost;
+                int calculatedCost = Mathf.Max(1, Mathf.RoundToInt(pStats.currentHp * 0.2f));
+                hpCost = ApplyNonlethalHpCost(pStats, calculatedCost);
                 DevLog.Log($"[별과 당신] 체력의 20%({hpCost})를 코스트로 지불했습니다.");
             }
 
             BattleEventSystem.CallHpChanged(true, pStats.currentHp, pStats.maxHp);
-            if (CombatUIManager.Instance != null)
+            if (hpCost > 0 && CombatUIManager.Instance != null)
             {
                 CombatUIManager.Instance.SpawnDamageText($"-{hpCost}", false, true);
             }
