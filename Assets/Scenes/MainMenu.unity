@@ -2514,6 +2514,7 @@ GameObject:
   - component: {fileID: 276175395}
   - component: {fileID: 276175394}
   - component: {fileID: 276175393}
+  - component: {fileID: 276175397}
   m_Layer: 5
   m_Name: HelpCanvas
   m_TagString: Untagged
@@ -2605,7 +2606,6 @@ RectTransform:
   - {fileID: 2021068064}
   - {fileID: 1975833345}
   - {fileID: 2033426132}
-  - {fileID: 2070049588}
   - {fileID: 311886665}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2614,6 +2614,64 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &276175397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276175392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86153f2048801694b82ff81a95436b51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HelpCanvasController
+  rootCanvas: {fileID: 276175392}
+  exitButton: {fileID: 1975833346}
+  leftButton: {fileID: 1427500851}
+  rightButton: {fileID: 523393957}
+  topicButtons:
+  - {fileID: 550158989}
+  - {fileID: 254508997}
+  - {fileID: 1819013353}
+  - {fileID: 2021068065}
+  topicButtonTexts:
+  - {fileID: 320201928}
+  - {fileID: 1341431001}
+  - {fileID: 1071933642}
+  - {fileID: 492297570}
+  bodyText: {fileID: 2070049589}
+  bodyScrollRect: {fileID: 2033426135}
+  bodyScrollbar: {fileID: 311886666}
+  topics:
+  - topicId: Exploration
+    titleTextKey: help_exploration_category
+    bodyTextKey: help_exploration_body
+  - topicId: Status
+    titleTextKey: help_status_category
+    bodyTextKey: help_status_body
+  - topicId: Supporters
+    titleTextKey: help_supporter_category
+    bodyTextKey: help_supporter_body
+  - topicId: Karin Equipment
+    titleTextKey: help_karin_equipment_category
+    bodyTextKey: help_karin_equipment_body
+  - topicId: Equipment
+    titleTextKey: help_equipment_category
+    bodyTextKey: help_equipment_body
+  - topicId: Classes
+    titleTextKey: help_class_category
+    bodyTextKey: help_class_body
+  - topicId: Facilities
+    titleTextKey: help_facility_category
+    bodyTextKey: help_facility_body
+  - topicId: Battle
+    titleTextKey: help_battle_category
+    bodyTextKey: help_battle_body
+  - topicId: Endless Battle
+    titleTextKey: help_endless_battle_category
+    bodyTextKey: help_endless_battle_body
+  topicsPerPage: 4
 --- !u!1001 &278349372
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3639,7 +3697,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1352292670}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.2
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8152,7 +8210,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -14507,7 +14565,7 @@ RectTransform:
   m_Father: {fileID: 1228798324}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.2, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -18935,6 +18993,8 @@ MonoBehaviour:
   enabledTextAlpha: 1
   disabledTextAlpha: 0.4
   disableTextButtonTransition: 1
+  helpButton: {fileID: 2119110911}
+  helpCanvasController: {fileID: 276175397}
   creditsButton: {fileID: 1303477748}
   creditsCanvas: {fileID: 1834131228}
   creditsExitButton: {fileID: 586594687}
@@ -21082,6 +21142,7 @@ GameObject:
   - component: {fileID: 2033426132}
   - component: {fileID: 2033426134}
   - component: {fileID: 2033426133}
+  - component: {fileID: 2033426135}
   m_Layer: 5
   m_Name: TextPanel
   m_TagString: Untagged
@@ -21100,7 +21161,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2070049588}
   m_Father: {fileID: 276175396}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -21146,6 +21208,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2033426131}
   m_CullTransparentMesh: 1
+--- !u!114 &2033426135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033426131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ScrollRect
+  m_Content: {fileID: 2070049588}
+  m_Horizontal: 0
+  m_Vertical: 1
+  m_MovementType: 2
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 1
+  m_Viewport: {fileID: 2033426132}
+  m_HorizontalScrollbar: {fileID: 0}
+  m_VerticalScrollbar: {fileID: 311886666}
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 0
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2053957984
 GameObject:
   m_ObjectHideFlags: 0
@@ -21518,16 +21610,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2070049587}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 276175396}
+  m_Father: {fileID: 2033426132}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -50, y: -59.999996}
+  m_AnchoredPosition: {x: 0.00004196167, y: 0}
   m_SizeDelta: {x: 1800, y: 950}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2070049589

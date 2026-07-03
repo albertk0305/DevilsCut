@@ -19,6 +19,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private float enabledTextAlpha = 1f;
     [SerializeField] private float disabledTextAlpha = 0.4f;
     [SerializeField] private bool disableTextButtonTransition = true;
+    [SerializeField] private Button helpButton;
+    [SerializeField] private HelpCanvasController helpCanvasController;
     [SerializeField] private Button creditsButton;
     [SerializeField] private GameObject creditsCanvas;
     [SerializeField] private Button creditsExitButton;
@@ -29,12 +31,15 @@ public class MainMenuManager : MonoBehaviour
 
     void Start()
     {
+        ResolveHelpReferences();
+        RegisterHelpListener();
         ResolveCreditsReferences();
         RegisterCreditsListeners();
 
         if (settingsPanel != null) settingsPanel.SetActive(false);
         if (confirmNewGamePanel != null) confirmNewGamePanel.SetActive(false);
         if (clearDataSelectCanvasController != null) clearDataSelectCanvasController.Hide();
+        if (helpCanvasController != null) helpCanvasController.Hide();
         if (creditsCanvas != null) creditsCanvas.SetActive(false);
         UpdateContinueButtonState();
         UpdateInfiniteBattleButtonState();
@@ -42,6 +47,8 @@ public class MainMenuManager : MonoBehaviour
 
     private void OnEnable()
     {
+        ResolveHelpReferences();
+        RegisterHelpListener();
         ResolveCreditsReferences();
         RegisterCreditsListeners();
         SubscribeLanguageChanged();
@@ -56,6 +63,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        UnregisterHelpListener();
         UnregisterCreditsListeners();
         UnsubscribeLanguageChanged();
     }
@@ -183,7 +191,62 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickHelp()
     {
-        DevLog.Log("[MainMenu] Help opened.");
+        ResolveHelpReferences();
+
+        if (helpCanvasController != null)
+        {
+            helpCanvasController.Show();
+            DevLog.Log("[MainMenu] Help opened.");
+            return;
+        }
+
+        DevLog.LogWarning("[MainMenu] HelpCanvasController is not assigned and could not be found.");
+    }
+
+    private void ResolveHelpReferences()
+    {
+        if (helpButton == null)
+            helpButton = FindSceneComponentByName<Button>("HelpButton");
+
+        if (helpCanvasController == null)
+            helpCanvasController = FindSceneComponent<HelpCanvasController>();
+
+        if (helpCanvasController == null)
+        {
+            GameObject helpCanvas = FindSceneGameObjectByName("HelpCanvas");
+            if (helpCanvas != null)
+                helpCanvasController = helpCanvas.GetComponent<HelpCanvasController>() ?? helpCanvas.AddComponent<HelpCanvasController>();
+        }
+    }
+
+    private void RegisterHelpListener()
+    {
+        if (helpButton == null || HasPersistentListener(helpButton, nameof(OnClickHelp)))
+            return;
+
+        helpButton.onClick.RemoveListener(OnClickHelp);
+        helpButton.onClick.AddListener(OnClickHelp);
+    }
+
+    private void UnregisterHelpListener()
+    {
+        if (helpButton != null && !HasPersistentListener(helpButton, nameof(OnClickHelp)))
+            helpButton.onClick.RemoveListener(OnClickHelp);
+    }
+
+    private static bool HasPersistentListener(Button button, string methodName)
+    {
+        if (button == null || string.IsNullOrEmpty(methodName))
+            return false;
+
+        int count = button.onClick.GetPersistentEventCount();
+        for (int i = 0; i < count; i++)
+        {
+            if (button.onClick.GetPersistentMethodName(i) == methodName)
+                return true;
+        }
+
+        return false;
     }
 
     public void OnClickCredits()
@@ -307,6 +370,22 @@ public class MainMenuManager : MonoBehaviour
     {
         GameObject obj = FindSceneGameObjectByName(objectName);
         return obj != null ? obj.GetComponent<T>() : null;
+    }
+
+    private static T FindSceneComponent<T>() where T : Component
+    {
+        T[] components = FindObjectsByType<T>(
+            FindObjectsInactive.Include,
+            FindObjectsSortMode.None);
+
+        foreach (T component in components)
+        {
+            if (component != null
+                && component.gameObject.scene == SceneManager.GetActiveScene())
+                return component;
+        }
+
+        return null;
     }
 
     private static GameObject FindSceneGameObjectByName(string objectName)

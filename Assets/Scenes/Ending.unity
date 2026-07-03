@@ -398,115 +398,148 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EndingCreditsController
   slides:
   - image: {fileID: 21300000, guid: 4929847f865a60142b309d465af6894c, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: 'Director
+
+      Neat3'
+    textPosition: 2
     durationOverride: 0
   - image: {fileID: 21300000, guid: 26f664a62f5a1b140bf27c8b36edb14c, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: 'Main Programmer
+
+      Neat3'
+    textPosition: 2
     durationOverride: 0
   - image: {fileID: 21300000, guid: 19f325541f461b442b680db7d99217f4, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: 'Game Engine
+
+      Unity'
+    textPosition: 2
     durationOverride: 0
   - image: {fileID: 21300000, guid: 00a33480e85b1c045bf03e3702af644c, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: 'Visual Synthesis & Tools
+
+      GPT-Image-2
+
+      Nano Banana 2'
+    textPosition: 2
     durationOverride: 0
   - image: {fileID: 21300000, guid: 134e36841fde6fc478af0954eb0777b1, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: 'Audio Generation
+
+      Suno AI'
+    textPosition: 3
     durationOverride: 0
   - image: {fileID: 21300000, guid: 5e9cd6588d75f724f8cdf96deb474d99, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: 'Fonts
+
+      A2Z'
+    textPosition: 2
     durationOverride: 0
   - image: {fileID: 21300000, guid: d1b92902268c00946bf8c082c85556f4, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: 'Sound & SFX Credits
+
+      Dragon Studio
+
+      Universfield'
+    textPosition: 3
     durationOverride: 0
   - image: {fileID: 21300000, guid: b288d1e012cdf004f9483888be3a0b04, type: 3}
-    creditText: 
+    creditText: 'Special Thanks To
+
+      Gao'
+    textPosition: 3
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 58f0ae7b80fd7954098489930a94f8a2, type: 3}
+    creditText: Stay tuned for more information and updates!
     textPosition: 0
     durationOverride: 0
   - image: {fileID: 21300000, guid: ccc6902de7729d94694b702b2527ccf6, type: 3}
-    creditText: 
-    textPosition: 0
-    durationOverride: 0
-  - image: {fileID: 21300000, guid: 58f0ae7b80fd7954098489930a94f8a2, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: 'YouTube
+
+      Neat3Develop'
+    textPosition: 2
     durationOverride: 0
   - image: {fileID: 21300000, guid: 7aac75cea935f5b42b13eef00224a4f4, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: 'itch.io
+
+      neat3.itch.io/devils-cut'
+    textPosition: 2
     durationOverride: 0
   - image: {fileID: 21300000, guid: e186b9964785f694cb08a2e44f3584bc, type: 3}
-    creditText: 
+    creditText: 'GitHub
+
+      albertk0305/DevilsCut'
     textPosition: 0
     durationOverride: 0
   - image: {fileID: 21300000, guid: 5b831e373ca04634886acf25cef80b05, type: 3}
-    creditText: 
-    textPosition: 0
-    durationOverride: 0
-  - image: {fileID: 21300000, guid: 1576b337552958b48adb2dbe117cb1b5, type: 3}
-    creditText: 
-    textPosition: 0
-    durationOverride: 0
-  - image: {fileID: 21300000, guid: 15750899b9b229d48adca024b783323f, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: 'Email
+
+      neat3booze@gmail.com'
+    textPosition: 2
     durationOverride: 0
   - image: {fileID: 21300000, guid: a16da50a4aefd3549b24534ac776b98d, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: If you enjoyed the game, please leave a review and feedback!
+    textPosition: 1
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 1576b337552958b48adb2dbe117cb1b5, type: 3}
+    creditText: Any feedback on what you liked or disliked, as well as bug reports,
+      would be greatly appreciated.
+    textPosition: 1
+    durationOverride: 0
+  - image: {fileID: 21300000, guid: 15750899b9b229d48adca024b783323f, type: 3}
+    creditText: "Neat3 Project \nNo.0"
+    textPosition: 2
     durationOverride: 0
   - image: {fileID: 21300000, guid: dd4e4a7cfb2ab664895e8f6a3f116743, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: v.1.0.0
+    textPosition: 2
     durationOverride: 0
   - image: {fileID: 21300000, guid: 23540ef646be590479414bdf990128d8, type: 3}
-    creditText: 
+    creditText: This is the very first game I have ever completed.
     textPosition: 0
     durationOverride: 0
   - image: {fileID: 21300000, guid: d227ecd0ea02380408487cc35cdd0da8, type: 3}
-    creditText: 
+    creditText: It took about three months to bring this project to life.
     textPosition: 0
     durationOverride: 0
   - image: {fileID: 21300000, guid: a12779bc1a02dd04d9a0bb2013956073, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: There were so many features and ideas I wanted to include,
+    textPosition: 1
     durationOverride: 0
   - image: {fileID: 21300000, guid: 802c77af18abdc74ea1ff49856dcd6b5, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: but handling everything on my own naturally left me with a few regrets.
+    textPosition: 1
     durationOverride: 0
   - image: {fileID: 21300000, guid: 9e74ac5d986f018428fe72db324974d5, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: Even so, the journey of building something from scratch and seeing
+      it to the end was truly rewarding.
+    textPosition: 1
     durationOverride: 0
   - image: {fileID: 21300000, guid: b09a9a926e9968e4985ca6a8c12bb200, type: 3}
-    creditText: 
+    creditText: "As a huge fan of anime and gaming, I\u2019ve hidden numerous homages
+      throughout the game."
     textPosition: 0
     durationOverride: 0
   - image: {fileID: 21300000, guid: 883ef722d7ab00042903a9f2d193977c, type: 3}
-    creditText: 
+    creditText: I hope they bring a small smile to your face when you discover them.
     textPosition: 0
     durationOverride: 0
   - image: {fileID: 21300000, guid: aa015c90f16eb744981bef60c7ad4ab6, type: 3}
-    creditText: 
-    textPosition: 0
+    creditText: This is just the beginning; I plan to keep creating more games in
+      the future.
+    textPosition: 1
     durationOverride: 0
   - image: {fileID: 21300000, guid: 67cb5684acf1c5d439e3bacc930ece36, type: 3}
-    creditText: 
+    creditText: "If you're interested, please stay tuned for what\u2019s next!"
     textPosition: 0
     durationOverride: 0
   - image: {fileID: 21300000, guid: 84c4da419b137e149af03fbde3f476cb, type: 3}
-    creditText: 
+    creditText: "Although it\u2019s far from perfect, I sincerely hope this game
+      brought a little joy to your time."
     textPosition: 0
     durationOverride: 0
   - image: {fileID: 21300000, guid: 159648add3aefcf4388318c9683a5dae, type: 3}
-    creditText: 
+    creditText: Thank you so much for playing.
     textPosition: 0
     durationOverride: 12.5
   defaultSlideDuration: 10
@@ -639,7 +672,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 15750899b9b229d48adca024b783323f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 26f664a62f5a1b140bf27c8b36edb14c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -849,32 +882,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Ending
+  m_text: 'Director
 
-    Credit
-
-    Comes
-
-    Here
-
-    .
-
-    .
-
-    .
-
-    .
-
-    .
-
-    .
-
-    .
-
-    .
-
-    all
-    the way'
+    Neat3'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d24e63d45271de1409e59de13f1eec83, type: 2}
   m_sharedMaterial: {fileID: -6334644560201892364, guid: d24e63d45271de1409e59de13f1eec83, type: 2}
@@ -1125,7 +1135,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1576b337552958b48adb2dbe117cb1b5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 159648add3aefcf4388318c9683a5dae, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
