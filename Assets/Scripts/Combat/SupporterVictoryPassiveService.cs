@@ -4,10 +4,17 @@ using UnityEngine;
 public class SupporterPassiveRewardResult
 {
     public string message;
+    public SupporterData supporterData;
 
     public SupporterPassiveRewardResult(string message)
+        : this(message, null)
+    {
+    }
+
+    public SupporterPassiveRewardResult(string message, SupporterData supporterData)
     {
         this.message = message;
+        this.supporterData = supporterData;
     }
 }
 
@@ -16,12 +23,19 @@ public class LeviathanGiftResult
     public EquipmentItemData giftItem;
     public List<ItemMergeResult> mergeResults;
     public string message;
+    public SupporterData supporterData;
 
     public LeviathanGiftResult(EquipmentItemData giftItem, List<ItemMergeResult> mergeResults, string message)
+        : this(giftItem, mergeResults, message, null)
+    {
+    }
+
+    public LeviathanGiftResult(EquipmentItemData giftItem, List<ItemMergeResult> mergeResults, string message, SupporterData supporterData)
     {
         this.giftItem = giftItem;
         this.mergeResults = mergeResults;
         this.message = message;
+        this.supporterData = supporterData;
     }
 }
 
@@ -66,7 +80,7 @@ public static class SupporterVictoryPassiveService
             return null;
 
         List<ItemMergeResult> mergeResults = playerManager.AcquireItemAndGetMergeResults(giftItem);
-        return new LeviathanGiftResult(giftItem, mergeResults, null);
+        return new LeviathanGiftResult(giftItem, mergeResults, null, leviathan);
     }
 
     private static void ResolveAsmodeusPassive(PlayerManager playerManager, List<SupporterPassiveRewardResult> results)
@@ -105,6 +119,8 @@ public static class SupporterVictoryPassiveService
                 results.Add(new SupporterPassiveRewardResult(FormatLocalizedText("combat_victory_asmodeus_ap_gain_format", "아스모데우스의 패시브 발동!\nAP가 {0} 증가했습니다.", statGain)));
                 break;
         }
+
+        AttachSupporterToLastResult(results, asmodeus);
     }
 
     private static SupporterData FindUnlockedSupporter(PlayerManager playerManager, string supporterId)
@@ -148,6 +164,7 @@ public static class SupporterVictoryPassiveService
 
         playerManager.stats.currentHp = Mathf.Clamp(playerManager.stats.currentHp + actualHeal, 0, finalMaxHp);
         results.Add(new SupporterPassiveRewardResult(FormatLocalizedText("combat_victory_baalzebub_heal_format", "바알제붑의 패시브 발동!\n체력이 {0} 회복되었습니다.", actualHeal)));
+        AttachSupporterToLastResult(results, beelzebub);
     }
 
     private static float GetBeelzebubHealRatio(int passiveLevel)
@@ -197,6 +214,16 @@ public static class SupporterVictoryPassiveService
                 results.Add(new SupporterPassiveRewardResult(FormatLocalizedText("combat_victory_lucifer_luck_gain_format", "루시퍼의 패시브 발동!\n운이 {0} 증가했습니다.", statGain)));
                 break;
         }
+
+        AttachSupporterToLastResult(results, lucifer);
+    }
+
+    private static void AttachSupporterToLastResult(List<SupporterPassiveRewardResult> results, SupporterData supporterData)
+    {
+        if (results == null || results.Count == 0)
+            return;
+
+        results[results.Count - 1].supporterData = supporterData;
     }
 
     private static float GetLuciferTriggerChance(int passiveLevel)

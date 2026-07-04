@@ -11,6 +11,7 @@ public class ModifiedBattleRewardResult
     public int finalGold;
     public int goldBonus;
     public readonly List<string> bonusMessages = new List<string>();
+    public readonly List<RewardBonusMessageEntry> bonusMessageEntries = new List<RewardBonusMessageEntry>();
 
     public string BuildFinalRewardLine()
     {
@@ -87,6 +88,18 @@ public class ModifiedBattleRewardResult
     }
 }
 
+public class RewardBonusMessageEntry
+{
+    public string message;
+    public SupporterData supporterData;
+
+    public RewardBonusMessageEntry(string message, SupporterData supporterData)
+    {
+        this.message = message;
+        this.supporterData = supporterData;
+    }
+}
+
 public static class SupporterBattleRewardModifierService
 {
     private const string MammonSupporterId = "mammon";
@@ -100,8 +113,11 @@ public static class SupporterBattleRewardModifierService
             baseGold = Mathf.Max(0, baseGold)
         };
 
-        result.expBonus = CalculateExpBonus(playerManager, result.baseExp);
-        result.goldBonus = CalculateGoldBonus(playerManager, result.baseGold);
+        SupporterData satan = FindUnlockedSupporter(playerManager, SatanSupporterId);
+        SupporterData mammon = FindUnlockedSupporter(playerManager, MammonSupporterId);
+
+        result.expBonus = CalculateExpBonus(satan, result.baseExp);
+        result.goldBonus = CalculateGoldBonus(mammon, result.baseGold);
         result.finalExp = result.baseExp + result.expBonus;
         result.finalGold = result.baseGold + result.goldBonus;
 
@@ -111,21 +127,29 @@ public static class SupporterBattleRewardModifierService
         if (result.expBonus > 0)
             result.bonusMessages.Add(ModifiedBattleRewardResult.GetLocalizedRewardText("combat_victory_satan_exp_bonus", "사탄의 패시브로 경험치 보상 증가!"));
 
+        if (result.goldBonus > 0 && result.bonusMessages.Count > 0)
+            result.bonusMessageEntries.Add(new RewardBonusMessageEntry(result.bonusMessages[0], mammon));
+
+        if (result.expBonus > 0)
+        {
+            int messageIndex = result.goldBonus > 0 ? 1 : 0;
+            if (messageIndex >= 0 && messageIndex < result.bonusMessages.Count)
+                result.bonusMessageEntries.Add(new RewardBonusMessageEntry(result.bonusMessages[messageIndex], satan));
+        }
+
         return result;
     }
 
-    private static int CalculateExpBonus(PlayerManager playerManager, int baseExp)
+    private static int CalculateExpBonus(SupporterData satan, int baseExp)
     {
-        SupporterData satan = FindUnlockedSupporter(playerManager, SatanSupporterId);
         if (satan == null || satan.passiveLevel <= 0 || baseExp <= 0)
             return 0;
 
         return Mathf.FloorToInt(baseExp * GetRewardBonusRatio(satan.passiveLevel));
     }
 
-    private static int CalculateGoldBonus(PlayerManager playerManager, int baseGold)
+    private static int CalculateGoldBonus(SupporterData mammon, int baseGold)
     {
-        SupporterData mammon = FindUnlockedSupporter(playerManager, MammonSupporterId);
         if (mammon == null || mammon.passiveLevel <= 0 || baseGold <= 0)
             return 0;
 

@@ -26,6 +26,18 @@ public class CombatVictoryUIController : MonoBehaviour
         public Sprite icon;
     }
 
+    private class VictoryMessageEntry
+    {
+        public string message;
+        public SupporterData supporterData;
+
+        public VictoryMessageEntry(string message, SupporterData supporterData = null)
+        {
+            this.message = message;
+            this.supporterData = supporterData;
+        }
+    }
+
     private enum VictoryStep
     {
         ResultMessage,
@@ -59,6 +71,7 @@ public class CombatVictoryUIController : MonoBehaviour
     [SerializeField] private Button confirmButton;
 
     [Header("Message")]
+    [SerializeField] private Image supporterImage;
     [SerializeField] private GameObject nextIndicator;
     [SerializeField] private bool useTypewriterText = false;
     [SerializeField] private float messageTypeInterval = 0.02f;
@@ -91,7 +104,7 @@ public class CombatVictoryUIController : MonoBehaviour
     [Header("Result BGM")]
     [SerializeField] private CombatResultBgmPlayer resultBgmPlayer;
 
-    private readonly Queue<string> messageQueue = new Queue<string>();
+    private readonly Queue<VictoryMessageEntry> messageQueue = new Queue<VictoryMessageEntry>();
     private readonly Queue<SupporterPassiveRewardResult> supporterPassiveResultQueue = new Queue<SupporterPassiveRewardResult>();
     private readonly List<ItemMergeResult> pendingMergeResults = new List<ItemMergeResult>();
     private Coroutine typingCoroutine;
@@ -99,6 +112,7 @@ public class CombatVictoryUIController : MonoBehaviour
     private string currentMessageKey = "";
     private string currentMessageFallback = "";
     private object[] currentMessageArgs;
+    private SupporterData currentMessageSupporter;
     private VictoryStep currentStep;
     private readonly List<EquipmentItemData> equipmentCandidates = new List<EquipmentItemData>();
     private readonly List<KarinItemData> karinItemCandidates = new List<KarinItemData>();
@@ -119,6 +133,7 @@ public class CombatVictoryUIController : MonoBehaviour
     private void Awake()
     {
         EnsureItemMergePresentation();
+        EnsureSupporterImage();
         Hide();
 
         if (continueButton != null)
@@ -180,6 +195,7 @@ public class CombatVictoryUIController : MonoBehaviour
                 resultMessageText.text = currentMessage;
 
             isTyping = false;
+            UpdateSupporterImageForCurrentMessage();
             SetNextIndicatorActive(true);
         }
     }
@@ -213,11 +229,11 @@ public class CombatVictoryUIController : MonoBehaviour
             resultMessageText.gameObject.SetActive(true);
 
         messageQueue.Clear();
-        messageQueue.Enqueue(BuildRewardResultMessage(rewardResult));
+        EnqueueRewardResultMessages(rewardResult);
 
         string levelUpMessage = BuildLevelUpMessage(rewardResult);
         if (!string.IsNullOrEmpty(levelUpMessage))
-            messageQueue.Enqueue(levelUpMessage);
+            messageQueue.Enqueue(new VictoryMessageEntry(levelUpMessage));
 
         StartNextMessage();
     }
@@ -230,6 +246,7 @@ public class CombatVictoryUIController : MonoBehaviour
         selectedKarinItem = null;
         currentEnemyName = "";
         currentRewardResult = null;
+        currentMessageSupporter = null;
         StopMergeAnimation();
         RestoreMergePresentationControls();
         HideAllStageGroups();
@@ -237,6 +254,7 @@ public class CombatVictoryUIController : MonoBehaviour
         HideAllItemSelectionBackgrounds();
         ClearMergePresentationStars();
         SetNextIndicatorActive(false);
+        HideSupporterImage();
 
         if (continueButton != null)
             continueButton.gameObject.SetActive(false);
@@ -407,6 +425,52 @@ public class CombatVictoryUIController : MonoBehaviour
             bonusItemImage.gameObject.SetActive(isActive);
     }
 
+    private void EnsureSupporterImage()
+    {
+        if (supporterImage == null)
+        {
+            Transform searchRoot = victoryRoot != null ? victoryRoot.transform : transform;
+            Image[] images = searchRoot.GetComponentsInChildren<Image>(true);
+            foreach (Image image in images)
+            {
+                if (image != null && image.gameObject.name == "SupporterImage")
+                {
+                    supporterImage = image;
+                    break;
+                }
+            }
+        }
+
+        if (supporterImage != null)
+        {
+            supporterImage.raycastTarget = false;
+            supporterImage.preserveAspect = true;
+        }
+    }
+
+    private void UpdateSupporterImageForCurrentMessage()
+    {
+        EnsureSupporterImage();
+
+        if (supporterImage == null)
+            return;
+
+        Sprite happySprite = currentMessageSupporter != null ? currentMessageSupporter.happy : null;
+        supporterImage.sprite = happySprite;
+        supporterImage.gameObject.SetActive(happySprite != null);
+    }
+
+    private void HideSupporterImage()
+    {
+        EnsureSupporterImage();
+
+        if (supporterImage == null)
+            return;
+
+        supporterImage.sprite = null;
+        supporterImage.gameObject.SetActive(false);
+    }
+
     private void SetEquipmentRewardGroupActive(bool isActive)
     {
         SetGroupActive(equipmentRewardGroup, isActive);
@@ -462,6 +526,39 @@ public class CombatVictoryUIController : MonoBehaviour
         int exp = rewardResult != null ? rewardResult.expGranted : 0;
         int gold = rewardResult != null ? rewardResult.goldGranted : 0;
         return BuildFinalRewardLine(exp, 0, gold, 0);
+    }
+
+    private void EnqueueRewardResultMessages(VictoryRewardGrantResult rewardResult)
+    {
+        ModifiedBattleRewardResult modifiedReward = rewardResult != null ? rewardResult.rewardModifierResult : null;
+
+        if (modifiedReward != null)
+        {
+            if (modifiedReward.bonusMessageEntries != null && modifiedReward.bonusMessageEntries.Count > 0)
+            {
+                foreach (RewardBonusMessageEntry entry in modifiedReward.bonusMessageEntries)
+                {
+                    if (entry != null && !string.IsNullOrEmpty(entry.message))
+                        messageQueue.Enqueue(new VictoryMessageEntry(entry.message, entry.supporterData));
+                }
+            }
+            else
+            {
+                string bonusMessage = BuildRewardModifierMessage(modifiedReward);
+                if (!string.IsNullOrEmpty(bonusMessage))
+                {
+                    messageQueue.Enqueue(new VictoryMessageEntry(bonusMessage));
+                    return;
+                }
+            }
+
+            messageQueue.Enqueue(new VictoryMessageEntry(BuildFinalRewardLine(modifiedReward.finalExp, modifiedReward.expBonus, modifiedReward.finalGold, modifiedReward.goldBonus)));
+            return;
+        }
+
+        int exp = rewardResult != null ? rewardResult.expGranted : 0;
+        int gold = rewardResult != null ? rewardResult.goldGranted : 0;
+        messageQueue.Enqueue(new VictoryMessageEntry(BuildFinalRewardLine(exp, 0, gold, 0)));
     }
 
     private string BuildLevelUpMessage(VictoryRewardGrantResult rewardResult)
@@ -1072,7 +1169,7 @@ public class CombatVictoryUIController : MonoBehaviour
 
         HashSet<string> excludedItemIds = BuildRerollExcludedItemIds(slotIndex);
         EquipmentItemData currentItem = equipmentCandidates[slotIndex];
-        bool belphegorApplied = TryGenerateBelphegorRerollUpgrade(currentItem, excludedItemIds, out EquipmentItemData newItem);
+        bool belphegorApplied = TryGenerateBelphegorRerollUpgrade(currentItem, excludedItemIds, out EquipmentItemData newItem, out SupporterData belphegor);
 
         if (!belphegorApplied)
             newItem = GenerateSingleEquipmentRewardCandidate(currentRewardBattleType, currentRewardPhase, excludedItemIds);
@@ -1091,19 +1188,20 @@ public class CombatVictoryUIController : MonoBehaviour
         equipmentCandidates[slotIndex] = newItem;
         SetupEquipmentRewardSlots();
         if (belphegorApplied)
-            StartSingleMessage("combat_victory_belphegor_passive", "벨페고르의 패시브 발동!");
+            StartSingleMessageWithSupporter("combat_victory_belphegor_passive", "벨페고르의 패시브 발동!", belphegor);
         else
             StartSingleMessage(BuildEquipmentRerollMessage(newItem));
     }
 
-    private bool TryGenerateBelphegorRerollUpgrade(EquipmentItemData currentItem, HashSet<string> excludedItemIds, out EquipmentItemData upgradedItem)
+    private bool TryGenerateBelphegorRerollUpgrade(EquipmentItemData currentItem, HashSet<string> excludedItemIds, out EquipmentItemData upgradedItem, out SupporterData belphegor)
     {
         upgradedItem = null;
+        belphegor = null;
 
         if (currentItem == null)
             return false;
 
-        SupporterData belphegor = FindUnlockedSupporter(BelphegorSupporterId);
+        belphegor = FindUnlockedSupporter(BelphegorSupporterId);
         if (belphegor == null || belphegor.passiveLevel <= 0)
             return false;
 
@@ -1398,7 +1496,7 @@ public class CombatVictoryUIController : MonoBehaviour
         }
 
         isWaitingForLeviathanGiftAdvance = false;
-        StartSingleMessage(BuildLeviathanGiftMessage(giftResult.giftItem));
+        StartSingleMessage(BuildLeviathanGiftMessage(giftResult.giftItem), giftResult.supporterData);
         StartCoroutine(WaitForLeviathanGiftMessageRoutine());
     }
 
@@ -1503,9 +1601,15 @@ public class CombatVictoryUIController : MonoBehaviour
 
     private void StartSingleMessage(string message)
     {
+        StartSingleMessage(message, (SupporterData)null);
+    }
+
+    private void StartSingleMessage(string message, SupporterData supporterData)
+    {
         currentMessageKey = "";
         currentMessageFallback = message ?? "";
         currentMessageArgs = null;
+        currentMessageSupporter = supporterData;
         messageQueue.Clear();
         currentMessage = message ?? "";
 
@@ -1514,9 +1618,15 @@ public class CombatVictoryUIController : MonoBehaviour
 
     private void StartSingleMessage(string key, string fallback, params object[] args)
     {
+        StartSingleMessageWithSupporter(key, fallback, null, args);
+    }
+
+    private void StartSingleMessageWithSupporter(string key, string fallback, SupporterData supporterData, params object[] args)
+    {
         currentMessageKey = key ?? "";
         currentMessageFallback = fallback ?? "";
         currentMessageArgs = args;
+        currentMessageSupporter = supporterData;
         messageQueue.Clear();
         currentMessage = FormatLocalizedText(currentMessageKey, currentMessageFallback, currentMessageArgs);
 
@@ -1531,7 +1641,9 @@ public class CombatVictoryUIController : MonoBehaviour
             typingCoroutine = null;
         }
 
-        currentMessage = messageQueue.Count > 0 ? messageQueue.Dequeue() : "";
+        VictoryMessageEntry entry = messageQueue.Count > 0 ? messageQueue.Dequeue() : null;
+        currentMessage = entry != null ? entry.message : "";
+        currentMessageSupporter = entry != null ? entry.supporterData : null;
         currentMessageKey = "";
         currentMessageFallback = currentMessage;
         currentMessageArgs = null;
@@ -1547,6 +1659,7 @@ public class CombatVictoryUIController : MonoBehaviour
         }
 
         isTyping = false;
+        UpdateSupporterImageForCurrentMessage();
 
         if (resultMessageText == null)
         {
@@ -1685,7 +1798,7 @@ public class CombatVictoryUIController : MonoBehaviour
 
         isWaitingForSupporterPassiveAdvance = false;
         SupporterPassiveRewardResult result = supporterPassiveResultQueue.Dequeue();
-        StartSingleMessage(result.message);
+        StartSingleMessage(result.message, result.supporterData);
         StartCoroutine(WaitForSupporterPassiveMessageRoutine());
     }
 

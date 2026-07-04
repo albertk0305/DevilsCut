@@ -20,11 +20,11 @@ prologue_c_018			sherry	normal	smirk		prologue_c_018	None					FALSE	FALSE	FALSE
 prologue_c_019	karin	karin	sherry	amazed	smirk	name_karin	prologue_c_019	None					FALSE	FALSE	FALSE								
 prologue_c_020	sherry	karin	sherry	amazed	easy	name_sherry	prologue_c_020	None					FALSE	FALSE	FALSE								
 prologue_c_021	karin	karin	sherry	curious	easy	name_karin	prologue_c_021	None					FALSE	FALSE	FALSE								
-prologue_c_022	sherry	karin	sherry	curious	wink	name_sherry	prologue_c_022	None					FALSE	FALSE	FALSE								
-prologue_c_023	sherry	karin	sherry	curious	wink	name_sherry	prologue_c_023	None					FALSE	FALSE	FALSE								
-prologue_c_024	karin	karin	sherry	confront	wink	name_karin	prologue_c_024	None					FALSE	FALSE	FALSE								
-prologue_c_025	sherry	karin	sherry	confront	bored	name_sherry	prologue_c_025	None					FALSE	FALSE	FALSE								
-prologue_c_026	karin	karin	sherry	panic	bored	name_karin	prologue_c_026	None					FALSE	FALSE	FALSE								
+prologue_c_022	sherry	karin	sherry	curious	smug	name_sherry	prologue_c_022	None					FALSE	FALSE	FALSE								
+prologue_c_023	sherry	karin	sherry	curious	smug	name_sherry	prologue_c_023	None					FALSE	FALSE	FALSE								
+prologue_c_024	karin	karin	sherry	confront	smug	name_karin	prologue_c_024	None					FALSE	FALSE	FALSE								
+prologue_c_025	sherry	karin	sherry	confront	greasy	name_sherry	prologue_c_025	None					FALSE	FALSE	FALSE								
+prologue_c_026	karin	karin	sherry	panic	greasy	name_karin	prologue_c_026	None					FALSE	FALSE	FALSE								
 prologue_c_027	sherry	karin	sherry	panic	annoyed	name_sherry	prologue_c_027	None					FALSE	FALSE	FALSE								
 prologue_c_028	karin	karin	sherry	tired	annoyed	name_karin	prologue_c_028	None					FALSE	FALSE	FALSE								
 prologue_c_029	sherry	karin	sherry	tired	hassle	name_sherry	prologue_c_029	None					FALSE	FALSE	FALSE								

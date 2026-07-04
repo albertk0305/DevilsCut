@@ -13184,6 +13184,7 @@ MonoBehaviour:
   continueButton: {fileID: 95833284}
   messageAdvanceButton: {fileID: 186638391}
   confirmButton: {fileID: 95833284}
+  supporterImage: {fileID: 419496267}
   nextIndicator: {fileID: 1162943609}
   useTypewriterText: 0
   messageTypeInterval: 0.02
