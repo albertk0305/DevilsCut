@@ -20,13 +20,12 @@ prologue_a_018							prologue_a_018	None					FALSE	FALSE	FALSE
 prologue_a_019							prologue_a_019	None					FALSE	FALSE	FALSE									
 prologue_a_020							prologue_a_020	None					FALSE	FALSE	FALSE									
 prologue_a_021							prologue_a_021	None					FALSE	FALSE	FALSE									
-prologue_a_022							prologue_a_022	None					FALSE	FALSE	FALSE									
-prologue_a_023							prologue_a_023	None		Lab			FALSE	FALSE	FALSE									
-prologue_a_024							prologue_a_024	None					FALSE	TRUE	FALSE									
+prologue_a_022							prologue_a_022	None		Lab			FALSE	FALSE	FALSE									
+prologue_a_023							prologue_a_023	None					FALSE	FALSE	FALSE									
+prologue_a_024	karin	karin		neutral		name_karin	prologue_a_024	None					FALSE	TRUE	FALSE									
 prologue_a_025	karin	karin		neutral		name_karin	prologue_a_025	None					FALSE	FALSE	FALSE									
-prologue_a_026	karin	karin		neutral		name_karin	prologue_a_026	None					FALSE	FALSE	FALSE									
+prologue_a_026	karin	karin		serious		name_karin	prologue_a_026	None					FALSE	FALSE	FALSE									
 prologue_a_027	karin	karin		serious		name_karin	prologue_a_027	None					FALSE	FALSE	FALSE									
 prologue_a_028	karin	karin		serious		name_karin	prologue_a_028	None					FALSE	FALSE	FALSE									
 prologue_a_029	karin	karin		serious		name_karin	prologue_a_029	None					FALSE	FALSE	FALSE									
 prologue_a_030	karin	karin		serious		name_karin	prologue_a_030	None					FALSE	FALSE	FALSE									
-prologue_a_031	karin	karin		serious		name_karin	prologue_a_031	None					FALSE	FALSE	FALSE									

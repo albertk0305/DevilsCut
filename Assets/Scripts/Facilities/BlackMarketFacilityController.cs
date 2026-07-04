@@ -107,6 +107,9 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
     [SerializeField] private int rarePrice = 1000;
     [SerializeField] private int epicPrice = 2500;
     [SerializeField] private int legendaryPrice = 20000;
+    [SerializeField, Min(0)] private int rerollBaseCostBeforeRank2 = 200;
+    [SerializeField, Min(0)] private int rerollBaseCostAtRank2OrHigher = 100;
+    [SerializeField, Min(1)] private int rerollCostMultiplier = 2;
 
     [Header("Text")]
     [SerializeField] private string operatorIntroTextKey = "black_market_mammon_greeting";
@@ -166,7 +169,7 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
     private bool isTextComplete;
     private int selectedIndex = -1;
     private int rerollCost;
-    private int rerollCostStep;
+    private int rerollCount;
 
     protected override void Start()
     {
@@ -340,8 +343,37 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
 
     private void InitializeRerollCost()
     {
-        rerollCostStep = CurrentRank >= 2 ? 100 : 200;
-        rerollCost = rerollCostStep;
+        rerollCount = 0;
+        rerollCost = GetCurrentRerollCost();
+    }
+
+    private int GetCurrentRerollCost()
+    {
+        return CalculateCompoundRerollCost(GetRerollBaseCost(), rerollCount);
+    }
+
+    private int GetRerollBaseCost()
+    {
+        return CurrentRank >= 2
+            ? rerollBaseCostAtRank2OrHigher
+            : rerollBaseCostBeforeRank2;
+    }
+
+    private int CalculateCompoundRerollCost(int baseCost, int count)
+    {
+        baseCost = Mathf.Max(0, baseCost);
+        count = Mathf.Max(0, count);
+        int multiplier = Mathf.Max(1, rerollCostMultiplier);
+
+        long cost = baseCost;
+        for (int i = 0; i < count; i++)
+        {
+            cost *= multiplier;
+            if (cost > int.MaxValue)
+                return int.MaxValue;
+        }
+
+        return (int)cost;
     }
 
     private void GenerateShopItems()
@@ -663,7 +695,8 @@ public class BlackMarketFacilityController : FacilitySceneControllerBase
         }
 
         playerManager.stats.currentGold = Mathf.Max(0, playerManager.stats.currentGold - rerollCost);
-        rerollCost += rerollCostStep;
+        rerollCount++;
+        rerollCost = GetCurrentRerollCost();
         GenerateShopItems();
         RefreshShopUI();
 

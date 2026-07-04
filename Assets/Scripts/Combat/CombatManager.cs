@@ -1770,11 +1770,12 @@ public class CombatManager : MonoBehaviour
         if (counterAI == null) return false;
         if (!counterAI.CanCounterAfterSkillDamage()) return false;
         if (counterAI is EnemyAI_Uriel) return CanUrielCounterAfterPlayerAttack();
+        if (counterAI is EnemyAI_Pati) return CanPatiCounterAfterPlayerAttack();
 
         return true;
     }
 
-    private bool CanUrielCounterAfterPlayerAttack()
+    private bool CanEnemyCounterAfterPlayerAttack()
     {
         if (combatEnded) return false;
         if (currentEnemyData == null) return false;
@@ -1783,6 +1784,16 @@ public class CombatManager : MonoBehaviour
         if (BreakManager.Instance.IsBroken(false)) return false;
 
         return true;
+    }
+
+    private bool CanUrielCounterAfterPlayerAttack()
+    {
+        return CanEnemyCounterAfterPlayerAttack();
+    }
+
+    private bool CanPatiCounterAfterPlayerAttack()
+    {
+        return CanEnemyCounterAfterPlayerAttack();
     }
 
     public bool ApplyDamageToEntity(bool isPlayerTarget, int damage)
