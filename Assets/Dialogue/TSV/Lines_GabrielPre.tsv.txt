@@ -1,15 +1,15 @@
 lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
-gabriel_pre_001							gabriel_pre_001	None	FALSE	FALSE	FALSE												
-gabriel_pre_002	gabriel	asmodeus	gabriel	bored	strict	name_gabriel	gabriel_pre_002	None	FALSE	FALSE	FALSE												
-gabriel_pre_003	asmodeus	asmodeus	gabriel	tease	strict	name_asmodeus	gabriel_pre_003	None	FALSE	FALSE	FALSE												
-gabriel_pre_004	gabriel	asmodeus	gabriel	tease	panic	name_gabriel	gabriel_pre_004	None	FALSE	FALSE	FALSE												
-gabriel_pre_005							gabriel_pre_005	None	FALSE	FALSE	FALSE												
-gabriel_pre_006	sherry	sherry	gabriel	wink	panic	name_sherry	gabriel_pre_006	None	FALSE	FALSE	FALSE												
-gabriel_pre_007	gabriel	sherry	gabriel	wink	strict	name_gabriel	gabriel_pre_007	None	FALSE	FALSE	FALSE												
-gabriel_pre_008	gabriel	sherry	gabriel	wink	strict	name_gabriel	gabriel_pre_008	None	FALSE	FALSE	FALSE												
-gabriel_pre_009	sherry	sherry	gabriel	mock	strict	name_sherry	gabriel_pre_009	None	FALSE	FALSE	FALSE												
-gabriel_pre_010	karin	sherry	karin	mock	amazed	name_karin	gabriel_pre_010	None	FALSE	FALSE	FALSE												
-gabriel_pre_011	sherry	sherry	karin	easy	amazed	name_sherry	gabriel_pre_011	None	FALSE	FALSE	FALSE												
-gabriel_pre_012	asmodeus	sherry	asmodeus	easy	charming	name_asmodeus	gabriel_pre_012	None	FALSE	FALSE	FALSE												
-gabriel_pre_013	sherry	sherry	asmodeus	smirk	charming	name_sherry	gabriel_pre_013	None	FALSE	FALSE	FALSE												
-gabriel_pre_014	gabriel	sherry	gabriel	smirk	panic	name_gabriel	gabriel_pre_014	LoadNextScene	FALSE	FALSE	FALSE												
+gabriel_pre_001							gabriel_pre_001	None		School			FALSE	FALSE	FALSE								
+gabriel_pre_002	gabriel	asmodeus	gabriel	bored	strict	name_gabriel	gabriel_pre_002	None					FALSE	FALSE	FALSE								
+gabriel_pre_003	asmodeus	asmodeus	gabriel	tease	strict	name_asmodeus	gabriel_pre_003	None					FALSE	FALSE	FALSE								
+gabriel_pre_004	gabriel	asmodeus	gabriel	tease	panic	name_gabriel	gabriel_pre_004	None					FALSE	FALSE	FALSE								
+gabriel_pre_005							gabriel_pre_005	None					FALSE	FALSE	FALSE								
+gabriel_pre_006	sherry	sherry	gabriel	wink	panic	name_sherry	gabriel_pre_006	None					FALSE	FALSE	FALSE								
+gabriel_pre_007	gabriel	sherry	gabriel	wink	strict	name_gabriel	gabriel_pre_007	None					FALSE	FALSE	FALSE								
+gabriel_pre_008	gabriel	sherry	gabriel	wink	strict	name_gabriel	gabriel_pre_008	None					FALSE	FALSE	FALSE								
+gabriel_pre_009	sherry	sherry	gabriel	mock	strict	name_sherry	gabriel_pre_009	None					FALSE	FALSE	FALSE								
+gabriel_pre_010	karin	sherry	karin	mock	amazed	name_karin	gabriel_pre_010	None					FALSE	FALSE	FALSE								
+gabriel_pre_011	sherry	sherry	karin	easy	amazed	name_sherry	gabriel_pre_011	None					FALSE	FALSE	FALSE								
+gabriel_pre_012	asmodeus	sherry	asmodeus	easy	charming	name_asmodeus	gabriel_pre_012	None					FALSE	FALSE	FALSE								
+gabriel_pre_013	sherry	sherry	asmodeus	smirk	charming	name_sherry	gabriel_pre_013	None					FALSE	FALSE	FALSE								
+gabriel_pre_014	gabriel	sherry	gabriel	smirk	panic	name_gabriel	gabriel_pre_014	LoadNextScene					FALSE	FALSE	FALSE								

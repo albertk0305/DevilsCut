@@ -54,8 +54,8 @@ combat_comment_encounter_format,{0} 조우!,Encountered {0}!
 combat_comment_stun_skip_format,{0:은는} 스턴 효과로 행동할 수 없습니다!,{0} cannot act due to stun!
 combat_comment_infinite_void_skip_format,{0:은는} 무량공처의 효과로 행동할 수 없습니다!,{0} cannot act due to Infinite Void!
 combat_comment_player_bleed_dot_format,셰리가 {0}의 출혈 지속 피해를 입습니다.,Sherry takes {0} bleed damage.
-combat_comment_enemy_bleed_dot_format,심연의 출혈! {0:이가} {1}의 지속 피해를 입습니다.,Abyssal Bleed! {0} takes {1} damage over time.
-combat_comment_enemy_burn_dot_format,지옥의 플람베! {0:이가} {1}의 화상 피해를 입습니다.,Hell Flambe! {0} takes {1} burn damage.
+combat_comment_enemy_bleed_dot_format,출혈! {0:이가} {1}의 지속 피해를 입습니다.,Bleed! {0} takes {1} damage over time.
+combat_comment_enemy_burn_dot_format,화상! {0:이가} {1}의 화상 피해를 입습니다.,Burn! {0} takes {1} burn damage.
 combat_comment_last_train_home,라스트 트레인 홈 발동!!,Last Train Home activated!!
 combat_comment_break_recover_format,{0:이가} 그로기 상태에서 정신을 차렸습니다.,{0} recovered from groggy state.
 combat_comment_enemy_turn_format,{0}의 차례입니다!,It is {0}'s turn!
