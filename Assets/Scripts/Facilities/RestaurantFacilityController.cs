@@ -1109,42 +1109,35 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
 
         builder.AppendLine(FormatLocalizedText(levelUpHeaderFormatKey, "Level Up! Lv.{0} \u2192 Lv.{1}", levelUp.oldLevel, levelUp.newLevel));
 
-        AppendGrowthLine(
-            builder,
+        string growthSummary = BuildGrowthSummaryLine(
             (GetLocalizedText(hpStatNameKey, "HP"), growth.maxHp),
             (GetLocalizedText(maxBreakGaugeStatNameKey, "Max Break Gauge"), growth.maxBreakGauge),
-            (GetLocalizedText(breakResistanceStatNameKey, "Break Resistance"), growth.breakResistance));
-        AppendGrowthLine(
-            builder,
+            (GetLocalizedText(breakResistanceStatNameKey, "Break Resistance"), growth.breakResistance),
             (GetLocalizedText(strengthShortStatNameKey, "STR"), growth.strength),
             (GetLocalizedText(defenseShortStatNameKey, "DEF"), growth.defense),
-            (GetLocalizedText(speedShortStatNameKey, "SPD"), growth.speed));
-        AppendGrowthLine(
-            builder,
+            (GetLocalizedText(speedShortStatNameKey, "SPD"), growth.speed),
             (GetLocalizedText(actionPointsShortStatNameKey, "AP"), growth.actionPoints),
             (GetLocalizedText(luckShortStatNameKey, "LUCK"), growth.luck));
+
+        if (!string.IsNullOrEmpty(growthSummary))
+            builder.Append(growthSummary);
 
         return builder.ToString().TrimEnd();
     }
 
-    private void AppendGrowthLine(StringBuilder builder, params (string label, int amount)[] stats)
+    private string BuildGrowthSummaryLine(params (string label, int amount)[] stats)
     {
-        bool hasAny = false;
+        List<string> parts = new List<string>();
 
         foreach ((string label, int amount) stat in stats)
         {
             if (stat.amount <= 0)
                 continue;
 
-            if (hasAny)
-                builder.Append(", ");
-
-            builder.Append($"{stat.label} +{stat.amount}");
-            hasAny = true;
+            parts.Add($"{stat.label} +{stat.amount}");
         }
 
-        if (hasAny)
-            builder.AppendLine();
+        return string.Join(" · ", parts);
     }
 
     private string GetMenuMonologueText(SkillCategory category)

@@ -24,7 +24,7 @@ MonoBehaviour:
   startSkillImage: {fileID: 21300000, guid: f69723d1d7c1a8a418d4018af1f5022a, type: 3}
   battleSkillImage: {fileID: 21300000, guid: a9000af1f17c0774a8a17a4692fb0d7c, type: 3}
   worried: {fileID: 21300000, guid: 88beee60da0082040a6f59d8b9204b81, type: 3}
-  happy: {fileID: 21300000, guid: 1f4e5d3bd9d9de048aba7b3069c6c7e2, type: 3}
+  happy: {fileID: 21300000, guid: 0c9ac23088833864089f886dd2e7847e, type: 3}
   passiveSkillDesc: supporter_passive_shiny_days
   startSkillDesc: supporter_start_apron_boy
   battleSkillDesc: supporter_battle_collage

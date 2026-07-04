@@ -15,109 +15,109 @@ MonoBehaviour:
   rules:
   - battleType: 0
     phase: 1
-    commonWeight: 90
-    rareWeight: 10
+    commonWeight: 88
+    rareWeight: 12
     epicWeight: 0
     legendaryWeight: 0
   - battleType: 0
     phase: 2
-    commonWeight: 80
-    rareWeight: 15
-    epicWeight: 5
+    commonWeight: 75
+    rareWeight: 22
+    epicWeight: 3
     legendaryWeight: 0
   - battleType: 0
     phase: 3
-    commonWeight: 70
-    rareWeight: 20
-    epicWeight: 10
+    commonWeight: 62
+    rareWeight: 30
+    epicWeight: 8
     legendaryWeight: 0
   - battleType: 0
     phase: 4
-    commonWeight: 55
-    rareWeight: 30
+    commonWeight: 45
+    rareWeight: 40
     epicWeight: 15
     legendaryWeight: 0
   - battleType: 0
     phase: 5
-    commonWeight: 40
-    rareWeight: 40
+    commonWeight: 30
+    rareWeight: 50
     epicWeight: 20
     legendaryWeight: 0
   - battleType: 0
     phase: 6
-    commonWeight: 25
-    rareWeight: 45
-    epicWeight: 25
-    legendaryWeight: 5
+    commonWeight: 18
+    rareWeight: 50
+    epicWeight: 32
+    legendaryWeight: 0
   - battleType: 0
     phase: 7
-    commonWeight: 15
-    rareWeight: 40
-    epicWeight: 35
-    legendaryWeight: 10
+    commonWeight: 10
+    rareWeight: 45
+    epicWeight: 45
+    legendaryWeight: 0
   - battleType: 0
     phase: 8
     commonWeight: 5
-    rareWeight: 30
-    epicWeight: 50
-    legendaryWeight: 15
+    rareWeight: 35
+    epicWeight: 60
+    legendaryWeight: 0
   - battleType: 0
     phase: 9
-    commonWeight: 1
-    rareWeight: 15
-    epicWeight: 65
-    legendaryWeight: 19
+    commonWeight: 2
+    rareWeight: 22
+    epicWeight: 75
+    legendaryWeight: 1
   - battleType: 1
     phase: 1
-    commonWeight: 40
-    rareWeight: 50
-    epicWeight: 10
+    commonWeight: 60
+    rareWeight: 35
+    epicWeight: 5
     legendaryWeight: 0
   - battleType: 1
     phase: 2
+    commonWeight: 45
+    rareWeight: 45
+    epicWeight: 10
+    legendaryWeight: 0
+  - battleType: 1
+    phase: 3
     commonWeight: 25
     rareWeight: 55
     epicWeight: 20
     legendaryWeight: 0
   - battleType: 1
-    phase: 3
-    commonWeight: 10
-    rareWeight: 50
-    epicWeight: 35
-    legendaryWeight: 5
-  - battleType: 1
     phase: 4
-    commonWeight: 5
-    rareWeight: 40
-    epicWeight: 45
-    legendaryWeight: 10
+    commonWeight: 10
+    rareWeight: 60
+    epicWeight: 30
+    legendaryWeight: 0
   - battleType: 1
     phase: 5
-    commonWeight: 0
-    rareWeight: 30
-    epicWeight: 55
-    legendaryWeight: 15
+    commonWeight: 5
+    rareWeight: 55
+    epicWeight: 40
+    legendaryWeight: 0
   - battleType: 1
     phase: 6
     commonWeight: 0
-    rareWeight: 15
-    epicWeight: 60
-    legendaryWeight: 25
+    rareWeight: 45
+    epicWeight: 55
+    legendaryWeight: 0
   - battleType: 1
     phase: 7
     commonWeight: 0
-    rareWeight: 5
-    epicWeight: 55
-    legendaryWeight: 40
+    rareWeight: 30
+    epicWeight: 70
+    legendaryWeight: 0
   - battleType: 1
     phase: 8
     commonWeight: 0
-    rareWeight: 0
-    epicWeight: 40
-    legendaryWeight: 60
+    rareWeight: 12
+    epicWeight: 80
+    legendaryWeight: 8
   - battleType: 1
     phase: 9
     commonWeight: 0
     rareWeight: 0
-    epicWeight: 10
-    legendaryWeight: 90
+    epicWeight: 80
+    legendaryWeight: 20

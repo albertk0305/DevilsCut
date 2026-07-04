@@ -549,11 +549,11 @@ public class ClearRecordPlayerProfile : IDisposable
         if (syn.GetValueOrDefault(ItemClass.Gunner) >= 6) luckToCritDmg += 0.5f;
         if (previewInventory.Any(x => x != null && x.data != null && x.data.itemClass == ItemClass.Gunner && x.data.grade == ItemGrade.Legendary))
             luckToCritDmg += 0.25f;
-        modified.critDamage += modified.luck * luckToCritDmg;
+        modified.critDamage += modified.luck * luckToCritDmg * 0.01f;
 
-        if (syn.GetValueOrDefault(ItemClass.Assassin) >= 6) modified.critDamage += modified.ActionPoints * 0.5f;
+        if (syn.GetValueOrDefault(ItemClass.Assassin) >= 6) modified.critDamage += modified.ActionPoints * 0.5f * 0.01f;
         if (previewInventory.Any(x => x != null && x.data != null && x.data.itemClass == ItemClass.Assassin && x.data.grade == ItemGrade.Legendary))
-            modified.critRate += modified.ActionPoints * 0.25f;
+            modified.critRate += modified.ActionPoints * 0.25f * 0.01f;
 
         float spdToStrRatio = 0f;
         if (syn.GetValueOrDefault(ItemClass.Boxer) >= 6) spdToStrRatio += 1.0f;

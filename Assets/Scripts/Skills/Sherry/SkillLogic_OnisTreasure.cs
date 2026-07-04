@@ -14,7 +14,7 @@ public class SkillLogic_OnisTreasure : SkillLogicBase
         {
             int currentLuck = StatManager.Instance.GetEffectiveStat(true, TargetStat.Luck);
 
-            int extraHits = currentLuck / 10;
+            int extraHits = currentLuck / 40;
 
             if (extraHits > 0)
             {

@@ -5421,12 +5421,12 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 2b13d45322677f14dafd3baa82f90506, type: 3}
   - itemClass: 9
     icon: {fileID: 21300000, guid: 6e94fb0499ff0504f8454e44f3bb62b6, type: 3}
-  commonPrice: 600
-  rarePrice: 1600
-  epicPrice: 4500
-  legendaryPrice: 30000
+  commonPrice: 4000
+  rarePrice: 8000
+  epicPrice: 18000
+  legendaryPrice: 85000
   rerollBaseCostBeforeRank2: 200
-  rerollBaseCostAtRank2OrHigher: 150
+  rerollBaseCostAtRank2OrHigher: 200
   rerollCostMultiplier: 2
   operatorIntroTextKey: black_market_mammon_greeting
   baitoIntroTextKey: black_market_baito_greeting
