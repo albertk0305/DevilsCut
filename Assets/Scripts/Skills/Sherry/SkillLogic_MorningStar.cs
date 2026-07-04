@@ -11,7 +11,7 @@ public class SkillLogic_MorningStar : SkillLogicBase, IPerfectEvadeApRecoverySki
 
     [Header("진화 A (Annihilation) - 멸식")]
     [Tooltip("반격 시 셰리의 힘(STR) 스탯에 곱해질 계수")]
-    public float[] pathA_CounterRates = { 0.5f, 0.8f, 1.2f };
+    public float[] pathA_CounterRates = { 4f, 5f, 6f };
 
     [Tooltip("멸식 카운터 발동 시 사용할 전용 이미지 (Icon이 아닌 Action 이미지)")]
     public Sprite counterActionImage;

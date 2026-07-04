@@ -12,9 +12,9 @@ public class SkillLogic_Yurokhwahong : SkillLogicBase
 
     [Header("진화 C (Chilhwapalryeol) - 밸런싱 수정")]
     [Tooltip("레벨별 기본 타수 (Lv1=2, Lv2=3, Lv3=4)")]
-    public int[] pathC_BaseHits = { 2, 3, 4 };
+    public int[] pathC_BaseHits = { 4, 6, 8 };
     [Tooltip("유효 속도(ES) 몇 당 1타씩 추가할지")]
-    public float pathC_SpeedPerHit = 25f;
+    public float pathC_SpeedPerHit = 50f;
 
     // Path C rule.
     public override int GetHitCount(SkillData skill)

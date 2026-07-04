@@ -6,9 +6,9 @@ public class SkillLogic_FantasticDreamer : SkillLogicBase
     [Header("단계별 딜 계수 (1단계 ~ 5단계)")]
     private readonly float[][] stageMultipliers = new float[][]
     {
-        new float[] { 3.0f, 6.0f, 9.0f, 12.0f, 18.0f },
-        new float[] { 4.0f, 7.5f, 11.0f, 15.0f, 22.0f },
-        new float[] { 5.0f, 9.0f, 13.0f, 18.0f, 26.0f }
+        new float[] { 6.0f, 9.0f, 12.0f, 15.0f, 18.0f },
+        new float[] { 8.0f, 11.5f, 15.0f, 18.5f, 22.0f },
+        new float[] { 10.0f, 14.0f, 18.0f, 22.0f, 26.0f }
     };
 
     [Header("단계별 브레이크 수치 (1단계 ~ 5단계)")]
