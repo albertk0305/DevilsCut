@@ -143,12 +143,8 @@ public class BuffSlotUI : MonoBehaviour
     private bool ShouldScalePercentageValue(StatusEffectData data)
     {
         if (data == null) return false;
-        if (data.specialType == SpecialEffectType.AccuracyUp ||
-        data.specialType == SpecialEffectType.EvasionUp ||
-        data.specialType == SpecialEffectType.CritRateUp)
-        {
+        if (ShouldDisplayRawPercentPointValue(data))
             return false;
-        }
 
         if (data.modifierType == ModifierType.Percentage) return true;
 
@@ -162,6 +158,19 @@ public class BuffSlotUI : MonoBehaviour
             default:
                 return false;
         }
+    }
+
+    private bool ShouldDisplayRawPercentPointValue(StatusEffectData data)
+    {
+        if (data == null) return false;
+
+        if (data.specialType == SpecialEffectType.AccuracyUp ||
+            data.specialType == SpecialEffectType.EvasionUp ||
+            data.specialType == SpecialEffectType.CritRateUp)
+            return true;
+
+        return data.effectID == "PermAccuracyBuff" ||
+               data.effectID == "PermEvasionBuff";
     }
 
     public void OnSlotClicked()

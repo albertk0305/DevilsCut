@@ -1106,12 +1106,12 @@ public class PlayerManager : MonoBehaviour
         if (syn.GetValueOrDefault(ItemClass.Gunner) >= 6) luckToCritDmg += 0.5f;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Gunner && x.data.grade == ItemGrade.Legendary))
             luckToCritDmg += 0.25f;
-        modified.critDamage += modified.luck * luckToCritDmg;
+        modified.critDamage += modified.luck * luckToCritDmg * 0.01f;
 
         // Assassin: AP to crit stats.
-        if (syn.GetValueOrDefault(ItemClass.Assassin) >= 6) modified.critDamage += modified.ActionPoints * 0.5f;
+        if (syn.GetValueOrDefault(ItemClass.Assassin) >= 6) modified.critDamage += modified.ActionPoints * 0.5f * 0.01f;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Assassin && x.data.grade == ItemGrade.Legendary))
-            modified.critRate += modified.ActionPoints * 0.25f;
+            modified.critRate += modified.ActionPoints * 0.25f * 0.01f;
 
         // Boxer: SPD to STR.
         float spdToStrRatio = 0f;

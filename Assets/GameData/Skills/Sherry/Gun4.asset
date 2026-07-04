@@ -34,9 +34,9 @@ MonoBehaviour:
   - 1.4
   - 1.2
   bonusCritRates:
-  - 0.2
-  - 0.3
-  - 0.4
+  - 20
+  - 30
+  - 40
   bonusAccuracyRates:
   - 0
   baseAccuracy: 80

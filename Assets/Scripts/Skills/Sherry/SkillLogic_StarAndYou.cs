@@ -11,7 +11,7 @@ public class SkillLogic_StarAndYou : SkillLogicBase
     public float pathA_CriticalSpikeMult = 3.0f;
 
     [Header("진화 B: 내 사랑 (잃은 체력 비례 크리 상승)")]
-    public float[] pathB_MaxCritRateBonus = { 0.3f, 0.4f, 0.5f };
+    public float[] pathB_MaxCritRateBonus = { 30f, 40f, 50f };
     // Damage scaling rule.
     public float[] pathB_MaxCritDmgBonus = { 0.5f, 1.0f, 1.5f };
 

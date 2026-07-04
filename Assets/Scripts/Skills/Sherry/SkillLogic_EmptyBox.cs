@@ -9,7 +9,7 @@ public class SkillLogic_EmptyBox : SkillLogicBase
 
     [Header("진화 A: 회피 버프")]
     public StatusEffectData evasionBuff;
-    public float[] pathA_EvasionRates = { 0.50f, 0.60f, 0.75f };
+    public float[] pathA_EvasionRates = { 50f, 60f, 70f };
 
     [Header("진화 B: 다음 턴 피해 증폭")]
     public StatusEffectData damageGivenAmpBuff;
@@ -44,7 +44,7 @@ public class SkillLogic_EmptyBox : SkillLogicBase
         if (skill.currentEvolution == SkillEvolution.PathA && evasionBuff != null)
         {
             BuffManager.Instance.AddEffect(true, evasionBuff, pathA_EvasionRates[index], 1);
-            DevLog.Log($"[진화 A] 빈 상자! 1턴간 회피율이 {pathA_EvasionRates[index] * 100}% 상승합니다.");
+            DevLog.Log($"[진화 A] 빈 상자! 1턴간 회피율이 {pathA_EvasionRates[index]}% 상승합니다.");
         }
 
         // ---------------------------------------------------------
