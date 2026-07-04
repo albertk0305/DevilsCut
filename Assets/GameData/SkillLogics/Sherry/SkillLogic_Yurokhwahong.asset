@@ -15,5 +15,5 @@ MonoBehaviour:
   pathA_BreakBonusRate: 1
   noEvasionDebuff: {fileID: 11400000, guid: f3516fb4c4536d0448cd5173af7323e2, type: 2}
   pathB_DebuffTurns: 2
-  pathC_BaseHits: 020000000300000004000000
-  pathC_SpeedPerHit: 25
+  pathC_BaseHits: 040000000600000008000000
+  pathC_SpeedPerHit: 50

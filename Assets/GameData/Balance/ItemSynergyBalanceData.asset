@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ecf512bc1b4bf8b8f88e6f4f12b8b7, type: 3}
   m_Name: ItemSynergyBalanceData
   m_EditorClassIdentifier: 
-  saber6TrueDamageConversion: 0.2
-  saberLegendaryTrueDamageConversion: 0.1
-  shielder6DefenseToStrengthMultiplier: 1
-  shielderLegendaryDefenseToStrengthMultiplier: 0.5
-  gunner6LuckToCritDamagePercentPerLuck: 0.5
-  gunnerLegendaryLuckToCritDamagePercentPerLuck: 0.25
-  assassin6ApToCritDamagePercentPerAp: 0.5
-  assassinLegendaryApToCritRatePercentPerAp: 0.25
-  boxer6SpeedToStrengthMultiplier: 1
-  boxerLegendarySpeedToStrengthMultiplier: 0.5
-  beast6MaxHpToStrengthRatio: 0.02
-  beastLegendaryMaxHpToStrengthRatio: 0.01
+  saber6TrueDamageConversion: 0.1
+  saberLegendaryTrueDamageConversion: 0.05
+  shielder6DefenseToStrengthMultiplier: 0.4
+  shielderLegendaryDefenseToStrengthMultiplier: 0.2
+  gunner6LuckToCritDamagePercentPerLuck: 0.2
+  gunnerLegendaryLuckToCritDamagePercentPerLuck: 0.1
+  assassin6ApToCritDamagePercentPerAp: 0.2
+  assassinLegendaryApToCritRatePercentPerAp: 0.1
+  boxer6SpeedToStrengthMultiplier: 0.4
+  boxerLegendarySpeedToStrengthMultiplier: 0.2
+  beast6MaxHpToStrengthRatio: 0.008
+  beastLegendaryMaxHpToStrengthRatio: 0.004
   caster6DamageAmpPerBuff: 0.03
   casterLegendaryDamageAmpPerBuff: 0.02
   trickster6DamageAmpPerDebuff: 0.03

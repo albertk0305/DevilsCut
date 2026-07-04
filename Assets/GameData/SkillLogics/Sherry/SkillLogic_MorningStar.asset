@@ -18,9 +18,9 @@ MonoBehaviour:
   - 30
   - 40
   pathA_CounterRates:
-  - 0.5
-  - 0.8
-  - 1.2
+  - 4
+  - 5
+  - 6
   counterActionImage: {fileID: 21300000, guid: d4873c2ac9818254aab166453d3c87cc, type: 3}
   pathB_ApRecovery: 15
   pathC_ConversionRate: 0.03

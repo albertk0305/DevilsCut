@@ -54,7 +54,7 @@ public class StatManager : MonoBehaviour
                 float epicMaxBonus = 0f;
                 foreach (var bEpic in berserkerEpics)
                 {
-                    epicMaxBonus += bEpic.starLevel == 1 ? 0.05f : (bEpic.starLevel == 2 ? 0.25f : 0.70f);
+                    epicMaxBonus += bEpic.starLevel == 1 ? 0.05f : (bEpic.starLevel == 2 ? 0.25f : 1.00f);
                 }
 
                 if (epicMaxBonus > 0f)

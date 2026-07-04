@@ -56,9 +56,9 @@ MonoBehaviour:
   - 0
   - 0
   finalDamageReduction:
-  - 0.02
-  - 0.1
-  - 0.35
+  - 0.01
+  - 0.05
+  - 0.2
   critRateBonus:
   - 0
   - 0

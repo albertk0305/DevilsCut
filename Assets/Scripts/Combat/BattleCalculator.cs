@@ -186,8 +186,8 @@ public static class BattleCalculator
                         foreach (var saberEpic in saberEpics)
                         {
                             if (saberEpic.starLevel == 1) damageGivenAmp += 0.04f;
-                            else if (saberEpic.starLevel == 2) damageGivenAmp += 0.20f;
-                            else if (saberEpic.starLevel >= 3) damageGivenAmp += 1.00f;
+                            else if (saberEpic.starLevel == 2) damageGivenAmp += 0.15f;
+                            else if (saberEpic.starLevel >= 3) damageGivenAmp += 0.50f;
                         }
                     }
 
@@ -197,15 +197,15 @@ public static class BattleCalculator
                     {
                         if (syn.GetValueOrDefault(ItemClass.Assassin) >= 4)
                         {
-                            damageGivenAmp += (apDiff * 0.01f);
+                            damageGivenAmp += (apDiff * 0.0015f);
                         }
 
                         var assassinEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Assassin && x.data.grade == ItemGrade.Epic);
                         foreach (var assassinEpic in assassinEpics)
                         {
-                            if (assassinEpic.starLevel == 1) damageGivenAmp += (apDiff * 0.005f);
-                            else if (assassinEpic.starLevel == 2) damageGivenAmp += (apDiff * 0.01f);
-                            else if (assassinEpic.starLevel >= 3) damageGivenAmp += (apDiff * 0.015f);
+                            if (assassinEpic.starLevel == 1) damageGivenAmp += (apDiff * 0.0004f);
+                            else if (assassinEpic.starLevel == 2) damageGivenAmp += (apDiff * 0.0015f);
+                            else if (assassinEpic.starLevel >= 3) damageGivenAmp += (apDiff * 0.005f);
                         }
                     }
 
@@ -216,9 +216,9 @@ public static class BattleCalculator
                         var boxerEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Boxer && x.data.grade == ItemGrade.Epic);
                         foreach (var boxerEpic in boxerEpics)
                         {
-                            if (boxerEpic.starLevel == 1) damageGivenAmp += (spdDiff * 0.005f);
-                            else if (boxerEpic.starLevel == 2) damageGivenAmp += (spdDiff * 0.01f);
-                            else if (boxerEpic.starLevel >= 3) damageGivenAmp += (spdDiff * 0.015f);
+                            if (boxerEpic.starLevel == 1) damageGivenAmp += (spdDiff * 0.0004f);
+                            else if (boxerEpic.starLevel == 2) damageGivenAmp += (spdDiff * 0.0015f);
+                            else if (boxerEpic.starLevel >= 3) damageGivenAmp += (spdDiff * 0.005f);
                         }
                     }
 
@@ -256,13 +256,13 @@ public static class BattleCalculator
 
                     if (syn.GetValueOrDefault(ItemClass.Berserker) >= 4)
                     {
-                        damageGivenAmp += (CombatMath.GetMissingHPMultiplier(pStats.maxHp, pStats.currentHp, 0.50f) - 1.0f);
+                        damageGivenAmp += (CombatMath.GetMissingHPMultiplier(pStats.maxHp, pStats.currentHp, 0.20f) - 1.0f);
                     }
 
                     var berserkerRares = inventory.FindAll(x => x.data.itemClass == ItemClass.Berserker && x.data.grade == ItemGrade.Rare);
                     foreach (var bRare in berserkerRares)
                     {
-                        float maxBonus = bRare.starLevel == 1 ? 0.10f : (bRare.starLevel == 2 ? 0.40f : 1.20f);
+                        float maxBonus = bRare.starLevel == 1 ? 0.04f : (bRare.starLevel == 2 ? 0.20f : 0.80f);
                         damageGivenAmp += (CombatMath.GetMissingHPMultiplier(pStats.maxHp, pStats.currentHp, maxBonus) - 1.0f);
                     }
                 }

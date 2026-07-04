@@ -261,6 +261,9 @@ MonoBehaviour:
   - actorID: sherry
     expressionID: softSpeak
     portraitSprite: {fileID: 21300000, guid: a96f9900ce5cdaa4a8621ece2c0f0a27, type: 3}
+  - actorID: sherry
+    expressionID: drunk
+    portraitSprite: {fileID: 21300000, guid: 73549c7122488c643bd1e1a55f97419d, type: 3}
   - actorID: asmodeus
     expressionID: bored
     portraitSprite: {fileID: 21300000, guid: 8be49b6042000764684285d551a5e4f1, type: 3}

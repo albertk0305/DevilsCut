@@ -1026,47 +1026,47 @@ public class PlayerManager : MonoBehaviour
 
         // Tier 2 and 4 synergy bonuses.
         // Saber: 2 points STR +15%, 4 points final damage +30%.
-        if (syn.GetValueOrDefault(ItemClass.Saber) >= 2) pctStr += 0.15f;
-        if (syn.GetValueOrDefault(ItemClass.Saber) >= 4) modified.finalDamageAmp += 0.30f;
+        if (syn.GetValueOrDefault(ItemClass.Saber) >= 2) pctStr += 0.10f;
+        if (syn.GetValueOrDefault(ItemClass.Saber) >= 4) modified.finalDamageAmp += 0.15f;
 
         // Shielder: 2 points DEF +20%, 4 points damage reduction +20%.
-        if (syn.GetValueOrDefault(ItemClass.Shielder) >= 2) pctDef += 0.20f;
-        if (syn.GetValueOrDefault(ItemClass.Shielder) >= 4) modified.finalDamageReduction += 0.20f;
+        if (syn.GetValueOrDefault(ItemClass.Shielder) >= 2) pctDef += 0.10f;
+        if (syn.GetValueOrDefault(ItemClass.Shielder) >= 4) modified.finalDamageReduction += 0.10f;
 
         // Gunner: 2 points LUK +15%, 4 points crit rate +15%.
-        if (syn.GetValueOrDefault(ItemClass.Gunner) >= 2) pctLuck += 0.15f;
+        if (syn.GetValueOrDefault(ItemClass.Gunner) >= 2) pctLuck += 0.10f;
         if (syn.GetValueOrDefault(ItemClass.Gunner) >= 4) modified.critRate += 0.15f;
 
         // Assassin 4-point damage is resolved by CombatManager.
-        if (syn.GetValueOrDefault(ItemClass.Assassin) >= 2) pctAP += 0.15f;
+        if (syn.GetValueOrDefault(ItemClass.Assassin) >= 2) pctAP += 0.10f;
 
-        if (syn.GetValueOrDefault(ItemClass.Boxer) >= 2) pctSpd += 0.20f;
+        if (syn.GetValueOrDefault(ItemClass.Boxer) >= 2) pctSpd += 0.10f;
 
         if (syn.GetValueOrDefault(ItemClass.Boxer) >= 4)
         {
-            modified.bonusAccuracy += 20f;
-            modified.bonusEvasion += 20f;
+            modified.bonusAccuracy += 10f;
+            modified.bonusEvasion += 10f;
         }
 
-        if (syn.GetValueOrDefault(ItemClass.Beast) >= 2) pctMaxHp += 0.15f;
+        if (syn.GetValueOrDefault(ItemClass.Beast) >= 2) pctMaxHp += 0.10f;
         if (syn.GetValueOrDefault(ItemClass.Beast) >= 4) pctBR += 0.20f;
 
         if (syn.GetValueOrDefault(ItemClass.Caster) >= 2) modified.finalDamageAmp += 0.05f;
         if (syn.GetValueOrDefault(ItemClass.Trickster) >= 2) modified.finalDamageAmp += 0.05f;
-        if (syn.GetValueOrDefault(ItemClass.Berserker) >= 2) modified.finalDamageReduction += 0.10f;
+        if (syn.GetValueOrDefault(ItemClass.Berserker) >= 2) modified.finalDamageReduction += 0.05f;
         if (syn.GetValueOrDefault(ItemClass.Demon) >= 2) modified.lifeSteal += 0.03f;
-        if (syn.GetValueOrDefault(ItemClass.Demon) >= 4) modified.healingReceivedAmp += 0.20f;
+        if (syn.GetValueOrDefault(ItemClass.Demon) >= 4) modified.healingReceivedAmp += 0.10f;
 
         var demonEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Epic);
         foreach (var dEpic in demonEpics)
         {
-            if (dEpic.starLevel == 1) modified.healingReceivedAmp += 0.07f;
-            else if (dEpic.starLevel == 2) modified.healingReceivedAmp += 0.27f;
-            else if (dEpic.starLevel >= 3) modified.healingReceivedAmp += 1.00f;
+            if (dEpic.starLevel == 1) modified.healingReceivedAmp += 0.03f;
+            else if (dEpic.starLevel == 2) modified.healingReceivedAmp += 0.12f;
+            else if (dEpic.starLevel >= 3) modified.healingReceivedAmp += 0.50f;
         }
 
         // LoneWolf scales exponentially by rejected supporter count.
-        float[] loneWolfAmps = { 0f, 0.05f, 0.10f, 0.20f, 0.40f, 0.75f, 1.30f, 2.00f };
+        float[] loneWolfAmps = { 0f, 0.03f, 0.05f, 0.08f, 0.15f, 0.30f, 0.60f, 1.00f };
         int rejectCount = Mathf.Clamp(stats.rejectedSupporterCount, 0, 7);
         float loneWolfBuff = loneWolfAmps[rejectCount];
 
