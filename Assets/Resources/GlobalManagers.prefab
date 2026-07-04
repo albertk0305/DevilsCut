@@ -102,12 +102,12 @@ MonoBehaviour:
     level: 100
     maxExp: 100
     currentExp: 0
-    maxHp: 10
-    currentHp: 10
+    maxHp: 10000
+    currentHp: 10000
     ActionPoints: 100
     breakResistance: 100
     maxBreakGauge: 100
-    strength: 10000
+    strength: 100
     defense: 100
     speed: 100
     luck: 100

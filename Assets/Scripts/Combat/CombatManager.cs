@@ -1114,7 +1114,7 @@ public class CombatManager : MonoBehaviour
         if (context.presentation.isPureUtility) return;
         if (currentEnemyData == null) return;
         if (!(currentEnemyData.aiBrain is IEnemySkillDamageCounter counterAI)) return;
-        if (!counterAI.CanCounterAfterSkillDamage()) return;
+        if (!CanEnemySkillDamageCounterTrigger(counterAI)) return;
 
         BattleVisualizer.Instance.EnqueueDelay(timing.enemyCounterPreDelay);   // 히트 여운
         BattleVisualizer.Instance.EnqueueAction(TryTriggerEnemyCounterAfterEnemyTakesSkillDamage);
@@ -1733,7 +1733,7 @@ public class CombatManager : MonoBehaviour
     {
         if (currentEnemyData == null) return;
         if (!(currentEnemyData.aiBrain is IEnemySkillDamageCounter counterAI)) return;
-        if (!counterAI.CanCounterAfterSkillDamage()) return;
+        if (!CanEnemySkillDamageCounterTrigger(counterAI)) return;
         if (currentState.hasTriggeredEnemyCounterThisSkill) return;
         if (currentEnemyHp <= 0) return;
 
@@ -1763,6 +1763,26 @@ public class CombatManager : MonoBehaviour
         else
             CombatUIManager.Instance.InterruptAndTypeCommentary(counterMessageFallback);
         DevLog.Log($"[Enemy Counter] Counter damage {counterDamage}.");
+    }
+
+    private bool CanEnemySkillDamageCounterTrigger(IEnemySkillDamageCounter counterAI)
+    {
+        if (counterAI == null) return false;
+        if (!counterAI.CanCounterAfterSkillDamage()) return false;
+        if (counterAI is EnemyAI_Uriel) return CanUrielCounterAfterPlayerAttack();
+
+        return true;
+    }
+
+    private bool CanUrielCounterAfterPlayerAttack()
+    {
+        if (combatEnded) return false;
+        if (currentEnemyData == null) return false;
+        if (currentEnemyHp <= 0) return false;
+        if (BreakManager.Instance == null) return false;
+        if (BreakManager.Instance.IsBroken(false)) return false;
+
+        return true;
     }
 
     public bool ApplyDamageToEntity(bool isPlayerTarget, int damage)

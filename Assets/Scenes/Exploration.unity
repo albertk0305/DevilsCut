@@ -2870,7 +2870,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f964aeca8bc9b61489ac034e53915db4, type: 2}
   finalBoss: {fileID: 11400000, guid: 192190b9551cbff4c848293d78575f8b, type: 2}
   trueFinalBoss: {fileID: 11400000, guid: 2fd74834f772af842940fc981481e673, type: 2}
-  currentTargetBoss: {fileID: 11400000, guid: f5f2f0d3088bbd845b922d39e3baac91, type: 2}
+  currentTargetBoss: {fileID: 11400000, guid: e85faee9f42677d4ab2fd90fea94e782, type: 2}
 --- !u!4 &1223019333
 Transform:
   m_ObjectHideFlags: 0
