@@ -5,7 +5,7 @@ speaker_karin	카린	Karin
 speaker_asmodeus	아스모데우스	Asmodeus
 asmodeus_affinity_02_001_body	셰리. 저쪽 테이블에서 특이한 의식이 진행 중입니다.	Sherry. A peculiar ritual is taking place at that table.
 asmodeus_affinity_02_002_body	의식?	A ritual?
-asmodeus_affinity_02_003_body	후와후와~ 퓨어퓨어! 미라크르~ 뀽~ 오므라이스 씨~ 맛있어져라~	Fluffy fluffy~ Pure pure! Miracle~ Kyung~ Mister omurice~ become delicious~
+asmodeus_affinity_02_003_body	후와후와~ 퓨어퓨어! 미라크르~ 큥~ 오므라이스 씨~ 맛있어져라~	Fluffy fluffy~ Pure pure! Miracle~ Kyung~ Mister omurice~ become delicious~
 asmodeus_affinity_02_004_body	아스모데우스가 양손으로 하트를 만들자, 테이블의 손님들이 기쁜 얼굴로 박수를 쳤다.	When Asmodeus made a heart with both hands, the guests at the table clapped with delighted faces.
 asmodeus_affinity_02_005_body	아아, 저건 의식이 아니라 주문이야.	Ah, that is not a ritual. It is a charm.
 asmodeus_affinity_02_006_body	질문이 있습니다. 저 주문은 실제로 맛에 영향을 줍니까?	Karin has a question. Does that charm actually affect the taste?
@@ -28,9 +28,9 @@ asmodeus_affinity_02_022_body	표정 지시까지 들어가나...	It even comes 
 asmodeus_affinity_02_023_body	갑니다! 후와후와~ 퓨어퓨어!	Here we go! Fluffy fluffy~ Pure pure!
 asmodeus_affinity_02_024_body	후와후와~ 퓨어퓨어!	Fluffy fluffy~ Pure pure!
 asmodeus_affinity_02_025_body	후와후와... 퓨어... 퓨어...	Fluffy fluffy... pure... pure...
-asmodeus_affinity_02_026_body	미라크르~ 뀽~	Miracle~ kyung~
-asmodeus_affinity_02_027_body	미라크르~ 뀽~	Miracle~ kyung~
-asmodeus_affinity_02_028_body	미라... 크르... 뀽...	Mira... cle... kyung...
+asmodeus_affinity_02_026_body	미라크르~ 큥~	Miracle~ kyung~
+asmodeus_affinity_02_027_body	미라크르~ 큥~	Miracle~ kyung~
+asmodeus_affinity_02_028_body	미라... 크르... 큥...	Mira... cle... kyung...
 asmodeus_affinity_02_029_body	오므라이스 씨~ 맛있어져라~	Mister omurice~ become delicious~
 asmodeus_affinity_02_030_body	오므라이스 씨~ 맛있어져라~	Mister omurice~ become delicious~
 asmodeus_affinity_02_031_body	오므라이스 씨... 맛있어져라...	Mister omurice... become delicious...

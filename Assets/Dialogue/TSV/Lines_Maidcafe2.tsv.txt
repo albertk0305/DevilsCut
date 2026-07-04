@@ -2,7 +2,7 @@ lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	spe
 asmodeus_affinity_02_001	karin	sherry	karin	smile	curious	speaker_karin	asmodeus_affinity_02_001_body			MaidCafe			FALSE	FALSE	FALSE								
 asmodeus_affinity_02_002	sherry	sherry	karin	curious	curious	speaker_sherry	asmodeus_affinity_02_002_body						FALSE	FALSE	FALSE								
 asmodeus_affinity_02_003	asmodeus	karin	asmodeus	curious	happy	speaker_asmodeus	asmodeus_affinity_02_003_body						FALSE	FALSE	FALSE								
-asmodeus_affinity_02_004	narration					speaker_narration	asmodeus_affinity_02_004_body						FALSE	FALSE	FALSE								
+asmodeus_affinity_02_004							asmodeus_affinity_02_004_body						FALSE	FALSE	FALSE								
 asmodeus_affinity_02_005	sherry	sherry	asmodeus	greasy	happy	speaker_sherry	asmodeus_affinity_02_005_body						FALSE	FALSE	FALSE								
 asmodeus_affinity_02_006	karin	sherry	karin	greasy	curious	speaker_karin	asmodeus_affinity_02_006_body						FALSE	FALSE	FALSE								
 asmodeus_affinity_02_007	sherry	sherry	karin	thinking	curious	speaker_sherry	asmodeus_affinity_02_007_body						FALSE	FALSE	FALSE								
@@ -39,4 +39,4 @@ asmodeus_affinity_02_037	asmodeus	sherry	asmodeus	embarassed	cheerful	speaker_as
 asmodeus_affinity_02_038	karin	sherry	karin	embarassed	smile	speaker_karin	asmodeus_affinity_02_038_body						FALSE	FALSE	FALSE								
 asmodeus_affinity_02_039	asmodeus	sherry	asmodeus	embarassed	cheerful	speaker_asmodeus	asmodeus_affinity_02_039_body						FALSE	FALSE	FALSE								
 asmodeus_affinity_02_040	sherry	sherry	asmodeus	exEmbarassed	cheerful	speaker_sherry	asmodeus_affinity_02_040_body						FALSE	FALSE	FALSE								
-asmodeus_affinity_02_041	narration					speaker_narration	asmodeus_affinity_02_041_body	UpgradePendingFacilityRank					FALSE	FALSE	FALSE								
+asmodeus_affinity_02_041							asmodeus_affinity_02_041_body	UpgradePendingFacilityRank					FALSE	FALSE	FALSE								

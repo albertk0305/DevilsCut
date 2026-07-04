@@ -1,8 +1,8 @@
 Key	Korean	English
-speaker_narration	나레이션	Narration
+		
 speaker_sherry	셰리	Sherry
 speaker_karin	카린	Karin
-speaker_beelzebub	바알제붑	Beelzebub
+speaker_baalzebub	바알제붑	Baalzebub
 beelzebub_affinity_01_001_body	자, 기다리던 쇼유라멘 나왔다. 뜨거울 때 먹어라.	Here it is, the shoyu ramen you were waiting for. Eat it while it is hot.
 beelzebub_affinity_01_002_body	질문이 있습니다. 라멘은 어떤 순서로 섭취하는 것이 가장 합리적입니까?	I have a question. What is the most rational order for consuming ramen?
 beelzebub_affinity_01_003_body	좋은 질문이네. 내가 오래된 깨달음 하나를 나눠줄 때가 왔군.	Good question. It seems the time has come for me to share an old realization.

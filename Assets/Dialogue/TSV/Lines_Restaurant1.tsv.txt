@@ -1,33 +1,33 @@
 lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
-beelzebub_affinity_01_001	beelzebub	sherry	beelzebub	smile	happy	speaker_beelzebub	beelzebub_affinity_01_001_body			Restaurant			FALSE	FALSE	FALSE								
+beelzebub_affinity_01_001	baalzebub	sherry	baalzebub	smile	happy	speaker_baalzebub	beelzebub_affinity_01_001_body			Restaurant			FALSE	FALSE	FALSE								
 beelzebub_affinity_01_002	karin	sherry	karin	smile	curious	speaker_karin	beelzebub_affinity_01_002_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_003	sherry	sherry	karin	easy	curious	speaker_sherry	beelzebub_affinity_01_003_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_01_004	beelzebub	sherry	beelzebub	easy	smile	speaker_beelzebub	beelzebub_affinity_01_004_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_01_004	baalzebub	sherry	baalzebub	easy	smile	speaker_baalzebub	beelzebub_affinity_01_004_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_005	karin	sherry	karin	easy	amazed	speaker_karin	beelzebub_affinity_01_005_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_006	sherry	sherry	karin	smile	amazed	speaker_sherry	beelzebub_affinity_01_006_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_01_007	beelzebub	sherry	beelzebub	smile	happy	speaker_beelzebub	beelzebub_affinity_01_007_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_01_007	baalzebub	sherry	baalzebub	smile	happy	speaker_baalzebub	beelzebub_affinity_01_007_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_008	karin	sherry	karin	smile	smile	speaker_karin	beelzebub_affinity_01_008_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_01_009	beelzebub	sherry	beelzebub	smile	panic	speaker_beelzebub	beelzebub_affinity_01_009_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_01_009	baalzebub	sherry	baalzebub	smile	panic	speaker_baalzebub	beelzebub_affinity_01_009_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_010	karin	sherry	karin	smile	awkward	speaker_karin	beelzebub_affinity_01_010_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_011	sherry	sherry	karin	greasy	awkward	speaker_sherry	beelzebub_affinity_01_011_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_012	sherry	sherry	karin	smirk	curious	speaker_sherry	beelzebub_affinity_01_012_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_013	karin	sherry	karin	smirk	curious	speaker_karin	beelzebub_affinity_01_013_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_014	sherry	sherry	karin	easy	curious	speaker_sherry	beelzebub_affinity_01_014_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_01_015	beelzebub	sherry	beelzebub	easy	happy	speaker_beelzebub	beelzebub_affinity_01_015_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_01_015	baalzebub	sherry	baalzebub	easy	happy	speaker_baalzebub	beelzebub_affinity_01_015_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_016	karin	sherry	karin	easy	speechless	speaker_karin	beelzebub_affinity_01_016_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_017	sherry	sherry	karin	greasy	speechless	speaker_sherry	beelzebub_affinity_01_017_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_018	karin	sherry	karin	greasy	confront	speaker_karin	beelzebub_affinity_01_018_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_019	sherry	sherry	karin	easy	confront	speaker_sherry	beelzebub_affinity_01_019_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_01_020	beelzebub	sherry	beelzebub	easy	smile	speaker_beelzebub	beelzebub_affinity_01_020_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_01_021	sherry	sherry	beelzebub	smirk	smile	speaker_sherry	beelzebub_affinity_01_021_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_01_020	baalzebub	sherry	baalzebub	easy	smile	speaker_baalzebub	beelzebub_affinity_01_020_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_01_021	sherry	sherry	baalzebub	smirk	smile	speaker_sherry	beelzebub_affinity_01_021_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_022	karin	sherry	karin	smirk	tired	speaker_karin	beelzebub_affinity_01_022_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_01_023	beelzebub	sherry	beelzebub	smirk	laugh	speaker_beelzebub	beelzebub_affinity_01_023_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_01_024	sherry	sherry	beelzebub	smug	laugh	speaker_sherry	beelzebub_affinity_01_024_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_01_023	baalzebub	sherry	baalzebub	smirk	laugh	speaker_baalzebub	beelzebub_affinity_01_023_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_01_024	sherry	sherry	baalzebub	smug	laugh	speaker_sherry	beelzebub_affinity_01_024_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_025	karin	sherry	karin	smug	tired	speaker_karin	beelzebub_affinity_01_025_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_01_026	beelzebub	sherry	beelzebub	smug	smile	speaker_beelzebub	beelzebub_affinity_01_026_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_01_027	beelzebub	sherry	beelzebub	smug	neutral	speaker_beelzebub	beelzebub_affinity_01_027_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_01_028	beelzebub	sherry	beelzebub	smug	happy	speaker_beelzebub	beelzebub_affinity_01_028_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_01_029	sherry	sherry	beelzebub	excited	happy	speaker_sherry	beelzebub_affinity_01_029_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_01_026	baalzebub	sherry	baalzebub	smug	smile	speaker_baalzebub	beelzebub_affinity_01_026_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_01_027	baalzebub	sherry	baalzebub	smug	neutral	speaker_baalzebub	beelzebub_affinity_01_027_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_01_028	baalzebub	sherry	baalzebub	smug	happy	speaker_baalzebub	beelzebub_affinity_01_028_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_01_029	sherry	sherry	baalzebub	excited	happy	speaker_sherry	beelzebub_affinity_01_029_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_01_030	karin	sherry	karin	excited	confront	speaker_karin	beelzebub_affinity_01_030_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_01_031	beelzebub	sherry	beelzebub	excited	smile	speaker_beelzebub	beelzebub_affinity_01_031_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_01_032	narration					speaker_narration	beelzebub_affinity_01_032_body	UpgradePendingFacilityRank					FALSE	FALSE	FALSE								
+beelzebub_affinity_01_031	baalzebub	sherry	baalzebub	excited	smile	speaker_baalzebub	beelzebub_affinity_01_031_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_01_032							beelzebub_affinity_01_032_body	UpgradePendingFacilityRank					FALSE	FALSE	FALSE								

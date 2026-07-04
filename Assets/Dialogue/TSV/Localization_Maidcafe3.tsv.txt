@@ -25,7 +25,7 @@ asmodeus_affinity_03_019_body	뭔데?	What?
 asmodeus_affinity_03_020_body	아스모는 귀여운 척하는 게 아니라, 원래 귀엽다구요!	Asmo is not acting cute. Asmo is naturally cute!
 asmodeus_affinity_03_021_body	그래 그래. 귀여운 메이드 씨.	Sure, sure. Miss Cute Maid.
 asmodeus_affinity_03_022_body	에헤헤. 인정이 빠르네요.	Ehehe. You accepted that quickly.
-asmodeus_affinity_03_023_body	하지만 네가 이대로 무리하면, 널 보러 온 주인님들이 오히려 걱정할걸. 프로라면 웃는 법만큼 쉬는 법도 알아야지.	But if you push yourself like this, the masters who came to see you will worry instead. A pro needs to know how to rest as much as how to smile.
+asmodeus_affinity_03_023_body	하지만 네가 이대로 무리하면, 널 보러 온 손님들이 오히려 걱정할걸. 프로라면 웃는 법만큼 쉬는 법도 알아야지.	But if you push yourself like this, the guests who came to see you will worry instead. A pro needs to know how to rest as much as how to smile.
 asmodeus_affinity_03_024_body	으으... 확실히 그렇네요.	Ugh... That is true.
 asmodeus_affinity_03_025_body	그럼 주인님들 앞에서 최고로 반짝반짝 웃을 수 있도록, 아스모 잠깐 충전하고 올게요.	Then Asmo will recharge for a little while so she can smile her sparkliest in front of the masters.
 asmodeus_affinity_03_026_body	셰리. 저희는 충분히 쉰 것 같습니다. 이제 의뢰를 마저 진행합니까?	Sherry. It appears that we have rested enough. Shall we continue the job now?

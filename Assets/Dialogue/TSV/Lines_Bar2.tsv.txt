@@ -5,10 +5,10 @@ lucifer_affinity_02_003	karin	sherry	karin	easy	curious	speaker_karin	lucifer_af
 lucifer_affinity_02_004	sherry	sherry	karin	smile	curious	speaker_sherry	lucifer_affinity_02_004_body						FALSE	FALSE	FALSE								
 lucifer_affinity_02_005	karin	sherry	karin	smile	curious	speaker_karin	lucifer_affinity_02_005_body						FALSE	FALSE	FALSE								
 lucifer_affinity_02_006	sherry	sherry	karin	perplexed	curious	speaker_sherry	lucifer_affinity_02_006_body						FALSE	FALSE	FALSE								
-lucifer_affinity_02_007	lucifer	sherry	lucifer	perplexed	nerutral	speaker_lucifer	lucifer_affinity_02_007_body						FALSE	FALSE	FALSE								
-lucifer_affinity_02_008	lucifer	sherry	lucifer	perplexed	nerutral	speaker_lucifer	lucifer_affinity_02_008_body						FALSE	FALSE	FALSE								
-lucifer_affinity_02_009	karin	karin	lucifer	amazed	nerutral	speaker_karin	lucifer_affinity_02_009_body						FALSE	FALSE	FALSE								
+lucifer_affinity_02_007	lucifer	sherry	lucifer	perplexed	neutral	speaker_lucifer	lucifer_affinity_02_007_body						FALSE	FALSE	FALSE								
+lucifer_affinity_02_008	lucifer	sherry	lucifer	perplexed	neutral	speaker_lucifer	lucifer_affinity_02_008_body						FALSE	FALSE	FALSE								
+lucifer_affinity_02_009	karin	karin	lucifer	amazed	neutral	speaker_karin	lucifer_affinity_02_009_body						FALSE	FALSE	FALSE								
 lucifer_affinity_02_010	lucifer	karin	lucifer	amazed	happy	speaker_lucifer	lucifer_affinity_02_010_body						FALSE	FALSE	FALSE								
 lucifer_affinity_02_011	sherry	sherry	lucifer	smile	happy	speaker_sherry	lucifer_affinity_02_011_body						FALSE	FALSE	FALSE								
-lucifer_affinity_02_012	lucifer	sherry	lucifer	smile	embarrassed	speaker_lucifer	lucifer_affinity_02_012_body						FALSE	FALSE	FALSE								
+lucifer_affinity_02_012	lucifer	sherry	lucifer	smile	embarassed	speaker_lucifer	lucifer_affinity_02_012_body						FALSE	FALSE	FALSE								
 lucifer_affinity_02_013	narration					speaker_narration	lucifer_affinity_02_013_body	UpgradePendingFacilityRank					FALSE	FALSE	FALSE								

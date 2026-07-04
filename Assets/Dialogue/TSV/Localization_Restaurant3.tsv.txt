@@ -1,8 +1,8 @@
 Key	Korean	English
-speaker_narration	나레이션	Narration
+		
 speaker_sherry	셰리	Sherry
 speaker_karin	카린	Karin
-speaker_beelzebub	바알제붑	Beelzebub
+speaker_baalzebub	바알제붑	Baalzebub
 beelzebub_affinity_03_001_body	의뢰와 외상 빚에 얽매이지 않고, 행복하게 공복을 채울 때 나는 자유로워진다.	When I am free from jobs and unpaid tabs and fill my empty stomach with happiness, I become free.
 beelzebub_affinity_03_002_body	오늘은 뭘로 할까.	What should I have today?
 beelzebub_affinity_03_003_body	미소라멘. 짭조름한 깊이와 부드러운 여운. 오늘 같은 날엔 나쁘지 않아.	Miso ramen. Salty depth and a gentle aftertaste. Not bad for a day like this.

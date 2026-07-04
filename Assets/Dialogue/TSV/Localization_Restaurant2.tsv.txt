@@ -1,8 +1,8 @@
 Key	Korean	English
-speaker_narration	나레이션	Narration
+		
 speaker_sherry	셰리	Sherry
 speaker_karin	카린	Karin
-speaker_beelzebub	바알제붑	Beelzebub
+speaker_baalzebub	바알제붑	Baalzebub
 beelzebub_affinity_02_001_body	바알제붑 씨. 교자는 신기합니다.	Beelzebub. Gyoza is fascinating.
 beelzebub_affinity_02_002_body	오냐. 어떤 부분이 신기하냐?	Oh yeah? What part of it fascinates you?
 beelzebub_affinity_02_003_body	아래쪽은 바삭하고, 위쪽은 촉촉합니다. 서로 반대되는 상태가 동시에 존재합니다.	The bottom is crispy, while the top is moist. Opposite states exist at the same time.
