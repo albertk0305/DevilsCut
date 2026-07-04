@@ -72,6 +72,7 @@ public sealed class DamageResolutionService
             {
                 var syn = PlayerManager.Instance.GetCurrentSynergies();
                 var inventory = PlayerManager.Instance.inventory;
+                ItemSynergyBalanceData synergyBalance = ItemSynergyBalanceData.Resolve();
 
                 int berserkerPoints = 0;
                 if (syn != null)
@@ -79,7 +80,7 @@ public sealed class DamageResolutionService
                     syn.TryGetValue(ItemClass.Berserker, out berserkerPoints);
                 }
 
-                bool has6Point = berserkerPoints >= 6;
+                bool has6Point = berserkerPoints >= 6 && synergyBalance.berserker6DeathGuardEnabled;
                 bool hasLegendary = inventory.Exists(x =>
                     x.data.itemClass == ItemClass.Berserker &&
                     x.data.grade == ItemGrade.Legendary);
@@ -89,7 +90,7 @@ public sealed class DamageResolutionService
                     currentState.hasResurrected = true;
                     currentState.currentTurnDeathGuardActive = true;
 
-                    if (has6Point && hasLegendary)
+                    if (has6Point && hasLegendary && synergyBalance.berserkerLegendaryFullHealWith6Point)
                     {
                         currentPlayerStats.currentHp = currentPlayerStats.maxHp;
                         DevLog.Log("[불굴의 투지+전설] 치명상을 입었으나, 최대 체력으로 부활합니다!");

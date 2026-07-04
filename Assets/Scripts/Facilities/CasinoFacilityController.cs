@@ -793,13 +793,13 @@ public class CasinoFacilityController : FacilitySceneControllerBase
         switch (outcome)
         {
             case CasinoSlotOutcome.Pair:
-                return 5000;
+                return 6000;
             case CasinoSlotOutcome.Triple:
-                return 20000;
+                return 15000;
             case CasinoSlotOutcome.Jackpot:
-                return 77777;
+                return 35000;
             default:
-                return 0;
+                return 2000;
         }
     }
 

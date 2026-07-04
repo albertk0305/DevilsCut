@@ -122,6 +122,11 @@ public class PlayerManager : MonoBehaviour
     [Header("플레이어 스탯")]
     public PlayerStats stats = new PlayerStats();
 
+    [Header("Item Synergy Balance")]
+    [SerializeField] private ItemSynergyBalanceData itemSynergyBalanceData;
+
+    public ItemSynergyBalanceData ItemSynergyBalance => itemSynergyBalanceData != null ? itemSynergyBalanceData : ItemSynergyBalanceData.Default;
+
     [Header("조력자 파티 관리")]
     public List<SupporterData> unlockedSupporters = new List<SupporterData>();
     public List<SupporterChoiceRecord> supporterChoiceRecords = new List<SupporterChoiceRecord>();
@@ -1017,6 +1022,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         var syn = GetCurrentSynergies();
+        ItemSynergyBalanceData synergyBalance = ItemSynergyBalance;
 
         // Tier 2 and 4 synergy bonuses.
         // Saber: 2 points STR +15%, 4 points final damage +30%.
@@ -1090,41 +1096,41 @@ public class PlayerManager : MonoBehaviour
         // Tier 6 and legendary conversions use finalized stats.
 
         // Saber: true damage conversion.
-        if (syn.GetValueOrDefault(ItemClass.Saber) >= 6) modified.trueDamageConversion += 0.20f;
+        if (syn.GetValueOrDefault(ItemClass.Saber) >= 6) modified.trueDamageConversion += synergyBalance.saber6TrueDamageConversion;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Saber && x.data.grade == ItemGrade.Legendary))
-            modified.trueDamageConversion += 0.10f;
+            modified.trueDamageConversion += synergyBalance.saberLegendaryTrueDamageConversion;
 
         // Shielder: DEF to STR.
         float defToStrRatio = 0f;
-        if (syn.GetValueOrDefault(ItemClass.Shielder) >= 6) defToStrRatio += 1.0f;
+        if (syn.GetValueOrDefault(ItemClass.Shielder) >= 6) defToStrRatio += synergyBalance.shielder6DefenseToStrengthMultiplier;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Shielder && x.data.grade == ItemGrade.Legendary))
-            defToStrRatio += 0.5f;
+            defToStrRatio += synergyBalance.shielderLegendaryDefenseToStrengthMultiplier;
         modified.strength += Mathf.RoundToInt(modified.defense * defToStrRatio);
 
         // Gunner: LUK to crit damage.
         float luckToCritDmg = 0f;
-        if (syn.GetValueOrDefault(ItemClass.Gunner) >= 6) luckToCritDmg += 0.5f;
+        if (syn.GetValueOrDefault(ItemClass.Gunner) >= 6) luckToCritDmg += synergyBalance.gunner6LuckToCritDamagePercentPerLuck;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Gunner && x.data.grade == ItemGrade.Legendary))
-            luckToCritDmg += 0.25f;
+            luckToCritDmg += synergyBalance.gunnerLegendaryLuckToCritDamagePercentPerLuck;
         modified.critDamage += modified.luck * luckToCritDmg * 0.01f;
 
         // Assassin: AP to crit stats.
-        if (syn.GetValueOrDefault(ItemClass.Assassin) >= 6) modified.critDamage += modified.ActionPoints * 0.5f * 0.01f;
+        if (syn.GetValueOrDefault(ItemClass.Assassin) >= 6) modified.critDamage += modified.ActionPoints * synergyBalance.assassin6ApToCritDamagePercentPerAp * 0.01f;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Assassin && x.data.grade == ItemGrade.Legendary))
-            modified.critRate += modified.ActionPoints * 0.25f * 0.01f;
+            modified.critRate += modified.ActionPoints * synergyBalance.assassinLegendaryApToCritRatePercentPerAp * 0.01f;
 
         // Boxer: SPD to STR.
         float spdToStrRatio = 0f;
-        if (syn.GetValueOrDefault(ItemClass.Boxer) >= 6) spdToStrRatio += 1.0f;
+        if (syn.GetValueOrDefault(ItemClass.Boxer) >= 6) spdToStrRatio += synergyBalance.boxer6SpeedToStrengthMultiplier;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Boxer && x.data.grade == ItemGrade.Legendary))
-            spdToStrRatio += 0.5f;
+            spdToStrRatio += synergyBalance.boxerLegendarySpeedToStrengthMultiplier;
         modified.strength += Mathf.RoundToInt(modified.speed * spdToStrRatio);
 
         // Beast: MaxHP to STR.
         float hpToStrRatio = 0f;
-        if (syn.GetValueOrDefault(ItemClass.Beast) >= 6) hpToStrRatio += 0.02f;
+        if (syn.GetValueOrDefault(ItemClass.Beast) >= 6) hpToStrRatio += synergyBalance.beast6MaxHpToStrengthRatio;
         if (inventory.Any(x => x.data.itemClass == ItemClass.Beast && x.data.grade == ItemGrade.Legendary))
-            hpToStrRatio += 0.01f;
+            hpToStrRatio += synergyBalance.beastLegendaryMaxHpToStrengthRatio;
         modified.strength += Mathf.RoundToInt(modified.maxHp * hpToStrRatio);
 
 

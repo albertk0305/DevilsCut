@@ -177,6 +177,7 @@ public static class BattleCalculator
                 {
                     var syn = PlayerManager.Instance.GetCurrentSynergies();
                     var inventory = PlayerManager.Instance.inventory;
+                    ItemSynergyBalanceData synergyBalance = ItemSynergyBalanceData.Resolve();
 
                     // Saber epic: bonus damage against enemies at 70% HP or higher.
                     if (defenderMaxHp > 0 && ((float)defenderCurrentHp / defenderMaxHp) >= 0.7f)
@@ -230,11 +231,11 @@ public static class BattleCalculator
                     if (activeBuffCount > 0)
                     {
                         if (syn.GetValueOrDefault(ItemClass.Caster) >= 6)
-                            damageGivenAmp += (activeBuffCount * 0.03f);
+                            damageGivenAmp += (activeBuffCount * synergyBalance.caster6DamageAmpPerBuff);
 
                         var casterLegendary = inventory.Find(x => x.data.itemClass == ItemClass.Caster && x.data.grade == ItemGrade.Legendary);
                         if (casterLegendary != null)
-                            damageGivenAmp += (activeBuffCount * 0.02f);
+                            damageGivenAmp += (activeBuffCount * synergyBalance.casterLegendaryDamageAmpPerBuff);
                     }
 
                     int activeDebuffCount = 0;
@@ -246,11 +247,11 @@ public static class BattleCalculator
                     if (activeDebuffCount > 0)
                     {
                         if (syn.GetValueOrDefault(ItemClass.Trickster) >= 6)
-                            damageGivenAmp += (activeDebuffCount * 0.03f);
+                            damageGivenAmp += (activeDebuffCount * synergyBalance.trickster6DamageAmpPerDebuff);
 
                         var tricksterLegendary = inventory.Find(x => x.data.itemClass == ItemClass.Trickster && x.data.grade == ItemGrade.Legendary);
                         if (tricksterLegendary != null)
-                            damageGivenAmp += (activeDebuffCount * 0.02f);
+                            damageGivenAmp += (activeDebuffCount * synergyBalance.tricksterLegendaryDamageAmpPerDebuff);
                     }
 
                     if (syn.GetValueOrDefault(ItemClass.Berserker) >= 4)

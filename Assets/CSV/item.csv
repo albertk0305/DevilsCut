@@ -10,13 +10,13 @@ item_chainsaw_blood_desc,악마의 힘이 깃들어 있는 전기톱. 피비린�
 item_chainsaw_blood_bonus,적의 체력이 70% 이상일때 (4%/20%/100%)만큼 추가 피해를 줍니다,Deals (4%/20%/100%) additional damage when the enemy's HP is 70% or higher.
 item_brave_shine_name,Brave Shine,Brave Shine
 item_brave_shine_desc,빛의 왕자가 사용하던 인과를 역전시키는 창.,A spear once wielded by the prince of light that reverses causality.
-item_brave_shine_bonus,스킬 데미지의 10%를 방어 무시 고정 피해로 전환합니다,Converts 10% of skill damage into fixed damage that ignores defense.
+item_brave_shine_bonus,스킬 데미지의 5%를 방어 무시 고정 피해로 전환합니다,Converts 5% of skill damage into fixed damage that ignores defense.
 syn_flower_song_name,꽃의 노래,Flower Song
 syn_flower_song_desc,힘이 15% 상승합니다,Strength increases by 15%.
 syn_ring_your_bell_name,Ring your bell,Ring Your Bell
 syn_ring_your_bell_desc,피해증폭 30%를 얻습니다,Gain 30% damage amplification.
 syn_last_stardust_name,LAST STARDUST,LAST STARDUST
-syn_last_stardust_desc,스킬 데미지의 20%를 방어 무시 고정 피해로 전환합니다,Converts 20% of skill damage into fixed damage that ignores defense.
+syn_last_stardust_desc,스킬 데미지의 10%를 방어 무시 고정 피해로 전환합니다,Converts 10% of skill damage into fixed damage that ignores defense.
 ,,
 item_love_is_not_enough_name,사랑이 부족해,Love Is Not Enough
 item_love_is_not_enough_desc,전격을 다루는 외계 오니 소녀가 입던 호피 비키니,A leopard print bikini once worn by an alien oni girl who controls lightning.
@@ -29,13 +29,13 @@ item_il_vento_doro_desc,꿈이 있는 갱스터의 무당벌레 브로치,A lady
 item_il_vento_doro_bonus,받는 피해량이 (4%/15%/50%)만큼 감소합니다,Damage taken decreases by (4%/15%/50%).
 item_silver_garden_name,그대의 은의 정원,Your Silver Garden
 item_silver_garden_desc,상냥한 소녀의 마법소녀 복장,The magical girl outfit of a kindhearted girl.
-item_silver_garden_bonus,방어의 50%만큼 힘이 상승합니다,Strength increases by 50% of Defense.
+item_silver_garden_bonus,방어의 20%만큼 힘이 상승합니다,Strength increases by 20% of Defense.
 syn_aiue_name,아이우에,AIUE
 syn_aiue_desc,방어가 20% 상승합니다,Defense increases by 20%.
 syn_melissa_name,Melissa,Melissa
 syn_melissa_desc,받는 피해가 20% 감소합니다,Damage taken decreases by 20%.
 syn_connect_name,Connect,Connect
-syn_connect_desc,방어의 100%만큼 힘이 상승합니다,Strength increases by 100% of Defense.
+syn_connect_desc,방어의 40%만큼 힘이 상승합니다,Strength increases by 40% of Defense.
 ,,
 item_flower_tower_name,꽃의 탑,Tower of Flower
 item_flower_tower_desc,찻집 종업원이자 특수요원으로 활동하던 소녀의 권총,A pistol once used by a girl who worked as a cafe waitress and special agent.
@@ -45,16 +45,16 @@ item_red_fraction_desc,아킴보 사격의 달인이 사용하던 권총,A pisto
 item_red_fraction_bonus,운이 (3%/15%/80%)만큼 상승합니다,Luck increases by (3%/15%/80%).
 item_inner_universe_name,Inner Universe,Inner Universe
 item_inner_universe_desc,기계화된 세계 속에서 인간성을 지킨 남자의 권총,A pistol once used by a man who preserved his humanity in a mechanized world.
-item_inner_universe_bonus,치명타 피해량이 (10%/50%/150%)만큼 상승합니다,Critical damage increases by (10%/50%/150%).
+item_inner_universe_bonus,치명타 피해량이 (5%/20%/75%)만큼 상승합니다,Critical damage increases by (5%/20%/75%).
 item_gotta_knock_name,Gotta Knock a Little Harder,Gotta Knock a Little Harder
 item_gotta_knock_desc,깨어나지 않는 꿈을 꾸던 남자의 권총,A pistol once used by a man trapped in an endless dream.
-item_gotta_knock_bonus,운의 25%만큼 치명타 피해량이 상승합니다,Critical damage increases by 25% of Luck.
+item_gotta_knock_bonus,운의 10%만큼 치명타 피해량이 상승합니다,Critical damage increases by 10% of Luck.
 syn_cat_blues_name,Cat Blues,Cat Blues
 syn_cat_blues_desc,운이 15% 상승합니다,Luck increases by 15%.
 syn_bad_dog_no_biscuits_name,Bad Dog No Biscuits,Bad Dog No Biscuits
 syn_bad_dog_no_biscuits_desc,치명타 확률이 15% 상승합니다,Critical rate increases by 15%.
 syn_the_real_folk_blues_name,The Real Folk Blues,The Real Folk Blues
-syn_the_real_folk_blues_desc,운의 50%만큼 치명타 피해량이 상승합니다,Critical damage increases by 50% of Luck.
+syn_the_real_folk_blues_desc,운의 20%만큼 치명타 피해량이 상승합니다,Critical damage increases by 20% of Luck.
 ,,
 item_fly_away_name,Fly Away,Fly Away
 item_fly_away_desc,빗치 천사들이 사용하던 분홍색 험비,A pink Humvee once used by bitch angels.
@@ -67,13 +67,13 @@ item_voyager_desc,어른스럽지 못한 지휘관이 타던 자동차,A car onc
 item_voyager_bonus,적과의 AP 차이에 비례하여 피해가 (7%/30%/100%)만큼 증가합니다,Damage increases by (7%/30%/100%) based on the AP difference from the enemy.
 item_kaneda_name,Kaneda,Kaneda
 item_kaneda_desc,폭주족 소년이 타던 붉은 바이크,A red bike once ridden by a biker gang boy.
-item_kaneda_bonus,행동력의 25%만큼 치명타 확률이 증가합니다,Critical rate increases by 25% of AP.
+item_kaneda_bonus,행동력의 10%만큼 치명타 확률이 증가합니다,Critical rate increases by 10% of AP.
 syn_reckless_name,Reckless,Reckless
 syn_reckless_desc,행동력이 15% 상승합니다,AP increases by 15%.
 syn_divine_name,Divine,Divine
 syn_divine_desc,적과의 AP 차이에 비례하여 피해가 30%만큼 증폭됩니다,Damage is amplified by 30% based on the AP difference from the enemy.
 syn_one_last_kiss_name,One Last Kiss,One Last Kiss
-syn_one_last_kiss_desc,행동력의 50%만큼 치명타 피해량이 증가합니다,Critical damage increases by 50% of AP.
+syn_one_last_kiss_desc,행동력의 20%만큼 치명타 피해량이 증가합니다,Critical damage increases by 20% of AP.
 ,,
 item_fuyubiyori_name,Fuyubiyori,Fuyubiyori
 item_fuyubiyori_desc,솔로 캠핑을 즐기는 소녀의 바이크,A bike ridden by a girl who enjoys solo camping.
@@ -86,13 +86,13 @@ item_keep_going_desc,지상 최강 생물의 아들이 입던 파이트 쇼츠,F
 item_keep_going_bonus,적과의 속도 차이에 비례하여 피해가 (7%/30%/100%)만큼 증가합니다,Damage increases by (7%/30%/100%) based on the Speed difference from the enemy.
 item_already_dead_name,너는 이미 죽어 있다,You Are Already Dead
 item_already_dead_desc,세기말 구세주의 가죽 재킷,A leather jacket once worn by the savior of the end century.
-item_already_dead_bonus,속도의 50%만큼 힘이 증가합니다,Strength increases by 50% of Speed.
+item_already_dead_bonus,속도의 20%만큼 힘이 증가합니다,Strength increases by 20% of Speed.
 syn_no_time_to_hesitate_name,머뭇거릴 틈이 없다!!,No Time to Hesitate!!
 syn_no_time_to_hesitate_desc,속도가 20% 상승합니다,Speed increases by 20%.
 syn_what_color_is_your_blood_name,네놈들의 피는 무슨 색이냐!!,What Color Is Your Blood!!
 syn_what_color_is_your_blood_desc,명중률과 회피율이 20% 상승합니다,Hit rate and evasion rate increase by 20%.
 syn_unworthy_to_live_today_name,네놈들은 오늘을 살아갈 자격이 없다!!,You Are Not Worthy to Live Today!!
-syn_unworthy_to_live_today_desc,속도의 100%만큼 힘이 상승합니다,Strength increases by 100% of Speed.
+syn_unworthy_to_live_today_desc,속도의 40%만큼 힘이 상승합니다,Strength increases by 40% of Speed.
 ,,
 item_ambivalent_world_name,ambivalent world,Ambivalent World
 item_ambivalent_world_desc,소원을 이루어주는 대신 그 사람에게 빙의하는 괴이,An oddity that grants a wish in exchange for possessing that person.
@@ -105,13 +105,13 @@ item_love_circulation_desc,짝사랑 끝에 신이 되었던 소녀의 모자,A 
 item_love_circulation_bonus,최대 체력이 (4%/20%/100%)만큼 증가합니다,Max HP increases by (4%/20%/100%).
 item_the_hero_name,THE HERO!!,THE HERO!!
 item_the_hero_desc,취미로 히어로를 하는 사나이의 글러브,Gloves once worn by a man who works as a hero for fun.
-item_the_hero_bonus,최대 체력의 1%만큼 힘이 상승합니다,Strength increases by 1% of Max HP.
+item_the_hero_bonus,최대 체력의 0.4%만큼 힘이 상승합니다,Strength increases by 0.4% of Max HP.
 syn_last_day_adolescence_name,the last day of my adolescence,The Last Day of My Adolescence
 syn_last_day_adolescence_desc,최대 체력이 15% 상승합니다,Max HP increases by 15%.
 syn_suteki_meppou_name,suteki meppou,Suteki Meppou
 syn_suteki_meppou_desc,브레이크 저항이 20% 상승합니다,Break Resistance increases by 20%.
 syn_spasibo_name,Spasibo!,Spasibo!
-syn_spasibo_desc,최대 체력의 2%만큼 힘이 상승합니다,Strength increases by 2% of Max HP.
+syn_spasibo_desc,최대 체력의 0.8%만큼 힘이 상승합니다,Strength increases by 0.8% of Max HP.
 ,,
 item_my_love_is_a_stapler_name,내 사랑은 호치키스,My Love Is a Stapler
 item_my_love_is_a_stapler_desc,부끄럼쟁이 베이시스트 소녀의 베이스 기타,A bass guitar owned by a shy bassist girl.

@@ -122,6 +122,7 @@ MonoBehaviour:
     bonusAccuracy: 0
     bonusEvasion: 0
     healingReceivedAmp: 0
+  itemSynergyBalanceData: {fileID: 11400000, guid: 0c43f36c4665438ca6e430998d94e1c4, type: 2}
   unlockedSupporters: []
   supporterChoiceRecords:
   - supporterID: asmodeus

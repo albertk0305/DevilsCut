@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ecf512bc1b4bf8b8f88e6f4f12b8b7, type: 3}
+  m_Name: ItemSynergyBalanceData
+  m_EditorClassIdentifier: 
+  saber6TrueDamageConversion: 0.2
+  saberLegendaryTrueDamageConversion: 0.1
+  shielder6DefenseToStrengthMultiplier: 1
+  shielderLegendaryDefenseToStrengthMultiplier: 0.5
+  gunner6LuckToCritDamagePercentPerLuck: 0.5
+  gunnerLegendaryLuckToCritDamagePercentPerLuck: 0.25
+  assassin6ApToCritDamagePercentPerAp: 0.5
+  assassinLegendaryApToCritRatePercentPerAp: 0.25
+  boxer6SpeedToStrengthMultiplier: 1
+  boxerLegendarySpeedToStrengthMultiplier: 0.5
+  beast6MaxHpToStrengthRatio: 0.02
+  beastLegendaryMaxHpToStrengthRatio: 0.01
+  caster6DamageAmpPerBuff: 0.03
+  casterLegendaryDamageAmpPerBuff: 0.02
+  trickster6DamageAmpPerDebuff: 0.03
+  tricksterLegendaryDamageAmpPerDebuff: 0.02
+  berserker6DeathGuardEnabled: 1
+  berserkerLegendaryFullHealWith6Point: 1
+  demon6OverhealAmpMultiplier: 1
+  demonLegendaryOverhealAmpMultiplier: 0.5

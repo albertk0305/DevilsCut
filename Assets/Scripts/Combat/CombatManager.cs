@@ -1873,6 +1873,7 @@ public class CombatManager : MonoBehaviour
         if (PlayerManager.Instance == null) return;
         var syn = PlayerManager.Instance.GetCurrentSynergies();
         var inventory = PlayerManager.Instance.inventory;
+        ItemSynergyBalanceData synergyBalance = ItemSynergyBalanceData.Resolve();
 
         bool has6Point = syn.GetValueOrDefault(ItemClass.Demon) >= 6;
         bool hasLegendary = inventory.Exists(x => x.data.itemClass == ItemClass.Demon && x.data.grade == ItemGrade.Legendary);
@@ -1881,8 +1882,8 @@ public class CombatManager : MonoBehaviour
 
         // 배율 산출: 기획안에 따라 최대 체력 비례 %당 1% (6점) + 0.5% (전설)
         float multiplier = 0f;
-        if (has6Point) multiplier += 1.0f;
-        if (hasLegendary) multiplier += 0.5f;
+        if (has6Point) multiplier += synergyBalance.demon6OverhealAmpMultiplier;
+        if (hasLegendary) multiplier += synergyBalance.demonLegendaryOverhealAmpMultiplier;
 
         // 공식: (초과 회복량 / 최대 체력) * 배율
         // 예: 1000 체력 중 200 초과 회복 시 -> 0.2 * 1.5 = 0.3f (30% 증폭)
