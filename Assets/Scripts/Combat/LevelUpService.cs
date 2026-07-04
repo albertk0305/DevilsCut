@@ -77,40 +77,40 @@ public static class LevelUpService
                 int previousCurrentHp = stats.currentHp;
                 int previousStrength = stats.strength;
 
-                stats.maxHp += 182;
-                stats.currentHp += 182;
-                stats.strength += 2;
+                stats.maxHp += 91;
+                stats.currentHp += 91;
+                stats.strength += 1;
 
-                totalGrowth.maxHp += 182;
-                totalGrowth.currentHp += 182;
-                totalGrowth.strength += 2;
-                growthLines.Add("Max HP +182, Current HP +182, Strength +2");
+                totalGrowth.maxHp += 91;
+                totalGrowth.currentHp += 91;
+                totalGrowth.strength += 1;
+                growthLines.Add("Max HP +91, Current HP +91, Strength +1");
 
                 DevLog.Log($"[LevelUp] Lv.{newLevel} HP growth applied: maxHp {previousMaxHp} -> {stats.maxHp}, currentHp {previousCurrentHp} -> {stats.currentHp}, strength {previousStrength} -> {stats.strength}");
                 break;
 
             case 1:
-                stats.maxBreakGauge += 2f;
-                stats.defense += 2;
-                totalGrowth.maxBreakGauge += 2;
-                totalGrowth.defense += 2;
-                growthLines.Add("Max Break Gauge +2, Defense +2");
+                stats.maxBreakGauge += 1f;
+                stats.defense += 1;
+                totalGrowth.maxBreakGauge += 1;
+                totalGrowth.defense += 1;
+                growthLines.Add("Max Break Gauge +1, Defense +1");
                 break;
 
             case 2:
-                stats.breakResistance += 2;
-                stats.speed += 2;
-                totalGrowth.breakResistance += 2;
-                totalGrowth.speed += 2;
-                growthLines.Add("Break Resistance +2, Speed +2");
+                stats.breakResistance += 1;
+                stats.speed += 1;
+                totalGrowth.breakResistance += 1;
+                totalGrowth.speed += 1;
+                growthLines.Add("Break Resistance +1, Speed +1");
                 break;
 
             case 3:
-                stats.ActionPoints += 2;
-                stats.luck += 2;
-                totalGrowth.actionPoints += 2;
-                totalGrowth.luck += 2;
-                growthLines.Add("Action Points +2, Luck +2");
+                stats.ActionPoints += 1;
+                stats.luck += 1;
+                totalGrowth.actionPoints += 1;
+                totalGrowth.luck += 1;
+                growthLines.Add("Action Points +1, Luck +1");
                 break;
         }
     }

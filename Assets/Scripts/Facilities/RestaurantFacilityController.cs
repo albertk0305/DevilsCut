@@ -990,7 +990,7 @@ public class RestaurantFacilityController : FacilitySceneControllerBase
             return 0;
 
         int generalBattleExp = GetGeneralBattleExp();
-        return CurrentRank >= 3 ? generalBattleExp * 4 : generalBattleExp * 2;
+        return CurrentRank >= 3 ? generalBattleExp * 2 : generalBattleExp * 1;
     }
 
     private int GetGeneralBattleExp()

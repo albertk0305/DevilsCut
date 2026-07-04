@@ -667,9 +667,9 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
         bool isRankThree = CurrentRank >= 3;
 
         if (actionType == LiveHouseActionType.Shout)
-            return isRankThree ? 910 : 455;
+            return isRankThree ? 546 : 273;
 
-        return isRankThree ? 10 : 5;
+        return isRankThree ? 6 : 3;
     }
 
     private float GetSupportAmount(LiveHouseActionType actionType)

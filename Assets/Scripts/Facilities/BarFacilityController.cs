@@ -551,7 +551,7 @@ public class BarFacilityController : FacilitySceneControllerBase
         if (CurrentRank >= 3)
         {
             lastOrderStat = GetRandomPermanentStatType();
-            lastOrderAmount = 5;
+            lastOrderAmount = 3;
         }
 
         if (playerManager != null)
@@ -576,9 +576,9 @@ public class BarFacilityController : FacilitySceneControllerBase
     private int GetPrimaryDrinkAmount(BarDrinkType drinkType)
     {
         if (drinkType == BarDrinkType.DevilsCut)
-            return CurrentRank >= 2 ? 20 : 10;
+            return CurrentRank >= 2 ? 10 : 6;
 
-        return CurrentRank >= 2 ? 10 : 5;
+        return CurrentRank >= 2 ? 5 : 3;
     }
 
     private PermanentStatType GetPermanentStatType(BarDrinkType drinkType)
