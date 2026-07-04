@@ -773,11 +773,17 @@ public class LiveHouseFacilityController : FacilitySceneControllerBase
     private string BuildSupportBonusText(List<LiveHouseActionGain> supportGains)
     {
         List<string> lines = new List<string> { GetLocalizedText(supportBonusHeaderTextKey, supportBonusHeaderText) };
+        List<string> gainParts = new List<string>();
 
         foreach (LiveHouseActionGain gain in supportGains)
         {
-            lines.Add(BuildGainText(gain.actionType, gain.amount));
+            string gainText = BuildGainText(gain.actionType, gain.amount);
+            if (!string.IsNullOrEmpty(gainText))
+                gainParts.Add(gainText);
         }
+
+        if (gainParts.Count > 0)
+            lines.Add(string.Join(" · ", gainParts));
 
         return string.Join("\n", lines);
     }
