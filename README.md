@@ -13,10 +13,12 @@ A stylish 2D turn-based RPG built with Unity.
 
 ## Recommended Platform Notice
 
-The browser version is mainly intended for quick testing and preview.  
-To fit WebGL upload limitations, some audio and image assets have been heavily compressed.
+The browser/WebGL version is provided mainly for quick testing and short preview play.  
+To fit WebGL upload limitations, audio and image assets in the browser version have been heavily compressed.
 
-For the full experience, downloading and playing the Windows, macOS, or Android version is recommended.
+Because of this, the WebGL version may have lower audio quality, reduced image quality, longer loading times, or lower performance depending on your browser and device.
+
+For the full experience, downloading and playing the Windows, macOS, or Android version is strongly recommended.
 
 ---
 
@@ -33,6 +35,9 @@ Available platforms:
 - Android
 
 For the best experience, please play in fullscreen mode.
+
+The WebGL version is intended mainly for quick testing and short preview play.  
+If possible, please download the Windows, macOS, or Android version for the full experience.
 
 If the WebGL version does not run smoothly, or if you notice longer loading times, lower audio quality, or reduced image quality, please try one of the downloadable versions instead.
 
