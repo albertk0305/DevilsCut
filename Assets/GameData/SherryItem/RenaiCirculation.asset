@@ -44,9 +44,9 @@ MonoBehaviour:
   - 0
   - 0
   pctMaxHp:
-  - 0.04
-  - 0.2
-  - 1
+  - 0.02
+  - 0.1
+  - 0.5
   pctAP:
   - 0
   - 0

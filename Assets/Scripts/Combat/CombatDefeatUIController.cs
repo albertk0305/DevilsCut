@@ -42,6 +42,7 @@ public class CombatDefeatUIController : MonoBehaviour
     [SerializeField] private CombatResultBgmPlayer resultBgmPlayer;
 
     private Coroutine typingCoroutine;
+    private int typingVersion;
     private bool isFinalizingGiveUp;
     private bool isConfirmingGiveUp;
     private DefeatMessageKind currentMessageKind;
@@ -64,6 +65,8 @@ public class CombatDefeatUIController : MonoBehaviour
     {
         if (LocalizationManager.Instance != null)
             LocalizationManager.Instance.OnLanguageChanged -= OnLanguageChanged;
+
+        StopCurrentTyping();
     }
 
     private void OnLanguageChanged()
@@ -258,7 +261,9 @@ public class CombatDefeatUIController : MonoBehaviour
     private IEnumerator FinalizeGiveUpRoutine()
     {
         currentMessageKind = DefeatMessageKind.GiveUpFinal;
-        yield return TypeMessageRoutine(BuildMessage(currentMessageKind));
+        Coroutine finalMessageCoroutine = StartDefeatMessage(BuildMessage(currentMessageKind), currentMessageKind);
+        if (finalMessageCoroutine != null)
+            yield return finalMessageCoroutine;
 
         yield return new WaitForSecondsRealtime(1.0f);
         yield return WebGLSaveSync.RequestAndWait("CombatDefeat:GiveUpAndExit");
@@ -269,38 +274,69 @@ public class CombatDefeatUIController : MonoBehaviour
 
     private void TypeMessage(string message)
     {
-        currentMessageKind = DefeatMessageKind.None;
-
-        if (typingCoroutine != null)
-            StopCoroutine(typingCoroutine);
-
-        typingCoroutine = StartCoroutine(TypeMessageRoutine(message));
+        StartDefeatMessage(message, DefeatMessageKind.None);
     }
 
     private void TypeMessage(DefeatMessageKind messageKind)
     {
-        currentMessageKind = messageKind;
-
-        if (typingCoroutine != null)
-            StopCoroutine(typingCoroutine);
-
-        typingCoroutine = StartCoroutine(TypeMessageRoutine(BuildMessage(messageKind)));
+        StartDefeatMessage(BuildMessage(messageKind), messageKind);
     }
 
-    private IEnumerator TypeMessageRoutine(string message)
+    private Coroutine StartDefeatMessage(string message, DefeatMessageKind messageKind)
+    {
+        currentMessageKind = messageKind;
+        int version = BeginNewTypingMessage();
+
+        if (messageText == null)
+            return null;
+
+        if (message == null)
+            message = string.Empty;
+
+        typingCoroutine = StartCoroutine(TypeMessageRoutine(message, version));
+        return typingCoroutine;
+    }
+
+    private int BeginNewTypingMessage()
+    {
+        typingVersion++;
+
+        StopCurrentTyping();
+
+        if (messageText != null)
+            messageText.text = string.Empty;
+
+        return typingVersion;
+    }
+
+    private void StopCurrentTyping()
+    {
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+    }
+
+    private IEnumerator TypeMessageRoutine(string message, int version)
     {
         if (messageText == null)
             yield break;
 
-        messageText.text = "";
+        if (version != typingVersion)
+            yield break;
 
         for (int i = 0; i < message.Length; i++)
         {
+            if (version != typingVersion)
+                yield break;
+
             messageText.text += message[i];
             yield return new WaitForSecondsRealtime(typeInterval);
         }
 
-        typingCoroutine = null;
+        if (version == typingVersion)
+            typingCoroutine = null;
     }
 
     private void RefreshCurrentMessage()
@@ -308,11 +344,8 @@ public class CombatDefeatUIController : MonoBehaviour
         if (currentMessageKind == DefeatMessageKind.None || messageText == null)
             return;
 
-        if (typingCoroutine != null)
-        {
-            StopCoroutine(typingCoroutine);
-            typingCoroutine = null;
-        }
+        typingVersion++;
+        StopCurrentTyping();
 
         messageText.text = BuildMessage(currentMessageKind);
     }

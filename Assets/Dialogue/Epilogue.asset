@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Epilogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
   dialogueID: Epilogue
-  nextDialogueID: 
+  nextDialogueID: SeeYou
   nextSceneName: 
-  storySkipPolicy: 3
+  storySkipPolicy: 0
   bgmPlaylist:
   - {fileID: 8300000, guid: 1312f73e6dbafb341915ebc6d98d232d, type: 3}
   bgmClip: {fileID: 0}

@@ -18,4 +18,4 @@ MonoBehaviour:
   luckBuff: {fileID: 11400000, guid: 5a63312058213b44a8069ca733caf2e9, type: 2}
   statBuffValue: 0.2
   buffTurns: 3
-  healRatio: 0.2
+  healRatio: 0.1

@@ -15,11 +15,11 @@ MonoBehaviour:
   phases:
   - phase: 1
     generalBattleReward:
-      exp: 250
+      exp: 500
       gold: 400
       keys: 0
     bossBattleReward:
-      exp: 1200
+      exp: 2400
       gold: 2000
       keys: 1
     finalBossReward:
@@ -38,7 +38,7 @@ MonoBehaviour:
       luck: 6
     bossEnemyStats:
       level: 12
-      maxHp: 7000
+      maxHp: 6000
       actionPoints: 10
       breakResistance: 14
       maxBreakGauge: 100
@@ -58,11 +58,11 @@ MonoBehaviour:
       luck: 0
   - phase: 2
     generalBattleReward:
-      exp: 850
+      exp: 1700
       gold: 600
       keys: 0
     bossBattleReward:
-      exp: 4500
+      exp: 9000
       gold: 3000
       keys: 1
     finalBossReward:
@@ -81,7 +81,7 @@ MonoBehaviour:
       luck: 9
     bossEnemyStats:
       level: 24
-      maxHp: 13000
+      maxHp: 11000
       actionPoints: 15
       breakResistance: 20
       maxBreakGauge: 115
@@ -101,11 +101,11 @@ MonoBehaviour:
       luck: 0
   - phase: 3
     generalBattleReward:
-      exp: 2200
+      exp: 4400
       gold: 800
       keys: 0
     bossBattleReward:
-      exp: 11000
+      exp: 22000
       gold: 4500
       keys: 1
     finalBossReward:
@@ -124,7 +124,7 @@ MonoBehaviour:
       luck: 13
     bossEnemyStats:
       level: 36
-      maxHp: 26000
+      maxHp: 21000
       actionPoints: 23
       breakResistance: 30
       maxBreakGauge: 135
@@ -144,11 +144,11 @@ MonoBehaviour:
       luck: 0
   - phase: 4
     generalBattleReward:
-      exp: 5500
+      exp: 11000
       gold: 1100
       keys: 0
     bossBattleReward:
-      exp: 25000
+      exp: 50000
       gold: 6500
       keys: 1
     finalBossReward:
@@ -167,7 +167,7 @@ MonoBehaviour:
       luck: 18
     bossEnemyStats:
       level: 48
-      maxHp: 45000
+      maxHp: 34000
       actionPoints: 32
       breakResistance: 42
       maxBreakGauge: 155
@@ -187,11 +187,11 @@ MonoBehaviour:
       luck: 0
   - phase: 5
     generalBattleReward:
-      exp: 12000
+      exp: 24000
       gold: 1500
       keys: 0
     bossBattleReward:
-      exp: 55000
+      exp: 110000
       gold: 9000
       keys: 1
     finalBossReward:
@@ -210,7 +210,7 @@ MonoBehaviour:
       luck: 24
     bossEnemyStats:
       level: 60
-      maxHp: 70000
+      maxHp: 52000
       actionPoints: 43
       breakResistance: 56
       maxBreakGauge: 180
@@ -230,11 +230,11 @@ MonoBehaviour:
       luck: 0
   - phase: 6
     generalBattleReward:
-      exp: 25000
+      exp: 50000
       gold: 2000
       keys: 0
     bossBattleReward:
-      exp: 120000
+      exp: 240000
       gold: 12000
       keys: 1
     finalBossReward:
@@ -253,7 +253,7 @@ MonoBehaviour:
       luck: 32
     bossEnemyStats:
       level: 72
-      maxHp: 105000
+      maxHp: 78000
       actionPoints: 55
       breakResistance: 72
       maxBreakGauge: 205
@@ -273,11 +273,11 @@ MonoBehaviour:
       luck: 0
   - phase: 7
     generalBattleReward:
-      exp: 55000
+      exp: 110000
       gold: 2600
       keys: 0
     bossBattleReward:
-      exp: 250000
+      exp: 500000
       gold: 16000
       keys: 1
     finalBossReward:
@@ -296,7 +296,7 @@ MonoBehaviour:
       luck: 42
     bossEnemyStats:
       level: 84
-      maxHp: 150000
+      maxHp: 110000
       actionPoints: 67
       breakResistance: 88
       maxBreakGauge: 230
@@ -316,11 +316,11 @@ MonoBehaviour:
       luck: 0
   - phase: 8
     generalBattleReward:
-      exp: 110000
+      exp: 220000
       gold: 3300
       keys: 0
     bossBattleReward:
-      exp: 500000
+      exp: 1000000
       gold: 21000
       keys: 0
     finalBossReward:
@@ -339,7 +339,7 @@ MonoBehaviour:
       luck: 53
     bossEnemyStats:
       level: 100
-      maxHp: 210000
+      maxHp: 155000
       actionPoints: 80
       breakResistance: 104
       maxBreakGauge: 255
@@ -359,16 +359,16 @@ MonoBehaviour:
       luck: 0
   - phase: 9
     generalBattleReward:
-      exp: 200000
+      exp: 400000
       gold: 4000
       keys: 0
     bossBattleReward:
-      exp: 1000000
+      exp: 2000000
       gold: 30000
       keys: 0
     finalBossReward:
       exp: 1048596
-      gold: 35100
+      gold: 48595
       keys: 0
     generalEnemyStats:
       level: 97
@@ -382,7 +382,7 @@ MonoBehaviour:
       luck: 65
     bossEnemyStats:
       level: 120
-      maxHp: 320000
+      maxHp: 235000
       actionPoints: 95
       breakResistance: 125
       maxBreakGauge: 290
@@ -392,7 +392,7 @@ MonoBehaviour:
       luck: 100
     finalBossStats:
       level: 120
-      maxHp: 300000
+      maxHp: 200000
       actionPoints: 120
       breakResistance: 100
       maxBreakGauge: 200

@@ -61,3 +61,5 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 1095529836e2e3d47942a7bba545a4f4, type: 3}
   - backgroundID: BlackInk
     sprite: {fileID: 21300000, guid: fba0bb94fe2465b40a960164392c6c10, type: 3}
+  - backgroundID: SeeYou
+    sprite: {fileID: 21300000, guid: 7ac0333622e101e46b9bf7a11334f152, type: 3}

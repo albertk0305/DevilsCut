@@ -26,9 +26,9 @@ MonoBehaviour:
   skillLevel: 1
   skillActionImage: {fileID: 21300000, guid: a87ed8d519c0d904fa7f1380158f6abb, type: 3}
   damageMultipliers:
-  - 15
-  - 18
-  - 22
+  - 10
+  - 13
+  - 16
   breakPowers:
   - 14
   - 16

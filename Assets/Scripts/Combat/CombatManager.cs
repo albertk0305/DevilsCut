@@ -51,6 +51,9 @@ public class CombatManager : MonoBehaviour
     public StatusEffectData pEffect_Evasion;
     public StatusEffectData pEffect_HealAmp;
 
+    [Header("아이템 시너지 StatusEffectData 매핑")]
+    [SerializeField] private StatusEffectData demonOverhealDamageAmpEffect;
+
     [Header("턴 효과 StatusEffectData 매핑")]
     [SerializeField] private TurnEffectResolverConfig turnEffectConfig;
 
@@ -1891,12 +1894,13 @@ public class CombatManager : MonoBehaviour
 
         if (ampValue > 0f)
         {
-            StatusEffectData newBuff = ScriptableObject.CreateInstance<StatusEffectData>();
-            newBuff.category = EffectCategory.Buff;
-            newBuff.specialType = SpecialEffectType.DamageGivenAmp;
-            newBuff.effectName = "피의 폭주";
+            if (demonOverhealDamageAmpEffect == null)
+            {
+                DevLog.LogWarning("[피의 폭주] Demon 초과회복 피해증폭 StatusEffectData가 연결되지 않았습니다.");
+                return;
+            }
 
-            BuffManager.Instance.AddEffect(true, newBuff, ampValue, 1);
+            BuffManager.Instance.AddEffect(true, demonOverhealDamageAmpEffect, ampValue, 1);
             DevLog.Log($"[피의 폭주] 초과 회복 {excessHeal} 달성 -> 피해 증폭 {ampValue * 100:F1}% 버프 1턴 획득!");
         }
     }

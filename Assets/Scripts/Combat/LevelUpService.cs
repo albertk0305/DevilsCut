@@ -30,7 +30,23 @@ public static class LevelUpService
     public static int CalculateExpToNextLevel(int level)
     {
         int safeLevel = Mathf.Max(1, level);
-        return Mathf.FloorToInt(50f * Mathf.Pow(safeLevel, 1.6f) + 100f);
+
+        float baseExp = 40f * Mathf.Pow(safeLevel, 1.6f) + 80f;
+
+        // Lv.50 전까지는 기존 공식 그대로 사용
+        if (safeLevel < 50)
+            return Mathf.FloorToInt(baseExp);
+
+        // Lv.50부터 Lv.100까지 점진적으로 요구 경험치 증가
+        float t = Mathf.InverseLerp(50f, 100f, safeLevel);
+
+        // 보정이 갑자기 튀지 않도록 부드러운 곡선 적용
+        t = t * t * (3f - 2f * t);
+
+        // Lv.50 = 1.0배, Lv.100 = 1.25배
+        float lateMultiplier = Mathf.Lerp(1f, 1.25f, t);
+
+        return Mathf.FloorToInt(baseExp * lateMultiplier);
     }
 
     public static LevelUpResult ProcessLevelUps(PlayerStats stats)

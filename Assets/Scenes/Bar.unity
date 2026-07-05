@@ -3245,7 +3245,7 @@ MonoBehaviour:
     selectedHighlight: {fileID: 594185980}
     nameText: {fileID: 832126671}
     statText: {fileID: 94415698}
-    monologueTextKey: 
+    monologueTextKey: bar_drink_speed_monologue
     monologueText: Some things act clean while hiding the sharpest bite. This one
       included.
   - drinkType: 3

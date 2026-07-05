@@ -262,7 +262,7 @@ public static class BattleCalculator
                     var berserkerRares = inventory.FindAll(x => x.data.itemClass == ItemClass.Berserker && x.data.grade == ItemGrade.Rare);
                     foreach (var bRare in berserkerRares)
                     {
-                        float maxBonus = bRare.starLevel == 1 ? 0.04f : (bRare.starLevel == 2 ? 0.20f : 0.80f);
+                        float maxBonus = bRare.starLevel == 1 ? 0.05f : (bRare.starLevel == 2 ? 0.20f : 0.80f);
                         damageGivenAmp += (CombatMath.GetMissingHPMultiplier(pStats.maxHp, pStats.currentHp, maxBonus) - 1.0f);
                     }
                 }

@@ -12951,6 +12951,7 @@ MonoBehaviour:
   pEffect_Accuracy: {fileID: 11400000, guid: 72a8250f065a8184a922d62e64a6bdda, type: 2}
   pEffect_Evasion: {fileID: 11400000, guid: a8c172ff7d60f674a9161312bea8d33b, type: 2}
   pEffect_HealAmp: {fileID: 11400000, guid: d3cdea5880183cc40abd8ea87a6c16c9, type: 2}
+  demonOverhealDamageAmpEffect: {fileID: 11400000, guid: 28f42e8453d84de9af0a9a60e44c38f2, type: 2}
   turnEffectConfig:
     casterStrengthBuff: {fileID: 11400000, guid: c162fcf09318ef64a9efa7f5b0b296a9, type: 2}
     casterDefenseBuff: {fileID: 11400000, guid: 75bdff4d11fa7004c8c4e3d5bbad59e8, type: 2}

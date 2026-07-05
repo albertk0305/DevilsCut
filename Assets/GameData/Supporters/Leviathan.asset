@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SupporterData
   supporterID: leviathan
   supporterName: leviathan
-  mainImage: {fileID: 21300000, guid: 99211f7505c1a6049b70388b2d5628dd, type: 3}
+  mainImage: {fileID: 21300000, guid: d874fd666e3394041aad198188df894a, type: 3}
   iconImage: {fileID: 21300000, guid: 1c9240fd690bcde4b86817c73c9502b7, type: 3}
   worriedSDImage: {fileID: 21300000, guid: a2905bd8fac927b43a390293b906bcaa, type: 3}
   readySDImage: {fileID: 21300000, guid: 81818268ad322db4da35260ae7a547e7, type: 3}
@@ -31,7 +31,7 @@ MonoBehaviour:
   selectMessage: support_leviathan_select
   joinMessage: support_leviathan_join
   linkedFacilityID: livehouse
-  passiveLevel: 1
+  passiveLevel: 2
   startSkillLevel: 1
   battleSkillLevel: 1
   startSkillLogic: {fileID: 11400000, guid: 4b8f6be4c9d44da47905ba95a6bc5c8a, type: 2}

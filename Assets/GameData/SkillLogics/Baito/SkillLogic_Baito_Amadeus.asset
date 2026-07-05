@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27309ef2529646bca6a6f4463f5a5ec9, type: 3}
   m_Name: SkillLogic_Baito_Amadeus
   m_EditorClassIdentifier: Assembly-CSharp::SkillLogic_Baito_Amadeus
-  missingHpHealRatio: 0.2
+  missingHpHealRatio: 0.1

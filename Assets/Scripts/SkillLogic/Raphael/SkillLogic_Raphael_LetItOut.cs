@@ -21,7 +21,7 @@ public class SkillLogic_Raphael_LetItOut : SkillLogic_Raphael_Base
         if (isPlayerAttacking) return;
         if (enemy == null) return;
 
-        int healAmount = Mathf.RoundToInt(enemy.maxHp * 0.20f);
+        int healAmount = Mathf.RoundToInt(enemy.maxHp * 0.10f);
         if (CombatManager.Instance != null)
         {
             CombatManager.Instance.HealEntity(false, healAmount);

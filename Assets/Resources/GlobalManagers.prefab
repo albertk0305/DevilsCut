@@ -102,14 +102,14 @@ MonoBehaviour:
     level: 1
     maxExp: 100
     currentExp: 0
-    maxHp: 10000
-    currentHp: 10000
+    maxHp: 10
+    currentHp: 10
     ActionPoints: 100
     breakResistance: 100
     maxBreakGauge: 100
-    strength: 1000000
+    strength: 100
     defense: 100
-    speed: 100
+    speed: 10
     luck: 100
     currentGold: 100000
     rejectedSupporterCount: 0
@@ -197,6 +197,10 @@ MonoBehaviour:
     starLevel: 1
   - data: {fileID: 11400000, guid: 71522d74c11d33140af6498600491c04, type: 2}
     starLevel: 1
+  - data: {fileID: 11400000, guid: 153729e5bd5078e459da61806cb2fb48, type: 2}
+    starLevel: 1
+  - data: {fileID: 11400000, guid: 00c4bb9cfb7b86c45ac231eecb344d75, type: 2}
+    starLevel: 3
   currentEnemyToFight: {fileID: 11400000, guid: d1966c3807a21404a94ce35bb25e9b11, type: 2}
   currentBattleReward:
     exp: 0

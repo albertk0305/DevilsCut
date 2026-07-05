@@ -19,4 +19,3 @@ cookie_epilogue_014_body	셰리.	Sherry.
 cookie_epilogue_015_body	의뢰입니다!	It's a request!
 cookie_epilogue_016_body	좋아.	Good.
 cookie_epilogue_017_body	일할 시간이네.	Time to work.
-cookie_epilogue_018_body	See you, moonshine fixer...	See you, moonshine fixer...

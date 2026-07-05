@@ -1235,11 +1235,11 @@ public class CombatVictoryUIController : MonoBehaviour
         switch (Mathf.Clamp(passiveLevel, 1, 3))
         {
             case 1:
-                return 0.10f;
+                return 0.05f;
             case 2:
-                return 0.20f;
+                return 0.10f;
             default:
-                return 0.35f;
+                return 0.20f;
         }
     }
 

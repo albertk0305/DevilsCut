@@ -16,4 +16,3 @@ cookie_epilogue_014	karin	sherry	karin	greasy	smile	speaker_karin	cookie_epilogu
 cookie_epilogue_015	karin	sherry	karin	greasy	happy	speaker_karin	cookie_epilogue_015_body						FALSE	FALSE	FALSE								
 cookie_epilogue_016	sherry	sherry	karin	easy	happy	speaker_sherry	cookie_epilogue_016_body						FALSE	FALSE	FALSE								
 cookie_epilogue_017	sherry	sherry	karin	smirk	happy	speaker_sherry	cookie_epilogue_017_body						FALSE	FALSE	FALSE								
-cookie_epilogue_018						speaker_narration	cookie_epilogue_018_body	GameClear		BlackInk			FALSE	FALSE	FALSE								

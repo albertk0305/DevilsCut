@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Arete_HealTheWorld", menuName = "SkillLogic/Arete/Heal the World")]
 public class SkillLogic_Arete_HealTheWorld : SkillLogicBase
@@ -9,7 +9,7 @@ public class SkillLogic_Arete_HealTheWorld : SkillLogicBase
     [SerializeField] private StatusEffectData luckBuff;
     [SerializeField] private float statBuffValue = 0.20f;
     [SerializeField] private int buffTurns = 3;
-    [SerializeField] private float healRatio = 0.20f;
+    [SerializeField] private float healRatio = 0.10f;
 
     public override bool AlwaysHits(SkillData skill) => true;
 

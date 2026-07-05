@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "SkillLogic_Hibiki_Matsuri", menuName = "SkillLogic/Hibiki/Matsuri")]
 public class SkillLogic_Hibiki_Matsuri : SkillLogicBase
@@ -9,7 +9,7 @@ public class SkillLogic_Hibiki_Matsuri : SkillLogicBase
     [SerializeField] private StatusEffectData luckBuff;
     [SerializeField] private float statBuffValue = 0.20f;
     [SerializeField] private int buffTurns = 3;
-    [SerializeField] private float healRatio = 0.30f;
+    [SerializeField] private float healRatio = 0.15f;
 
     public override bool AlwaysHits(SkillData skill) => true;
 

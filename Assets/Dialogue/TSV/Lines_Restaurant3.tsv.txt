@@ -1,8 +1,8 @@
 lineID	speakerID	leftActorID	rightActorID	leftExpressionID	rightExpressionID	speakerNameKey	bodyTextKey	lineEndAction	lineEndActionValue	backgroundID	storyImageID	choiceID	clearBackground	showStoryImage	hasChoice	yesTextKey	noTextKey	yesAction	noAction	yesActionValue	noActionValue	yesNextLineID	noNextLineID
-beelzebub_affinity_03_001	sherry	sherry	karin	smug	neutral	speaker_sherry	beelzebub_affinity_03_001_body			Restaurant			FALSE	FALSE	FALSE								
-beelzebub_affinity_03_002	sherry	sherry	karin	consider	neutral	speaker_sherry	beelzebub_affinity_03_002_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_03_003	sherry	sherry	karin	thinking	neutral	speaker_sherry	beelzebub_affinity_03_003_body						FALSE	FALSE	FALSE								
-beelzebub_affinity_03_004	sherry	sherry	karin	content	neutral	speaker_sherry	beelzebub_affinity_03_004_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_001	sherry	sherry	karin	smug	default	speaker_sherry	beelzebub_affinity_03_001_body			Restaurant			FALSE	FALSE	FALSE								
+beelzebub_affinity_03_002	sherry	sherry	karin	consider	default	speaker_sherry	beelzebub_affinity_03_002_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_003	sherry	sherry	karin	thinking	default	speaker_sherry	beelzebub_affinity_03_003_body						FALSE	FALSE	FALSE								
+beelzebub_affinity_03_004	sherry	sherry	karin	content	default	speaker_sherry	beelzebub_affinity_03_004_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_03_005	karin	sherry	karin	content	curious	speaker_karin	beelzebub_affinity_03_005_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_03_006	sherry	sherry	karin	curious	curious	speaker_sherry	beelzebub_affinity_03_006_body						FALSE	FALSE	FALSE								
 beelzebub_affinity_03_007	sherry	sherry	karin	thinking	curious	speaker_sherry	beelzebub_affinity_03_007_body						FALSE	FALSE	FALSE								
