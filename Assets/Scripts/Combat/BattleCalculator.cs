@@ -180,7 +180,7 @@ public static class BattleCalculator
                     ItemSynergyBalanceData synergyBalance = ItemSynergyBalanceData.Resolve();
 
                     // Saber epic: bonus damage against enemies at 70% HP or higher.
-                    if (defenderMaxHp > 0 && ((float)defenderCurrentHp / defenderMaxHp) >= 0.7f)
+                    if (defenderMaxHp > 0 && ((float)defenderCurrentHp / defenderMaxHp) >= 0.5f)
                     {
                         var saberEpics = inventory.FindAll(x => x.data.itemClass == ItemClass.Saber && x.data.grade == ItemGrade.Epic);
                         foreach (var saberEpic in saberEpics)

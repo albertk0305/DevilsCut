@@ -7,7 +7,7 @@ item_nyoibo_desc,외계인 전사가 사용하던 무기. 길이를 마음대로
 item_nyoibo_bonus,힘이 (2%/10%/40%)만큼 증가합니다,Strength increases by (2%/10%/40%).
 item_chainsaw_blood_name,Chainsaw Blood,Chainsaw Blood
 item_chainsaw_blood_desc,악마의 힘이 깃들어 있는 전기톱. 피비린내가 난다,A chainsaw imbued with demonic power. It reeks of blood.
-item_chainsaw_blood_bonus,적의 체력이 70% 이상일때 (4%/15%/50%)만큼 추가 피해를 줍니다,Deals (4%/15%/50%) additional damage when the enemy's HP is 70% or higher.
+item_chainsaw_blood_bonus,적의 체력이 50% 이상일때 (4%/15%/50%)만큼 추가 피해를 줍니다,Deals (4%/15%/50%) additional damage when the enemy's HP is 50% or higher.
 item_brave_shine_name,Brave Shine,Brave Shine
 item_brave_shine_desc,빛의 왕자가 사용하던 인과를 역전시키는 창.,A spear once wielded by the prince of light that reverses causality.
 item_brave_shine_bonus,스킬 데미지의 5%를 방어 무시 고정 피해로 전환합니다,Converts 5% of skill damage into fixed damage that ignores defense.
