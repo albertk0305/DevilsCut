@@ -39,7 +39,7 @@ public class SkillLogic_Excalibur : SkillLogicBase
             // Path B rule.
             if (skill.currentEvolution == SkillEvolution.PathB && avalonBuff != null)
             {
-                BuffManager.Instance.AddEffect(true, avalonBuff, avalonHealRate, 3);
+                BuffManager.Instance.AddEffect(true, avalonBuff, avalonHealRate, 2);
                 DevLog.Log($"[진화 B] 아발론 발동! 3턴간 매 턴 최대 체력의 {avalonHealRate * 100}%를 회복합니다.");
             }
 

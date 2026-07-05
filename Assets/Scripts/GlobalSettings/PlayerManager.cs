@@ -1066,7 +1066,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         // LoneWolf scales exponentially by rejected supporter count.
-        float[] loneWolfAmps = { 0f, 0.03f, 0.05f, 0.08f, 0.15f, 0.30f, 0.60f, 1.00f };
+        float[] loneWolfAmps = { 0f, 0.05f, 0.10f, 0.20f, 0.40f, 0.75f, 1.30f, 2.00f };
         int rejectCount = Mathf.Clamp(stats.rejectedSupporterCount, 0, 7);
         float loneWolfBuff = loneWolfAmps[rejectCount];
 
