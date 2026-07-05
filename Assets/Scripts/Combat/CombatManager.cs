@@ -1637,6 +1637,9 @@ public class CombatManager : MonoBehaviour
 
     private void RestoreDefenderImageAfterSkill(bool isPlayerAttacking, bool isPlayerDefending)
     {
+        if (ShouldHoldEnemyHitImageAfterInfiniteBattleDefeat(isPlayerAttacking, isPlayerDefending))
+            return;
+
         bool isDefenderBroken = (!isPlayerAttacking && BreakManager.Instance.IsBroken(true)) || (isPlayerAttacking && BreakManager.Instance.IsBroken(false));
 
         if (!isDefenderBroken)
@@ -1652,6 +1655,14 @@ public class CombatManager : MonoBehaviour
             if (groggySprite != null) CombatUIManager.Instance.SetDefenderImage(isPlayerDefending, groggySprite);
             DevLog.Log($"[{(isPlayerDefending ? "주인공" : "적")}]가 아직 그로기 상태이므로 전용 Break 이미지로 복구합니다.");
         }
+    }
+
+    private bool ShouldHoldEnemyHitImageAfterInfiniteBattleDefeat(bool isPlayerAttacking, bool isPlayerDefending)
+    {
+        return InfiniteBattleRunContext.IsRunPrepared
+            && isPlayerAttacking
+            && !isPlayerDefending
+            && currentEnemyHp <= 0;
     }
 
     private void UpdateStyleRankAfterSkillReset(bool isPlayerAttacking, bool isUltimate, SkillData skill)

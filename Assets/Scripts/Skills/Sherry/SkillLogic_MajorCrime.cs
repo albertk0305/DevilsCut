@@ -112,9 +112,9 @@ public class SkillLogic_MajorCrime : SkillLogicBase
         else if (skill.currentEvolution == SkillEvolution.PathC)
         {
             // Turn gauge rule.
-            // Lv1: -30% ~ +60% / Lv2: -20% ~ +80% / Lv3: -10% ~ +100%
+            // Lv1: -30% ~ +50% / Lv2: -20% ~ +60% / Lv3: -10% ~ +70%
             float min = -0.3f + (levelIdx * 0.1f);
-            float max = 0.6f + (levelIdx * 0.2f);
+            float max = 0.5f + (levelIdx * 0.1f);
 
             ApplyRandomStat(strengthMod, min, max);
             ApplyRandomStat(defenseMod, min, max);

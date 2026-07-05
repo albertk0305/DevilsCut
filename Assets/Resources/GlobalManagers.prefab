@@ -107,7 +107,7 @@ MonoBehaviour:
     ActionPoints: 20
     breakResistance: 50
     maxBreakGauge: 100
-    strength: 100
+    strength: 10000
     defense: 100
     speed: 10
     luck: 100

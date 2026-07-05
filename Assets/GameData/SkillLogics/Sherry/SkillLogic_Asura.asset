@@ -30,9 +30,9 @@ MonoBehaviour:
   - 0.4
   - 0.5
   pathB_StrMultipliers:
+  - 1.5
+  - 1.75
   - 2
-  - 2.5
-  - 3
   pathC_DamageMults:
   - 30
   - 40
