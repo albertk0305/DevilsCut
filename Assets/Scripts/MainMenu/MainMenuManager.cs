@@ -27,7 +27,9 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI creditText;
     [SerializeField] private string creditsTextKey = "ui_credits_text";
 
-    private const string NewGameOverwriteMessage = "저장된 진행 상황이 있습니다.\n새 게임을 시작하면 기존 이어하기 데이터가 삭제됩니다.\n정말 새로 시작하시겠습니까?";
+    private const string NewGameOverwriteMessageKey = "main_menu_new_game_overwrite_confirm";
+    private const string NewGameOverwriteMessageKo = "저장된 진행 상황이 있습니다.\n새 게임을 시작하면 기존 이어하기 데이터가 삭제됩니다.\n정말 새로 시작하시겠습니까?";
+    private const string NewGameOverwriteMessageEn = "There is existing progress.\nStarting a new game will delete your continue data.\nAre you sure you want to start over?";
 
     void Start()
     {
@@ -138,7 +140,7 @@ public class MainMenuManager : MonoBehaviour
     private void ShowNewGameConfirmPanel()
     {
         if (confirmNewGameText != null)
-            confirmNewGameText.text = NewGameOverwriteMessage;
+            confirmNewGameText.text = GetLocalizedText(NewGameOverwriteMessageKey, NewGameOverwriteMessageKo, NewGameOverwriteMessageEn);
 
         if (confirmNewGamePanel != null)
         {
@@ -349,6 +351,25 @@ public class MainMenuManager : MonoBehaviour
     {
         if (creditsCanvas != null && creditsCanvas.activeInHierarchy)
             RefreshCreditText();
+
+        if (confirmNewGamePanel != null && confirmNewGamePanel.activeInHierarchy && confirmNewGameText != null)
+            confirmNewGameText.text = GetLocalizedText(NewGameOverwriteMessageKey, NewGameOverwriteMessageKo, NewGameOverwriteMessageEn);
+    }
+
+    private static string GetLocalizedText(string key, string koreanFallback, string englishFallback)
+    {
+        if (LocalizationManager.Instance != null)
+        {
+            string localized = LocalizationManager.Instance.GetText(key);
+            if (!string.IsNullOrEmpty(localized) && localized != key)
+                return localized.Replace("\\n", "\n");
+
+            return LocalizationManager.Instance.currentLanguage == LocalizationManager.Language.Korean
+                ? koreanFallback
+                : englishFallback;
+        }
+
+        return englishFallback;
     }
 
     private static T FindChildComponentByName<T>(GameObject root, string objectName) where T : Component
