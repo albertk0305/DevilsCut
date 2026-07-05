@@ -1943,7 +1943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  textKey: 
+  textKey: main_menu_new_game_overwrite_confirm
 --- !u!1 &254508995
 GameObject:
   m_ObjectHideFlags: 0
