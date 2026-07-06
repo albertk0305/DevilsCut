@@ -1,4 +1,5 @@
 Key,Korean,English
+main_menu_new_game_overwrite_confirm,저장된 진행 상황이 있습니다.\n새 게임을 시작하면 기존 이어하기 데이터가 삭제됩니다.\n정말 새로 시작하시겠습니까?,There is existing progress.\nStarting a new game will delete your continue data.\nAre you sure you want to start over?
 menu_main_start,새 게임,New Game
 menu_main_continue,이어하기,Continue
 menu_main_options,설정,Options
