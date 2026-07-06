@@ -10044,6 +10044,7 @@ GameObject:
   - component: {fileID: 836198126}
   - component: {fileID: 836198128}
   - component: {fileID: 836198127}
+  - component: {fileID: 836198129}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -10170,6 +10171,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836198125}
   m_CullTransparentMesh: 1
+--- !u!114 &836198129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836198125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: btn_confirm
 --- !u!1 &847182759
 GameObject:
   m_ObjectHideFlags: 0
@@ -18953,12 +18967,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
   bgmPlaylist:
-  - {fileID: 8300000, guid: da51e54e226d54c4eb540ba6a71378d7, type: 3}
-  - {fileID: 8300000, guid: 0f112e0011483274191e8d046db2c73c, type: 3}
+  - {fileID: 8300000, guid: d9fa99c8ee24ad44b89e4890d12c68a8, type: 3}
   - {fileID: 8300000, guid: 621ccb51bee779e42830c063a2b10cfb, type: 3}
-  - {fileID: 8300000, guid: 5485b6c24199cdd4db609da6e25ac961, type: 3}
-  - {fileID: 8300000, guid: 9b21525d8c7508a44b9234b4b01acdfd, type: 3}
-  - {fileID: 8300000, guid: 0d5207a6f46f2f440882e95c2c0e9501, type: 3}
+  - {fileID: 8300000, guid: b9bab6efa4ea3374eb8ad25788f8f501, type: 3}
+  - {fileID: 8300000, guid: 4bd9c6d8d8b1eae4eb3194e9705b4f5c, type: 3}
+  - {fileID: 8300000, guid: 59949d8914a4c2e478ed34498e26bf24, type: 3}
+  - {fileID: 8300000, guid: 76a86413f16bd104a9a0a586e922b637, type: 3}
   bgmClip: {fileID: 8300000, guid: bcb98e4be45fc694db2bb2ec4d917a66, type: 3}
   fadeTime: 1
   stopBgmIfEmpty: 0
@@ -24700,10 +24714,10 @@ RectTransform:
   - {fileID: 2026580334}
   m_Father: {fileID: 311812381}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 1080}
+  m_SizeDelta: {x: -0.2803955, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910500000000000002
 MonoBehaviour:
@@ -24902,7 +24916,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1.5584717, y: 0}
+  m_SizeDelta: {x: -0.2803955, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910500000000003002
 MonoBehaviour:

@@ -6066,9 +6066,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
   bgmPlaylist:
-  - {fileID: 8300000, guid: eea512d897420f849b5c57da5cb1dd1d, type: 3}
+  - {fileID: 8300000, guid: 28453a8c1ddbdd74796c44cf704e9a5a, type: 3}
   - {fileID: 8300000, guid: 24451afca4fdb084db6caf6c44e71361, type: 3}
-  - {fileID: 8300000, guid: ad520cc1769a7be4b97a564b1c270a00, type: 3}
+  - {fileID: 8300000, guid: 225cb3a73de706b418eafd68e7469592, type: 3}
   bgmClip: {fileID: 8300000, guid: 544cf5b6aadd40b45b2d023b5c11cdfb, type: 3}
   fadeTime: 1
   stopBgmIfEmpty: 0

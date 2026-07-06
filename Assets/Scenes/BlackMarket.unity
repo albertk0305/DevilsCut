@@ -11402,9 +11402,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
   bgmPlaylist:
-  - {fileID: 8300000, guid: 63bb2f869f750f1458a7ef189abf4cb7, type: 3}
+  - {fileID: 8300000, guid: efc7fd7b8a188524d8c013b8774e902f, type: 3}
   - {fileID: 8300000, guid: b47546ff52d31064aa1028afa6ceba92, type: 3}
-  - {fileID: 8300000, guid: a6dba9b8f1ac2e14ebae0de9b033446b, type: 3}
+  - {fileID: 8300000, guid: d671b687438b9824baa4c6408981affc, type: 3}
   bgmClip: {fileID: 8300000, guid: 544cf5b6aadd40b45b2d023b5c11cdfb, type: 3}
   fadeTime: 1
   stopBgmIfEmpty: 0
@@ -12592,6 +12592,7 @@ GameObject:
   - component: {fileID: 1801968539}
   - component: {fileID: 1801968541}
   - component: {fileID: 1801968540}
+  - component: {fileID: 1801968542}
   m_Layer: 5
   m_Name: ConfirmationText
   m_TagString: Untagged
@@ -12638,7 +12639,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC2DC\uC124 \uC774\uC6A9\uC744 \uB9C8\uCE58\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
+  m_text: Are you finished with the facilities?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d24e63d45271de1409e59de13f1eec83, type: 2}
   m_sharedMaterial: {fileID: -6334644560201892364, guid: d24e63d45271de1409e59de13f1eec83, type: 2}
@@ -12718,6 +12719,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1801968538}
   m_CullTransparentMesh: 1
+--- !u!114 &1801968542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801968538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: blackmarket_end
 --- !u!1 &1804452655
 GameObject:
   m_ObjectHideFlags: 0

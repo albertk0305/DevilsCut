@@ -17,7 +17,7 @@ MonoBehaviour:
   nextSceneName: Bar
   storySkipPolicy: 1
   bgmPlaylist:
-  - {fileID: 8300000, guid: 22edf0bf1750d00459dedc738a4f3d0d, type: 3}
+  - {fileID: 8300000, guid: 58326022773aa9e499432ec3c87cb575, type: 3}
   bgmClip: {fileID: 0}
   bgmFadeTime: 0.5
   stopBgmIfEmpty: 0

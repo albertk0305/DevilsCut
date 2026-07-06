@@ -17,7 +17,7 @@ MonoBehaviour:
   nextSceneName: Restaurant
   storySkipPolicy: 1
   bgmPlaylist:
-  - {fileID: 8300000, guid: 8dd3b9632d7a406468f0360e682c8681, type: 3}
+  - {fileID: 8300000, guid: c37a6603ff570954baefed17526d9ac7, type: 3}
   bgmClip: {fileID: 0}
   bgmFadeTime: 0.5
   stopBgmIfEmpty: 0

@@ -4654,7 +4654,7 @@ MonoBehaviour:
   bgmPlaylist:
   - {fileID: 8300000, guid: b06c511e2ee07524da0c60904f51d8ec, type: 3}
   - {fileID: 8300000, guid: 7911e799cf4b3dd4ab6d6fcc38ab8ba3, type: 3}
-  - {fileID: 8300000, guid: 41ef63201e9d81b4b99ddf0d2674551f, type: 3}
+  - {fileID: 8300000, guid: c76e405e3a63ab244a96598915527de7, type: 3}
   bgmClip: {fileID: 8300000, guid: 544cf5b6aadd40b45b2d023b5c11cdfb, type: 3}
   fadeTime: 1
   stopBgmIfEmpty: 0

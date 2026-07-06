@@ -964,6 +964,7 @@ GameObject:
   - component: {fileID: 144862341}
   - component: {fileID: 144862343}
   - component: {fileID: 144862342}
+  - component: {fileID: 144862344}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1090,6 +1091,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144862340}
   m_CullTransparentMesh: 1
+--- !u!114 &144862344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144862340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: btn_exit
 --- !u!1 &153256923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,7 +1134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneBGMPlayer
   bgmPlaylist:
-  - {fileID: 8300000, guid: 2d7b879883d6f6d4e9b86570238d53c8, type: 3}
+  - {fileID: 8300000, guid: 619e58c77f097e44b8700cbf59c98cca, type: 3}
   - {fileID: 8300000, guid: 39b350639db8b994ab2c46cc2ed9f5c2, type: 3}
   bgmClip: {fileID: 8300000, guid: 7a9d8086751984f49b6b54af5e52cca8, type: 3}
   fadeTime: 1
@@ -17376,6 +17390,7 @@ GameObject:
   - component: {fileID: 1600325352}
   - component: {fileID: 1600325354}
   - component: {fileID: 1600325353}
+  - component: {fileID: 1600325355}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -17502,6 +17517,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600325351}
   m_CullTransparentMesh: 1
+--- !u!114 &1600325355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600325351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9148325422cd984eb29e500197c61c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
+  textKey: btn_exit
 --- !u!1 &1606758336
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ MonoBehaviour:
   nextSceneName: LiveHouse
   storySkipPolicy: 1
   bgmPlaylist:
-  - {fileID: 8300000, guid: 41ef63201e9d81b4b99ddf0d2674551f, type: 3}
+  - {fileID: 8300000, guid: c76e405e3a63ab244a96598915527de7, type: 3}
   bgmClip: {fileID: 0}
   bgmFadeTime: 0.5
   stopBgmIfEmpty: 0

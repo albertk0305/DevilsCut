@@ -17,7 +17,7 @@ MonoBehaviour:
   nextSceneName: BlackMarket
   storySkipPolicy: 1
   bgmPlaylist:
-  - {fileID: 8300000, guid: a6dba9b8f1ac2e14ebae0de9b033446b, type: 3}
+  - {fileID: 8300000, guid: efc7fd7b8a188524d8c013b8774e902f, type: 3}
   bgmClip: {fileID: 0}
   bgmFadeTime: 0.5
   stopBgmIfEmpty: 0

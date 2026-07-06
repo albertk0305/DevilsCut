@@ -1252,6 +1252,17 @@ public class CombatManager : MonoBehaviour
 
     private bool CheckAndHandleBattleEnd()
     {
+        return ResolveBattleEndAfterHpChanged();
+    }
+
+    private bool ResolveBattleEndAfterHpChanged()
+    {
+        if (combatEnded)
+            return true;
+
+        if (currentPlayerStats == null)
+            return false;
+
         if (currentEnemyHp <= 0 || currentPlayerStats.currentHp <= 0)
         {
             EndCombat(currentEnemyHp <= 0);
@@ -2264,6 +2275,9 @@ public class CombatManager : MonoBehaviour
 
                     yield return new WaitForSeconds(timing.specialExpireHold);
                     CombatUIManager.Instance.ResetDefenderImage(true);
+
+                    if (ResolveBattleEndAfterHpChanged())
+                        yield break;
                 }
 
                 // 2. [진화 B] 피해 누적 폭발 (적 피격)
@@ -2283,6 +2297,9 @@ public class CombatManager : MonoBehaviour
                     currentState.accumulatedDamage = 0; // 초기화
                     yield return new WaitForSeconds(timing.specialExpireHold);
                     CombatUIManager.Instance.ResetDefenderImage(false);
+
+                    if (ResolveBattleEndAfterHpChanged())
+                        yield break;
                 }
             }
         }
